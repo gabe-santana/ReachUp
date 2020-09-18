@@ -50,6 +50,20 @@ var lightTheme = ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
         );
 
+var littleDarkTheme = ThemeData(
+        primary color: Color(),
+        appBarTheme: AppBarTheme(
+        centerTitle: true,
+        color: Color(),
+      ),
+      textTheme: TextTheme(
+        headline1: TextStyle(fontSize: 72.0, fontFamily: 'Hind', fontWeight: FontWeight.bold),
+        headline6: TextStyle(fontSize: 6.0, fontFamily: 'Hind', fontStyle: FontStyle.italic),
+        bodyText2: TextStyle(fontSize: 24.0, fontFamily: 'Hind', color: Colors.white), 
+      ),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      );
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

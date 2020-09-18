@@ -1,6 +1,9 @@
+import 'package:ReachUp/Controller/LocalController.dart';
+import 'package:ReachUp/Model/Local.dart';
 import 'package:ReachUp/View/HomeView/Home.view.dart';
 import 'package:ReachUp/View/SearchView/SearchCard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -9,12 +12,26 @@ class Search extends StatefulWidget {
 
 String search;
 var _controller = TextEditingController();
+List<Local> locates;
+final _formKey = GlobalKey<FormState>();
+final _LocalController = new LocalController();
 
+
+
+buildListView(){
+  return ListView.builder(
+      itemCount: locates.length,
+      itemBuilder: (context, index){
+        return SearchCard(local: locates[index]);
+      }
+  );
+}
 class _SearchState extends State<Search> {
+  bool loading= false;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 4,
+        length: 5,
         child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 150,
@@ -23,6 +40,7 @@ class _SearchState extends State<Search> {
                     child: Container(
                        color: Theme.of(context).primaryColor,
                         child: Form(
+                          key: _formKey,
                           child: Row(
                             children: <Widget>[
                               Container(
@@ -40,8 +58,42 @@ class _SearchState extends State<Search> {
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsets.fromLTRB(15, 10, 20, 10),
-                                  child: TextFormField(
-
+                                  child: 
+                                  TextFormField(
+                                    validator: (value){
+                                      if (value.isEmpty){
+                                        return "Campo vazio";
+                                      }
+                                      return null;
+                                    },
+                                    onChanged: (val){
+                                      debugPrint(val);
+                                  
+                                        if(val.isNotEmpty)
+                                        {
+                                           setState(() {
+                                             loading = true;
+                                           });
+                                        
+                                              _LocalController.search(val).then((value) => {
+                                                setState((){
+                                                    locates = value;
+                                                })
+                                              
+                                              });
+                                         
+    
+                                            setState(() {
+                                             loading = false;
+                                           });
+                                        }
+                                        else{
+                                          setState(() {
+                                            locates.clear();
+                                          });
+                                        }
+                           
+                                    },
                                     controller: _controller,
                                     cursorColor: Colors.white,
                                     style: TextStyle(
@@ -63,7 +115,12 @@ class _SearchState extends State<Search> {
                                           ),
                                         ),
                                        suffixIcon: IconButton(
-                                          onPressed: () => _controller.clear(),
+                                          onPressed: () {
+                                             setState((){
+                                                locates.clear();
+                                             });
+                                            _controller.clear();
+                                          },
                                           icon: Icon(Icons.clear, size: 30, color: Colors.white),
                                         ),
                                         hintText: "lojas, locais, produtos ...",
@@ -113,7 +170,8 @@ class _SearchState extends State<Search> {
               Tab(text: "Todos",),
               Tab(text: "Lojas"),
               Tab(text: "Restaurantes"),
-              Tab(text: "Promoções")
+              Tab(text: "Livrarias"),
+              Tab(text: "Cinema")
             ],
           ),
         ),
@@ -124,21 +182,20 @@ class _SearchState extends State<Search> {
                     
                    Expanded(
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(10, 25, 10, 0),
-                      child: ListView(
-                        children: <Widget>[
-                          SearchCard(),
-                          SearchCard(),
-                          SearchCard(),
-                          SearchCard(),
-                          SearchCard(),
-                          SearchCard(),
-                          SearchCard(),
-                          SearchCard(),
-                        ],
+                      padding: EdgeInsets.fromLTRB(10, 25, 10,25),
+                      child: loading == true ? 
+                      Center(
+                            child: CircularProgressIndicator(
+                            strokeWidth: 7.0,
+                         ),
+                      )
+                       : locates !=null ? buildListView() : Center(
+                        child: 
+                        Text("Sem resultados"),
+                      )
+                      ,
                       )
                     ),
-                  )
                   ],
                 )),
       )),
