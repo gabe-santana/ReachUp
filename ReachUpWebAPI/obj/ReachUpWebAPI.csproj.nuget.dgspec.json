@@ -1,26 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj": {}
+    "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj": {
+    "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj",
         "projectName": "ReachUpWebAPI",
-        "projectPath": "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj",
-        "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUpWebAPI\\obj\\",
+        "projectPath": "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj",
+        "packagesPath": "C:\\Users\\Guilherme\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUpWebAPI\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Guilherme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -32,8 +27,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUp\\ReachUp.csproj": {
-                "projectPath": "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUp\\ReachUp.csproj"
+              "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUp\\ReachUp.csproj": {
+                "projectPath": "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUp\\ReachUp.csproj"
               }
             }
           }
@@ -55,6 +50,10 @@
               "target": "Package",
               "version": "[3.1.7, )"
             },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[6.7.1, )"
@@ -62,6 +61,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.4, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
@@ -86,27 +89,22 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUp\\ReachUp.csproj": {
+    "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUp\\ReachUp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUp\\ReachUp.csproj",
+        "projectUniqueName": "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUp\\ReachUp.csproj",
         "projectName": "ReachUp",
-        "projectPath": "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUp\\ReachUp.csproj",
-        "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUp\\obj\\",
+        "projectPath": "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUp\\ReachUp.csproj",
+        "packagesPath": "C:\\Users\\Guilherme\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUp\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Guilherme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -149,7 +147,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

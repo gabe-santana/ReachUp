@@ -13,22 +13,22 @@ namespace ReachUpWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : ControllerBase
+    public class AccountController : ControllerBase
     {
         #region Fields
         private IConfiguration Config;
         #endregion
 
         #region Constructor
-        public LoginController(IConfiguration Config)
+        public AccountController(IConfiguration Config)
         {
             this.Config = Config;
         }
         #endregion
 
         #region Actions
-        [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] User user) 
+        [HttpGet("Login")]
+        public async Task<IActionResult> Login([FromQuery] User user) 
         {
             if (user != null)
                 if (user.Login()) 
@@ -36,7 +36,6 @@ namespace ReachUpWebAPI.Controllers
                 else
                     return NotFound();
             return BadRequest("Parameters are null");
-
         }
         #endregion
 

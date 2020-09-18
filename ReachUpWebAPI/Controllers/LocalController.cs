@@ -9,6 +9,7 @@ namespace ReachUpWebAPI.Controllers
     [ApiController]
     public class LocalController : ControllerBase
     {
+        #region Actions
         [Authorize]
         [HttpGet("Connect")]
         public async Task<IActionResult> Connect(string uuid) 
@@ -71,5 +72,6 @@ namespace ReachUpWebAPI.Controllers
                 return Ok(await new Local().Delete(id));
             return BadRequest("Parameters are null");
         }
+        #endregion
     }
 }
