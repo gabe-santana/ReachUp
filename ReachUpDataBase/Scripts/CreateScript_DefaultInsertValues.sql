@@ -1,3 +1,21 @@
+-- -----------------------------------------------------
+-- Schema ReachUp                                  --
+-- Banco de dados do sistema ReachUp  --
+-- -----------------------------------------------------
+/*
+  _____                 _     _    _       _ 
+ |  __ \               | |   | |  | |     | |
+ | |__) |___  __ _  ___| |__ | |  | |_ __ | |
+ |  _  // _ \/ _` |/ __| '_ \| |  | | '_ \| |
+ | | \ \  __/ (_| | (__| | | | |__| | |_) |_|
+ |_|  \_\___|\__,_|\___|_| |_|\____/| .__/(_)
+                                    | |      
+                                    |_|      
+*/
+-- -----------------------------------------------------
+-- Script // Default Values                           --
+-- -----------------------------------------------------
+
 /* Tipos de feeddback */
 
 INSERT INTO tipo_feedback 
@@ -51,36 +69,87 @@ INSERT INTO tipo_local
 VALUES
 (
 	1,
-    "Banheiro"
+    "Restaurante"
 );
 
 INSERT INTO tipo_local
 VALUES
 (
 	2,
-    "Bebedouro"
+    "Livraria"
 );
 
 INSERT INTO tipo_local
 VALUES
 (
 	3,
-    "Escada"
+    "Cinema"
 );
 
 INSERT INTO tipo_local
 VALUES
 (
 	4,
-    "Elevador"
+    "Hipermercado"
 );
 
 INSERT INTO tipo_local
 VALUES
 (
 	5,
+    "Drogaria"
+);
+
+INSERT INTO tipo_local
+VALUES
+(
+	6,
+    "Banheiro"
+);
+	
+INSERT INTO tipo_local
+VALUES
+(
+	7,
+    "Bebedouro"
+);
+
+INSERT INTO tipo_local
+VALUES
+(
+	8,
+    "Escada fixa"
+);
+
+INSERT INTO tipo_local
+VALUES
+(
+	9,
+    "Escada rolante"
+);
+
+INSERT INTO tipo_local
+VALUES
+(
+	10,
+    "Elevador"
+);
+
+INSERT INTO tipo_local
+VALUES
+(
+	11,
     "Praça"
 );
+
+INSERT INTO tipo_local
+VALUES
+(
+    12,
+    "Serviços"
+
+);
+
 
 /* Tipo de Beacons*/
 
@@ -88,21 +157,14 @@ INSERT INTO tipo_beacon
 VALUES
 (
 	"0",
-    "Local Beacon"
+    "Beacon local"
 );
 
 INSERT INTO tipo_beacon
 VALUES
 (
 	"1",
-    "Triangulação Beacon"
-);
-
-INSERT INTO tipo_beacon
-VALUES
-(
-    2,
-    "Andar Beacon"
+    "Beacon trilateral"
 );
 
 /* Tipo de comunicados */
@@ -110,14 +172,14 @@ INSERT INTO tipo_comunicado
 VALUES
 (
 	0,
-    "Promoção"
+    "Promoção direcionada"
 );
 
 INSERT INTO tipo_comunicado
 VALUES
 (
 	1,
-    "Geral"
+    "Promoção geral"
 );
 
 
@@ -125,9 +187,8 @@ INSERT INTO tipo_comunicado
 VALUES
 (
 	2,
-    "Aviso"
+    "Notificação"
 );
-
 
 INSERT INTO tipo_comunicado
 VALUES
@@ -136,10 +197,10 @@ VALUES
     "Alarme"
 );
 
-
 INSERT INTO tipo_comunicado
 VALUES
 (
-	4,
-    "Perigo"
+    4,
+    "Preços"
 );
+
