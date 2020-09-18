@@ -20,15 +20,15 @@ We're using:
 
 - **MySQL database** for data storage/management;
 - **ASP.NET Core 3.0 Web API** for web service (RESTful WebAPI);
-- **ASP.NET Core App Web Application** for website;
+- **HTML + CSS/SASS + JQuery** for website;
 - **Flutter** for cross-platfor mobile app (Android/iOS);
-- **Unity2D Renderer** for render a real-time map of loca;
+- **Flame** - Flutter Lib (for render a real-time map of local);
 
 ## Progress Project
 
 - [x] Database
-- [x] WebAPI
-- [ ] Unity2D Assets **(in progress)**
+- [x] WebAPI **(completed, but always on edit and rising)**
+- [0] Unity2D Assets **(not anymore)**
 - [ ] Web Application **(in progress)**
 - [ ] Cross-Platform Mobile App **(in progress)**
 
