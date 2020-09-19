@@ -40,7 +40,7 @@ We're using:
 
 - [x] Database
 - [x] WebAPI **(completed, but always on edit and rising)**
-- [0] Unity2D Assets **(not anymore)**
+- ~~[ ] Unity2D Assets **(not anymore)**
 - [ ] Web Application **(in progress)**
 - [ ] Cross-Platform Mobile App **(in progress)**
 
