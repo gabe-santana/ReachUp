@@ -153,6 +153,23 @@ CALL cadastrarUsuario("doloresfuertesdabarriga@email.com", "Dolores Fuertes da B
 CALL cadastrarUsuario("inocenciogoes@email.com", "Inocêncio Goes", "125463", "cli", null);
 CALL cadastrarUsuario("leandrokarmal@email.com", "Leandro Karmal", "125463", "cli", null);
 
+CALL criarFeedback(5, "jonathanjoestar@email.com", "Os corredores são bem espaçosos, mas em alguns pontos não há piso tátil.", 3);
+CALL criarFeedback(6, "jonathanjoestar@email.com", "Os corredores entre as mesas são muito apertados, eu sempre acabo esbarrando em algumas.", 2);
+CALL criarFeedback(8, "jonathanjoestar@email.com", "A praça de lazer no último andar é muito aconchegante e acessível, gostei", 5);
+CALL criarFeedback(7, "jessicafonseca@email.com", "O restaurante Pé de Fava é muito ruim para se locomover.", 1);
+CALL criarFeedback(7, "jessicafonseca@email.com", "A Cafeteria Plaza está de parabéns! O garçom me atendeu super bem, atencioso, e consegui caminhar pelo local sem nenhum problema", 5);
+CALL criarFeedback(4, "thiagoklein@email.com", "O piso tátil da Besni está muito esburacado, e algumas partes faltam no meio do caminho, acabo me perdendo.", 2);
+CALL criarFeedback(4, "reginaweber@email.com", "A Samsung está de parabéns! Amo seus celulares, e a loja é muito acessível!", 2);
+CALL criarFeedback(3, "leandrokarmal@email.com", "Os elevadores são bem acessíveis, parabéns!", 4);
+CALL criarFeedback(1, "leandrokarmal@email.com", "Os degraus que vão do segundo ao terceiro andar são muito altos, eu quase caí uma vez!", 1);
+CALL criarFeedback(1, "leandrokarmal@email.com", "Alguns locais de transição entre escadas fixas têm piso tátil, mas outros não. Essa falta de padronização incomoda, quando eu esperava continuar com piso tátil, eles sumiram do nada.", 2);
+CALL criarFeedback(2, "inocenciogoes@email.com", "Poderia haver uma sinalização, sonora ou tátil, que indicasse que o fim da escada rolante está perto.", 2);
+
+CALL criarFeedback(0, "giornogiovanna@email.com", "Os banheiros são bem iluminados, o que é bem importante pra uma pessoa como eu, que tem baixa visão.", 5);
+CALL criarFeedback(0, "fabianacruz@email.com", "As cabines dos banheiros são apertadas, e eles não têm piso tátil. Isso é um absurdo.", 1);
+
+
+
 CALL cadastrarLocal(2, "Livraria Praiamar Shopping ",  0,  '09:25:00', '19:35:00', "7deb0e0c-f928-11ea-adc1-0242ac120002");
 CALL cadastrarLocal(2, "Livraria Saraiva",  3, '10:00:00', '19:59:59',"7deafe8a-f928-11ea-adc1-0242ac120002");
 CALL cadastrarLocal(2, "Livraria Cultura",  2, '11:00:00', '18:59:59',"7deafe8a-f928-11ea-adc1-0242ac120002");
