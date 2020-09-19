@@ -34,7 +34,7 @@ lost children and people like me who just want more agility on a daily basis.
 
 ## For developers
 
-1. [Install MySQL](https://www.mysql.com/downloads/)
+1. [MySQL Server](https://www.mysql.com/downloads/)
 2. [.NET Services (We recommend Visual Studio too)](https://dotnet.microsoft.com/download)
 3. You will need a package manager, we recommeend: [NPM (Node.js)](https://nodejs.org/en/download/), [Yarn](https://classic.yarnpkg.com/en/docs/install/#windows-stable) or 
 [Chocolatey](https://chocolatey.org)
