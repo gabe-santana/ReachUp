@@ -486,6 +486,11 @@
 		WHERE cd_local = pLocal;	
 	END$$
 
+    DROP PROCEDURE IF EXISTS alterarHorarioFuncionamentoShopping$$
+    CREATE PROCEDURE alterarHorarioFuncionamentoShopping(pAbertura time, pFechamento time)
+    BEGIN
+       SET 
+    END$$
 
 	DROP FUNCTION IF EXISTS formatString$$
 	CREATE FUNCTION formatString(str varchar(50) ) 	RETURNS  varchar(50)

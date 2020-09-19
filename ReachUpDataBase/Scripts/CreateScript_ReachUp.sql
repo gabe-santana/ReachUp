@@ -20,6 +20,11 @@ DROP SCHEMA IF EXISTS ReachUp ;
 CREATE SCHEMA IF NOT EXISTS ReachUp DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
 USE ReachUp ;
 
+/* VARIÁVEIS GLOBAIS */
+
+SET GLOBAL hr_abertura_shopping = '12:00:00';
+SET GLOBAL hr_fechamento_shopping = '20:00:00';
+
 -- -----------------------------------------------------
 -- Tabela tipo_administrador
 -- -----------------------------------------------------

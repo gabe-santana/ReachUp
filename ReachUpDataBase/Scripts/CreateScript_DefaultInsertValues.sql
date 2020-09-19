@@ -22,14 +22,14 @@ INSERT INTO tipo_feedback
 VALUES
 (
 	0,
-    "Avaliação de uso"
+    "Acessibilidade dos banheiros"
 );
 
 INSERT INTO tipo_feedback 
 VALUES
 (
 	1,
-    "Reporte de bug"
+    "Acessibilidade de escadas fixas"
 );
 
 
@@ -37,8 +37,52 @@ INSERT INTO tipo_feedback
 VALUES
 (
 	2,
-    "Denúncia"
+    "Acessibilidade de escadas rolantes"
 );
+
+INSERT INTO tipo_feedback
+VALUES
+(
+    3,
+    "Acessibilidade de elevadores"
+);
+
+INSERT INTO tipo_feedback
+VALUES
+(
+    4,
+    "Acessibilidade de lojas"
+);
+
+INSERT INTO tipo_feedback
+VALUES
+(
+    5,
+    "Acessibilidade dos corredores"
+);
+
+INSERT INTO tipo_feedback
+VALUES
+(
+    6,
+    "Acessibilidade da praça de alimentação"
+);
+
+INSERT INTO tipo_feedback
+VALUES
+(
+    7,
+    "Acessibilidade de restaurantes"
+);
+
+INSERT INTO tipo_feedback
+VALUES
+(
+    8,
+    "Acessibilidade dos pontos de lazer"
+);
+
+
 
 /* Tipos de adminsitradores */
 
