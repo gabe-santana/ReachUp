@@ -73,10 +73,10 @@ dependencies:
 
 We're using:
 
-- **MySQL database** for data storage/management;
+- **MySQL Database: Transact-SQL Script's** for data storage/management;
 - **ASP.NET Core 3.0 Web API** for web service (RESTful WebAPI);
-- **HTML + CSS/SASS + JQuery** for website;
-- **Flutter** for cross-platfor mobile app (Android/iOS);
+- **ASP.NET Core Web Application: C# + Razor + HTML + CSS/SASS + JavaScript/JQuery** for website;
+- **Flutter: Dart + Java + Objective-C** for cross-platfor mobile app (Android/iOS);
 - **Flame** - Flutter Lib (for render a real-time map of local);
 
 ## Progress Project
