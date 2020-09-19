@@ -77,7 +77,7 @@ We're using:
 - **ASP.NET Core 3.0 Web API** for web service (RESTful WebAPI);
 - **ASP.NET Core Web Application: C# + Razor + HTML + CSS/SASS + JavaScript/JQuery** for website;
 - **Flutter: Dart + Java + Objective-C** for cross-platfor mobile app (Android/iOS);
-- **Flame** - Flutter Lib (for render a real-time map of local);
+- **Flame: Flutter Lib** for render a real-time map of local;
 
 ## Progress Project
 
