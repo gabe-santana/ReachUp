@@ -24,6 +24,7 @@ lost children and people like me who just want more agility on a daily basis.
 
 ![anglais-chiffres-TOP](https://user-images.githubusercontent.com/59267719/93686508-1487d380-fa8d-11ea-9b3a-a8523c20918a.png)
 
+# Developing Info
 
 ## How is it being built?
 
