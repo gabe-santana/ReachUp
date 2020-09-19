@@ -30,7 +30,7 @@ lost children and people like me who just want more agility on a daily basis.
 
 > For now, haven't any network structure in the web for hosting databases and web services, come back later 🤚
 
-*** ReachUp will be available for Android and iOS platform!***	
+***ReachUp will be available for Android and iOS platform!***	
 
 ## For developers
 
