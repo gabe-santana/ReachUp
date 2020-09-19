@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj": {}
+    "C:\\Users\\Guilherme\\reachup\\ReachUpWebAPI\\ReachUpWebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj": {
+    "C:\\Users\\Guilherme\\reachup\\ReachUpWebAPI\\ReachUpWebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Guilherme\\reachup\\ReachUpWebAPI\\ReachUpWebAPI.csproj",
         "projectName": "ReachUpWebAPI",
-        "projectPath": "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj",
+        "projectPath": "C:\\Users\\Guilherme\\reachup\\ReachUpWebAPI\\ReachUpWebAPI.csproj",
         "packagesPath": "C:\\Users\\Guilherme\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUpWebAPI\\obj\\",
+        "outputPath": "C:\\Users\\Guilherme\\reachup\\ReachUpWebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Guilherme\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -27,8 +27,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUp\\ReachUp.csproj": {
-                "projectPath": "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUp\\ReachUp.csproj"
+              "C:\\Users\\Guilherme\\reachup\\ReachUp\\ReachUp.csproj": {
+                "projectPath": "C:\\Users\\Guilherme\\reachup\\ReachUp\\ReachUp.csproj"
               }
             }
           }
@@ -93,14 +93,14 @@
         }
       }
     },
-    "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUp\\ReachUp.csproj": {
+    "C:\\Users\\Guilherme\\reachup\\ReachUp\\ReachUp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUp\\ReachUp.csproj",
+        "projectUniqueName": "C:\\Users\\Guilherme\\reachup\\ReachUp\\ReachUp.csproj",
         "projectName": "ReachUp",
-        "projectPath": "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUp\\ReachUp.csproj",
+        "projectPath": "C:\\Users\\Guilherme\\reachup\\ReachUp\\ReachUp.csproj",
         "packagesPath": "C:\\Users\\Guilherme\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Guilherme\\Desktop\\_ReachUp\\ReachUp\\obj\\",
+        "outputPath": "C:\\Users\\Guilherme\\reachup\\ReachUp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Guilherme\\AppData\\Roaming\\NuGet\\NuGet.Config",

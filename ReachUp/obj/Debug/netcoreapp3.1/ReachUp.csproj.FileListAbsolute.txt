@@ -6,3 +6,12 @@ C:\Users\Gabriel\Documents\_\_ReachUp\ReachUp\bin\Debug\netcoreapp3.1\ReachUp.pd
 C:\Users\Gabriel\Documents\_\_ReachUp\ReachUp\obj\Debug\netcoreapp3.1\ReachUp.csprojAssemblyReference.cache
 C:\Users\Gabriel\Documents\_\_ReachUp\ReachUp\obj\Debug\netcoreapp3.1\ReachUp.dll
 C:\Users\Gabriel\Documents\_\_ReachUp\ReachUp\obj\Debug\netcoreapp3.1\ReachUp.pdb
+C:\Users\Guilherme\reachup\ReachUp\bin\Debug\netcoreapp3.1\ReachUp.deps.json
+C:\Users\Guilherme\reachup\ReachUp\bin\Debug\netcoreapp3.1\ReachUp.dll
+C:\Users\Guilherme\reachup\ReachUp\bin\Debug\netcoreapp3.1\ReachUp.pdb
+C:\Users\Guilherme\reachup\ReachUp\obj\Debug\netcoreapp3.1\ReachUp.csprojAssemblyReference.cache
+C:\Users\Guilherme\reachup\ReachUp\obj\Debug\netcoreapp3.1\ReachUp.AssemblyInfoInputs.cache
+C:\Users\Guilherme\reachup\ReachUp\obj\Debug\netcoreapp3.1\ReachUp.AssemblyInfo.cs
+C:\Users\Guilherme\reachup\ReachUp\obj\Debug\netcoreapp3.1\ReachUp.csproj.CoreCompileInputs.cache
+C:\Users\Guilherme\reachup\ReachUp\obj\Debug\netcoreapp3.1\ReachUp.dll
+C:\Users\Guilherme\reachup\ReachUp\obj\Debug\netcoreapp3.1\ReachUp.pdb

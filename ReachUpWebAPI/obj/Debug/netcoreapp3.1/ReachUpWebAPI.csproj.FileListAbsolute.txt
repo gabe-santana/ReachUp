@@ -163,3 +163,10 @@ C:\Users\Guilherme\Desktop\_ReachUp\ReachUpWebAPI\obj\Debug\netcoreapp3.1\ReachU
 C:\Users\Guilherme\Desktop\_ReachUp\ReachUpWebAPI\obj\Debug\netcoreapp3.1\ReachUpWebAPI.genruntimeconfig.cache
 C:\Users\Guilherme\Desktop\_ReachUp\ReachUpWebAPI\obj\Debug\netcoreapp3.1\ReachUpWebAPI.csproj.CoreCompileInputs.cache
 C:\Users\Guilherme\Desktop\_ReachUp\ReachUpWebAPI\obj\Debug\netcoreapp3.1\ReachUpWebAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Guilherme\reachup\ReachUpWebAPI\obj\Debug\netcoreapp3.1\ReachUpWebAPI.csprojAssemblyReference.cache
+C:\Users\Guilherme\reachup\ReachUpWebAPI\obj\Debug\netcoreapp3.1\ReachUpWebAPI.AssemblyInfoInputs.cache
+C:\Users\Guilherme\reachup\ReachUpWebAPI\obj\Debug\netcoreapp3.1\ReachUpWebAPI.AssemblyInfo.cs
+C:\Users\Guilherme\reachup\ReachUpWebAPI\obj\Debug\netcoreapp3.1\ReachUpWebAPI.csproj.CoreCompileInputs.cache
+C:\Users\Guilherme\reachup\ReachUpWebAPI\obj\Debug\netcoreapp3.1\ReachUpWebAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Guilherme\reachup\ReachUpWebAPI\obj\Debug\netcoreapp3.1\ReachUpWebAPI.dll
+C:\Users\Guilherme\reachup\ReachUpWebAPI\obj\Debug\netcoreapp3.1\ReachUpWebAPI.pdb
