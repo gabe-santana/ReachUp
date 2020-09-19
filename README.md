@@ -24,6 +24,49 @@ lost children and people like me who just want more agility on a daily basis.
 
 ![anglais-chiffres-TOP](https://user-images.githubusercontent.com/59267719/93686508-1487d380-fa8d-11ea-9b3a-a8523c20918a.png)
 
+# Installation
+
+## For users
+
+> For now, haven't any network structure in the web for hosting databases and web services, come back later 🤚
+
+*** ReachUp will be available for Android and iOS platform!***	
+
+## For developers
+
+1. [Install MySQL](https://www.mysql.com/downloads/)
+2. [.NET Services (We recommend Visual Studio too)](https://dotnet.microsoft.com/download)
+3. You will need a package manager, we recommeend: [NPM (Node.js)](https://nodejs.org/en/download/), [Yarn](https://classic.yarnpkg.com/en/docs/install/#windows-stable) or 
+[Chocolatey](https://chocolatey.org)
+4. [Flutter Framework](https://flutter.dev/docs/get-started/install)
+
+> Make sure you have all dependencies for Android [Android Studio](https://developer.android.com/studio) and iOS [XCode](https://developer.apple.com/xcode/) that will be 
+necessary to installation step 4. 
+
+
+### WebAPI ASP.NET Core 3.0 Dependencies
+
+```
+dotnet add package JWT --version 7.2.2
+dotnet add package Microsoft.AspNetCore.Server.Kestrel --version 2.2.0
+```
+
+
+### Flutter Dependencies
+
+```
+dependencies:
+  flutter:
+    sdk: flutter
+  dio: ^3.0.8
+  mobx: ^0.4.0
+  flutter_mobx: ^0.3.4
+  provider: ^4.0.1
+  path_provider: ^1.5.0
+  font_awesome_flutter:  ^8.8.1
+  flutter_beacon: ^0.3.0
+  http: ^0.12.0+2
+```
 # Developing Info
 
 ## How is it being built?
