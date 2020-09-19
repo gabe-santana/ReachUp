@@ -87,6 +87,10 @@ We're using:
 - [ ] Web Application **(in progress)**
 - [ ] Cross-Platform Mobile App **(in progress)**
 
+## About Officers Contributors
+
+We're TI students in [Centro Paula Souza](https://www.cps.sp.gov.br) technical schools organization and this projects are our Term Paper that we decided make it open-source!
+
 ## Contributing
 
 For now, this project is being developed for a Term Paper, so we are paying more attention to our team and advisors but
