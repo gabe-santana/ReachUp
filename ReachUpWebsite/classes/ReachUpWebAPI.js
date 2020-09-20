@@ -10,7 +10,7 @@
         ]
      }
 
-     export let clsReachUpWebAPI = class {
+     export class clsReachUpWebAPI {
         constructor() {
             this.url = 'https://192.168.0.109:8000/api';
             this.response = "";

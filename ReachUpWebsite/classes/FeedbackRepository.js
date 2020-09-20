@@ -1,7 +1,8 @@
-//$document.ready(function(){
+$document.ready(function(){
 
-    import 'ReachUpWebAPI';
-    import clsReachUpWebAPI from "ReachUpWebAPI";
+    //import { clsReachUpWebAPI } from "./ReachUpWebAPI";
+    import class clsReachUpWebAPI{};
+    //import clsReachUpWebAPI from "ReachUpWebAPI";
 
     let clsFeedbackRepository = class {
        constructor (){
@@ -91,4 +92,4 @@
     const FeedbackRepository;
     FeedbackRepository = new clsFeedbackRepository("");
 
-//})
+})
