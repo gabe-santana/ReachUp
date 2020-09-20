@@ -27,7 +27,7 @@ namespace ReachUp
 
 
         #region Methods
-        public ClientPreference Get(string email) 
+        public async Task<ClientPreference> Get(string email) 
         {
             if (base.DQLCommand(Procedure.clientePrefere, ref this.Data, 
                 new string[,] {
