@@ -6,8 +6,7 @@ $document.ready(function(){
            ReachUpWebAPI = new clsReachUpWebAPI();
         }
 
-        getJson()
-        {
+        getJson() {
             var contentRootPath = _hostingEnvironment.ContentRootPath;
             var JSON = System.IO.File.ReadAllText(contentRootPath + '/App_Data/json/map/map.json');
             return JSON;

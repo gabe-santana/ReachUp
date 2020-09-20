@@ -8,13 +8,11 @@ $document.ready(function(){
 
         async login(email, password)
         {
-           if (await ReachUpWebAPI.httpGet('Account/Login?Email=' + email + '&Password=' + password + '&role=adm'))
-           {
+           if (await ReachUpWebAPI.httpGet('Account/Login?Email=' + email + '&Password=' + password + '&role=adm')) {
                return ReachUpWebAPI.response;
            }
 
-           else
-           {
+           else {
                return false;
            }
         }
