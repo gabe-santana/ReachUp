@@ -1,4 +1,4 @@
-//$document.ready(function(){
+$document.ready(function(){
 
      export default {
         class: clsReachUpWebAPI,
@@ -149,4 +149,4 @@
                 return false;
          }
      }*/
-//})
+})

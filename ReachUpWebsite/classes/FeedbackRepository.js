@@ -1,7 +1,7 @@
 $document.ready(function(){
 
     //import { clsReachUpWebAPI } from "./ReachUpWebAPI";
-    import class clsReachUpWebAPI{};
+    import clsReachUpWebAPI{};
     //import clsReachUpWebAPI from "ReachUpWebAPI";
 
     let clsFeedbackRepository = class {
