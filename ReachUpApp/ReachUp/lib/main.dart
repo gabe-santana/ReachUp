@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'View/HomeView/Home.view.dart';
 
 void main() {
@@ -8,59 +7,79 @@ void main() {
 
 var darkTheme = ThemeData(
          colorScheme: ColorScheme(
-           primary: Color(0xFF193445),
-            onPrimary: null, 
-           secondary: Colors.white, 
-           background: null, 
-           brightness: Brightness.dark, 
-           error: null, 
-           onBackground: null, 
-           onError: null, 
-           onSecondary: null,
-           onSurface: null, 
-           primaryVariant: null, 
-           surface: null, 
-           secondaryVariant: null,
+           brightness: Brightness.light, 
+
+           primary: Color(0xFF008D9E),
+           onPrimary:  Colors.white, 
+           primaryVariant: Color(0xFF006d7a), 
+
+           secondary: Color(0xFF006d7a), 
+           onSecondary:  Colors.white,
+           secondaryVariant:  Colors.white,
+
+           background: Colors.white, 
+           onBackground:  Color(0xFF212121), 
+        
+           error:  Color(0xFFd42839), 
+           onError:  Colors.white,
+
+           surface:  Color(0xFF212121),   
+           onSurface:  Colors.white, 
+   
          ),
          
          appBarTheme: AppBarTheme(
          centerTitle: true,
-         color: Color(0xFF193445),
+         color:  Color(0xFF008D9E),
 
         ),
         textTheme: TextTheme(
-          headline1: TextStyle(fontSize: 72.0, fontFamily: 'Hind', fontWeight: FontWeight.bold),
-          headline6: TextStyle(fontSize: 6.0, fontFamily: 'Hind', fontStyle: FontStyle.italic),
-          bodyText2: TextStyle(fontSize: 24.0, fontFamily: 'Hind', color: Colors.white),
+          bodyText1: TextStyle(fontSize: 24.0, fontFamily: 'Hind', color:   Color(0xFF212121)),
+          bodyText2: TextStyle(fontSize: 12.0, fontFamily: 'Hind', color:  Color(0xFF212121)),
+          headline1: TextStyle(fontSize: 24.0, fontFamily: 'Hind', fontWeight: FontWeight.bold),
+          headline6: TextStyle(fontSize: 12.0, fontFamily: 'Hind', fontStyle: FontStyle.italic),
+       
         ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         );
 
 var lightTheme = ThemeData(
-         primaryColor: Color(0xFF1B8C9C),
+         colorScheme: ColorScheme(
+           brightness: Brightness.light, 
+
+           primary: Color(0xFF008D9E),
+           onPrimary:  Colors.white, 
+           primaryVariant: Color(0xFF006d7a), 
+
+           secondary: Color(0xFF006d7a), 
+           onSecondary:  Colors.white,
+           secondaryVariant:  Colors.white,
+
+           background: Colors.white, 
+           onBackground:  Color(0xFF525252),
+        
+           error:  Color(0xFFd42839), 
+           onError:  Colors.white,
+
+           surface:  Color(0xFF212121),   
+           onSurface:  Colors.white, 
+   
+         ),
+         
          appBarTheme: AppBarTheme(
          centerTitle: true,
-         color: Color(0xFF1B8C9C),
+         color:  Color(0xFF008D9E),
+
         ),
         textTheme: TextTheme(
-          headline1: TextStyle(fontSize: 72.0, fontFamily: 'Hind', fontWeight: FontWeight.bold),
-          headline6: TextStyle(fontSize: 6.0, fontFamily: 'Hind', fontStyle: FontStyle.italic),
-          bodyText2: TextStyle(fontSize: 24.0, fontFamily: 'Hind', color: Colors.black),
+          bodyText1: TextStyle(fontSize: 24.0, fontFamily: 'Hind', color:   Color(0xFF212121)),
+          bodyText2: TextStyle(fontSize: 12.0, fontFamily: 'Hind', color:  Color(0xFF212121)),
+          headline1: TextStyle(fontSize: 24.0, fontFamily: 'Hind', fontWeight: FontWeight.bold),
+          headline6: TextStyle(fontSize: 12.0, fontFamily: 'Hind', fontStyle: FontStyle.italic),
+       
         ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         );
-
-var littleDarkTheme = ThemeData(
-        appBarTheme: AppBarTheme(
-        centerTitle: true,
-      ),
-      textTheme: TextTheme(
-        headline1: TextStyle(fontSize: 72.0, fontFamily: 'Hind', fontWeight: FontWeight.bold),
-        headline6: TextStyle(fontSize: 6.0, fontFamily: 'Hind', fontStyle: FontStyle.italic),
-        bodyText2: TextStyle(fontSize: 24.0, fontFamily: 'Hind', color: Colors.white), 
-      ),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      );
 
 class MyApp extends StatelessWidget {
   @override
