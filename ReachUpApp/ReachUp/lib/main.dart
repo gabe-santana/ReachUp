@@ -51,10 +51,8 @@ var lightTheme = ThemeData(
         );
 
 var littleDarkTheme = ThemeData(
-        primary color: Color(),
         appBarTheme: AppBarTheme(
         centerTitle: true,
-        color: Color(),
       ),
       textTheme: TextTheme(
         headline1: TextStyle(fontSize: 72.0, fontFamily: 'Hind', fontWeight: FontWeight.bold),

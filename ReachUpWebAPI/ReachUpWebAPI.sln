@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReachUpWebAPI", "ReachUpWeb
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReachUp", "..\ReachUp\ReachUp.csproj", "{F3EAC641-7F03-46BA-ACF1-92435FBAA04E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReachUpWebAPITests", "..\ReachUpWebAPITests\ReachUpWebAPITests.csproj", "{99AE4A25-8FBD-4E2F-BDFD-5BA25BF19320}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{F3EAC641-7F03-46BA-ACF1-92435FBAA04E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3EAC641-7F03-46BA-ACF1-92435FBAA04E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3EAC641-7F03-46BA-ACF1-92435FBAA04E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{99AE4A25-8FBD-4E2F-BDFD-5BA25BF19320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{99AE4A25-8FBD-4E2F-BDFD-5BA25BF19320}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{99AE4A25-8FBD-4E2F-BDFD-5BA25BF19320}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{99AE4A25-8FBD-4E2F-BDFD-5BA25BF19320}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ReachUp;
-using ReachUpWebAPI.MapModels;
 
 namespace ReachUpWebAPI
 {
@@ -16,20 +15,18 @@ namespace ReachUpWebAPI
     [ApiController]
     public class MapController : ControllerBase
     {
+        private readonly string MapJSon;
 
-        private readonly IHostingEnvironment _hostingEnvironment;
-
+        [Obsolete]
         public MapController(IHostingEnvironment hostingEnvironment)
         {
-            _hostingEnvironment = hostingEnvironment;
+            this.MapJSon = System.IO.File.ReadAllText(hostingEnvironment.ContentRootPath + "/App_Data/json/map/map.json"); ;
         }
 
-        [HttpGet("GetJson")]
-        public IActionResult GetJson()
+        [HttpGet]
+        public IActionResult Get()
         {
-            string contentRootPath = _hostingEnvironment.ContentRootPath;
-            var JSON = System.IO.File.ReadAllText(contentRootPath + "/App_Data/json/map/map.json");
-            return Ok(JSON);
+            return Ok(this.MapJSon);
         }
     }
 }

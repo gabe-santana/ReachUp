@@ -1,3 +1,5 @@
+import 'package:ReachUp/www/ReachUpAPI.dart';
+
 import 'Subcategory.model.dart';
 import 'Beacon.model.dart';
 import 'User.model.dart';
@@ -19,6 +21,8 @@ class Local {
       this.admin,
       this.beacons,
       this.subCategories});
+
+
 
   Local.fromJson(Map<String, dynamic> json) {
     idLocal = json['idLocal'];

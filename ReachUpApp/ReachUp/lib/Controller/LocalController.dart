@@ -13,3 +13,4 @@ class LocalController{
       return localRepository.search(search);
   }
 }
+
