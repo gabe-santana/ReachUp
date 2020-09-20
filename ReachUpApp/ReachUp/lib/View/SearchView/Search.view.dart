@@ -38,7 +38,7 @@ class _SearchState extends State<Search> {
           actions: [
                  Expanded(
                     child: Container(
-                       color: Theme.of(context).primaryColor,
+                       color: Theme.of(context).colorScheme.primary,
                         child: Form(
                           key: _formKey,
                           child: Row(
@@ -162,6 +162,7 @@ class _SearchState extends State<Search> {
                     ),
           ],
           bottom: TabBar(
+           indicatorColor: Theme.of(context).colorScheme.onPrimary,
            isScrollable: true,
             labelStyle: TextStyle(
               fontSize: 20,

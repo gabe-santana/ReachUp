@@ -1,3 +1,4 @@
+import 'package:ReachUp/View/HomeView/HomeMap.view.dart';
 import 'package:ReachUp/View/HomeView/HomeWI.dart';
 import 'package:ReachUp/View/SearchView/Search.view.dart';
 import 'package:flutter/material.dart';
@@ -46,25 +47,13 @@ class _HomeState extends State<Home> {
             ]),
         body: Container(
           child: Column(children: <Widget>[
-            Expanded(
-                child: Container(
-                    child: Center(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("Unity2D Map here!", style: TextStyle(fontSize: 25)),
-                    Icon(
-                      Icons.map,
-                      size: 40,
-                    )
-                  ]),
-            ))),
+            Expanded(child: Container(child: Center(child: HomeMap()))),
             Container(
                 width: double.infinity,
                 height: 45,
                 child: InkWell(
                     child: Container(
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).colorScheme.primary,
                       child: Center(
                         child: Icon(Icons.arrow_upward,
                             color: Colors.white, size: 35),
@@ -78,13 +67,14 @@ class _HomeState extends State<Home> {
                                 child: Column(
                               children: <Widget>[
                                 InkWell(
-                                  onTap: (){
+                                  onTap: () {
                                     Navigator.pop(context);
-                                 },
-                                child: Container(
+                                  },
+                                  child: Container(
                                     width: double.infinity,
                                     height: 45,
-                                    color: Theme.of(context).primaryColor,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                     child: Center(
                                       child: Icon(Icons.arrow_downward,
                                           color: Colors.white, size: 35),
@@ -94,7 +84,9 @@ class _HomeState extends State<Home> {
                                 Text('Walking Info',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                        color: Theme.of(context).accentColor,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
                                         fontSize: 24.0)),
                               ],
                             ));
