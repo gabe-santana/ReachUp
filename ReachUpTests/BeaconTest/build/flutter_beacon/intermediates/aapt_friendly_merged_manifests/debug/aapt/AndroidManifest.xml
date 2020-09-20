@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.flutterbeacon" >
+
+    <uses-sdk android:minSdkVersion="18" />
+
+</manifest>
