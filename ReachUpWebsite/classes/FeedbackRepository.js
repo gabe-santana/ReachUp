@@ -8,7 +8,7 @@ $document.ready(function(){
 
         async getByDate(type, begin, end)
         {
-           if (await ReachUpWebAPI.httpGet())
+           if (await ReachUpWebAPI.httpGet('Feedback/ByDate?type=' + type + '&begin=' + begin + '&end=' + end))
            {
                return ReachUpWebAPI.response;
            }
@@ -21,7 +21,7 @@ $document.ready(function(){
 
         async getByUser(email)
         {
-           if (await ReachUpWebAPI.httpGet())
+           if (await ReachUpWebAPI.httpGet('Feedback/ByUser?email=' + email))
            {
                return ReachUpWebAPI.response;
            }
@@ -34,7 +34,7 @@ $document.ready(function(){
 
         async getByType(type)
         {
-           if (await ReachUpWebAPI.httpGet())
+           if (await ReachUpWebAPI.httpGet('Feedback/GetAll?type=' + type))
            {
                return ReachUpWebAPI.response;
            }
@@ -47,7 +47,7 @@ $document.ready(function(){
 
         async get(id)
         {
-           if (await ReachUpWebAPI.httpGet())
+           if (await ReachUpWebAPI.httpGet('Feedback/Get?id=' + id))
            {
                return ReachUpWebAPI.response;
            }
@@ -60,7 +60,7 @@ $document.ready(function(){
 
         async post(feedback)
         {
-           if (await ReachUpWebAPI.httpPost())
+           if (await ReachUpWebAPI.httpPost('Feedback/Post'))
            {
                return true;
            }
@@ -73,7 +73,7 @@ $document.ready(function(){
 
         async patch(feedback)
         {
-           if (await ReachUpWebAPI.httpPatch())
+           if (await ReachUpWebAPI.httpPatch('Feedback/Patch'))
            {
                return true;
            }
@@ -86,7 +86,7 @@ $document.ready(function(){
 
         async delete(id)
         {
-           if (await ReachUpWebAPI.httpDelete())
+           if (await ReachUpWebAPI.httpDelete('Feedback/Delete?id=' + id))
            {
                return true;
            }

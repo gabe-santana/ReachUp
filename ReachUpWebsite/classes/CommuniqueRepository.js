@@ -8,7 +8,7 @@ $document.ready(function(){
 
         async receive(user, local)
         {
-           if (await ReachUpWebAPI.httpGet())
+           if (await ReachUpWebAPI.httpGet('Communique/Receive?'))
            {
                return ReachUpWebAPI.response;
            }
@@ -19,9 +19,9 @@ $document.ready(function(){
            }
         }
 
-        async get(local)
+        async get(local_id)
         {
-           if (await ReachUpWebAPI.httpGet())
+           if (await ReachUpWebAPI.httpGet('Communique/Get?id=' + local_id))
            {
                return ReachUpWebAPI.response;
            }
@@ -60,7 +60,7 @@ $document.ready(function(){
 
         async delete(id)
         {
-           if (await ReachUpWebAPI.httpDelete())
+           if (await ReachUpWebAPI.httpDelete('Communique/Delete?id=' + id))
            {
                return true;
            }

@@ -6,9 +6,9 @@ $document.ready(function(){
            ReachUpWebAPI = new clsReachUpWebAPI();
         }
 
-        async getAll(id)
+        async getAllById(id)
         {
-           if (await ReachUpWebAPI.httpGet())
+           if (await ReachUpWebAPI.httpGet('User/GetAll?id=' + id))
            {
                return ReachUpWebAPI.response;
            }
@@ -19,9 +19,9 @@ $document.ready(function(){
            }
         }
 
-        async getAll(role)
+        async getAllByRole(role)
         {
-           if (await ReachUpWebAPI.httpGet())
+           if (await ReachUpWebAPI.httpGet('User/GetAll?role=' + role))
            {
                return ReachUpWebAPI.response;
            }
@@ -34,7 +34,7 @@ $document.ready(function(){
 
         async get(role, email)
         {
-           if (await ReachUpWebAPI.httpGet())
+           if (await ReachUpWebAPI.httpGet('User/Get?role=' + role + '&email=' + email))
            {
                return ReachUpWebAPI.response;
            }
@@ -47,7 +47,7 @@ $document.ready(function(){
 
         async post(user)
         {
-           if (await ReachUpWebAPI.httpPost())
+           if (await ReachUpWebAPI.httpPost('User/Post'))
            {
                return true;
            }
@@ -60,7 +60,7 @@ $document.ready(function(){
 
         async patch(user)
         {
-           if (await ReachUpWebAPI.httpPatch())
+           if (await ReachUpWebAPI.httpPatch('User/Patch'))
            {
                return true;
            }
@@ -73,7 +73,7 @@ $document.ready(function(){
 
         async delete(role, email)
         {
-           if (await ReachUpWebAPI.httpDelete())
+           if (await ReachUpWebAPI.httpDelete('User/Delete?role=' + role + '&email=' + email))
            {
                return true;
            }
