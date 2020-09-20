@@ -8,78 +8,66 @@ $document.ready(function(){
 
         async getAllById(id)
         {
-           if (await ReachUpWebAPI.httpGet('User/GetAll?id=' + id))
-           {
+           if (await ReachUpWebAPI.httpGet('User/GetAll?id=' + id)) {
                return ReachUpWebAPI.response;
            }
 
-           else
-           {
+           else {
                return false;
            }
         }
 
         async getAllByRole(role)
         {
-           if (await ReachUpWebAPI.httpGet('User/GetAll?role=' + role))
-           {
+           if (await ReachUpWebAPI.httpGet('User/GetAll?role=' + role)) {
                return ReachUpWebAPI.response;
            }
 
-           else
-           {
+           else {
                return false;
            }
         }
 
         async get(role, email)
         {
-           if (await ReachUpWebAPI.httpGet('User/Get?role=' + role + '&email=' + email))
-           {
+           if (await ReachUpWebAPI.httpGet('User/Get?role=' + role + '&email=' + email)) {
                return ReachUpWebAPI.response;
            }
 
-           else
-           {
+           else {
                return false;
            }
         }
 
         async post(user)
         {
-           if (await ReachUpWebAPI.httpPost('User/Post'))
-           {
+           if (await ReachUpWebAPI.httpPost('User/Post')) {
                return true;
            }
 
-           else
-           {
+           else {
                return false;
            }
         }
 
         async patch(user)
         {
-           if (await ReachUpWebAPI.httpPatch('User/Patch'))
-           {
+           if (await ReachUpWebAPI.httpPatch('User/Patch')) {
                return true;
            }
 
-           else
-           {
+           else {
                return false;
            }
         }
 
         async delete(role, email)
         {
-           if (await ReachUpWebAPI.httpDelete('User/Delete?role=' + role + '&email=' + email))
-           {
+           if (await ReachUpWebAPI.httpDelete('User/Delete?role=' + role + '&email=' + email)) {
                return true;
            }
 
-           else
-           {
+           else {
                return false;
            }
         }
