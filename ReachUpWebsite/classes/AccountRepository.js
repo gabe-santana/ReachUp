@@ -1,5 +1,8 @@
 $document.ready(function(){
 
+    //import { clsReachUpWebAPI } from "./ReachUpWebAPI";
+      import 'ReachUpWebAPI';
+
     let clsAccountRepository = class {
        constructor (){
            const ReachUpWebAPI;
@@ -16,7 +19,7 @@ $document.ready(function(){
                return false;
            }
         }
-
+        
     } 
 
     const AccountRepository;

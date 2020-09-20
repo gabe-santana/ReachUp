@@ -1,8 +1,18 @@
-$document.ready(function(){
+//$document.ready(function(){
 
-     let clsReachUpWebAPI = class {
-        constructor(url) {
-            this.url = url;
+     export default {
+        class: clsReachUpWebAPI,
+        methods: [
+          httpGet(),
+          httpPost(),
+          httpPatch(),
+          httpDelete()
+        ]
+     }
+
+     export let clsReachUpWebAPI = class {
+        constructor() {
+            this.url = 'https://192.168.0.109:8000/api';
             this.response = "";
          }
 
@@ -139,4 +149,4 @@ $document.ready(function(){
                 return false;
          }
      }*/
-})
+//})
