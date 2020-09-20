@@ -6,63 +6,11 @@ $document.ready(function(){
            ReachUpWebAPI = new clsReachUpWebAPI();
         }
 
-        async login(user)
+        async login(email, password)
         {
-           if (await ReachUpWebAPI.httpGet())
+           if (await ReachUpWebAPI.httpGet('Account/Login?Email=' + email + '&Password=' + password + '&role=adm'))
            {
                return ReachUpWebAPI.response;
-           }
-
-           else
-           {
-               return false;
-           }
-        }
-
-        async get(local)
-        {
-           if (await ReachUpWebAPI.httpGet())
-           {
-               return ReachUpWebAPI.response;
-           }
-
-           else
-           {
-               return false;
-           }
-        }
-
-        async post(communique)
-        {
-           if (await ReachUpWebAPI.httpPost())
-           {
-               return true;
-           }
-
-           else
-           {
-               return false;
-           }
-        }
-
-        async patch(communique)
-        {
-           if (await ReachUpWebAPI.httpPatch())
-           {
-               return true;
-           }
-
-           else
-           {
-               return false;
-           }
-        }
-
-        async delete(id)
-        {
-           if (await ReachUpWebAPI.httpDelete())
-           {
-               return true;
            }
 
            else

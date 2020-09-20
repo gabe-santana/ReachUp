@@ -8,7 +8,7 @@ $document.ready(function(){
 
         async getAll(type)
         {
-           if (await ReachUpWebAPI.httpGet())
+           if (await ReachUpWebAPI.httpGet('Beacon/GetAll?Type=' + type))
            {
                return ReachUpWebAPI.response;
            }
@@ -21,7 +21,7 @@ $document.ready(function(){
 
         async get(uuid)
         {
-           if (await ReachUpWebAPI.httpGet())
+           if (await ReachUpWebAPI.httpGet('Beacon/Get?UUID=' + uuid))
            {
                return ReachUpWebAPI.response;
            }
@@ -34,7 +34,7 @@ $document.ready(function(){
 
         async post(beacon)
         {
-           if (await ReachUpWebAPI.httpPost())
+           if (await ReachUpWebAPI.httpPost('Beacon/Post'))
            {
                return true;
            }
@@ -47,7 +47,7 @@ $document.ready(function(){
 
         async patch(beacon)
         {
-           if (await ReachUpWebAPI.httpPatch())
+           if (await ReachUpWebAPI.httpPatch('Beacon/Patch'))
            {
                return true;
            }
@@ -60,7 +60,7 @@ $document.ready(function(){
 
         async delete(uuid)
         {
-           if (await ReachUpWebAPI.httpDelete())
+           if (await ReachUpWebAPI.httpDelete('Beacon/Delete?UUID=' + uuid))
            {
                return true;
            }
@@ -68,7 +68,7 @@ $document.ready(function(){
            else
            {
                return false;
-           }
+           }v
         }
 
     } 
