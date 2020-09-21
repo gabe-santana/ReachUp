@@ -1,61 +1,36 @@
 $(function(){
     
-    const uri =  'https://192.168.0.109:8000/api';
-    let localTypes = [];
-    let localFloorOptions = 0;
-    const token = sessionStorage.getItem('token');
+  import { clsLocalOptionsRepository } 
+  from '../classes/repositories/LocalOptionsRepository.js'
+    
+    //const token = sessionStorage.getItem('token');
 
     getLocalTypeOptions();
     getLocalFloorOptions();
 
-    function getLocalTypeOptions()
+    async function getLocalTypeOptions()
     {
-        fetch(uri, {
-          method: 'GET',
-          headers: {
-              'Accept':'application/json',
-              'Content-Type':'application/json',
-              'Authorization':'Bearer ' + token
-          },
-        })
-          .then (localTypes = JSON.parse(response => response.json()))
-          .then(() => {
-            displayLocalTypeOptions(localTypes);
-          })
-          .catch(error => console.error('Não é possível acessar os tipos de local', error))
+        const cmb = document.querySelector('#cmbLocalType');
+        const LocalOptionsRepo = new clsLocalOptionsRepository();
+        const localTypes = await LocalOptionsRepo.getLocalTypes();
+
+        localTypes.foreach(localType => {
+             const cmbItem = document.createElement('option');
+             cmbItem.innerText = localType.name;
+             cmb.append(cmbItem);
+            });
     }
 
-    function displayLocalTypeOptions(localTypes)
+    async function getLocalFloorOptions()
     {
-       for (let i = 0; i < localTypes.length; i++) {
-           $('#cmbLocalType').append('<option>' + localTypes[i] + '</option>');
-           
-       }
-    }
+        const cmb = document.querySelector('#cmbLocalFloor');
+        const LocalOptionsRepo = new clsLocalOptionsRepository();
+        const floorOptions = await LocalOptionsRepo.getFloorOptions();
 
-    function getLocalFloorOptions()
-    {
-        fetch(uri, {
-          method: 'GET',
-          headers: {
-              'Accept':'application/json',
-              'Content-Type':'application/json',
-              'Authorization':'Bearer ' + token
-          },
-        })
-        .then (localFloorOptions = JSON.parse(response => response.json()))
-        .then(() => {
-            displayLocalFloorOptions(localFloorOptions);
-          })
-        .catch(error => console.error('Não é possível acessar as opções de andar', error))
+        floorOptions.foreach(floorOption => {
+        const cmbItem = document.createElement('option');
+        cmbItem.innerText = floorOption.name;
+        cmb.append(cmbItem);
+       });
     }
-
-    function displayLocalFloorOptions(localFloorOptions)
-    {
-       for (let i = 0; i < localFloorOptions.length; i++) {
-           $('#cmbLocalFloor').append('<option>' + localFloorOptions[i] + '</option>');
-           
-       }
-    }
-
 })

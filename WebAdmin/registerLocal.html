@@ -4,12 +4,16 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ReachUp!</title>>
+	<title>ReachUp!</title>
     <link rel="stylesheet" type="text/css" href="css/generalStyle.css">
     <link rel="stylesheet" type="text/css" href="css/registerLocalStyle.css">
-    <link rel="stylesheet" type="text/javascript" href="js/jquery-3.4.1.min.js">
-    <link rel="stylesheet" type="text/javascript" href="js/fetchLocalOptions.js">
-    <link rel="stylesheet" type="text/javascript" href="js/registerLocal.js">
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="module" src="classes/models/ReachUpWebAPI.js"></script>
+    <script type="module" src="classes/repositories/LocalOptionsRepository.js"></script>
+    <script type="module" src="classes/repositories/LocalRepository.js"></script>
+    <script type="module" src="js/fetchLocalOptions.js"></script>
+    <script type="module" src="js/registerLocal.js"></script>
+    <script type="text/javascript" src="js/getUserToken.js"></script>
 </head>
 <body>
 		<header>
@@ -37,7 +41,10 @@
         </select>
         <p>UUID do beacon</p>
         <input type="text" required id="txtLocalBeaconUUID" class="input" name="localBeaconUUID" placeholder="Digite o UUID do beacon"></input>
-        <button id="btnRegisterLocal" value="Confirmar"></button>
+        <button id="btnBookLocal" value="Guardar local na lista"></button>
+        <ul id = 'list-locals-to-register'>
+        </ul>
+        <button id="btnRegisterLocals" value="Registrar locais"></button>
     </form>
  </main>
 </body>

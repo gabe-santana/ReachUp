@@ -1,35 +1,40 @@
 $(function(){
 
-    let ab = [];
-    const token = sessionStorage.getItem('token');
+    import { clsLocalRepository } 
+    from '../classes/repositories/LocalRepository.js'
+   
+    //const token = sessionStorage.getItem('token');
 
-    $('btnRegisterLocal').click(function(){
+    /*$('#btnBookLocal').click(function(){
+        
+         const listLocals = document.querySelector('#list-locals-to-register');
+         const local = 
+         //const listLocalsItem = document.createElement('li');
 
-      for (let index = 0; index < array.length; index++) {
-        const uri =  'https://192.168.0.109:8000/api/Account/Login?Email=' + email + '&Password=' + password + '&Role=adm';
-          registerLocal();
-      }
+         listLocalsItem.innerText = 
+    })*/
+
+    $('#btnRegisterLocals').click(function(){
+
+      const listLocalsToRegister = document.querySelector('');
+
+      /*array.foreach(element => {
+        
+      });*/ ;
+        const name = $('#txtLocalName').val();
+        const type = $('#localType').val();
+        const floor = $('#localFloor').val();
+        const beaconUUID = $('#txtLocalBeaconUUID').val();
+
+        const local = [name, type, floor, beaconUUID];
+        register(local);
 
     })
 
-      function registerLocal()
+      async function register(local)
       {
-          fetch(uri, {
-              method: 'POST',
-              headers: {
-                  'Accept':'application/json',
-                  'Content-Type':'application/json',
-                  'Authorization':'Bearer ' + token
-              },
-              body: JSON.stringify('object')
-          })
-            .then (response => response.json())
-            .then(() => {
-                return true;
-              })
-            .catch(error => console.error('Não foi possível registrar o local', error))
-            .catch(() => {
-                return false;
-              })
+        const LocalRepo = new clsLocalRepository();
+        const isOK = await LocalRepo.post(local);
+        return isOK;
       }
 })
