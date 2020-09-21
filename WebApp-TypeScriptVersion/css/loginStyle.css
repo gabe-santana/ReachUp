@@ -1,0 +1,23 @@
+form{
+    display: block;
+    margin: auto;
+    margin-top: 375px;
+}
+
+.input {
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    width: 300px;
+    height: 20px;
+}
+
+button{
+    display: block;
+    margin: auto;
+    margin-top: 25px;
+    width: 100px;
+    height: 25px;
+    
+    
+}

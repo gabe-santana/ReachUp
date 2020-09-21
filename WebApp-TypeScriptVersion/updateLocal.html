@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ReachUp!</title>>
+    <link rel="stylesheet" type="text/css" href="css/generalStyle.css">
+    <link rel="stylesheet" type="text/css" href="css/updateLocalStyle.css">
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="module" src="classes/models/ReachUpWebAPI.js"></script>
+    <script type="module" src="classes/repositories/LocalOptionsRepository.js"></script>
+    <script type="module" src="classes/repositories/LocalRepository.js"></script>
+    <script type="module" src="js/updateLocal.js"></script>
+    <script type="text/javascript" src="js/getUserToken.js"></script>
+</head>
+<body>
+		<header>
+            <figure>
+               <img src="img/ReachUp.png" title="ReachUp!" alt="ReachUp!">
+            </figure>
+		</header>
+<main>
+
+     <h1>Atualizar local</h1>
+
+	<form>
+        <p>Nome do local</p>
+        <input type="text" required id="txtLocalName" class="input" name="localName" placeholder="Digite o nome do local"></input>
+        <p>Tipo do local</p>
+        <select id = "localType">
+            <option>Selecione o tipo do local</option>
+            <option>Loja</option>
+            <option>Cinema</option>
+            <option>Banheiro</option>
+        </select>
+        <p>Andar do local</p>
+        <select id = "localFloor">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>S</option>
+        </select>
+        <p>UUID do beacon</p>
+        <input type="text" required id="txtLocalBeaconUUID" class="input" name="localBeaconUUID" placeholder="Digite o UUID do beacon"></input>
+        <button id="btnUpdateLocal" value="Confirmar"></button>
+    </form>
+ </main>
+</body>
