@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUp\\ReachUp.csproj": {}
+    "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUp\\ReachUp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUp\\ReachUp.csproj": {
+    "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUp\\ReachUp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUp\\ReachUp.csproj",
+        "projectUniqueName": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUp\\ReachUp.csproj",
         "projectName": "ReachUp",
-        "projectPath": "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUp\\ReachUp.csproj",
+        "projectPath": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUp\\ReachUp.csproj",
         "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUp\\obj\\",
+        "outputPath": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",

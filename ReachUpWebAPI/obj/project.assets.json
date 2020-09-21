@@ -8477,11 +8477,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj",
       "projectName": "ReachUpWebAPI",
-      "projectPath": "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj",
+      "projectPath": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUpWebAPI\\ReachUpWebAPI.csproj",
       "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUpWebAPI\\obj\\",
+      "outputPath": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUpWebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -8502,8 +8502,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUp\\ReachUp.csproj": {
-              "projectPath": "C:\\Users\\Gabriel\\Documents\\_\\_ReachUp\\ReachUp\\ReachUp.csproj"
+            "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUp\\ReachUp.csproj": {
+              "projectPath": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUp\\ReachUp.csproj"
             }
           }
         }
