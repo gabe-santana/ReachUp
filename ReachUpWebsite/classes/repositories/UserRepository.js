@@ -1,80 +1,47 @@
 $document.ready(function(){
 
-    let clsUserRepository = class {
-       constructor (){
-           const ReachUpWebAPI;
-           ReachUpWebAPI = new clsReachUpWebAPI();
-        }
+    import { clsReachUpWebAPI } from '..models/ReachUpWebAPI.js';
+
+    export class clsUserRepository {
+        api = new clsReachUpWebAPI();
 
         async getAllById(id)
         {
-           if (await ReachUpWebAPI.httpGet('User/GetAll?id=' + id)) {
-               return ReachUpWebAPI.response;
-           }
-
-           else {
-               return false;
-           }
+            const users = await this.api.httpGet('User/GetAll?id=' + id)
+            return users;
         }
 
         async getAllByRole(role)
         {
-           if (await ReachUpWebAPI.httpGet('User/GetAll?role=' + role)) {
-               return ReachUpWebAPI.response;
-           }
-
-           else {
-               return false;
-           }
+           const users = await this.api.httpGet('User/GetAll?role=' + role);
+           return users;
         }
 
         async get(role, email)
         {
-           if (await ReachUpWebAPI.httpGet('User/Get?role=' + role + '&email=' + email)) {
-               return ReachUpWebAPI.response;
-           }
-
-           else {
-               return false;
-           }
+           const users = await this.api.httpGet('User/Get?role=' + role + '&email=' + email);
+           return users;
         }
 
         async post(user)
         {
-           if (await ReachUpWebAPI.httpPost('User/Post')) {
-               return true;
-           }
-
-           else {
-               return false;
-           }
+           const httpStatus = await this.api.httpPost('User/Post');
+           return httpStatus;
         }
 
         async patch(user)
         {
-           if (await ReachUpWebAPI.httpPatch('User/Patch')) {
-               return true;
-           }
-
-           else {
-               return false;
-           }
+           const httpStatus = await this.api.httpPatch('User/Patch');
+           return httpStatus;
+    
         }
 
         async delete(role, email)
         {
-           if (await ReachUpWebAPI.httpDelete('User/Delete?role=' + role + '&email=' + email)) {
-               return true;
-           }
-
-           else {
-               return false;
-           }
+            const httpStatus = await this.api.httpDelete('User/Delete?role=' + role + '&email=' + email);
+            return httpStatus;
         }
 
     } 
-
-    const UserRepository;
-    UserRepository = new clsUserRepository("");
 
 })

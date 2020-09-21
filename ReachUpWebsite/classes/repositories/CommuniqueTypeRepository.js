@@ -1,24 +1,14 @@
 $document.ready(function(){
 
-    let clsCommuniqueTypeRepository = class {
-       constructor (){
-           const ReachUpWebAPI;
-           ReachUpWebAPI = new clsReachUpWebAPI();
-        }
+    import { clsReachUpWebAPI } from '..models/ReachUpWebAPI.js';
+  
+    export class clsCommuniqueTypeRepository {
+        api = new clsReachUpWebAPI();
 
         async get()
         {
-           if (await ReachUpWebAPI.httpGet('FeedbackType/Get')) {
-               return ReachUpWebAPI.response;
-           }
-
-           else {
-               return false;
-           }
+            const communiqueTypes = await this.api.httpGet('CommuniqueType/Get');
+            return communiqueTypes;
         }
     } 
-
-    const CommuniqueTypeRepository;
-    CommuniqueTypeRepository = new clsCommuniqueTypeRepository("");
-
 })

@@ -1,24 +1,15 @@
 $document.ready(function(){
 
-    let clsBeaconTypeRepository = class {
-       constructor (){
-           const ReachUpWebAPI;
-           ReachUpWebAPI = new clsReachUpWebAPI();
-        }
+    import { clsReachUpWebAPI } from '..models/ReachUpWebAPI.js';
+
+    export class clsBeaconTypeRepository {
+        api = new clsReachUpWebAPI();
 
         async get()
         {
-           if (await ReachUpWebAPI.httpGet('BeaconType/Get')) {
-               return ReachUpWebAPI.response;
-           }
-
-           else {
-               return false;
-           }
+           const beaconTypes = await this.api.httpGet('BeaconType/Get');
+           return beaconTypes;
         }
     } 
-
-    const BeaconTypeRepository;
-    BeaconTypeRepository = new clsBeaconTypeRepository("");
 
 })

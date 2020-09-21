@@ -1,69 +1,40 @@
 $document.ready(function(){
 
-    let clsBeaconRepository = class {
-       constructor (){
-           const ReachUpWebAPI;
-           ReachUpWebAPI = new clsReachUpWebAPI();
-        }
+    import { clsReachUpWebAPI } from '..models/ReachUpWebAPI.js';
+
+    export class clsBeaconRepository {
+        api = new clsReachUpWebAPI();
 
         async getAll(type)
         {
-           if (await ReachUpWebAPI.httpGet('Beacon/GetAll?Type=' + type)) {
-               return ReachUpWebAPI.response;
-           }
-
-           else {
-               return false;
-           }
+           const beacons = await this.api.httpGet('Beacon/GetAll?Type=' + type);
+           return beacons;
         }
 
         async get(uuid)
         {
-           if (await ReachUpWebAPI.httpGet('Beacon/Get?UUID=' + uuid)) {
-               return ReachUpWebAPI.response;
-           }
-
-           else {
-               return false;
-           }
+            const beacons = await this.api.httpGet('Beacon/Get?UUID=' + uuid);
+            return beacons;
         }
 
         async post(beacon)
         {
-           if (await ReachUpWebAPI.httpPost('Beacon/Post')) {
-               return true;
-           }
-
-           else {
-               return false;
-           }
+           const httpStatus = await this.api.httpPost('Beacon/Post');
+           return httpStatus;
         }
 
         async patch(beacon)
         {
-           if (await ReachUpWebAPI.httpPatch('Beacon/Patch')) {
-               return true;
-           }
-
-           else {
-               return false;
-           }
+           const httpStatus = await this.api.httpPatch('Beacon/Patch');
+           return httpStatus;
         }
 
         async delete(uuid)
         {
-           if (await ReachUpWebAPI.httpDelete('Beacon/Delete?UUID=' + uuid)) {
-               return true;
-           }
-
-           else {
-               return false;
-           }
+           const httpStatus = await this.api.httpDelete('Beacon/Delete?UUID=' + uuid);
+           return httpStatus;
         }
 
     } 
-
-    const BeaconRepository;
-    BeaconRepository = new clsBeaconRepository("");
 
 })
