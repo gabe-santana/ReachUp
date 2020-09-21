@@ -1,38 +1,37 @@
 $(function(){
 
-    let feedbacks = [];
-    const token = sessionStorage.getItem('token');
+    import { clsFeedbackRepository } 
+    from '../classes/repositories/FeedbackRepository.js';
+
+    //const token = sessionStorage.getItem('token');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const type = urlParams.get('type');
+
+    if (type) {
+        getFeedbacksOfType(type);
+    }
+
 
     $('#cmbFeedbackTypes').change(function(){
-        var feedbackType = ('#cmbFeedbackTypes').val();
-        getFeedbacks(feedbackType);
+        const type = ('#cmbFeedbackTypes').val();
+        getFeedbacksOfType(type);
     })
 
-    function getFeedbacks(feedbackType)
+    async function getFeedbacksOfType(type)
     {
-        const uri = 'https://192.168.0.109:8000/api' + "" + feedbackType;
+        const feedbacksRepo = new clsFeedbackRepository();
+        const section = document.querySelector('#feedbacks');
 
-        fetch(uri, {
-           method: 'GET',
-           headers: {
-            'Accept':'application/json',
-            'Content-Type':'application/json',
-            'Authorization':'Bearer ' + token
-        },
-      })
-          .then (feedbacks = JSON.parse(response => response.json()))
-          .then(() => {
-            displayFeedbacks(feedbacks);
-          })
-          .catch(error => console.error('Não foi possível acessar os feedbacks', error))
-    }
+        const feedbacks = await feedbacksRepo.getByType(type);
 
-    function displayFeedbacks(feedbacks)
-    {
-        for (let i = 0; i < feedbacks.length; i++) {
-            $('feedbacks').append('<div>' + "" + '</div>');
+          feedbacks.foreach(feedback => {
+               const divItem = document.createElement('div');
             
-        }
-    }
+               divItem.id = feedback.id;
+               divItem.innerText = feedback.user + "-" + feedback.description + "-" + feedback.date + " - " + feedback.starsAmount;
 
+               section.append(divItem);
+            });
+    }
 })

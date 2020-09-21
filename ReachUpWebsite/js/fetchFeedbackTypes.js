@@ -1,33 +1,24 @@
 $(function(){
 
-    let feedbackTypes = [];
-    const token = sessionStorage.getItem('token');
-
+    import { clsFeedbackTypeRepository } 
+    from '../classes/repositories/FeedbackTypeRepository.js';
     
-    getFeedbackTypes();
-
-    function getFeedbackTypes()
+    //const token = sessionStorage.getItem('token');
+    main();
+    
+    async function main()
     {
+        const feedbackTypesRepo = new clsFeedbackTypeRepository();
+        const cmb = document.querySelector('#cmbFeedbackTypes');
 
-        /*fetch(uri, {
-           method: 'GET',
-           headers: {
-            'Accept':'application/json',
-            'Content-Type':'application/json',
-            'Authorization':'Bearer ' + token
-           },
-        })
-          .then (feedbackTypes = JSON.parse(response => response.json()))
-          .then(() => {
-            displayFeedbackTypes(feedbackTypes);
-          })
-          .catch(error => console.error('Não foi possível acessar os tipos de feedback', error))*/
-    }
+        const feedbackTypes = await feedbackTypesRepo.get();
 
-    function displayFeedbackTypes(feedbackTypes)
-    {
-       for (let i = 0; i < feedbackTypes.length; i++) {
-           $('#cmbFeedbackTypes').append('<option>' + feedbackTypes[i] + '</option>');
-        }
+        feedbackTypes.foreach(feedbackType => {
+           const cmbItem = document.createElement('option');
+           
+           cmbItem.innerText = feedbackType.name;
+           cmb.append(cmbItem);
+      });
+
     }
 })

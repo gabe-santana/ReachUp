@@ -1,85 +1,74 @@
 $document.ready(function(){
 
-     export default {
-        class: clsReachUpWebAPI,
-        methods: [
-          httpGet(),
-          httpPost(),
-          httpPatch(),
-          httpDelete()
-        ]
-     }
-
      export class clsReachUpWebAPI {
         constructor() {
             this.url = 'https://192.168.0.109:8000/api';
-            this.response = "";
          }
 
-         async httpGet(str)
+         async httpGet(str, options = {})
          {
-            await fetch(this.url + str, {
+            const response = await fetch(this.url + str, {
                 method: 'GET',
                 headers: {
                     'Accept':'application/json',
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json',
+                    ...options.headers,
                 },
               })
-                .then (this.response = JSON.parse(response => response.json()))
-                /*.then(() => {
-                  return this.response;
-                })*/
+
+              const json = await response.json();
+              return json;
          }
 
-         async httpPost(str)
+         async httpPost(str, options = {})
          {
-            await fetch(this.url + str, {
+            const response = await fetch(this.url + str, {
                 method: 'POST',
+                body: options.body,
                 headers: {
                     'Accept':'application/json',
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json',
+                    ...options.headers,
                 },
               })
-                .then (this.response = JSON.parse(response => response.json()))
-                /*.then(() => {
-                  return this.response;
-                })*/
+              
+              const json = await response.json();
+              return json;
+
          }
 
-         async httpPatch(str)
+         async httpPatch(str, options = {})
          {
-            await fetch(this.url + str, {
+            const response = await fetch(this.url + str, {
                 method: 'PATCH',
                 headers: {
                     'Accept':'application/json',
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json',
+                    ...options.headers,
                 },
               })
-                .then (this.response = JSON.parse(response => response.json()))
-                /*.then(() => {
-                  return this.response;
-                })*/
+
+              const json = await response.json();
+              return json;
+
          }
 
-         async httpDelete(str)
+         async httpDelete(str, options = {})
          {
-            await fetch(this.url + str, {
+            const response = await fetch(this.url + str, {
                 method: 'DELETE',
                 headers: {
                     'Accept':'application/json',
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json',
+                    ...options.headers,
                 },
               })
-                .then (this.response = JSON.parse(response => response.json()))
-                /*.then(() => {
-                  return this.response;
-                })
-                return false;*/
+                
+              const json = await response.json();
+              return json;
+
          }
      }
-
-     const ReachUpWebApi;
-     ReachUpWebApi = new clsReachUpWebAPI("");
 
      /*function clsReachUpWebApi(url)
      {
