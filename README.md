@@ -39,6 +39,7 @@ lost children and people like me who just want more agility on a daily basis.
 3. You will need a package manager, we recommeend: [NPM (Node.js)](https://nodejs.org/en/download/), [Yarn](https://classic.yarnpkg.com/en/docs/install/#windows-stable) or 
 [Chocolatey](https://chocolatey.org)
 4. [Flutter Framework](https://flutter.dev/docs/get-started/install)
+5. Babel - for transpilation of TypeScript  to JavaScript ([Install and config] https://ccoenraets.github.io/es6-tutorial/setup-babel/ , [Transpile all] https://babeljs.io/docs/en/babel-parser)
 
 > Make sure you have all dependencies for Android [Android Studio](https://developer.android.com/studio) and iOS [XCode](https://developer.apple.com/xcode/) that will be 
 necessary to installation step 4. 
