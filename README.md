@@ -88,7 +88,7 @@ We're using:
 - [ ] Web Application **(in progress)**
 - [ ] Cross-Platform Mobile App **(in progress)**
 
-## Development migrations: "bipolar programming"
+## Development migrations: "Bipolar Programming™"
 
 As the project grows, and taking into account the time available until delivery (in December), we have modified some parts of the project (both finished parts and parts still running), with at least one of these purposes:
 
