@@ -1,0 +1,5 @@
+Do you know what Bipolar Programming is?
+
+It is a concept that we have created (well, at least that name is our creation). With bipolar programming, at the same time that a system is developed in a main and centralized branch, parts of code or entire modules gradually undergo, according to the time available, small or large changes, with changes in languages ​​and frameworks (or, if you prefer, just programming paradigm changes), generating several stable versions for each module and, thus, several stable versions of the project, in a dynamic development scheme.
+Once fragments of a project are tested, and it turns out that they are working correctly according to the expected, loopholes are opened to improve them syntaxically.
+ + wait for more...
