@@ -76,7 +76,7 @@ We're using:
 
 - **MySQL Database: Transact-SQL Script's** for data storage/management;
 - **ASP.NET Core 3.0 Web API** for web service (RESTful WebAPI);
-- **ASP.NET Core Web Application: C# + Razor + HTML + CSS/SASS + JavaScript/JQuery** for website;
+- **Web Application: HTML + CSS/SASS + TypeScript + JavaScript** for website;
 - **Flutter: Dart + Java + Objective-C** for cross-platfor mobile app (Android/iOS);
 - **Flame: Flutter Lib** for render a real-time map of local;
 
