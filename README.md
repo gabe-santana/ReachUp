@@ -106,6 +106,8 @@ As the project grows, and taking into account the time available until delivery 
 
 - [ ] Development Big Migration #1: HTML + CSS/SASS + TS + JS to Node.js **(dreaming about)**
 
+To see all stable versions of the project modules before their current versions (with migration in progress or with their migration period ended), consult the other branches.
+
 ## About Officers Contributors
 
 We're TI students in [Centro Paula Souza](https://www.cps.sp.gov.br) technical schools organization and this projects are our Term Paper that we decided make it open-source!
