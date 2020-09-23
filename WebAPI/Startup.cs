@@ -14,6 +14,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.Extensions.Options;
 
 namespace ReachUpWebAPI
 {
@@ -49,9 +51,12 @@ namespace ReachUpWebAPI
             });
 
 
-            services.AddCors(options => 
+            services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials().Build());
+                options.AddPolicy("CorsPolicy",
+              builder => builder.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader());
             });
             services.AddControllers();
 
@@ -73,6 +78,8 @@ namespace ReachUpWebAPI
             });
             services.AddMvcCore()
                     .AddAuthorization();
+        
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -86,6 +93,7 @@ namespace ReachUpWebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors("CorsPolicy");
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -93,6 +101,13 @@ namespace ReachUpWebAPI
             {
                 endpoints.MapControllers();
             });
+
+          
+
+        }
+
+        private class ConfigureMvcOptions
+        {
         }
     }
 }

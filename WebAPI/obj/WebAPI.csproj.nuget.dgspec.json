@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUpWebAPI\\WebAPI.csproj": {}
+    "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
     "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\LibraryClasses\\BusinessLayer.csproj": {
@@ -67,14 +67,14 @@
         }
       }
     },
-    "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUpWebAPI\\WebAPI.csproj": {
+    "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\WebAPI\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUpWebAPI\\WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\WebAPI\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUpWebAPI\\WebAPI.csproj",
+        "projectPath": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\WebAPI\\WebAPI.csproj",
         "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\ReachUpWebAPI\\obj\\",
+        "outputPath": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -117,6 +117,10 @@
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[3.1.7, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
