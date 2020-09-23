@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:sqflite/sqflite.dart';
 import 'View/HomeView/Home.view.dart';
+import 'package:mobx/mobx.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx_codegen/builder.dart';
 
 void main() {
   runApp(MyApp());

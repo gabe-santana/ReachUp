@@ -1,18 +1,36 @@
+import 'package:mobx/mobx.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx_codegen/builder.dart';
+import 'package:sqflite/sqflite.dart';
+
 import 'package:ReachUp/Component/DatabaseCreator.dart';
 
-class DatabaseRepository {
+part 'DatabaseRepository.g.dart';
+
+class DatabaseRepository = _DatabaseRepository with _$DatabaseRepository;
+
+abstract class _DatabaseRepository {
   static Future<List<Todo>> getAllTodos() async {
     final sql = '''SELECT * FROM ${DatabaseCreator.todoTable}
     WHERE ${DatabaseCreator.isDeleted} == 0''';
     final data = await db.rawQuery(sql);
-    List<Todo> todos = List();
+
+    @observable
+    var todos = ObservableList<Todo>();
 
     for (final node in data) {
-      final todo = Todo.fromJson(node);
-      todos.add(todo);
+      add(node);
+      todos.add(add(node));
     }
 
     return todos;
+  }
+
+  @action
+  static dynamic add(Map<String, dynamic> node) {
+    final todo = Todo.fromJson(node);
+    return todo;
+    //todos.add(todo);
   }
 
   static Future<Todo> getTodo(int id) async {
@@ -40,7 +58,7 @@ class DatabaseRepository {
        ${todo.isDeleted ? 1 : 0}
     )''';
 
-    final result = await db.rawinsert(sql);
+    final result = await db.rawInsert(sql);
     DatabaseCreator.databaseLog('Add todo', sql, null, result);
   }
 
