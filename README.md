@@ -39,6 +39,7 @@ lost children and people like me who just want more agility on a daily basis.
 3. You will need a package manager, we recommeend: [NPM (Node.js)](https://nodejs.org/en/download/), [Yarn](https://classic.yarnpkg.com/en/docs/install/#windows-stable) or 
 [Chocolatey](https://chocolatey.org)
 4. [Flutter Framework](https://flutter.dev/docs/get-started/install)
+5. Babel - for transpilation of TypeScript  to JavaScript ([Install and config] https://ccoenraets.github.io/es6-tutorial/setup-babel/ , [Transpile all] https://babeljs.io/docs/en/babel-parser)
 
 > Make sure you have all dependencies for Android [Android Studio](https://developer.android.com/studio) and iOS [XCode](https://developer.apple.com/xcode/) that will be 
 necessary to installation step 4. 
@@ -75,7 +76,7 @@ We're using:
 
 - **MySQL Database: Transact-SQL Script's** for data storage/management;
 - **ASP.NET Core 3.0 Web API** for web service (RESTful WebAPI);
-- **ASP.NET Core Web Application: C# + Razor + HTML + CSS/SASS + JavaScript/JQuery** for website;
+- **Web Application: HTML + CSS/SASS + TypeScript + JavaScript** for website;
 - **Flutter: Dart + Java + Objective-C** for cross-platfor mobile app (Android/iOS);
 - **Flame: Flutter Lib** for render a real-time map of local;
 
@@ -84,8 +85,28 @@ We're using:
 - [x] Database
 - [x] WebAPI **(completed, but always on edit and rising)**
 - [ ] ~~Unity2D Assets~~ **(not anymore)**
-- [ ] Web Application **(in progress)**
-- [ ] Cross-Platform Mobile App **(in progress)**
+- [ ] Web Application **(idling)**
+- [ ] Cross-Platform Mobile App **(in progress with full-focus)**
+
+## Development migrations: "Bipolar Programming™"
+
+As the project grows, and taking into account the time available until delivery (in December), we have modified some parts of the project (both finished parts and parts still running), with at least one of these purposes:
+
+ - better performance and scalability
+ - better facility to do unit tests / UI tests / debugs
+ - better maintenance
+ - refactoring codes, making them object-oriented as much as possible
+ - simple desire to learn a new language / framework
+
+- [ ] Development Migration #1: JS to TS **(in progress)**
+  -> better facility to do unit tests / UI tests / debugs
+  -> better maintenance
+  -> refactoring codes, making them object-oriented as much as possible
+  -> simple desire to learn a new language / framework
+
+- [ ] Development Big Migration #1: HTML + CSS/SASS + TS + JS to Node.js **(dreaming about)**
+
+To see all stable versions of the project modules before their current versions (with migration in progress or with their migration period ended), consult the other branches.
 
 ## About Officers Contributors
 
