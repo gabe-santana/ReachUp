@@ -6,12 +6,12 @@ import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
 import 'dart:convert';
 
-//Database db;
+Database db;
 
-class DatabaseProvider {
-  DatabaseProvider._();
-  static final DatabaseProvider dbProvider = DatabaseProvider._();
-  static Database db;
+class DatabaseCreator {
+  DatabaseCreator._();
+  static final DatabaseCreator dbProvider = DatabaseCreator._();
+  //static Database db; não pode ser acessado nos outros components
 
   Future<Database> get database async {
     if (db != null) {
@@ -50,28 +50,40 @@ class DatabaseProvider {
   }*/
 
   Future<void> createTables(Database db) async {
-    var tables = new List(5);
-    tables[0] = '''CREATE TABLE map (
+    var tables = new List(3);
+    /*tables[0] = '''CREATE TABLE map (
               code INT PRIMARY KEY, name TEXT
-           )''';
-    tables[1] = '''CREATE TABLE floor (
-              code INT, map INT, name TEXT
+           )''';*/
+    tables[0] = '''CREATE TABLE floor (
+              code INT, name TEXT
     )''';
-    tables[2] = '''CREATE TABLE local (
+    tables[1] = '''CREATE TABLE local (
               beacon TEXT 
     )''';
-    tables[3] = '''CREATE TABLE hall (
-              floor INT, map INT, hall INT
+    tables[2] = '''CREATE TABLE hall (
+              floor INT, hall INT
     )''';
-    tables[4] = '''CREATE TABLE local_hall (
-              beacon TEXT, floor INT, map INT, hall INT
-    )''';
+    /*tables[3] = '''CREATE TABLE local_hall (
+              beacon TEXT, floor INT, hall INT
+    )''';*/
 
     await db.execute(tables[0]);
     await db.execute(tables[1]);
     await db.execute(tables[2]);
     await db.execute(tables[3]);
     await db.execute(tables[4]);
+  }
+
+  static void databaseLog(String functionName, String sql,
+      [List<Map<String, dynamic>> getResult, int postOrUpdateResult]) {
+    print(functionName);
+    print(sql);
+
+    if (getResult != null) {
+      print(getResult);
+    } else if (postOrUpdateResult != null) {
+      print(postOrUpdateResult);
+    }
   }
 
   /* initDB() async {
@@ -148,17 +160,6 @@ class User {
   static const id = 'id';
   static const name = 'name';
   static const info = 'info';
-  static const isDeleted = 'isDeleted';
+  static const isDeleted = 'isDeleted';*/
 
-  static void databaseLog(String functionName, String sql,
-      [List<Map<String, dynamic>> getResult, int postOrUpdateResult]) {
-    print(functionName);
-    print(sql);
-
-    if (getResult != null) {
-      print(getResult);
-    } else if (postOrUpdateResult != null) {
-      print(postOrUpdateResult);
-    }
-  }*/
 }
