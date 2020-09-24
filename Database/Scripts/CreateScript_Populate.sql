@@ -16,6 +16,10 @@
 -- Script // Populate                                         --
 -- -----------------------------------------------------
 
+/* Nota de desenvolvimento - CUIDADO: Categorias + subcategorias são independentes (não têm ligação alguma) com tipos de local */
+/*Todos os locais, independente do tipo, possuem categorias, e não apenas lojas.*/
+
+/* Categorias aplicáveis em lojas (e suas subcategorias) */
 
 CALL cadastrarCategoria("Informática",  'Produtos tecnólogicos de uso geral e específico no mundo da tecnologia da informação');
 CALL cadastrarSubCategoria(0, "Hardware");
@@ -58,7 +62,7 @@ CALL cadastrarSubCategoria(7, "Doceria");
 CALL cadastrarSubCategoria(7, "Chocolateria");
 CALL cadastrarSubCategoria(7, "Bolos e tortas");
 CALL cadastrarSubCategoria(7, "Cafés");
-
+CALL cadastrarSubCategoria(7, "Padaria");
 
 CALL cadastrarCategoria("Cultura","Cultura");
 
@@ -67,24 +71,70 @@ CALL cadastrarSubCategoria(9, "Livraria");
 CALL cadastrarSubCategoria(9, "Comic store");
 CALL cadastrarSubCategoria(9, "Mangá Store");
 
-CALL cadastrarCategoria("Cinema","Produtos envolvendo entretimento no mundo dos filmes");
+CALL cadastrarCategoria("Hipermercado", "Mercados, hipermercados e quitandas");
 
-CALL cadastrarCategoria("Beleza e cuidado pessoal", "Serviços de beleza, higiene e cuidado pessoal; tatuagens; etc");
-CALL cadastrarSubCategoria(11, "Salão de beleza");
-CALL cadastrarSubCategoria(11, "Pedicure");
-CALL cadastrarSubCategoria(11, "Manicure");
-CALL cadastrarSubCategoria(11, "SPA");
-CALL cadastrarSubCategoria(11, "Salão de tatuagem");
-
-
-CALL cadastrarCategoria("Medicina", "Serviços médicos");
-CALL cadastrarSubCategoria(12, "Clínica Geral");
-CALL cadastrarSubCategoria(12, "Odontologia");
-CALL cadastrarSubCategoria(12, "Oftalmologia");
+CALL cadastrarCategoria("Drogaria", "Farmácias e lojas farmaucêticas");
+CALL cadastrarSubCategoria(11, "Farmácia");
+CALL cadastrarSubCategoria(11, "Loja de manipulados");
 
 CALL cadastrarCategoria("Casa", "Acessórios para casa");
 
-CALL cadastrarCategoria("Animais de estimação", "Lojas e serviços para seu querido animalzinho");
+CALL cadastrarCategoria("Pet-shop", "Lojas para seu querido animalzinho");
+
+/* Categorias aplicáveis em restaurantes */
+
+CALL cadastrarCategoria("Frutos do mar", "Frutos do mar");
+CALL cadastrarCategoria("Self-service", "Monte seu prato e pague por kilo");
+CALL cadastrarCategoria("Lanchonete", "Lanchonetes... huummm");
+CALL cadastrarCategoria("Comida japonesa", "Experimente o incrível sabor da culinária japonesa");
+CALL cadastrarCategoria("Pastelaria", "Pastéis.... quero de flango!");
+CALL cadastrarCategoria("Fast-food", "Locais perfeitos para você matar sua fome sem perder tempo");
+CALL cadastrarCategoria("Churrascaria", "Carnes suculentas... mal-passado, ao ponto ou bem-passado? À sua vontade");
+CALL cadastrarCategoria("Casa de massas", "Spaghetti, nhoque, lasanha, ravioli, etc.");
+CALL cadastrarCategoria("Pizzaria", "Pizzas quentinhas e deliciosas");
+CALL cadastrarCategoria("Esfiharia", "Não tem dinheiro para comer pizza? Então compre esfihas!");
+
+/*Categorias aplicáveis em cinema */
+
+CALL cadastrarCategoria("Cinema", "O local mais amado do shopping!");
+
+/*Categorias aplicáveis em necessidades */
+
+CALL cadastrarCategoria("Banheiro", "Banheiros limpos e confortáveis");
+CALL cadastrarCategoria("Berçário", "Berçários para você amamentar ou trocar a fralda do seu bebê");
+CALL cadastrarCategoria("Bebedouro", "Bebedouros com água fria, morna ou quente");
+CALL cadastrarCategoria("Telefone", "Telefones para você se comunicar com o mundo lá fora");
+
+/*Categorias aplicáveis em escada */
+
+CALL cadastrarCategoria("Escada fixa", "Escadas fixas para sua locomoção entre os andares do shopping");
+CALL cadastrarCategoria("Escada rolante", "Escadas rolantes para sua locomoção entre os andares do shopping");
+
+/*Categorias aplicáveis em elevador */
+
+CALL cadastrarCategoria("Elevador", "Elevadores para sua locomoção entre os andares do shopping");
+
+/* Categorias aplicáveis em praça */ 
+
+CALL cadastrarCategoria("Praça de alimentação", "Praças de alimentação, com inúmeros restaurantes e lanchonetes, para você matar sua fome");
+CALL cadastrarCategoria("Praça de lazer", "Praças de lazer com Wi-Fi grátis, assentos aconchegantes, fontes e estátuas para você descansar do barulho do shopping ou do seu grande tour de compras");
+
+/* Categorias aplicáveis em serviços */
+
+CALL cadastrarCategoria("Beleza e cuidado pessoal", "Serviços de beleza, higiene e cuidado pessoal; tatuagens; etc");
+CALL cadastrarSubCategoria(34, "Salão de beleza");
+CALL cadastrarSubCategoria(34, "Pedicure");
+CALL cadastrarSubCategoria(34, "Manicure");
+CALL cadastrarSubCategoria(34, "SPA");
+CALL cadastrarSubCategoria(34, "Salão de tatuagem");
+
+CALL cadastrarCategoria("Medicina", "Serviços médicos");
+CALL cadastrarSubCategoria(35, "Clínica Geral");
+CALL cadastrarSubCategoria(35, "Odontologia");
+CALL cadastrarSubCategoria(35, "Oftalmologia");
+
+
+
 
 CALL cadastrarUsuario("adm@email.com", "Administrator", "123", "adm", null);
 
@@ -657,5 +707,4 @@ CALL publicarComunicado(6, 1, 0, "Desconto maior para produtos de informática: 
 
 CALL publicarComunicado(217, 4, null, "Preços: Meia entrada - R$ 18.00; Inteira: R$ 32.00", now(), null);
 CALL publicarComunicado(217, 2, null, "Próxima sessâo: 'Sonic: O filme' - Sala 4, às 17:00. Dublado. Duração: 1h40m", now(), DATE_ADD(now(), INTERVAL 45 minute));
-
 
