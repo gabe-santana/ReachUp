@@ -85,8 +85,8 @@ We're using:
 - [x] Database
 - [x] WebAPI **(completed, but always on edit and rising)**
 - [ ] ~~Unity2D Assets~~ **(not anymore)**
-- [ ] Web Application **(in progress)**
-- [ ] Cross-Platform Mobile App **(in progress)**
+- [ ] Web Application **(idling)**
+- [ ] Cross-Platform Mobile App **(in progress with full-focus)**
 
 ## Development migrations: "Bipolar Programming™"
 

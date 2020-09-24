@@ -13,6 +13,7 @@ export module ReachUpWebAPI {
          public async httpGet(str : string, options : Array<string> = [])
          {
             const response = await fetch(this._url + str, {
+                mode: 'cors',
                 method: 'GET',
                 headers: {
                     'Accept':'application/json',
@@ -28,6 +29,7 @@ export module ReachUpWebAPI {
          public async httpPost(str : string, options : Array<string> = [])
          {
             const response = await fetch(this._url + str, {
+                mode: 'cors',
                 method: 'POST',
                 //body: options.body,
                 headers: {
@@ -45,6 +47,7 @@ export module ReachUpWebAPI {
          public async httpPatch(str : string, options : Array<string> = [])
          {
             const response = await fetch(this._url + str, {
+                mode: 'cors',
                 method: 'PATCH',
                 headers: {
                     'Accept':'application/json',
@@ -61,6 +64,7 @@ export module ReachUpWebAPI {
          public async httpDelete(str : string, options : Array<string> = [])
          {
             const response = await fetch(this._url + str, {
+                mode: 'cors',
                 method: 'DELETE',
                 headers: {
                     'Accept':'application/json',
