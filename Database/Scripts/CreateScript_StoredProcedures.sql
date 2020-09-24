@@ -271,7 +271,7 @@
 	CREATE PROCEDURE pesquisar(search varchar(50))
 	BEGIN
 		SELECT 
-		l.cd_local, l.nm_local, tl.cd_tipo_local, l.cd_andar,
+		l.cd_local, l.nm_local, l.cd_tipo_local, l.cd_andar,
 		substring_index(group_concat(DISTINCT sc.nm_sub_categoria SEPARATOR ','), ',', 3) as  sub_categorias
 		FROM `local` AS l
 		JOIN tipo_local AS tl 
@@ -287,9 +287,9 @@
 		OR 
         formatString(c.nm_categoria)    LIKE formatString(concat("%",search,"%"))
 		OR 
-        formatString(sc.nm_sub_categoria)    LIKE formatString(concat("%",search,"%"))
+        (formatString(sc.nm_sub_categoria)    LIKE formatString(concat("%",search,"%")) AND (l.cd_tipo_local = 0  OR l.cd_tipo_local = 7))
         OR
-        formatString(l.cd_tipo_local)            LIKE formatString(concat("%",search,"%"))
+        formatString(tl.nm_tipo_local)            LIKE formatString(concat("%",search,"%"))
 	    OR
         formatString(l.cd_andar)                     LIKE formatString(concat("%",search,"%"))
 	

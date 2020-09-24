@@ -116,92 +116,76 @@ VALUES
     "Restaurante"
 );
 
-INSERT INTO tipo_local
+/*INSERT INTO tipo_local
 VALUES
 (
 	2,
     "Livraria"
+);*/
+
+INSERT INTO tipo_local
+VALUES
+(
+	2,
+    "Cinema"
 );
+
+/*INSERT INTO tipo_local
+VALUES
+(
+	4,
+    "Hipermercado"
+);*/
+
+/*INSERT INTO tipo_local
+VALUES
+(
+	5,
+    "Drogaria"
+);*/
 
 INSERT INTO tipo_local
 VALUES
 (
 	3,
-    "Cinema"
+    "Necessidades"
 );
 
 INSERT INTO tipo_local
 VALUES
 (
 	4,
-    "Hipermercado"
+    "Escada"
 );
+
+/*INSERT INTO tipo_local
+VALUES
+(
+	9,
+    "Escada rolante"
+);*/
 
 INSERT INTO tipo_local
 VALUES
 (
 	5,
-    "Drogaria"
-);
-
-INSERT INTO tipo_local
-VALUES
-(
-	6,
-    "Banheiro"
-);
-	
-INSERT INTO tipo_local
-VALUES
-(
-	7,
-    "Bebedouro"
-);
-
-INSERT INTO tipo_local
-VALUES
-(
-	8,
-    "Escada fixa"
-);
-
-INSERT INTO tipo_local
-VALUES
-(
-	9,
-    "Escada rolante"
-);
-
-INSERT INTO tipo_local
-VALUES
-(
-	10,
     "Elevador"
 );
 
 INSERT INTO tipo_local
 VALUES
 (
-	11,
+	6,
     "Praça"
 );
 
 INSERT INTO tipo_local
 VALUES
 (
-    12,
-    "Serviços"
+    7,
+    "Serviço"
 
 );
-
-INSERT INTO tipo_local
-VALUES
-(
-    13,
-    "Local do Shopping"
-
-);
-
 
 /* Tipo de Beacons*/
 
