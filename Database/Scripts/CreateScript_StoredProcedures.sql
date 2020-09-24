@@ -1,4 +1,4 @@
-	-- -----------------------------------------------------
+-- -----------------------------------------------------
 	-- Schema ReachUp                                  --
 	-- Banco de dados do sistema ReachUp  --
 	-- -----------------------------------------------------
@@ -131,7 +131,7 @@
 	CREATE PROCEDURE cadastrarCategoria(pNome varchar(45), pDs varchar(200))
 	BEGIN
 		DECLARE _cd int;
-		SELECT MAX(cd_categoria)+1 INTO @_cd FROM categoria;
+		SELECT COUNT(cd_categoria) INTO @_cd FROM categoria;
 		INSERT INTO categoria VALUES
 		(
 			@_cd ,
@@ -144,7 +144,7 @@
 	CREATE PROCEDURE cadastrarSubCategoria(pCdCategoria int, pNome varchar(45))
 	BEGIN
 		DECLARE _cd int;
-		SELECT MAX(cd_sub_categoria)+1 INTO @_cd FROM sub_categoria;
+		SELECT COUNT(cd_sub_categoria) INTO @_cd FROM sub_categoria;
 		INSERT INTO sub_categoria VALUES
 		(
 			@_cd,
@@ -184,7 +184,7 @@
 	CREATE PROCEDURE criarFeedback(pTipo int, pEmail varchar(100),  pDs text, pQt int(1)) 
 	BEGIN	
 		DECLARE 	_cd int;
-		SELECT MAX(cd_feedback)+1 INTO @_cd FROM feedback WHERE cd_tipo_feedback = pTipo;
+		SELECT COUNT(cd_feedback) INTO @_cd FROM feedback WHERE cd_tipo_feedback = pTipo;
 		INSERT INTO feedback VALUES (@_cd, pTipo, pEmail, pDs, curdate(), pQt) ;
 	END$$
 
@@ -272,19 +272,23 @@
 	BEGIN
 		SELECT 
 		l.cd_local, l.nm_local, tl.cd_tipo_local, l.cd_andar,
-		group_concat(sc.nm_sub_categoria) as sub_categorias
+		substring_index(group_concat(DISTINCT sc.nm_sub_categoria SEPARATOR ','), ',', 3) as  sub_categorias
 		FROM `local` AS l
-		INNER JOIN tipo_local AS tl 
+		JOIN tipo_local AS tl 
 		ON l.cd_tipo_local = tl.cd_tipo_local
-		INNER JOIN categoria_local as cl
+		JOIN categoria_local as cl
 		ON l.cd_local = cl.cd_local
-		INNER JOIN categoria as c
+		JOIN categoria as c
 		ON cl.cd_categoria = c.cd_categoria
-		INNER JOIN sub_categoria as sc
+		JOIN sub_categoria as sc
 		ON c.cd_categoria = sc.cd_categoria
-		WHERE formatString(l.nm_local) like formatString(concat("%",search,"%"))
-		OR formatString(c.nm_categoria) like formatString(concat("%",search,"%"))
-		OR formatString(sc.nm_sub_categoria) like formatString(concat("%",search,"%"))
+		WHERE 
+        formatString(l.nm_local)    LIKE formatString(concat("%",search,"%"))
+		OR 
+        formatString(c.nm_categoria)    LIKE formatString(concat("%",search,"%"))
+		OR 
+        formatString(sc.nm_sub_categoria)    LIKE formatString(concat("%",search,"%"))
+        
 		GROUP BY l.cd_local;
 	END$$
 
@@ -294,7 +298,7 @@
 	CREATE PROCEDURE cadastrarLocal(pTipo int, pNome varchar(45), pAndar int(3), pAbertura time , pFechamento time, pUUIDBeacon varchar(36))
 	BEGIN
 		DECLARE _cd int;
-		SELECT MAX(cd_local)+1 INTO @_cd FROM `local`;
+		SELECT COUNT(cd_local) INTO @_cd FROM `local`;
 		INSERT INTO `local` VALUES (@_cd, pTipo, pNome, pAndar, pAbertura, pFechamento);
 		INSERT INTO beacon VALUES (pUUIDBeacon, 0,  @_cd);
 	END$$
@@ -316,7 +320,7 @@
 	CREATE PROCEDURE publicarComunicado(pLocal int, pTipo int, pCategoria int, pDs text, pDataInicio datetime, pDataFim datetime)
 	BEGIN
 			DECLARE 	_cd int;
-			SELECT MAX(cd_comunicado)+1 INTO @_cd FROM comunicado;
+			SELECT COUNT(cd_comunicado) INTO @_cd FROM comunicado;
 			INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pCategoria, pDs, pDataInicio, pDataFim );
 	END$$
 
@@ -486,11 +490,7 @@
 		WHERE cd_local = pLocal;	
 	END$$
 
-    DROP PROCEDURE IF EXISTS alterarHorarioFuncionamentoShopping$$
-    CREATE PROCEDURE alterarHorarioFuncionamentoShopping(pAbertura time, pFechamento time)
-    BEGIN
-       SET 
-    END$$
+  
 
 	DROP FUNCTION IF EXISTS formatString$$
 	CREATE FUNCTION formatString(str varchar(50) ) 	RETURNS  varchar(50)
@@ -515,8 +515,9 @@
 
 		SET @lowerCaseStr = REPLACE(@lowerCaseStr, 'ú','u');
 		SET @lowerCaseStr = REPLACE(@lowerCaseStr, 'ù','u');
+        
+        SET @lowerCaseStr = REPLACE(@lowerCaseStr,'|','');
 		return @lowerCaseStr;
 	END$$
 	DELIMITER ;
 	SHOW PROCEDURE STATUS WHERE db = "reachup";
-

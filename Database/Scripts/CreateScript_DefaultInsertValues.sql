@@ -194,6 +194,14 @@ VALUES
 
 );
 
+INSERT INTO tipo_local
+VALUES
+(
+    13,
+    "Local do Shopping"
+
+);
+
 
 /* Tipo de Beacons*/
 

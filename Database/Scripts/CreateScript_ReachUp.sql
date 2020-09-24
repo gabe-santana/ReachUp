@@ -17,13 +17,13 @@
 -- -----------------------------------------------------
 
 DROP SCHEMA IF EXISTS ReachUp ;
-CREATE SCHEMA IF NOT EXISTS ReachUp DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
+CREATE SCHEMA IF NOT EXISTS ReachUp ;
 USE ReachUp ;
 
 /* VARIÁVEIS GLOBAIS */
 
-SET GLOBAL hr_abertura_shopping = '12:00:00';
-SET GLOBAL hr_fechamento_shopping = '20:00:00';
+/*SET GLOBAL hr_abertura_shopping = '12:00:00';*/
+/*SET GLOBAL hr_fechamento_shopping = '20:00:00'*/;
 
 -- -----------------------------------------------------
 -- Tabela tipo_administrador
@@ -106,7 +106,7 @@ DROP TABLE IF EXISTS tipo_feedback ;
 
 CREATE TABLE IF NOT EXISTS tipo_feedback (
   cd_tipo_feedback INT NOT NULL,
-  nm_tipo_feedback VARCHAR(25) NOT NULL,
+  nm_tipo_feedback VARCHAR(45) NOT NULL,
   PRIMARY KEY (cd_tipo_feedback));
 
 
