@@ -31,7 +31,7 @@ namespace ReachUp
         #endregion
         #region Methods
 
-        public Category Get(int id) 
+        public Task<Category> Get(int id) 
         {
             if (base.DQLCommand(Procedure.pegarCategoria, ref this.Data,
                 new string[,] {
@@ -51,7 +51,7 @@ namespace ReachUp
                 this.Data.Close();
                 base.Disconnect();
 
-                return category;
+                return Task.FromResult(category);
             }
             return null;
         }

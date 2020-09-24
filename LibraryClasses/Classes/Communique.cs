@@ -59,7 +59,7 @@ namespace ReachUp
                         communiques.Add(new Communique(
                             int.Parse(this.Data["cd_comunicado"].ToString()),
                             ushort.Parse(this.Data["cd_tipo_comunicado"].ToString()),
-                            new Category().Get(int.Parse(this.Data["cd_categoria"].ToString())),
+                            await new Category().Get(int.Parse(this.Data["cd_categoria"].ToString())),
                             this.Data["ds_comunicado"].ToString(),
                             DateTime.Parse(this.Data["dt_inicio_comunicado"].ToString()),
                             DateTime.Parse(this.Data["dt_fim_comunicado"].ToString()),
@@ -91,7 +91,7 @@ namespace ReachUp
                                   new Communique(
                                             int.Parse(this.Data["cd_comunicado"].ToString()),
                                             ushort.Parse(this.Data["cd_tipo_comunicado"].ToString()),
-                                            new Category().Get(int.Parse(this.Data["cd_categoria"].ToString())),
+                                            await new Category().Get(int.Parse(this.Data["cd_categoria"].ToString())),
                                             this.Data["ds_comunicado"].ToString(),
                                             DateTime.Parse(this.Data["dt_inicio_comunicado"].ToString()),
                                             DateTime.Parse(this.Data["dt_fim_comunicado"].ToString()),
