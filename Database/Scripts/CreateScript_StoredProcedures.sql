@@ -288,7 +288,11 @@
         formatString(c.nm_categoria)    LIKE formatString(concat("%",search,"%"))
 		OR 
         formatString(sc.nm_sub_categoria)    LIKE formatString(concat("%",search,"%"))
-        
+        OR
+        formatString(l.cd_tipo_local)            LIKE formatString(concat("%",search,"%"))
+	    OR
+        formatString(l.cd_andar)                     LIKE formatString(concat("%",search,"%"))
+	
 		GROUP BY l.cd_local;
 	END$$
 
