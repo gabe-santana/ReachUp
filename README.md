@@ -75,6 +75,7 @@ dependencies:
 We're using:
 
 - **MySQL Database: Transact-SQL Script's** for data storage/management;
+-**NoSQL (non-relational database)** for local data storage/management in Flutter App - ReachUpHeart Database;
 - **ASP.NET Core 3.0 Web API** for web service (RESTful WebAPI);
 - **Web Application: HTML + CSS/SASS + TypeScript + JavaScript** for website;
 - **Flutter: Dart + Java + Objective-C** for cross-platfor mobile app (Android/iOS);
