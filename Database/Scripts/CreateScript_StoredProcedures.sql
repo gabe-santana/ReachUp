@@ -396,11 +396,17 @@
 	CREATE PROCEDURE pegarLocal(pID INT)
 	BEGIN
 		SELECT l.cd_local, tl.cd_tipo_local, l.nm_local, l.cd_andar, 
+        l.hr_abertura, l.hr_fechamento,
+	    substring_index(group_concat(DISTINCT c.nm_categoria SEPARATOR ','), ',', 3) as  categorias,
 		group_concat(b.cd_uuid_beacon) AS  Beacons FROM `local` AS l 
 		INNER JOIN tipo_local AS tl
 		ON l.cd_tipo_local = tl.cd_tipo_local
 		INNER JOIN beacon AS b
 		ON l.cd_local = b.cd_local
+        INNER JOIN categoria_local as cl
+        ON l.cd_local = cl.cd_local
+        INNER JOIN categoria as c
+        ON cl.cd_categoria = c.cd_categoria
 		WHERE l.cd_local = pID;
 	END$$
 
