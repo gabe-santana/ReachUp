@@ -17,8 +17,10 @@ namespace ReachUp
         public string Name { get; set; }
         public ushort Floor { get; set; }
         public User Admin { get;set; }
-
+        public string DescriptionSubCategories { get; set; }
         public List<Beacon> Beacons = new List<Beacon>();
+        public List<SubCategory> SubCategories = new List<SubCategory>();
+
 
         #endregion
 
@@ -29,13 +31,15 @@ namespace ReachUp
         #region Constructor
         public Local() : base() { }
 
-        public Local(int id, int type, string name, ushort floor, string[] uuids = null) : base()
+        public Local(int id, int type, string name, ushort floor, string DescriptionSubCategories , string[] uuids = null, List<SubCategory> SubCategories = null) : base()
         {
             this.IdLocal = id;
             this.Type = type;
             this.Name = name;
-            this.Floor = floor;
-
+            this.Floor = floor; 
+            this.DescriptionSubCategories = DescriptionSubCategories;
+            this.SubCategories = SubCategories;
+          
             if (uuids != null)
             {
                 foreach (var uuid in uuids)
@@ -49,7 +53,7 @@ namespace ReachUp
         #endregion
 
         #region Public Methods
-        public Task<Local> ConnectBeaconLocal(string uuidBeacon)
+        public async Task<Local> ConnectBeaconLocal(string uuidBeacon)
         {
             if (base.DQLCommand(Procedure.conectarBeacon, ref this.Data,
                 new string[,] {
@@ -64,10 +68,12 @@ namespace ReachUp
                             int.Parse(this.Data["cd_local"].ToString()),
                             int.Parse(this.Data["cd_tipo_local"].ToString()),
                             this.Data["nm_local"].ToString(),
-                            ushort.Parse(this.Data["cd_andar"].ToString()));
+                            ushort.Parse(this.Data["cd_andar"].ToString()),
+                            this.Data["sub_categorias"].ToString().Replace(",",", ")
+                        );
                         this.Data.Close();
                         base.Disconnect();
-                        return Task.FromResult(local);
+                        return local;
                     }
                 }
                 this.Data.Close();
@@ -77,7 +83,7 @@ namespace ReachUp
             return null;
         }
 
-        public Task<List<Local>> Search(string search)
+        public async Task<List<Local>> Search(string search)
         {
             List<Local> locals = new List<Local>();
             if (base.DQLCommand(Procedure.pesquisar, ref this.Data,
@@ -87,13 +93,17 @@ namespace ReachUp
                 {
                     while (this.Data.Read())
                     {
-                        locals.Add(new Local(int.Parse(this.Data["cd_local"].ToString()),
-                                int.Parse(this.Data["cd_tipo_local"].ToString()),
-                                this.Data["nm_local"].ToString(),
-                                ushort.Parse(this.Data["cd_andar"].ToString())));
+                        locals.Add(new Local(
+                                 int.Parse(this.Data["cd_local"].ToString()),
+                                 int.Parse(this.Data["cd_tipo_local"].ToString()),
+                                 this.Data["nm_local"].ToString(),
+                                 ushort.Parse(this.Data["cd_andar"].ToString()),
+                                 this.Data["sub_categorias"].ToString().Replace(",", ", "))
+                               
+                            );
                     }
                     this.Data.Close();
-                    return Task.FromResult(locals);
+                    return locals;
                 }
                 base.Disconnect();
             }
@@ -101,7 +111,7 @@ namespace ReachUp
             return null;
         }
 
-        public Task<Local> Get(int id)
+        public async Task<Local> Get(int id)
         {
             if (base.DQLCommand(Procedure.pegarLocal, ref this.Data,
                 new string[,] {
@@ -116,7 +126,9 @@ namespace ReachUp
                         while (this.Data.Read())
                         {
                             local = new Local(id, int.Parse(this.Data["cd_tipo_local"].ToString()),
-                                this.Data["nm_local"].ToString(), ushort.Parse(this.Data["cd_andar"].ToString()), this.Data["Beacons"].ToString().Split(','));
+                                this.Data["nm_local"].ToString(), ushort.Parse(this.Data["cd_andar"].ToString()),
+                                this.Data["sub_categorias"].ToString().Replace(",", ", "),
+                                this.Data["Beacons"].ToString().Split(','));
                         }
                     }
                     catch { };
@@ -124,13 +136,13 @@ namespace ReachUp
                 this.Data.Close();
                 base.Disconnect();
 
-                return Task.FromResult(local);
+                return local;
             }
 
             return null;
         }
 
-        public Task<List<Local>> GetAll(string typeName)
+        public async Task<List<Local>> GetAll(string typeName)
         {
             if (base.DQLCommand(Procedure.pegarLocais, ref this.Data,
                 new string[,] {
@@ -143,13 +155,15 @@ namespace ReachUp
                     while (this.Data.Read())
                     {
                         local.Add(new Local(int.Parse(this.Data["cd_local"].ToString()), int.Parse(this.Data["cd_tipo_local"].ToString()),
-                            this.Data["nm_local"].ToString(), ushort.Parse(this.Data["cd_andar"].ToString()), this.Data["Beacons"].ToString().Split(',')));
+                            this.Data["n_local"].ToString(), ushort.Parse(this.Data["cd_andar"].ToString()),
+                            this.Data["sub_categorias"].ToString().Replace(",",", "),                       
+                            this.Data["Beacons"].ToString().Split(',')));
                     }
                 }
                 this.Data.Close();
                 base.Disconnect();
 
-                return Task.FromResult(local);
+                return local;
             }
             return null;
         }

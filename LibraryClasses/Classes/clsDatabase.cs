@@ -36,6 +36,7 @@ namespace ReachUp
             receberAlertas,
             pesquisar,
             cadastrarLocal,
+            pegarSubcategoriasLocal,
             darAdm,
             publicarComunicado,
             definirCategoria,

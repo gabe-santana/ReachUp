@@ -47,7 +47,7 @@ namespace ReachUp
                         {
                             subCategories.Add(new SubCategory(
                                     int.Parse(cd_subcategory),
-                                    new Category().Get(int.Parse(cd_categories[i])),
+                                    await new Category().Get(int.Parse(cd_categories[i])),
                                     nm_subcategories[i]
                                 ));
                             i++;
