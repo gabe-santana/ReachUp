@@ -6,9 +6,18 @@ import 'View/HomeView/Home.view.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx_codegen/builder.dart';
+import 'package:flame/util.dart';
+import 'package:flutter/services.dart';
+import 'mapRender.dart';
 
-void main() {
+void main() async {
+  Util flameUtil = Util();
+  await flameUtil.fullScreen();
+  await flameUtil.setOrientation(DeviceOrientation.portraitUp);
+
+  MapRender map = MapRender();
   runApp(MyApp());
+  runApp(map.widget);
 }
 
 var darkTheme = ThemeData(
