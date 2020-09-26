@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'View/HomeView/Home.view.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
 var darkTheme = ThemeData(
   colorScheme: ColorScheme(
     brightness: Brightness.light,

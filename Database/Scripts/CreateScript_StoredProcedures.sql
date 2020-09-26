@@ -214,8 +214,8 @@
 		WHERE cd_uuid_beacon = pUUID;
 	END$$
 
-	DROP PROCEDURE IF EXISTS receberAlertas$$
-	CREATE PROCEDURE receberAlertas(pLocal int)
+	DROP PROCEDURE IF EXISTS receberComunicados$$
+	CREATE PROCEDURE receberComunicados(pLocal int)
 	BEGIN
 		SELECT * FROM comunicado as c 
 		INNER JOIN `local` as l 
@@ -223,23 +223,28 @@
 		WHERE c.cd_tipo_comunicado <> 0
 		AND l.cd_local = pLocal;
 	END$$
-	DROP PROCEDURE IF EXISTS receberComunicados$$
-	CREATE PROCEDURE  receberComunicados(pLocal int, pCliente varchar(100))
+	DROP PROCEDURE IF EXISTS receberPromocoesDirecionadas$$
+	CREATE PROCEDURE  receberPromocoesDirecionadas(pLocal int, pCliente varchar(100))
 	BEGIN
-				SELECT l.nm_local , c.ds_comunicado , ca.cd_categoria, 
-				c.cd_comunicado , c.dt_inicio_comunicado, c.dt_fim_comunicado FROM comunicado as  c 
-				INNER JOIN categoria as ca
-				ON c.cd_categoria = ca.cd_categoria
-				INNER JOIN `local` as l 
-				ON c.cd_local = l.cd_local
+				SELECT l.nm_local , c.ds_comunicado , ca.nm_categoria, 
+				sc.nm_sub_categoria , c.dt_inicio_comunicado, c.dt_fim_comunicado 
+                FROM `local` as l
+				INNER JOIN comunicado as c
+                ON l.cd_local = c.cd_local 
+				INNER JOIN comunicado_sub_categoria as csc
+				ON c.cd_comunicado = csc.cd_comunicado
 				INNER JOIN sub_categoria as sc
-				ON ca.cd_categoria = sc.cd_categoria
+				ON csc.cd_categoria = sc.cd_categoria
+                AND csc.cd_sub_categoria = sc.cd_sub_categoria
+				INNER JOIN categoria as ca
+				ON sc.cd_categoria = ca.cd_categoria
 				INNER JOIN preferencia_cliente as pc
 				ON sc.cd_categoria = pc.cd_categoria
-				WHERE c.cd_categoria = pc.cd_categoria
+                AND sc.cd_sub_categoria = pc.cd_sub_categoria
+				WHERE sc.cd_categoria = pc.cd_categoria AND sc.cd_sub_categoria = pc.cd_sub_categoria
 				AND pc.nm_email_cliente = pCliente
 				AND curdate() BETWEEN c.dt_inicio_comunicado AND c.dt_fim_comunicado
-				AND cd_tipo_comunicado = 0
+				AND c.cd_tipo_comunicado = 0
 				AND c.cd_local = pLocal
 				GROUP BY c.cd_comunicado;
 	END$$
@@ -251,11 +256,10 @@
 	END$$
 
 	DROP PROCEDURE IF EXISTS atualizarComunicado$$
-	CREATE PROCEDURE atualizarComunicado(pComunicado int, pLocal int, pTipo int, pCategoria int, pDs text, pDataInicio datetime, pDataFim datetime)
+	CREATE PROCEDURE atualizarComunicado(pComunicado int, pLocal int, pTipo int, pDs text, pDataInicio datetime, pDataFim datetime)
 	BEGIN
 		UPDATE comunicado SET cd_local = pLocal WHERE cd_comunicado = pComunicado;
 		UPDATE comunicado SET cd_tipo_comunicado = pTipo WHERE cd_comunicado = pComunicado;
-		UPDATE comunicado SET cd_categoria = pCategoria WHERE cd_comunicado = pComunicado;
 		UPDATE comunicado SET ds_comunicado = pDs WHERE cd_comunicado = pComunicado;
 		UPDATE comunicado SET dt_inicio_comunicado = pDataInicio WHERE cd_comunicado = pComunicado;
 		UPDATE comunicado SET dt_fim_comunicado = pDataFim WHERE cd_comunicado = pComunicado;
@@ -271,17 +275,19 @@
 	CREATE PROCEDURE pesquisar(search varchar(50))
 	BEGIN
 		SELECT 
-		l.cd_local, l.nm_local, l.cd_tipo_local, l.cd_andar,
-		substring_index(group_concat(DISTINCT sc.nm_sub_categoria SEPARATOR ','), ',', 3) as  sub_categorias
+		l.nm_local, tl.nm_tipo_local, l.cd_andar,
+		substring_index(group_concat(DISTINCT c.nm_categoria SEPARATOR ','), ',', 3) as categorias,
+		substring_index(group_concat(DISTINCT sc.nm_sub_categoria SEPARATOR ','), ',', 3) as sub_categorias
 		FROM `local` AS l
 		JOIN tipo_local AS tl 
 		ON l.cd_tipo_local = tl.cd_tipo_local
-		JOIN categoria_local as cl
-		ON l.cd_local = cl.cd_local
-		JOIN categoria as c
-		ON cl.cd_categoria = c.cd_categoria
+		JOIN sub_categoria_local as scl
+		ON l.cd_local = scl.cd_local
 		JOIN sub_categoria as sc
-		ON c.cd_categoria = sc.cd_categoria
+		ON scl.cd_categoria = sc.cd_categoria
+        AND scl.cd_sub_categoria = sc.cd_sub_categoria
+		JOIN categoria as ca
+		ON sc.cd_categoria = ca.cd_categoria
 		WHERE 
         formatString(l.nm_local)    LIKE formatString(concat("%",search,"%"))
 		OR 
@@ -307,10 +313,10 @@
 		INSERT INTO beacon VALUES (pUUIDBeacon, 0,  @_cd);
 	END$$
 
-	DROP PROCEDURE IF EXISTS defCategoriaLocal$$
-	CREATE PROCEDURE defCategoriaLocal(plocal int, pCategoria int)
+	DROP PROCEDURE IF EXISTS defSubCategoriaLocal$$
+	CREATE PROCEDURE defSubCategoriaLocal(plocal int, pCategoria int, pSubCategoria int)
 	BEGIN
-		INSERT INTO categoria_local VALUES (plocal, pCategoria);
+		INSERT INTO sub_categoria_local VALUES (plocal, pCategoria, pSubCategoria);
 	END$$
 
 	DROP PROCEDURE IF EXISTS darAdm$$
@@ -321,11 +327,13 @@
 	END$$
 
 	DROP PROCEDURE IF EXISTS publicarComunicado$$
-	CREATE PROCEDURE publicarComunicado(pLocal int, pTipo int, pCategoria int, pDs text, pDataInicio datetime, pDataFim datetime)
+	CREATE PROCEDURE publicarComunicado(pLocal int, pTipo int, pCategoria int, pSubCategoria int, pDs text, pDataInicio datetime, pDataFim datetime)
 	BEGIN
 			DECLARE 	_cd int;
 			SELECT COUNT(cd_comunicado) INTO @_cd FROM comunicado;
-			INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pCategoria, pDs, pDataInicio, pDataFim );
+			INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, pDataInicio, pDataFim);
+            INSERT INTO comunicado_sub_categoria VALUES (@_cd, pCategoria, pSubCategoria);
+            
 	END$$
 
 	DROP PROCEDURE IF EXISTS cadastrarBeacon$$
@@ -399,7 +407,7 @@
 	DROP PROCEDURE IF EXISTS pegarLocal$$
 	CREATE PROCEDURE pegarLocal(pID INT)
 	BEGIN
-		SELECT l.cd_local, tl.cd_tipo_local, l.nm_local, l.cd_andar, 
+		SELECT l.cd_local, tl.nm_tipo_local, l.nm_local, l.cd_andar, 
         l.hr_abertura, l.hr_fechamento,
 	    substring_index(group_concat(DISTINCT c.nm_categoria SEPARATOR ','), ',', 3) as  categorias,
 		group_concat(b.cd_uuid_beacon) AS  Beacons FROM `local` AS l 
@@ -407,10 +415,13 @@
 		ON l.cd_tipo_local = tl.cd_tipo_local
 		INNER JOIN beacon AS b
 		ON l.cd_local = b.cd_local
-        INNER JOIN categoria_local as cl
+        INNER JOIN sub_categoria_local as scl
         ON l.cd_local = cl.cd_local
+        INNER JOIN sub_categoria as sc
+        ON scl.cd_categoria = sc.cd_categoria
+        AND scl.cd_sub_categoria = sc.cd_sub_categoria
         INNER JOIN categoria as c
-        ON cl.cd_categoria = c.cd_categoria
+        ON sc.cd_categoria = c.cd_categoria
 		WHERE l.cd_local = pID;
 	END$$
 

@@ -192,7 +192,6 @@ CREATE TABLE IF NOT EXISTS comunicado (
   cd_comunicado INT NOT NULL,
   cd_local INT NOT NULL,
   cd_tipo_comunicado INT NOT NULL,
-  cd_categoria INT NULL,
   ds_comunicado TEXT NOT NULL,
   dt_inicio_comunicado DATETIME NOT NULL,
   dt_fim_comunicado DATETIME NULL,
@@ -202,28 +201,7 @@ CREATE TABLE IF NOT EXISTS comunicado (
     REFERENCES local (cd_local),
   CONSTRAINT fk_comunicado_tipo_comunicado
     FOREIGN KEY (cd_tipo_comunicado)
-    REFERENCES tipo_comunicado (cd_tipo_comunicado),
-  CONSTRAINT fk_comunicado_categoria
-    FOREIGN KEY (cd_categoria)
-    REFERENCES categoria (cd_categoria)
-    );
-
-
--- -----------------------------------------------------
--- Tabela categoria_local
--- -----------------------------------------------------
-DROP TABLE IF EXISTS categoria_local ;
-
-CREATE TABLE IF NOT EXISTS categoria_local (
-  cd_local INT NOT NULL,
-  cd_categoria INT NOT NULL,
-  PRIMARY KEY (cd_local, cd_categoria),
-  CONSTRAINT fk_local_has_categoria_local
-    FOREIGN KEY (cd_local)
-    REFERENCES local (cd_local),
-  CONSTRAINT fk_local_has_categoria_categoria
-    FOREIGN KEY (cd_categoria)
-    REFERENCES categoria (cd_categoria)
+    REFERENCES tipo_comunicado (cd_tipo_comunicado)
     );
 
 -- -----------------------------------------------------
@@ -239,6 +217,24 @@ CREATE TABLE IF NOT EXISTS sub_categoria (
   CONSTRAINT fk_sub_categoria_categoria
     FOREIGN KEY (cd_categoria)
     REFERENCES categoria (cd_categoria)
+    );
+
+-- -----------------------------------------------------
+-- Tabela sub_categoria_local
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS sub_categoria_local ;
+
+CREATE TABLE IF NOT EXISTS sub_categoria_local (
+  cd_local INT NOT NULL,
+  cd_categoria INT NOT NULL,
+  cd_sub_categoria INT NOT NULL,
+  PRIMARY KEY (cd_local, cd_categoria, cd_sub_categoria),
+  CONSTRAINT fk_local_has_categoria_local
+    FOREIGN KEY (cd_local)
+    REFERENCES local (cd_local),
+  CONSTRAINT fk_local_has_categoria_categoria
+    FOREIGN KEY (cd_categoria, cd_sub_categoria)
+    REFERENCES sub_categoria (cd_categoria, cd_sub_categoria)
     );
 
 
@@ -259,3 +255,21 @@ CREATE TABLE IF NOT EXISTS preferencia_cliente (
     FOREIGN KEY (cd_sub_categoria , cd_categoria)
     REFERENCES sub_categoria (cd_sub_categoria , cd_categoria)
     );
+
+-- -----------------------------------------------------
+-- Tabela comunicado_sub_categoria
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS comunicado_sub_categoria;
+
+CREATE TABLE IF NOT EXISTS comunicado_sub_categoria (
+  cd_comunicado INT NOT NULL,
+  cd_categoria INT NOT NULL,
+  cd_sub_categoria INT NOT NULL,
+  PRIMARY KEY (cd_comunicado, cd_categoria, cd_sub_categoria),
+  CONSTRAINT fk_comunicado_comunicado_sub_categoria
+    FOREIGN KEY (cd_comunicado)
+    REFERENCES comunicado (cd_comunicado),
+  CONSTRAINT fk_sub_categoria_comunicado_sub_categoria
+    FOREIGN KEY (cd_categoria , cd_sub_categoria)
+    REFERENCES sub_categoria (cd_categoria , cd_sub_categoria)
+);

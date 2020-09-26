@@ -116,33 +116,12 @@ VALUES
     "Restaurante"
 );
 
-/*INSERT INTO tipo_local
-VALUES
-(
-	2,
-    "Livraria"
-);*/
-
 INSERT INTO tipo_local
 VALUES
 (
 	2,
     "Cinema"
 );
-
-/*INSERT INTO tipo_local
-VALUES
-(
-	4,
-    "Hipermercado"
-);*/
-
-/*INSERT INTO tipo_local
-VALUES
-(
-	5,
-    "Drogaria"
-);*/
 
 INSERT INTO tipo_local
 VALUES
@@ -157,13 +136,6 @@ VALUES
 	4,
     "Escada"
 );
-
-/*INSERT INTO tipo_local
-VALUES
-(
-	9,
-    "Escada rolante"
-);*/
 
 INSERT INTO tipo_local
 VALUES
