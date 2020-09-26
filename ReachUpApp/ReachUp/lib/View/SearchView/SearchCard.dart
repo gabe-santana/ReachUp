@@ -2,6 +2,7 @@ import 'package:ReachUp/Model/Local.dart';
 import 'package:ReachUp/Model/Subcategory.model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 class SearchCard extends StatefulWidget {
@@ -14,25 +15,6 @@ class SearchCard extends StatefulWidget {
 }
 
 
-
-
-Text buildSubCat(List<SubCategory> subCategories){
-  String subcats = "";
-  int i = 0;
-  for (SubCategory subcat in subCategories) {
-
-    if(i>2){
-      break;
-    }
-    subcats+= "${subcat.subCategoryName}, ";    
-    i++;   
-  }
-
-  return Text(subcats, style: TextStyle(
-   fontSize: 20,
-   color: Colors.grey 
-  ),);
-}
 class _SearchCardState extends State<SearchCard> {
   @override
   Widget build(BuildContext context) {
@@ -58,9 +40,8 @@ class _SearchCardState extends State<SearchCard> {
              ),
              child: Center(
                child: 
-               Text("image", style: TextStyle(
-                 color: Colors.grey
-               ),)
+                widget.local.type == 0 ? FaIcon(FontAwesomeIcons.store, size: 40,) :
+                widget.local.type == 1 ? Icon(Icons.launch, size: 40,) : FaIcon(FontAwesomeIcons.question)
              ),
            ),
              Padding(
@@ -75,7 +56,7 @@ class _SearchCardState extends State<SearchCard> {
                    Container(
                      padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                      width: MediaQuery.of(context).size.width*0.5,
-                     child: buildSubCat(widget.local.subCategories)
+                     child: Text(widget.local.descriptionSubCategories)
                      ),
 
                  ],

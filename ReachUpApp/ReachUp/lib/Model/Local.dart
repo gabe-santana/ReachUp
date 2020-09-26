@@ -1,5 +1,3 @@
-import 'package:ReachUp/www/ReachUpAPI.dart';
-
 import 'Subcategory.model.dart';
 import 'Beacon.model.dart';
 import 'User.model.dart';
@@ -10,6 +8,8 @@ class Local {
   String name;
   int floor;
   User admin;
+  String descriptionSubCategories;
+
   List<Beacon> beacons;
   List<SubCategory> subCategories;
 
@@ -20,11 +20,11 @@ class Local {
       this.floor,
       this.admin,
       this.beacons,
-      this.subCategories});
-
-
-
+      this.subCategories,
+      this.descriptionSubCategories});
+      
   Local.fromJson(Map<String, dynamic> json) {
+    descriptionSubCategories = json['descriptionSubCategories'];
     idLocal = json['idLocal'];
     type = json['type'];
     name = json['name'];
@@ -46,6 +46,7 @@ class Local {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['descriptionSubCategories'] = this.descriptionSubCategories;
     data['idLocal'] = this.idLocal;
     data['type'] = this.type;
     data['name'] = this.name;

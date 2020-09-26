@@ -5,11 +5,15 @@ import 'Position.component.dart';
 class Mapper{
   double metersByUnit = 1; 
 
+  getRoute(Position userPos, Position localPos){
+    
+  }
+  
   getUserPosition(Position a, Position b, Position c, double dA, double dB, double dC){
 
         var cogX = (a.x + b.x + c.x) / 3;
         var cogY = (a.y + b.y + c.y) / 3;
-        var cog = new Position(cogX,cogY,a.floor);
+        var cog = new Position(cogX, cogY, a.floor);
 
     
         Position nearestBeacon;
