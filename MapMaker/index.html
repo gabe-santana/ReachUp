@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/MapMaker.style.css">
+    <title>MapMaker</title>
+</head>
+<body>
+    <section id="right-painel">
+        <button class="mapBtn" id="addRoute">Add route</button></br></br>
+        <button class="mapBtn" id="clear">Clear</button>
+    </section>
+     <section id="control-panel">
+        <div>
+          
+            <div>
+                <label>
+                <input id="cbHall" type="radio" name="cbSetter" checked="true">
+                    Hall
+                </label>
+
+                <label>
+                <input id="cbBeacon" type="radio" name="cbSetter">
+                    Beacon
+                </label>
+
+                <label>
+                <input id="cbTriBeacon" type="radio" name="cbSetter">
+                Trilateral Beacon
+                </label>
+
+                <label>
+                    <input  id="cbILocal"  type="radio" name="cbSetter">
+                    Local (Initial Position)
+                </label>
+
+                <label>
+                    <input  id="cbELocal" type="radio" name="cbSetter">
+                    Local (End Position)
+                </label>
+                <br/>
+               
+            </div>
+        </div>
+    </section>
+    <section id="mapContainer"></section>
+    <br/>
+
+   
+
+    
+    <script src="js/jquery-3.5.1.min.js"></script>
+ 
+    <script src="js/MapMakerScripts/routines.script.js"></script>
+    <script src="js/MapMakerScripts/main.script.js"></script>
+    <script src="js/MapMakerScripts/events.script.js"></script>
+</body>
+</html>
