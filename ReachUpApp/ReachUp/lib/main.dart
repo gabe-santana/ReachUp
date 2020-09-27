@@ -1,24 +1,6 @@
-import 'package:ReachUp/Component/DatabaseRepository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:sqflite/sqflite.dart';
 import 'View/HomeView/Home.view.dart';
-import 'package:mobx/mobx.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx_codegen/builder.dart';
-import 'package:flame/util.dart';
-import 'package:flutter/services.dart';
-import 'mapRender.dart';
-
-void main() async {
-  Util flameUtil = Util();
-  await flameUtil.fullScreen();
-  await flameUtil.setOrientation(DeviceOrientation.portraitUp);
-
-  MapRender map = MapRender();
-  runApp(MyApp());
-  runApp(map.widget);
-}
 
 var darkTheme = ThemeData(
   colorScheme: ColorScheme(
@@ -54,6 +36,7 @@ var darkTheme = ThemeData(
 );
 
 var lightTheme = ThemeData(
+  primaryColor:  Color(0xFF008D9E),
   colorScheme: ColorScheme(
     brightness: Brightness.light,
     primary: Color(0xFF008D9E),
@@ -114,38 +97,3 @@ class MyCustomRoute<T> extends MaterialPageRoute<T> {
   }
 }
 
-/// SQLite Connection
-
-class _SqfLiteCrudState extends State<SqfLiteCrud> {
-  final _formKey = GlobalKey<FormState>();
-  Future<List<Todo>> future;
-  String name;
-  String id;
-
-  @override
-  initState() {
-    super.initState();
-    future = DatabaseRepository.getAllTodos();
-  }
-
-  void readData() async {
-    final todo = await DatabaseRepository.getTodo(id);
-    print(todo.name);
-  }
-
-  updateTodo(Todo todo) async {
-    todo.name = 'Bananas!';
-    await DatabaseRepository.updateTodo(todo);
-    setState(() {
-      future = DatabaseRepository.getAllTodos();
-    });
-  }
-
-  deleteTodo(Todo todo) async {
-    await DatabaseRepository.deleteTodo(todo);
-    setState(() {
-      id = null;
-      future = DatabaseRepository.getAllTodos();
-    });
-  }
-}

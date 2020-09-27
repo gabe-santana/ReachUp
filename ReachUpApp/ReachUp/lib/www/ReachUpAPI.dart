@@ -3,12 +3,13 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 
 class ReachUpAPI{
-  String url = "https://192.168.0.109:8000/api";
+  String url = "http://192.168.0.109:5000/api";
   Response response;
   Dio dio;
   String token;
 
-  ReachUpAPI(String token){
+  ReachUpAPI(){
+    token = token;
     dio = new Dio();
     _config();
   }
@@ -18,6 +19,9 @@ class ReachUpAPI{
     this.response = await dio.get(
             "${this.url}/$uri",
             options: Options(
+              headers: {
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbUBlbWFpbC5jb20iLCJyb2xlIjoiYWRtIiwibmJmIjoxNjAxMDYwMjE4LCJleHAiOjE2MDEwNjc0MTgsImlhdCI6MTYwMTA2MDIxOH0.8bd6n9lvwfTL6hsgpgmxxoKmV208P3fghoiVRqZQ1q0"
+              },
               followRedirects: false,
               validateStatus: (status) {
                 return status < 500;
@@ -39,8 +43,5 @@ class ReachUpAPI{
       dio.options.headers["Authorization"] = "Bearer ${this.token}";
   }
 
-    toList<T>()
-    {
-        return List<T>.from(this.response.data.map((i) => (T as dynamic).fromJson(i)));
-    }
+
 }

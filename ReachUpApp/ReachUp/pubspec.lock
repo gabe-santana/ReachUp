@@ -29,6 +29,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.2"
+<<<<<<< HEAD
+  bloc:
+    dependency: transitive
+    description:
+      name: bloc
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.11.2"
+=======
   audioplayers:
     dependency: transitive
     description:
@@ -36,6 +45,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.15.1"
+>>>>>>> d9ae93991b054430b0d89c4dd1e1f0e996fba524
   boolean_selector:
     dependency: transitive
     description:
@@ -197,6 +207,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.10"
+  equatable:
+    dependency: "direct main"
+    description:
+      name: equatable
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.6"
   fake_async:
     dependency: transitive
     description:
@@ -251,6 +268,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_beacon:
+    dependency: "direct main"
+    description:
+      name: flutter_beacon
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0"
+  flutter_bloc:
+    dependency: "direct main"
+    description:
+      name: flutter_bloc
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.9.1"
   flutter_mobx:
     dependency: "direct main"
     description:
@@ -430,11 +461,18 @@ packages:
     source: hosted
     version: "1.7.0"
   path_provider:
+<<<<<<< HEAD
+    dependency: "direct main"
+=======
     dependency: transitive
+>>>>>>> d9ae93991b054430b0d89c4dd1e1f0e996fba524
     description:
       name: path_provider
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
+    version: "0.5.0+1"
+=======
     version: "1.6.18"
   path_provider_linux:
     dependency: transitive
@@ -464,6 +502,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.4+1"
+>>>>>>> d9ae93991b054430b0d89c4dd1e1f0e996fba524
   pedantic:
     dependency: transitive
     description:
@@ -527,6 +566,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.3"
+  rxdart:
+    dependency: transitive
+    description:
+      name: rxdart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.21.0"
+  sembast:
+    dependency: "direct main"
+    description:
+      name: sembast
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.17.2+2"
   shelf:
     dependency: transitive
     description:
@@ -560,20 +613,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
-  sqflite:
-    dependency: "direct main"
-    description:
-      name: sqflite
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.3.1+1"
-  sqflite_common:
-    dependency: transitive
-    description:
-      name: sqflite_common
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.2+1"
   stack_trace:
     dependency: transitive
     description:
