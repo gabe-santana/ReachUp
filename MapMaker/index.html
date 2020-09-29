@@ -7,13 +7,26 @@
     <title>MapMaker</title>
 </head>
 <body>
+    <label>
+        <span>UUID</span>
+        <input  id="uuid" type="text" >
+    </label>
+    <label>
+    <span>Current Floor</span>
+        <input  id="uuid" type="number" value="0"  width="20px">
+    </label>
     <section id="right-painel">
-        <button class="mapBtn" id="addRoute">Add route</button></br></br>
+        <button class="mapBtn" id="addRoute">Add hall</button></br></br>
+         <button class="mapBtn" id="addLocal">Add local</button></br></br>
+        <button class="mapBtn" id="addBeacon">Add beacon</button></br></br>
+        <button class="mapBtn" id="addTriBeacon">Add tri-beacon</button></br></br>
         <button class="mapBtn" id="clear">Clear</button>
+   
+        <br/>
     </section>
      <section id="control-panel">
         <div>
-          
+       
             <div>
                 <label>
                 <input id="cbHall" type="radio" name="cbSetter" checked="true">
@@ -24,7 +37,7 @@
                 <input id="cbBeacon" type="radio" name="cbSetter">
                     Beacon
                 </label>
-
+  
                 <label>
                 <input id="cbTriBeacon" type="radio" name="cbSetter">
                 Trilateral Beacon
@@ -40,6 +53,8 @@
                     Local (End Position)
                 </label>
                 <br/>
+
+        
                
             </div>
         </div>
@@ -47,11 +62,10 @@
     <section id="mapContainer"></section>
     <br/>
 
-   
+
 
     
     <script src="js/jquery-3.5.1.min.js"></script>
- 
     <script src="js/MapMakerScripts/routines.script.js"></script>
     <script src="js/MapMakerScripts/main.script.js"></script>
     <script src="js/MapMakerScripts/events.script.js"></script>
