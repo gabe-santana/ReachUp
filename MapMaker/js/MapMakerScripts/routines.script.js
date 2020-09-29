@@ -71,8 +71,12 @@ function hatchMap(){
     //draw Ilocates
    
     mapJson.floors[0].locates.forEach(element => {
-        
-        drawILocates(document.getElementById(element.position.x0+","+element.position.y0));
+        /*var banana = document.getElementById(element.position.x0+","+element.position.y0);
+        var banana0 = "";
+        if (banana){
+        banana0 = banana.value;
+      }*/
+      drawILocates(document.getElementById(element.position["x0"]+","+element.position["y0"]+""));
     });
 
     //draw Elocates
@@ -237,7 +241,9 @@ function addLocaltoJson(){
 
 //Adiciona os tri-beacons no json
 function addTriBeacontoJson(){
+    if (typeof triBeaconmap != "undefined"){
     for (let tb = 0; tb < triBeaconmap.length; tb++) {
+        if (typeof mapJson.floors[currentFloor].triBeacons != "undefined"){
         mapJson.floors[currentFloor].triBeacons.push({
             uuid: triBeaconmap[tb].uuid,
             position:{
@@ -245,7 +251,9 @@ function addTriBeacontoJson(){
                 y: beaconmap[tb].position.y
             },
         });
+      }
     }
+}
     setJson(JSON.stringify(mapJson));
     clearArrays();
 }
@@ -256,7 +264,7 @@ function clearArrays(){
    Ilocalmap = [];
    Elocalmap = [];
    beaconmap = [];
-   tribeaconmap = [];
+   triBeaconmap = [];
 }
 
 

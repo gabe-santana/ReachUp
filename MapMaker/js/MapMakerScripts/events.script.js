@@ -15,7 +15,7 @@ $(document).ready(()=>{
 
     $("#addTriBeacon").click(function(){
        
-        var squares = document.querySelectorAll(".square");
+        /*var squares = document.querySelectorAll(".square");
         var count = 0;
 
         for (let i = 0; i < squares.length; i++){
@@ -27,12 +27,12 @@ $(document).ready(()=>{
             }
         }
 
-        if (count == 3){
+        if (count == 3)*/
         addTriBeacontoJson();
-        }
+        /*}
         else{
             alert("error");
-        }
+        }*/
     });
 
     $("#clear").click(function(){
