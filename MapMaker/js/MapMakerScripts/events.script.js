@@ -15,7 +15,7 @@ $(document).ready(()=>{
 
     $("#addTriBeacon").click(function(){
        
-        var squares = document.querySelector(".square");
+        var squares = document.querySelectorAll(".square");
         var count = 0;
 
         for (let i = 0; i < squares.length; i++){
