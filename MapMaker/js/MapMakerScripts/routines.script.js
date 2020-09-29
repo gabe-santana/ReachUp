@@ -1,7 +1,7 @@
 // Verifica se o localstorage está vazio e insere dados nele.
 if(localStorage.getItem('jsonmodel') == null)
 {
-   localStorage.setItem('jsonmodel','{"version":0.1,"shopping":"Praiamar Shopping","address":"R. Alexandre Martins, 80 - Aparecida, Santos - SP, 11025-202","floors":[{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":2,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":5,"y":5,"floor":0}}],"halls":[[]]}]}');
+   localStorage.setItem('jsonmodel','{"version":0.1,"shopping":"Praiamar Shopping","address":"R. Alexandre Martins, 80 - Aparecida, Santos - SP, 11025-202","floors":[{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":2,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":5,"y":5,"floor":0}}],"halls":[[]], "tribeacons":[] }]}');
    clear();
 }
 
@@ -88,13 +88,16 @@ function hatchMap(){
 
 
     //draw beacons
-
+  if (typeof mapJson.floors[0].locates != "undefined"){
     mapJson.floors[0].locates.forEach(element => {
+      if (typeof element.beacons != "undefined"){
         element.beacons.forEach(elementBeacon => {
             log(elementBeacon)
             drawBeacons(document.getElementById(elementBeacon.position.x+","+elementBeacon.position.y+""));
         })
+      }
     });
+}
 
     // draw tri-beacons
 
@@ -154,6 +157,7 @@ function drawTriBeacons(obj){
 //Faz o desenho propriamento dito e guarda nos arrays
 function setDraw(color, obj, id){
   
+    if (obj != null){
     var x = obj.id.split(',')[0];
     var y = obj.id.split(',')[1];
     //ERROR 16:50
@@ -191,6 +195,7 @@ function setDraw(color, obj, id){
             }
             $(obj).css("background-color",color);
         }
+    }
 }
 
 //Limpa tudo
