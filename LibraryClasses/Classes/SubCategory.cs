@@ -27,6 +27,34 @@ namespace ReachUp
             this.SubCategoryName = Name;
         }
 
+        public async Task<List<SubCategory>> getAll()
+        {
+           if (base.DQL(Procedure.pegarSubCategorias, ref this.Data)) 
+           {
+              if (this.Data.HasRows)
+              {
+                  List<SubCategory> subCategories = new List<SubCategory>();
+
+                  while (this.Data.Read())
+                  {
+                     subCategories.Add(
+                         new SubCategory(
+                              int.Parse(this.Data["cd_sub_categoria"].ToString()),
+                              await new Category().Get(int.Parse(this.Data["cd_categoria"].ToString())),
+                              this.Data["nm_sub_categoria"].ToString()
+                            )
+                        );
+                   }
+
+                   this.Data.Close();
+                   base.Disconnect();
+                   return subCategories;
+              }
+           }
+
+           return null;
+        }
+
         public async Task<List<SubCategory>> getByLocal(int local) 
         {
             if (base.DQLCommand(Procedure.pegarSubcategoriasLocal, ref this.Data, new string[,] {
@@ -43,7 +71,37 @@ namespace ReachUp
                             new SubCategory(
                                  int.Parse(this.Data["cd_sub_categoria"].ToString()),
                                  await new Category().Get(int.Parse(this.Data["cd_categoria"].ToString())),
-                                 this.Data["nm_sub_categoria"].ToString()
+                                 this.Data["nm_sub_categoria"].ToString(),
+                                 this.Data["nm_categoria"].ToString()
+                                )
+                            );
+                    }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return subCategories;
+                }
+            }
+            return null;
+        }
+
+        public async Task<List<SubCategory>> getByCommunique(int communique) 
+        {
+            if (base.DQLCommand(Procedure.pegarSubCategoriasComunicado, ref this.Data, new string[,] {
+                {"pComunicado", communique.ToString()}
+            }))
+            {
+                if (this.Data.HasRows)
+                {
+                    List<SubCategory> subCategories = new List<SubCategory>();
+
+                    while (this.Data.Read()) 
+                    {
+                        subCategories.Add(
+                            new SubCategory(
+                                 int.Parse(this.Data["cd_sub_categoria"].ToString()),
+                                 await new Category().Get(int.Parse(this.Data["cd_categoria"].ToString())),
+                                 this.Data["nm_sub_categoria"].ToString(),
+                                 this.Data["nm_categoria"].ToString()
                               )
                             );
                     }
