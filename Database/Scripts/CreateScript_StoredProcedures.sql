@@ -500,15 +500,41 @@
 		DELETE FROM categoria WHERE cd_categoria = pCategoria;
 	END$$
 
+    DROP PROCEDURE IF EXISTS pegarSubCategorias$$
+    CREATE PROCEDURE pegarSubCategorias()
+    BEGIN
+     SELECT sc.cd_categoria, sc.cd_sub_categoria, sc.nm_sub_categoria, c.nm_categoria 
+		FROM sub_categoria as sc 
+		INNER JOIN categoria as c
+		ON sc.cd_categoria = c.cd_categoria
+        GROUP BY sc.cd_categoria;
+	END$$
+
+	DROP PROCEDURE IF EXISTS pegarSubCategoriasComunicado$$
+    CREATE PROCEDURE pegarSubCategoriasComunicado(pComunicado int)
+    BEGIN
+     SELECT sc.cd_categoria, sc.cd_sub_categoria, sc.nm_sub_categoria, c.nm_categoria
+        FROM comunicado_sub_categoria csc
+		INNER JOIN sub_categoria as sc 
+        ON csc.cd_categoria = sc.cd_categoria
+        AND csc.cd_sub_categoria = sc.cd_sub_categoria
+		INNER JOIN categoria as c
+		ON sc.cd_categoria = c.cd_categoria
+        WHERE csc.cd_comunicado = pComunicado
+        GROUP BY sc.cd_categoria;
+	END$$
+
 	DROP PROCEDURE IF EXISTS pegarSubcategoriasLocal$$
 	CREATE PROCEDURE 	pegarSubcategoriasLocal(pLocal int)
 	BEGIN
-		SELECT sc.cd_categoria, sc.cd_sub_categoria, sc.nm_sub_categoria FROM sub_categoria as sc 
+		SELECT sc.cd_categoria, sc.cd_sub_categoria, sc.nm_sub_categoria, c.nm_categoria 
+        FROM sub_categoria_local as scl
+		INNER JOIN sub_categoria as sc
+		ON scl.cd_categoria = sc.cd_categoria
+        AND scl.cd_sub_categoria = sc.cd_sub_categoria
 		INNER JOIN categoria as c
 		ON sc.cd_categoria = c.cd_categoria
-		INNER JOIN categoria_local as cl
-		ON c.cd_categoria = cl.cd_categoria
-		WHERE cd_local = pLocal;	
+		WHERE scl.cd_local = pLocal;	
 	END$$
 
   
