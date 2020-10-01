@@ -1,6 +1,5 @@
 import 'package:ReachUp/Controller/LocalController.dart';
 import 'package:ReachUp/Model/Local.dart';
-import 'package:ReachUp/View/HomeView/Home.view.dart';
 import 'package:ReachUp/View/SearchView/SearchCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +9,9 @@ class Search extends StatefulWidget {
   _SearchState createState() => _SearchState();
 }
 
-String search;
+
+class _SearchState extends State<Search> {
+  String search;
 var _controller = TextEditingController();
 List<Local> locates;
 final _formKey = GlobalKey<FormState>();
@@ -26,7 +27,7 @@ buildListView(){
       }
   );
 }
-class _SearchState extends State<Search> {
+
   bool loading= false;
   @override
   Widget build(BuildContext context) {

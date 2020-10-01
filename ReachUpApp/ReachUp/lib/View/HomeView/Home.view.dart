@@ -1,10 +1,8 @@
 import 'package:ReachUp/View/HomeView/HomeMap.view.dart';
-import 'package:ReachUp/View/HomeView/HomeWI.dart';
 import 'package:ReachUp/View/SearchView/Search.view.dart';
 import 'package:flutter/material.dart';
 import 'package:ReachUp/View/HomeView/HomeDrawer.view.dart';
 
-import '../../main.dart';
 
 class Home extends StatefulWidget {
   @override

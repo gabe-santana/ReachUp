@@ -1,8 +1,12 @@
+import 'package:ReachUp/Component/Map/Map.component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'View/HomeView/Home.view.dart';
 
-void main() => runApp(MyApp());
+
+void main() {
+  runApp(ReachUp());
+}
 
 var darkTheme = ThemeData(
   colorScheme: ColorScheme(
@@ -73,7 +77,7 @@ var lightTheme = ThemeData(
 
 
 
-class MyApp extends StatelessWidget {
+class ReachUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
