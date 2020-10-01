@@ -35,5 +35,37 @@
 				"floor": 0
 			}
 		}]
-	}]
+	},
+	{
+		"locates": [{
+			"beacons": [{
+				"uuid": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+				"position": {
+					"x": 12.0,
+					"y": 3.0,
+					"floor": 0
+				}
+			}],
+			"id": 0,
+			"position": {
+				"x0": 0.0,
+				"y0": 0.0,
+				"x": 24.0,
+				"y": 24.0,
+				"floor": 0
+			}
+		}],
+		"halls": [
+			[]
+		],
+		"triBeacons": [{
+			"uuid": "",
+			"position": {
+				"x": 10.0,
+				"y": 10.0,
+				"floor": 0
+			}
+		}]
+	}
+  ]
 }

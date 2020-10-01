@@ -1,7 +1,7 @@
 // Verifica se o localstorage está vazio e insere dados nele.
 if(localStorage.getItem('jsonmodel') == null)
 {
-   localStorage.setItem('jsonmodel','{"version":0.1,"shopping":"Praiamar Shopping","address":"R. Alexandre Martins, 80 - Aparecida, Santos - SP, 11025-202","metersByUnity":1,"widthUnits":52,"heightUnits":52,"floors":[{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":2,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":5,"y":5,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":6,"y":6,"floor":0}}]}]}');
+   localStorage.setItem('jsonmodel','{"version":0.1,"shopping":"Praiamar Shopping","address":"R. Alexandre Martins, 80 - Aparecida, Santos - SP, 11025-202","metersByUnity":1,"widthUnits":52,"heightUnits":52,"floors":[{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":2,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":5,"y":5,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":6,"y":6,"floor":0}}]},{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":12,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":24,"y":24,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":10,"y":10,"floor":0}}]}]}');
    clear();
 }
 
@@ -15,6 +15,11 @@ var IlocalColor = "#25a149";
 var ElocalColor = "#03290e";
 
 var currentFloor = 0;
+
+function setCurrentFloor(floor){
+    currentFloor = floor;
+    log(currentFloor);
+}
 
 var mapJson = getJson();
 
@@ -41,12 +46,6 @@ var triBeaconmap = [];
 
 var mapMarks = [];
 
-//Representação dos desenhos do mapa
-/*var mapMarks = new Array(26);
-for (var i = 0; i < mapMarks.length; i++) {
-    mapMarks[i] = new Array(26);
-}*/
-
 function setMapLength(){
   mapMarks = new Array(mapWidth);
   for (var i = 0; i < mapMarks.length; i++) {
@@ -67,17 +66,17 @@ function renderMap(){
 
     var squares = document.querySelectorAll('.square').length; 
     log(squares);
-
-       hatchMap();
+    
+    hatchMap();
 }
 
 //Função que faz o desenho inicial do mapa
 function hatchMap(){
-    numbersOfRoutes = mapJson.floors[0].halls.length;
+    numbersOfRoutes = mapJson.floors[currentFloor].halls.length;
     log("ROUTES: " + numbersOfRoutes);
     //draw halls
-    for (let i = 0; i <  numbersOfRoutes; i++) {
-            mapJson.floors[0].halls[i].forEach(element => {
+    for (let i = 0; i < numbersOfRoutes; i++) {
+            mapJson.floors[currentFloor].halls[i].forEach(element => {
             log(element);
                 drawHalls(document.getElementById(element["x"]+","+element["y"]+""))
 
@@ -86,20 +85,20 @@ function hatchMap(){
 
     //draw Ilocates
    
-    mapJson.floors[0].locates.forEach(element => {
+    mapJson.floors[currentFloor].locates.forEach(element => {
       drawILocates(document.getElementById(element.position["x0"]+","+element.position["y0"]+""));
     });
 
     //draw Elocates
 
-    mapJson.floors[0].locates.forEach(element => {
+    mapJson.floors[currentFloor].locates.forEach(element => {
 
         drawELocates(document.getElementById(element.position["x"]+","+element.position["y"]+""));
     });
 
 
     //draw beacons
-    mapJson.floors[0].locates.forEach(element => {
+    mapJson.floors[currentFloor].locates.forEach(element => {
         Array.from(element.beacons).forEach(elementBeacon => {
             drawBeacons(document.getElementById(elementBeacon.position.x+","+elementBeacon.position.y+""));
         })
@@ -107,7 +106,7 @@ function hatchMap(){
   
 
     // draw tri-beacons
-    mapJson.floors[0].triBeacons.forEach(triBeacon => {
+    mapJson.floors[currentFloor].triBeacons.forEach(triBeacon => {
         drawTriBeacons(document.getElementById(triBeacon.position.x+","+triBeacon.position.y+""));
     });
 }

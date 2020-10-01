@@ -1,9 +1,18 @@
 $(()=>{
   
-
     $(".square").on("click", function(e) {
         draw(this);
     });
+
+    $("#floor").change(function(){
+        var floor = this.value;
+        //clearDraw();
+        //clearArrays();
+        clear();
+        setCurrentFloor(floor);
+        //hatchMap();
+        renderMap();
+    })
 
     $("#addRoute").click(function(){
         addHallToJson();
