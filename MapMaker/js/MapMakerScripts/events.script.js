@@ -1,4 +1,4 @@
-$(document).ready(()=>{
+$(()=>{
   
 
     $(".square").on("click", function(e) {

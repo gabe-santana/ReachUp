@@ -1,7 +1,7 @@
 // Verifica se o localstorage está vazio e insere dados nele.
 if(localStorage.getItem('jsonmodel') == null)
 {
-   localStorage.setItem('jsonmodel','{"version":0.1,"shopping":"Praiamar Shopping","address":"R. Alexandre Martins, 80 - Aparecida, Santos - SP, 11025-202","floors":[{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":2,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":5,"y":5,"floor":0}}],"halls":[[]], "tribeacons":[] }]}');
+   localStorage.setItem('jsonmodel','{"version":0.1,"shopping":"Praiamar Shopping","address":"R. Alexandre Martins, 80 - Aparecida, Santos - SP, 11025-202","metersByUnity":1,"floors":[{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":2,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":5,"y":5,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":6,"y":6,"floor":0}}]}]}');
    clear();
 }
 
@@ -45,13 +45,14 @@ for (var i = 0; i < mapMarks.length; i++) {
 
 //Função que renderiza o mapa
 function renderMap(){
-    for (let y = 0; y < 26; y++) 
+    for (let y = 0; y < 26; y++) {
        for (let x = 0; x < 26; x++) {
             var square = document.createElement('div');
             square.setAttribute('class','square');
             square.setAttribute('id',x+","+y);
             $("#mapContainer").append(square);
        }
+    }
        hatchMap();
 }
 
@@ -253,8 +254,8 @@ function addTriBeacontoJson(){
         mapJson.floors[currentFloor].triBeacons.push({
             uuid: triBeaconmap[tb].uuid,
             position:{
-                x: beaconmap[tb].position.x,
-                y: beaconmap[tb].position.y
+                x: triBeaconmap[tb].position.x,
+                y: triBeaconmap[tb].position.y
             },
         });
       }
@@ -277,14 +278,16 @@ function clearArrays(){
 //Pega o json
 function getJson(){
     var object = [];
-    try{
+    /*try{
       object = JSON.parse(localStorage.getItem("json"));
     }
     catch{
       object = undefined;
       log("undefined!");
     }
-    return object;
+    return object;*/
+
+    return JSON.parse(localStorage.getItem("json"));
 }
 
 //Define valor no json
