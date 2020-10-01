@@ -88,11 +88,11 @@ function hatchMap(){
 
 
     //draw beacons
-  if (typeof mapJson.floors[0].locates != "undefined"){
+  if (typeof mapJson.floors[0].locates != "undefined" && typeof mapJson.floors[0].locates != null){
     mapJson.floors[0].locates.forEach(element => {
-      if (typeof element.beacons != "undefined"){
-        element.beacons.forEach(elementBeacon => {
-            log(elementBeacon)
+      if (typeof element.beacons != "undefined" && !Array.isArray(element.beacons)){
+        Array.from(element.beacons).forEach(elementBeacon => {
+            log(elementBeacon);
             drawBeacons(document.getElementById(elementBeacon.position.x+","+elementBeacon.position.y+""));
         })
       }
@@ -100,11 +100,12 @@ function hatchMap(){
 }
 
     // draw tri-beacons
-
-    mapJson.floors[0].triBeacons.forEach(triBeacon => {
+    if (typeof mapJson.floors[0].triBeacons != "undefined" && !Array.isArray(mapJson.floors[0].triBeacons)){
+    Array.from(mapJson.floors[0].triBeacons).forEach(triBeacon => {
 
         drawTriBeacons(document.getElementById(triBeacon.position.x+","+triBeacon.position.y+""));
     });
+  }
 }
 //Função de log
 function log(m){
@@ -144,7 +145,7 @@ function drawELocates(obj){
     setDraw(ElocalColor, obj,'el');
 }
 
-//Função que seta o obj que será desenhado, neste caso é a "beacon do local"
+//Função que seta o obj que será desenhado, neste caso é o "beacon do local"
 function drawBeacons(obj){
     setDraw(beaconColor, obj,'b');
 }

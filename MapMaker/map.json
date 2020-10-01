@@ -27,17 +27,17 @@
           }  
         ],
         "halls":[
-         [
-         ]
+          [
+          ]
         ],
-        "triBeacons": [
+        "triBeacons":[
           {
-             "uuid": "",
-             "position": {
-              "x": 5.0,
-              "y": 5.0,
-              "floor": 0
-            }
+            "uuid": "",
+            "position": {
+            "x": 5.0,
+            "y": 5.0,
+            "floor": 0
+          }
           }
         ]
       }
