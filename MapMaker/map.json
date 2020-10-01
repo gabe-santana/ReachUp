@@ -3,6 +3,8 @@
 	"shopping": "Praiamar Shopping",
 	"address": "R. Alexandre Martins, 80 - Aparecida, Santos - SP, 11025-202",
 	"metersByUnity": 1.0,
+	"widthUnits": 52,
+	"heightUnits": 52,
 	"floors": [{
 		"locates": [{
 			"beacons": [{

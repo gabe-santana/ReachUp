@@ -1,7 +1,7 @@
 // Verifica se o localstorage está vazio e insere dados nele.
 if(localStorage.getItem('jsonmodel') == null)
 {
-   localStorage.setItem('jsonmodel','{"version":0.1,"shopping":"Praiamar Shopping","address":"R. Alexandre Martins, 80 - Aparecida, Santos - SP, 11025-202","metersByUnity":1,"floors":[{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":2,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":5,"y":5,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":6,"y":6,"floor":0}}]}]}');
+   localStorage.setItem('jsonmodel','{"version":0.1,"shopping":"Praiamar Shopping","address":"R. Alexandre Martins, 80 - Aparecida, Santos - SP, 11025-202","metersByUnity":1,"widthUnits":52,"heightUnits":52,"floors":[{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":2,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":5,"y":5,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":6,"y":6,"floor":0}}]}]}');
    clear();
 }
 
@@ -17,6 +17,9 @@ var ElocalColor = "#03290e";
 var currentFloor = 0;
 
 var mapJson = getJson();
+
+var mapWidth = mapJson.widthUnits;
+var mapHeight = mapJson.heightUnits;
 
 var numbersOfRoutes = 0;
 var squaresCount = 0;
@@ -36,23 +39,35 @@ var beaconmap = [];
 
 var triBeaconmap = [];
 
+var mapMarks = [];
+
 //Representação dos desenhos do mapa
-var mapMarks = new Array(26);
+/*var mapMarks = new Array(26);
 for (var i = 0; i < mapMarks.length; i++) {
     mapMarks[i] = new Array(26);
-}
+}*/
 
+function setMapLength(){
+  mapMarks = new Array(mapWidth);
+  for (var i = 0; i < mapMarks.length; i++) {
+    mapMarks[i] = new Array(mapHeight);
+  }
+}
 
 //Função que renderiza o mapa
 function renderMap(){
-    for (let y = 0; y < 26; y++) {
-       for (let x = 0; x < 26; x++) {
+    for (let y = 0; y < mapWidth; y++) {
+       for (let x = 0; x < mapHeight; x++) {
             var square = document.createElement('div');
             square.setAttribute('class','square');
             square.setAttribute('id',x+","+y);
             $("#mapContainer").append(square);
        }
     }
+
+    var squares = document.querySelectorAll('.square').length; 
+    log(squares);
+
        hatchMap();
 }
 
@@ -72,11 +87,6 @@ function hatchMap(){
     //draw Ilocates
    
     mapJson.floors[0].locates.forEach(element => {
-        /*var banana = document.getElementById(element.position.x0+","+element.position.y0);
-        var banana0 = "";
-        if (banana){
-        banana0 = banana.value;
-      }*/
       drawILocates(document.getElementById(element.position["x0"]+","+element.position["y0"]+""));
     });
 
@@ -89,24 +99,17 @@ function hatchMap(){
 
 
     //draw beacons
-  if (typeof mapJson.floors[0].locates != "undefined" && typeof mapJson.floors[0].locates != null){
     mapJson.floors[0].locates.forEach(element => {
-      //if (typeof element.beacons != "undefined" && !Array.isArray(element.beacons)){
-        element.beacons.forEach(elementBeacon => {
-            log(elementBeacon);
+        Array.from(element.beacons).forEach(elementBeacon => {
             drawBeacons(document.getElementById(elementBeacon.position.x+","+elementBeacon.position.y+""));
         })
-      //}
     });
-  }
+  
 
     // draw tri-beacons
-    //if (typeof mapJson.floors[0].triBeacons != "undefined" && !Array.isArray(mapJson.floors[0].triBeacons)){
     mapJson.floors[0].triBeacons.forEach(triBeacon => {
-
         drawTriBeacons(document.getElementById(triBeacon.position.x+","+triBeacon.position.y+""));
     });
-  //}
 }
 //Função de log
 function log(m){
@@ -159,10 +162,9 @@ function drawTriBeacons(obj){
 //Faz o desenho propriamento dito e guarda nos arrays
 function setDraw(color, obj, id){
   
-    if (obj != null){
     var x = obj.id.split(',')[0];
     var y = obj.id.split(',')[1];
-    //ERROR 16:50
+
         if(mapMarks[x][y] == null){
             mapMarks[x][y] = id;
             log(id);
@@ -198,7 +200,6 @@ function setDraw(color, obj, id){
             $(obj).css("background-color",color);
         }
     }
-}
 
 //Limpa tudo
 function clearDraw(){
@@ -277,16 +278,6 @@ function clearArrays(){
 
 //Pega o json
 function getJson(){
-    var object = [];
-    /*try{
-      object = JSON.parse(localStorage.getItem("json"));
-    }
-    catch{
-      object = undefined;
-      log("undefined!");
-    }
-    return object;*/
-
     return JSON.parse(localStorage.getItem("json"));
 }
 
@@ -301,10 +292,7 @@ function clear(){
         localStorage.getItem("jsonmodel")
     );
 
-    mapMarks = new Array(26);
-    for (var i = 0; i < mapMarks.length; i++) {
-        mapMarks[i] = new Array(26);
-    }
+    setMapLength();
     clearDraw();
 }
 
