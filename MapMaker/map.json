@@ -66,6 +66,68 @@
 				"floor": 0
 			}
 		}]
+	},
+	{
+		"locates": [{
+			"beacons": [{
+				"uuid": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+				"position": {
+					"x": 15.0,
+					"y": 7.0,
+					"floor": 0
+				}
+			}],
+			"id": 0,
+			"position": {
+				"x0": 3.0,
+				"y0": 3.0,
+				"x":  9.0,
+				"y": 9.0,
+				"floor": 0
+			}
+		}],
+		"halls": [
+			[]
+		],
+		"triBeacons": [{
+			"uuid": "",
+			"position": {
+				"x": 21.0,
+				"y": 21.0,
+				"floor": 0
+			}
+		}]
+	},
+	{
+		"locates": [{
+			"beacons": [{
+				"uuid": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+				"position": {
+					"x": 30.0,
+					"y": 9.0,
+					"floor": 0
+				}
+			}],
+			"id": 0,
+			"position": {
+				"x0": 2.0,
+				"y0": 2.0,
+				"x": 3.0,
+				"y": 3.0,
+				"floor": 0
+			}
+		}],
+		"halls": [
+			[]
+		],
+		"triBeacons": [{
+			"uuid": "",
+			"position": {
+				"x": 30.0,
+				"y": 30.0,
+				"floor": 0
+			}
+		}]
 	}
   ]
 }

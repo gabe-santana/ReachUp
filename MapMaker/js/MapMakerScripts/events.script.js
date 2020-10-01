@@ -6,6 +6,11 @@ $(()=>{
 
     $("#floor").change(function(){
         var floor = this.value;
+
+        if (floor == ""){
+            this.value = 0;
+            floor = 0;
+        }
         //clearDraw();
         //clearArrays();
         clear();
@@ -23,28 +28,25 @@ $(()=>{
     });
 
     $("#addTriBeacon").click(function(){
-       
-        /*var squares = document.querySelectorAll(".square");
-        var count = 0;
-
-        for (let i = 0; i < squares.length; i++){
-            if (count > 2 && squares[i].style.color == "#bd0000"){
-                break;
-            }
-            else if (squares[i].style.color == "#bd0000" && count < 3){
-                count++;
-            }
-        }
-
-        if (count == 3)*/
         addTriBeacontoJson();
-        /*}
-        else{
-            alert("error");
-        }*/
     });
 
     $("#clear").click(function(){
-        clear();
+        if (pendingAdditions == 0){
+           clear();
+           this.disabled = true;
+           document.getElementById('showMap').disabled = false;
+           document.getElementById('floor').value = getCurrentFloor();
+        } else {
+            alert('Há alterações não adicionadas!');
+        }
+        
     });
+
+    $('#showMap').click(function(){
+        hatchMap();
+        this.disabled = true;
+        document.getElementById('clear').disabled = false;
+
+    })
 });
