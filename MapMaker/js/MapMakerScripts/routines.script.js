@@ -90,22 +90,22 @@ function hatchMap(){
     //draw beacons
   if (typeof mapJson.floors[0].locates != "undefined" && typeof mapJson.floors[0].locates != null){
     mapJson.floors[0].locates.forEach(element => {
-      if (typeof element.beacons != "undefined" && !Array.isArray(element.beacons)){
-        Array.from(element.beacons).forEach(elementBeacon => {
+      //if (typeof element.beacons != "undefined" && !Array.isArray(element.beacons)){
+        element.beacons.forEach(elementBeacon => {
             log(elementBeacon);
             drawBeacons(document.getElementById(elementBeacon.position.x+","+elementBeacon.position.y+""));
         })
-      }
+      //}
     });
-}
+  }
 
     // draw tri-beacons
-    if (typeof mapJson.floors[0].triBeacons != "undefined" && !Array.isArray(mapJson.floors[0].triBeacons)){
-    Array.from(mapJson.floors[0].triBeacons).forEach(triBeacon => {
+    //if (typeof mapJson.floors[0].triBeacons != "undefined" && !Array.isArray(mapJson.floors[0].triBeacons)){
+    mapJson.floors[0].triBeacons.forEach(triBeacon => {
 
         drawTriBeacons(document.getElementById(triBeacon.position.x+","+triBeacon.position.y+""));
     });
-  }
+  //}
 }
 //Função de log
 function log(m){
@@ -276,7 +276,15 @@ function clearArrays(){
 
 //Pega o json
 function getJson(){
-    return  JSON.parse(localStorage.getItem("json"));
+    var object = [];
+    try{
+      object = JSON.parse(localStorage.getItem("json"));
+    }
+    catch{
+      object = undefined;
+      log("undefined!");
+    }
+    return object;
 }
 
 //Define valor no json
