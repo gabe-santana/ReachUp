@@ -14,6 +14,8 @@ var triBeaconColor = "#bd0000";
 var IlocalColor = "#25a149";
 var ElocalColor = "#03290e";
 
+var setDrawExecutions = 0;
+
 var currentFloor = 0;
 
 var pendingAdditions = 0;
@@ -125,15 +127,17 @@ function hatchMap(){
     //draw beacons
     mapJson.floors[currentFloor].locates.forEach(element => {
         Array.from(element.beacons).forEach(elementBeacon => {
-            drawBeacons(document.getElementById(elementBeacon.position.x+","+elementBeacon.position.y+""));
+            drawBeacons(document.getElementById(elementBeacon.position.x+","+elementBeacon.position.y+","+elementBeacon.uuid+""));
         })
     });
   
 
     // draw tri-beacons
     mapJson.floors[currentFloor].triBeacons.forEach(triBeacon => {
-        drawTriBeacons(document.getElementById(triBeacon.position.x+","+triBeacon.position.y+""));
+        drawTriBeacons(document.getElementById(triBeacon.position.x+","+triBeacon.position.y+","+triBeacon.uuid+""));
     });
+
+    setDrawExecutions++;
 }
 //Função de log
 function log(m){
@@ -188,6 +192,9 @@ function setDraw(color, obj, id){
   
     var x = obj.id.split(',')[0];
     var y = obj.id.split(',')[1];
+    if ((id == 'b' || id == 'tb') && setDrawExecutions == 0){
+    var uuidExistingBeacon = obj.split(',')[2];
+    }
 
         if(mapMarks[x][y] == null){
             mapMarks[x][y] = id;
@@ -203,27 +210,50 @@ function setDraw(color, obj, id){
                     Elocalmap.push({"x":parseInt(x), "y":parseInt(y), "floor": parseInt(currentFloor)});
                     break;
                 case 'b':
-                    var uuid = document.getElementById('uuid').value;
-                    if (uuid == ""){
-                        uuid = generateUUID();
+                    var uuidNewBeacon = "";
+                    if (setDrawExecutions > 0){
+                    uuidNewBeacon = document.getElementById('uuid').value;
+                    if (uuidNewBeacon == ""){
+                        uuidNewBeacon = generateUUID();
                     }
                     beaconmap.push({
-                        uuid: uuid,
+                        uuid: uuidNewBeacon,
                         position: {
                             "x":parseInt(x), "y":parseInt(y), "floor": parseInt(currentFloor)
                         }
                     });
-                    break;
+                  }
+                  else {
+                    beaconmap.push({
+                        uuid: uuidExistingBeacon,
+                        position: {
+                            "x":parseInt(x), "y":parseInt(y), "floor": parseInt(currentFloor)
+                        }
+                    });
+                  }
+                  break;
                 case 'tb':
-                    var uuid = document.getElementById('uuid').value;
-                    if (uuid == ""){
-                        uuid = generateUUID();
+                    var uuidNewBeacon = "";
+                    if (setDrawExecutions > 0){
+                    uuidNewBeacon = document.getElementById('uuid').value;
+                    if (uuidNewBeacon == ""){
+                        uuidNewBeacon = generateUUID();
                     }
                     triBeaconmap.push({
-                    uuid: uuid,
-                    position: {
+                        uuid: uuidNewBeacon,
+                        position: {
                             "x":parseInt(x), "y":parseInt(y), "floor": parseInt(currentFloor)
-                        }});
+                        }
+                    });
+                  }
+                  else {
+                    triBeaconmap.push({
+                        uuid: uuidExistingBeacon,
+                        position: {
+                            "x":parseInt(x), "y":parseInt(y), "floor": parseInt(currentFloor)
+                        }
+                    });
+                  }
                     break;
     
                 default:
@@ -237,6 +267,7 @@ function setDraw(color, obj, id){
 //Limpa tudo
 function clearDraw(){
     map =[];
+    setDrawExecutions = 0;
     $(".square").css("background-color","transparent");
     log("!MAP CLEANED!");
 }
@@ -256,10 +287,34 @@ function addHallToJson(){
 //Adiciona os locais no json
 function addLocaltoJson(){
     if (beaconmap.length != Ilocalmap.length){
-        alert('Algum(ns) local(is) está(ão) sem beacon definido!');
+        alert('Algum(ns) local(is) está(ão) sem beacon definido, ou o contrário!');
         return;
     }
+
     for (let b = 0; b < beaconmap.length; b++) {
+            if (Elocalmap[b] == null){
+                Elocalmap[b].x = Ilocalmap.x0;
+                Elocalmap[b].y = Ilocalmap.y0;
+            }
+            mapJson.floors[currentFloor].locates.push({
+                beacons: {
+                    uuid: beaconmap[b].uuid,
+                    position:{
+                        x: beaconmap[b].position.x,
+                        y: beaconmap[b].position.y
+                    },
+                },
+                    id: 0,
+                    position: {
+                        x0:Ilocalmap[b].x0,
+                        y0:Ilocalmap[b].y0,
+                        x: Elocalmap[b].x,
+                        y: Elocalmap[b].y
+                    }
+                }
+            );
+        }
+    /*for (let b = 0; b < beaconmap.length; b++) {
         for (let i = 0; i < Ilocalmap.length; i++) {
             if (Elocalmap[i] == null){
                 Elocalmap[i].x = Ilocalmap.x0;
@@ -283,7 +338,7 @@ function addLocaltoJson(){
                 }
             );
         }
-    }
+    }*/
     setJson(JSON.stringify(mapJson));
     clearArrays();
 }
