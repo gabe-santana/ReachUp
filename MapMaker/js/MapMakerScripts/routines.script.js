@@ -1,7 +1,7 @@
 // Verifica se o localstorage está vazio e insere dados nele.
 if(localStorage.getItem('jsonmodel') == null)
 {
-   localStorage.setItem('jsonmodel','{"version":0.1,"shopping":"Praiamar Shopping","address":"R. Alexandre Martins, 80 - Aparecida, Santos - SP, 11025-202","metersByUnity":1,"widthUnits":52,"heightUnits":52,"floors":[{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":2,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":5,"y":5,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":6,"y":6,"floor":0}}]},{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":12,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":24,"y":24,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":10,"y":10,"floor":0}}]},{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":15,"y":7,"floor":0}}],"id":0,"position":{"x0":3,"y0":3,"x":9,"y":9,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":21,"y":21,"floor":0}}]},{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":30,"y":9,"floor":0}}],"id":0,"position":{"x0":2,"y0":2,"x":3,"y":3,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":30,"y":30,"floor":0}}]}]}');
+   localStorage.setItem('jsonmodel','{"version":0.1,"shopping":"Praiamar Shopping","address":"R. Alexandre Martins, 80 - Aparecida, Santos - SP, 11025-202","metersByUnity":1,"widthUnits":52,"heightUnits":52,"triBeaconsPerFloor":3,"floors":[{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":2,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":5,"y":5,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":6,"y":6,"floor":0}}]},{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":12,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":24,"y":24,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":10,"y":10,"floor":0}}]},{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":15,"y":7,"floor":0}}],"id":0,"position":{"x0":3,"y0":3,"x":9,"y":9,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":21,"y":21,"floor":0}}]},{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":30,"y":9,"floor":0}}],"id":0,"position":{"x0":2,"y0":2,"x":3,"y":3,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":30,"y":30,"floor":0}}]}]}');
    clear();
 }
 
@@ -32,6 +32,24 @@ var mapJson = getJson();
 var mapWidth = mapJson.widthUnits;
 var mapHeight = mapJson.heightUnits;
 
+var triBeaconsLimit = mapJson.triBeaconsPerFloor;
+
+function getTriBeaconsLimit(){
+    return triBeaconsLimit;
+}
+
+function getWidthUnits(){
+    return mapWidth;
+}
+
+function getHeightUnits(){
+    return mapHeight;
+}
+
+function getMetersByUnity(){
+    return mapJson.metersByUnity;
+}
+
 var numbersOfRoutes = 0;
 var squaresCount = 0;
 
@@ -47,6 +65,8 @@ var Ilocalmap = [];
 var Elocalmap = [];
 
 var beaconmap = [];
+
+var localPositions = [];
 
 var triBeaconmap = [];
 
@@ -71,7 +91,6 @@ function renderMap(){
     }
 
     var squares = document.querySelectorAll('.square').length; 
-    log(squares);
     
     hatchMap();
 }
@@ -188,7 +207,6 @@ function setDraw(color, obj, id){
                     if (uuid == ""){
                         uuid = generateUUID();
                     }
-                    console.log(uuid);
                     beaconmap.push({
                         uuid: uuid,
                         position: {
@@ -201,7 +219,6 @@ function setDraw(color, obj, id){
                     if (uuid == ""){
                         uuid = generateUUID();
                     }
-                    console.log(uuid);
                     triBeaconmap.push({
                     uuid: uuid,
                     position: {
@@ -213,7 +230,7 @@ function setDraw(color, obj, id){
                     break;
             }
             $(obj).css("background-color",color);
-            pendingAdditions++;
+            //pendingAdditions++;
         }
     }
 
@@ -238,8 +255,16 @@ function addHallToJson(){
 
 //Adiciona os locais no json
 function addLocaltoJson(){
+    if (beaconmap.length != Ilocalmap.length){
+        alert('Algum(ns) local(is) está(ão) sem beacon definido!');
+        return;
+    }
     for (let b = 0; b < beaconmap.length; b++) {
         for (let i = 0; i < Ilocalmap.length; i++) {
+            if (Elocalmap[i] == null){
+                Elocalmap[i].x = Ilocalmap.x0;
+                Elocalmap[i].y = Ilocalmap.y0;
+            }
             mapJson.floors[currentFloor].locates.push({
                 beacons: {
                     uuid: beaconmap[b].uuid,
@@ -265,9 +290,11 @@ function addLocaltoJson(){
 
 //Adiciona os tri-beacons no json
 function addTriBeacontoJson(){
-    if (typeof triBeaconmap != "undefined"){
+    if (triBeaconmap.length > triBeaconsLimit){
+      alert('Há mais tri-beacons que o limite por andar! Se quiser adicionar mesmo essa quantidade, altere o limite no map.json');
+      return;
+    }
     for (let tb = 0; tb < triBeaconmap.length; tb++) {
-        if (typeof mapJson.floors[currentFloor].triBeacons != "undefined"){
         mapJson.floors[currentFloor].triBeacons.push({
             uuid: triBeaconmap[tb].uuid,
             position:{
@@ -275,9 +302,7 @@ function addTriBeacontoJson(){
                 y: triBeaconmap[tb].position.y
             },
         });
-      }
-    }
-}
+     }
     setJson(JSON.stringify(mapJson));
     clearArrays();
 }

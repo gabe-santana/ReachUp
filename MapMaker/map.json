@@ -5,6 +5,7 @@
 	"metersByUnity": 1.0,
 	"widthUnits": 52,
 	"heightUnits": 52,
+	"triBeaconsPerFloor": 3,
 	"floors": [{
 		"locates": [{
 			"beacons": [{
