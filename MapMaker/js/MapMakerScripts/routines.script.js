@@ -188,7 +188,6 @@ function setDraw(color, obj, id){
                     if (uuid == ""){
                         uuid = generateUUID();
                     }
-                    console.log(uuid);
                     beaconmap.push({
                         uuid: uuid,
                         position: {
@@ -201,7 +200,6 @@ function setDraw(color, obj, id){
                     if (uuid == ""){
                         uuid = generateUUID();
                     }
-                    console.log(uuid);
                     triBeaconmap.push({
                     uuid: uuid,
                     position: {
@@ -213,7 +211,7 @@ function setDraw(color, obj, id){
                     break;
             }
             $(obj).css("background-color",color);
-            pendingAdditions++;
+            //pendingAdditions++;
         }
     }
 

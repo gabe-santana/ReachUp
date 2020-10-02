@@ -5,6 +5,10 @@ $(()=>{
     renderMap();
 });
 
+var canvas = document.createElement('canvas');
+
+
+
 /*$(function(){
     renderMap();
     var map = getJson();

@@ -1,7 +1,20 @@
 $(()=>{
-  
-    $(".square").on("click", function(e) {
-        draw(this);
+
+    var clicked = false;
+    var squares = document.querySelectorAll('.square');
+
+    squares.forEach(square => {
+        square.addEventListener('mousedown', function(){
+            clicked = true;
+        });
+        square.addEventListener('mouseup', function(){
+            clicked = false;
+        });
+        square.addEventListener('mouseover', function(){
+            if (clicked){
+                draw(square);
+            }
+        });
     });
 
     $("#floor").change(function(){
@@ -36,7 +49,6 @@ $(()=>{
            clear();
            this.disabled = true;
            document.getElementById('showMap').disabled = false;
-           document.getElementById('floor').value = getCurrentFloor();
         } else {
             alert('Há alterações não adicionadas!');
         }
