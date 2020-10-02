@@ -31,9 +31,7 @@ dependencies:
   flutter_beacon: ^0.3.0
   sembast: ^1.15.1
   flutter_bloc: ^0.9.1
-
-  localstorage: ^2.0.0
-  path_provider: ^1.1.0 
+  path_provider:
 
   path:
   flame: ^0.26.0
