@@ -1,5 +1,4 @@
 $(()=>{
-<<<<<<< HEAD
 
     var clicked = false;
     var squares = document.querySelectorAll('.square');
@@ -20,16 +19,6 @@ $(()=>{
                 draw(square);
             }
         });
-=======
-  
-    $(".square").on("click", function(e) {
-        draw(this);
->>>>>>> parent of 09f0e2f... Painting added! Now it's easy to edit the map
-    });
-
-    /*$('.square').mouseout(function(){
-        clicked = false;
-    })*/
 
     $("#floor").change(function(){
         var floor = this.value;
