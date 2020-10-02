@@ -14,7 +14,7 @@ namespace ReachUp
         public int CommuniqueId { get; set; }
         [JsonIgnore] public ushort Type { get; set; }
         public Local CommuniqueLocal { get; set; }
-        public Category CommuniqueCategory{ get; set; }
+        public List<SubCategory> CommuniqueSubCategory = new List<SubCategory>();
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
@@ -28,12 +28,12 @@ namespace ReachUp
         #region Constructor
         public Communique() : base() { }
 
-        public Communique(int id, ushort Type, Category CommuniqueCategory,
+        public Communique(int id, ushort Type, List<SubCategory> SubCategories = null,
              string Description,  DateTime StartDate,
              DateTime EndDate, Local local) : base()
         {
             this.CommuniqueId = id;
-            this.CommuniqueCategory = CommuniqueCategory;
+            this.CommuniqueSubCategory = CommuniqueSubCategory;
             this.Description = Description;
             this.StartDate = StartDate;
             this.EndDate = EndDate;
@@ -45,7 +45,7 @@ namespace ReachUp
         #region Methods
         public async Task<List<Communique>> Receive(User user, int idLocal)
         {
-            if (base.DQLCommand(Procedure.receberComunicados, ref this.Data,
+            if (base.DQLCommand(Procedure.receberPromocoesDirecionadas, ref this.Data,
                 new string[,] {
                     {"pLocal",idLocal.ToString()},
                     {"pCliente", user.Email }
@@ -59,7 +59,7 @@ namespace ReachUp
                         communiques.Add(new Communique(
                             int.Parse(this.Data["cd_comunicado"].ToString()),
                             ushort.Parse(this.Data["cd_tipo_comunicado"].ToString()),
-                            await new Category().Get(int.Parse(this.Data["cd_categoria"].ToString())),
+                            await new SubCategory().getByCommunique(int.Parse(this.Data["cd_comunicado"].ToString())),
                             this.Data["ds_comunicado"].ToString(),
                             DateTime.Parse(this.Data["dt_inicio_comunicado"].ToString()),
                             DateTime.Parse(this.Data["dt_fim_comunicado"].ToString()),
@@ -78,7 +78,7 @@ namespace ReachUp
 
         public async Task<List<Communique>> Get(int idLocal) 
         {
-            if (base.DQLCommand(Procedure.pegarComunicados, ref this.Data, new string[,] {
+            if (base.DQLCommand(Procedure.receberComunicados, ref this.Data, new string[,] {
                 {"pLocal", idLocal.ToString()}
             }))
             {
@@ -91,7 +91,7 @@ namespace ReachUp
                                   new Communique(
                                             int.Parse(this.Data["cd_comunicado"].ToString()),
                                             ushort.Parse(this.Data["cd_tipo_comunicado"].ToString()),
-                                            await new Category().Get(int.Parse(this.Data["cd_categoria"].ToString())),
+                                            await new SubCategory().getByCommunique(int.Parse(this.Data["cd_comunicado"].ToString())),
                                             this.Data["ds_comunicado"].ToString(),
                                             DateTime.Parse(this.Data["dt_inicio_comunicado"].ToString()),
                                             DateTime.Parse(this.Data["dt_fim_comunicado"].ToString()),

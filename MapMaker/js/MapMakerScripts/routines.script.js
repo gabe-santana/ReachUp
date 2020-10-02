@@ -1,7 +1,7 @@
 // Verifica se o localstorage está vazio e insere dados nele.
 if(localStorage.getItem('jsonmodel') == null)
 {
-   localStorage.setItem('jsonmodel','{"version":0.1,"shopping":"Praiamar Shopping","address":"R. Alexandre Martins, 80 - Aparecida, Santos - SP, 11025-202","floors":[{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":2,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":5,"y":5,"floor":0}}],"halls":[[]]}]}');
+   localStorage.setItem('jsonmodel','{"version":0.1,"shopping":"Praiamar Shopping","address":"R. Alexandre Martins, 80 - Aparecida, Santos - SP, 11025-202","metersByUnity":1,"widthUnits":52,"heightUnits":52,"floors":[{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":2,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":5,"y":5,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":6,"y":6,"floor":0}}]},{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":12,"y":3,"floor":0}}],"id":0,"position":{"x0":0,"y0":0,"x":24,"y":24,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":10,"y":10,"floor":0}}]},{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":15,"y":7,"floor":0}}],"id":0,"position":{"x0":3,"y0":3,"x":9,"y":9,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":21,"y":21,"floor":0}}]},{"locates":[{"beacons":[{"uuid":"f7826da6-4fa2-4e98-8024-bc5b71e0893e","position":{"x":30,"y":9,"floor":0}}],"id":0,"position":{"x0":2,"y0":2,"x":3,"y":3,"floor":0}}],"halls":[[]],"triBeacons":[{"uuid":"","position":{"x":30,"y":30,"floor":0}}]}]}');
    clear();
 }
 
@@ -16,7 +16,21 @@ var ElocalColor = "#03290e";
 
 var currentFloor = 0;
 
+var pendingAdditions = 0;
+
+function setCurrentFloor(floor){
+    currentFloor = floor;
+    log(currentFloor);
+}
+
+function getCurrentFloor(){
+    return currentFloor;
+}
+
 var mapJson = getJson();
+
+var mapWidth = mapJson.widthUnits;
+var mapHeight = mapJson.heightUnits;
 
 var numbersOfRoutes = 0;
 var squaresCount = 0;
@@ -36,32 +50,39 @@ var beaconmap = [];
 
 var triBeaconmap = [];
 
-//Representação dos desenhos do mapa
-var mapMarks = new Array(26);
-for (var i = 0; i < mapMarks.length; i++) {
-    mapMarks[i] = new Array(26);
-}
+var mapMarks = [];
 
+function setMapLength(){
+  mapMarks = new Array(mapWidth);
+  for (var i = 0; i < mapMarks.length; i++) {
+    mapMarks[i] = new Array(mapHeight);
+  }
+}
 
 //Função que renderiza o mapa
 function renderMap(){
-    for (let y = 0; y < 26; y++) 
-       for (let x = 0; x < 26; x++) {
+    for (let y = 0; y < mapWidth; y++) {
+       for (let x = 0; x < mapHeight; x++) {
             var square = document.createElement('div');
             square.setAttribute('class','square');
             square.setAttribute('id',x+","+y);
             $("#mapContainer").append(square);
        }
-       hatchMap();
+    }
+
+    var squares = document.querySelectorAll('.square').length; 
+    log(squares);
+    
+    hatchMap();
 }
 
 //Função que faz o desenho inicial do mapa
 function hatchMap(){
-    numbersOfRoutes = mapJson.floors[0].halls.length;
+    numbersOfRoutes = mapJson.floors[currentFloor].halls.length;
     log("ROUTES: " + numbersOfRoutes);
     //draw halls
-    for (let i = 0; i <  numbersOfRoutes; i++) {
-            mapJson.floors[0].halls[i].forEach(element => {
+    for (let i = 0; i < numbersOfRoutes; i++) {
+            mapJson.floors[currentFloor].halls[i].forEach(element => {
             log(element);
                 drawHalls(document.getElementById(element["x"]+","+element["y"]+""))
 
@@ -70,32 +91,28 @@ function hatchMap(){
 
     //draw Ilocates
    
-    mapJson.floors[0].locates.forEach(element => {
-        
-        drawILocates(document.getElementById(element.position.x0+","+element.position.y0));
+    mapJson.floors[currentFloor].locates.forEach(element => {
+      drawILocates(document.getElementById(element.position["x0"]+","+element.position["y0"]+""));
     });
 
     //draw Elocates
 
-    mapJson.floors[0].locates.forEach(element => {
+    mapJson.floors[currentFloor].locates.forEach(element => {
 
         drawELocates(document.getElementById(element.position["x"]+","+element.position["y"]+""));
     });
 
 
     //draw beacons
-
-    mapJson.floors[0].locates.forEach(element => {
-        element.beacons.forEach(elementBeacon => {
-            log(elementBeacon)
+    mapJson.floors[currentFloor].locates.forEach(element => {
+        Array.from(element.beacons).forEach(elementBeacon => {
             drawBeacons(document.getElementById(elementBeacon.position.x+","+elementBeacon.position.y+""));
         })
     });
+  
 
     // draw tri-beacons
-
-    mapJson.floors[0].triBeacons.forEach(triBeacon => {
-
+    mapJson.floors[currentFloor].triBeacons.forEach(triBeacon => {
         drawTriBeacons(document.getElementById(triBeacon.position.x+","+triBeacon.position.y+""));
     });
 }
@@ -137,7 +154,7 @@ function drawELocates(obj){
     setDraw(ElocalColor, obj,'el');
 }
 
-//Função que seta o obj que será desenhado, neste caso é a "beacon do local"
+//Função que seta o obj que será desenhado, neste caso é o "beacon do local"
 function drawBeacons(obj){
     setDraw(beaconColor, obj,'b');
 }
@@ -152,7 +169,7 @@ function setDraw(color, obj, id){
   
     var x = obj.id.split(',')[0];
     var y = obj.id.split(',')[1];
-    //ERROR 16:50
+
         if(mapMarks[x][y] == null){
             mapMarks[x][y] = id;
             log(id);
@@ -167,16 +184,24 @@ function setDraw(color, obj, id){
                     Elocalmap.push({"x":parseInt(x), "y":parseInt(y), "floor": parseInt(currentFloor)});
                     break;
                 case 'b':
+                    var uuid = document.getElementById('uuid').value;
+                    if (uuid == ""){
+                        uuid = generateUUID();
+                    }
                     beaconmap.push({
-                        uuid: generateUUID(),
+                        uuid: uuid,
                         position: {
                             "x":parseInt(x), "y":parseInt(y), "floor": parseInt(currentFloor)
                         }
                     });
                     break;
                 case 'tb':
+                    var uuid = document.getElementById('uuid').value;
+                    if (uuid == ""){
+                        uuid = generateUUID();
+                    }
                     triBeaconmap.push({
-                    uuid: generateUUID(),
+                    uuid: uuid,
                     position: {
                             "x":parseInt(x), "y":parseInt(y), "floor": parseInt(currentFloor)
                         }});
@@ -186,8 +211,9 @@ function setDraw(color, obj, id){
                     break;
             }
             $(obj).css("background-color",color);
+            //pendingAdditions++;
         }
-}
+    }
 
 //Limpa tudo
 function clearDraw(){
@@ -237,17 +263,28 @@ function addLocaltoJson(){
 
 //Adiciona os tri-beacons no json
 function addTriBeacontoJson(){
+    if (typeof triBeaconmap != "undefined"){
     for (let tb = 0; tb < triBeaconmap.length; tb++) {
+        if (typeof mapJson.floors[currentFloor].triBeacons != "undefined"){
         mapJson.floors[currentFloor].triBeacons.push({
             uuid: triBeaconmap[tb].uuid,
             position:{
-                x: beaconmap[tb].position.x,
-                y: beaconmap[tb].position.y
+                x: triBeaconmap[tb].position.x,
+                y: triBeaconmap[tb].position.y
             },
         });
+      }
     }
+}
     setJson(JSON.stringify(mapJson));
     clearArrays();
+}
+
+//Adiciona todas as novas mudanças no mapa
+function addAlltoJson(){
+   addHallToJson();
+   addLocaltoJson();
+   addTriBeacontoJson();
 }
 
 //Limpa arrays
@@ -256,13 +293,13 @@ function clearArrays(){
    Ilocalmap = [];
    Elocalmap = [];
    beaconmap = [];
-   tribeaconmap = [];
+   triBeaconmap = [];
 }
 
 
 //Pega o json
 function getJson(){
-    return  JSON.parse(localStorage.getItem("json"));
+    return JSON.parse(localStorage.getItem("json"));
 }
 
 //Define valor no json
@@ -276,10 +313,7 @@ function clear(){
         localStorage.getItem("jsonmodel")
     );
 
-    mapMarks = new Array(26);
-    for (var i = 0; i < mapMarks.length; i++) {
-        mapMarks[i] = new Array(26);
-    }
+    setMapLength();
     clearDraw();
 }
 

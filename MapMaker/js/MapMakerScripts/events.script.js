@@ -1,9 +1,44 @@
-$(document).ready(()=>{
-  
+$(()=>{
 
-    $(".square").on("click", function(e) {
-        draw(this);
+    var clicked = false;
+    var squares = document.querySelectorAll('.square');
+
+    $('.square').click(function(){
+       draw(this);
     });
+
+    squares.forEach(square => {
+        square.addEventListener('mousedown', function(){
+            clicked = true;
+        });
+        square.addEventListener('mouseup', function(){
+            clicked = false;
+        });
+        square.addEventListener('mouseover', function(){
+            if (clicked){
+                draw(square);
+            }
+        });
+    });
+
+    /*$('.square').mouseout(function(){
+        clicked = false;
+    })*/
+
+    $("#floor").change(function(){
+        var floor = this.value;
+
+        if (floor == ""){
+            this.value = 0;
+            floor = 0;
+        }
+        //clearDraw();
+        //clearArrays();
+        clear();
+        setCurrentFloor(floor);
+        //hatchMap();
+        renderMap();
+    })
 
     $("#addRoute").click(function(){
         addHallToJson();
@@ -14,28 +49,28 @@ $(document).ready(()=>{
     });
 
     $("#addTriBeacon").click(function(){
-       
-        var squares = document.querySelector(".square");
-        var count = 0;
-
-        for (let i = 0; i < squares.length; i++){
-            if (count > 2 && squares[i].style.color == "#bd0000"){
-                break;
-            }
-            else if (squares[i].style.color == "#bd0000" && count < 3){
-                count++;
-            }
-        }
-
-        if (count == 3){
         addTriBeacontoJson();
-        }
-        else{
-            alert("error");
-        }
+    });
+    
+    $("#addAll").click(function(){
+        addAlltoJson();
     });
 
     $("#clear").click(function(){
-        clear();
+        if (pendingAdditions == 0){
+           clear();
+           this.disabled = true;
+           document.getElementById('showMap').disabled = false;
+        } else {
+            alert('Há alterações não adicionadas!');
+        }
+        
     });
+
+    $('#showMap').click(function(){
+        hatchMap();
+        this.disabled = true;
+        document.getElementById('clear').disabled = false;
+
+    })
 });

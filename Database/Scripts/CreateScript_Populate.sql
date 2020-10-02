@@ -708,3 +708,4 @@ CALL publicarComunicado(6, 1, 0, "Desconto maior para produtos de informática: 
 CALL publicarComunicado(217, 4, null, "Preços: Meia entrada - R$ 18.00; Inteira: R$ 32.00", now(), null);
 CALL publicarComunicado(217, 2, null, "Próxima sessâo: 'Sonic: O filme' - Sala 4, às 17:00. Dublado. Duração: 1h40m", now(), DATE_ADD(now(), INTERVAL 45 minute));
 
+CALL pesquisar("Americanas");
