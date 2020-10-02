@@ -184,16 +184,26 @@ function setDraw(color, obj, id){
                     Elocalmap.push({"x":parseInt(x), "y":parseInt(y), "floor": parseInt(currentFloor)});
                     break;
                 case 'b':
+                    var uuid = document.getElementById('uuid').value;
+                    if (uuid == ""){
+                        uuid = generateUUID();
+                    }
+                    console.log(uuid);
                     beaconmap.push({
-                        uuid: generateUUID(),
+                        uuid: uuid,
                         position: {
                             "x":parseInt(x), "y":parseInt(y), "floor": parseInt(currentFloor)
                         }
                     });
                     break;
                 case 'tb':
+                    var uuid = document.getElementById('uuid').value;
+                    if (uuid == ""){
+                        uuid = generateUUID();
+                    }
+                    console.log(uuid);
                     triBeaconmap.push({
-                    uuid: generateUUID(),
+                    uuid: uuid,
                     position: {
                             "x":parseInt(x), "y":parseInt(y), "floor": parseInt(currentFloor)
                         }});
