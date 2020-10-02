@@ -19,6 +19,7 @@ $(()=>{
                 draw(square);
             }
         });
+    });
 
     $("#floor").change(function(){
         var floor = this.value;
@@ -33,7 +34,7 @@ $(()=>{
         setCurrentFloor(floor);
         //hatchMap();
         renderMap();
-    })
+    });
 
     $("#addRoute").click(function(){
         addHallToJson();
@@ -68,5 +69,5 @@ $(()=>{
         this.disabled = true;
         document.getElementById('clear').disabled = false;
 
-    })
+    });
 });
