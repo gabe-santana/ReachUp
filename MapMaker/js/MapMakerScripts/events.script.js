@@ -1,4 +1,5 @@
 $(()=>{
+<<<<<<< HEAD
 
     var clicked = false;
     var squares = document.querySelectorAll('.square');
@@ -19,6 +20,11 @@ $(()=>{
                 draw(square);
             }
         });
+=======
+  
+    $(".square").on("click", function(e) {
+        draw(this);
+>>>>>>> parent of 09f0e2f... Painting added! Now it's easy to edit the map
     });
 
     /*$('.square').mouseout(function(){
@@ -61,6 +67,7 @@ $(()=>{
            clear();
            this.disabled = true;
            document.getElementById('showMap').disabled = false;
+           document.getElementById('floor').value = getCurrentFloor();
         } else {
             alert('Há alterações não adicionadas!');
         }
