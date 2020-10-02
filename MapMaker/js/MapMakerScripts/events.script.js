@@ -3,6 +3,10 @@ $(()=>{
     var clicked = false;
     var squares = document.querySelectorAll('.square');
 
+    $('.square').click(function(){
+       draw(this);
+    });
+
     squares.forEach(square => {
         square.addEventListener('mousedown', function(){
             clicked = true;
@@ -16,6 +20,10 @@ $(()=>{
             }
         });
     });
+
+    /*$('.square').mouseout(function(){
+        clicked = false;
+    })*/
 
     $("#floor").change(function(){
         var floor = this.value;
@@ -42,6 +50,10 @@ $(()=>{
 
     $("#addTriBeacon").click(function(){
         addTriBeacontoJson();
+    });
+    
+    $("#addAll").click(function(){
+        addAlltoJson();
     });
 
     $("#clear").click(function(){

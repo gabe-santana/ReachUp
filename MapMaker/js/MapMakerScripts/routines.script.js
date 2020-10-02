@@ -280,6 +280,13 @@ function addTriBeacontoJson(){
     clearArrays();
 }
 
+//Adiciona todas as novas mudanças no mapa
+function addAlltoJson(){
+   addHallToJson();
+   addLocaltoJson();
+   addTriBeacontoJson();
+}
+
 //Limpa arrays
 function clearArrays(){
    map = [];
