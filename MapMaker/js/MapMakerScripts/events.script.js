@@ -3,6 +3,13 @@ $(()=>{
     var clicked = false;
     var squares = document.querySelectorAll('.square');
 
+    $('#widthUnits').value = getWidthUnits();
+
+    /*$('#widthUnits').change(function(){
+        var unitsValue = this.value; 
+        updateWidthUnits(unitsValue);
+    })*/
+
     $('.square').click(function(){
        draw(this);
     });
@@ -53,14 +60,14 @@ $(()=>{
     });
 
     $("#clear").click(function(){
-        if (pendingAdditions == 0){
+        //if (pendingAdditions == 0){
            clear();
            this.disabled = true;
            document.getElementById('showMap').disabled = false;
            document.getElementById('floor').value = getCurrentFloor();
-        } else {
+        /*} else {
             alert('Há alterações não adicionadas!');
-        }
+        }*/
         
     });
 
