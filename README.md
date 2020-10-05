@@ -119,13 +119,13 @@ For now, this project is being developed for a Term Paper, so we are paying more
 later *Pull requests* will be welcome. 
 
 - Fork:
-[fork my repository](https://github.com/0G4briel/ReachUp/fork)
+[Fork ReachUp](https://github.com/0G4briel/ReachUp/fork)
 
 - Watch/ Follow:
-[watch this repo](https://github.com/0G4briel/ReachUp/subscription)
+[Watch ReachUp](https://github.com/0G4briel/ReachUp/subscription)
 
 - Create Issues:
-[create issue](https://github.com/0G4briel/ReachUp/issues/new)
+[Create Issue in ReachUp](https://github.com/0G4briel/ReachUp/issues/new)
 
 ## License
 
