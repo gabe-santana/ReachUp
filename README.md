@@ -118,7 +118,14 @@ We're TI students in [Centro Paula Souza](https://www.cps.sp.gov.br) technical s
 For now, this project is being developed for a Term Paper, so we are paying more attention to our team and advisors but
 later *Pull requests* will be welcome. 
 
-> **For major changes, please open an issue first to discuss what you would like to change.** 
+- Fork:
+[fork my repository](https://github.com/0G4briel/ReachUp/fork)
+
+- Watch/ Follow:
+[watch this repo](https://github.com/0G4briel/ReachUp/subscription)
+
+- Create Issues:
+[create issue](https://github.com/0G4briel/ReachUp/issues/new)
 
 ## License
 
