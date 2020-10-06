@@ -43,7 +43,9 @@ class _HomeState extends State<Home> {
                 ),
               )
             ]),
+  
         body: Container(
+          
           child: Column(children: <Widget>[
             Expanded(child: Container(child: Center(child: HomeMap()))),
             Container(
