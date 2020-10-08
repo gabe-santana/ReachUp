@@ -125,9 +125,17 @@ function hatchMap(){
 
 
     //draw beacons
+  
     mapJson.floors[currentFloor].locates.forEach(element => {
-        Array.from(element.beacons).forEach(elementBeacon => {
-            drawBeacons(document.getElementById(elementBeacon.position.x+","+elementBeacon.position.y+","+elementBeacon.uuid+""));
+        element.beacons.forEach(elementBeacon => {
+            log(elementBeacon);
+            try{
+                 drawBeacons(document.getElementById(elementBeacon.position.x+","+elementBeacon.position.y+","+elementBeacon.uuid+""));
+            }
+            catch{
+                log("error");
+                log(elementBeacon);
+            }
         })
     });
   
@@ -188,12 +196,13 @@ function drawTriBeacons(obj){
 }
 
 //Faz o desenho propriamento dito e guarda nos arrays
-function setDraw(color, obj, id){
-  
+function setDraw(color, obj, id){4
+    log()
+    log(obj);
     var x = obj.id.split(',')[0];
     var y = obj.id.split(',')[1];
     if ((id == 'b' || id == 'tb') && setDrawExecutions == 0){
-    var uuidExistingBeacon = obj.split(',')[2];
+    var uuidExistingBeacon = obj.id.split(',')[2];
     }
 
         if(mapMarks[x][y] == null){
