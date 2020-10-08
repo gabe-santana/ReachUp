@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.0"
+  after_layout:
+    dependency: transitive
+    description:
+      name: after_layout
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.7+2"
   analyzer:
     dependency: transitive
     description:
@@ -272,6 +279,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.1"
+  flutter_image_compress:
+    dependency: "direct main"
+    description:
+      name: flutter_image_compress
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.3"
   flutter_mobx:
     dependency: "direct main"
     description:
@@ -492,6 +506,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.0"
+  photo_view:
+    dependency: "direct main"
+    description:
+      name: photo_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.2"
   platform:
     dependency: transitive
     description:

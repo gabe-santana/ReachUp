@@ -39,7 +39,8 @@ lost children and people like me who just want more agility on a daily basis.
 3. You will need a package manager, we recommeend: [NPM (Node.js)](https://nodejs.org/en/download/), [Yarn](https://classic.yarnpkg.com/en/docs/install/#windows-stable) or 
 [Chocolatey](https://chocolatey.org)
 4. [Flutter Framework](https://flutter.dev/docs/get-started/install)
-5. Babel - for transpilation of TypeScript  to JavaScript ([Install and config] https://ccoenraets.github.io/es6-tutorial/setup-babel/ , [Transpile all] https://babeljs.io/docs/en/babel-parser)
+5. Babel - for transpilation of TypeScript  to JavaScript [Install and config](https://ccoenraets.github.io/es6-tutorial/setup-babel),
+[Transpile all](https://babeljs.io/docs/en/babel-parser)
 
 > Make sure you have all dependencies for Android [Android Studio](https://developer.android.com/studio) and iOS [XCode](https://developer.apple.com/xcode/) that will be 
 necessary to installation step 4. 
@@ -118,7 +119,14 @@ We're TI students in [Centro Paula Souza](https://www.cps.sp.gov.br) technical s
 For now, this project is being developed for a Term Paper, so we are paying more attention to our team and advisors but
 later *Pull requests* will be welcome. 
 
-> **For major changes, please open an issue first to discuss what you would like to change.** 
+- Fork:
+[Fork ReachUp](https://github.com/0G4briel/ReachUp/fork)
+
+- Watch/ Follow:
+[Watch ReachUp](https://github.com/0G4briel/ReachUp/subscription)
+
+- Create Issues:
+[Create Issue in ReachUp](https://github.com/0G4briel/ReachUp/issues/new)
 
 ## License
 

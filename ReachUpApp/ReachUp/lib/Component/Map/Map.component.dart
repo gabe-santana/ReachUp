@@ -1,18 +1,28 @@
 import 'dart:ui';
-import 'package:ReachUp/Component/Map/Hall.component.dart';
-import 'package:flame/components/mixins/tapable.dart';
 import 'package:flame/game.dart';
-import 'package:flame/flame.dart';
-import 'package:flame/gestures.dart';
+import 'package:flutter/material.dart';
 
+class MapObject extends Game{
 
-class MapObject extends BaseGame with PanDetector, HasTapableComponents {
-  MapObject(){
-    for (double i = 0; i < 10; i++) {
-      add(SquareHall(x:1, y:i, floor:0));
+  Size screenSize;
 
-    }
+  MapObject() {
 
   }
 
+  @override
+  void render(Canvas canvas) async{
+    canvas.drawRect(
+      new Rect.fromLTWH(0,0,100,100), new Paint()..color= Color(0xFFf54278));
+  }
+  
+  @override
+  void update(double t) {}
+
+  @override 
+  void resize(Size size){
+    super.resize(size);
+    screenSize = size;
+
+  }
 }
