@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ReachUp;
+using System.IO;
 
 
 namespace ReachUpWebAPI.Controllers
@@ -28,20 +29,22 @@ namespace ReachUpWebAPI.Controllers
         }
         #endregion
 
+        public static bool deleteFile(string path);
+
         #region Methods
-        public async Task<List<object>> getMallPlan()
+        public async Task<<bool>> patchPlan()
         {
-           //verificar no MapMaker se há uma nova versão da planta, e retornar todo o objeto JSON
+           if (File.Exists(@""))
         }
 
         #endregion
 
         #region Actions
-        [Authorize(Roles = "cli")]
-        [HttpGet("getMallPlan")]
-        public async Task<IActionResult> Fetch() 
+        [Authorize(Roles = "adm")]
+        [HttpPatch("patchPlan")]
+        public async Task<IActionResult> patchPlan() 
         {
-           return Ok(await new getMallPlan());
+           return Ok(await new patchPlan());
         }
         #endregion
     }

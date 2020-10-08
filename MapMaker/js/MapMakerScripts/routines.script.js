@@ -386,7 +386,6 @@ function clearArrays(){
    triBeaconmap = [];
 }
 
-
 //Pega o json
 function getJson(){
     return JSON.parse(localStorage.getItem("json"));

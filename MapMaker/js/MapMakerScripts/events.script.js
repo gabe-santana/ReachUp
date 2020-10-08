@@ -1,3 +1,8 @@
+/// <reference path='../MallPlanController.ts'/>
+
+import { MallPlanController } from "../MallPlanController";
+
+
 $(()=>{
 
     var clicked = false;
@@ -77,4 +82,19 @@ $(()=>{
         document.getElementById('clear').disabled = false;
 
     });
+
+    $('#updateMap').click(function(){
+        patchMap();
+    })
 });
+
+class clsMapHandler extends MallPlanController.clsMallPlanController {
+         constructor(){
+             super();
+         }
+
+         async patchMap(){
+             return await this.patch();
+         }
+    } 
+

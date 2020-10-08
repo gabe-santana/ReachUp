@@ -1,8 +1,9 @@
 /// <reference path='../ApiConnection.ts'/>
-/// <reference path='../js/MapMakerScripts/routines.script.js'/>
-
+/// <reference path='MapMakerScripts/routines.script.js'/>
 
 import { ApiConnection } from "../ApiConnection";
+
+export module MallPlanController {
 
     export class clsMallPlanController extends ApiConnection.clsApiConnection {
          constructor(){
@@ -12,10 +13,10 @@ import { ApiConnection } from "../ApiConnection";
          public async patch()
          {
             if (getJson()){
-               const map = await this.httpGet('Map/UpdatePlan');
+               const map = await this.httpPatch('Map/UpdatePlan');
                return map;
             }
             return false;
          }
- 
     } 
+}
