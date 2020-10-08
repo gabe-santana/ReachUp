@@ -15,6 +15,10 @@
     <span>Current Floor</span>
         <input  id="floor" type="number" value="0"  width="20px">
     </label>
+    <label>
+        <span>Width Units</span>
+            <input  id="widthUnits" type="number" value="0"  width="20px">
+        </label>
     <section id="right-painel">
         <button class="mapBtn" id="addRoute">Add hall</button></br></br>
         <button class="mapBtn" id="addLocal">Add local</button></br></br>
@@ -65,8 +69,10 @@
 
     
     <script src="js/jquery-3.5.1.min.js"></script>
-    <script src="js/MapMakerScripts/routines.script.js"></script>
-    <script src="js/MapMakerScripts/main.script.js"></script>
-    <script src="js/MapMakerScripts/events.script.js"></script>
+    <script type="module" src="ApiConnection.ts"></script>
+    <script type="module" src="js/MallPlanController.ts"></script>
+    <script type="module" src="js/MapMakerScripts/routines.script.js"></script>
+    <script type="module" src="js/MapMakerScripts/main.script.js"></script>
+    <script type="module" src="js/MapMakerScripts/events.script.js"></script>
 </body>
 </html>

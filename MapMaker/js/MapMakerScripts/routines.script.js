@@ -34,6 +34,17 @@ var mapJson = getJson();
 var mapWidth = mapJson.widthUnits;
 var mapHeight = mapJson.heightUnits;
 
+document.documentElement.style.setProperty('--squarePerRow', getWidthUnits());
+
+function updateWidthUnits(value){
+   document.documentElement.style.setProperty('--squarePerRow', value);
+   mapWidth = value;
+   //Alterar no json
+   clear();
+   mapJson = getJson();
+   renderMap();
+}
+
 var triBeaconsLimit = mapJson.triBeaconsPerFloor;
 
 function getTriBeaconsLimit(){
@@ -90,10 +101,7 @@ function renderMap(){
             square.setAttribute('id',x+","+y);
             $("#mapContainer").append(square);
        }
-    }
-
-    var squares = document.querySelectorAll('.square').length; 
-    
+    }    
     hatchMap();
 }
 
