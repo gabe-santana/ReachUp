@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using ReachUp;
-
+using System.IO;
 
 namespace ReachUpWebAPI.Controllers
 {
@@ -29,19 +29,34 @@ namespace ReachUpWebAPI.Controllers
         #endregion
 
         #region Methods
-        public async Task<List<object>> getMallPlan()
+        public async Task<bool> patchPlan([FromBody] json)
         {
-           //verificar no MapMaker se há uma nova versão da planta, e retornar todo o objeto JSON
+           string path = Request.PhysicalApplicationPath + @"\App_Data\json\map\map.json";
+           DirectoryInfo directory = new DirectoryInfo(path);
+           
+           if (File.Exists(path)){
+               File.Delete(path);
+               path = Path.Combine(path, 'map.json');
+               File.Create(path).Close();
+
+               TextWriter file = File.AppendText(path);
+               file.WriteLine(json);
+               file.Close();
+               
+               return Task.fromResult(true);
+           }
+
+           return Task.fromResult(false);
         }
 
         #endregion
 
         #region Actions
-        [Authorize(Roles = "cli")]
-        [HttpGet("getMallPlan")]
-        public async Task<IActionResult> Fetch() 
+        [Authorize(Roles = "adm")]
+        [HttpPatch("patchPlan")]
+        public async Task<IActionResult> patchPlan([FromBody] json) 
         {
-           return Ok(await new getMallPlan());
+           return Ok(await new patchPlan());
         }
         #endregion
     }
