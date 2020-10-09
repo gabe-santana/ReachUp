@@ -20,23 +20,31 @@ export module ApiConnection {
                   'Content-Type':'application/json',
                   //...options.headers,
               },
+              cache: 'no-cache',
+              credentials: 'same-origin',
+              redirect: 'follow',
+              referrerPolicy: 'no-referrer'
             })
 
             const json = await response.json();
             return json;
        }
 
-       public async httpPost(str : string, options : Array<string> = [])
+       public async httpPost(str : string, data : object, options : Array<string> = [])
        {
           const response = await fetch(this._url + str, {
               mode: 'cors',
               method: 'POST',
-              //body: options.body,
+              body: JSON.stringify(data),
               headers: {
                   'Accept':'application/json',
                   'Content-Type':'application/json',
                   //...options.headers,
               },
+              cache: 'no-cache',
+              credentials: 'same-origin',
+              redirect: 'follow',
+              referrerPolicy: 'no-referrer'
             })
             
             const json = await response.json();
@@ -44,16 +52,21 @@ export module ApiConnection {
 
        }
 
-       public async httpPatch(str : string, options : Array<string> = [])
+       public async httpPatch(str : string, data : object, options : Array<string> = [])
        {
           const response = await fetch(this._url + str, {
               mode: 'cors',
               method: 'PATCH',
+              body: JSON.stringify(data),
               headers: {
                   'Accept':'application/json',
                   'Content-Type':'application/json',
                   //...options.headers,
               },
+              cache: 'no-cache',
+              credentials: 'same-origin',
+              redirect: 'follow',
+              referrerPolicy: 'no-referrer'
             })
 
             const json = await response.json();
@@ -71,6 +84,10 @@ export module ApiConnection {
                   'Content-Type':'application/json',
                   //...options.headers,
               },
+              cache: 'no-cache',
+              credentials: 'same-origin',
+              redirect: 'follow',
+              referrerPolicy: 'no-referrer'
             })
               
             const json = await response.json();

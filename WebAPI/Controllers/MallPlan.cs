@@ -10,7 +10,6 @@ using Microsoft.IdentityModel.Tokens;
 using ReachUp;
 using System.IO;
 
-
 namespace ReachUpWebAPI.Controllers
 {
     [EnableCors("CorsPolicy")]
@@ -29,12 +28,25 @@ namespace ReachUpWebAPI.Controllers
         }
         #endregion
 
-        public static bool deleteFile(string path);
-
         #region Methods
-        public async Task<<bool>> patchPlan()
+        public async Task<bool> patchPlan([FromBody] json)
         {
-           if (File.Exists(@""))
+           string path = Request.PhysicalApplicationPath + @"\App_Data\json\map\map.json";
+           DirectoryInfo directory = new DirectoryInfo(path);
+           
+           if (File.Exists(path)){
+               File.Delete(path);
+               path = Path.Combine(path, 'map.json');
+               File.Create(path).Close();
+
+               TextWriter file = File.AppendText(path);
+               file.WriteLine(json);
+               file.Close();
+               
+               return Task.fromResult(true);
+           }
+
+           return Task.fromResult(false);
         }
 
         #endregion
@@ -42,7 +54,7 @@ namespace ReachUpWebAPI.Controllers
         #region Actions
         [Authorize(Roles = "adm")]
         [HttpPatch("patchPlan")]
-        public async Task<IActionResult> patchPlan() 
+        public async Task<IActionResult> patchPlan([FromBody] json) 
         {
            return Ok(await new patchPlan());
         }

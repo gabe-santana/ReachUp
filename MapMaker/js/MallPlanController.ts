@@ -12,11 +12,8 @@ export module MallPlanController {
 
          public async patch()
          {
-            if (getJson()){
-               const map = await this.httpPatch('Map/UpdatePlan');
-               return map;
-            }
-            return false;
+            const json = getJson();
+            return await this.httpPatch('Map/UpdatePlan', json, null);
          }
     } 
 }
