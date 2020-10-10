@@ -15,7 +15,7 @@ namespace ReachUpWebAPI
     [ApiController]
     public class MapController : ControllerBase
     {
-        private readonly string MapJSon;
+        private string MapJSon;
 
         [Obsolete]
         public MapController(IHostingEnvironment hostingEnvironment)
@@ -27,6 +27,13 @@ namespace ReachUpWebAPI
         public IActionResult Get()
         {
             return Ok(this.MapJSon);
+        }
+
+        [Authorize]
+        [HttpPut]
+        public IActionResult Put() 
+        {
+            return Ok();
         }
     }
 }

@@ -34,7 +34,7 @@ namespace ReachUpWebAPI.Controllers
         {
             if (user != null)
                 if (user.Login()) 
-                    return Ok(new { token = await GenerateJSONWebToken(user)});
+                    return Ok(GenerateJSONWebToken(user));
                 else
                     return NotFound();
             return BadRequest("Parameters are null");
@@ -42,7 +42,7 @@ namespace ReachUpWebAPI.Controllers
         #endregion
 
         #region Private Methods
-        private Task<string> GenerateJSONWebToken(User user)
+        private User GenerateJSONWebToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(this.Config["Jwt:Key"]);
@@ -57,7 +57,9 @@ namespace ReachUpWebAPI.Controllers
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return Task.FromResult(tokenHandler.WriteToken(token));
+            user.Token = tokenHandler.WriteToken(token);
+            return user;
+
     
 
         //var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Config["Jwt:Key"]));
