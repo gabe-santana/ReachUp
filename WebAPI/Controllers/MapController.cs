@@ -16,13 +16,15 @@ namespace ReachUpWebAPI
     public class MapController : ControllerBase
     {
         private string MapJSon;
+        private IHostingEnvironment hostingEnvironment;
 
         [Obsolete]
         public MapController(IHostingEnvironment hostingEnvironment)
         {
-            this.MapJSon = System.IO.File.ReadAllText(hostingEnvironment.ContentRootPath + "/App_Data/json/map/map.json"); ;
+            this.hostingEnvironment = hostingEnvironment;
+            this.MapJSon = System.IO.File.ReadAllText(hostingEnvironment.ContentRootPath + "/App_Data/json/map/map.json");
         }
-
+         
         [HttpGet]
         public IActionResult Get()
         {
@@ -31,9 +33,17 @@ namespace ReachUpWebAPI
 
         [Authorize]
         [HttpPut]
-        public IActionResult Put() 
+        public IActionResult Put([FromBody] object mapJson) 
         {
-            return Ok();
+            using (StreamWriter writer = 
+                new StreamWriter(hostingEnvironment.ContentRootPath + "/App_Data/json/map/map.json"))
+            {
+                writer.Write(mapJson);
+            }
+
+
+            return Ok(true);
         }
+
     }
 }
