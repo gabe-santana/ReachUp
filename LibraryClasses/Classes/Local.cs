@@ -53,7 +53,7 @@ namespace ReachUp
         #endregion
 
         #region Public Methods
-        public async Task<Local> ConnectBeaconLocal(string uuidBeacon)
+        public Task<Local> ConnectBeaconLocal(string uuidBeacon)
         {
             if (base.DQLCommand(Procedure.conectarBeacon, ref this.Data,
                 new string[,] {
@@ -73,7 +73,7 @@ namespace ReachUp
                         );
                         this.Data.Close();
                         base.Disconnect();
-                        return local;
+                        return Task.FromResult(local);
                     }
                 }
                 this.Data.Close();
@@ -83,7 +83,7 @@ namespace ReachUp
             return null;
         }
 
-        public async Task<List<Local>> Search(string search)
+        public Task<List<Local>> Search(string search)
         {
             List<Local> locals = new List<Local>();
             if (base.DQLCommand(Procedure.pesquisar, ref this.Data,
@@ -103,7 +103,7 @@ namespace ReachUp
                             );
                     }
                     this.Data.Close();
-                    return locals;
+                    return Task.FromResult(locals);
                 }
                 base.Disconnect();
             }
@@ -111,7 +111,7 @@ namespace ReachUp
             return null;
         }
 
-        public async Task<Local> Get(int id)
+        public Task<Local> Get(int id)
         {
             if (base.DQLCommand(Procedure.pegarLocal, ref this.Data,
                 new string[,] {
@@ -136,13 +136,13 @@ namespace ReachUp
                 this.Data.Close();
                 base.Disconnect();
 
-                return local;
+                return Task.FromResult(local);
             }
 
             return null;
         }
 
-        public async Task<List<Local>> GetAll(string typeName)
+        public Task<List<Local>> GetAll(string typeName)
         {
             if (base.DQLCommand(Procedure.pegarLocais, ref this.Data,
                 new string[,] {
@@ -163,7 +163,7 @@ namespace ReachUp
                 this.Data.Close();
                 base.Disconnect();
 
-                return local;
+                return Task.FromResult(local);
             }
             return null;
         }

@@ -27,24 +27,24 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize (Roles = "loj,adm")]
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Communique communique) 
-        {
-            if (communique != null)
-                return Ok(await communique.Add());
-            return BadRequest("Parameters are null");
-        }
+        //[Authorize (Roles = "loj,adm")]
+        //[HttpPost]
+        //public async Task<IActionResult> Post([FromBody] Communique communique) 
+        //{
+        //    if (communique != null)
+        //        return Ok(await communique.Add());
+        //    return BadRequest("Parameters are null");
+        //}
 
-        [Authorize]
-        [HttpPatch]
-        public async Task<IActionResult> Patch([FromBody] Communique communique)
-        {
-            if (communique != null)
-                if (HttpContextId.IsOwn(HttpContext, communique.CommuniqueLocal.Admin.Email))
-                    return Ok(await communique.Update());
-            return BadRequest("Parameters are null");
-        }
+        //[Authorize]
+        //[HttpPatch]
+        //public async Task<IActionResult> Patch([FromBody] Communique communique)
+        //{
+        //    if (communique != null)
+        //        if (HttpContextId.IsOwn(HttpContext, communique.CommuniqueLocal.Admin.Email))
+        //            return Ok(await communique.Update());
+        //    return BadRequest("Parameters are null");
+        //}
 
         [Authorize]
         [HttpDelete]

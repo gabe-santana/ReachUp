@@ -29,7 +29,7 @@ namespace ReachUp
 
         public async Task<List<SubCategory>> getAll()
         {
-           if (base.DQL(Procedure.pegarSubCategorias, ref this.Data)) 
+           if (base.DQLCommand(Procedure.pegarSubCategorias, ref this.Data)) 
            {
               if (this.Data.HasRows)
               {
@@ -71,8 +71,7 @@ namespace ReachUp
                             new SubCategory(
                                  int.Parse(this.Data["cd_sub_categoria"].ToString()),
                                  await new Category().Get(int.Parse(this.Data["cd_categoria"].ToString())),
-                                 this.Data["nm_sub_categoria"].ToString(),
-                                 this.Data["nm_categoria"].ToString()
+                                 this.Data["nm_sub_categoria"].ToString()
                                 )
                             );
                     }
@@ -100,8 +99,7 @@ namespace ReachUp
                             new SubCategory(
                                  int.Parse(this.Data["cd_sub_categoria"].ToString()),
                                  await new Category().Get(int.Parse(this.Data["cd_categoria"].ToString())),
-                                 this.Data["nm_sub_categoria"].ToString(),
-                                 this.Data["nm_categoria"].ToString()
+                                 this.Data["nm_sub_categoria"].ToString()
                               )
                             );
                     }

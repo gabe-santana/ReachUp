@@ -16,6 +16,7 @@ class _HomeMapState extends State<HomeMap> {
   @override
   Widget build(BuildContext context) {
     final map = MapObject();
+    
      return Container(
        color: Theme.of(context).colorScheme.primaryVariant,
        child: Padding(
@@ -24,26 +25,38 @@ class _HomeMapState extends State<HomeMap> {
          child: Stack(
            children: <Widget>[
            PhotoView(
-                enableRotation: this.enableRotation,
-                backgroundDecoration:  BoxDecoration(color: Colors.white),
-                scaleStateChangedCallback: (PhotoViewScaleState p)=>{
-                    this.enableRotation == false ? 
-                    setState((){
-                        this.enableRotation = true;
-                    })
-                     : null
-                  
-                  //print(p)
-                },
-                onTapDown: (BuildContext bc, 
-                TapDownDetails details, PhotoViewControllerValue pv)=>{
-                  //print("Clicked on: {X:${details.localPosition.dx}};{Y:${details.localPosition.dy}}")
-                },
-                basePosition: Alignment(93/100, 155/100).add(Alignment.centerLeft),
-                minScale: PhotoViewComputedScale.contained * 4,
-                maxScale: PhotoViewComputedScale.contained * 15,
-                initialScale: PhotoViewComputedScale.contained * 5,
-                imageProvider: AssetImage("assets/images/map/floor0.jpg"),
+             enableRotation: this.enableRotation,
+             backgroundDecoration:  BoxDecoration(color: Colors.white),
+             scaleStateChangedCallback: (PhotoViewScaleState p)=>{
+                 this.enableRotation == false ? 
+                 setState((){
+                     this.enableRotation = true;
+                 })
+                  : null
+               
+               //print(p)
+             },
+             onTapDown: (BuildContext bc, 
+             TapDownDetails details, PhotoViewControllerValue pv)=>{
+               //print("Clicked on: {X:${details.localPosition.dx}};{Y:${details.localPosition.dy}}")
+             },
+             basePosition: Alignment(120/100, 120/100).add(Alignment.topLeft),
+             minScale: PhotoViewComputedScale.contained * 4,
+             maxScale: PhotoViewComputedScale.contained * 15,
+             initialScale: PhotoViewComputedScale.contained * 5,
+             imageProvider: AssetImage("assets/images/map/floor0.jpg"),
+           ),
+              Positioned(
+       
+                width: 50,
+                height: 50,
+                left: (MediaQuery.of(context).size.width/2),
+                top: (MediaQuery.of(context).size.height/2) - 200,
+                child: FaIcon(
+                    FontAwesomeIcons.mapMarkerAlt,
+                    color: Colors.orange,
+                    size:75.0,
+                  ),
               ),
               Positioned(
                 

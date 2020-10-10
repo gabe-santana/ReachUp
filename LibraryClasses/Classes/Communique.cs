@@ -28,7 +28,7 @@ namespace ReachUp
         #region Constructor
         public Communique() : base() { }
 
-        public Communique(int id, ushort Type, List<SubCategory> SubCategories = null,
+        public Communique(int id, ushort Type, List<SubCategory> SubCategories,
              string Description,  DateTime StartDate,
              DateTime EndDate, Local local) : base()
         {
@@ -109,39 +109,8 @@ namespace ReachUp
             return null;
         }
 
-        public Task<bool> Add()
-        {
-            if (base.DMLCommand(Procedure.publicarComunicado, new string[,] {
-                {"pLocal",this.CommuniqueLocal.IdLocal.ToString()},
-                {"pTipo", this.Type.ToString() },
-                {"pCategoria", this.CommuniqueCategory.CategoryId.ToString()},
-                {"pDs", this.Description}, {"pDataInicio", this.StartDate.Date.ToString("0000-00-00")},
-                {"pDataFim", (this.EndDate == null ? "null" : this.EndDate.ToString("0000-00-00 00:00:00") )}
 
-            }))
-            {
-                return Task.FromResult(true);
-            }
-
-            return Task.FromResult(false);
-        }
-
-        public Task<bool> Update() 
-        {
-            if (base.DMLCommand(Procedure.atualizarComunicado, new string[,] {
-                {"pComunicado", this.CommuniqueId.ToString()},
-                {"pLocal", this.CommuniqueLocal.IdLocal.ToString()},
-                {"pTipo", this.Type.ToString()},
-                {"pCategoria", this.CommuniqueCategory.CategoryId.ToString()},
-                {"pDs", this.Description},
-                {"pDataInicio", this.StartDate.ToString("0000-00-00 00:00:00")},
-                {"pDataFim", (this.EndDate == null ? "null" : this.EndDate.ToString("0000-00-00 00:00:00") )}
-            }))
-            {
-                return Task.FromResult(true);
-            }
-            return Task.FromResult(false);
-        }
+  
 
         public Task<bool> Delete(int id) 
         {
