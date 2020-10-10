@@ -29,7 +29,7 @@ namespace ReachUpWebAPI.Controllers
         #endregion
 
         #region Methods
-        public async Task<bool> patchPlan([FromBody] json)
+        public async Task<bool> patchPlan(json)
         {
            string path = Request.PhysicalApplicationPath + @"\App_Data\json\map\map.json";
            DirectoryInfo directory = new DirectoryInfo(path);
@@ -56,7 +56,7 @@ namespace ReachUpWebAPI.Controllers
         [HttpPatch("patchPlan")]
         public async Task<IActionResult> patchPlan([FromBody] json) 
         {
-           return Ok(await new patchPlan());
+           return Ok(await new patchPlan(json));
         }
         #endregion
     }
