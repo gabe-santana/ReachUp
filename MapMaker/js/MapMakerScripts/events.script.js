@@ -2,8 +2,13 @@
 
 import { MallPlanController } from "../MallPlanController";
 
-
 $(()=>{
+
+    const mapHandler = new clsMapHandler();
+    var map = await mapHandler.getMap();
+    console.log(map);
+    setMapLength();
+    renderMap();
 
     var clicked = false;
     var squares = document.querySelectorAll('.square');
@@ -84,17 +89,23 @@ $(()=>{
     });
 
     $('#updateMap').click(function(){
-        patchMap();
+        const mapHandler = new clsMapHandler();
+        mapHandler.putMap();
     })
+
+    class clsMapHandler extends MallPlanController.clsMallPlanController {
+        constructor(){
+            super();
+        }
+
+        async getMap(){
+            return await this.get();
+        }
+
+        async putMap(){
+           return await this.put();
+        }
+
+    }
 });
-
-class clsMapHandler extends MallPlanController.clsMallPlanController {
-         constructor(){
-             super();
-         }
-
-         async patchMap(){
-             return await this.patch();
-         }
-    } 
 

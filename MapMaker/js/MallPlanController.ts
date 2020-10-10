@@ -10,10 +10,16 @@ export module MallPlanController {
              super();
          }
 
-         public async patch()
+         public async get()
+         {
+             const json = await this.httpGet('Map/Get', null);
+             setJson(json);
+         }
+
+         public async put()
          {
             const json = getJson();
-            return await this.httpPatch('Map/UpdatePlan', json, null);
+            return await this.httpPut('Map/Put', json, null);
          }
     } 
 }
