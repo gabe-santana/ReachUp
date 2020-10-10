@@ -17,10 +17,13 @@ export module ReachUpWebAPI {
                 method: 'GET',
                 headers: {
                   'Accept':'application/json',
+                  'Accept-Ranges': 'bytes',
                   'Content-Type':'application/json',
+                  'Pragma': 'no-cache',
                   'Authorization': 'Bearer + token',
                   'X-Custom-Header': 'ProcessThisImmediately',
                   'WWW-Authenticate': 'Basic',
+                  'Connection': 'close',
                   //...options.headers,
 
                 },
@@ -42,10 +45,13 @@ export module ReachUpWebAPI {
                 body: JSON.stringify(data),
                 headers: {
                   'Accept':'application/json',
+                  'Accept-Ranges': 'bytes',
                   'Content-Type':'application/json',
+                  'Pragma': 'no-cache',
                   'Authorization': 'Bearer + token',
                   'X-Custom-Header': 'ProcessThisImmediately',
                   'WWW-Authenticate': 'Basic',
+                  'Connection': 'close',
                   //...options.headers,
 
                 },
@@ -68,10 +74,13 @@ export module ReachUpWebAPI {
                 body: JSON.stringify(data),
                 headers: {
                   'Accept':'application/json',
+                  'Accept-Ranges': 'bytes',
                   'Content-Type':'application/json',
+                  'Pragma': 'no-cache',
                   'Authorization': 'Bearer + token',
                   'X-Custom-Header': 'ProcessThisImmediately',
                   'WWW-Authenticate': 'Basic',
+                  'Connection': 'close',
                   //...options.headers,
 
                 },
@@ -93,12 +102,15 @@ export module ReachUpWebAPI {
                 method: 'DELETE',
                 headers: {
                   'Accept':'application/json',
+                  'Accept-Ranges': 'bytes',
                   'Content-Type':'application/json',
+                  'Pragma': 'no-cache',
                   'Authorization': 'Bearer + token',
                   'X-Custom-Header': 'ProcessThisImmediately',
                   'WWW-Authenticate': 'Basic',
+                  'Connection': 'close',
                   //...options.headers,
-                  
+
                 },
                 cache: 'no-cache',
                 credentials: 'same-origin',
