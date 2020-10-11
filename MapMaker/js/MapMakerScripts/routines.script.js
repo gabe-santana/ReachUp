@@ -8,31 +8,25 @@ if(localStorage.getItem('jsonmodel') == null)
 //Váriaveis globais
 var inDevelopment = true;
 
-var hallColor = "#e3ff12";
-var beaconColor = "#42ddf5";
-var triBeaconColor = "#bd0000";
-var IlocalColor = "#25a149";
-var ElocalColor = "#03290e";
-
-var setDrawExecutions = 0;
-
-var currentFloor = 0;
-
-var pendingAdditions = 0;
-
-function setCurrentFloor(floor){
-    currentFloor = floor;
-    log(currentFloor);
+var colors = {
+    hallColor: "#e3ff12",
+    beaconColor: "#42ddf5",
+    triBeaconColor: "#bd0000",
+    IlocalColor: "#25a149",
+    ElocalColor: "#03290e"
 }
 
-function getCurrentFloor(){
-    return currentFloor;
-}
+var setDrawExecutions = 0,
+    currentFloor = 0,
+    pendingAdditions = 0;
 
-var mapJson = getJson();
+function setCurrentFloor(floor){ currentFloor = floor; }
 
-var mapWidth = mapJson.widthUnits;
-var mapHeight = mapJson.heightUnits;
+function getCurrentFloor(){ return currentFloor; }
+
+var mapJson = getJson(),
+    mapWidth = mapJson.widthUnits,
+    mapHeight = mapJson.heightUnits;
 
 document.documentElement.style.setProperty('--squarePerRow', getWidthUnits());
 
@@ -47,43 +41,26 @@ function updateWidthUnits(value){
 
 var triBeaconsLimit = mapJson.triBeaconsPerFloor;
 
-function getTriBeaconsLimit(){
-    return triBeaconsLimit;
-}
+function getTriBeaconsLimit(){ return triBeaconsLimit; }
 
-function getWidthUnits(){
-    return mapWidth;
-}
+function getWidthUnits(){ return mapWidth; }
 
-function getHeightUnits(){
-    return mapHeight;
-}
+function getHeightUnits(){ return mapHeight; }
 
-function getMetersByUnity(){
-    return mapJson.metersByUnity;
-}
+function getMetersByUnity(){ return mapJson.metersByUnity; }
 
-var numbersOfRoutes = 0;
-var squaresCount = 0;
-
-
-var firstRender = true;
-
+var numbersOfRoutes = 0,
+    squaresCount = 0,
+    firstRender = true;
 
 //Arrays globais que contém objetos do mapa
-var map = [];
-
-var Ilocalmap = [];
-
-var Elocalmap = [];
-
-var beaconmap = [];
-
-var localPositions = [];
-
-var triBeaconmap = [];
-
-var mapMarks = [];
+var map = [],
+    Ilocalmap = [],
+    Elocalmap = [],
+    beaconmap = [],
+    localPositions = [],
+    triBeaconmap = [],
+    mapMarks = [];
 
 function setMapLength(){
   mapMarks = new Array(mapWidth);
@@ -169,43 +146,42 @@ function draw(obj){
     let  cbILocal = $("#cbILocal").prop("checked");
     let  cbELocal = $("#cbELocal").prop("checked");
 
-    cbHall == true ? setDraw(hallColor, obj, 'h') :
-    cbBeacon == true ? setDraw(beaconColor, obj, 'b') : 
-    cbTriBeacon == true ? setDraw(triBeaconColor, obj, 'tb') :
-    cbILocal == true ? setDraw(IlocalColor, obj, 'il') :
-    cbELocal == true ? setDraw(ElocalColor, obj,'el'): null;
+    cbHall == true ? setDraw(colors.hallColor, obj, 'h') :
+    cbBeacon == true ? setDraw(colors.beaconColor, obj, 'b') : 
+    cbTriBeacon == true ? setDraw(colors.triBeaconColor, obj, 'tb') :
+    cbILocal == true ? setDraw(colors.IlocalColor, obj, 'il') :
+    cbELocal == true ? setDraw(colors.ElocalColor, obj,'el'): null;
   
 }
 
 
 //Função que seta o obj que será desenhado, neste caso é o "Hall"
 function drawHalls(obj){
-    setDraw(hallColor, obj, 'h');
+    setDraw(colors.hallColor, obj, 'h');
 }
 
 //Função que seta o obj que será desenhado, neste caso é a "posição inicial do Local"
 function drawILocates(obj){
-    setDraw(IlocalColor, obj,'il');
+    setDraw(colors.IlocalColor, obj,'il');
 }
 
 //Função que seta o obj que será desenhado, neste caso é a "posição final do Local"
 function drawELocates(obj){
-    setDraw(ElocalColor, obj,'el');
+    setDraw(colors.ElocalColor, obj,'el');
 }
 
 //Função que seta o obj que será desenhado, neste caso é o "beacon do local"
 function drawBeacons(obj){
-    setDraw(beaconColor, obj,'b');
+    setDraw(colors.beaconColor, obj,'b');
 }
 
 //Função que seta o obj que será desenhado, neste caso é o "beacon trilateral"
 function drawTriBeacons(obj){
-    setDraw(triBeaconColor, obj,'tb');
+    setDraw(colors.triBeaconColor, obj,'tb');
 }
 
 //Faz o desenho propriamento dito e guarda nos arrays
-function setDraw(color, obj, id){4
-    log()
+function setDraw(color, obj, id){
     log(obj);
     var x = obj.id.split(',')[0];
     var y = obj.id.split(',')[1];
@@ -414,7 +390,6 @@ function clear(){
     setMapLength();
     clearDraw();
 }
-
 
 //Verifica se existe valor
 function isEmpty(obj) {
