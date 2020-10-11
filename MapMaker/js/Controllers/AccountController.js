@@ -20,6 +20,10 @@ $(()=>{
       }
    }
 
+   /*test('Salvando o token', ()=> {
+      expect(putToken).toThrow(Error);
+   })*/
+
    console.log('Email e/ou senha incorretos, ou token de autenticação inválido!');
 
     class clsTokenHandler extends UserToken.clsUserToken {
@@ -29,7 +33,18 @@ $(()=>{
 
        putToken(token){
          this.setToken(token);
+         throw new Error('Não foi possível salvar o token');
        }
     }
+
+
+    /*class clsAccountControllerTest extends clsTokenHandler {
+       constructor(){
+          super();
+       }
+      test('' ,()=> {
+         expect(putToken).toThrow(Error);
+      })
+    }*/
 
 });
