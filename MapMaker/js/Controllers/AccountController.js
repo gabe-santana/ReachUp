@@ -12,14 +12,15 @@ $(()=>{
    var user = '';
 
    if (user = await account.login(email, password)){
-      if (user.token != null){
+      var token = user.token;
+      if (token.matches("/^[0-9a-zA-Z]+$/")){
       var tokenHandler = new clsTokenHandler();
-      tokenHandler.putToken(user.token);
-      }
+      tokenHandler.putToken(token);
       return;
+      }
    }
 
-   console.log('Email e/ou senha incorretos!');
+   console.log('Email e/ou senha incorretos, ou token de autenticação inválido!');
 
     class clsTokenHandler extends UserToken.clsUserToken {
        constructor(){
