@@ -3,7 +3,7 @@ export module ReachUpWebAPI {
       export class clsReachUpWebAPI {
         public readonly _url: string;
         constructor() {
-             this._url = 'https://192.168.0.109:8000/api';
+             this._url = 'http://192.168.0.109:8000/api';
          }
 
          public get url() : string {
