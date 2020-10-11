@@ -1,6 +1,6 @@
-/// <reference path='../MallPlanController.ts'/>
+/// <reference path='../Models/MallPlan.ts'/>
 
-import { MallPlanController } from "../MallPlanController";
+import { MallPlan } from "../Models/MallPlan";
 
 $(()=>{
 
@@ -93,7 +93,7 @@ $(()=>{
         mapHandler.putMap();
     })
 
-    class clsMapHandler extends MallPlanController.clsMallPlanController {
+    class clsMapHandler extends MallPlan.clsMallPlan {
         constructor(){
             super();
         }

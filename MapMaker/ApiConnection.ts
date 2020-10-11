@@ -1,9 +1,16 @@
+/// <reference path='js/Models/UserToken.ts'/>
+
+import { UserToken } from "../MapMaker/js/Models/UserToken";
+
 export module ApiConnection {
   
     export class clsApiConnection {
       public readonly _url: string;
+      private readonly _token : string;
       constructor() {
            this._url = 'http://192.168.0.109:5000/api/';
+           var tokenAcess = new UserToken.clsUserToken();
+           this._token = tokenAcess.getToken();
        }
 
        public get url() : string {
@@ -20,11 +27,10 @@ export module ApiConnection {
                 'Accept-Ranges': 'bytes',
                 'Content-Type':'application/json',
                 'Pragma': 'no-cache',
-                'Authorization': 'Bearer + token',
+                'Authorization': 'Bearer ' + this._token,
                 'X-Custom-Header': 'ProcessThisImmediately',
                 'WWW-Authenticate': 'Basic',
                 'Connection': 'close',
-                //...options.headers,
               },
               cache: 'no-cache',
               credentials: 'same-origin',
@@ -47,12 +53,10 @@ export module ApiConnection {
                   'Accept-Ranges': 'bytes',
                   'Content-Type':'application/json',
                   'Pragma': 'no-cache',
-                  'Authorization': 'Bearer + token',
+                  'Authorization': 'Bearer ' + this._token,
                   'X-Custom-Header': 'ProcessThisImmediately',
                   'WWW-Authenticate': 'Basic',
                   'Connection': 'close',
-                  //...options.headers,
-
               },
               cache: 'no-cache',
               credentials: 'same-origin',
@@ -76,12 +80,10 @@ export module ApiConnection {
                 'Accept-Ranges': 'bytes',
                 'Content-Type':'application/json',
                 'Pragma': 'no-cache',
-                'Authorization': 'Bearer + token',
+                'Authorization': 'Bearer ' + this._token,
                 'X-Custom-Header': 'ProcessThisImmediately',
                 'WWW-Authenticate': 'Basic',
                 'Connection': 'close',
-                //...options.headers,
-
               },
               cache: 'no-cache',
               credentials: 'same-origin',
@@ -105,12 +107,10 @@ export module ApiConnection {
                 'Accept-Ranges': 'bytes',
                 'Content-Type':'application/json',
                 'Pragma': 'no-cache',
-                'Authorization': 'Bearer + token',
+                'Authorization': 'Bearer ' + this._token,
                 'X-Custom-Header': 'ProcessThisImmediately',
                 'WWW-Authenticate': 'Basic',
                 'Connection': 'close',
-                //...options.headers,
-
               },
               cache: 'no-cache',
               credentials: 'same-origin',
@@ -133,12 +133,10 @@ export module ApiConnection {
                 'Accept-Ranges': 'bytes',
                 'Content-Type':'application/json',
                 'Pragma': 'no-cache',
-                'Authorization': 'Bearer + token',
+                'Authorization': 'Bearer ' + this._token,
                 'X-Custom-Header': 'ProcessThisImmediately',
                 'WWW-Authenticate': 'Basic',
                 'Connection': 'close',
-                //...options.headers,
-
               },
               cache: 'no-cache',
               credentials: 'same-origin',

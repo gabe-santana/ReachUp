@@ -1,11 +1,11 @@
-/// <reference path='../ApiConnection.ts'/>
-/// <reference path='MapMakerScripts/routines.script.js'/>
+/// <reference path='../../ApiConnection.ts'/>
+/// <reference path='../MapMakerScripts/routines.script.js'/>
 
-import { ApiConnection } from "../ApiConnection";
+import { ApiConnection } from "../../ApiConnection";
 
-export module MallPlanController {
+export module MallPlan {
 
-    export class clsMallPlanController extends ApiConnection.clsApiConnection {
+    export class clsMallPlan extends ApiConnection.clsApiConnection {
          constructor(){
              super();
          }
