@@ -9,16 +9,16 @@ namespace ReachUp
 {
     public abstract class ToDoReachUp
     {
-        public ToDoReachUp(){};
+        public ToDoReachUp(){}
 
-        public string Email;
-        public string Name;
-        public string Role;
-        public string Password;
-        public abstract string Token; // Toda classe que implemente esta deve conter uma implementação dessa propriedade 
-        public abstract int Id; // Toda classe que implemente esta deve conter uma implementação dessa propriedade
-        public int Type;
-        public string Description;
-        public DateTime Date;
+        public string Email { get; set; }
+        public string Name { get; set; }
+        public string Role { get; set; }
+        public string Password { get; set; }
+        public abstract string Token { get; set; } // Toda classe que implemente esta deve conter uma implementação dessa propriedade 
+        public abstract int Id { get; set; } // Toda classe que implemente esta deve conter uma implementação dessa propriedade
+        public int Type { get; set; }
+        public string Description { get; set; }
+        public DateTime Date { get; set; }
     }
 }
