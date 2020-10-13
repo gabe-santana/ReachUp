@@ -144,7 +144,7 @@ DROP PROCEDURE IF EXISTS cadastrarSubCategoria$$
 CREATE PROCEDURE cadastrarSubCategoria(pCdCategoria int, pNome varchar(45))
 BEGIN
 	DECLARE _cd int;
-	SELECT COUNT(cd_sub_categoria) INTO @_cd FROM sub_categoria;
+	SELECT COUNT(cd_sub_categoria) INTO @_cd FROM sub_categoria WHERE cd_categoria = pCdCategoria;
 	INSERT INTO sub_categoria VALUES
 	(
 		@_cd,
@@ -275,29 +275,36 @@ DROP PROCEDURE IF EXISTS pesquisar$$
 CREATE PROCEDURE pesquisar(search varchar(50))
 BEGIN
 	SELECT 
+	l.cd_local,
 	l.nm_local, tl.nm_tipo_local, l.cd_andar,
+	l.hr_abertura,
+	l.hr_fechamento,
 	substring_index(group_concat(DISTINCT ca.nm_categoria SEPARATOR ','), ',', 3) as categorias,
 	substring_index(group_concat(DISTINCT sc.nm_sub_categoria SEPARATOR ','), ',', 3) as sub_categorias
 	FROM `local` AS l
+
 	JOIN tipo_local AS tl 
 	ON l.cd_tipo_local = tl.cd_tipo_local
 	JOIN sub_categoria_local as scl
 	ON l.cd_local = scl.cd_local
+
 	JOIN sub_categoria as sc
-	ON scl.cd_categoria = sc.cd_categoria
-	AND scl.cd_sub_categoria = sc.cd_sub_categoria
+	ON scl.cd_categoria = sc.cd_categoria AND scl.cd_sub_categoria = sc.cd_sub_categoria
+	
 	JOIN categoria as ca
 	ON sc.cd_categoria = ca.cd_categoria
+
 	WHERE 
 	formatString(l.nm_local)    LIKE formatString(concat("%",search,"%"))
-	OR 
-	formatString(ca.nm_categoria)    LIKE formatString(concat("%",search,"%"))
-	OR 
-	(formatString(sc.nm_sub_categoria)    LIKE formatString(concat("%",search,"%")) AND (l.cd_tipo_local = 0  OR l.cd_tipo_local = 7))
 	OR
-	formatString(tl.nm_tipo_local)            LIKE formatString(concat("%",search,"%"))
+	formatString(ca.nm_categoria) LIKE formatString(concat("%",search,"%"))
+
+	OR 
+	formatString(sc.nm_sub_categoria) LIKE formatString(concat("%",search,"%"))
 	OR
-	formatString(l.cd_andar)                     LIKE formatString(concat("%",search,"%"))
+	formatString(tl.nm_tipo_local) LIKE formatString(concat("%",search,"%"))
+	OR
+	formatString(l.cd_andar) LIKE formatString(concat("%",search,"%"))
 
 	GROUP BY l.cd_local;
 END$$
@@ -327,7 +334,11 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS publicarComunicado$$
-CREATE PROCEDURE publicarComunicado(pLocal int, pTipo int, pCategoria int, pSubCategoria int, pDs text, pDataInicio datetime, pDataFim datetime)
+CREATE PROCEDURE publicarComunicado(
+	pLocal int, pTipo int,
+	pCategoria int, pSubCategoria int, 
+	pDs text, pDataInicio datetime, 
+	pDataFim datetime)
 BEGIN
 		DECLARE 	_cd int;
 		SELECT COUNT(cd_comunicado) INTO @_cd FROM comunicado;

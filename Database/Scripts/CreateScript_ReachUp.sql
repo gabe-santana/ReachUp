@@ -214,6 +214,7 @@ CREATE TABLE IF NOT EXISTS sub_categoria (
   cd_categoria INT NOT NULL,
   nm_sub_categoria VARCHAR(45) NOT NULL,
   PRIMARY KEY (cd_sub_categoria, cd_categoria),
+
   CONSTRAINT fk_sub_categoria_categoria
     FOREIGN KEY (cd_categoria)
     REFERENCES categoria (cd_categoria)
@@ -229,9 +230,11 @@ CREATE TABLE IF NOT EXISTS sub_categoria_local (
   cd_categoria INT NOT NULL,
   cd_sub_categoria INT NOT NULL,
   PRIMARY KEY (cd_local, cd_categoria, cd_sub_categoria),
+
   CONSTRAINT fk_local_has_categoria_local
     FOREIGN KEY (cd_local)
     REFERENCES local (cd_local),
+
   CONSTRAINT fk_local_has_categoria_categoria
     FOREIGN KEY (cd_categoria, cd_sub_categoria)
     REFERENCES sub_categoria (cd_categoria, cd_sub_categoria)
