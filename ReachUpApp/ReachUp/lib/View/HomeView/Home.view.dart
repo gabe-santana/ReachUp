@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:ReachUp/View/HomeView/HomeDrawer.view.dart';
 
 
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  int _counter = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

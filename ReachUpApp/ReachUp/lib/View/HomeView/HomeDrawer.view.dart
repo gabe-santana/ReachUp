@@ -202,6 +202,37 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 ),
               ],
             ),
+          ),
+             Container(
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      border: Border(
+                    top: BorderSide(width: 1.0, color: Color(0xFFededed)),
+                  )),
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(15, 10, 0, 15),
+                    child: const Text(
+                      "Desenvolvedor",
+                      style: TextStyle(fontSize: 18, color: Colors.grey),
+                    ),
+                  ),
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.fromLTRB(15, 0, 0, 10),
+                  title: ItemMenuTitle("Beacons log", FontAwesomeIcons.broadcastTower, false),
+                  onTap: () {
+                    // Update the state of the app.
+                    // ...
+                  },
+                ),
+              ],
+            ),
           )
         ],
       ),
