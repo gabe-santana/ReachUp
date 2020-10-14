@@ -1,4 +1,5 @@
 import 'package:ReachUp/Component/Map/Map.component.dart';
+import 'package:ReachUp/View/HomeView/HomeMap.view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'View/HomeView/Home.view.dart';

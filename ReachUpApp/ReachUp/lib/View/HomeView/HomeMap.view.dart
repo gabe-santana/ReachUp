@@ -1,3 +1,4 @@
+import 'package:ReachUp/Component/Compass/Compass.component.dart';
 import 'package:ReachUp/Component/Map/Map.component.dart';
 import 'package:ReachUp/Component/TTS/TextToSpeech.component.dart';
 import 'package:flutter/material.dart';
@@ -25,17 +26,17 @@ class _HomeMapState extends State<HomeMap> {
   @override
   void initState() {
     accelerometerEvents.listen((AccelerometerEvent event) {
-      //print(event);
+      //print(event.x);
     });
     // [AccelerometerEvent (x: 0.0, y: 9.8, z: 0.0)]
 
     userAccelerometerEvents.listen((UserAccelerometerEvent event) {
-     // print(event);
+     print(event.x);
     });
     // [UserAccelerometerEvent (x: 0.0, y: 0.0, z: 0.0)]
 
     gyroscopeEvents.listen((GyroscopeEvent event) {
-      print(event);
+      //print(event);
     });
 
     super.initState();
@@ -107,7 +108,7 @@ class _HomeMapState extends State<HomeMap> {
          child: Stack(
            children: <Widget>[
           // change it for matrix gestures
-
+       
            PhotoView(
              enableRotation: this.enableRotation,
              backgroundDecoration:  BoxDecoration(color: Colors.white),
@@ -142,6 +143,7 @@ class _HomeMapState extends State<HomeMap> {
                     size:75.0,
                   ),
               ),
+                 
               Positioned(
                 
                   bottom: 10,
