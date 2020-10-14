@@ -1,7 +1,7 @@
-/// <reference path='../../ApiConnection.ts'/>
-/// <reference path='../MapMakerScripts/routines.script.js'/>
+/// <reference path='../services/ApiConnection.ts'/>
+/// <reference path='../Scripts/routines.script.js'/>
 
-import { ApiConnection } from "../../ApiConnection";
+import { ApiConnection } from "../services/ApiConnection";
 
 export module MallPlan {
 

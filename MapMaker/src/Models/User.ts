@@ -1,6 +1,6 @@
-/// <reference path='../../ApiConnection.ts'/>
+/// <reference path='../services/ApiConnection.ts'/>
 
-import { ApiConnection } from "../../ApiConnection";
+import { ApiConnection } from "../services/ApiConnection";
 
 export module User {
 

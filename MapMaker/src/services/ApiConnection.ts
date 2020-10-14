@@ -1,6 +1,6 @@
-/// <reference path='js/Models/UserToken.ts'/>
+/// <reference path='../Models/UserToken.ts'/>
 
-import { UserToken } from "../MapMaker/js/Models/UserToken";
+import { UserToken } from "../Models/UserToken";
 
 export module ApiConnection {
   
