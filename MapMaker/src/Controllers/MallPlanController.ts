@@ -9,14 +9,24 @@ export module MallPlanController {
            super();
          }
         
-         public async getMap()
-         {
+         public async getMap() {
             return await this.get();
-         } 
+         }
 
          public async putMap()
          {
             return await this.put();
          }
+
+         /*
+         public async getMapImages()
+         {
+            return await this.getImages();
+         }
+
+         public async getFloor(floor : number)
+         {
+            return await this.getFloorImage(floor);
+         }*/
      }
 }

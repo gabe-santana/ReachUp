@@ -9,7 +9,7 @@ export module Account {
            super();
          }
         
-         public async login(User)
+         public async login(User : any)
          {
             const logIn = await this.httpGet(`Account/Login?Email=${User.email}&Password=${User.password}&role=dev`);
             return logIn;
