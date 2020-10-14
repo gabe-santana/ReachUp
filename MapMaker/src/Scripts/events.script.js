@@ -1,10 +1,10 @@
-/// <reference path='../Models/MallPlan.ts'/>
+/// <reference path='../Controllers/MallPlanController.ts'/>
 
-import { MallPlan } from "../Models/MallPlan";
+import { MallPlanController } from "../Controllers/MallPlanController";
 
 $(()=>{
 
-    const mapHandler = new clsMapHandler();
+    const mapHandler = new MallPlanController.clsMallPlanController();
     var map = await mapHandler.getMap();
     console.log(map);
     setMapLength();
@@ -89,23 +89,9 @@ $(()=>{
     });
 
     $('#updateMap').click(function(){
-        const mapHandler = new clsMapHandler();
-        mapHandler.putMap();
+        const mapHandler = new MallPlanController.clsMallPlanController();
+        return await mapHandler.putMap();
     })
 
-    class clsMapHandler extends MallPlan.clsMallPlan {
-        constructor(){
-            super();
-        }
-
-        async getMap(){
-            return await this.get();
-        }
-
-        async putMap(){
-           return await this.put();
-        }
-
-    }
 });
 

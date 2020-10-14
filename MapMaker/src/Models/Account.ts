@@ -9,10 +9,10 @@ export module Account {
            super();
          }
         
-         public async login(email : string, password : string)
+         public async login(User)
          {
-            const user = await this.httpGet('Account/Login?Email=' + email + '&Password=' + password + '&role=dev');
-            return user;
+            const logIn = await this.httpGet(`Account/Login?Email=${User.email}&Password=${User.password}&role=dev`);
+            return logIn;
          } 
      }
 }
