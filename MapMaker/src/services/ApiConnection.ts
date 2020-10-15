@@ -145,5 +145,57 @@ export module ApiConnection {
             return json;
 
        }
+
+       public async httpGetBlob(str : string, options : Array<string> = []) : Promise<Blob>
+       {
+          const response = await fetch(this.url() + str, {
+              mode: 'cors',
+              method: 'GET',
+              headers: {
+                'Accept':'application/octet-stream',
+                'Accept-Ranges': 'bytes',
+                'Content-Type':'application/octet-stream',
+                'Pragma': 'no-cache',
+                'Authorization': 'Bearer ' + this._token,
+                'X-Custom-Header': 'ProcessThisImmediately',
+                'WWW-Authenticate': 'Basic',
+                'Connection': 'close',
+              },
+              cache: 'no-cache',
+              credentials: 'same-origin',
+              redirect: 'follow',
+              referrerPolicy: 'no-referrer'
+            })
+
+            const json = await response.json();
+            return json;
+       }
+
+       public async httpPutBlob(str : string, data : Blob, options : Array<string> = [])
+       {
+          const response = await fetch(this.url() + str, {
+              mode: 'cors',
+              method: 'PUT',
+              body: data,
+              headers: {
+                'Accept':'application/octet-stream',
+                'Accept-Ranges': 'bytes',
+                'Content-Type':'application/octet-stream',
+                'Pragma': 'no-cache',
+                'Authorization': 'Bearer ' + this._token,
+                'X-Custom-Header': 'ProcessThisImmediately',
+                'WWW-Authenticate': 'Basic',
+                'Connection': 'close',
+              },
+              cache: 'no-cache',
+              credentials: 'same-origin',
+              redirect: 'follow',
+              referrerPolicy: 'no-referrer'
+            })
+
+            const json = await response.json();
+            return json;
+
+       }
    }
 }
