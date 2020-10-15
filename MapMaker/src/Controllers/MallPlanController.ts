@@ -18,7 +18,7 @@ export module MallPlanController {
             return await this.put();
          }
 
-         /*
+         
          public async getMapImages()
          {
             return await this.getImages();
@@ -27,6 +27,6 @@ export module MallPlanController {
          public async getFloor(floor : number)
          {
             return await this.getFloorImage(floor);
-         }*/
+         }
      }
 }

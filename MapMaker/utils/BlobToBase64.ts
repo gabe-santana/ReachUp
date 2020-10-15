@@ -17,9 +17,10 @@ export module BlobToBase64 {
       const reader = new FileReader();
       reader.readAsBinaryString(this.blob);
       reader.onloadend = async () => {
-        var base64String = reader.result;
+        var base64String = reader.result.toString();
         return base64String;
       }
+
     }
 
     public async convertToBlob(base64 : string, contentType='', sliceSize = 512) {

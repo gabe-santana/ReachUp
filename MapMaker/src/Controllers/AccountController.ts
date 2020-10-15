@@ -3,12 +3,8 @@
 
 import { Account } from "../Models/Account";
 import { UserToken } from "../Models/UserToken";
+import { IUser } from "../Interfaces/IUser";
 import { UserTokenController } from "./UserTokenController";
-
-interface userLogging {
-  email: string;
-  password: string;
-}
 
 export module AccountController {
 
@@ -19,7 +15,7 @@ export module AccountController {
     }
 
     public async index(email : string, password : string) {
-      const User : userLogging = {
+      const User : IUser = {
         email: email,
         password: password
       }  

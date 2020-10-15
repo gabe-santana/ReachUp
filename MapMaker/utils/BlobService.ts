@@ -13,7 +13,9 @@ export module BlobService {
        return await this.httpGetBlob('Map/GetImage', null);
      }
 
-     private saveBlob() : void {}
+     public async saveBlob(blob : Blob) {
+       
+     }
 
      public async putBlob(blob : Blob) {
        return await this.httpPutBlob('Map/PutImage', blob, null);
