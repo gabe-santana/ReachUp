@@ -1,20 +1,22 @@
 import { ApiConfig } from "../src/services/ApiConfig";
 import { ApiConnection } from "../src/services/ApiConnection";
 
-export module Blob {
+export module BlobService {
   
-  export class clsBlob extends ApiConnection.clsApiConnection {
+  export class clsBlobService extends ApiConnection.clsApiConnection {
      constructor(){
         super();
         //const path = new ApiConfig.clsApiConfig().blobPath();
      }
 
      public async fetchBlob() : Promise<Blob> {
-       return await this.httpGetBlob('Blob/Get', null);
+       return await this.httpGetBlob('Map/GetImage', null);
      }
 
+     private saveBlob() : void {}
+
      public async putBlob(blob : Blob) {
-       return await this.httpPutBlob('Blob/Put', blob, null);
+       return await this.httpPutBlob('Map/PutImage', blob, null);
     }
   }
 }

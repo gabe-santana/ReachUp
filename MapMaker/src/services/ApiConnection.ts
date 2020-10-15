@@ -167,7 +167,7 @@ export module ApiConnection {
               referrerPolicy: 'no-referrer'
             })
 
-            const json = await response.json();
+            const json = await response.blob();
             return json;
        }
 
