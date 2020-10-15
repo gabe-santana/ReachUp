@@ -1,4 +1,5 @@
 import { BlobService } from "./BlobService";
+import {Base64Service} from './Base64Service';
 
 export module BlobToBase64 {
 
@@ -8,19 +9,15 @@ export module BlobToBase64 {
       super();
     }
 
-    public async handleBlob(){
+    public async convertFromBlob() {
       this.blob = await this.fetchBlob();
-    }
-
-    public async convertFromBlob(){
-      this.handleBlob();
+      let base64String = '';
       const reader = new FileReader();
       reader.readAsBinaryString(this.blob);
       reader.onloadend = async () => {
-        var base64String = reader.result.toString();
-        return base64String;
+        base64String = reader.result.toString();
       }
-
+      return new Base64Service.clsBase64Service().saveBase64(base64String);
     }
 
     public async convertToBlob(base64 : string, contentType='', sliceSize = 512) {
@@ -40,7 +37,7 @@ export module BlobToBase64 {
       }
 
       const blob = new Blob(byteArrays, {type: contentType});
-      return blob;
+      return await this.putBlob(blob);
     }
   }
 }

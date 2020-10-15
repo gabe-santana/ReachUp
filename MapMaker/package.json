@@ -1,9 +1,23 @@
 {
-    "publishConfig": {
+  "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
-    },
-
-    "scripts": {
-        "test": "jest"
-    }
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "0.0.1-security"
+  },
+  "name": "MapMaker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

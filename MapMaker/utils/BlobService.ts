@@ -1,20 +1,16 @@
-import { ApiConfig } from "../src/services/ApiConfig";
 import { ApiConnection } from "../src/services/ApiConnection";
+import {readFile} from 'fs';
+import { writeFile } from 'fs/promises';
 
 export module BlobService {
   
   export class clsBlobService extends ApiConnection.clsApiConnection {
      constructor(){
         super();
-        //const path = new ApiConfig.clsApiConfig().blobPath();
      }
 
-     public async fetchBlob() : Promise<Blob> {
+     public async fetchBlob() {
        return await this.httpGetBlob('Map/GetImage', null);
-     }
-
-     public async saveBlob(blob : Blob) {
-       
      }
 
      public async putBlob(blob : Blob) {
