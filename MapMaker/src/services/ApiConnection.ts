@@ -1,4 +1,4 @@
-/// <reference path='ApiConfig.ts'/>
+/// <reference path='./ApiConfig.ts'/>
 /// <reference path='../Models/UserToken.ts'/>
 
 import { UserToken } from "../Models/UserToken";

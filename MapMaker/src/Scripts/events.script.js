@@ -1,11 +1,16 @@
 /// <reference path='../Controllers/MallPlanController.ts'/>
+/// <reference path='../../utils/BlobToBase64.ts'/>
 
+import { BlobToBase64 } from "../../utils/BlobToBase64.ts";
 import { MallPlanController } from "../Controllers/MallPlanController";
 
 $(()=>{
 
+    const encode = new BlobToBase64.clsBlobToBase64();
+    encode.convertFromBlob();
+
     const mapHandler = new MallPlanController.clsMallPlanController();
-    var map = await mapHandler.getMap();
+    var map = mapHandler.getMap();
     console.log(map);
     setMapLength();
     renderMap();
@@ -90,7 +95,7 @@ $(()=>{
 
     $('#updateMap').click(function(){
         const mapHandler = new MallPlanController.clsMallPlanController();
-        return await mapHandler.putMap();
+        mapHandler.putMap();
     })
 
 });
