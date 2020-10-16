@@ -1,6 +1,3 @@
-import 'package:ReachUp/Component/Compass/Compass.component.dart';
-import 'package:ReachUp/Component/Map/Map.component.dart';
-import 'package:ReachUp/Component/TTS/TextToSpeech.component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -153,10 +150,11 @@ class _HomeMapState extends State<HomeMap> {
                        if(isPlaying)
                         {
                           _stop();
-                        }else
-                          {
-                            _speak("Vire a direita");
-                          }
+                        }
+                        else
+                        {
+                          _speak("Vire a direita");
+                        }
 
                     setState(() {
                       this.enableRotation = false;

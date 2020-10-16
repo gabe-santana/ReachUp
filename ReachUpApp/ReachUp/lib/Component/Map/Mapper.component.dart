@@ -5,10 +5,6 @@ import 'Position.component.dart';
 class Mapper{
   double metersByUnit = 1; 
 
-  getRoute(Position userPos, Position localPos){
-    
-  }
-  
   getUserPosition(Position a, Position b, Position c, double dA, double dB, double dC){
 
         var cogX = (a.x + b.x + c.x) / 3;

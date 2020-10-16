@@ -76,4 +76,5 @@ class CompassPainter extends CustomPainter {
 
     @override
     bool shouldRepaint(CustomPainter oldDelegate) => true;
+
 }

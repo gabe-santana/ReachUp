@@ -1,3 +1,4 @@
+import 'package:ReachUp/View/DeveloperView/BeaconBroadcast.view.dart';
 import 'package:ReachUp/View/DeveloperView/Compass.view.dart';
 import 'package:ReachUp/View/HomeView/HomeMap.view.dart';
 import 'package:ReachUp/View/SearchView/Search.view.dart';
@@ -25,6 +26,8 @@ class _HomeState extends State<Home> {
     switch (pos) {
       case 0:
         return FragmentWidget(HomeMap());
+      case 7:
+        return FragmentWidget(BroadcastBeacon());
       case 8:
         return FragmentWidget(Compass());
     }
