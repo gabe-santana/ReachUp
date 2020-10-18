@@ -20,7 +20,7 @@ class ReachUpAPI{
             "${this.url}/$uri",
             options: Options(
               headers: {
-                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbUBlbWFpbC5jb20iLCJyb2xlIjoiYWRtIiwibmJmIjoxNjAxMDYwMjE4LCJleHAiOjE2MDEwNjc0MTgsImlhdCI6MTYwMTA2MDIxOH0.8bd6n9lvwfTL6hsgpgmxxoKmV208P3fghoiVRqZQ1q0"
+                "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbUBlbWFpbC5jb20iLCJyb2xlIjoiYWRtIiwibmJmIjoxNjAyODcwMzExLCJleHAiOjE2MDI4Nzc1MTEsImlhdCI6MTYwMjg3MDMxMX0.cu4OV5HU3feCJSJjdc37TqTGj2BYXB1yFulZ9fbXpaA"
               },
               followRedirects: false,
               validateStatus: (status) {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'View/DeveloperView/BeaconBroadcast.view.dart';
 import 'View/HomeView/Home.view.dart';
 
 
@@ -45,16 +44,21 @@ var lightTheme = ThemeData(
   primaryColor:  Color(0xFF008D9E),
   colorScheme: ColorScheme(
     brightness: Brightness.light,
+
     primary: Color(0xFF008D9E),
     onPrimary: Colors.white,
     primaryVariant: Color(0xFF006d7a),
+
     secondary: Color(0xFF006d7a),
+    secondaryVariant: Color(0xFF012529),
     onSecondary: Colors.white,
-    secondaryVariant: Colors.white,
+
     background: Colors.white,
     onBackground: Color(0xFF525252),
+
     error: Color(0xFFd42839),
     onError: Colors.white,
+
     surface: Color(0xFF212121),
     onSurface: Colors.white,
   ),

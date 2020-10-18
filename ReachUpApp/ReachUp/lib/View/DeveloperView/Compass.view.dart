@@ -24,8 +24,11 @@ class _CompassState extends State<Compass> {
         FlutterCompass.events.listen(_onData);
     }
     
-    void _onData(double x) => setState(() { _heading = x; });
-
+    void _onData(double x){
+      if (this.mounted) 
+        setState(() { _heading = x; });
+    }
+    
     final TextStyle _style = TextStyle(
         color: Colors.black,
         fontSize: 32, 
