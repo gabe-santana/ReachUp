@@ -77,14 +77,14 @@ We're using:
 
 - **MySQL Database: Transact-SQL Script's** for data storage/management;
 - **NoSQL (non-relational database)** for local data storage/management in Flutter App - ReachUpHeart Database;
-- **ASP.NET Core 3.0 Web API** for web service (RESTful WebAPI);
-- **Web Application: HTML + CSS/SASS + TypeScript + JavaScript** for website;
+- **ASP.NET Core 3.0 MVC Web API** for web service (RESTful WebAPI);
+- **Web Application: ASP.NET Core 3.0 MVC WebApplication C#/Razor (Backend)\ HTML + CSS/SASS + TypeScript + JavaScript (Frontend)**;
 - **Flutter: Dart + Java + Objective-C** for cross-platfor mobile app (Android/iOS);
 - **Flame: Flutter Lib** for render a real-time map of local;
 
 ## Progress Project
 
-- [x] Database
+- [x] Database 
 - [x] WebAPI **(completed, but always on edit and rising)**
 - [ ] ~~Unity2D Assets~~ **(not anymore)**
 - [ ] Web Application **(idling)**

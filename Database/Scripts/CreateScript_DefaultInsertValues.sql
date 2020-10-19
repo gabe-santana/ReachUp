@@ -134,34 +134,27 @@ INSERT INTO tipo_local
 VALUES
 (
 	4,
-    "Escada Fixa"
+    "Escada"
 );
 
 INSERT INTO tipo_local
 VALUES
 (
 	5,
-    "Escada Rolante"
-);
-
-INSERT INTO tipo_local
-VALUES
-(
-	6,
     "Elevador"
 );
 
 INSERT INTO tipo_local
 VALUES
 (
-	7,
+	6,
     "Praça"
 );
 
 INSERT INTO tipo_local
 VALUES
 (
-    8,
+    7,
     "Serviço"
 
 );
