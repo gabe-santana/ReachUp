@@ -64,6 +64,12 @@ BEGIN
 		nm_senha_administrador as "nm_senha_user"
 		FROM administrador WHERE cd_tipo_administrador = 0 AND nm_email_administrador = pEmail;	
 	END IF;
+
+    IF (pRole = "dev") THEN
+		SELECT nm_administrador as "nm_user", nm_email_administrador as "nm_email_user", 
+		nm_senha_administrador as "nm_senha_user"
+		FROM administrador WHERE cd_tipo_administrador = 2 AND nm_email_administrador = pEmail;	
+	END IF;
 	
 END$$
 
@@ -90,7 +96,15 @@ BEGIN
 		nm_senha_administrador as "nm_senha_user"
 		FROM administrador where cd_tipo_administrador = 0;	
 	END IF;
+
+    IF (pRole = "dev") THEN
+		SELECT 
+		nm_administrador as "nm_user", nm_email_administrador as "nm_email_user", 
+		nm_senha_administrador as "nm_senha_user"
+		FROM administrador where cd_tipo_administrador = 2;	
+	END IF;
 END$$
+
 DROP PROCEDURE IF EXISTS cadastrarUsuario$$
 CREATE PROCEDURE cadastrarUsuario(pEmail varchar(100), pNome varchar(45), pSenha varchar(60), pRole varchar(3), pLocal INT)
 BEGIN
@@ -104,6 +118,10 @@ BEGIN
 	
 	IF (pRole = "adm") THEN
 	INSERT INTO administrador VALUES (pEmail, 0, null, pNome, md5(pSenha));
+	END IF;
+
+    IF (pRole = "dev") THEN
+	INSERT INTO administrador VALUES (pEmail, 2, null, pNome, md5(pSenha));
 	END IF;
 	
 	
@@ -177,7 +195,7 @@ BEGIN
 	INNER JOIN categoria AS c 
 	ON sc.cd_categoria = c.cd_categoria 
 	WHERE pc.nm_email_cliente = pEmail
-	GROUP BY c.cd_categoria AND   sc.cd_sub_categoria; 
+	GROUP BY c.cd_categoria AND  sc.cd_sub_categoria; 
 END$$
 
 DROP PROCEDURE IF EXISTS criarFeedback$$
@@ -296,11 +314,18 @@ BEGIN
 
 	WHERE 
 	formatString(l.nm_local)    LIKE formatString(concat("%",search,"%"))
+
 	OR
 	formatString(ca.nm_categoria) LIKE formatString(concat("%",search,"%"))
 
-	OR 
+    OR 
 	formatString(sc.nm_sub_categoria) LIKE formatString(concat("%",search,"%"))
+
+    /*OR
+	formatString(ca.nm_categoria) LIKE formatString(concat("%",search,"%"))
+    AND
+	formatString(sc.nm_sub_categoria) LIKE formatString(concat("%",search,"%"))*/
+
 	OR
 	formatString(tl.nm_tipo_local) LIKE formatString(concat("%",search,"%"))
 	OR
