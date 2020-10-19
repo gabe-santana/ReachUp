@@ -24,7 +24,7 @@
 CALL cadastrarCategoria("Informática",  'Produtos tecnólogicos de uso geral e específico no mundo da tecnologia da informação');
 CALL cadastrarSubCategoria(0, "Hardware");
 CALL cadastrarSubCategoria(0, "Software");
-CALL cadastrarSubCategoria(0, "Periféricos");
+CALL cadastrarSubCategoria(0, "Periféricos/Acessórios");
 
 CALL cadastrarCategoria("Jogos","Jogos e semelhantes, ao entretenimento de diversos tipos");
 CALL cadastrarSubCategoria(1, "RPG");
@@ -69,16 +69,19 @@ CALL cadastrarSubCategoria(4, "Cosméticos");
 CALL cadastrarSubCategoria(4, "Mochilas");
 CALL cadastrarSubCategoria(4, "Malas de viagem");
 CALL cadastrarSubCategoria(4, "Moda infantil");
+CALL cadastrarSubCategoria(4, "Vestidos");
+CALL cadastrarSubCategoria(4, "Meias");
 
 CALL cadastrarCategoria("Acessórios","Vestimentas para o corpo");
 CALL cadastrarSubCategoria(5, "De mão");
-CALL cadastrarSubCategoria(5, "Braços");
-CALL cadastrarSubCategoria(5, "Peitoral e/ou pescoço");
+CALL cadastrarSubCategoria(5, "Pulseiras");
+CALL cadastrarSubCategoria(5, "Colares/Pescoço");
 CALL cadastrarSubCategoria(5, "Pernas e pés");
 CALL cadastrarSubCategoria(5, "Óculos de sol");
 CALL cadastrarSubCategoria(5, "Relógios");
 CALL cadastrarSubCategoria(5, "Bonés");
-
+CALL cadastrarSubCategoria(5, "Brincos");
+CALL cadastrarSubCategoria(5, "Lenços");
 
 CALL cadastrarCategoria("Categoria 1,99","Produtos de preço acessíveis e com funcionalidades distintas ");
 CALL cadastrarSubCategoria(6, "Objetos de uso geral");
@@ -241,6 +244,12 @@ CALL cadastrarSubCategoria(42, "Australian Food");
 
 CALL cadastrarCategoria("Comida mineira", "Ô trem bão de comida, sô!");
 CALL cadastrarSubCategoria(43, "Comida de Minas Gerais");
+
+/* -- */
+
+CALL cadastrarCategoria("Fotografia", "Estúdios e lojas de fotografia");
+CALL cadastrarSubCategoria(44, "Estúdio");
+CALL cadastrarSubCategoria(44, "Loja");
 
 
 CALL cadastrarUsuario("adm@email.com", "Administrator", "123", "adm", null);
@@ -579,10 +588,8 @@ CALL cadastrarLocal(0, "iPlace",  2,  '08:00:00', '23:59:59', "sdeb0cf1-a928-11e
 CALL cadastrarLocal(0, "Kallan",  1,  '08:00:00', '23:59:59', "adjb0cf1-a928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Kanto Kent",  0,  '08:00:00', '23:59:59', "aoeb0cf1-a928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Kidstok",  0,  '08:00:00', '23:59:59', "adea0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Kidz Shoe Store",  0,  '08:00:00', '23:59:59', "ateb0cf1-a928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Lacoste",  0,  '08:00:00', '23:59:59', "aqeb0cf1-a928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Le Lis Blanc",  2,  '08:00:00', '23:59:59', "areb0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Kidz Shoe Store",  0,  '08:00:00', '23:59:59', "adyb0cf1-a928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Levi's",  2,  '08:00:00', '23:59:59', "adib0cf1-a928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Lez a Lez",  1,  '08:00:00', '23:59:59', "adeb5cf1-a928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Lilica & Tigor",  1,  '08:00:00', '23:59:59', "ad2b0cf1-a928-11ea-adc1-0942ac120032");
@@ -1639,6 +1646,219 @@ CALL defSubCategoriaLocal(188, 4, 14);
 CALL defSubCategoriaLocal(188, 5, 4);
 
 /* House */
+
+CALL defSubCategoriaLocal(189, 4, 1);
+
+/* Imaginarium */
+
+CALL defSubCategoriaLocal(190, 4, 10);
+CALL defSubCategoriaLocal(190, 4, 13);
+CALL defSubCategoriaLocal(190, 4, 14);
+CALL defSubCategoriaLocal(190, 6, 4);
+
+/* Intimissimi */
+
+CALL defSubCategoriaLocal(191, 4, 3);
+
+/* iPlace */
+
+CALL defSubCategoriaLocal(192, 0, 0);
+CALL defSubCategoriaLocal(192, 0, 2);
+CALL defSubCategoriaLocal(192, 2, 0);
+
+/* Kallan */
+
+CALL defSubCategoriaLocal(193, 4, 0);
+CALL defSubCategoriaLocal(193, 4, 4);
+CALL defSubCategoriaLocal(193, 4, 7);
+
+/* Kanto Kent */
+
+CALL defSubCategoriaLocal(194, 4, 0);
+CALL defSubCategoriaLocal(194, 4, 1);
+CALL defSubCategoriaLocal(194, 4, 3);
+
+/* Kidstok */
+
+CALL defSubCategoriaLocal(195, 4, 16);
+CALL defSubCategoriaLocal(195, 4, 1);
+CALL defSubCategoriaLocal(195, 4, 2);
+CALL defSubCategoriaLocal(195, 4, 3);
+CALL defSubCategoriaLocal(195, 4, 9);
+
+/* Lacoste */
+
+CALL defSubCategoriaLocal(196, 4, 0);
+CALL defSubCategoriaLocal(196, 4, 1);
+CALL defSubCategoriaLocal(196, 4, 2);
+CALL defSubCategoriaLocal(196, 4, 3);
+CALL defSubCategoriaLocal(196, 4, 4);
+
+/* Le Lis Blanc */
+
+CALL defSubCategoriaLocal(197, 4, 0);
+CALL defSubCategoriaLocal(197, 4, 1);
+CALL defSubCategoriaLocal(197, 4, 2);
+CALL defSubCategoriaLocal(197, 4, 3);
+CALL defSubCategoriaLocal(197, 4, 4);
+CALL defSubCategoriaLocal(197, 4, 10);
+CALL defSubCategoriaLocal(197, 5, 1);
+CALL defSubCategoriaLocal(197, 5, 2);
+CALL defSubCategoriaLocal(197, 5, 7);
+CALL defSubCategoriaLocal(197, 5, 8);
+CALL defSubCategoriaLocal(197, 12, 4);
+
+/* Levi's */
+
+CALL defSubCategoriaLocal(198, 4, 0);
+CALL defSubCategoriaLocal(198, 4, 1);
+CALL defSubCategoriaLocal(198, 4, 2);
+CALL defSubCategoriaLocal(198, 4, 3);
+CALL defSubCategoriaLocal(198, 4, 4);
+CALL defSubCategoriaLocal(198, 4, 6);
+CALL defSubCategoriaLocal(198, 4, 8);
+CALL defSubCategoriaLocal(198, 4, 9);
+CALL defSubCategoriaLocal(198, 4, 16);
+CALL defSubCategoriaLocal(198, 5, 6);
+
+/* Lez a Lez */
+
+CALL defSubCategoriaLocal(199, 4, 1);
+CALL defSubCategoriaLocal(199, 4, 17);
+
+/* Lilica & Tigor */
+
+CALL defSubCategoriaLocal(200, 4, 0);
+CALL defSubCategoriaLocal(200, 4, 1);
+CALL defSubCategoriaLocal(200, 4, 2);
+CALL defSubCategoriaLocal(200, 4, 3);
+CALL defSubCategoriaLocal(200, 4, 16);
+
+/* Lindt */
+
+CALL defSubCategoriaLocal(201, 7, 1);
+
+/* Lupo */
+
+CALL defSubCategoriaLocal(202, 4, 3);
+CALL defSubCategoriaLocal(202, 4, 9);
+CALL defSubCategoriaLocal(202, 4, 16);
+CALL cadastrarSubCategoria(202, 4, 18);
+
+/* Marcia Mello */
+
+CALL cadastrarSubCategoria(203, 4, 17);
+CALL cadastrarSubCategoria(203, 4, 1);
+CALL cadastrarSubCategoria(203, 4, 2);
+CALL cadastrarSubCategoria(203, 5, 1);
+CALL cadastrarSubCategoria(203, 5, 2);
+CALL cadastrarSubCategoria(203, 5, 7);
+CALL cadastrarSubCategoria(203, 5, 8);
+
+/* Marisorte Loterias */
+
+CALL cadastrarSubCategoria(204, 36, 1);
+
+/* Maxxi Color */
+
+CALL cadastrarSubCategoria(205, 44, 0);
+CALL cadastrarSubCategoria(205, 44, 1);
+
+/* Mendes Tur */
+
+CALL cadastrarSubCategoria(206, 38, 0);
+
+/* Miró */
+
+CALL cadastrarSubCategoria(207, 4, 14);
+CALL cadastrarSubCategoria(207, 4, 15);
+
+/* MMartan */
+
+CALL cadastrarSubCategoria(208, 12, 7);
+
+/* Monte Carlo */
+
+CALL cadastrarSubCategoria(209, 5, 0);
+CALL cadastrarSubCategoria(209, 5, 1);
+CALL cadastrarSubCategoria(209, 5, 2);
+CALL cadastrarSubCategoria(209, 5, 3);
+CALL cadastrarSubCategoria(209, 5, 5);
+CALL cadastrarSubCategoria(209, 5, 7);
+
+/* Morana */
+
+/* Murabak */
+
+/* Náutica Tattoo  */
+
+/* O Boticário */
+
+/* Organza */
+
+/* Ortobom */
+
+/* Óticas IX, Martins Zeiss, Occhiali e Carol  */
+
+/* Pandora */
+
+/* Pink */
+
+/* Planeta Café */
+
+/* Quiksilver */
+
+/* Radio Nacional */
+
+/* Raquel Bijoux */
+
+/* Rei do Mate */
+
+/* Schutz */
+
+/* Sodimac Dicico */
+
+/* Starbucks Coffee */
+
+/* Stroke */
+
+/* Swarovski */
+
+/* The Body Shop */
+
+/* TIM */
+
+/* Tip Top */
+
+/* Top Car */
+
+/* Tottene */
+
+/* Track & Field */
+
+/* Valisere */
+
+/* Vermont */
+
+/* Victor Hugo */
+
+/* Vim Vi Venci */
+
+/* Vivara */
+
+/* Viviana Puccinelli */
+
+/* YellowCom Vivo */
+
+/* You Play Space */
+
+/* Yuppie */
+
+/* Zeiss */
+
+/* Zelo */
+
+/* ------------ ! ------------- */
 
 CALL publicarComunicado(7, 0, 1, 0,"Loja fechada por tempo indeterminado, devido à pandemia do novo Coronavírus", now(), null);
 CALL publicarComunicado(8, 0, 2, 0,"Compre o Galaxy Note20 em até 12x sem juros, e ganhe um voucher de R$ 2000!", now(), null);
