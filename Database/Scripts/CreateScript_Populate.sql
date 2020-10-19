@@ -52,7 +52,7 @@ CALL cadastrarSubCategoria(3, "Ventilação");
 CALL cadastrarSubCategoria(3, "Termo elétrico");
 
 CALL cadastrarCategoria("Roupas","Vestimentas gerais");
-CALL cadastrarSubCategoria(4, "Calçados");
+CALL cadastrarSubCategoria(4, "Calçados simples");
 CALL cadastrarSubCategoria(4, "Blusas, camisas e camisetas");
 CALL cadastrarSubCategoria(4, "Calças e bermudas");
 CALL cadastrarSubCategoria(4, "Lingerie e roupas íntimas");
@@ -67,6 +67,8 @@ CALL cadastrarSubCategoria(4, "Maquiagens");
 CALL cadastrarSubCategoria(4, "Perfumes");
 CALL cadastrarSubCategoria(4, "Cosméticos");
 CALL cadastrarSubCategoria(4, "Mochilas");
+CALL cadastrarSubCategoria(4, "Malas de viagem");
+CALL cadastrarSubCategoria(4, "Moda infantil");
 
 CALL cadastrarCategoria("Acessórios","Vestimentas para o corpo");
 CALL cadastrarSubCategoria(5, "De mão");
@@ -77,11 +79,13 @@ CALL cadastrarSubCategoria(5, "Óculos de sol");
 CALL cadastrarSubCategoria(5, "Relógios");
 CALL cadastrarSubCategoria(5, "Bonés");
 
+
 CALL cadastrarCategoria("Categoria 1,99","Produtos de preço acessíveis e com funcionalidades distintas ");
 CALL cadastrarSubCategoria(6, "Objetos de uso geral");
 CALL cadastrarSubCategoria(6, "Objetos de cozinha");
 CALL cadastrarSubCategoria(6, "Peças de roupa 1,99");
 CALL cadastrarSubCategoria(6, "Alimentos 1,99");
+CALL cadastrarSubCategoria(6, "Sacolas");
 
 CALL cadastrarCategoria("Alimentação","Alimentação");
 CALL cadastrarSubCategoria(7, "Doceria");
@@ -118,7 +122,7 @@ CALL cadastrarSubCategoria(12, "Lustres e abajures");
 CALL cadastrarSubCategoria(12, "Quadros e esculturas");
 CALL cadastrarSubCategoria(12, "Plantas");
 CALL cadastrarSubCategoria(12, "Cozinha");
-
+CALL cadastrarSubCategoria(12, "Tapetes");
 
 CALL cadastrarCategoria("Pet-shop", "Lojas para seu querido animalzinho");
 CALL cadastrarSubCategoria(13, "Pet-shop");
@@ -208,6 +212,19 @@ CALL cadastrarSubCategoria(37, "Operadora");
 
 CALL cadastrarCategoria("Agenciamento de viagens", "Agências de viagem");
 CALL cadastrarSubCategoria(38, "Agências");
+
+/* Categoria aplicável a lojas */
+
+CALL cadastrarCategoria("Esportes", "Artigos e objetos esportivos");
+CALL cadastrarSubCategoria(39, "Bolas");
+CALL cadastrarSubCategoria(39, "Redes");
+CALL cadastrarSubCategoria(39, "Raquetes");
+CALL cadastrarSubCategoria(39, "Artigos personalizados");
+CALL cadastrarSubCategoria(39, "Mesas de ping-pong");
+CALL cadastrarSubCategoria(39, "Mesas de sinuca");
+
+
+
 
 CALL cadastrarUsuario("adm@email.com", "Administrator", "123", "adm", null);
 
@@ -805,7 +822,9 @@ CALL defSubCategoriaLocal(19, 4, 7);
 
 /* Stilleto */
 
-CALL defSubCategoriaLocal(19, 4, 7);
+CALL defSubCategoriaLocal(20, 4, 0);
+CALL defSubCategoriaLocal(20, 4, 4);
+CALL defSubCategoriaLocal(20, 4, 10);
 
 /* Clube Melissa */ 
 
@@ -818,6 +837,28 @@ CALL defSubCategoriaLocal(22, 4, 4);
 CALL defSubCategoriaLocal(22, 4, 7);
 CALL defSubCategoriaLocal(22, 4, 8);
 CALL defSubCategoriaLocal(22, 4, 9);
+
+/* RetrôMania */
+
+CALL defSubCategoriaLocal(23, 4, 1);
+
+/* Reserva */
+
+CALL defSubCategoriaLocal(24, 4, 0);
+CALL defSubCategoriaLocal(24, 4, 1);
+CALL defSubCategoriaLocal(24, 4, 2);
+CALL defSubCategoriaLocal(24, 4, 4);
+
+/* Polo Play */
+
+CALL defSubCategoriaLocal(25, 4, 1);
+CALL defSubCategoriaLocal(25, 4, 2);
+CALL defSubCategoriaLocal(25, 4, 3);
+
+/* Maybelline NY */
+
+CALL defSubCategoriaLocal(26, 4, 11);
+CALL defSubCategoriaLocal(26, 4, 13);
 
 /* Arezzo */
 
@@ -885,13 +926,97 @@ CALL defSubCategoriaLocal(37, 0, 1);
 CALL defSubCategoriaLocal(37, 2, 0);
 CALL defSubCategoriaLocal(37, 12, 4);
 
+/* A Esportiva */
+
+CALL defSubCategoriaLocal(38, 4, 6);
+CALL defSubCategoriaLocal(38, 4, 7);
+CALL defSubCategoriaLocal(38, 4, 14);
+
 /* Cacau Show */
 
 CALL defSubCategoriaLocal(39, 7, 1);
 
+/* LOFT */
+
+CALL defSubCategoriaLocal(40, 0, 2);
+CALL defSubCategoriaLocal(40, 2, 0);
+CALL defSubCategoriaLocal(40, 4, 14);
+
+/* Relicário */
+
+CALL defSubCategoriaLocal(41, 4, 11);
+CALL defSubCategoriaLocal(41, 4, 13);
+CALL defSubCategoriaLocal(41, 12, 1);
+CALL defSubCategoriaLocal(41, 12, 2);
+CALL defSubCategoriaLocal(41, 6, 0);
+
+/* Andisport Futebol */
+
+CALL defSubCategoriaLocal(42, 4, 6);
+CALL defSubCategoriaLocal(42, 4, 7);
+CALL defSubCategoriaLocal(42, 39, 0);
+CALL defSubCategoriaLocal(42, 39, 1);
+CALL defSubCategoriaLocal(42, 39, 2);
+CALL defSubCategoriaLocal(42, 39, 3);
+
+/* Le Postiche */
+
+CALL defSubCategoriaLocal(43, 4, 10);
+CALL defSubCategoriaLocal(43, 4, 14);
+CALL defSubCategoriaLocal(43, 4, 15);
+
+/* Crocs */
+
+CALL defSubCategoriaLocal(44, 4, 0);
+
+/* Criatiff */
+
+CALL defSubCategoriaLocal(45, 4, 1);
+
+/* Bluebeach */
+
+CALL defSubCategoriaLocal(46, 4, 0);
+CALL defSubCategoriaLocal(46, 4, 8);
+CALL defSubCategoriaLocal(46, 5, 4);
+CALL defSubCategoriaLocal(46, 5, 6);
+
+/* SIDE WALK */
+
+CALL defSubCategoriaLocal(47, 4, 1); 
+CALL defSubCategoriaLocal(47, 4, 2); 
+CALL defSubCategoriaLocal(47, 4, 4); 
+CALL defSubCategoriaLocal(47, 4, 10); 
+
+/* Usaflex */
+
+CALL defSubCategoriaLocal(48, 4, 0); 
+CALL defSubCategoriaLocal(48, 4, 4); 
+CALL defSubCategoriaLocal(48, 4, 10); 
+
+/* Beautybox */
+
+CALL defSubCategoriaLocal(49, 4, 11); 
+CALL defSubCategoriaLocal(49, 4, 12); 
+CALL defSubCategoriaLocal(49, 4, 13); 
+
+/* Kyowa */
+
+CALL defSubCategoriaLocal(50, 12, 5);
+
 /* Chilli Beans */
 
 CALL defSubCategoriaLocal(51, 5, 4);
+
+/* Adcos */
+
+CALL defSubCategoriaLocal(52, 4, 13);
+
+/* PUC */
+
+CALL defSubCategoriaLocal(53, 4, 16);
+CALL defSubCategoriaLocal(53, 4, 0);
+CALL defSubCategoriaLocal(53, 4, 9);
+CALL defSubCategoriaLocal(53, 4, 1);
 
 /* MM Santos */
 
@@ -903,8 +1028,6 @@ CALL defSubCategoriaLocal(54, 2, 0);
 CALL defSubCategoriaLocal(55, 4, 0);
 CALL defSubCategoriaLocal(55, 4, 1);
 CALL defSubCategoriaLocal(55, 4, 4);
-
-CALL pesquisar("Maze");
 
 /* Estúdio de Sombrancelha */
 
@@ -1009,7 +1132,6 @@ CALL defSubCategoriaLocal(78, 7, 6);
 
 /* Bancos Caixa, Itaú, do Brasil e Pan */
 
-
 CALL defSubCategoriaLocal(79, 36, 0);
 CALL defSubCategoriaLocal(80, 36, 0);
 CALL defSubCategoriaLocal(81, 36, 0);
@@ -1095,7 +1217,7 @@ CALL defSubCategoriaLocal(88, 25, 0);
 CALL defSubCategoriaLocal(114, 25, 0);
 CALL defSubCategoriaLocal(130, 25, 0);
 CALL defSubCategoriaLocal(211, 25, 0);
-CALL defSubCategoriaLocal(227, 30, 0);
+CALL defSubCategoriaLocal(227, 25, 0);
 
 /* Bebedouros Praiamar Shopping, do térreo ao terceiro andar */
 
@@ -1103,7 +1225,7 @@ CALL defSubCategoriaLocal(89, 27, 0);
 CALL defSubCategoriaLocal(115, 27, 0);
 CALL defSubCategoriaLocal(131, 27, 0);
 CALL defSubCategoriaLocal(212, 27, 0);
-CALL defSubCategoriaLocal(228, 30, 0);
+CALL defSubCategoriaLocal(228, 27, 0);
 
 /* Escadas fixas, do térreo ao terceiro andar */
 
@@ -1111,7 +1233,7 @@ CALL defSubCategoriaLocal(90, 29, 0);
 CALL defSubCategoriaLocal(116, 29, 0);
 CALL defSubCategoriaLocal(132, 29, 0);
 CALL defSubCategoriaLocal(213, 29, 0);
-CALL defSubCategoriaLocal(229, 30, 0);
+CALL defSubCategoriaLocal(229, 29, 0);
 
 /* Escadas rolantes, do térreo ao terceiro andar */
 
@@ -1123,11 +1245,11 @@ CALL defSubCategoriaLocal(230, 30, 0);
 
 /* Elevadores, do térreo ao quarto andar */
 
-CALL defSubCategoriaLocal(92, 30, 0);
-CALL defSubCategoriaLocal(118, 30, 0);
-CALL defSubCategoriaLocal(134, 30, 0);
-CALL defSubCategoriaLocal(215, 30, 0);
-CALL defSubCategoriaLocal(231, 30, 0);
+CALL defSubCategoriaLocal(92, 31, 0);
+CALL defSubCategoriaLocal(118, 31, 0);
+CALL defSubCategoriaLocal(134, 31, 0);
+CALL defSubCategoriaLocal(215, 31, 0);
+CALL defSubCategoriaLocal(231, 31, 0);
 
 /* Adidas */
 
