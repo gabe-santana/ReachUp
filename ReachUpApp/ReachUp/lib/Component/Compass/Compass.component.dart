@@ -24,10 +24,13 @@ class _CompassState extends State<Compass> {
         FlutterCompass.events.listen(_onData);
     }
     
-    void _onData(double x) => setState(() { _heading = x; });
-
+    void _onData(double x){
+      if (this.mounted) 
+        setState(() { _heading = x; });
+    }
+    
     final TextStyle _style = TextStyle(
-        color: Colors.red[50].withOpacity(0.9), 
+        color: Colors.black,
         fontSize: 32, 
         fontWeight: FontWeight.w200,
     );
@@ -35,12 +38,9 @@ class _CompassState extends State<Compass> {
     @override
     Widget build(BuildContext context) {
 
-        return Container(
-          color: Colors.red,
-          child: CustomPaint(
-              foregroundPainter: CompassPainter(angle: _heading),
-              child: Center(child: Text(_readout, style: _style))
-          ),
+        return CustomPaint(
+            foregroundPainter: CompassPainter(angle: _heading),
+            child: Center(child: Text(_readout, style: _style))
         );
     }
 }
@@ -60,10 +60,10 @@ class CompassPainter extends CustomPainter {
     void paint(Canvas canvas, Size size) {
 
         Paint circle = _brush
-            ..color = Colors.indigo[400].withOpacity(0.6);
+            ..color = Colors.black;
 
         Paint needle = _brush
-            ..color = Colors.red[400];
+            ..color = Colors.red;
         
         double radius = min(size.width / 2.2, size.height / 2.2);
         Offset center = Offset(size.width / 2, size.height / 2);
@@ -79,4 +79,5 @@ class CompassPainter extends CustomPainter {
 
     @override
     bool shouldRepaint(CustomPainter oldDelegate) => true;
+
 }

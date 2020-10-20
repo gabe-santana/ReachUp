@@ -61,7 +61,10 @@ flutter:
     - assets/images/map/floor0.jpg
     - assets/images/map/floor1.jpg
     - assets/animations/pin.json
-
+    - assets/animations/pin-pointer.json
+    - assets/animations/user-location.json
+    - assets/images/icons/user-location.png
+    
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
