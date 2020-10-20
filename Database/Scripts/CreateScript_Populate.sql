@@ -21,10 +21,12 @@
 
 /* Categorias aplicáveis em lojas (e suas subcategorias) */
 
-CALL cadastrarCategoria("Informática",  'Produtos tecnólogicos de uso geral e específico no mundo da tecnologia da informação');
+CALL pesquisar("Amusement Park");
+
+CALL cadastrarCategoria("Informática", "Produtos tecnólogicos de uso geral e específico no mundo da tecnologia da informação");
 CALL cadastrarSubCategoria(0, "Hardware");
 CALL cadastrarSubCategoria(0, "Software");
-CALL cadastrarSubCategoria(0, "Periféricos/Acessórios");
+CALL cadastrarSubCategoria(0, "Periféricos");
 
 CALL cadastrarCategoria("Jogos","Jogos e semelhantes, ao entretenimento de diversos tipos");
 CALL cadastrarSubCategoria(1, "RPG");
@@ -47,7 +49,7 @@ CALL cadastrarSubCategoria(2, "Placas eletrônicas");
 
 CALL cadastrarCategoria("Eletrodomésticos","Máquinas eletrodomésticas");
 CALL cadastrarSubCategoria(3, "Refrigeração em geral");
-CALL cadastrarSubCategoria(3, "A gás");
+CALL cadastrarSubCategoria(3, "Refrigeração a gás");
 CALL cadastrarSubCategoria(3, "Ventilação");
 CALL cadastrarSubCategoria(3, "Termo elétrico");
 
@@ -82,6 +84,8 @@ CALL cadastrarSubCategoria(5, "Relógios");
 CALL cadastrarSubCategoria(5, "Bonés");
 CALL cadastrarSubCategoria(5, "Brincos");
 CALL cadastrarSubCategoria(5, "Lenços");
+CALL cadastrarSubCategoria(5, "Anéis");
+
 
 CALL cadastrarCategoria("Categoria 1,99","Produtos de preço acessíveis e com funcionalidades distintas ");
 CALL cadastrarSubCategoria(6, "Objetos de uso geral");
@@ -99,21 +103,22 @@ CALL cadastrarSubCategoria(7, "Padaria");
 CALL cadastrarSubCategoria(7, "Castanhas, nozes e amêndoas");
 CALL cadastrarSubCategoria(7, "Sorvetes");
 
+/* Categoria cancelada - nenhum local se associa a ela  */
 CALL cadastrarCategoria("Cultura","Cultura");
 CALL cadastrarSubCategoria(8, "Obras literárias Cultura");
 CALL cadastrarSubCategoria(8, "Obras artísticas Cultura");
 CALL cadastrarSubCategoria(8, "Obras musicais Cultura");
-
+/* ------------------ */
 
 CALL cadastrarCategoria("Literatura","Produtos envolvendo entretimento no mundo dos livros");
 CALL cadastrarSubCategoria(9, "Livraria");
 CALL cadastrarSubCategoria(9, "Comic store");
 CALL cadastrarSubCategoria(9, "Mangá Store");
 
-CALL cadastrarCategoria("Hipermercado", "Mercados, hipermercados e quitandas");
-CALL cadastrarSubCategoria(10, "Objetos de uso geral Hipermercado");
-CALL cadastrarSubCategoria(10, "Objetos de cozinha Hipermercado");
-CALL cadastrarSubCategoria(10, "Alimentos Hipermercado");
+CALL cadastrarCategoria("Mercados", "Mercadinhos, hipermercados e quitandas");
+CALL cadastrarSubCategoria(10, "Hipermercado");
+CALL cadastrarSubCategoria(10, "Mercadinho");
+CALL cadastrarSubCategoria(10, "Quitanda");
 
 CALL cadastrarCategoria("Drogaria", "Farmácias e lojas farmaucêticas");
 CALL cadastrarSubCategoria(11, "Farmácia");
@@ -128,68 +133,68 @@ CALL cadastrarSubCategoria(12, "Cozinha");
 CALL cadastrarSubCategoria(12, "Tapetes");
 CALL cadastrarSubCategoria(12, "Filtros de água");
 CALL cadastrarSubCategoria(12, "Cama, mesa e banho");
+CALL cadastrarSubCategoria(12, "Colchões");
 
 CALL cadastrarCategoria("Pet-shop", "Lojas para seu querido animalzinho");
 CALL cadastrarSubCategoria(13, "Pet-shop");
 
-
 /* Categorias aplicáveis em restaurantes */
 
 CALL cadastrarCategoria("Frutos do mar", "Frutos do mar");
-CALL cadastrarSubCategoria(14, "Frutos do mar");
+CALL cadastrarSubCategoria(14, "Seafood");
 CALL cadastrarCategoria("Self-service", "Monte seu prato e pague por kilo");
 CALL cadastrarSubCategoria(15, "Montar prato");
 CALL cadastrarCategoria("Lanchonete", "Lanchonetes... huummm");
-CALL cadastrarSubCategoria(16, "Lanchonete");
+CALL cadastrarSubCategoria(16, "Snack bar");
 CALL cadastrarCategoria("Comida japonesa", "Experimente o incrível sabor da culinária japonesa");
 CALL cadastrarSubCategoria(17, "Japan Food");
 CALL cadastrarCategoria("Pastelaria", "Pastéis.... quero de flango!");
-CALL cadastrarSubCategoria(18, "Pastel");
+CALL cadastrarSubCategoria(18, "Pastry Shop");
 CALL cadastrarCategoria("Fast-food", "Locais perfeitos para você matar sua fome sem perder tempo");
 CALL cadastrarSubCategoria(19, "Fast-food");
 CALL cadastrarCategoria("Churrascaria", "Carnes suculentas... mal-passado, ao ponto ou bem-passado? À sua vontade");
-CALL cadastrarSubCategoria(20, "Churrasco");
+CALL cadastrarSubCategoria(20, "Steakhouse");
 CALL cadastrarCategoria("Casa de massas", "Spaghetti, nhoque, lasanha, ravioli, etc.");
-CALL cadastrarSubCategoria(21, "Massas");
+CALL cadastrarSubCategoria(21, "Pasta House");
 CALL cadastrarCategoria("Pizzaria", "Pizzas quentinhas e deliciosas");
-CALL cadastrarSubCategoria(22, "Pizza");
+CALL cadastrarSubCategoria(22, "Pizzas");
 CALL cadastrarCategoria("Esfiharia", "Não tem dinheiro para comer pizza? Então compre esfihas!");
 CALL cadastrarSubCategoria(23, "Esfihas");
 
 /*Categorias aplicáveis em cinema */
 
 CALL cadastrarCategoria("Cinema", "O local mais amado do shopping!");
-CALL cadastrarSubCategoria(24, "Filmes");
+CALL cadastrarSubCategoria(24, "Movies Theater");
 
 /*Categorias aplicáveis em necessidades */
 
 CALL cadastrarCategoria("Banheiro", "Banheiros limpos e confortáveis");
-CALL cadastrarSubCategoria(25, "Banheiro");
+CALL cadastrarSubCategoria(25, "Toilet");
 CALL cadastrarCategoria("Berçário", "Berçários para você amamentar ou trocar a fralda do seu bebê");
-CALL cadastrarSubCategoria(26, "Berçário");
+CALL cadastrarSubCategoria(26, "Nursery");
 CALL cadastrarCategoria("Bebedouro", "Bebedouros com água fria, morna ou quente");
-CALL cadastrarSubCategoria(27, "Água");
+CALL cadastrarSubCategoria(27, "Fountain");
 CALL cadastrarCategoria("Telefone", "Telefones para você se comunicar com o mundo lá fora");
-CALL cadastrarSubCategoria(28, "Telefone");
+CALL cadastrarSubCategoria(28, "Telephone");
 
 /*Categorias aplicáveis em escada */
 
 CALL cadastrarCategoria("Escada fixa", "Escadas fixas para sua locomoção entre os andares do shopping");
-CALL cadastrarSubCategoria(29, "Escada");
+CALL cadastrarSubCategoria(29, "Fixed Ladder");
 CALL cadastrarCategoria("Escada rolante", "Escadas rolantes para sua locomoção entre os andares do shopping");
-CALL cadastrarSubCategoria(30, "Rolante");
+CALL cadastrarSubCategoria(30, "Moving Ladder");
 
 /*Categorias aplicáveis em elevador */
 
 CALL cadastrarCategoria("Elevador", "Elevadores para sua locomoção entre os andares do shopping");
-CALL cadastrarSubCategoria(31, "Andar");
+CALL cadastrarSubCategoria(31, "Lift");
 
 /* Categorias aplicáveis em praça */ 
 
 CALL cadastrarCategoria("Praça de alimentação", "Praças de alimentação, com inúmeros restaurantes e lanchonetes, para você matar sua fome");
-CALL cadastrarSubCategoria(32, "Alimentação");
+CALL cadastrarSubCategoria(32, "Food Court");
 CALL cadastrarCategoria("Praça de lazer", "Praças de lazer com Wi-Fi grátis, assentos aconchegantes, fontes e estátuas para você descansar do barulho do shopping ou do seu grande tour de compras");
-CALL cadastrarSubCategoria(33, "Lazer");
+CALL cadastrarSubCategoria(33, "Leisure Plaza");
 
 /* Categorias aplicáveis em serviços */
 
@@ -216,10 +221,10 @@ CALL cadastrarSubCategoria(36, "Lotérica");
 CALL cadastrarSubCategoria(36, "Agência de câmbio");
 
 CALL cadastrarCategoria("Telefonia celular", "Operadoras de telefone");
-CALL cadastrarSubCategoria(37, "Operadora");
+CALL cadastrarSubCategoria(37, "Operadora de telefonia celular");
 
 CALL cadastrarCategoria("Agenciamento de viagens", "Agências de viagem");
-CALL cadastrarSubCategoria(38, "Agências");
+CALL cadastrarSubCategoria(38, "Agência de viagem");
 
 /* Categoria aplicável a lojas */
 
@@ -248,9 +253,20 @@ CALL cadastrarSubCategoria(43, "Comida de Minas Gerais");
 /* -- */
 
 CALL cadastrarCategoria("Fotografia", "Estúdios e lojas de fotografia");
-CALL cadastrarSubCategoria(44, "Estúdio");
-CALL cadastrarSubCategoria(44, "Loja");
+CALL cadastrarSubCategoria(44, "Estúdio de fotografia");
+CALL cadastrarSubCategoria(44, "Loja de fotografia");
 
+CALL cadastrarCategoria("Esoterismo", "Lojas de produtos esotéricos");
+CALL cadastrarSubCategoria(45, "Índia");
+
+CALL cadastrarCategoria("Construção", "Lojas de material de construção");
+CALL cadastrarSubCategoria(46, "Building");
+
+CALL cadastrarCategoria("Lava-rápido", "Lojas que lavam seu carro num passe de mágica");
+CALL cadastrarSubCategoria(47, "Car-wash");
+
+CALL cadastrarCategoria("Parquinho de diversões", "A criançada vai adorar!");
+CALL cadastrarSubCategoria(48, "Amusement Park");
 
 CALL cadastrarUsuario("adm@email.com", "Administrator", "123", "adm", null);
 
@@ -453,7 +469,7 @@ CALL cadastrarLocal(2, "Livraria Praiamar Shopping ",  0,  '09:25:00', '19:35:00
 CALL cadastrarLocal(3, "Banheiro Praiamar Shopping | Térreo ",  0,  '08:00:00', '23:59:59', "7deb0cfe-f928-11ea-adc1-0242ac120002");
 CALL cadastrarLocal(3, "Bebedouro Praiamar Shopping | Térreo ",  0,  '09:25:00', '19:35:00', "7deb0ba0-f928-11ea-adc1-0242ac120002");
 CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | Térreo ",  0,  '08:00:00', '23:59:59', "7deb0cf1-a928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(5, "Escada Rolante Praiamar Shopping | Térreo ",  0,  '09:25:00', '19:35:00', "7deb0ba1-a928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(4, "Escada Rolante Praiamar Shopping | Térreo ",  0,  '09:25:00', '19:35:00', "7deb0ba1-a928-11ea-adc1-0242ac120002");
 CALL cadastrarLocal(5, "Elevador Praiamar Shopping | Térreo ",  0,  '09:25:00', '19:35:00', "7deb0ba0-f921-a1ea-adc1-0242ac120002");
 
 CALL cadastrarLocal(0, "Adidas ",  1,  '09:25:00', '19:35:00', "7deb0bd0-f928-11ea-adc1-0242ac120092");
@@ -528,23 +544,23 @@ CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | 3º Andar ",  3,  '08:00
 CALL cadastrarLocal(4, "Escada Rolante Praiamar Shopping | 3º Andar ",  3,  '09:25:00', '19:35:00', "7deb0ba1-a928-11ea-adc1-0242ac1200f9");
 CALL cadastrarLocal(5, "Elevador Praiamar Shopping | 3º Andar ",  3,  '09:25:00', '19:35:00', "7deb0ba0-f921-a1ea-adc1-0242ac120092");
 
-CALL cadastrarLocal(3, "Cinema Roxy | Recepção",  4,  '08:00:00', '23:59:59', "8deafff1-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinema Roxy | Recepção",  4,  '08:00:00', '23:59:59', "8deafff1-f928-11ea-adc1-0242ac120013");
 
-CALL cadastrarLocal(3, "Cinema Roxy | Sala 1",  4,  '08:00:00', '23:59:59', "8aeafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(3, "Cinema Roxy | Sala 2",  4,  '08:00:00', '23:59:59', "8beafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(3, "Cinema Roxy | Sala 3",  4,  '08:00:00', '23:59:59', "8ceafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinema Roxy | Sala 1",  4,  '08:00:00', '23:59:59', "8aeafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinema Roxy | Sala 2",  4,  '08:00:00', '23:59:59', "8beafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinema Roxy | Sala 3",  4,  '08:00:00', '23:59:59', "8ceafcfe-f928-11ea-adc1-0242ac120013");
 
-CALL cadastrarLocal(3, "Cinema Roxy | Sala 4",  4,  '08:00:00', '23:59:59', "8deafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(3, "Cinema Roxy | Sala 5",  4,  '08:00:00', '23:59:59', "8eeafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(3, "Cinema Roxy | Sala 6",  4,  '08:00:00', '23:59:59', "8feafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(3, "Cinema Roxy | Sala 7",  4,  '08:00:00', '23:59:59', "8e1afcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinema Roxy | Sala 4",  4,  '08:00:00', '23:59:59', "8deafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinema Roxy | Sala 5",  4,  '08:00:00', '23:59:59', "8eeafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinema Roxy | Sala 6",  4,  '08:00:00', '23:59:59', "8feafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinema Roxy | Sala 7",  4,  '08:00:00', '23:59:59', "8e1afcfe-f928-11ea-adc1-0242ac120013");
 
-CALL cadastrarLocal(3, "Cinema Roxy | Sala 8",  4,  '08:00:00', '23:59:59', "8dsafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(3, "Cinema Roxy | Sala 9",  4,  '08:00:00', '23:59:59', "8d4afcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(3, "Cinema Roxy | Sala 10",  4,  '08:00:00', '23:59:59', "85eafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinema Roxy | Sala 8",  4,  '08:00:00', '23:59:59', "8dsafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinema Roxy | Sala 9",  4,  '08:00:00', '23:59:59', "8d4afcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinema Roxy | Sala 10",  4,  '08:00:00', '23:59:59', "85eafcfe-f928-11ea-adc1-0242ac120013");
 
 CALL cadastrarLocal(3, "Banheiro Praiamar Shopping | 4º Andar ",  4,  '08:00:00', '23:59:59', "8deb0cfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Bebedouro Praiamar Shopping | 4º Andar ",  4,  '09:25:00', '19:35:00', "8deb0ba0-f928-11ea-adc1-0242ac120023");
+CALL cadastrarLocal(3, "Bebedouro Praiamar Shopping | 4º Andar ",  4,  '09:25:00', '19:35:00', "8deb0ba0-f928-11ea-adc1-0242ac120023");
 CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | 4º Andar ",  4,  '08:00:00', '23:59:59', "8deb0cf1-a928-11ea-adc1-0242ac120032");
 CALL cadastrarLocal(4, "Escada Rolante Praiamar Shopping | 4º Andar ",  4,  '09:25:00', '19:35:00', "8deb0ba1-a928-11ea-adc1-0242ac130042");
 CALL cadastrarLocal(5, "Elevador Praiamar Shopping | 4º Andar ",  4,  '09:25:00', '19:35:00', "8deb0ba0-f921-a1ea-adc1-0242ac120053");
@@ -566,10 +582,10 @@ CALL cadastrarLocal(0, "Brasil Cacau",  0,  '08:00:00', '23:59:59', "adeb0cf1-a9
 CALL cadastrarLocal(0, "Camicado",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11eq-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Capodarte",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11xa-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Caravella",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ea-aoc1-0942ac120032");
-CALL cadastrarLocal(0, "Casa de Câmbio",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ha-adc1-0942ac120032");
+CALL cadastrarLocal(7, "Casa de Câmbio",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ha-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Deny Sports",  0,  '08:00:00', '23:59:59', "adex0cf1-a928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Dhemy",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ca-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Espaço Laser",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11en-adc1-0942ac120032");
+CALL cadastrarLocal(7, "Espaço Laser",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11en-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Filtros Europa",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ja-adc1-0942ac120032");
 CALL cadastrarLocal(0, "First Class",  2,  '08:00:00', '23:59:59', "adeb0cf1-a928-11eç-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Follow up",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ez-adc1-0942ac120032");
@@ -596,7 +612,7 @@ CALL cadastrarLocal(0, "Lilica & Tigor",  1,  '08:00:00', '23:59:59', "ad2b0cf1-
 CALL cadastrarLocal(0, "Lindt",  1,  '08:00:00', '23:59:59', "adeb0tf1-a928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Lupo",  0,  '08:00:00', '23:59:59', "adeb0ci1-a928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Marcia Mello",  2,  '08:00:00', '23:59:59', "adpb0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Marisorte Loterias",  0,  '08:00:00', '23:59:59', "aweb0cf1-a928-11ea-adc1-0942ac120032");
+CALL cadastrarLocal(7, "Marisorte Loterias",  0,  '08:00:00', '23:59:59', "aweb0cf1-a928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Maxxi Color",  0,  '08:00:00', '23:59:59', "xdeb0cf1-a928-12ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Mendes Tur",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-13ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Miró",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-14ea-adc1-0942ac120032");
@@ -604,7 +620,7 @@ CALL cadastrarLocal(0, "MMartan",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-15
 CALL cadastrarLocal(0, "Monte Carlo",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-16ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Morana",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-17ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Murabak",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-18ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Náutica Tattoo",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-19ea-adc1-0942ac120032");
+CALL cadastrarLocal(7, "Náutica Tattoo",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-19ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "O Boticário",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-20ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Organza",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-24ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Ortobom",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-32ea-adc1-0942ac120032");
@@ -626,9 +642,9 @@ CALL cadastrarLocal(1, "Starbucks Coffee",  0,  '08:00:00', '23:59:59', "adeb0ce
 CALL cadastrarLocal(0, "Stroke",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11eb-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Swarovski",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-113a-adc1-0942ac120032");
 CALL cadastrarLocal(0, "The Body Shop",  2,  '08:00:00', '23:59:59', "adeb0cf1-a918-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "TIM",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ea-adl1-0942ac120032");
+CALL cadastrarLocal(7, "TIM",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ea-adl1-0942ac120032");
 CALL cadastrarLocal(0, "Tip Top",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ew-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Top Car",  -3,  '08:00:00', '23:59:59', "adeb0cf1-a928-11el-adc1-0942ac120032");
+CALL cadastrarLocal(7, "Top Car",  -3,  '08:00:00', '23:59:59', "adeb0cf1-a928-11el-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Tottene",  1,  '08:00:00', '23:59:59', "adeb0cf1-b928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Track & Field",  1,  '08:00:00', '23:59:59', "adeb0cf1-c928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Valisere",  1,  '08:00:00', '23:59:59', "adeb0cf1-d928-11ea-adc1-0942ac120032");
@@ -637,16 +653,26 @@ CALL cadastrarLocal(0, "Victor Hugo",  1,  '08:00:00', '23:59:59', "adeb0cf1-f92
 CALL cadastrarLocal(0, "Vim Vi Venci",  0,  '08:00:00', '23:59:59', "adeb0cf1-g928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Vivara",  0,  '08:00:00', '23:59:59', "adeb0cf1-h928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Viviane Puccinelli",  1,  '08:00:00', '23:59:59', "adeb0cf1-i928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "YellowCom Vivo",  0,  '08:00:00', '23:59:59', "adeb0cf1-j928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "You Play Space",  2,  '08:00:00', '23:59:59', "adeb0cf1-k928-11ea-adc1-0942ac120032");
+CALL cadastrarLocal(7, "YellowCom Vivo",  0,  '08:00:00', '23:59:59', "adeb0cf1-j928-11ea-adc1-0942ac120032");
+CALL cadastrarLocal(7, "You Play Space",  2,  '08:00:00', '23:59:59', "adeb0cf1-k928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Yuppie",  1,  '08:00:00', '23:59:59', "adeb0cf1-l928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Zeiss",  1,  '08:00:00', '23:59:59', "adeb0cf1-m928-11ea-adc1-0942ac120032");
 CALL cadastrarLocal(0, "Zelo",  0,  '08:00:00', '23:59:59', "adeb0cf1-n928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(3, "Berçário Praiamar Shopping | Térreo",  0,  '08:00:00', '23:59:59', "adeb0cf1-n928-11ea-adc1-8942ac120032");
+CALL cadastrarLocal(3, "Berçário Praiamar Shopping | 1º Andar",  1,  '08:00:00', '23:59:59', "adeb0cf1-n928-11ea-adc1-2942ac120032");
+CALL cadastrarLocal(3, "Berçário Praiamar Shopping | 2º Andar",  2,  '08:00:00', '23:59:59', "adeb0cf1-n928-11ea-adc1-1942ac120032");
+CALL cadastrarLocal(3, "Berçário Praiamar Shopping | 3º Andar",  3,  '08:00:00', '23:59:59', "adeb0cf1-n928-11ea-adc1-5942ac120032");
+CALL cadastrarLocal(3, "Berçário Praiamar Shopping | 4º Andar",  4,  '08:00:00', '23:59:59', "adeb0cf1-n928-11ea-avc1-4942ac120032");
+
+CALL cadastrarLocal(3, "Telefone 1 Praiamar Shopping ",  3,  '08:00:00', '23:59:59', "adeb0cf1-n928-13ea-adc1-8942ac120032");
+CALL cadastrarLocal(3, "Telefone 2 Praiamar Shopping ",  3,  '08:00:00', '23:59:59', "adeb0cf1-n928-15ea-adc1-8942ac120032");
+CALL cadastrarLocal(3, "Telefone 3 Praiamar Shopping ",  3,  '08:00:00', '23:59:59', "adeb0cf1-n928-17ea-adc1-8942ac120032");
+CALL cadastrarLocal(3, "Telefone 4 Praiamar Shopping ",  3,  '08:00:00', '23:59:59', "adeb0cf1-n928-19ea-adc1-8942ac120032");
 
 
 /* Selects de auxílio */
 
-SELECT 
+/*SELECT 
     *
 from
     local;
@@ -660,31 +686,17 @@ from
     sub_categoria
 group by cd_categoria , cd_sub_categoria;
 
-SELECT nm_local from local where nm_local LIKE "% %";
+SELECT nm_local from local where nm_local LIKE "% %";*/
 
 /* qw */
 
 /* Livrarias Praiamar, Saraiva, Cultura, Nobel e Martins Fontes */
 
 CALL defSubCategoriaLocal(0, 9, 0);
-CALL defSubCategoriaLocal(0, 9, 1);
-CALL defSubCategoriaLocal(0, 9, 2);
-
 CALL defSubCategoriaLocal(1, 9, 0);
-CALL defSubCategoriaLocal(1, 9, 1);
-CALL defSubCategoriaLocal(1, 9, 2);
-
 CALL defSubCategoriaLocal(2, 9, 0);
-CALL defSubCategoriaLocal(2, 9, 1);
-CALL defSubCategoriaLocal(2, 9, 2);
-
 CALL defSubCategoriaLocal(3, 9, 0);
-CALL defSubCategoriaLocal(3, 9, 1);
-CALL defSubCategoriaLocal(3, 9, 2);
-
 CALL defSubCategoriaLocal(4, 9, 0);
-CALL defSubCategoriaLocal(4, 9, 1);
-CALL defSubCategoriaLocal(4, 9, 2);
 
 /* Lojas Americanas */
 
@@ -715,16 +727,11 @@ CALL defSubCategoriaLocal(5, 4, 11);
 CALL defSubCategoriaLocal(5, 4, 12);
 CALL defSubCategoriaLocal(5, 4, 13);
 CALL defSubCategoriaLocal(5, 4, 14);
-CALL defSubCategoriaLocal(5, 5, 4);
-CALL defSubCategoriaLocal(5, 5, 5);
-CALL defSubCategoriaLocal(5, 5, 6);
 CALL defSubCategoriaLocal(5, 6, 0);
 CALL defSubCategoriaLocal(5, 6, 1);
 CALL defSubCategoriaLocal(5, 6, 2);
 CALL defSubCategoriaLocal(5, 6, 3);
 CALL defSubCategoriaLocal(5, 9, 0);
-CALL defSubCategoriaLocal(5, 9, 1);
-CALL defSubCategoriaLocal(5, 9, 2);
 CALL defSubCategoriaLocal(5, 13, 0);
 
 
@@ -735,12 +742,9 @@ CALL defSubCategoriaLocal(6, 1,2);
 CALL defSubCategoriaLocal(6, 1,4);
 CALL defSubCategoriaLocal(6, 1,5);
 CALL defSubCategoriaLocal(6, 1,6);
-CALL defSubCategoriaLocal(6, 5,0);
-CALL defSubCategoriaLocal(6, 5,1);
-CALL defSubCategoriaLocal(6, 5,2);
-CALL defSubCategoriaLocal(6, 5,3);
-CALL defSubCategoriaLocal(6, 6,0);
-CALL defSubCategoriaLocal(6, 8,0);
+CALL defSubCategoriaLocal(6, 6,2);
+CALL defSubCategoriaLocal(6, 6,3);
+CALL defSubCategoriaLocal(6, 6,4);
 CALL defSubCategoriaLocal(6, 9,1);
 CALL defSubCategoriaLocal(6, 9,2);
 
@@ -805,8 +809,6 @@ CALL defSubCategoriaLocal(15, 4, 13);
 CALL defSubCategoriaLocal(16, 4, 1);
 CALL defSubCategoriaLocal(16, 4, 2);
 
-/* 
-
 /* Belliótica */
 
 CALL defSubCategoriaLocal(17, 35, 2);
@@ -823,10 +825,9 @@ CALL defSubCategoriaLocal(18, 5, 0);
 CALL defSubCategoriaLocal(18, 5, 1);
 CALL defSubCategoriaLocal(18, 5, 2);
 CALL defSubCategoriaLocal(18, 5, 3);
-CALL defSubCategoriaLocal(18, 6, 0);
-CALL defSubCategoriaLocal(18, 6, 2);
-CALL defSubCategoriaLocal(18, 6, 3);
-CALL defSubCategoriaLocal(18, 8, 0);
+CALL defSubCategoriaLocal(18, 6,2);
+CALL defSubCategoriaLocal(18, 6,3);
+CALL defSubCategoriaLocal(18, 6,4);
 CALL defSubCategoriaLocal(18, 9, 1);
 CALL defSubCategoriaLocal(18, 9, 2);
 
@@ -1071,7 +1072,7 @@ CALL defSubCategoriaLocal(60, 4, 10);
 
 /* Doctor Feet */
 
-CALL defSubCategoriaLocal(61, 34, 4);
+CALL defSubCategoriaLocal(61, 34, 1);
 
 /* Nutty Bavarian */
 
@@ -1167,15 +1168,12 @@ CALL defSubCategoriaLocal(84, 7, 3);
 
 /* Padaria Praiamar */
 
-CALL defSubCategoriaLocal(85, 7, 2);
-CALL defSubCategoriaLocal(85, 7, 3);
 CALL defSubCategoriaLocal(85, 7, 4);
+CALL defSubCategoriaLocal(85, 7, 2);
 
 /* Carrefour */
 
 CALL defSubCategoriaLocal(86, 10, 0);
-CALL defSubCategoriaLocal(86, 10, 1);
-CALL defSubCategoriaLocal(86, 10, 2);
 CALL defSubCategoriaLocal(86, 0, 0);
 CALL defSubCategoriaLocal(86, 0, 1);
 CALL defSubCategoriaLocal(86, 0, 2);
@@ -1216,9 +1214,6 @@ CALL defSubCategoriaLocal(86, 6, 0);
 CALL defSubCategoriaLocal(86, 6, 1);
 CALL defSubCategoriaLocal(86, 6, 2);
 CALL defSubCategoriaLocal(86, 6, 3);
-CALL defSubCategoriaLocal(86, 8, 0);
-CALL defSubCategoriaLocal(86, 8, 1);
-CALL defSubCategoriaLocal(86, 8, 2);
 CALL defSubCategoriaLocal(86, 11, 0);
 CALL defSubCategoriaLocal(86, 12, 1);
 CALL defSubCategoriaLocal(86, 12, 3);
@@ -1391,19 +1386,14 @@ CALL defSubCategoriaLocal(119, 20, 0);
 
 /* Mania de Churrasco Prime Steak House */
 
-CALL defSubCategoriaLocal(120, 16, 0);
-CALL defSubCategoriaLocal(120, 19, 0);
 CALL defSubCategoriaLocal(120, 20, 0);
 
 /* Mania de Churrasco */
 
-CALL defSubCategoriaLocal(121, 16, 0);
-CALL defSubCategoriaLocal(121, 19, 0);
 CALL defSubCategoriaLocal(121, 20, 0);
 
 /* Spoleto */
 
-CALL defSubCategoriaLocal(122, 19, 0);
 CALL defSubCategoriaLocal(122, 21, 0);
 CALL defSubCategoriaLocal(122, 40, 0);
 
@@ -1415,7 +1405,6 @@ CALL defSubCategoriaLocal(123, 16, 0);
 /* All Beef's */
 
 CALL defSubCategoriaLocal(124, 15, 0);
-CALL defSubCategoriaLocal(124, 19, 0);
 
 /* Patroni Premium */
 
@@ -1743,120 +1732,265 @@ CALL defSubCategoriaLocal(201, 7, 1);
 CALL defSubCategoriaLocal(202, 4, 3);
 CALL defSubCategoriaLocal(202, 4, 9);
 CALL defSubCategoriaLocal(202, 4, 16);
-CALL cadastrarSubCategoria(202, 4, 18);
+CALL defSubCategoriaLocal(202, 4, 18);
 
 /* Marcia Mello */
 
-CALL cadastrarSubCategoria(203, 4, 17);
-CALL cadastrarSubCategoria(203, 4, 1);
-CALL cadastrarSubCategoria(203, 4, 2);
-CALL cadastrarSubCategoria(203, 5, 1);
-CALL cadastrarSubCategoria(203, 5, 2);
-CALL cadastrarSubCategoria(203, 5, 7);
-CALL cadastrarSubCategoria(203, 5, 8);
+CALL defSubCategoriaLocal(203, 4, 17);
+CALL defSubCategoriaLocal(203, 4, 1);
+CALL defSubCategoriaLocal(203, 4, 2);
+CALL defSubCategoriaLocal(203, 5, 1);
+CALL defSubCategoriaLocal(203, 5, 2);
+CALL defSubCategoriaLocal(203, 5, 7);
+CALL defSubCategoriaLocal(203, 5, 8);
 
 /* Marisorte Loterias */
 
-CALL cadastrarSubCategoria(204, 36, 1);
+CALL defSubCategoriaLocal(204, 36, 1);
 
 /* Maxxi Color */
 
-CALL cadastrarSubCategoria(205, 44, 0);
-CALL cadastrarSubCategoria(205, 44, 1);
+CALL defSubCategoriaLocal(205, 44, 0);
+CALL defSubCategoriaLocal(205, 44, 1);
 
 /* Mendes Tur */
 
-CALL cadastrarSubCategoria(206, 38, 0);
+CALL defSubCategoriaLocal(206, 38, 0);
 
 /* Miró */
 
-CALL cadastrarSubCategoria(207, 4, 14);
-CALL cadastrarSubCategoria(207, 4, 15);
+CALL defSubCategoriaLocal(207, 4, 14);
+CALL defSubCategoriaLocal(207, 4, 15);
 
 /* MMartan */
 
-CALL cadastrarSubCategoria(208, 12, 7);
+CALL defSubCategoriaLocal(208, 12, 7);
 
 /* Monte Carlo */
 
-CALL cadastrarSubCategoria(209, 5, 0);
-CALL cadastrarSubCategoria(209, 5, 1);
-CALL cadastrarSubCategoria(209, 5, 2);
-CALL cadastrarSubCategoria(209, 5, 3);
-CALL cadastrarSubCategoria(209, 5, 5);
-CALL cadastrarSubCategoria(209, 5, 7);
+CALL defSubCategoriaLocal(209, 5, 0);
+CALL defSubCategoriaLocal(209, 5, 1);
+CALL defSubCategoriaLocal(209, 5, 2);
+CALL defSubCategoriaLocal(209, 5, 3);
+CALL defSubCategoriaLocal(209, 5, 5);
+CALL defSubCategoriaLocal(209, 5, 7);
 
 /* Morana */
 
+CALL defSubCategoriaLocal(210, 5, 2);
+CALL defSubCategoriaLocal(210, 5, 1);
+CALL defSubCategoriaLocal(210, 5, 7);
+CALL defSubCategoriaLocal(210, 5, 8);
+CALL defSubCategoriaLocal(210, 4, 10);
+CALL defSubCategoriaLocal(210, 5, 9);
+
 /* Murabak */
+
+CALL defSubCategoriaLocal(211, 4, 1);
+CALL defSubCategoriaLocal(211, 4, 17);
+CALL defSubCategoriaLocal(211, 4, 2);
+CALL defSubCategoriaLocal(211, 12, 2);
+CALL defSubCategoriaLocal(211, 6, 0);
+CALL defSubCategoriaLocal(211, 6, 2);
+CALL defSubCategoriaLocal(211, 45, 0);
 
 /* Náutica Tattoo  */
 
+CALL defSubCategoriaLocal(212, 34, 4);
+
 /* O Boticário */
+
+CALL defSubCategoriaLocal(213, 4, 11);
+CALL defSubCategoriaLocal(213, 4, 12);
+CALL defSubCategoriaLocal(213, 4, 13);
 
 /* Organza */
 
+CALL defSubCategoriaLocal(214, 4, 17);
+
 /* Ortobom */
+
+CALL defSubCategoriaLocal(215, 12, 8);
 
 /* Óticas IX, Martins Zeiss, Occhiali e Carol  */
 
+CALL defSubCategoriaLocal(216, 35, 2);
+CALL defSubCategoriaLocal(217, 35, 2);
+CALL defSubCategoriaLocal(218, 35, 2);
+CALL defSubCategoriaLocal(219, 35, 2);
+
+/* Kidz Shoe Store */
+
+CALL defSubCategoriaLocal(220, 4, 0);
+CALL defSubCategoriaLocal(220, 4, 16);
+
 /* Pandora */
+
+CALL defSubCategoriaLocal(221, 5, 2);
+CALL defSubCategoriaLocal(221, 5, 1);
+CALL defSubCategoriaLocal(221, 5, 7);
+CALL defSubCategoriaLocal(221, 5, 8);
+CALL defSubCategoriaLocal(221, 5, 9);
 
 /* Pink */
 
+CALL defSubCategoriaLocal(222, 4, 0);
+CALL defSubCategoriaLocal(222, 4, 4);
+
 /* Planeta Café */
+
+CALL defSubCategoriaLocal(223, 16, 0);
 
 /* Quiksilver */
 
+CALL defSubCategoriaLocal(224, 4, 6);
+CALL defSubCategoriaLocal(224, 4, 8);
+CALL defSubCategoriaLocal(224, 4, 1);
+CALL defSubCategoriaLocal(224, 4, 2);
+CALL defSubCategoriaLocal(224, 4, 18);
+CALL defSubCategoriaLocal(224, 5, 6);
+
 /* Radio Nacional */
+
+CALL defSubCategoriaLocal(225, 4, 1);
+CALL defSubCategoriaLocal(225, 4, 2);
+CALL defSubCategoriaLocal(225, 4, 17);
 
 /* Raquel Bijoux */
 
+CALL defSubCategoriaLocal(226, 5, 2);
+CALL defSubCategoriaLocal(226, 5, 1);
+CALL defSubCategoriaLocal(226, 5, 7);
+CALL defSubCategoriaLocal(226, 5, 8);
+CALL defSubCategoriaLocal(226, 5, 9);
+
+
 /* Rei do Mate */
+
+CALL defSubCategoriaLocal(227, 16, 0);
 
 /* Schutz */
 
+CALL defSubCategoriaLocal(228, 4, 0);
+CALL defSubCategoriaLocal(228, 4, 4);
+CALL defSubCategoriaLocal(228, 4, 10);
+
 /* Sodimac Dicico */
+
+CALL defSubCategoriaLocal(229, 46, 0);
 
 /* Starbucks Coffee */
 
+CALL defSubCategoriaLocal(230, 7, 3);
+CALL defSubCategoriaLocal(230, 16, 0);
+
 /* Stroke */
+
+CALL defSubCategoriaLocal(231, 4, 1);
+CALL defSubCategoriaLocal(231, 4, 2);
+CALL defSubCategoriaLocal(231, 4, 17);
 
 /* Swarovski */
 
+CALL defSubCategoriaLocal(232, 5, 2);
+CALL defSubCategoriaLocal(232, 5, 1);
+CALL defSubCategoriaLocal(232, 5, 7);
+CALL defSubCategoriaLocal(232, 5, 9);
+CALL defSubCategoriaLocal(232, 5, 5);
+
 /* The Body Shop */
+
+CALL defSubCategoriaLocal(233, 4, 11);
+CALL defSubCategoriaLocal(233, 4, 12);
+CALL defSubCategoriaLocal(233, 4, 13);
 
 /* TIM */
 
+CALL defSubCategoriaLocal(234, 37, 0);
+
 /* Tip Top */
+
+CALL defSubCategoriaLocal(235, 4, 16);
 
 /* Top Car */
 
+CALL defSubCategoriaLocal(236, 47, 0);
+
 /* Tottene */
+
+CALL defSubCategoriaLocal(237, 7, 6);
 
 /* Track & Field */
 
+CALL defSubCategoriaLocal(238, 4, 0);
+CALL defSubCategoriaLocal(238, 4, 1);
+CALL defSubCategoriaLocal(238, 4, 2);
+CALL defSubCategoriaLocal(238, 4, 4);
+CALL defSubCategoriaLocal(238, 5, 6);
+
 /* Valisere */
+
+CALL defSubCategoriaLocal(239, 4, 3);
 
 /* Vermont */
 
+CALL defSubCategoriaLocal(240, 4, 0);
+CALL defSubCategoriaLocal(240, 4, 4);
+
 /* Victor Hugo */
+
+CALL defSubCategoriaLocal(241, 4, 10);
 
 /* Vim Vi Venci */
 
+CALL defSubCategoriaLocal(242, 4, 16);
+
 /* Vivara */
+
+CALL defSubCategoriaLocal(243, 5, 2);
+CALL defSubCategoriaLocal(243, 5, 1);
+CALL defSubCategoriaLocal(243, 5, 7);
+CALL defSubCategoriaLocal(243, 5, 9);
+CALL defSubCategoriaLocal(243, 5, 5);
 
 /* Viviana Puccinelli */
 
+CALL defSubCategoriaLocal(244, 4, 1);
+CALL defSubCategoriaLocal(244, 4, 17);
+
 /* YellowCom Vivo */
+
+CALL defSubCategoriaLocal(245, 37, 0);
 
 /* You Play Space */
 
+CALL defSubCategoriaLocal(246, 48, 0);
+
 /* Yuppie */
 
-/* Zeiss */
+CALL defSubCategoriaLocal(247, 4, 1);
+CALL defSubCategoriaLocal(247, 4, 2);
+CALL defSubCategoriaLocal(247, 4, 4);
+CALL defSubCategoriaLocal(247, 4, 10);
 
 /* Zelo */
+
+CALL defSubCategoriaLocal(248, 12, 7);
+
+/* Berçários, do térreo ao quarto andar */
+
+CALL defSubCategoriaLocal(249, 26, 0);
+CALL defSubCategoriaLocal(250, 26, 0);
+CALL defSubCategoriaLocal(251, 26, 0);
+CALL defSubCategoriaLocal(252, 26, 0);
+CALL defSubCategoriaLocal(253, 26, 0);
+
+/* Telefones (terceiro andar) */
+
+CALL defSubCategoriaLocal(254, 28, 0);
+CALL defSubCategoriaLocal(255, 28, 0);
+CALL defSubCategoriaLocal(256, 28, 0);
+CALL defSubCategoriaLocal(257, 28, 0);
 
 /* ------------ ! ------------- */
 
@@ -1870,10 +2004,11 @@ CALL publicarComunicado(19, 1, 3, 0, "50% de desconto em todos os jogos e HQ's!"
 CALL publicarComunicado(38, 0, 1, 0,"Chegou a nova TV 8K da LG, com tecnologia NanoCell e tamanho de 75 polegadas! Não se preocupe mais com distorção de cores e ângulo de visão, adquira já!", now(), null);
 CALL publicarComunicado(115, 3, 2, 0,"Banheiro interditado!", now(), DATE_ADD(now(), INTERVAL 1 hour));
 CALL publicarComunicado(153, 2, 2, 0, "Prato do dia: escargot ao molho madeira", now(), DATE_ADD(now(), INTERVAL 3 hour));
-
-
 CALL publicarComunicado(6, 0, 0, 0,"50% de desconto em todos os produtos!", now(), '2020-09-30 22:00:00'); 
 CALL publicarComunicado(6, 1, 0, 0, "Desconto maior para produtos de informática: 80%!", now(), '2020-09-30 22:00:00'); 
-
 CALL publicarComunicado(217, 4, 4, 0, "Preços: Meia entrada - R$ 18.00; Inteira: R$ 32.00", now(), null);
+
+
+
 CALL publicarComunicado(217, 2, 5, 0, "Próxima sessâo: 'Sonic: O filme' - Sala 4, às 17:00. Dublado. Duração: 1h40m", now(), DATE_ADD(now(), INTERVAL 45 minute));
+CALL cadastrarSubCategoria(9, "Livraria")

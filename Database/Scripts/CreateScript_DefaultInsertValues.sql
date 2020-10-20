@@ -100,6 +100,13 @@ VALUES
     "Lojista"
 );
 
+INSERT INTO tipo_administrador
+VALUES
+(
+	2,
+    "Desenvolvedor"
+);
+
 /* Tipo de locais */
 
 INSERT INTO tipo_local
