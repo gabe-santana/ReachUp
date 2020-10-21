@@ -289,6 +289,43 @@ BEGIN
 	DELETE FROM comunicado WHERE cd_comunicado = pComunicado;
 END$$
 
+DROP FUNCTION IF EXISTS pesquisarNomeCategoria$$
+CREATE FUNCTION pesquisarCategoria(pCategoria int) RETURNS varchar(45)
+BEGIN
+
+    DECLARE nomeCategoria varchar(45);
+    SELECT nm_categoria INTO nomeCategoria 
+    FROM categoria
+    WHERE cd_categoria = pCategoria;
+
+    RETURN nomeCategoria;
+END$$
+
+DROP FUNCTION IF EXISTS pesquisarDescricaoCategoria$$
+CREATE FUNCTION pesquisarDescricaoCategoria(pCategoria int) RETURNS varchar(200)
+BEGIN
+
+    DECLARE descricaoCategoria varchar(200);
+    SELECT ds_categoria INTO descricaoCategoria
+    FROM categoria
+    WHERE cd_categoria = pCategoria;
+
+    RETURN descricaoCategoria;
+END$$
+
+DROP FUNCTION IF EXISTS pesquisarNomeSubCategoria$$
+CREATE FUNCTION pesquisarNomeSubCategoria(pCategoria int, pSubCategoria int) RETURNS varchar(45)
+BEGIN
+
+    DECLARE nomeSubCategoria varchar(45);
+    SELECT nm_sub_categoria INTO nomeSubCategoria 
+    FROM sub_categoria
+    WHERE cd_categoria = pCategoria
+    AND cd_sub_categoria = pSubCategoria;
+
+    RETURN nomeSubCategoria;
+END$$
+
 DROP PROCEDURE IF EXISTS pesquisar$$
 CREATE PROCEDURE pesquisar(search varchar(50))
 BEGIN
@@ -298,7 +335,13 @@ BEGIN
 	l.hr_abertura,
 	l.hr_fechamento,
 	substring_index(group_concat(DISTINCT ca.nm_categoria SEPARATOR ','), ',', 3) as categorias,
-	substring_index(group_concat(DISTINCT sc.nm_sub_categoria SEPARATOR ','), ',', 3) as sub_categorias
+	substring_index(group_concat(DISTINCT sc.nm_sub_categoria SEPARATOR ','), ',', 3) as sub_categorias,
+    count(DISTINCT(ca.cd_categoria)) as categoriesCount,
+	count(DISTINCT (sc.cd_sub_categoria)) as subCategoriesCount,
+    pesquisarNomeCategoria(ca.cd_categoria) as Nome_Categoria,
+    pesquisarDescricaoCategoria(ca.cd_categoria) as Descricao_Categoria,
+    pesquisarNomeSubCategoria(ca.cd_categoria, sc.cd_sub_categoria) as Nome_SubCategoria
+    
 	FROM `local` AS l
 
 	JOIN tipo_local AS tl 
@@ -321,17 +364,19 @@ BEGIN
     OR 
 	formatString(sc.nm_sub_categoria) LIKE formatString(concat("%",search,"%"))
 
+	/* ------ Check the active issue ------- */
     /*OR
-	formatString(ca.nm_categoria) LIKE formatString(concat("%",search,"%"))
+	formatString(ca.nm_categoria) RLIKE formatString(concat("%", search REGEXP '.',"%"))
     AND
-	formatString(sc.nm_sub_categoria) LIKE formatString(concat("%",search,"%"))*/
+	formatString(sc.nm_sub_categoria) RLIKE formatString(concat("%", search RLIKE '.',"%"))*/
 
 	OR
-	formatString(tl.nm_tipo_local) LIKE formatString(concat("%",search,"%"))
+	formatString(tl.nm_tipo_local) LIKE formatString(concat("%", search,"%"))
 	OR
 	formatString(l.cd_andar) LIKE formatString(concat("%",search,"%"))
 
-	GROUP BY l.cd_local;
+	GROUP BY l.cd_local
+    ORDER BY categoriesCount DESC , subCategoriesCount DESC;
 END$$
 
 /* Lojista e Administrador */
@@ -573,7 +618,76 @@ BEGIN
 	WHERE scl.cd_local = pLocal;	
 END$$
 
+DROP PROCEDURE IF EXISTS alterarHorarioFuncionamentoLocais_Tipo$$
+CREATE PROCEDURE alterarHorarioFuncionamentoLocais_Tipo(pTipo int, pAbertura time, pFechamento time)
+BEGIN
+	declare tipoLocal int;
+	declare parar int default 0;
+	declare posicao int default 0;
 
+	Declare locais cursor for
+      SELECT cd_tipo_local
+	  FROM `local`;
+
+	declare continue handler for not found
+     set parar = 1;
+
+  Open locais;
+
+  set posicao = 0;
+
+  todos:loop
+    fetch locais into tipoLocal;
+
+    set posicao = posicao + 1;
+
+    if pTipo = tipoLocal then
+      UPDATE `local`
+      SET hr_abertura = pAbertura,
+          hr_fechamento = pFechamento
+      WHERE cd_local = posicao;
+    end if;
+
+    if parar = 1 then
+      set posicao = 0;
+      leave todos;
+    end if;
+
+  end loop;
+
+  Close locais;
+END$$
+
+/*DROP PROCEDURE IF EXISTS alterarHorarioFuncionamentoLocais_Todos$$
+CREATE PROCEDURE alterarHorarioFuncionamentoLocais_Todos(pAbertura time, pFechamento time)
+BEGIN
+	declare parar int default 0;
+	declare posicao int default 0;
+
+	declare continue handler for not found
+     set parar = 1;
+
+  Open locais;
+
+  set posicao = 0;
+
+  todos:loop
+    set posicao = posicao + 1;
+
+      UPDATE `local`
+      SET hr_abertura = pAbertura,
+          hr_fechamento = pFechamento
+      WHERE cd_local = posicao;
+
+    if parar = 1 then
+      set posicao = 0;
+      leave todos;
+    end if;
+
+  end loop;
+
+  Close locais;
+END$$*/
 
 DROP FUNCTION IF EXISTS formatString$$
 CREATE FUNCTION formatString(str varchar(50) ) 	RETURNS  varchar(50)
