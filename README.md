@@ -128,6 +128,10 @@ later *Pull requests* will be welcome.
 - Create Issues:
 [Create Issue in ReachUp](https://github.com/0G4briel/ReachUp/issues/new)
 
+## Our Partnership
+
+We are anxiously waiting for a craft from [Praiamar Shopping](http://www.praiamarshopping.com.br) to record the project working on there, and a lending of the local plants so that everything works correctly. Meanwhile, our database is densely populated with all mall locations, for testing and academic or commercial presentation purposes.
+
 ## License
 
 - [MIT](https://choosealicense.com/licenses/mit/)
