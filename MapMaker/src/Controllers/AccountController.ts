@@ -6,10 +6,13 @@ import { UserToken } from "../Models/UserToken";
 import { IUser } from "../Interfaces/IUser";
 import { UserTokenController } from "./UserTokenController";
 
+interface IAccount {
+  index(email : string, password : string) : Promise<any>;
+}
+
 export module AccountController {
 
-  export class clsAccountController extends Account.clsAccount {
- 
+  export class clsAccountController extends Account.clsAccount implements IAccount {
     constructor(){
       super();
     }

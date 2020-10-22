@@ -21,7 +21,9 @@
 
 /* Categorias aplicáveis em lojas (e suas subcategorias) */
 
-CALL pesquisar("Amusement Park");
+Select * from `local` where cd_tipo_local = 0;
+
+CALL alterarHorarioFuncionamentoLocais_Tipo(1, '11:00:00', '16:00:00');
 
 CALL cadastrarCategoria("Informática", "Produtos tecnólogicos de uso geral e específico no mundo da tecnologia da informação");
 CALL cadastrarSubCategoria(0, "Hardware");
@@ -354,25 +356,27 @@ CALL criarFeedback(0, "giornogiovanna@email.com", "Os banheiros são bem ilumina
 CALL criarFeedback(0, "fabianacruz@email.com", "As cabines dos banheiros são apertadas, e eles não têm piso tátil. Isso é um absurdo.", 1);
 
 
+/* Não existe */
+CALL cadastrarLocal(0, "Livraria Praiamar Shopping ",  1,  '09:25:00', '19:35:00', "77ab0e0c-f928-11ea-eee1-0242ac120002");
 
-CALL cadastrarLocal(0, "Livraria Praiamar Shopping ",  0,  '09:25:00', '19:35:00', "77ab0e0c-f928-11ea-eee1-0242ac120002");
-CALL cadastrarLocal(0, "Livraria Saraiva",  3, '10:00:00', '19:59:59',"adeafe8a-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Livraria Saraiva",  3, '10:00:00', '20:00:00',"adeafe8a-f928-11ea-adc1-0242ac120002");
+
+/* Não existem */
 CALL cadastrarLocal(0, "Livraria Cultura",  2, '11:00:00', '18:59:59',"7beafe8a-f928-11ea-adc1-0242ac120002");
 CALL cadastrarLocal(0, "Livraria Nobel",  1, '10:00:00', '17:59:59',"7deace8a-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Livraria Martins Fontes",  1, '10:00:00', '22:59:59',"fdeafe8a-f928-11ea-adc1-0242ac120002");
-
-	
+CALL cadastrarLocal(0, "Livraria Martins Fontes",  1, '10:00:00', '22:59:59',"fdeafe8a-f928-11ea-adc1-0242ac120002");	
 CALL cadastrarLocal(0, "Lojas Americanas",  0, '09:00:00', '22:30:00', "7deaf908-f928-11ea-adc1-0242ac120002");
 
 
-CALL cadastrarLocal(0, "Rihappy",  2, '08:35:00', '22:00:00', "7deafb92-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "Rihappy",  2, '12:00:00', '20:00:00', "7deafb92-f928-11ea-adc1-0242ac120002");
 
 
 
-CALL cadastrarLocal(0, "Samsung",  1, '09:45:00', '23:00:00', "7deafd68-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "Samsung",  1, '12:00:00', '20:00:00', "7deafd68-f928-11ea-adc1-0242ac120002");
 
 
-CALL cadastrarLocal(0, "MM Santos",  0, '08:00:00', '23:30:00', "7deaff8e-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "MM Santos",  0, '10:00:00', '22:00:00', "7deaff8e-f928-11ea-adc1-0242ac120002");
 
 
 CALL cadastrarLocal(0, "Life's Good LG",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac120002");
@@ -2007,8 +2011,4 @@ CALL publicarComunicado(153, 2, 2, 0, "Prato do dia: escargot ao molho madeira",
 CALL publicarComunicado(6, 0, 0, 0,"50% de desconto em todos os produtos!", now(), '2020-09-30 22:00:00'); 
 CALL publicarComunicado(6, 1, 0, 0, "Desconto maior para produtos de informática: 80%!", now(), '2020-09-30 22:00:00'); 
 CALL publicarComunicado(217, 4, 4, 0, "Preços: Meia entrada - R$ 18.00; Inteira: R$ 32.00", now(), null);
-
-
-
 CALL publicarComunicado(217, 2, 5, 0, "Próxima sessâo: 'Sonic: O filme' - Sala 4, às 17:00. Dublado. Duração: 1h40m", now(), DATE_ADD(now(), INTERVAL 45 minute));
-CALL cadastrarSubCategoria(9, "Livraria")

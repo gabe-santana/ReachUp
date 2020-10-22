@@ -2,6 +2,8 @@
 
 import { MallPlanController } from "../Controllers/MallPlanController";
 
+var $id = document.getElementById.bind(document);
+
 $(()=>{
 
     const mapHandler = new MallPlanController.clsMallPlanController();
@@ -13,7 +15,7 @@ $(()=>{
     var clicked = false;
     var squares = document.querySelectorAll('.square');
 
-    $('#widthUnits').value = getWidthUnits();
+    $id('widthUnits').value = getWidthUnits();
 
     /*$('#widthUnits').change(function(){
         var unitsValue = this.value; 
@@ -38,7 +40,7 @@ $(()=>{
         });
     });
 
-    $("#floor").change(function(){
+    $id("floor").change(function(){
         var floor = this.value;
 
         if (floor == ""){
@@ -53,44 +55,44 @@ $(()=>{
         renderMap();
     });
 
-    $("#addRoute").click(function(){
+    $id("addRoute").click(function(){
         addHallToJson();
     });
 
-    $("#addLocal").click(function(){
+    $id("addLocal").click(function(){
         addLocaltoJson();
     });
 
     
-    $("#addAll").click(function(){
+    $id("addAll").click(function(){
         addAlltoJson();
     });
 
  
 
-    $("#clear").click(function(){
+    $id("clear").click(function(){
         //if (pendingAdditions == 0){
            clear();
            this.disabled = true;
-           document.getElementById('showMap').disabled = false;
-           document.getElementById('floor').value = getCurrentFloor();
+           $id('showMap').disabled = false;
+           $id('floor').value = getCurrentFloor();
         /*} else {
             alert('Há alterações não adicionadas!');
         }*/
         
     });
 
-    $('#showMap').click(function(){
+    $id('showMap').click(function(){
         hatchMap();
         this.disabled = true;
-        document.getElementById('clear').disabled = false;
+        $id('clear').disabled = false;
 
     })
 
-    $('#plan').change(function(){
+    $id('plan').change(() => {
       alert('imagem mudou!');
       var path = this.val();
-      document.getElementById('#mapContainer').style.setProperty('background-image', `url(../map/${path})`);
+      $id('mapContainer').style.setProperty('background-image', `url(../map/${path})`);
       document.location.reload();
     });
 
