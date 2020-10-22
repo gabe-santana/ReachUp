@@ -1,5 +1,7 @@
 /// <reference path='../Controllers/MallPlanController.ts'/>
 
+import { MallPlanController } from "../Controllers/MallPlanController";
+
 $(()=>{
 
     const mapHandler = new MallPlanController.clsMallPlanController();
