@@ -1,13 +1,6 @@
 /// <reference path='../Controllers/MallPlanController.ts'/>
-/// <reference path='../../utils/BlobToBase64.ts'/>
-
-import { BlobToBase64 } from "../../utils/BlobToBase64.ts";
-import { MallPlanController } from "../Controllers/MallPlanController";
 
 $(()=>{
-
-    const encode = new BlobToBase64.clsBlobToBase64();
-    encode.convertFromBlob();
 
     const mapHandler = new MallPlanController.clsMallPlanController();
     var map = mapHandler.getMap();
@@ -66,13 +59,12 @@ $(()=>{
         addLocaltoJson();
     });
 
-    $("#addTriBeacon").click(function(){
-        addTriBeacontoJson();
-    });
     
     $("#addAll").click(function(){
         addAlltoJson();
     });
+
+ 
 
     $("#clear").click(function(){
         //if (pendingAdditions == 0){
@@ -91,12 +83,10 @@ $(()=>{
         this.disabled = true;
         document.getElementById('clear').disabled = false;
 
-    });
-
-    $('#updateMap').click(function(){
-        const mapHandler = new MallPlanController.clsMallPlanController();
-        mapHandler.putMap();
     })
 
+    /*$('#updateMap').click(function(){
+        const mapHandler = new MallPlanController.clsMallPlanController();
+        mapHandler.putMap();
+    })*/
 });
-

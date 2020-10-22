@@ -1,6 +1,10 @@
+body{
+   margin: 0px;
+   padding: 0px;
+}
 :root{
     --dimension-mapContainer: 700px;
-    --squarePerRow: 20;
+    --squarePerRow: 200;
 }
 
 
@@ -14,10 +18,16 @@
     height: var(--dimension-mapContainer);
     width: var(--dimension-mapContainer);
 
+    background-image: url("../map/floor0.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+
+    width: 100%;
+    height: 100%;
 }
 
 #control-panel{
-
+ 
     margin-top: 10px;
     margin-bottom: 10px;
     width: var(--dimension-mapContainer);
@@ -35,13 +45,23 @@
 .square{
     height: 50;
     width: 50;
-
-    border: 1px solid black;
+    border: 1px solid rgba(0, O, O, O.5);
+    background-color: transparent;
 }
+
+.square-local{
+    height: 20;
+    width: 0;
+    border: 1px solid rgba(0, O, O, O.5);
+    background-color: transparent;
+}
+
+
 .mapBtn{
     width: 150px;
     height: 35px;
     border: 1px solid black;
     background-color: transparent;
 }
+
 
