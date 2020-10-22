@@ -87,6 +87,13 @@ $(()=>{
 
     })
 
+    $('#plan').change(function(){
+      alert('imagem mudou!');
+      var path = this.val();
+      document.getElementById('#mapContainer').style.setProperty('background-image', `url(../map/${path})`);
+      document.location.reload();
+    });
+
     /*$('#updateMap').click(function(){
         const mapHandler = new MallPlanController.clsMallPlanController();
         mapHandler.putMap();
