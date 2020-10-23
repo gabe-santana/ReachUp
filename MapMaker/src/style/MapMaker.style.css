@@ -37,8 +37,21 @@ body{
 
 #right-painel{
     float: right;
+    background-color: black;
+    color: #d7d7d7;
+    border-top-width: 5px;
+    border-top-style: solid;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-color: #372a70;
 }
 
+#logo {
+    background-image: url("../files/images/ReachUp.jpg");
+    width: 100px;
+    height: 100px;
+    margin-left: 75%;
+}
 
 /* CLASSES */
 
@@ -61,7 +74,16 @@ body{
     width: 150px;
     height: 35px;
     border: 1px solid black;
-    background-color: transparent;
+    background-color: #1c405e;
+    margin-left: 5px;
+    color: #e0e0e0;
+    box-shadow: 1px 1px #1c405e;
+    border-radius: 5px;
+}
+
+.mapBtn:disabled {
+   background-color: #298696;
+   box-shadow: 1px 1px #298696;
 }
 
 

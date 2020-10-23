@@ -92,8 +92,12 @@ $(()=>{
     $id('plan').change(() => {
       alert('imagem mudou!');
       var path = this.val();
-      $id('mapContainer').style.setProperty('background-image', `url(../map/${path})`);
-      document.location.reload();
+      if (path.split('.').pop() == 'jpg' || 'jpeg' || 'png'){
+        $id('mapContainer').style.setProperty('background-image', `url(../map/${path})`);
+        document.location.reload();
+        return;
+      }
+      alert('Tipo de arquivo inválido! Escolha um arquivo de imagem!');
     });
 
     /*$('#updateMap').click(function(){

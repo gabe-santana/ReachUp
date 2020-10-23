@@ -8,7 +8,7 @@ export module UserTokenController {
     }
 
     public async putToken(token : string){
-      this.setToken(token);
+      await this.setToken(token);
     }
   }
 }
