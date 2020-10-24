@@ -1,3 +1,7 @@
+https://img.shields.io/github/issues/0G4briel/ReachUp
+https://img.shields.io/github/forks/0G4briel/ReachUp
+
+
 # ReachUp!
 
 
