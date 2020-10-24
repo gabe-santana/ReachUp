@@ -89,10 +89,10 @@ dependencies:
 ### TypeScript Dev-Dependencies (VS Code Intellisense and Transpilation)
 
 ```
- "typescript": ^4.0.3
- "babel-cli": ^6.26.0
- "babel-core": ^6.26.3
- "babel-preset-es2015": ^6.24.1
+ typescript: ^4.0.3
+ babel-cli: ^6.26.0
+ babel-core: ^6.26.3
+ babel-preset-es2015: ^6.24.1
 ```
 # Developing Info
 
