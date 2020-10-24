@@ -7,13 +7,19 @@
 <img alt="HTML5" src="https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white" />
 <img alt="CSS3" src="https://img.shields.io/badge/-CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white" />
 <img alt="MySQL" src="https://img.shields.io/badge/-MySQL-1a202c?style=flat-square&logo=MySQL&logoColor=white" /> 
+</p>
+<br/>
+<p>
 <img alt="NPM" src="https://img.shields.io/badge/-npm-red?style=flat-square&logo=npm&logoColor=white" />
 <img alt="VS Code" src="https://img.shields.io/badge/-Code-1073C9?style=flat-square&logo=visual%20studio%20code&logoColor=white" />
+</p>
+<br/>
+<p>
 <img src="https://img.shields.io/github/issues/0G4briel/ReachUp">
 <img src="https://img.shields.io/github/forks/0G4briel/ReachUp">
 <img src="https://img.shields.io/github/directory-file-count/0G4briel/ReachUp">
 <img src="https://img.shields.io/github/last-commit/0G4briel/ReachUp">
-<p>
+</p>
 
 # ReachUp!
 
@@ -134,6 +140,12 @@ We are anxiously waiting for a craft from [Praiamar Shopping](http://www.praiama
 ## License
 
 - [MIT](https://choosealicense.com/licenses/mit/)
+
+## Contact us
+
+<a target="_blank" href="mailto:csoft.company@gmail.com?subject=[GitHub]">
+    <img alt="Gmail badge" src="https://img.shields.io/badge/-csoft.company@gmail.com-D14836?style=flat-square&logo=Gmail&logoColor=white" />
+  </a>
 
 ![ReachUp](https://user-images.githubusercontent.com/59267719/93685984-a55cb000-fa89-11ea-9dfe-4a4906088e3a.png)
 
