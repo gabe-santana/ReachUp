@@ -81,7 +81,7 @@ We're using:
 - **ASP.NET Core 3.0 MVC Web Application**: C#/Razor (Backend)\ HTML + CSS + JavaScript + Bootstrap (Frontend);
 - **Flutter: Dart + Java + Objective-C** for cross-platfor mobile app (Android/iOS);
 - **Flame: Flutter Lib** for render a real-time map of local;
-- **MapMaker (MVC pattern - or almost that)**: HTML + CSS + JavaScript (Frontend) \ TypeScript (Backend).
+- **TS + JS MVC MapMaker Web Application**: HTML + CSS + JavaScript (Frontend) \ TypeScript (Backend).
 
 ## Project Progress
 
