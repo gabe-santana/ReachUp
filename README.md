@@ -137,15 +137,15 @@ later *Pull requests* will be welcome.
 
 We are anxiously waiting for a craft from [Praiamar Shopping](http://www.praiamarshopping.com.br) to record the project working on there, and a lending of the local plants so that everything works correctly. Meanwhile, our database is densely populated with all mall locations, for testing and academic or commercial presentation purposes.
 
-## License
-
-- [MIT](https://choosealicense.com/licenses/mit/)
-
 ## Contact us
 
 <a target="_blank" href="mailto:csoft.company@gmail.com?subject=[GitHub]">
     <img alt="Gmail badge" src="https://img.shields.io/badge/-csoft.company@gmail.com-D14836?style=flat-square&logo=Gmail&logoColor=white" />
   </a>
+
+## License
+
+- [MIT](https://choosealicense.com/licenses/mit/)
 
 ![ReachUp](https://user-images.githubusercontent.com/59267719/93685984-a55cb000-fa89-11ea-9dfe-4a4906088e3a.png)
 
