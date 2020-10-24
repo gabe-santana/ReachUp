@@ -1,7 +1,7 @@
 <img src="https://img.shields.io/github/issues/0G4briel/ReachUp">
 <img src="https://img.shields.io/github/forks/0G4briel/ReachUp">
 <img src="https://img.shields.io/github/directory-file-count/0G4briel/ReachUp">
-<img src="https://img.shields.io/github/license/0G4briel/ReachUp">
+[![GitHub License](https://img.shields.io/github/license/mashape/apistatus?branch=master&label=License&logo=GitHub&logoColor=ffffff&labelColor=282828&color=informational&style=flat)]()
 <img src="https://img.shields.io/github/last-commit/0G4briel/ReachUp">
 
 # ReachUp!
