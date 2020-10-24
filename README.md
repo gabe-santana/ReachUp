@@ -131,11 +131,14 @@ later *Pull requests* will be welcome.
 - Fork:
 [Fork ReachUp](https://github.com/0G4briel/ReachUp/fork)
 
-- Watch/ Follow:
+- Watch/Follow:
 [Watch ReachUp](https://github.com/0G4briel/ReachUp/subscription)
 
 - Create Issues:
 [Create Issue in ReachUp](https://github.com/0G4briel/ReachUp/issues/new)
+
+- Approach us on our wiki:
+[See our development histories](https://github.com/0G4briel/ReachUp/wiki)
 
 ## Our Partnership
 
