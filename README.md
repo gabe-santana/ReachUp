@@ -78,10 +78,10 @@ We're using:
 - **MySQL Database: MySQL Workbench** for data storage/management;
 - **NoSQL (non-relational database)** for local data storage/management in Flutter App;
 - **ASP.NET Core 3.0 MVC Web API** for web services (RESTful WebAPI);
-- **Web Application: ASP.NET Core 3.0 MVC WebApplication C#/Razor (Backend)\ HTML + CSS + JavaScript + Bootstrap (Frontend)**;
+- **ASP.NET Core 3.0 MVC Web Application**: C#/Razor (Backend)\ HTML + CSS + JavaScript + Bootstrap (Frontend);
 - **Flutter: Dart + Java + Objective-C** for cross-platfor mobile app (Android/iOS);
 - **Flame: Flutter Lib** for render a real-time map of local;
-- **MapMaker (MVC pattern - or almost that)**: HTML + CSS + JavaScript (Frontend) \ TypeScript (Backend)**
+- **MapMaker (MVC pattern - or almost that)**: HTML + CSS + JavaScript (Frontend) \ TypeScript (Backend).
 
 ## Project Progress
 
