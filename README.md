@@ -82,33 +82,14 @@ We're using:
 - **Flutter: Dart + Java + Objective-C** for cross-platfor mobile app (Android/iOS);
 - **Flame: Flutter Lib** for render a real-time map of local;
 
-## Progress Project
+## Project Progress
 
-- [x] Database 
+- [x] Database **(completed, but always on edit and rising)**
 - [x] WebAPI **(completed, but always on edit and rising)**
-- [ ] ~~Unity2D Assets~~ **(not anymore)**
-- [ ] Web Application **(idling)**
-- [ ] Cross-Platform Mobile App **(in progress with full-focus)**
-
-## Development migrations: "Bipolar Programming™"
-
-As the project grows, and taking into account the time available until delivery (in December), we have modified some parts of the project (both finished parts and parts still running), with at least one of these purposes:
-
- - better performance and scalability
- - better facility to do unit tests / UI tests / debugs
- - better maintenance
- - refactoring codes, making them object-oriented as much as possible
- - simple desire to learn a new language / framework
-
-- [ ] Development Migration #1: JS to TS **(in progress)**
-  -> better facility to do unit tests / UI tests / debugs
-  -> better maintenance
-  -> refactoring codes, making them object-oriented as much as possible
-  -> simple desire to learn a new language / framework
-
-- [ ] Development Big Migration #1: HTML + CSS/SASS + TS + JS to Node.js **(dreaming about)**
-
-To see all stable versions of the project modules before their current versions (with migration in progress or with their migration period ended), consult the other branches.
+- [ ] Web Application - coding **(idling)**
+- [ ] Web Application - design **(on God's hands)**
+- [ ] Cross-Platform Mobile App **(main functionality almost ready)**
+- [X] MapMaker - for the developers **(debug errors)**
 
 ## About Officers Contributors
 
