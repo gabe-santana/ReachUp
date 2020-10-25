@@ -96,6 +96,12 @@ dependencies:
  babel-core: ^6.26.3
  babel-preset-es2015: ^6.24.1
 ```
+### Environment Variables access with JS
+
+```
+dotenv: ^8.2.0
+```
+
 # Developing Info
 
 ## How is it being built?
