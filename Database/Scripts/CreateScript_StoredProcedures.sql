@@ -329,7 +329,8 @@ END$$
 DROP PROCEDURE IF EXISTS pesquisar$$
 CREATE PROCEDURE pesquisar(search varchar(50))
 BEGIN
-	SELECT 
+
+    SELECT 
 	l.cd_local,
 	l.nm_local, tl.nm_tipo_local, l.cd_andar,
 	l.hr_abertura,
@@ -379,6 +380,38 @@ BEGIN
     ORDER BY categoriesCount DESC , subCategoriesCount DESC;
 END$$
 
+DROP PROCEDURE IF EXISTS buscarHorarioAlternativoLocal$$
+CREATE PROCEDURE buscarHorarioAlternativoLocal(pLocal int, pDia int)
+BEGIN 
+
+/*DECLARE isDiaAlternativo boolean;*/
+DECLARE qtLinhasHorarioAlternativoLocal int;
+
+ /*SELECT EXISTS (
+    SELECT * FROM horario_local 
+    WHERE cd_local = pLocal
+    AND cd_dia_semana = pDia
+    )
+    INTO @isDiaAlternativo;*/
+
+    SELECT count(*) into qtLinhasHorarioAlternativoLocal
+    from horario_local
+    WHERE cd_local = pLocal
+    AND cd_dia_semana = pDia;
+
+   /*IF isDiaAlternativo THEN
+     SELECT hr_abertura, hr_fechamento FROM horario_local
+     WHERE cd_dia_semana = pDia 
+     AND cd_local = pLocal;
+   END IF;*/
+
+    IF qtLinhasHorarioAlternativoLocal = 1 then
+	 SELECT hr_abertura, hr_fechamento FROM horario_local
+     WHERE cd_dia_semana = pDia 
+     AND cd_local = pLocal;
+    END IF;
+END$$
+
 /* Lojista e Administrador */
 
 DROP PROCEDURE IF EXISTS cadastrarLocal$$
@@ -388,6 +421,42 @@ BEGIN
 	SELECT COUNT(cd_local) INTO @_cd FROM `local`;
 	INSERT INTO `local` VALUES (@_cd, pTipo, pNome, pAndar, pAbertura, pFechamento);
 	INSERT INTO beacon VALUES (pUUIDBeacon, 0,  @_cd);
+END$$
+
+DROP PROCEDURE IF EXISTS defHorarioAlternativoLocal$$
+CREATE PROCEDURE defHorarioAlternativoLocal(pLocal int, pDia int, pAbertura time, pFechamento time)
+BEGIN
+
+  /*DECLARE horarioNaoExiste boolean;*/
+  DECLARE qtLinhasTabelaComEsseHorario int;
+
+  /*SELECT NOT EXISTS (
+    SELECT 1 from horario 
+    WHERE cd_dia_semana = pDia
+    AND hr_abertura = pAbertura
+    AND hr_fechamento = pFechamento 
+    LIMIT 1
+    )
+    INTO @horarioNaoExiste;*/
+
+    SELECT count(*) into qtLinhasTabelaComEsseHorario
+    from horario 
+    WHERE cd_dia_semana = pDia
+    AND hr_abertura = pAbertura
+    AND hr_fechamento = pFechamento;
+
+   /*IF horarioNaoExiste THEN
+     INSERT INTO horario
+     VALUES (pDia, pAbertura, pFechamento);
+   END IF;*/
+
+    IF qtLinhasTabelaComEsseHorario = 0 then
+      INSERT INTO horario
+     VALUES (pDia, pAbertura, pFechamento);
+   END IF;
+
+   INSERT INTO horario_local
+   VALUES (pLocal, pDia, pAbertura, pFechamento);
 END$$
 
 DROP PROCEDURE IF EXISTS defSubCategoriaLocal$$
