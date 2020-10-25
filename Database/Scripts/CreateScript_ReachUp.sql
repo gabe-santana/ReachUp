@@ -22,8 +22,8 @@ USE ReachUp ;
 
 /* VARIÁVEIS GLOBAIS */
 
-/*SET GLOBAL hr_abertura_shopping = '12:00:00';*/
-/*SET GLOBAL hr_fechamento_shopping = '20:00:00'*/;
+/*SET GLOBAL hr_abertura_shopping = '10:00:00';
+SET GLOBAL hr_fechamento_shopping = '20:00:00';*/
 
 -- -----------------------------------------------------
 -- Tabela tipo_administrador
@@ -63,6 +63,36 @@ CREATE TABLE IF NOT EXISTS local (
     REFERENCES tipo_local (cd_tipo_local)
     
     );
+
+-- -----------------------------------------------------
+-- Tabela horario
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS horario;
+CREATE TABLE IF NOT EXISTS horario (
+  cd_dia_semana INT NOT NULL,
+  hr_abertura TIME,
+  hr_fechamento TIME,
+  PRIMARY KEY (cd_dia_semana, hr_abertura, hr_fechamento)
+
+);
+
+-- -----------------------------------------------------
+-- Tabela horario_local
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS horario_local;
+CREATE TABLE IF NOT EXISTS horario_local (
+  cd_local INT NOT NULL,
+  cd_dia_semana INT NOT NULL,
+  hr_abertura TIME,
+  hr_fechamento TIME,
+  PRIMARY KEY (cd_local, cd_dia_semana, hr_abertura, hr_fechamento),
+  CONSTRAINT fk_local_horario_local
+	FOREIGN KEY (cd_local)
+    REFERENCES `local` (cd_local),
+  CONSTRAINT fk_horario_horario_local
+    FOREIGN KEY (cd_dia_semana, hr_abertura, hr_fechamento)
+    REFERENCES horario (cd_dia_semana, hr_abertura, hr_fechamento)
+);
 
 
 -- -----------------------------------------------------
