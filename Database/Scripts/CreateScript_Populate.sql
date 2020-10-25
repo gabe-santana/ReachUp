@@ -21,10 +21,6 @@
 
 /* Categorias aplicáveis em lojas (e suas subcategorias) */
 
-Select * from `local` where cd_tipo_local = 0;
-
-CALL alterarHorarioFuncionamentoLocais_Tipo(1, '11:00:00', '16:00:00');
-
 CALL cadastrarCategoria("Informática", "Produtos tecnólogicos de uso geral e específico no mundo da tecnologia da informação");
 CALL cadastrarSubCategoria(0, "Hardware");
 CALL cadastrarSubCategoria(0, "Software");
@@ -673,6 +669,36 @@ CALL cadastrarLocal(3, "Telefone 2 Praiamar Shopping ",  3,  '08:00:00', '23:59:
 CALL cadastrarLocal(3, "Telefone 3 Praiamar Shopping ",  3,  '08:00:00', '23:59:59', "adeb0cf1-n928-17ea-adc1-8942ac120032");
 CALL cadastrarLocal(3, "Telefone 4 Praiamar Shopping ",  3,  '08:00:00', '23:59:59', "adeb0cf1-n928-19ea-adc1-8942ac120032");
 
+CALL cadastrarLocal(1, "Madero",  2,  '18:00:00', '22:00:00', "adeb0cf1-n928-19ea-adc2-8942ac120032");
+
+CALL cadastrarLocal(8, "Entrada/Saída Alexandre Martins",  0,  '10:00:00', '22:00:00', "adeb0cf1-f928-19ea-adc2-8942ac120032");
+CALL cadastrarLocal(8, "Entrada/Saída Guaiaó",  0,  '10:00:00', '22:00:00', "adeb0cf1-n928-19ea-adm2-8942ac120032");
+CALL cadastrarLocal(8, "Entrada/Saída Carrefour",  0,  '10:00:00', '22:00:00', "adeb0cf1-n928-76ea-adc2-8942ac120032");
+CALL cadastrarLocal(8, "Entrada/Saída Praiamar Corporate",  4,  '10:00:00', '22:00:00', "adeb2cf1-n928-19ea-adc2-8942ac120032");
+
+/* Definir horário alternativo das entradas: no domingo
+o período de funcionamento do shopping é diferente */
+
+CALL defHorarioAlternativoLocal(259, 0, '11:00:00', '22:00:00');
+CALL defHorarioAlternativoLocal(260, 0, '11:00:00', '22:00:00');
+CALL defHorarioAlternativoLocal(261, 0, '11:00:00', '22:00:00');
+CALL defHorarioAlternativoLocal(262, 0, '11:00:00', '22:00:00');
+
+/* Exibir a configuração de horário (dia + início + fim) que foi adicionada, pois não existia */
+
+SELECT * from horario 
+where cd_dia_semana = 0
+and hr_abertura = '11:00:00'
+and hr_fechamento = '22:00:00';
+
+/* Verificar se as entradas, no dia de hoje (suponhamos que seja domingo),
+possuem um horário de funcionamento diferente/alternativo.
+Se possuírem, retornar esses horários. */
+
+CALL buscarHorarioAlternativoLocal(259, 0);
+CALL buscarHorarioAlternativoLocal(260, 0);
+CALL buscarHorarioAlternativoLocal(261, 0);
+CALL buscarHorarioAlternativoLocal(262, 0);
 
 /* Selects de auxílio */
 
@@ -1995,6 +2021,11 @@ CALL defSubCategoriaLocal(254, 28, 0);
 CALL defSubCategoriaLocal(255, 28, 0);
 CALL defSubCategoriaLocal(256, 28, 0);
 CALL defSubCategoriaLocal(257, 28, 0);
+
+/* Madero */
+
+CALL defSubCategoriaLocal(258, 20, 0);
+
 
 /* ------------ ! ------------- */
 
