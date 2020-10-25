@@ -9,10 +9,17 @@
 </head>
 <body>
    <script src="../src/Scripts/jquery-3.5.1.min.js"></script>
+   <script src="https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js"></script>
    <script src="https://apis.google.com/js/platform.js" async defer></script>
    <script type="script" src="../src/services/FacebookApi.js"></script>
+   <script type="script" src="../src/services/GoogleApi.js"></script>
+   <script type="script" src="../src/services/GitHubOAuth.js"></script>
    <script async defer crossorigin="anonymous" 
    src="https://connect.facebook.net/pt_BR/sdk.js"></script>
+
+   <a id="github-button" class="btn btn-block btn-social btn-github">
+    <i class="fa fa-github"></i> Sign in with Github
+   </a>
    
    <div class="g-signin2" data-onsuccess="onSignIn"></div>
    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
