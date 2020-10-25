@@ -1,7 +1,25 @@
 # ReachUp!
 
+<p>
+<img alt="Csharp" src="https://img.shields.io/badge/-C%23-7022DC?style=flat-square&logo=c-sharp&logoColor=white" />
+<img alt="DotNetCore" src="https://img.shields.io/badge/-.NET-7022DC?style=flat-square&logo=dot-net&logoColor=white" />
+<img alt="JavaScript" src="https://img.shields.io/badge/-JavaScript-e0c050?style=flat-square&logo=javascript&logoColor=white" />
+<img alt="TypeScript" src="https://img.shields.io/badge/-TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white" />
+<img alt="Flutter" src="https://img.shields.io/badge/-Flutter-1a202c?style=flat-square&logo=Flutter&logoColor=white" />
+<img alt="HTML5" src="https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white" />
+<img alt="CSS3" src="https://img.shields.io/badge/-CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white" />
+<img alt="MySQL" src="https://img.shields.io/badge/-MySQL-1a202c?style=flat-square&logo=MySQL&logoColor=white" /> 
+<img alt="NPM" src="https://img.shields.io/badge/-npm-red?style=flat-square&logo=npm&logoColor=white" />
+<img alt="VS Code" src="https://img.shields.io/badge/-Code-1073C9?style=flat-square&logo=visual%20studio%20code&logoColor=white" />
+<img src="https://img.shields.io/github/issues/0G4briel/ReachUp">
+<img src="https://img.shields.io/github/forks/0G4briel/ReachUp">
+<!--[![](https://tokei.rs/b1/github/0G4briel/ReachUp)](https://github.com/0G4briel/ReachUp).-->
+<img  src="https://img.shields.io/github/directory-file-count/0G4briel/ReachUp">
+<img src="https://img.shields.io/github/languages/code-size/0G4briel/Reachup">
+<img src="https://img.shields.io/github/last-commit/0G4briel/ReachUp">
+</p>
 
->ReachUp's a mobile application for indoor location, provides blind and visually impaired an interaction experience in the mall, using voice tools the users can search by stores, bathrooms, restaurants and so on. Besides that, the application offers tools for shopkeepers publish their promotions or communicated and mall managers 
+>ReachUp (the end can sounds like "shop") is a mobile application for indoor location, provides blind and visually impaired an interaction experience in the mall, using voice tools the users can search by stores, bathrooms, restaurants and so on. Besides that, the application offers tools for shopkeepers publish their promotions or communicated and mall managers 
 >receive a user visit reports by the mall.
 
 
@@ -69,46 +87,37 @@ dependencies:
   flutter_beacon: ^0.3.0
   http: ^0.12.0+2
 ```
+
+### TypeScript Dev-Dependencies (VS Code Intellisense and Transpilation)
+
+```
+ typescript: ^4.0.3
+ babel-cli: ^6.26.0
+ babel-core: ^6.26.3
+ babel-preset-es2015: ^6.24.1
+```
 # Developing Info
 
 ## How is it being built?
 
 We're using:
 
-- **MySQL Database: Transact-SQL Script's** for data storage/management;
-- **NoSQL (non-relational database)** for local data storage/management in Flutter App - ReachUpHeart Database;
-- **ASP.NET Core 3.0 MVC Web API** for web service (RESTful WebAPI);
-- **Web Application: ASP.NET Core 3.0 MVC WebApplication C#/Razor (Backend)\ HTML + CSS/SASS + TypeScript + JavaScript (Frontend)**;
+- **MySQL Database: MySQL Workbench** for data storage/management;
+- **NoSQL (non-relational database)** for local data storage/management in Flutter App;
+- **ASP.NET Core 3.0 MVC Web API** for web services (RESTful WebAPI);
+- **ASP.NET Core 3.0 MVC Web Application**: C#/Razor (Backend)\ HTML + CSS + JavaScript + Bootstrap (Frontend);
 - **Flutter: Dart + Java + Objective-C** for cross-platfor mobile app (Android/iOS);
 - **Flame: Flutter Lib** for render a real-time map of local;
+- **TS + JS MVC MapMaker Web Application**: HTML + CSS + JavaScript (Frontend) \ TypeScript (Backend).
 
-## Progress Project
+## Project Progress
 
-- [x] Database 
+- [x] Database **(completed, but always on edit and rising)**
 - [x] WebAPI **(completed, but always on edit and rising)**
-- [ ] ~~Unity2D Assets~~ **(not anymore)**
-- [ ] Web Application **(idling)**
-- [ ] Cross-Platform Mobile App **(in progress with full-focus)**
-
-## Development migrations: "Bipolar Programming™"
-
-As the project grows, and taking into account the time available until delivery (in December), we have modified some parts of the project (both finished parts and parts still running), with at least one of these purposes:
-
- - better performance and scalability
- - better facility to do unit tests / UI tests / debugs
- - better maintenance
- - refactoring codes, making them object-oriented as much as possible
- - simple desire to learn a new language / framework
-
-- [ ] Development Migration #1: JS to TS **(in progress)**
-  -> better facility to do unit tests / UI tests / debugs
-  -> better maintenance
-  -> refactoring codes, making them object-oriented as much as possible
-  -> simple desire to learn a new language / framework
-
-- [ ] Development Big Migration #1: HTML + CSS/SASS + TS + JS to Node.js **(dreaming about)**
-
-To see all stable versions of the project modules before their current versions (with migration in progress or with their migration period ended), consult the other branches.
+- [ ] Web Application - coding **(idling)**
+- [ ] Web Application - design **(on God's hands)**
+- [ ] Cross-Platform Mobile App **(main functionality almost ready)**
+- [X] MapMaker - for the developers **(debug errors)**
 
 ## About Officers Contributors
 
@@ -122,15 +131,24 @@ later *Pull requests* will be welcome.
 - Fork:
 [Fork ReachUp](https://github.com/0G4briel/ReachUp/fork)
 
-- Watch/ Follow:
+- Watch/Follow:
 [Watch ReachUp](https://github.com/0G4briel/ReachUp/subscription)
 
 - Create Issues:
 [Create Issue in ReachUp](https://github.com/0G4briel/ReachUp/issues/new)
 
+- Approach us on our wiki:
+[See our development histories](https://github.com/0G4briel/ReachUp/wiki)
+
 ## Our Partnership
 
 We are anxiously waiting for a craft from [Praiamar Shopping](http://www.praiamarshopping.com.br) to record the project working on there, and a lending of the local plants so that everything works correctly. Meanwhile, our database is densely populated with all mall locations, for testing and academic or commercial presentation purposes.
+
+## Contact us
+
+<a target="_blank" href="mailto:csoft.company@gmail.com?subject=[GitHub]">
+    <img alt="Gmail badge" src="https://img.shields.io/badge/-csoft.company@gmail.com-D14836?style=flat-square&logo=Gmail&logoColor=white" />
+  </a>
 
 ## License
 
