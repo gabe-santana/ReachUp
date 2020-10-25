@@ -1,7 +1,5 @@
 # ReachUp!
 
-Escrevendo isso pra ver se eu consigo commitar.......
-
 <p>
 <img alt="Csharp" src="https://img.shields.io/badge/-C%23-7022DC?style=flat-square&logo=c-sharp&logoColor=white" />
 <img alt="DotNetCore" src="https://img.shields.io/badge/-.NET-7022DC?style=flat-square&logo=dot-net&logoColor=white" />
