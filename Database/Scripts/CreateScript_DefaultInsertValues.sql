@@ -166,6 +166,14 @@ VALUES
 
 );
 
+INSERT INTO tipo_local
+VALUES
+(
+    8,
+    "Entrada/Saída"
+
+);
+
 /* Tipo de Beacons*/
 
 INSERT INTO tipo_beacon
