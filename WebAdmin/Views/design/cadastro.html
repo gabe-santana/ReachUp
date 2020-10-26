@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>ReachUp</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link rel="stylesheet" type="text/css" href="css/stylecadastro.css">
+   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+   <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+
+<body>
+
+<div class="grid-container">
+<div class="item3">
+<form name="cadastro" action="">
+   <br>
+   <label>Digite seu nome:</label>
+   <input type="text" name="Nome" size="40" required="Nome"><br><br>
+
+   <label>Segundo nome:</label>
+   <input type="text" name="SNome" size="40" required="Segundo Nome"><br><br>
+
+   <label>Digite seu e-mail:</label>
+   <td><input type="email" name="E-mail" size="40" required="Email"><br><br>
+
+   <label>Digite uma senha:</label>
+   <input type="password" name="Senha" size="40" required="Senha"><br><br>
+
+   <label>Confirme a senha:</label>
+   <input type="password" name="CSenha" size="40" required="SenhaC"><br><br>
+
+   <input type="button" name="btnConfirmar" value="Confirmar" class="botaozin" onclick="verifica()">
+</form>
+</div>
+</div>
+
+<script language="javascript">
+   var nome
+   var sobrenome
+   var email
+   var senha1
+   var senha2
+
+   function verifica() {
+
+      senha1 = document.cadastro.Senha.value;
+      senha2 = document.cadastro.CSenha.value;
+
+      
+      if (senha1 == senha2){
+
+         window.location.href = "criar_comunicado.html";
+      }
+      else{
+         window.alert('As senhas não são iguais. Digite novamente.');
+      }
+   }
+</script>
+
+
+
+</body>
+</html>
