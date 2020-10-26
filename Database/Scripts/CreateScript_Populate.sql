@@ -2029,6 +2029,10 @@ CALL defSubCategoriaLocal(258, 20, 0);
 
 /* ------------ ! ------------- */
 
+SELECT * from `local`;
+
+/* COMUNICADOS - Arrumar os locais e acrescentar novos, de acordo com as possibilidades */
+
 CALL publicarComunicado(7, 0, 1, 0,"Loja fechada por tempo indeterminado, devido à pandemia do novo Coronavírus", now(), null);
 CALL publicarComunicado(8, 0, 2, 0,"Compre o Galaxy Note20 em até 12x sem juros, e ganhe um voucher de R$ 2000!", now(), null);
 CALL publicarComunicado(9, 0, 1, 0,"Desconto de 30% em toda a loja! Aproveite, é apenas neste fim de semana!", now(), '2020-09-20 23:00:00');
