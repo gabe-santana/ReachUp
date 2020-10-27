@@ -183,14 +183,14 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
-        public Task<bool> AddOpHours(int localId, int weekDay, time opening, time closing)
+        public Task<bool> AddOpHours(Local local, OpeningHours openingHours)
         {
             if (base.DMLCommand(Procedure.defHorarioAlternativoLocal,
                new string[,] {
-                   { "pLocal", localId.ToString() },
-                   { "pDia", weekDay.ToString() },
-                   { "pAbertura", opening.ToString() },
-                   { "pFechamento", closing.ToString() }
+                   { "pLocal", this.localId.ToString() },
+                   { "pDia", openingHours.weekDay.ToString() },
+                   { "pAbertura", openingHours.opening.ToString() },
+                   { "pFechamento", openingHours.closing.ToString() }
                 }))
             {
                return Task.FromResult(true);
