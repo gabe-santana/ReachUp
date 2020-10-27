@@ -75,5 +75,17 @@ namespace ReachUpWebAPI.Controllers
                 return Ok(await new Feedback().Delete(id));
             return BadRequest("Parameters are null");
         }
+
+        [Authorize(Roles = "adm")]
+        [HttpGet("GetAverage")]
+        public async Task<IActionResult> GetAverage(Date startDate, Date endDate, bool isGeneral)
+        {
+            if (!string.IsNullOrWhiteSpace(startDate.ToString())
+                && !string.IsNullOrWhiteSpace(endDate.ToString())
+                && !string.IsNullOrWhiteSpace(isGeneral.ToString())
+               )
+                return Ok(await new Feedback().GetAverage(startDate, endDate, isGeneral));
+            return BadRequest("Parameters are null");
+        }
     }
 }
