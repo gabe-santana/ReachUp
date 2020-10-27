@@ -278,11 +278,11 @@ BEGIN
 			GROUP BY c.cd_comunicado;
 END$$
 
-DROP PROCEDURE IF EXISTS pegarComunicados$$
+/*DROP PROCEDURE IF EXISTS pegarComunicados$$
 CREATE PROCEDURE pegarComunicados(pLocal int)
 BEGIN
 	SELECT * FROM comunicado WHERE cd_local = pLocal;
-END$$
+END$$*/ /* Maybe this is not useful */
 
 DROP PROCEDURE IF EXISTS atualizarComunicado$$
 CREATE PROCEDURE atualizarComunicado(pComunicado int, pLocal int, pTipo int, pDs text, pDataInicio datetime, pDataFim datetime)
@@ -678,6 +678,15 @@ BEGIN
 	SELECT * FROM categoria WHERE cd_categoria = pCategoria;
 END$$
 
+DROP PROCEDURE IF EXISTS atualizarCategoria$$
+CREATE PROCEDURE atualizarCategoria(pCategoria INT, pNome varchar(45), pDs varchar(200))
+BEGIN
+	UPDATE categoria
+    SET nm_categoria = pNome,
+        ds_categoria = pDs
+    WHERE cd_categoria = pCategoria;
+END$$
+
 DROP PROCEDURE IF EXISTS removerCategoria$$
 CREATE PROCEDURE removerCategoria(pCategoria int)
 BEGIN
@@ -720,77 +729,6 @@ BEGIN
 	ON sc.cd_categoria = c.cd_categoria
 	WHERE scl.cd_local = pLocal;	
 END$$
-
-DROP PROCEDURE IF EXISTS alterarHorarioFuncionamentoLocais_Tipo$$
-CREATE PROCEDURE alterarHorarioFuncionamentoLocais_Tipo(pTipo int, pAbertura time, pFechamento time)
-BEGIN
-	declare tipoLocal int;
-	declare parar int default 0;
-	declare posicao int default 0;
-
-	Declare locais cursor for
-      SELECT cd_tipo_local
-	  FROM `local`;
-
-	declare continue handler for not found
-     set parar = 1;
-
-  Open locais;
-
-  set posicao = 0;
-
-  todos:loop
-    fetch locais into tipoLocal;
-
-    set posicao = posicao + 1;
-
-    if pTipo = tipoLocal then
-      UPDATE `local`
-      SET hr_abertura = pAbertura,
-          hr_fechamento = pFechamento
-      WHERE cd_local = posicao;
-    end if;
-
-    if parar = 1 then
-      set posicao = 0;
-      leave todos;
-    end if;
-
-  end loop;
-
-  Close locais;
-END$$
-
-/*DROP PROCEDURE IF EXISTS alterarHorarioFuncionamentoLocais_Todos$$
-CREATE PROCEDURE alterarHorarioFuncionamentoLocais_Todos(pAbertura time, pFechamento time)
-BEGIN
-	declare parar int default 0;
-	declare posicao int default 0;
-
-	declare continue handler for not found
-     set parar = 1;
-
-  Open locais;
-
-  set posicao = 0;
-
-  todos:loop
-    set posicao = posicao + 1;
-
-      UPDATE `local`
-      SET hr_abertura = pAbertura,
-          hr_fechamento = pFechamento
-      WHERE cd_local = posicao;
-
-    if parar = 1 then
-      set posicao = 0;
-      leave todos;
-    end if;
-
-  end loop;
-
-  Close locais;
-END$$*/
 
 DROP FUNCTION IF EXISTS formatString$$
 CREATE FUNCTION formatString(str varchar(50) ) 	RETURNS  varchar(50)
