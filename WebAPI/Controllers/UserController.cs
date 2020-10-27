@@ -11,16 +11,6 @@ namespace ReachUpWebAPI.Controllers
     {
         #region Actions
 
-        [Authorize(Roles = "loj,adm")]
-        [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll(int id) 
-        {
-            if (!string.IsNullOrWhiteSpace(id.ToString())) 
-                return Ok(await new User().GetAdmins(id));
-            return BadRequest("Parameters are null");
-        }
-
-
         [Authorize (Roles = "adm")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(string role)

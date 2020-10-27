@@ -11,53 +11,35 @@ namespace ReachUpWebAPI.Controllers
     {
         #region Actions
 
-        //Actions dos quatro métodos criados
-        //[Authorize(Roles = "adm")]
-        //[HttpGet("Get")]
-        //public async Task<IActionResult> GetAll(string role) 
-        //{
-        //    if (!string.IsNullOrWhiteSpace(role)) 
-        //       // return Ok(await new ClientPreference().GetAll());
-        //    return BadRequest("Parameters are null");
-        //}
-
-
         [Authorize(Roles = "adm,cli")]
-        [HttpGet("Get")]
-        public async Task<IActionResult> Get(string email) 
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll(string email) 
         {
             if (!string.IsNullOrWhiteSpace(email)) 
-                return Ok(await new ClientPreference().Get(email));
+                return Ok(await new ClientPreference().GetAll(email));
             return BadRequest("Parameters are null");
         }
 
+        [Authorize (Roles = "cli")]
+        [HttpPost("Add")]
+        public async Task<IActionResult> Add(string email, [FromBody] ClientPreference clientPreference)
+        {
+            if (!string.IsNullOrWhiteSpace(email) && clientPreference != null)
+              return  Ok(await clientPreference.Add(email));
+           return BadRequest("Parameters are null");
+        }
 
-        //[Authorize (Roles = "cli")]
-        //[HttpPut("Add")]
-        //public async Task<IActionResult> Add(string email)
-        //{
-        //    if (!string.IsNullOrWhiteSpace(email))
-        //        //return  Ok(await new ClientPreference().Add(email));
-        //    return BadRequest("Parameters are null");
-        //}
-
-        //[Authorize (Roles = "cli")]
-        //[HttpPatch("Update")]
-        //public async Task<IActionResult> Update(string email)
-        //{
-        //    if (!string.IsNullOrWhiteSpace(email))
-        //        //return Ok(await new ClientPreference().Update(email));
-        //    return BadRequest("Parameters are null");
-        //}
-
-        //[Authorize (Roles = "cli")]
-        //[HttpDelete("Delete")]
-        //public async Task<IActionResult> Update(string email)
-        //{
-        //    if (!string.IsNullOrWhiteSpace(email))
-        //        //return Ok(await new ClientPreference().Delete(email));
-        //    return BadRequest("Parameters are null");
-        //}         
+        [Authorize (Roles = "cli")]
+        [HttpDelete]
+        public async Task<IActionResult> Delete(string email, int category, int subCategory)
+        {
+          if (!string.IsNullOrWhiteSpace(email)
+              && !string.IsNullOrWhiteSpace(category.ToString())
+              && !string.IsNullOrWhiteSpace(subCategory.ToString())
+             )
+             return Ok(await new ClientPreference().Delete(email, category, subCategory));
+           return BadRequest("Parameters are null");
+        }         
         #endregion 
     }
 }
