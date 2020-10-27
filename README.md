@@ -1,4 +1,5 @@
 # ReachUp!
+## Closed Beta Version: October 29
 
 <p>
 <img alt="Csharp" src="https://img.shields.io/badge/-C%23-7022DC?style=flat-square&logo=c-sharp&logoColor=white" />
