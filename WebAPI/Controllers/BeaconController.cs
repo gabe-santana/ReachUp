@@ -28,6 +28,16 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        [Authorize(Roles = "adm")]
+        [HttpGet("ByLocal")]
+        public async Task<IActionResult> ByLocal(int local)
+        {
+            if (!string.IsNullOrWhiteSpace(local.ToString()))
+                return Ok(await new Beacon().ByLocal(local));
+            return BadRequest("Parameters are null");
+        }
+
+
         [Authorize(Roles = "loj,adm")]
         [HttpPost]
         public async Task<IActionResult> Post(Beacon beacon)
