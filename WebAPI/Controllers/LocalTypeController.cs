@@ -5,19 +5,20 @@ using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class LocalTypeController : ControllerBase
     {
 
-        [Authorize(Roles = "adm")]
+        [Authorize(Roles = "adm, dev")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
            return Ok(await new LocalType().GetAll());
         }
 
-        [Authorize(Roles = "adm")]
+        [Authorize(Roles = "adm, dev")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] LocalType localType)
         {

@@ -5,6 +5,7 @@ using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class CommuniqueController : ControllerBase
@@ -16,7 +17,7 @@ namespace ReachUpWebAPI.Controllers
             if (user != null && !string.IsNullOrWhiteSpace(idLocal.ToString()))
                 return Ok(await new Communique().Receive(user, idLocal));
             return BadRequest("Parameters are null");
-        };
+        }
 
         [Authorize(Roles = "loj,adm")]
         [HttpGet]

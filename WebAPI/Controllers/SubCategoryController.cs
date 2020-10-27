@@ -5,6 +5,7 @@ using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -21,7 +22,7 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet("ByLocal")]
         public async Task<IActionResult> ByLocal(int local)
         {
-            if (!string.IsNullOrWhiteSpace(local))
+            if (!string.IsNullOrWhiteSpace(local.ToString()))
                 return Ok(await new SubCategory().ByLocal(local));
             return BadRequest("Parameters are null");
         }
@@ -30,7 +31,7 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet("ByCommunique")]
         public async Task<IActionResult> ByCommunique(int communique)
         {
-            if (!string.IsNullOrWhiteSpace(communique))
+            if (!string.IsNullOrWhiteSpace(communique.ToString()))
                 return Ok(await new SubCategory().ByCommunique(communique));
             return BadRequest("Parameters are null");
         }
@@ -48,7 +49,9 @@ namespace ReachUpWebAPI.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(int categoryId, int subCategoryId)
         {
-            if (!string.IsNullOrWhiteSpace(categoryId) && !string.IsNullOrWhiteSpace(subCategoryId))
+            if (!string.IsNullOrWhiteSpace(categoryId.ToString()) 
+                && !string.IsNullOrWhiteSpace(subCategoryId.ToString())
+               )
                 return Ok(await new SubCategory().Delete(categoryid, subCategoryId));
             return BadRequest("Parameters are null");
         }

@@ -5,12 +5,13 @@ using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class BeaconController : ControllerBase
     {
 
-        [Authorize(Roles = "adm")]
+        [Authorize(Roles = "adm, dev")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(int type)
         {
@@ -28,7 +29,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm")]
+        [Authorize(Roles = "adm, dev")]
         [HttpGet("ByLocal")]
         public async Task<IActionResult> ByLocal(int local)
         {
@@ -38,9 +39,9 @@ namespace ReachUpWebAPI.Controllers
         }
 
 
-        [Authorize(Roles = "loj,adm")]
+        [Authorize(Roles = "loj,adm,dev")]
         [HttpPost]
-        public async Task<IActionResult> Post(Beacon beacon)
+        public async Task<IActionResult> Post([FromBody] Beacon beacon)
         {
             if (beacon != null)
                 return Ok(await beacon.Add());
@@ -49,7 +50,7 @@ namespace ReachUpWebAPI.Controllers
 
         [Authorize(Roles = "loj,adm")]
         [HttpPatch]
-        public async Task<IActionResult> Patch(Beacon beacon)
+        public async Task<IActionResult> Patch([FromBody] Beacon beacon)
         {
             if (beacon != null)
                 return Ok(await beacon.Update());
@@ -57,7 +58,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         [Authorize(Roles = "loj,adm")]
-        [HttpGet]
+        [HttpDelete]
         public async Task<IActionResult> Delete(string uuid)
         {
             if (!string.IsNullOrWhiteSpace(uuid))

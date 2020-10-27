@@ -11,6 +11,7 @@ using ReachUp;
 
 namespace ReachUpWebAPI
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class MapController : ControllerBase

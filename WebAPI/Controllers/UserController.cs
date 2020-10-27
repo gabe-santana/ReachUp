@@ -5,6 +5,7 @@ using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -24,7 +25,9 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(string role, string email)
         {
-            if (!string.IsNullOrWhiteSpace(email) && !string.IsNullOrWhiteSpace(role))
+            if (!string.IsNullOrWhiteSpace(email) 
+                && !string.IsNullOrWhiteSpace(role)
+               )
                 return Ok(await new User().Get(role, email));
             return BadRequest("Parameters are null");
         }
@@ -54,7 +57,9 @@ namespace ReachUpWebAPI.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(string role, string email)
         {
-            if (!string.IsNullOrWhiteSpace(email) && !string.IsNullOrWhiteSpace(role))
+            if (!string.IsNullOrWhiteSpace(email) 
+                && !string.IsNullOrWhiteSpace(role)
+               )
                 if (HttpContextId.IsOwn(HttpContext, email))
                     return Ok(await new User().Delete(role, email));
                 else

@@ -5,6 +5,7 @@ using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class FeedbackController : ControllerBase
@@ -22,7 +23,7 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet("ByUser")]
         public async Task<IActionResult> ByUser(string email) 
         {
-            if (email != null)
+            if (!string.IsNullOrWhiteSpace(email))
                 return Ok(await new Feedback().ByUser(email));
             return BadRequest("Parameters are null");
         }

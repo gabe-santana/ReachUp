@@ -5,6 +5,7 @@ using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -14,9 +15,16 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(int id)
         {
-            if (!string.IsNullOrWhiteSpace(id))
+            if (!string.IsNullOrWhiteSpace(id.ToString()))
                 return Ok(await new Category().Get(id));
             return BadRequest("Parameters are null");
+        }
+
+        [Authorize]
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+           return Ok(await new Category().GetAll());
         }
 
         [Authorize(Roles = "adm")]
@@ -41,7 +49,7 @@ namespace ReachUpWebAPI.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
-            if (!string.IsNullOrWhiteSpace(id))
+            if (!string.IsNullOrWhiteSpace(id.ToString()))
                 return Ok(await new Category().Delete(id));
             return BadRequest("Parameters are null");
         }

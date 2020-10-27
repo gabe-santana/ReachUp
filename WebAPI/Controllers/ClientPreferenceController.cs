@@ -5,6 +5,7 @@ using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class ClientPreferenceController : ControllerBase
@@ -22,7 +23,7 @@ namespace ReachUpWebAPI.Controllers
 
         [Authorize (Roles = "cli")]
         [HttpPost("Add")]
-        public async Task<IActionResult> Add(string email, [FromBody] ClientPreference clientPreference)
+        public async Task<IActionResult> Add([FromQuery] string email, [FromBody] ClientPreference clientPreference)
         {
             if (!string.IsNullOrWhiteSpace(email) && clientPreference != null)
               return  Ok(await clientPreference.Add(email));

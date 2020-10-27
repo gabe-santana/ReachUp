@@ -5,6 +5,7 @@ using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class LocalController : ControllerBase
@@ -40,7 +41,7 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(string type)
         {
-            if (!string.IsNullOrWhiteSpace(type.ToString()))
+            if (!string.IsNullOrWhiteSpace(type))
                 return Ok(await new Local().GetAll(type));
             return BadRequest("Parameters are null");
         }
@@ -49,7 +50,9 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet("FetchOpHours")]
         public async Task<IActionResult> FetchOpHours(int localId, int weekDay)
         {
-            if (!string.IsNullOrWhiteSpace(localId.ToString()) && !string.IsNullOrWhiteSpace(weekDay.ToString()))
+            if (!string.IsNullOrWhiteSpace(localId.ToString()) 
+               && !string.IsNullOrWhiteSpace(weekDay.ToString())
+               )
                 return Ok(await new Local().FetchOpHours(localId, weekDay));
             return BadRequest("Parameters are null");
         }
@@ -126,12 +129,12 @@ namespace ReachUpWebAPI.Controllers
         [HttpPost("ConnectAdm")]
         public async Task<IActionResult> ConnectAdm(string email, int local) 
         {
-            if (email != null && local != null)
+            if (!string.IsNullOrWhiteSpace(email)
+                && !string.IsNullOrWhiteSpace(local.ToString())
+               )
                 return Ok(await new Local().ConnectAdm(email, local));
             return BadRequest("Parameters are null");
         }
-
-        
 
         #endregion
     }
