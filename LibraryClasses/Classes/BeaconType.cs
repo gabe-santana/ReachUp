@@ -64,7 +64,8 @@ namespace ReachUp
         public Task<bool> Add()
         {
             if (base.DMLCommand(
-                $"INSERT INTO tipo_beacon VALUES ({this.Id}, {this.Name})", ref this.Data
+                $"INSERT INTO tipo_beacon VALUES ({this.Id}, {this.Name})", 
+                ref this.Data
             ))
             {
                return Task.FromResult(true);

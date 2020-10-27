@@ -43,7 +43,7 @@ namespace ReachUp
         #endregion
 
         #region Methods
-        public Task<List<Communique>> Receive(User user, int idLocal)
+        public Task<List<Communique>> Receive(User user, int local)
         {
             if (base.DQLCommand(Procedure.receberPromocoesDirecionadas, ref this.Data,
                 new string[,] {
@@ -76,7 +76,7 @@ namespace ReachUp
             return null;
         }
 
-        public Task<List<Communique>> Get(int idLocal) 
+        public Task<List<Communique>> Get(int local) 
         {
             if (base.DQLCommand(Procedure.receberComunicados, ref this.Data, new string[,] {
                 {"pLocal", idLocal.ToString()}

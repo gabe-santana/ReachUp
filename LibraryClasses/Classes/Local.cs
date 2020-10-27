@@ -53,7 +53,7 @@ namespace ReachUp
         #endregion
 
         #region Public Methods
-        public Task<Local> ConnectBeaconLocal(string uuidBeacon)
+        public Task<Local> ConnectBeaconLocal(string uuid)
         {
             if (base.DQLCommand(Procedure.conectarBeacon, ref this.Data,
                 new string[,] {
@@ -142,7 +142,7 @@ namespace ReachUp
             return null;
         }
 
-        public Task<List<Local>> GetAll(string typeName)
+        public Task<List<Local>> GetAll(string type)
         {
             if (base.DQLCommand(Procedure.pegarLocais, ref this.Data,
                 new string[,] {
