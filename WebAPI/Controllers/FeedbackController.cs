@@ -23,7 +23,7 @@ namespace ReachUpWebAPI.Controllers
         public async Task<IActionResult> ByUser(string email) 
         {
             if (email != null)
-                return Ok(await new Feedback().ByUser());
+                return Ok(await new Feedback().ByUser(email));
             return BadRequest("Parameters are null");
         }
 

@@ -49,7 +49,7 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet("FetchOpHours")]
         public async Task<IActionResult> FetchOpHours(int localId, int weekDay)
         {
-            if (!string.IsNullOrWhiteSpace(type.ToString()))
+            if (!string.IsNullOrWhiteSpace(localId.ToString()) && !string.IsNullOrWhiteSpace(weekDay.ToString()))
                 return Ok(await new Local().FetchOpHours(localId, weekDay));
             return BadRequest("Parameters are null");
         }
