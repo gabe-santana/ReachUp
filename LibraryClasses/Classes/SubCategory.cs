@@ -122,10 +122,5 @@ namespace ReachUp
             }
             return Task.FromResult(false);
         }
-
-        /*public Task<bool> Delete(int categoryId, int subCategoryId)
-        {
-           
-        }*/
     }
 }

@@ -15,57 +15,61 @@ namespace ReachUp
         private string ErrorMessage { get; set; }
         #endregion
 
+        // Please, my colleagues, keep this on order 
+        // Future improvement: separate by objects/models
+        // COUNT: 48
         #region StoredProcedures
         [System.Flags]
-        public enum Procedure
+        public static readonly enum Procedure
         {
+            atualizarUsuario,
+            deletarUsuario,
+            pegarUsuario,
+            pegarUsuarios,
             cadastrarUsuario,
             logarUsuario,
             cadastrarCategoria,
-            removerCategoria,
             cadastrarSubCategoria,
             definirPreferencia,
+            removerPreferencia,
             clientePrefere,
             criarFeedback,
             deletarFeedback,
             pegarFeedback,
-            FeedbackPorCliente,
-            atualizarFeedback,
             conectarBeacon,
             receberComunicados,
             receberPromocoesDirecionadas,
-            receberAlertas,
+            atualizarComunicado,
+            deletarComunicado,
             pesquisar,
+            buscarHorarioAlternativoLocal,
             cadastrarLocal,
-            pegarSubCategorias,
-            pegarSubcategoriasLocal,
-            pegarSubCategoriasComunicado,
+            defHorarioAlternativoLocal,
+            defSubCategoriaLocal,
+            removerSubCategoriaLocal,
             darAdm,
             publicarComunicado,
-            definirCategoria,
+            relacionarComunicadoSubCategoria,
             cadastrarBeacon,
+            atualizarBeacon,
+            atualizarFeedback,
+            FeedbackPorCliente,
             acessoFeedbacks,
             mediaFeedbacks,
-            pegarUsuarios,
-            pegarUsuario,
-            deletarUsuario,
-            atualizarUsuario,
             pegarLocal,
             pegarLocais,
             atualizarLocal,
             deletarLocal,
             pegarBeacon,
-            pegarBeacons,
+            pegarBeaconsDeLocal,
             deletarBeacon,
             lojistasLoja,
             pegarCategoria,
-            atualizarBeacon,
-            pegarComunicados,
-            atualizarComunicado,
-            deletarComunicado,
-            defHorarioAlternativoLocal,
-            buscarHorarioAlternativoLocal,
-            relacionarComunicadoSubCategoria
+            atualizarCategoria,
+            removerCategoria,
+            pegarSubCategorias,
+            pegarSubCategoriasComunicado,
+            pegarSubcategoriasLocal
         }
 
         #endregion

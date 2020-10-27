@@ -122,7 +122,7 @@ namespace ReachUp
                   for (int i = 0; i < this.CommuniqueSubCategory.Count(); i++)
                   {
                      if (!base.DMLCommand(Procedure.relacionarComunicadoSubCategoria, new string[,] {
-                           {"pCategoria", this.CommuniqueSubCategory[i].Category },
+                           {"pCategoria", this.CommuniqueSubCategory[i].Category.CategoryId },
                            {"pSubCategoria", this.CommuniqueSubCategory[i].SubCategoryId }
                          }))
                          {

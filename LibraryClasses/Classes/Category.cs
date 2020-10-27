@@ -64,11 +64,11 @@ namespace ReachUp
                 {"pDs", this.CategoryDescription}
             }))
             {
-                base.Disconnect();;
-                return true;
+                base.Disconnect();
+                return Task.FromResult(true);
             }
             base.Disconnect();
-            return false;
+            return Task.FromResult(false);
         }
 
         public Task<bool> Update()
@@ -79,11 +79,11 @@ namespace ReachUp
                 {"pDs", this.CategoryDescription}
             }))
             {
-                base.Disconnect();;
-                return true;
+                base.Disconnect();
+                return Task.FromResult(true);
             }
             base.Disconnect();
-            return false;
+            return Task.FromResult(false);
         }
 
         public Task<bool> Delete(int id)
@@ -93,10 +93,10 @@ namespace ReachUp
             }))
             {
                 base.Disconnect();
-                return true;
+                return Task.FromResult(true);
             }
             base.Disconnect();
-            return false;
+            return Task.FromResult(false);
         }
 
         #endregion
