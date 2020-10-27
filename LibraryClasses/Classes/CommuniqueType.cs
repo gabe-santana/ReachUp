@@ -43,15 +43,19 @@ namespace ReachUp
         {
             if (base.DQLCommand(
                 "SELECT * from tipo_comunicado", ref this.Data
-            ))
+            )).
             {
                 List<CommuniqueType> communiqueTypes = new List<CommuniqueType>();
                 if (this.Data.HasRows)
                 {
                     while (this.Data.Read())
                     {
-                        communiqueTypes.Add(new CommuniqueType(this.Data["cd_tipo_comunicado"].ToString(),
-                             this.Data["nm_tipo_comunicado"].ToString()));
+                        communiqueTypes.Add(
+                          new CommuniqueType(
+                            this.Data["cd_tipo_comunicado"].ToString(),
+                            this.Data["nm_tipo_comunicado"]
+                          )
+                        );
                     }
                     this.Data.Close();
                 }
@@ -64,7 +68,8 @@ namespace ReachUp
         public Task<bool> Add()
         {
             if (base.DMLCommand(
-                $"INSERT INTO tipo_comunicado VALUES ({this.Id}, {this.Name})", ref this.Data
+                $"INSERT INTO tipo_comunicado VALUES ({this.Id}, {this.Name})", 
+                ref this.Data
             ))
             {
                return Task.FromResult(true);

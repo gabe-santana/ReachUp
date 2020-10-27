@@ -56,6 +56,35 @@ namespace ReachUp
             return null;
         }
 
+        public Task<List<Category>> GetAll() 
+        {
+            if (base.DQLCommand(
+                  "SELECT * FROM categoria", ref this.Data,
+               ))
+            {
+                List<Category> categories = new List<Category>();
+                if (this.Data.HasRows)
+                {
+                    while (this.Data.Read())
+                    {
+                        categories.Add(
+                          new Category(
+                            this.Data["cd_categoria"].ToString(),
+                            this.Data["nm_categoria"],
+                            this.Data["ds_categoria"]         
+                            )
+                        );
+                    }
+                }
+
+                this.Data.Close();
+                base.Disconnect();
+
+                return Task.FromResult(categories);
+            }
+            return null;
+        }
+
         public Task<bool> Add() 
         {
             if (base.DMLCommand(Procedure.cadastrarCategoria, new string[,] {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReachUp
+namespace ReachUp.
 {
     public class ClientPreference : clsDatabase
     {
@@ -70,7 +70,7 @@ namespace ReachUp
             {
                 if (!base.DMLCommand(Procedure.definirPreferencia, ref this.Data, 
                    new string[,] {
-                  {"pEmail", email.ToString()},
+                  {"pEmail", email},
                   {"pCdSubCategoria", this.SubCategories[i].SubCategoryId.ToString()},
                   {"pCdCategoria", this.SubCategories[i].Category.CategoryId.ToString()}
                   }))
@@ -85,7 +85,7 @@ namespace ReachUp
         {
              if (base.DMLCommand(Procedure.definirPreferencia, ref this.Data, 
                 new string[,] {
-                {"pEmail", email.ToString()},
+                {"pEmail", email},
                 {"pCdSubCategoria", category.ToString()},
                 {"pCdCategoria", subCategory.ToString()}
               }))

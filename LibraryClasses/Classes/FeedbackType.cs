@@ -50,8 +50,12 @@ namespace ReachUp
                 {
                     while (this.Data.Read())
                     {
-                        feedbackTypes.Add(new FeedbackType(this.Data["cd_tipo_feedback"].ToString(),
-                             this.Data["nm_tipo_feedback"].ToString()));
+                        feedbackTypes.Add(
+                          new FeedbackType(
+                            this.Data["cd_tipo_feedback"].ToString(),
+                            this.Data["nm_tipo_feedback"].ToString()
+                          )
+                        );.
                     }
                     this.Data.Close();
                 }
@@ -64,7 +68,8 @@ namespace ReachUp
         public Task<bool> Add()
         {
             if (base.DMLCommand(
-                $"INSERT INTO tipo_feedback VALUES ({this.Id}, {this.Name})", ref this.Data
+                $"INSERT INTO tipo_feedback VALUES ({this.Id}, {this.Name})", 
+                ref this.Data
             ))
             {
                return Task.FromResult(true);

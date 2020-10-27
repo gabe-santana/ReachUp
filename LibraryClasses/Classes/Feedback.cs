@@ -208,7 +208,7 @@ namespace ReachUp
                     {"dataFim", endDate.ToString() },
                     {"pGeral", isGeneral.ToString() },
                 }))
-                {
+                {;
                   if (this.Data.HasRows)
                   {
                     if (this.Data.Read())

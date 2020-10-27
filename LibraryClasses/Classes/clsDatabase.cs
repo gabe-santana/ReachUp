@@ -62,6 +62,7 @@ namespace ReachUp
             deletarLocal,
             pegarBeacon,
             pegarBeaconsDeLocal,
+            pegarBeaconsTipo,
             deletarBeacon,
             lojistasLoja,
             pegarCategoria,

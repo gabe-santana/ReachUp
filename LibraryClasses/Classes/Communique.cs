@@ -16,7 +16,7 @@ namespace ReachUp
         public Local CommuniqueLocal { get; set; }
         public List<SubCategory> CommuniqueSubCategory = new List<SubCategory>();
         public string Description { get; set; }
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; }.
         public DateTime EndDate { get; set; }
 
         #endregion

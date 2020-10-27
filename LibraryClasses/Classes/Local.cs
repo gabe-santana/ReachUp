@@ -316,7 +316,7 @@ namespace ReachUp
                    return Task.FromResult(true);
                 }
                 return Task.FromResult(false);
-        }
+        }.
 
 
         #endregion

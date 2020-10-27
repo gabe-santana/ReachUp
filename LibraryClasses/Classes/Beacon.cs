@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReachUp
+namespace ReachUp;
 {
     public class Beacon : clsDatabase
     {
@@ -21,10 +21,11 @@ namespace ReachUp
 
         #region Constructor
         public Beacon() : base() { }
-        public Beacon(string uuid, int type) : base()
+        public Beacon(string uuid, int type, Local local) : base()
         {
             this.UUID = uuid;
             this.Type = type;
+            this.LocalBeacon = local;
         }
 
         public Beacon(string uuid) : base()
@@ -48,7 +49,9 @@ namespace ReachUp
                     while (this.Data.Read())
                     {
                         beacon = new Beacon(uuid,
-                            int.Parse(this.Data["cd_tipo_beacon"].ToString()));
+                            int.Parse(this.Data["cd_tipo_beacon"].ToString()),
+                            int.Parse(this.Data["cd_local"].ToString())
+                            );
                     }
                 }
                 this.Data.Close();
@@ -61,7 +64,7 @@ namespace ReachUp
 
         public Task<List<Beacon>> GetAll(int type)
         {
-            if (base.DQLCommand(Procedure.pegarBeacons, ref this.Data,
+            if (base.DQLCommand(Procedure.pegarBeaconsTipo, ref this.Data,
                  new string[,] {
                  {"pTipo", type.ToString()}
              }))
@@ -71,8 +74,11 @@ namespace ReachUp
                 {
                     while (this.Data.Read())
                     {
-                        beacons.Add(new Beacon(this.Data["cd_uuid_beacon"].ToString(),
-                            int.Parse(type.ToString())));
+                        beacons.Add(new Beacon(
+                            this.Data["cd_uuid_beacon"].ToString(),
+                            int.Parse(type.ToString()),
+                            int.Parse(this.Data["cd_local"].ToString())
+                        ));
                     }
                     this.Data.Close();
                 }
@@ -94,8 +100,11 @@ namespace ReachUp
                 {
                     while (this.Data.Read())
                     {
-                        beacons.Add(new Beacon(this.Data["cd_uuid_beacon"].ToString(),
-                            int.Parse(type.ToString())));
+                        beacons.Add(new Beacon(
+                            this.Data["cd_uuid_beacon"].ToString(),
+                            int.Parse(this.Data["cd_tipo_beacon"].ToString()),
+                            int.Parse(local.ToString())
+                        ));
                     }
                     this.Data.Close();
                 }
@@ -115,7 +124,7 @@ namespace ReachUp
                 ))
             {
                 return Task.FromResult(true);
-            }.
+            }
             return Task.FromResult(false);
         }
 
