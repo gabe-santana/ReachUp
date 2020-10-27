@@ -14,7 +14,10 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet("ByDate")]
         public async Task<IActionResult> ByDate(int type, string begin, string end)
         {
-            if (!string.IsNullOrWhiteSpace(type.ToString()))
+            if (!string.IsNullOrWhiteSpace(type.ToString())
+                && !string.IsNullOrWhiteSpace(begin)
+                && !string.IsNullOrWhiteSpace(end)
+               )
                 return Ok(await new Feedback().ByDate(type,begin,end));
             return BadRequest("Parameters are null");
         }
@@ -38,7 +41,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm")]
+        [Authorize(Roles = "adm,cli")]
         [HttpGet]
         public async Task<IActionResult> Get(int id)
         {

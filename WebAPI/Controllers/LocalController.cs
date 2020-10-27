@@ -37,7 +37,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm")]
+        [Authorize]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(string type)
         {
@@ -48,7 +48,7 @@ namespace ReachUpWebAPI.Controllers
 
         [Authorize]
         [HttpGet("FetchOpHours")]
-        public async Task<IActionResult> FetchOpHours(int localId, int weekDay)
+        public async Task<IActionResult> FetchOpHours(int local, int weekDay)
         {
             if (!string.IsNullOrWhiteSpace(localId.ToString()) 
                && !string.IsNullOrWhiteSpace(weekDay.ToString())
@@ -76,7 +76,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "loj")]
+        [Authorize(Roles = "adm")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] Local local)
         {
@@ -126,13 +126,13 @@ namespace ReachUpWebAPI.Controllers
         }
 
         [Authorize(Roles = "adm")]
-        [HttpPost("ConnectAdm")]
-        public async Task<IActionResult> ConnectAdm(string email, int local) 
+        [HttpPost("ConnectAdmin")]
+        public async Task<IActionResult> ConnectAdmin(string email, int local) 
         {
             if (!string.IsNullOrWhiteSpace(email)
                 && !string.IsNullOrWhiteSpace(local.ToString())
                )
-                return Ok(await new Local().ConnectAdm(email, local));
+                return Ok(await new Local().ConnectAdmin(email, local));
             return BadRequest("Parameters are null");
         }
 

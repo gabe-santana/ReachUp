@@ -12,16 +12,16 @@ namespace ReachUpWebAPI.Controllers
     {
         [Authorize(Roles = "cli")]
         [HttpGet("Receive")]
-        public async Task<IActionResult> Receive([FromBody] User user, [FromQuery] int idLocal) 
+        public async Task<IActionResult> Receive([FromBody] User user, [FromQuery] int local) 
         {
             if (user != null && !string.IsNullOrWhiteSpace(idLocal.ToString()))
                 return Ok(await new Communique().Receive(user, idLocal));
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "loj,adm")]
+        [Authorize(Roles = "loj,adm,cli")]
         [HttpGet]
-        public async Task<IActionResult> Get(int idLocal) 
+        public async Task<IActionResult> Get(int local) 
         {
             if (!string.IsNullOrWhiteSpace(idLocal.ToString()))
                 return Ok(await new Communique().Get(idLocal));
@@ -37,7 +37,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize]
+        [Authorize (Roles = "loj,adm")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] Communique communique)
         {
@@ -47,7 +47,7 @@ namespace ReachUpWebAPI.Controllers
            return BadRequest("Parameters are null");
         }
 
-        [Authorize]
+        [Authorize (Roles = "loj,adm")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id) 
         {

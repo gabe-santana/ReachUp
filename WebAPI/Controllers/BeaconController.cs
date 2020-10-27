@@ -20,7 +20,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize]
+        [Authorize(Roles = "adm,dev")]
         [HttpGet]
         public async Task<IActionResult> Get(string uuid)
         {
@@ -39,7 +39,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
 
-        [Authorize(Roles = "loj,adm,dev")]
+        [Authorize(Roles = "adm,dev")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Beacon beacon)
         {
@@ -48,7 +48,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "loj,adm")]
+        [Authorize(Roles = "adm, dev")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] Beacon beacon)
         {
@@ -57,7 +57,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "loj,adm")]
+        [Authorize(Roles = "adm, dev")]
         [HttpDelete]
         public async Task<IActionResult> Delete(string uuid)
         {

@@ -12,7 +12,7 @@ namespace ReachUpWebAPI.Controllers
     {
         #region Actions
 
-        [Authorize (Roles = "adm")]
+        [Authorize (Roles = "adm, dev")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(string role)
         {
