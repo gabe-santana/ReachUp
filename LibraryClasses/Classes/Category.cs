@@ -56,7 +56,7 @@ namespace ReachUp
             return null;
         }
 
-        public bool Add(int id) 
+        public Task<bool> Add() 
         {
             if (base.DMLCommand(Procedure.cadastrarCategoria, new string[,] {
                 {"pCategoria", this.CategoryId.ToString()},
@@ -64,14 +64,29 @@ namespace ReachUp
                 {"pDs", this.CategoryDescription}
             }))
             {
-                base.Disconnect();
+                base.Disconnect();;
                 return true;
             }
             base.Disconnect();
             return false;
         }
 
-        public bool Delete(int id)
+        public Task<bool> Update()
+        {
+           if (base.DMLCommand(Procedure.atualizarCategoria, new string[,] {
+                {"pCategoria", this.CategoryId.ToString()},
+                {"pNome", this.CategoryName},
+                {"pDs", this.CategoryDescription}
+            }))
+            {
+                base.Disconnect();;
+                return true;
+            }
+            base.Disconnect();
+            return false;
+        }
+
+        public Task<bool> Delete(int id)
         {
             if (base.DMLCommand(Procedure.removerCategoria, new string[,] {
                 {"pCategoria", id.ToString()},
