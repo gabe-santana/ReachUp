@@ -33,7 +33,7 @@ namespace ReachUp
              DateTime EndDate, Local local) : base()
         {
             this.CommuniqueId = id;
-            this.CommuniqueSubCategory = CommuniqueSubCategory;
+            this.CommuniqueSubCategory = SubCategories;
             this.Description = Description;
             this.StartDate = StartDate;
             this.EndDate = EndDate;
@@ -43,7 +43,7 @@ namespace ReachUp
         #endregion
 
         #region Methods
-        public async Task<List<Communique>> Receive(User user, int idLocal)
+        public Task<List<Communique>> Receive(User user, int idLocal)
         {
             if (base.DQLCommand(Procedure.receberPromocoesDirecionadas, ref this.Data,
                 new string[,] {
@@ -70,13 +70,13 @@ namespace ReachUp
                 this.Data.Close();
                 base.Disconnect();
 
-                return await Task.FromResult(communiques);
+                return Task.FromResult(communiques);
             }
 
             return null;
         }
 
-        public async Task<List<Communique>> Get(int idLocal) 
+        public Task<List<Communique>> Get(int idLocal) 
         {
             if (base.DQLCommand(Procedure.receberComunicados, ref this.Data, new string[,] {
                 {"pLocal", idLocal.ToString()}
@@ -103,13 +103,52 @@ namespace ReachUp
                 this.Data.Close();
                 base.Disconnect();
 
-                return await Task.FromResult(communiques);
+                return Task.FromResult(communiques);
             }
 
             return null;
         }
 
+        public Task<bool> Add()
+        {
+           if (base.DMLCommand(Procedure.publicarComunicado, new string[,] {
+                {"pLocal", this.CommuniqueLocal.IdLocal },
+                {"pTipo", this.Type },
+                {"pDs", this.Description },
+                {"pDataInicio", this.StartDate },
+                {"pDataFim", this.EndDate }
+              }))
+              {
+                  for (int i = 0; i < this.CommuniqueSubCategory.Count(); i++)
+                  {
+                     if (!base.DMLCommand(Procedure.relacionarComunicadoSubCategoria, new string[,] {
+                           {"pCategoria", this.CommuniqueSubCategory[i].Category },
+                           {"pSubCategoria", this.CommuniqueSubCategory[i].SubCategoryId }
+                         }))
+                         {
+                             return Task.FromResult(false);
+                         }
+                  }
+                  return Task.FromResult(true);
+              }
+              return Task.FromResult(false);
+        }
 
+        public Task<bool> Update()
+        {
+            if (base.DMLCommand(Procedure.atualizarComunicado, new string[,] {
+                 {"pComunicado", this.CommuniqueId },
+                 {"pLocal", this.CommuniqueLocal.IdLocal },
+                 {"pTipo", this.Type },
+                 {"pDs", this.Description },
+                 {"pDataInicio", this.StartDate },
+                 {"pDataFim", this.EndDate }
+            })) 
+            {
+                return Task.FromResult(true);
+            }
+            return Task.FromResult(false);
+        }
   
 
         public Task<bool> Delete(int id) 

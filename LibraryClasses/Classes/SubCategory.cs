@@ -27,7 +27,7 @@ namespace ReachUp
             this.SubCategoryName = Name;
         }
 
-        public async Task<List<SubCategory>> getAll()
+        public Task<List<SubCategory>> GetAll()
         {
            if (base.DQLCommand(Procedure.pegarSubCategorias, ref this.Data)) 
            {
@@ -55,7 +55,7 @@ namespace ReachUp
            return null;
         }
 
-        public async Task<List<SubCategory>> getByLocal(int local) 
+        public Task<List<SubCategory>> ByLocal(int local) 
         {
             if (base.DQLCommand(Procedure.pegarSubcategoriasLocal, ref this.Data, new string[,] {
                 {"pLocal", local.ToString()}
@@ -83,7 +83,7 @@ namespace ReachUp
             return null;
         }
 
-        public async Task<List<SubCategory>> getByCommunique(int communique) 
+        public Task<List<SubCategory>> ByCommunique(int communique) 
         {
             if (base.DQLCommand(Procedure.pegarSubCategoriasComunicado, ref this.Data, new string[,] {
                 {"pComunicado", communique.ToString()}
@@ -110,5 +110,22 @@ namespace ReachUp
             }
             return null;
         }
+
+        public Task<bool> Add()
+        {
+           if (base.DMLCommand(Procedure.cadastrarSubCategoria, ref this.Data, new string[,] {
+                {"pCdCategoria", communique.ToString()},
+                {"pNome", this.SubCategoryName}
+            }))
+            {
+               return Task.FromResult(true);
+            }
+            return Task.FromResult(false);
+        }
+
+        /*public Task<bool> Delete(int categoryId, int subCategoryId)
+        {
+           
+        }*/
     }
 }

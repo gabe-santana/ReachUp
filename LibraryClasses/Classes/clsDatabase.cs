@@ -64,7 +64,8 @@ namespace ReachUp
             atualizarComunicado,
             deletarComunicado,
             defHorarioAlternativoLocal,
-            buscarHorarioAlternativoLocal
+            buscarHorarioAlternativoLocal,
+            relacionarComunicadoSubCategoria
         }
 
         #endregion
