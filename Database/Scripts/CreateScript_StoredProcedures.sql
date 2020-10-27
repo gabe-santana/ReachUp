@@ -244,7 +244,7 @@ END$$
 DROP PROCEDURE IF EXISTS receberPromocoesDirecionadas$$
 CREATE PROCEDURE  receberPromocoesDirecionadas(pLocal int, pCliente varchar(100))
 BEGIN
-			SELECT l.nm_local , c.ds_comunicado , ca.nm_categoria, 
+			SELECT l.nm_local , c.cd_comunicado, c.cd_tipo_comunicado, c.ds_comunicado , ca.nm_categoria, 
 			sc.nm_sub_categoria , c.dt_inicio_comunicado, c.dt_fim_comunicado 
 			FROM `local` as l
 			INNER JOIN comunicado as c
@@ -475,15 +475,23 @@ END$$
 DROP PROCEDURE IF EXISTS publicarComunicado$$
 CREATE PROCEDURE publicarComunicado(
 	pLocal int, pTipo int,
-	pCategoria int, pSubCategoria int, 
 	pDs text, pDataInicio datetime, 
 	pDataFim datetime)
 BEGIN
 		DECLARE 	_cd int;
 		SELECT COUNT(cd_comunicado) INTO @_cd FROM comunicado;
 		INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, pDataInicio, pDataFim);
-		INSERT INTO comunicado_sub_categoria VALUES (@_cd, pCategoria, pSubCategoria);
+		/*INSERT INTO comunicado_sub_categoria VALUES (@_cd, pCategoria, pSubCategoria);*/
 		
+END$$
+
+DROP PROCEDURE IF EXISTS relacionarComunicadoSubCategoria$$
+CREATE PROCEDURE relacionarComunicadoSubCategoria(
+          pCategoria int, pSubCategoria int)
+BEGIN
+  DECLARE 	_cd int;
+  SELECT MAX(cd_comunicado) INTO @_cd FROM comunicado;
+  INSERT INTO comunicado_sub_categoria VALUES (@_cd, pCategoria, pSubCategoria);
 END$$
 
 DROP PROCEDURE IF EXISTS cadastrarBeacon$$
