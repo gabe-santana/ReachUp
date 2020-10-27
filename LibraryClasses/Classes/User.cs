@@ -96,30 +96,6 @@ namespace ReachUp
             return false;
         }
 
-        public Task<List<User>> GetAdmins(int id)
-        {
-            if (base.DQLCommand(Procedure.lojistasLoja, ref this.Data,
-                new string[,] {
-                    { "pLocal", id.ToString()}
-                }))
-            {
-                List<User> admins = new List<User>();
-                if (this.Data.HasRows)
-                {
-                    while (this.Data.Read())
-                    {
-                        admins.Add(new User(this.Data["nm_administrador"].ToString(), this.Data["nm_email_administrador"].ToString(),
-                            null, "loj"));
-                    }
-                }
-                this.Data.Close();
-                base.Disconnect();
-
-                return Task.FromResult(admins);
-            }
-
-            return null;
-        }
         public async Task<List<User>> GetAll(string role)
         {
             List<User> _return = new List<User>();

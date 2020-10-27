@@ -27,7 +27,7 @@ namespace ReachUp
 
 
         #region Methods
-        public async Task<ClientPreference> Get(string email) 
+        public async Task<ClientPreference> GetAll(string email) 
         {
             if (base.DQLCommand(Procedure.clientePrefere, ref this.Data, 
                 new string[,] {
@@ -62,6 +62,37 @@ namespace ReachUp
             this.Data.Close();
             base.Disconnect();
             return null;
+        }
+
+        public Task<bool> Add(string email)
+        {
+            for (int i = 0; i < this.SubCategories.Count(); i++)
+            {
+                if (!base.DMLCommand(Procedure.definirPreferencia, ref this.Data, 
+                   new string[,] {
+                  {"pEmail", email.ToString()},
+                  {"pCdSubCategoria", this.SubCategories[i].SubCategoryId.ToString()},
+                  {"pCdCategoria", this.SubCategories[i].Category.CategoryId.ToString()}
+                  }))
+                  {
+                     return Task.FromResult(false);
+                  }
+            }
+            return Task.FromResult(true);
+        }
+
+        public Task<bool> Delete(string email, int category, int subCategory)
+        {
+             if (base.DMLCommand(Procedure.definirPreferencia, ref this.Data, 
+                new string[,] {
+                {"pEmail", email.ToString()},
+                {"pCdSubCategoria", category.ToString()},
+                {"pCdCategoria", subCategory.ToString()}
+              }))
+              {
+                 return Task.FromResult(true);
+              }
+              return Task.FromResult(false);
         }
         #endregion
     }
