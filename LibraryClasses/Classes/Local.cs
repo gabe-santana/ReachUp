@@ -212,7 +212,7 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
-        public Task<List<string>> FetchOpHours(int localId, int weekDay)
+        public Task<List<string>> FetchOpHours(int local, int weekDay)
         {
             if (base.DQLCommand(Procedure.buscarHorarioAlternativoLocal, ref this.Data,
                 new string[,] {
@@ -305,7 +305,7 @@ namespace ReachUp
             return null;
         }
 
-        public Task<bool> ConnectAdm(string email, int local)
+        public Task<bool> ConnectAdmin(string email, int local)
         {
             if (base.DMLCommand(Procedure.darAdm, 
                 new string[,] {
@@ -316,7 +316,7 @@ namespace ReachUp
                    return Task.FromResult(true);
                 }
                 return Task.FromResult(false);
-        }.
+        }
 
 
         #endregion

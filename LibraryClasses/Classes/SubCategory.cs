@@ -114,7 +114,7 @@ namespace ReachUp
         public Task<bool> Add()
         {
            if (base.DMLCommand(Procedure.cadastrarSubCategoria, ref this.Data, new string[,] {
-                {"pCdCategoria", communique.ToString()},
+                {"pCdCategoria", this.Category.CategoryId.ToString()},
                 {"pNome", this.SubCategoryName}
             }))
             {
@@ -122,5 +122,22 @@ namespace ReachUp
             }
             return Task.FromResult(false);
         }
+
+        public Task<bool> Delete(int category, int subCategory)
+        {
+           if (base.DMLCommand(
+                $"DELETE FROM sub_categoria WHERE cd_categoria = {category}
+                AND cd_sub_categoria = {subCategory} ", 
+                ref this.Data, 
+              new string[,] {
+                {"pCategoria", category.ToString()},
+                {"pSubCategoria", subCategory.ToString()}
+            }))
+            {
+               return Task.FromResult(true);
+            }
+            return Task.FromResult(false);
+        }
+        
     }
 }
