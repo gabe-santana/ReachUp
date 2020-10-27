@@ -16,7 +16,7 @@ namespace ReachUp
         [JsonIgnore] public int Type { get; set; }
         public string Name { get; set; }
         public ushort Floor { get; set; }
-        public User Admin { get;set; }
+        public List<User> Admins { get;set; }
         public string DescriptionSubCategories { get; set; }
         public List<Beacon> Beacons = new List<Beacon>();
         public List<SubCategory> SubCategories = new List<SubCategory>();
@@ -180,7 +180,7 @@ namespace ReachUp
             {
                 return Task.FromResult(true);
             }
-            return Task.FromResult(false);
+            return Task.FromResult(false);;
         }
 
         public Task<bool> AddOpHours(Local local, OpeningHours openingHours)
@@ -249,6 +249,76 @@ namespace ReachUp
 
             return Task.FromResult(false);
         }
+
+        public Task<bool> AddSubCategories()
+        {
+            for (int i = 0; i < this.SubCategories.Count(); i++)
+            {
+                if (!base.DMLCommand(Procedure.defSubCategoriaLocal, 
+                new string[,] {
+                    {"pLocal", this.IdLocal.ToString()},
+                    {"pCategoria", this.SubCategories[i].Category.CategoryId.ToString()},
+                    {"pSubCategoria", this.SubCategories[i].SubCategoryId.ToString()},
+                }))
+                {
+                   return Task.FromResult(false);
+                }
+            }
+            return Task.FromResult(true);
+        }
+
+        public Task<bool> DeleteSubCategory(int local, int category, int subCategory)
+        {
+             if (base.DMLCommand(Procedure.removerSubCategoriaLocal, 
+                new string[,] {
+                    {"pLocal", local.ToString()},
+                    {"pCategoria", category.ToString()},
+                    {"pSubCategoria", subCategory.ToString()},
+                }))
+                {
+                   return Task.FromResult(true);
+                }
+                return Task.FromResult(false);
+        }
+
+        public Task<List<User>> GetAdmins(int local)
+        {
+             if (base.DQLCommand(Procedure.lojistasLoja, ref this.Data,
+                new string[,] {
+                    { "pLocal", local.ToString()}
+                }))
+            {
+                Admins = new List<User>();
+                if (this.Data.HasRows)
+                {
+                    while (this.Data.Read())
+                    {
+                        Admins.Add(this.Data["nm_administrador"].ToString(),
+                            this.Data["nm_email_administrador"].ToString());
+                    }
+                }
+                this.Data.Close();
+                base.Disconnect();
+
+                return Task.FromResult(Admins);
+            }
+            return null;
+        }
+
+        public Task<bool> ConnectAdm(string email, int local)
+        {
+            if (base.DMLCommand(Procedure.darAdm, 
+                new string[,] {
+                    {"pEmail", email.ToString()},
+                    {"pCdLocal", local.ToString()}
+                }))
+                {
+                   return Task.FromResult(true);
+                }
+                return Task.FromResult(false);
+        }
+
+
         #endregion
 
         #region Private Methods
