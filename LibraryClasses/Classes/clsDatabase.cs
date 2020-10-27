@@ -62,7 +62,9 @@ namespace ReachUp
             atualizarBeacon,
             pegarComunicados,
             atualizarComunicado,
-            deletarComunicado
+            deletarComunicado,
+            defHorarioAlternativoLocal,
+            buscarHorarioAlternativoLocal
         }
 
         #endregion
