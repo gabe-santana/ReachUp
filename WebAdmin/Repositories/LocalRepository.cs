@@ -50,7 +50,7 @@ namespace WebAdmin.Repositories
            return response;
         }
 
-        public async Task<Bool> AddOpHours(int localId, int weekDay, time opening, time closing)
+        public async Task<Bool> AddOpHours(Local local, OpeningHours OpeningHours)
         {
            string response = await base.Get($"Local/AddOpHours");
            return response;
