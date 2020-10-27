@@ -465,6 +465,15 @@ BEGIN
 	INSERT INTO sub_categoria_local VALUES (plocal, pCategoria, pSubCategoria);
 END$$
 
+DROP PROCEDURE IF EXISTS removerSubCategoriaLocal$$
+CREATE PROCEDURE removerSubCategoriaLocal(plocal int, pCategoria int, pSubCategoria int)
+BEGIN
+    DELETE FROM sub_categoria_local
+    WHERE cd_local = pLocal
+    AND cd_categoria = pCategoria
+    AND cd_sub_categoria = pSubCategoria;
+END$$
+
 DROP PROCEDURE IF EXISTS darAdm$$
 CREATE PROCEDURE darAdm(pEmail varchar(100), pCdLocal int)
 BEGIN
@@ -548,7 +557,7 @@ BEGIN
 	END IF;
 END$$
 
-DROP FUNCTION IF EXISTS mediaFeedbacks$$
+/*DROP FUNCTION IF EXISTS mediaFeedbacks$$
 CREATE FUNCTION mediaFeedbacks( dataInicio date, dataFim date, pGeral bool) RETURNS INT(1)
 BEGIN
 	DECLARE media INT(1);
@@ -560,6 +569,18 @@ BEGIN
 		 WHERE cd_tipo_feedback = 0 ;
 	END IF;
 	RETURN  @media;
+END$$*/
+
+DROP PROCEDURE IF EXISTS mediaFeedbacks$$
+CREATE PROCEDURE mediaFeedbacks( dataInicio date, dataFim date, pGeral bool)
+BEGIN
+	IF pGeral = false THEN
+		SELECT  avg(qt_estrelas_feedback) as media FROM feedback 	
+		WHERE cd_tipo_feedback = 0 AND dt_feedback BETWEEN  dataInicio AND dataFim;
+	ELSE
+		SELECT avg(qt_estrelas_feedback) as media FROM feedback
+		 WHERE cd_tipo_feedback = 0 ;
+	END IF;
 END$$
 
 DROP PROCEDURE IF EXISTS pegarLocal$$
