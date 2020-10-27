@@ -62,7 +62,7 @@ namespace ReachUpWebAPI.Controllers
             if (local != null)
                 return Ok(await local.Add());
             return BadRequest("Parameters are null");
-        }.
+        }
 
         [Authorize(Roles = "adm")]
         [HttpPost("AddOpHours")]
@@ -83,7 +83,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
 
-        [Authorize(Roles = "loj,adm")]
+        [Authorize(Roles = "adm")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
@@ -91,6 +91,47 @@ namespace ReachUpWebAPI.Controllers
                 return Ok(await new Local().Delete(id));
             return BadRequest("Parameters are null");
         }
+
+        [Authorize(Roles = "adm")]
+        [HttpPost("AddSubCategories")]
+        public async Task<IActionResult> AddSubCategories([FromBody] Local local) 
+        {
+            if (local != null)
+                return Ok(await local.AddSubCategories());
+            return BadRequest("Parameters are null");
+        }
+
+        [Authorize(Roles = "adm")]
+        [HttpDelete("DeleteSubCategory")]
+        public async Task<IActionResult> DeleteSubCategory(int local, int category, int subCategory)
+        {
+            if (!string.IsNullOrWhiteSpace(local.ToString()) 
+                && !string.IsNullOrWhiteSpace(category.ToString()) 
+                && !string.IsNullOrWhiteSpace(subCategory.ToString())
+               )
+                return Ok(await new Local().DeleteSubCategory(local, category, subCategory));
+            return BadRequest("Parameters are null");
+        }
+
+        [Authorize(Roles = "adm")]
+        [HttpGet("GetAdmins")]
+        public async Task<IActionResult> GetAdmins(int local)
+        {
+            if (!string.IsNullOrWhiteSpace(local.ToString()))
+                return Ok(await new Local().GetAdmins(local));
+            return BadRequest("Parameters are null");
+        }
+
+        [Authorize(Roles = "adm")]
+        [HttpPost("ConnectAdm")]
+        public async Task<IActionResult> ConnectAdm(string email, int local) 
+        {
+            if (email != null && local != null)
+                return Ok(await new Local().ConnectAdm(email, local));
+            return BadRequest("Parameters are null");
+        }
+
+        
 
         #endregion
     }
