@@ -183,6 +183,21 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        public Task<bool> AddOpHours(int localId, int weekDay, time opening, time closing)
+        {
+            if (base.DMLCommand(Procedure.defHorarioAlternativoLocal,
+               new string[,] {
+                   { "pLocal", localId.ToString() },
+                   { "pDia", weekDay.ToString() },
+                   { "pAbertura", opening.ToString() },
+                   { "pFechamento", closing.ToString() }
+                }))
+            {
+               return Task.FromResult(true);
+            }
+            return Task.FromResult(false);
+        }
+
         public Task<bool> Update()
         {
             if (base.DMLCommand(Procedure.atualizarLocal,
@@ -195,6 +210,31 @@ namespace ReachUp
             }
 
             return Task.FromResult(false);
+        }
+
+        public Task<List<string>> FetchOpHours(int localId, int weekDay)
+        {
+            if (base.DQLCommand(Procedure.buscarHorarioAlternativoLocal, ref this.Data,
+                new string[,] {
+                    { "pLocal", localId.ToString() },
+                    { "pDia", weekDay.ToString() }
+                }))
+            {
+                List<string> opHours = new List<string>();
+                if (this.Data.HasRows)
+                {
+                    while (this.Data.Read())
+                    {
+                       opHours.Add(this.Data["hr_abertura"].ToString(),
+                                   this.Data["hr_fechamento"].ToString());
+                    }
+                }
+                this.Data.Close();
+                base.Disconnect();
+
+                return Task.FromResult(opHours);
+            }
+            return null;
         }
 
         public Task<bool> Delete(int id) 
