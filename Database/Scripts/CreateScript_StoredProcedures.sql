@@ -177,6 +177,17 @@ BEGIN
 	INSERT INTO preferencia_cliente VALUES(pEmail, pCdSubCategoria, pCdCategoria);
 END$$
 
+DROP PROCEDURE IF EXISTS removerPreferencia$$
+CREATE PROCEDURE removerPreferencia(pEmail varchar(100), pCdSubCategoria int, pCdCategoria int)
+BEGIN
+	DELETE FROM preferencia_cliente
+    WHERE nm_email_cliente = pEmail
+    AND cd_sub_categoria = pCdSubCategoria
+    AND cd_categoria = pCdCategoria;
+END$$
+
+
+
 DROP PROCEDURE IF EXISTS clientePrefere$$
 CREATE PROCEDURE clientePrefere(pEmail varchar(100))
 BEGIN
@@ -631,12 +642,6 @@ BEGIN
 	DELETE FROM comunicado WHERE cd_local = pLocal;
 	DELETE FROM beacon WHERE cd_local = pLocal;
 	DELETE FROM `local` WHERE cd_local = pLocal;
-END$$
-
-DROP PROCEDURE IF EXISTS pegarBeacon$$
-CREATE PROCEDURE pegarBeacon(pUUID varchar(36))
-BEGIN
-	SELECT * FROM beacon WHERE cd_uuid_beacon = pUUID;
 END$$
 
 DROP PROCEDURE IF EXISTS pegarBeacon$$
