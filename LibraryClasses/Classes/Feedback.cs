@@ -151,7 +151,7 @@ namespace ReachUp
                 }
 
                 this.Data.Close();
-                base.Disconnect();
+                base.Disconnect();.
 
                 return await Task.FromResult(feedback);
             }
@@ -196,6 +196,36 @@ namespace ReachUp
 
             }
             return Task.FromResult(false);
+        }
+
+        public async Task<int> GetAverage(Date startDate, Date endDate, bool isGeneral)
+        {
+           int average;
+
+            if (base.DQLCommand(Procedure.mediaFeedbacks, ref this.Data,
+                new string[,] {
+                    {"dataInicio", startDate.ToString() },
+                    {"dataFim", endDate.ToString() },
+                    {"pGeral", isGeneral.ToString() },
+                }))
+                {
+                  if (this.Data.HasRows)
+                  {
+                    if (this.Data.Read())
+                    {
+                        average = this.Data["media"];
+                    }
+
+                    this.Data.Close();
+                    base.Disconnect();
+                    return await Task.FromResult(average);
+                  }
+
+                this.Data.Close();
+                base.Disconnect();
+            }
+
+            return null;
         }
 
             #endregion
