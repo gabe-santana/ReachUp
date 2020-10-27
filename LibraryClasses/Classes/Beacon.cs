@@ -82,6 +82,29 @@ namespace ReachUp
             return null;
         }
 
+        public Task<List<Beacon>> ByLocal(int local)
+        {
+             if (base.DQLCommand(Procedure.pegarBeaconsDeLocal, ref this.Data,
+                 new string[,] {
+                 {"pLocal", local.ToString()}
+             }))
+             {
+                List<Beacon> beacons = new List<Beacon>();
+                if (this.Data.HasRows)
+                {
+                    while (this.Data.Read())
+                    {
+                        beacons.Add(new Beacon(this.Data["cd_uuid_beacon"].ToString(),
+                            int.Parse(type.ToString())));
+                    }
+                    this.Data.Close();
+                }
+                base.Disconnect();
+                return Task.FromResult(beacons);
+             }
+             return null;
+        }
+
         public Task<bool> Add() 
         {
             if (base.DMLCommand(Procedure.cadastrarBeacon,
@@ -92,7 +115,7 @@ namespace ReachUp
                 ))
             {
                 return Task.FromResult(true);
-            }
+            }.
             return Task.FromResult(false);
         }
 
