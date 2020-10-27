@@ -15,7 +15,7 @@
 <img src="https://img.shields.io/github/issues/0G4briel/ReachUp">
 <img src="https://img.shields.io/github/forks/0G4briel/ReachUp">
 <!--[![](https://tokei.rs/b1/github/0G4briel/ReachUp)](https://github.com/0G4briel/ReachUp).-->
-<img  src="https://img.shields.io/github/directory-file-count/0G4briel/ReachUp">
+![Lines of code](https://git.marcoaceti.it/0G4briel/ReachUp)
 <img src="https://img.shields.io/github/languages/code-size/0G4briel/Reachup">
 <img src="https://img.shields.io/github/last-commit/0G4briel/ReachUp">
 </p>
