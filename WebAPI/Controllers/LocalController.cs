@@ -45,12 +45,31 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        [Authorize]
+        [HttpGet("FetchOpHours")]
+        public async Task<IActionResult> FetchOpHours(int localId, int weekDay)
+        {
+            if (!string.IsNullOrWhiteSpace(type.ToString()))
+                return Ok(await new Local().FetchOpHours(localId, weekDay));
+            return BadRequest("Parameters are null");
+        }
+        
+
         [Authorize(Roles = "adm")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Local local) 
         {
             if (local != null)
                 return Ok(await local.Add());
+            return BadRequest("Parameters are null");
+        }
+
+        [Authorize(Roles = "adm")]
+        [HttpPost("AddOpHours")]
+        public async Task<IActionResult> AddOpHours(int localId, int weekDay, time opening, time closing) 
+        {
+            if (local != null)
+                return Ok(await local.AddOpHours(localId, weekDay, opening, closing));
             return BadRequest("Parameters are null");
         }
 
@@ -72,6 +91,7 @@ namespace ReachUpWebAPI.Controllers
                 return Ok(await new Local().Delete(id));
             return BadRequest("Parameters are null");
         }
+
         #endregion
     }
 }
