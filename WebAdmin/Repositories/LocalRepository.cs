@@ -49,5 +49,20 @@ namespace WebAdmin.Repositories
            string response = await base.Get($"Local/Delete?Id={id}");
            return response;
         }
+
+        public async Task<Bool> AddOpHours(int localId, int weekDay, time opening, time closing)
+        {
+           string response = await base.Get($"Local/AddOpHours");
+           return response;
+        }
+
+        public async Task<List<string>> FetchOpHours(int localId, int weekDay)
+        {
+           string response = await base.Get($"Local/FetchOpHours?localId={localId}&weekDay={weekDay}");
+           List<string> _times =
+             JsonConvert.DeserializeObject<List<string>>(response);
+
+           return _times;
+        }
     }
 }
