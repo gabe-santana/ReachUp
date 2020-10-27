@@ -656,6 +656,11 @@ BEGIN
 	SELECT * FROM beacon WHERE cd_local = pLocal;
 END$$
 
+DROP PROCEDURE IF EXISTS pegarBeaconsTipo$$
+CREATE PROCEDURE pegarBeaconsTipo(pTipo int )
+BEGIN
+	SELECT * FROM beacon WHERE cd_tipo_beacon = pTipo;
+END$$
 
 
 DROP PROCEDURE IF EXISTS deletarBeacon$$
@@ -677,6 +682,7 @@ CREATE PROCEDURE pegarCategoria(pCategoria INT )
 BEGIN
 	SELECT * FROM categoria WHERE cd_categoria = pCategoria;
 END$$
+
 
 DROP PROCEDURE IF EXISTS atualizarCategoria$$
 CREATE PROCEDURE atualizarCategoria(pCategoria INT, pNome varchar(45), pDs varchar(200))
