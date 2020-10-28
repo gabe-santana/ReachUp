@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace ReachUp
 {
@@ -53,17 +52,15 @@ namespace ReachUp
         }
 
         /// <summary>
-        /// Login path constructor
+        /// Get store admins constructor
         /// </summary>
+        /// <param name="name"></param>
         /// <param name="email"></param>
-        /// <param name="password"></param>
-        /// <param name="role"></param>
-        public User(string email, string password, string role)
+        public User(string name, string email)
          : base()
         {
+            this.Name = name;
             this.Email = email;
-            this.Password = password;
-            this.Role = role;
         }
 
         #endregion

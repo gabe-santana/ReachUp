@@ -20,6 +20,8 @@ namespace ReachUp
         public string DescriptionSubCategories { get; set; }
         public List<Beacon> Beacons = new List<Beacon>();
         public List<SubCategory> SubCategories = new List<SubCategory>();
+        public List<OpeningHours> OpeningHours_List = new List<OpeningHours>();
+        public OpeningHours OpeningHours { get;set; }
 
 
         #endregion
@@ -31,7 +33,10 @@ namespace ReachUp
         #region Constructor
         public Local() : base() { }
 
-        public Local(int id, int type, string name, ushort floor, string DescriptionSubCategories , string[] uuids = null, List<SubCategory> SubCategories = null) : base()
+        public Local(int id, int type, string name, ushort floor, 
+        string DescriptionSubCategories , string[] uuids = null, 
+        List<SubCategory> SubCategories = null, List<OpeningHours> OpeningHours_List = null
+       ) : base()
         {
             this.IdLocal = id;
             this.Type = type;
@@ -39,6 +44,9 @@ namespace ReachUp
             this.Floor = floor; 
             this.DescriptionSubCategories = DescriptionSubCategories;
             this.SubCategories = SubCategories;
+            this.OpeningHours_List = OpeningHours_List;
+            this.OpeningHours = OpeningHours;
+
           
             if (uuids != null)
             {
@@ -57,7 +65,7 @@ namespace ReachUp
         {
             if (base.DQLCommand(Procedure.conectarBeacon, ref this.Data,
                 new string[,] {
-                    {"pUUID", uuidBeacon}
+                    {"pUUID", uuid}
                 }))
             {
                 if (this.Data.HasRows)
@@ -146,7 +154,7 @@ namespace ReachUp
         {
             if (base.DQLCommand(Procedure.pegarLocais, ref this.Data,
                 new string[,] {
-                    { "pTipo", typeName.ToString()}
+                    { "pTipo", type.ToString()}
                 }))
             {
                 List<Local> local = new List<Local>();
@@ -183,14 +191,14 @@ namespace ReachUp
             return Task.FromResult(false);;
         }
 
-        public Task<bool> AddOpHours(Local local, OpeningHours openingHours)
+        public Task<bool> AddOpHours()
         {
             if (base.DMLCommand(Procedure.defHorarioAlternativoLocal,
                new string[,] {
-                   { "pLocal", this.localId.ToString() },
-                   { "pDia", openingHours.weekDay.ToString() },
-                   { "pAbertura", openingHours.opening.ToString() },
-                   { "pFechamento", openingHours.closing.ToString() }
+                   { "pLocal", this.IdLocal.ToString() },
+                   { "pDia", this.OpeningHours.WeekDay.ToString() },
+                   { "pAbertura", OpeningHours.OpeningTime.ToString() },
+                   { "pFechamento", OpeningHours.ClosingTime.ToString() }
                 }))
             {
                return Task.FromResult(true);
@@ -212,21 +220,24 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
-        public Task<List<string>> FetchOpHours(int local, int weekDay)
+        public Task<OpeningHours> FetchOpHours(int local, int weekDay)
         {
             if (base.DQLCommand(Procedure.buscarHorarioAlternativoLocal, ref this.Data,
                 new string[,] {
-                    { "pLocal", localId.ToString() },
+                    { "pLocal", local.ToString() },
                     { "pDia", weekDay.ToString() }
                 }))
             {
-                List<string> opHours = new List<string>();
+                OpeningHours opHours = null;
                 if (this.Data.HasRows)
                 {
                     while (this.Data.Read())
                     {
-                       opHours.Add(this.Data["hr_abertura"].ToString(),
-                                   this.Data["hr_fechamento"].ToString());
+                       opHours = new OpeningHours(
+                           weekDay,
+                           DateTime.Parse(this.Data["hr_abertura"].ToString()),
+                           DateTime.Parse(this.Data["hr_fechamento"].ToString())
+                        );
                     }
                 }
                 this.Data.Close();
@@ -250,7 +261,7 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
-        public Task<bool> AddSubCategories()
+        /*public Task<bool> AddSubCategories()
         {
             for (int i = 0; i < this.SubCategories.Count(); i++)
             {
@@ -265,7 +276,7 @@ namespace ReachUp
                 }
             }
             return Task.FromResult(true);
-        }
+        }*/
 
         public Task<bool> DeleteSubCategory(int local, int category, int subCategory)
         {
@@ -288,13 +299,17 @@ namespace ReachUp
                     { "pLocal", local.ToString()}
                 }))
             {
-                Admins = new List<User>();
+                List<User> Admins = new List<User>();
                 if (this.Data.HasRows)
                 {
                     while (this.Data.Read())
                     {
-                        Admins.Add(this.Data["nm_administrador"].ToString(),
-                            this.Data["nm_email_administrador"].ToString());
+                        Admins.Add(
+                          new User(
+                            this.Data["nm_administrador"].ToString(),
+                            this.Data["nm_email_administrador"].ToString()
+                          )
+                        );
                     }
                 }
                 this.Data.Close();

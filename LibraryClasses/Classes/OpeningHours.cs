@@ -11,12 +11,12 @@ namespace ReachUp
     {
         #region Properties
         public int WeekDay {get; set;}
-        public Time OpeningTime {get ;set;}
-        public Time ClosingTime {get; set;}
+        public DateTime OpeningTime {get ;set;}
+        public DateTime ClosingTime {get; set;}
         #endregion
 
         #region Constructor
-        public OpeningHours(int weekDay, Time openingTime, Time closingTime)
+        public OpeningHours(int weekDay, DateTime openingTime, DateTime closingTime)
         {
             this.WeekDay = weekDay;
             this.OpeningTime = openingTime;

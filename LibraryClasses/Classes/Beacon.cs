@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReachUp;
+namespace ReachUp
 {
     public class Beacon : clsDatabase
     {
@@ -36,7 +36,7 @@ namespace ReachUp;
         #endregion
 
         #region Methods
-        public Task<Beacon> Get(string uuid) 
+        public async Task<Beacon> Get(string uuid) 
         {
             if (base.DQLCommand(Procedure.pegarBeacon, ref this.Data,
                     new string[,] {
@@ -50,19 +50,21 @@ namespace ReachUp;
                     {
                         beacon = new Beacon(uuid,
                             int.Parse(this.Data["cd_tipo_beacon"].ToString()),
-                            int.Parse(this.Data["cd_local"].ToString())
+                            await new Local().Get(
+                                int.Parse(this.Data["cd_local"].ToString())
+                                )
                             );
                     }
                 }
                 this.Data.Close();
                 base.Disconnect();
-                return Task.FromResult(beacon);
+                return beacon;
             }
 
             return null;
         }
 
-        public Task<List<Beacon>> GetAll(int type)
+        public async Task<List<Beacon>> GetAll(int type)
         {
             if (base.DQLCommand(Procedure.pegarBeaconsTipo, ref this.Data,
                  new string[,] {
@@ -77,18 +79,20 @@ namespace ReachUp;
                         beacons.Add(new Beacon(
                             this.Data["cd_uuid_beacon"].ToString(),
                             int.Parse(type.ToString()),
-                            int.Parse(this.Data["cd_local"].ToString())
+                            await new Local().Get(
+                                int.Parse(this.Data["cd_local"].ToString())
+                                )
                         ));
                     }
                     this.Data.Close();
                 }
                 base.Disconnect();
-                return Task.FromResult(beacons);
+                return beacons;
             }
             return null;
         }
 
-        public Task<List<Beacon>> ByLocal(int local)
+        public async Task<List<Beacon>> ByLocal(int local)
         {
              if (base.DQLCommand(Procedure.pegarBeaconsDeLocal, ref this.Data,
                  new string[,] {
@@ -103,13 +107,15 @@ namespace ReachUp;
                         beacons.Add(new Beacon(
                             this.Data["cd_uuid_beacon"].ToString(),
                             int.Parse(this.Data["cd_tipo_beacon"].ToString()),
-                            int.Parse(local.ToString())
+                            await new Local().Get(
+                                int.Parse(local.ToString())
+                                )
                         ));
                     }
                     this.Data.Close();
                 }
                 base.Disconnect();
-                return Task.FromResult(beacons);
+                return beacons;
              }
              return null;
         }

@@ -10,7 +10,7 @@ namespace ReachUp
     public class SubCategory : clsDatabase
     {
         #region Properties
-        private int SubCategoryId { get; set; }
+        public int SubCategoryId { get; set; }
         public Category Category { get;set; }
         public string SubCategoryName { get; set; }
         public SubCategory() : base() { }
@@ -27,7 +27,7 @@ namespace ReachUp
             this.SubCategoryName = Name;
         }
 
-        public Task<List<SubCategory>> GetAll()
+        public async Task<List<SubCategory>> GetAll()
         {
            if (base.DQLCommand(Procedure.pegarSubCategorias, ref this.Data)) 
            {
@@ -55,7 +55,7 @@ namespace ReachUp
            return null;
         }
 
-        public Task<List<SubCategory>> ByLocal(int local) 
+        public async Task<List<SubCategory>> ByLocal(int local) 
         {
             if (base.DQLCommand(Procedure.pegarSubcategoriasLocal, ref this.Data, new string[,] {
                 {"pLocal", local.ToString()}
@@ -83,7 +83,7 @@ namespace ReachUp
             return null;
         }
 
-        public Task<List<SubCategory>> ByCommunique(int communique) 
+        public async Task<List<SubCategory>> ByCommunique(int communique) 
         {
             if (base.DQLCommand(Procedure.pegarSubCategoriasComunicado, ref this.Data, new string[,] {
                 {"pComunicado", communique.ToString()}
@@ -113,7 +113,8 @@ namespace ReachUp
 
         public Task<bool> Add()
         {
-           if (base.DMLCommand(Procedure.cadastrarSubCategoria, ref this.Data, new string[,] {
+           if (base.DMLCommand(Procedure.cadastrarSubCategoria, 
+             new string[,] {
                 {"pCdCategoria", this.Category.CategoryId.ToString()},
                 {"pNome", this.SubCategoryName}
             }))
@@ -126,13 +127,8 @@ namespace ReachUp
         public Task<bool> Delete(int category, int subCategory)
         {
            if (base.DMLCommand(
-                $"DELETE FROM sub_categoria WHERE cd_categoria = {category}
-                AND cd_sub_categoria = {subCategory} ", 
-                ref this.Data, 
-              new string[,] {
-                {"pCategoria", category.ToString()},
-                {"pSubCategoria", subCategory.ToString()}
-            }))
+                $"DELETE FROM sub_categoria WHERE cd_categoria = {category} AND cd_sub_categoria = {subCategory}"
+            ))
             {
                return Task.FromResult(true);
             }

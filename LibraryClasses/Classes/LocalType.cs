@@ -52,7 +52,7 @@ namespace ReachUp
                     {
                         localTypes.Add(
                           new LocalType(
-                            this.Data["cd_tipo_local"].ToString(),
+                            int.Parse(this.Data["cd_tipo_local"].ToString()),
                             this.Data["nm_tipo_local"].ToString()
                           )
                         );
@@ -68,8 +68,7 @@ namespace ReachUp
         public Task<bool> Add()
         {
             if (base.DMLCommand(
-                $"INSERT INTO tipo_local VALUES ({this.Id}, {this.Name})", 
-                ref this.Data
+                $"INSERT INTO tipo_local VALUES ({this.Id}, {this.Name})"
             ))
             {
                return Task.FromResult(true);

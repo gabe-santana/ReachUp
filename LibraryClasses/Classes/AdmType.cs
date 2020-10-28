@@ -50,8 +50,12 @@ namespace ReachUp
                 {
                     while (this.Data.Read())
                     {
-                        admTypes.Add(new AdmType(this.Data["cd_tipo_administrador"].ToString(),
-                             this.Data["nm_tipo_administrador"].ToString()));
+                        admTypes.Add(
+                          new AdmType(
+                            int.Parse(this.Data["cd_tipo_administrador"].ToString()),
+                             this.Data["nm_tipo_administrador"].ToString()
+                          )
+                        );
                     }
                     this.Data.Close();
                 }
@@ -64,7 +68,7 @@ namespace ReachUp
         public Task<bool> Add()
         {
             if (base.DMLCommand(
-                $"INSERT INTO tipo_administrador VALUES ({this.Id}, {this.Name})", ref this.Data
+                $"INSERT INTO tipo_administrador VALUES ({this.Id}, {this.Name})"
             ))
             {
                return Task.FromResult(true);

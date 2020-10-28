@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ReachUp.
+namespace ReachUp
 {
     public class ClientPreference : clsDatabase
     {
@@ -68,7 +68,7 @@ namespace ReachUp.
         {
             for (int i = 0; i < this.SubCategories.Count(); i++)
             {
-                if (!base.DMLCommand(Procedure.definirPreferencia, ref this.Data, 
+                if (!base.DMLCommand(Procedure.definirPreferencia, 
                    new string[,] {
                   {"pEmail", email},
                   {"pCdSubCategoria", this.SubCategories[i].SubCategoryId.ToString()},
@@ -83,7 +83,7 @@ namespace ReachUp.
 
         public Task<bool> Delete(string email, int category, int subCategory)
         {
-             if (base.DMLCommand(Procedure.definirPreferencia, ref this.Data, 
+             if (base.DMLCommand(Procedure.definirPreferencia, 
                 new string[,] {
                 {"pEmail", email},
                 {"pCdSubCategoria", category.ToString()},

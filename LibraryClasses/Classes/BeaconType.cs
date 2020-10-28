@@ -50,8 +50,12 @@ namespace ReachUp
                 {
                     while (this.Data.Read())
                     {
-                        beaconTypes.Add(new BeaconType(this.Data["cd_tipo_beacon"].ToString(),
-                             this.Data["nm_tipo_beacon"].ToString()));
+                        beaconTypes.Add(
+                            new BeaconType(
+                             int.Parse(this.Data["cd_tipo_beacon"].ToString()),
+                             this.Data["nm_tipo_beacon"].ToString()
+                            )
+                        );
                     }
                     this.Data.Close();
                 }
@@ -64,8 +68,7 @@ namespace ReachUp
         public Task<bool> Add()
         {
             if (base.DMLCommand(
-                $"INSERT INTO tipo_beacon VALUES ({this.Id}, {this.Name})", 
-                ref this.Data
+                $"INSERT INTO tipo_beacon VALUES ({this.Id}, {this.Name})"
             ))
             {
                return Task.FromResult(true);

@@ -59,7 +59,7 @@ namespace ReachUp
         public Task<List<Category>> GetAll() 
         {
             if (base.DQLCommand(
-                  "SELECT * FROM categoria", ref this.Data,
+                  "SELECT * FROM categoria", ref this.Data
                ))
             {
                 List<Category> categories = new List<Category>();
@@ -69,9 +69,9 @@ namespace ReachUp
                     {
                         categories.Add(
                           new Category(
-                            this.Data["cd_categoria"].ToString(),
-                            this.Data["nm_categoria"],
-                            this.Data["ds_categoria"]         
+                            int.Parse(this.Data["cd_categoria"].ToString()),
+                            this.Data["nm_categoria"].ToString(),
+                            this.Data["ds_categoria"].ToString()        
                             )
                         );
                     }

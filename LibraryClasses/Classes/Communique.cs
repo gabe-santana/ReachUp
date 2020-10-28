@@ -16,7 +16,7 @@ namespace ReachUp
         public Local CommuniqueLocal { get; set; }
         public List<SubCategory> CommuniqueSubCategory = new List<SubCategory>();
         public string Description { get; set; }
-        public DateTime StartDate { get; set; }.
+        public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
         #endregion
@@ -43,12 +43,12 @@ namespace ReachUp
         #endregion
 
         #region Methods
-        public Task<List<Communique>> Receive(User user, int local)
+        public async Task<List<Communique>> Receive(User user, int local)
         {
             if (base.DQLCommand(Procedure.receberPromocoesDirecionadas, ref this.Data,
                 new string[,] {
-                    {"pLocal",idLocal.ToString()},
-                    {"pCliente", user.Email }
+                    {"pLocal", local.ToString()},
+                    {"pCliente", user.Email.ToString() }
                 }))
             {
                 List<Communique> communiques = new List<Communique>();
@@ -59,7 +59,7 @@ namespace ReachUp
                         communiques.Add(new Communique(
                             int.Parse(this.Data["cd_comunicado"].ToString()),
                             ushort.Parse(this.Data["cd_tipo_comunicado"].ToString()),
-                            await new SubCategory().getByCommunique(int.Parse(this.Data["cd_comunicado"].ToString())),
+                            await new SubCategory().ByCommunique(int.Parse(this.Data["cd_comunicado"].ToString())),
                             this.Data["ds_comunicado"].ToString(),
                             DateTime.Parse(this.Data["dt_inicio_comunicado"].ToString()),
                             DateTime.Parse(this.Data["dt_fim_comunicado"].ToString()),
@@ -70,16 +70,16 @@ namespace ReachUp
                 this.Data.Close();
                 base.Disconnect();
 
-                return Task.FromResult(communiques);
+                return communiques;
             }
 
             return null;
         }
 
-        public Task<List<Communique>> Get(int local) 
+        public async Task<List<Communique>> Get(int local) 
         {
             if (base.DQLCommand(Procedure.receberComunicados, ref this.Data, new string[,] {
-                {"pLocal", idLocal.ToString()}
+                {"pLocal", local.ToString()}
             }))
             {
                 List<Communique> communiques = new List<Communique>();
@@ -91,7 +91,7 @@ namespace ReachUp
                                   new Communique(
                                             int.Parse(this.Data["cd_comunicado"].ToString()),
                                             ushort.Parse(this.Data["cd_tipo_comunicado"].ToString()),
-                                            await new SubCategory().getByCommunique(int.Parse(this.Data["cd_comunicado"].ToString())),
+                                            await new SubCategory().ByCommunique(int.Parse(this.Data["cd_comunicado"].ToString())),
                                             this.Data["ds_comunicado"].ToString(),
                                             DateTime.Parse(this.Data["dt_inicio_comunicado"].ToString()),
                                             DateTime.Parse(this.Data["dt_fim_comunicado"].ToString()),
@@ -103,7 +103,7 @@ namespace ReachUp
                 this.Data.Close();
                 base.Disconnect();
 
-                return Task.FromResult(communiques);
+                return communiques;
             }
 
             return null;
@@ -112,18 +112,18 @@ namespace ReachUp
         public Task<bool> Add()
         {
            if (base.DMLCommand(Procedure.publicarComunicado, new string[,] {
-                {"pLocal", this.CommuniqueLocal.IdLocal },
-                {"pTipo", this.Type },
-                {"pDs", this.Description },
-                {"pDataInicio", this.StartDate },
-                {"pDataFim", this.EndDate }
+                {"pLocal", this.CommuniqueLocal.IdLocal.ToString() },
+                {"pTipo", this.Type.ToString() },
+                {"pDs", this.Description.ToString() },
+                {"pDataInicio", this.StartDate.ToString() },
+                {"pDataFim", this.EndDate.ToString() }
               }))
               {
                   for (int i = 0; i < this.CommuniqueSubCategory.Count(); i++)
                   {
                      if (!base.DMLCommand(Procedure.relacionarComunicadoSubCategoria, new string[,] {
-                           {"pCategoria", this.CommuniqueSubCategory[i].Category.CategoryId },
-                           {"pSubCategoria", this.CommuniqueSubCategory[i].SubCategoryId }
+                           {"pCategoria", this.CommuniqueSubCategory[i].Category.CategoryId.ToString() },
+                           {"pSubCategoria", this.CommuniqueSubCategory[i].SubCategoryId.ToString() }
                          }))
                          {
                              return Task.FromResult(false);
@@ -137,12 +137,12 @@ namespace ReachUp
         public Task<bool> Update()
         {
             if (base.DMLCommand(Procedure.atualizarComunicado, new string[,] {
-                 {"pComunicado", this.CommuniqueId },
-                 {"pLocal", this.CommuniqueLocal.IdLocal },
-                 {"pTipo", this.Type },
-                 {"pDs", this.Description },
-                 {"pDataInicio", this.StartDate },
-                 {"pDataFim", this.EndDate }
+                 {"pComunicado", this.CommuniqueId.ToString() },
+                 {"pLocal", this.CommuniqueLocal.IdLocal.ToString() },
+                 {"pTipo", this.Type.ToString() },
+                 {"pDs", this.Description.ToString() },
+                 {"pDataInicio", this.StartDate.ToString() },
+                 {"pDataFim", this.EndDate.ToString() }
             })) 
             {
                 return Task.FromResult(true);

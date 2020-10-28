@@ -20,7 +20,7 @@ namespace ReachUp
         // COUNT: 48
         #region StoredProcedures
         [System.Flags]
-        public static readonly enum Procedure
+        public enum Procedure
         {
             atualizarUsuario,
             deletarUsuario,

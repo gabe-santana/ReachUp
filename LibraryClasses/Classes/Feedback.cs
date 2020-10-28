@@ -99,10 +99,10 @@ namespace ReachUp
             return null;
         }
 
-        public async Task<List<Feedback>> ByUser() 
+        public async Task<List<Feedback>> ByUser(string email) 
         {
             if (base.DQLCommand(Procedure.FeedbackPorCliente, ref this.Data, new string[,] {
-                {"pEmail", this.FeedbackUser.Email}
+                {"pEmail", email}
             })) 
             {
                 List<Feedback> feedbacks = new List<Feedback>();
@@ -151,7 +151,7 @@ namespace ReachUp
                 }
 
                 this.Data.Close();
-                base.Disconnect();.
+                base.Disconnect();
 
                 return await Task.FromResult(feedback);
             }
@@ -198,7 +198,7 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
-        public async Task<int> GetAverage(Date startDate, Date endDate, bool isGeneral)
+        /*public Task<int> GetAverage(DateTime startDate, DateTime endDate, bool isGeneral)
         {
            int average;
 
@@ -208,25 +208,25 @@ namespace ReachUp
                     {"dataFim", endDate.ToString() },
                     {"pGeral", isGeneral.ToString() },
                 }))
-                {;
+                {
                   if (this.Data.HasRows)
                   {
                     if (this.Data.Read())
                     {
-                        average = this.Data["media"];
+                        average = int.Parse(this.Data["media"].ToString());
                     }
 
                     this.Data.Close();
                     base.Disconnect();
-                    return await Task.FromResult(average);
+                    return Task.FromResult(average);
                   }
 
                 this.Data.Close();
                 base.Disconnect();
             }
 
-            return null;
-        }
+            return Task.FromResult(-1);
+        }*/
 
             #endregion
 
