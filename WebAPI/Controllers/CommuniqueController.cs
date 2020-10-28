@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ReachUp;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ReachUpWebAPI.Controllers
 {
@@ -29,11 +32,19 @@ namespace ReachUpWebAPI.Controllers
 
         [Authorize (Roles = "loj,adm")]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Communique communique) 
+        public async Task<IAsyncEnumerable<Task<IActionResult>>> Post([FromBody] Communique communique) 
         {
             if (communique != null)
-                return Ok(await communique.Add());
-            return BadRequest("Parameters are null");
+            {
+                var action = communique.Add();
+                //List<Task<bool>> responses = new List<Task<bool>>();
+                
+                foreach (var task in action)
+                {
+                   yield return task;
+                }
+                yield break;
+            }
         }
 
         [Authorize (Roles = "loj,adm")]
