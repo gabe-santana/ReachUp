@@ -5,7 +5,6 @@ using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
-    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class CommuniqueController : ControllerBase
@@ -14,8 +13,8 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet("Receive")]
         public async Task<IActionResult> Receive([FromBody] User user, [FromQuery] int local) 
         {
-            if (user != null && !string.IsNullOrWhiteSpace(idLocal.ToString()))
-                return Ok(await new Communique().Receive(user, idLocal));
+            if (user != null && !string.IsNullOrWhiteSpace(local.ToString()))
+                return Ok(await new Communique().Receive(user, local));
             return BadRequest("Parameters are null");
         }
 
@@ -23,8 +22,8 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(int local) 
         {
-            if (!string.IsNullOrWhiteSpace(idLocal.ToString()))
-                return Ok(await new Communique().Get(idLocal));
+            if (!string.IsNullOrWhiteSpace(local.ToString()))
+                return Ok(await new Communique().Get(local));
             return BadRequest("Parameters are null");
         }
 
@@ -42,7 +41,7 @@ namespace ReachUpWebAPI.Controllers
         public async Task<IActionResult> Patch([FromBody] Communique communique)
         {
             if (communique != null)
-                if (HttpContextId.IsOwn(HttpContext, communique.CommuniqueLocal.Admin.Email))
+                //if (HttpContextId.IsOwn(HttpContext, communique.CommuniqueLocal.Admin.Email))
                    return Ok(await communique.Update());
            return BadRequest("Parameters are null");
         }

@@ -5,7 +5,6 @@ using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
-    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class LocalTypeController : ControllerBase

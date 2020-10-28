@@ -5,7 +5,6 @@ using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
-    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class FeedbackController : ControllerBase
@@ -80,9 +79,9 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm")]
+        /*[Authorize(Roles = "adm")]
         [HttpGet("GetAverage")]
-        public async Task<IActionResult> GetAverage(Date startDate, Date endDate, bool isGeneral)
+        public async Task<IActionResult> GetAverage(DateTime startDate, DateTime endDate, bool isGeneral)
         {
             if (!string.IsNullOrWhiteSpace(startDate.ToString())
                 && !string.IsNullOrWhiteSpace(endDate.ToString())
@@ -90,6 +89,6 @@ namespace ReachUpWebAPI.Controllers
                )
                 return Ok(await new Feedback().GetAverage(startDate, endDate, isGeneral));
             return BadRequest("Parameters are null");
-        }
+        }*/
     }
 }

@@ -5,7 +5,6 @@ using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
-    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class LocalController : ControllerBase
@@ -50,10 +49,10 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet("FetchOpHours")]
         public async Task<IActionResult> FetchOpHours(int local, int weekDay)
         {
-            if (!string.IsNullOrWhiteSpace(localId.ToString()) 
+            if (!string.IsNullOrWhiteSpace(local.ToString()) 
                && !string.IsNullOrWhiteSpace(weekDay.ToString())
                )
-                return Ok(await new Local().FetchOpHours(localId, weekDay));
+                return Ok(await new Local().FetchOpHours(local, weekDay));
             return BadRequest("Parameters are null");
         }
         
@@ -95,14 +94,14 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm")]
+        /*[Authorize(Roles = "adm")]
         [HttpPost("AddSubCategories")]
         public async Task<IActionResult> AddSubCategories([FromBody] Local local) 
         {
             if (local != null)
                 return Ok(await local.AddSubCategories());
             return BadRequest("Parameters are null");
-        }
+        }*/
 
         [Authorize(Roles = "adm")]
         [HttpDelete("DeleteSubCategory")]

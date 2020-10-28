@@ -5,10 +5,9 @@ using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
-    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryController : ControllerBase
+    public class SubCategoryController : ControllerBase
     {
 
         [Authorize]
@@ -44,7 +43,7 @@ namespace ReachUpWebAPI.Controllers
                 return Ok(await subCategory.Add());
             return BadRequest("Parameters are null");
         }
-.
+
         [Authorize(Roles="adm")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int category, int subCategory)
