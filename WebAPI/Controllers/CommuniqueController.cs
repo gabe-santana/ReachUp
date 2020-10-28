@@ -30,7 +30,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize (Roles = "loj,adm")]
+        /*[Authorize (Roles = "loj,adm")]
         [HttpPost]
         public async Task<IAsyncEnumerable<Task<IActionResult>>> Post([FromBody] Communique communique) 
         {
@@ -45,6 +45,29 @@ namespace ReachUpWebAPI.Controllers
                 }
                 yield break;
             }
+        }*/
+
+        //
+        [Authorize (Roles = "loj,adm")]
+        [HttpPost]
+        public List<Task<IActionResult>> Post([FromBody] Communique communique) 
+        {
+            if (communique != null)
+            {
+                List<Task<IActionResult>> results = new List<Task<IActionResult>>();
+                var action = communique.Add();
+                //return Ok(Step(action));
+            }
+            //return BadRequest("Parameters are null");
+        }
+
+        static IEnumerable<Task<bool>> Step(IEnumerable<Task<bool>> action)
+        {
+            foreach (var task in action)
+            {
+                yield return task;
+            }
+            yield break;
         }
 
         [Authorize (Roles = "loj,adm")]
