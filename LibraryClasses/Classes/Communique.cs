@@ -109,7 +109,7 @@ namespace ReachUp
             return null;
         }
 
-        public Task<bool> Add()
+        public IEnumerable<Task<bool>> Add()
         {
            if (base.DMLCommand(Procedure.publicarComunicado, new string[,] {
                 {"pLocal", this.CommuniqueLocal.IdLocal.ToString() },
@@ -119,6 +119,8 @@ namespace ReachUp
                 {"pDataFim", this.EndDate.ToString() }
               }))
               {
+                  yield return Task.FromResult(true);
+
                   for (int i = 0; i < this.CommuniqueSubCategory.Count(); i++)
                   {
                      if (!base.DMLCommand(Procedure.relacionarComunicadoSubCategoria, new string[,] {
@@ -126,12 +128,15 @@ namespace ReachUp
                            {"pSubCategoria", this.CommuniqueSubCategory[i].SubCategoryId.ToString() }
                          }))
                          {
-                             return Task.FromResult(false);
+                             yield return Task.FromResult(false);
+                             yield break;
                          }
                   }
-                  return Task.FromResult(true);
+                  yield return Task.FromResult(true);
+                  yield break;
               }
-              return Task.FromResult(false);
+              yield return Task.FromResult(false);
+              yield break;
         }
 
         public Task<bool> Update()
