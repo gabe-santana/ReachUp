@@ -59,6 +59,7 @@ lost children or any people who just want more agility on a daily basis.
 4. [Flutter Framework](https://flutter.dev/docs/get-started/install)
 5. Babel - for transpilation of TypeScript  to JavaScript [Install and config](https://ccoenraets.github.io/es6-tutorial/setup-babel),
 [Transpile all](https://babeljs.io/docs/en/babel-parser)
+6. To make HTTP requests to API: we recommend [Insomnia](https://insomnia.rest/download/)
 
 > Make sure you have all dependencies for Android [Android Studio](https://developer.android.com/studio) and iOS [XCode](https://developer.apple.com/xcode/) that will be 
 necessary to installation step 4. 
