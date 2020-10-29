@@ -122,7 +122,7 @@ We're using:
 - [x] Database **(completed, but always on edit and rising)**
 - [x] WebAPI **(completed, but always on edit and rising)**
 - [ ] Web Application - coding **(idling)**
-- [ ] Web Application - design **(on God's hands)**
+- [ ] Web Application - design **(on development)**
 - [ ] Cross-Platform Mobile App **(main functionality almost ready)**
 - [X] MapMaker - for the developers **(debug errors)**
 
