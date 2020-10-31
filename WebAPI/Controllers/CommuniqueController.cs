@@ -48,6 +48,7 @@ namespace ReachUpWebAPI.Controllers
         }*/
 
         //
+<<<<<<< Updated upstream
         [Authorize (Roles = "loj,adm")]
         [HttpPost]
         /* This is an action in which none, only the first or both
@@ -62,6 +63,20 @@ namespace ReachUpWebAPI.Controllers
             result.Add(false);
             return result;
         }
+=======
+        //[Authorize (Roles = "loj,adm")]
+        //[HttpPost]
+        //public List<Task<IActionResult>> Post([FromBody] Communique communique) 
+        //{
+        //    if (communique != null)
+        //    {
+        //        List<Task<IActionResult>> results = new List<Task<IActionResult>>();
+        //        var action = communique.Add();
+        //        //return Ok(Step(action));
+        //    }
+        //    //return BadRequest("Parameters are null");
+        //}
+>>>>>>> Stashed changes
 
         /* Accessing the amount of "bool" and its values,
         we can later interpret the action final result*/

@@ -17,6 +17,7 @@ namespace ReachUp
 
         #region Fields    
         private MySqlDataReader Data = null;
+        private int v;
         #endregion
 
         #region Constructor
@@ -32,6 +33,11 @@ namespace ReachUp
         {
             this.UUID = uuid;
   
+        }
+
+        public Beacon(string uuid, int v) : this(uuid)
+        {
+            this.v = v;
         }
         #endregion
 
@@ -49,10 +55,8 @@ namespace ReachUp
                     while (this.Data.Read())
                     {
                         beacon = new Beacon(uuid,
-                            int.Parse(this.Data["cd_tipo_beacon"].ToString()),
-                            await new Local().Get(
-                                int.Parse(this.Data["cd_local"].ToString())
-                                )
+                            int.Parse(this.Data["cd_tipo_beacon"].ToString())
+                            
                             );
                     }
                 }

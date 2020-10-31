@@ -18,10 +18,15 @@ namespace ReachUp
         public ushort Floor { get; set; }
         public List<User> Admins { get;set; }
         public string DescriptionSubCategories { get; set; }
+        public string StrOPHour { get; set; }
+        public string StrEHour { get; set; }
         public List<Beacon> Beacons = new List<Beacon>();
-        public List<SubCategory> SubCategories = new List<SubCategory>();
-        public List<OpeningHours> OpeningHours_List = new List<OpeningHours>();
-        public OpeningHours OpeningHours { get;set; }
+
+
+        private List<SubCategory> SubCategories = new List<SubCategory>();
+
+        private List<OpeningHours> OpeningHours_List = new List<OpeningHours>();
+        private OpeningHours OpeningHours { get;set; }
 
 
         #endregion
@@ -34,7 +39,7 @@ namespace ReachUp
         public Local() : base() { }
 
         public Local(int id, int type, string name, ushort floor, 
-        string DescriptionSubCategories , string[] uuids = null, 
+        string DescriptionSubCategories , string uuids = null, 
         List<SubCategory> SubCategories = null, List<OpeningHours> OpeningHours_List = null
        ) : base()
         {
@@ -47,13 +52,9 @@ namespace ReachUp
             this.OpeningHours_List = OpeningHours_List;
             this.OpeningHours = OpeningHours;
 
-          
             if (uuids != null)
             {
-                foreach (var uuid in uuids)
-                {
-                    AddBeacon(uuid);
-                }
+                 AddBeacon(uuids);   
             }
 
         }
@@ -99,6 +100,7 @@ namespace ReachUp
             {
                 if (this.Data.HasRows)
                 {
+                    int i = 0;
                     while (this.Data.Read())
                     {
                         locals.Add(new Local(
@@ -107,8 +109,13 @@ namespace ReachUp
                                  this.Data["nm_local"].ToString(),
                                  ushort.Parse(this.Data["cd_andar"].ToString()),
                                  this.Data["sub_categorias"].ToString().Replace(",", ", "))
+                         
                                
                             );
+
+                        locals[i].StrOPHour = this.Data["hr_abertura"].ToString();
+                        locals[i].StrEHour = this.Data["hr_fechamento"].ToString();
+                        i++;
                     }
                     this.Data.Close();
                     return Task.FromResult(locals);
@@ -133,18 +140,26 @@ namespace ReachUp
                     {
                         while (this.Data.Read())
                         {
-                            local = new Local(id, int.Parse(this.Data["cd_tipo_local"].ToString()),
-                                this.Data["nm_local"].ToString(), ushort.Parse(this.Data["cd_andar"].ToString()),
-                                this.Data["sub_categorias"].ToString().Replace(",", ", "),
-                                this.Data["Beacons"].ToString().Split(','));
+                            local = new Local(
+                                id, int.Parse(this.Data["cd_tipo_local"].ToString()),
+                                this.Data["nm_local"].ToString(), 
+                                ushort.Parse(this.Data["cd_andar"].ToString()),
+                                null,
+                                this.Data["Beacons"].ToString());
+                            local.StrOPHour = this.Data["hr_abertura"].ToString();
+                            local.StrEHour = this.Data["hr_fechamento"].ToString();
+                           
+
+                            this.Data.Close();
+                            base.Disconnect();
+                               return Task.FromResult(local);
                         }
                     }
-                    catch { };
+                    catch(MySqlException e) { Console.WriteLine(e); }
                 }
-                this.Data.Close();
-                base.Disconnect();
+               
 
-                return Task.FromResult(local);
+             
             }
 
             return null;
@@ -163,9 +178,9 @@ namespace ReachUp
                     while (this.Data.Read())
                     {
                         local.Add(new Local(int.Parse(this.Data["cd_local"].ToString()), int.Parse(this.Data["cd_tipo_local"].ToString()),
-                            this.Data["n_local"].ToString(), ushort.Parse(this.Data["cd_andar"].ToString()),
+                            this.Data["nm_local"].ToString(), ushort.Parse(this.Data["cd_andar"].ToString()),
                             this.Data["sub_categorias"].ToString().Replace(",",", "),                       
-                            this.Data["Beacons"].ToString().Split(',')));
+                            this.Data["Beacons"].ToString()));
                     }
                 }
                 this.Data.Close();

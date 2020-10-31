@@ -66,14 +66,14 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm")]
-        [HttpPost("AddOpHours")]
-        public async Task<IActionResult> AddOpHours([FromBody] Local local, [FromBody] OpeningHours openingHours) 
-        {
-            if (local != null && openingHours != null)
-                return Ok(await local.AddOpHours());
-            return BadRequest("Parameters are null");
-        }
+        //[Authorize(Roles = "adm")]
+        //[HttpPost("AddOpHours")]
+        //public async Task<IActionResult> AddOpHours([FromBody] Local local, [FromBody] OpeningHours openingHours) 
+        //{
+        //    if (local != null && openingHours != null)
+        //        return Ok(await local.AddOpHours());
+        //    return BadRequest("Parameters are null");
+        //}
 
         [Authorize(Roles = "adm")]
         [HttpPatch]
