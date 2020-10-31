@@ -123,8 +123,8 @@ We're using:
 - [x] WebAPI **(completed, but always on edit and rising)**
 - [ ] Web Application - coding **(idling)**
 - [ ] Web Application - design **(on development)**
-- [ ] Cross-Platform Mobile App **(main functionality almost ready)**
-- [X] MapMaker - for the developers **(debug errors)**
+- [ ] Cross-Platform Mobile App **(main functionality ready)**
+- [X] MapMaker - map module **(completed)**
 
 ## About Officers Contributors
 
