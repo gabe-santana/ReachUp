@@ -301,11 +301,11 @@ BEGIN
 END$$
 
 DROP FUNCTION IF EXISTS pesquisarNomeCategoria$$
-CREATE FUNCTION pesquisarCategoria(pCategoria int) RETURNS varchar(45)
+CREATE FUNCTION pesquisarNomeCategoria(pCategoria int) RETURNS varchar(45)
 BEGIN
 
     DECLARE nomeCategoria varchar(45);
-    SELECT nm_categoria INTO nomeCategoria 
+    SELECT nm_categoria INTO @nomeCategoria 
     FROM categoria
     WHERE cd_categoria = pCategoria;
 
@@ -337,59 +337,6 @@ BEGIN
     RETURN nomeSubCategoria;
 END$$
 
-DROP PROCEDURE IF EXISTS pesquisar$$
-CREATE PROCEDURE pesquisar(search varchar(50))
-BEGIN
-
-    SELECT 
-	l.cd_local,
-	l.nm_local, tl.nm_tipo_local, l.cd_andar,
-	l.hr_abertura,
-	l.hr_fechamento,
-	substring_index(group_concat(DISTINCT ca.nm_categoria SEPARATOR ','), ',', 3) as categorias,
-	substring_index(group_concat(DISTINCT sc.nm_sub_categoria SEPARATOR ','), ',', 3) as sub_categorias,
-    count(DISTINCT(ca.cd_categoria)) as categoriesCount,
-	count(DISTINCT (sc.cd_sub_categoria)) as subCategoriesCount,
-    pesquisarNomeCategoria(ca.cd_categoria) as Nome_Categoria,
-    pesquisarDescricaoCategoria(ca.cd_categoria) as Descricao_Categoria,
-    pesquisarNomeSubCategoria(ca.cd_categoria, sc.cd_sub_categoria) as Nome_SubCategoria
-    
-	FROM `local` AS l
-
-	JOIN tipo_local AS tl 
-	ON l.cd_tipo_local = tl.cd_tipo_local
-	JOIN sub_categoria_local as scl
-	ON l.cd_local = scl.cd_local
-
-	JOIN sub_categoria as sc
-	ON scl.cd_categoria = sc.cd_categoria AND scl.cd_sub_categoria = sc.cd_sub_categoria
-	
-	JOIN categoria as ca
-	ON sc.cd_categoria = ca.cd_categoria
-
-	WHERE 
-	formatString(l.nm_local)    LIKE formatString(concat("%",search,"%"))
-
-	OR
-	formatString(ca.nm_categoria) LIKE formatString(concat("%",search,"%"))
-
-    OR 
-	formatString(sc.nm_sub_categoria) LIKE formatString(concat("%",search,"%"))
-
-	/* ------ Check the active issue ------- */
-    /*OR
-	formatString(ca.nm_categoria) RLIKE formatString(concat("%", search REGEXP '.',"%"))
-    AND
-	formatString(sc.nm_sub_categoria) RLIKE formatString(concat("%", search RLIKE '.',"%"))*/
-
-	OR
-	formatString(tl.nm_tipo_local) LIKE formatString(concat("%", search,"%"))
-	OR
-	formatString(l.cd_andar) LIKE formatString(concat("%",search,"%"))
-
-	GROUP BY l.cd_local
-    ORDER BY categoriesCount DESC , subCategoriesCount DESC;
-END$$
 
 DROP PROCEDURE IF EXISTS buscarHorarioAlternativoLocal$$
 CREATE PROCEDURE buscarHorarioAlternativoLocal(pLocal int, pDia int)
@@ -597,16 +544,18 @@ END$$
 DROP PROCEDURE IF EXISTS pegarLocal$$
 CREATE PROCEDURE pegarLocal(pID INT)
 BEGIN
-	SELECT l.cd_local, tl.nm_tipo_local, l.nm_local, l.cd_andar, 
+	SELECT 
+    l.cd_tipo_local,
+    l.cd_local, tl.nm_tipo_local, l.nm_local, l.cd_andar, 
 	l.hr_abertura, l.hr_fechamento,
 	substring_index(group_concat(DISTINCT c.nm_categoria SEPARATOR ','), ',', 3) as  categorias,
-	group_concat(b.cd_uuid_beacon) AS  Beacons FROM `local` AS l 
+	b.cd_uuid_beacon AS  Beacons FROM `local` AS l 
 	INNER JOIN tipo_local AS tl
 	ON l.cd_tipo_local = tl.cd_tipo_local
 	INNER JOIN beacon AS b
 	ON l.cd_local = b.cd_local
 	INNER JOIN sub_categoria_local as scl
-	ON l.cd_local = cl.cd_local
+	ON l.cd_local = scl.cd_local
 	INNER JOIN sub_categoria as sc
 	ON scl.cd_categoria = sc.cd_categoria
 	AND scl.cd_sub_categoria = sc.cd_sub_categoria
@@ -762,6 +711,62 @@ BEGIN
 	
 	SET @lowerCaseStr = REPLACE(@lowerCaseStr,'|','');
 	return @lowerCaseStr;
+END$$
+
+
+DROP PROCEDURE IF EXISTS pesquisar$$
+CREATE PROCEDURE pesquisar(search varchar(50))
+BEGIN
+
+    SELECT 
+    l.cd_tipo_local,
+	l.cd_local,
+	l.nm_local, tl.nm_tipo_local, l.cd_andar,
+	l.hr_abertura,
+	l.hr_fechamento,
+	substring_index(group_concat(DISTINCT ca.nm_categoria SEPARATOR ','), ',', 3) as categorias,
+	substring_index(group_concat(DISTINCT sc.nm_sub_categoria SEPARATOR ','), ',', 3) as sub_categorias,
+    count(DISTINCT(ca.cd_categoria)) as categoriesCount,
+	count(DISTINCT (sc.cd_sub_categoria)) as subCategoriesCount,
+    pesquisarNomeCategoria(ca.cd_categoria) as Nome_Categoria,
+    pesquisarDescricaoCategoria(ca.cd_categoria) as Descricao_Categoria,
+    pesquisarNomeSubCategoria(ca.cd_categoria, sc.cd_sub_categoria) as Nome_SubCategoria
+    
+	FROM `local` AS l
+
+	JOIN tipo_local AS tl 
+	ON l.cd_tipo_local = tl.cd_tipo_local
+	JOIN sub_categoria_local as scl
+	ON l.cd_local = scl.cd_local
+
+	JOIN sub_categoria as sc
+	ON scl.cd_categoria = sc.cd_categoria AND scl.cd_sub_categoria = sc.cd_sub_categoria
+	
+	JOIN categoria as ca
+	ON sc.cd_categoria = ca.cd_categoria
+
+	WHERE 
+	formatString(l.nm_local)    LIKE formatString(concat("%",search,"%"))
+
+	OR
+	formatString(ca.nm_categoria) LIKE formatString(concat("%",search,"%"))
+
+    OR 
+	formatString(sc.nm_sub_categoria) LIKE formatString(concat("%",search,"%"))
+
+	/* ------ Check the active issue ------- */
+    /*OR
+	formatString(ca.nm_categoria) RLIKE formatString(concat("%", search REGEXP '.',"%"))
+    AND
+	formatString(sc.nm_sub_categoria) RLIKE formatString(concat("%", search RLIKE '.',"%"))*/
+
+	OR
+	formatString(tl.nm_tipo_local) LIKE formatString(concat("%", search,"%"))
+	OR
+	formatString(l.cd_andar) LIKE formatString(concat("%",search,"%"))
+
+	GROUP BY l.cd_local
+    ORDER BY categoriesCount DESC , subCategoriesCount DESC;
 END$$
 DELIMITER ;
 SHOW PROCEDURE STATUS WHERE db = "reachup";
