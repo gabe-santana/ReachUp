@@ -1,69 +1,73 @@
-import 'Subcategory.model.dart';
-import 'Beacon.model.dart';
-import 'User.model.dart';
-
 class Local {
+  List<Beacons> beacons;
   int idLocal;
   int type;
   String name;
   int floor;
-  User admin;
   String descriptionSubCategories;
-
-  List<Beacon> beacons;
-  List<SubCategory> subCategories;
+  String strOPHour;
+  String strEHour;
 
   Local(
-      {this.idLocal,
+      {this.beacons,
+      this.idLocal,
       this.type,
       this.name,
       this.floor,
-      this.admin,
-      this.beacons,
-      this.subCategories,
-      this.descriptionSubCategories});
-      
+      this.descriptionSubCategories,
+      this.strOPHour,
+      this.strEHour});
+
   Local.fromJson(Map<String, dynamic> json) {
-    descriptionSubCategories = json['descriptionSubCategories'];
+    if (json['beacons'] != null) {
+      beacons = new List<Beacons>();
+      json['beacons'].forEach((v) {
+        beacons.add(new Beacons.fromJson(v));
+      });
+    }
     idLocal = json['idLocal'];
     type = json['type'];
     name = json['name'];
     floor = json['floor'];
-    admin = json['admin'] != null ? new User.fromJson(json['admin']) : null;
-    if (json['beacons'] != null) {
-      beacons = new List<Beacon>();
-      json['beacons'].forEach((v) {
-        beacons.add(new Beacon.fromJson(v));
-      });
-    }
-    if (json['subCategories'] != null) {
-      subCategories = new List<SubCategory>();
-      json['subCategories'].forEach((v) {
-        subCategories.add(new SubCategory.fromJson(v));
-      });
-    }
+    descriptionSubCategories = json['descriptionSubCategories'];
+    strOPHour = json['strOPHour'];
+    strEHour = json['strEHour'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['descriptionSubCategories'] = this.descriptionSubCategories;
+    if (this.beacons != null) {
+      data['beacons'] = this.beacons.map((v) => v.toJson()).toList();
+    }
     data['idLocal'] = this.idLocal;
     data['type'] = this.type;
     data['name'] = this.name;
     data['floor'] = this.floor;
-    if (this.admin != null) {
-      data['admin'] = this.admin.toJson();
-    }
-    if (this.beacons != null) {
-      data['beacons'] = this.beacons.map((v) => v.toJson()).toList();
-    }
-    if (this.subCategories != null) {
-      data['subCategories'] =
-          this.subCategories.map((v) => v.toJson()).toList();
-    }
+    data['descriptionSubCategories'] = this.descriptionSubCategories;
+    data['strOPHour'] = this.strOPHour;
+    data['strEHour'] = this.strEHour;
     return data;
   }
 }
 
+class Beacons {
+  int type;
+  String uuid;
+  Null localBeacon;
 
+  Beacons({this.type, this.uuid, this.localBeacon});
 
+  Beacons.fromJson(Map<String, dynamic> json) {
+    type = json['type'];
+    uuid = json['uuid'];
+    localBeacon = json['localBeacon'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['type'] = this.type;
+    data['uuid'] = this.uuid;
+    data['localBeacon'] = this.localBeacon;
+    return data;
+  }
+}

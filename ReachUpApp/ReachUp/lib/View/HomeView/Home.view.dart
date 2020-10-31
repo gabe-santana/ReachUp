@@ -1,6 +1,7 @@
 import 'package:ReachUp/View/DeveloperView/BeaconBroadcast.view.dart';
 import 'package:ReachUp/View/DeveloperView/Compass.view.dart';
 import 'package:ReachUp/View/HomeView/HomeMap.view.dart';
+import 'package:ReachUp/View/MapView/Map.view.dart';
 import 'package:ReachUp/View/SearchView/Search.view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,6 +15,8 @@ class FragmentWidget extends StatelessWidget {
 }
 
 class Home extends StatefulWidget {
+  bool inRouting;
+  Home({this.inRouting = false});
   _HomeState createState() => _HomeState();
 }
 
@@ -23,7 +26,7 @@ class _HomeState extends State<Home> {
   Widget _getDrawerItem(int pos) {
     switch (pos) {
       case 0:
-        return FragmentWidget(HomeMap());
+        return FragmentWidget(MapView(inRouting: widget.inRouting));
       case 7:
         return FragmentWidget(BroadcastBeacon());
       case 8:

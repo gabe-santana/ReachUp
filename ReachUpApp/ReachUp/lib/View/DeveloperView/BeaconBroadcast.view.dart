@@ -171,7 +171,7 @@ class _BroadcastBeacon extends State<BroadcastBeacon> with WidgetsBindingObserve
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Flutter Beacon'),
+          title: const Text('Beacons detected'),
           centerTitle: false,
           actions: <Widget>[
             if (!authorizationStatusOk)
