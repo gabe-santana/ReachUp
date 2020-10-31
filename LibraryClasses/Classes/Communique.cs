@@ -11,7 +11,17 @@ namespace ReachUp
     public class Communique : clsDatabase
     {
         #region Properties
-        public int CommuniqueId { get; set; }
+        public Communique(int communiqueId, ushort type, Local communiqueLocal, string description, DateTime startDate, DateTime endDate) 
+        {
+            this.CommuniqueId = communiqueId;
+                this.Type = type;
+                this.CommuniqueLocal = communiqueLocal;
+                this.Description = description;
+                this.StartDate = startDate;
+                this.EndDate = endDate;
+               
+        }
+                public int CommuniqueId { get; set; }
         [JsonIgnore] public ushort Type { get; set; }
         public Local CommuniqueLocal { get; set; }
         public List<SubCategory> CommuniqueSubCategory = new List<SubCategory>();
@@ -109,7 +119,9 @@ namespace ReachUp
             return null;
         }
 
-        public IEnumerable<Task<bool>> Add()
+        /* The yield return returns, but then returns where it left off */
+        /* The yield break stops method execution */
+        public IEnumerable<bool> Add()
         {
            if (base.DMLCommand(Procedure.publicarComunicado, new string[,] {
                 {"pLocal", this.CommuniqueLocal.IdLocal.ToString() },
@@ -119,7 +131,7 @@ namespace ReachUp
                 {"pDataFim", this.EndDate.ToString() }
               }))
               {
-                  yield return Task.FromResult(true);
+                  yield return true;
 
                   for (int i = 0; i < this.CommuniqueSubCategory.Count(); i++)
                   {
@@ -128,14 +140,14 @@ namespace ReachUp
                            {"pSubCategoria", this.CommuniqueSubCategory[i].SubCategoryId.ToString() }
                          }))
                          {
-                             yield return Task.FromResult(false);
+                             yield return false;
                              yield break;
                          }
                   }
-                  yield return Task.FromResult(true);
+                  yield return true;
                   yield break;
               }
-              yield return Task.FromResult(false);
+              yield return false;
               yield break;
         }
 

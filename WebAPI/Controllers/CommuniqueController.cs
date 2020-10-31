@@ -50,24 +50,30 @@ namespace ReachUpWebAPI.Controllers
         //
         [Authorize (Roles = "loj,adm")]
         [HttpPost]
-        public List<Task<IActionResult>> Post([FromBody] Communique communique) 
+        /* This is an action in which none, only the first or both
+        commands can work */
+        public List<bool> Post([FromBody] Communique communique) 
         {
             if (communique != null)
             {
-                List<Task<IActionResult>> results = new List<Task<IActionResult>>();
-                var action = communique.Add();
-                //return Ok(Step(action));
+               return Steps(communique);
             }
-            //return BadRequest("Parameters are null");
+            List<bool> result = new List<bool>();
+            result.Add(false);
+            return result;
         }
 
-        static IEnumerable<Task<bool>> Step(IEnumerable<Task<bool>> action)
+        /* Accessing the amount of "bool" and its values,
+        we can later interpret the action final result*/
+        static List<bool> Steps(Communique communique)
         {
-            foreach (var task in action)
+            List<bool> results = new List<bool>();
+            foreach (bool task in communique.Add())
             {
-                yield return task;
-            }
-            yield break;
+               // Yield return returns here
+               results.Add(task);
+            } 
+            return results;          
         }
 
         [Authorize (Roles = "loj,adm")]

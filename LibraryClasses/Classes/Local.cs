@@ -197,8 +197,8 @@ namespace ReachUp
                new string[,] {
                    { "pLocal", this.IdLocal.ToString() },
                    { "pDia", this.OpeningHours.WeekDay.ToString() },
-                   { "pAbertura", OpeningHours.OpeningTime.ToString() },
-                   { "pFechamento", OpeningHours.ClosingTime.ToString() }
+                   { "pAbertura", this.OpeningHours.OpeningTime.ToString() },
+                   { "pFechamento", this.OpeningHours.ClosingTime.ToString() }
                 }))
             {
                return Task.FromResult(true);
