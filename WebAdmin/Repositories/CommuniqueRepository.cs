@@ -7,7 +7,7 @@ using WebAdmin.Models;
 
 namespace WebAdmin.Repositories
 {
-    public class CommuniqueRepository : WebAPI
+    /*public class CommuniqueRepository : WebAPI
     {
         public CommuniqueRepository() : base()
         {
@@ -16,28 +16,28 @@ namespace WebAdmin.Repositories
 
         public async Task<List<Communique>> Get(int local)
         {
-           string response = await base.Get($"Communique/Get?Local={id}");
+           string response = await base.Get($"Communique/Get?Local={local}");
            List<Communique> _communiques =
              JsonConvert.DeserializeObject<List<Communique>>(response);
            return _communiques;
         }
 
-        public async Task<Bool> Post(Communique communique)
+        public async Task<bool> Post(Communique communique)
         {
-           string response = await base.Get($"Communique/Post");
+           bool response = await base.Post($"Communique/Post");
            return response;
         }
 
-        public async Task<Bool> Patch(Communique communique)
+        public async Task<bool> Patch(Communique communique)
         {
-           string response = await base.Get($"Communique/Patch");
+           bool response = await base.Patch($"Communique/Patch");
            return response;
         }
 
-        public async Task<Bool> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-           string response = await base.Get($"Communique/Delete?Id={id}");
+           bool response = await base.Delete($"Communique/Delete?Id={id}");
            return response;
         }
-    }
+    }*/
 }

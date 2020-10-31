@@ -1,26 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\WebAdmin\\WebAdmin.csproj": {}
+    "c:\\Users\\Guilherme\\reachup\\WebAdmin\\WebAdmin.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\WebAdmin\\WebAdmin.csproj": {
+    "c:\\Users\\Guilherme\\reachup\\WebAdmin\\WebAdmin.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\WebAdmin\\WebAdmin.csproj",
+        "projectUniqueName": "c:\\Users\\Guilherme\\reachup\\WebAdmin\\WebAdmin.csproj",
         "projectName": "WebAdmin",
-        "projectPath": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\WebAdmin\\WebAdmin.csproj",
-        "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\WebAdmin\\obj\\",
+        "projectPath": "c:\\Users\\Guilherme\\reachup\\WebAdmin\\WebAdmin.csproj",
+        "packagesPath": "C:\\Users\\Guilherme\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\Guilherme\\reachup\\WebAdmin\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Guilherme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -84,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

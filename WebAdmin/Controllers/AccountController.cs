@@ -13,7 +13,7 @@ using WebAdmin.Repositories;
 
 namespace WebAdmin.Controllers
 {
-    public class AccountController : Controller
+    /*public class AccountController : Controller
     {
         // GET: Account
         public ActionResult Sigin()
@@ -121,5 +121,5 @@ namespace WebAdmin.Controllers
                 return View();
             }
         }
-    }
+    }*/
 }

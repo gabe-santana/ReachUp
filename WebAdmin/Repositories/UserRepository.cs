@@ -7,7 +7,7 @@ using WebAdmin.Models;
 
 namespace WebAdmin.Repositories
 {
-    public class UserRepository : WebAPI
+    /*public class UserRepository : WebAPI
     {
         public UserRepository() : base()
         {
@@ -22,5 +22,5 @@ namespace WebAdmin.Repositories
          
             return _user;
         } 
-    }
+    }*/
 }

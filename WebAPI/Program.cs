@@ -27,7 +27,7 @@ namespace ReachUpWebAPI
           .ConfigureWebHostDefaults(webBuilder =>
           {
               webBuilder.UseStartup<Startup>()
-              .UseUrls("http://192.168.0.109:5000/");
+              .UseUrls("http://192.168.0.12:8000/");
           });
     }
 }

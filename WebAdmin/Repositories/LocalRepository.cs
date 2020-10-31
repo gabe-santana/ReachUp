@@ -7,12 +7,12 @@ using WebAdmin.Models;
 
 namespace WebAdmin.Repositories
 {
-    public class LocalRepository : WebAPI
+    /*public class LocalRepository : WebAPI
     {
         public LocalRepository() : base()
         {
 
-        };
+        }
 
         public async Task<Local> Get(int id)
         {
@@ -32,27 +32,27 @@ namespace WebAdmin.Repositories
            return _locals;
         }
 
-        public async Task<Bool> Post(Local local)
+        public async Task<bool> Post(Local local)
         {
-           string response = await base.Get($"Local/Post");
+           bool response = await base.Post($"Local/Post");
            return response;
         }
 
-        public async Task<Bool> Patch(Local local)
+        public async Task<bool> Patch(Local local)
         {
-           string response = await base.Get($"Local/Patch");
+           bool response = await base.Patch($"Local/Patch");
            return response;
         }
 
-        public async Task<Bool> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-           string response = await base.Get($"Local/Delete?Id={id}");
+           bool response = await base.Delete($"Local/Delete?Id={id}");
            return response;
         }
 
-        public async Task<Bool> AddOpHours(Local local, OpeningHours OpeningHours)
+        public async Task<bool> AddOpHours(Local local, OpeningHours OpeningHours)
         {
-           string response = await base.Get($"Local/AddOpHours");
+           bool response = await base.Post($"Local/AddOpHours");
            return response;
         }
 
@@ -64,5 +64,5 @@ namespace WebAdmin.Repositories
 
            return _times;
         }
-    }
+    }*/
 }

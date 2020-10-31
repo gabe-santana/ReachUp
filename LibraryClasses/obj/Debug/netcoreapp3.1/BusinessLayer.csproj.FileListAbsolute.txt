@@ -6,3 +6,12 @@ C:\Users\Gabriel\Documents\Repositories\ReachUp\LibraryClasses\obj\Debug\netcore
 C:\Users\Gabriel\Documents\Repositories\ReachUp\LibraryClasses\bin\Debug\netcoreapp3.1\BusinessLayer.pdb
 C:\Users\Gabriel\Documents\Repositories\ReachUp\LibraryClasses\obj\Debug\netcoreapp3.1\BusinessLayer.dll
 C:\Users\Gabriel\Documents\Repositories\ReachUp\LibraryClasses\obj\Debug\netcoreapp3.1\BusinessLayer.pdb
+C:\Users\Guilherme\reachup\LibraryClasses\obj\Debug\netcoreapp3.1\BusinessLayer.csprojAssemblyReference.cache
+C:\Users\Guilherme\reachup\LibraryClasses\obj\Debug\netcoreapp3.1\BusinessLayer.AssemblyInfoInputs.cache
+C:\Users\Guilherme\reachup\LibraryClasses\obj\Debug\netcoreapp3.1\BusinessLayer.AssemblyInfo.cs
+C:\Users\Guilherme\reachup\LibraryClasses\obj\Debug\netcoreapp3.1\BusinessLayer.csproj.CoreCompileInputs.cache
+C:\Users\Guilherme\reachup\LibraryClasses\obj\Debug\netcoreapp3.1\BusinessLayer.dll
+C:\Users\Guilherme\reachup\LibraryClasses\obj\Debug\netcoreapp3.1\BusinessLayer.pdb
+C:\Users\Guilherme\reachup\LibraryClasses\bin\Debug\netcoreapp3.1\BusinessLayer.deps.json
+C:\Users\Guilherme\reachup\LibraryClasses\bin\Debug\netcoreapp3.1\BusinessLayer.dll
+C:\Users\Guilherme\reachup\LibraryClasses\bin\Debug\netcoreapp3.1\BusinessLayer.pdb

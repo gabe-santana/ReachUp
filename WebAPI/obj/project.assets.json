@@ -8884,27 +8884,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Gabriel\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Guilherme\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "c:\\Users\\Guilherme\\reachup\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\WebAPI\\WebAPI.csproj",
-      "packagesPath": "C:\\Users\\Gabriel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\WebAPI\\obj\\",
+      "projectPath": "c:\\Users\\Guilherme\\reachup\\WebAPI\\WebAPI.csproj",
+      "packagesPath": "C:\\Users\\Guilherme\\.nuget\\packages\\",
+      "outputPath": "c:\\Users\\Guilherme\\reachup\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Gabriel\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Guilherme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -8916,8 +8909,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\LibraryClasses\\BusinessLayer.csproj": {
-              "projectPath": "C:\\Users\\Gabriel\\Documents\\Repositories\\ReachUp\\LibraryClasses\\BusinessLayer.csproj"
+            "c:\\Users\\Guilherme\\reachup\\LibraryClasses\\BusinessLayer.csproj": {
+              "projectPath": "c:\\Users\\Guilherme\\reachup\\LibraryClasses\\BusinessLayer.csproj"
             }
           }
         }
@@ -8982,7 +8975,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

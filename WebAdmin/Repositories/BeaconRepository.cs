@@ -7,7 +7,7 @@ using WebAdmin.Models;
 
 namespace WebAdmin.Repositories
 {
-    public class BeaconRepository : WebAPI
+    /*public class BeaconRepository : WebAPI
     {
         public BeaconRepository() : base()
         {
@@ -22,7 +22,7 @@ namespace WebAdmin.Repositories
            return _beacons;
         }
 
-        public async Task<Beacon> Get(string uuid)
+        public async Task<Beacon> Fetch(string uuid)
         {
            string response = await base.Get($"Beacon/Get?UUID={uuid}");
            Beacon _beacon =
@@ -30,30 +30,22 @@ namespace WebAdmin.Repositories
            return _beacon;
         }
 
-        public async Task<List<Beacon>> GetAll(int type)
+        public async Task<bool> Post(Beacon beacon)
         {
-           string response = await base.Get($"Beacon/GetAll?Type={type}");
-           List<Beacon> _beacons =
-             JsonConvert.DeserializeObject<List<Beacon>>(response);
-           return _beacons;
-        }
-
-        public async Task<Bool> Post(Beacon beacon)
-        {
-           string response = await base.Get($"Beacon/Post");
+           bool response = await base.Post($"Beacon/Post");
            return response;
         }
 
-        public async Task<Bool> Patch(Beacon beacon)
+        public async Task<bool> Patch(Beacon beacon)
         {
-           string response = await base.Get($"Beacon/Patch");
+           bool response = await base.Patch($"Beacon/Patch");
            return response;
         }
 
-        public async Task<Bool> Delete(string uuid)
+        public async Task<bool> Delete(string uuid)
         {
-           string response = await base.Get($"Beacon/Delete?UUID={uuid}");
+           bool response = await base.Delete($"Beacon/Delete?UUID={uuid}");
            return response;
         }
-    }
+    }*/
 }

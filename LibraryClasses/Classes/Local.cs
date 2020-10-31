@@ -191,7 +191,7 @@ namespace ReachUp
             return Task.FromResult(false);;
         }
 
-        public Task<bool> AddOpHours()
+        /*public Task<bool> AddOpHours()
         {
             if (base.DMLCommand(Procedure.defHorarioAlternativoLocal,
                new string[,] {
@@ -204,7 +204,7 @@ namespace ReachUp
                return Task.FromResult(true);
             }
             return Task.FromResult(false);
-        }
+        }*/
 
         public Task<bool> Update()
         {

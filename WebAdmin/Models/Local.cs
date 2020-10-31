@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+
 
 namespace WebAdmin.Models
 {
@@ -8,7 +10,7 @@ namespace WebAdmin.Models
         public int Type {get; set;}
         public string Name {get; set;}
         public int Floor {get; set;}
-        public Time OpeningTime {get; set;}
-        public Time ClosingTime {get; set;}
+        public DateTime OpeningTime {get; set;}
+        public DateTime ClosingTime {get; set;}
     }
 }

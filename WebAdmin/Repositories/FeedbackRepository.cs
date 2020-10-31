@@ -7,7 +7,7 @@ using WebAdmin.Models;
 
 namespace WebAdmin.Repositories
 {
-    public class FeedbackRepository : WebAPI
+    /*public class FeedbackRepository : WebAPI
     {
         public FeedbackRepository() : base()
         {
@@ -46,22 +46,22 @@ namespace WebAdmin.Repositories
            return _feedback;
         }
 
-        public async Task<Bool> Post(Feedback feedback)
+        public async Task<bool> Post(Feedback feedback)
         {
-           string response = await base.Get($"Feedback/Post");
+           bool response = await base.Post($"Feedback/Post");
            return response;
         }
 
-        public async Task<Bool> Patch(Feedback feedback)
+        public async Task<bool> Patch(Feedback feedback)
         {
-           string response = await base.Get($"Feedback/Patch");
+           bool response = await base.Patch($"Feedback/Patch");
            return response;
         }
 
-        public async Task<Bool> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-           string response = await base.Get($"Feedback/Delete?Id={id}");
+           bool response = await base.Delete($"Feedback/Delete?Id={id}");
            return response;
         }
-    }
+    }*/
 }
