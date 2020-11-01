@@ -40,34 +40,37 @@ $(()=>{
         });
     });
 
-    $id("floor").change(function(){
+    
+    $("#floor").bind("input",function(){
         var floor = this.value;
-
         if (floor == ""){
             this.value = 0;
             floor = 0;
         }
         //clearDraw();
         //clearArrays();
-        clear();
+        // clear();
         setCurrentFloor(floor);
         //hatchMap();
-        renderMap();
-    });
+        // renderMap();
+    })
 
-    $id("addRoute").click(function(){
+    $("#addRoute").click(function(){
+        $("#cbCornerUp").prop("checked",false);
+        $("#cbCornerDown").prop("checked",false);
+        $("#cbCornerLeft").prop("checked",false);
+        $("#cbCornerRight").prop("checked",false);
         addHallToJson();
     });
 
-    $id("addLocal").click(function(){
+    $("#addLocal").click(function(){
         addLocaltoJson();
     });
 
     
-    $id("addAll").click(function(){
+    $("#addAll").click(function(){
         addAlltoJson();
     });
-
  
 
     $id("clear").click(function(){
@@ -88,6 +91,12 @@ $(()=>{
         $id('clear').disabled = false;
 
     })
+
+    // $("input[type=radio][id=cbCorner]").change(function(){
+    //     if($("input[type=radio][id=cbCorner]").val() == "on"){
+    //         $("#top-painel").hide();
+    //     }
+    // });
 
     $id('plan').change(() => {
       alert('imagem mudou!');

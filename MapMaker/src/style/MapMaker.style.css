@@ -1,16 +1,10 @@
 body{
    margin: 0px;
    padding: 0px;
-   opacity: 0.5;
 }
 :root{
     --dimension-mapContainer: 700px;
     --squarePerRow: 200;
-}
-
-#login {
-    z-index: 1000;
-    opacity: 1;
 }
 
 
@@ -41,22 +35,32 @@ body{
     font-size: 16px;
 }
 
-#right-painel{
-    float: right;
-    background-color: black;
-    color: #d7d7d7;
-    border-top-width: 5px;
-    border-top-style: solid;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    border-color: #372a70;
+#top-painel{
+    position: fixed; 
+    background-color: 
+    white;
+    top: 0px;
+    width: 100%;
+    height: 80px;
+    border: 1px solid #000000;
 }
 
-#logo {
-    background-image: url("../files/images/ReachUp.jpg");
-    width: 100px;
-    height: 100px;
-    margin-left: 75%;
+#bottom-painel{
+    float: right;
+    position: fixed; 
+    background-color: 
+    white;
+    bottom: 0px;
+    width: 100%;
+    border: 1px solid #000000;
+}
+
+#top-controls{
+    position: absolute;
+    left: 50%;
+    top:50%;
+
+    transform: translate(-50%);
 }
 
 /* CLASSES */
@@ -80,16 +84,7 @@ body{
     width: 150px;
     height: 35px;
     border: 1px solid black;
-    background-color: #1c405e;
-    margin-left: 5px;
-    color: #e0e0e0;
-    box-shadow: 1px 1px #1c405e;
-    border-radius: 5px;
-}
-
-.mapBtn:disabled {
-   background-color: #298696;
-   box-shadow: 1px 1px #298696;
+    background-color: transparent;
 }
 
 
