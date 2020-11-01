@@ -8,12 +8,12 @@ using System.Net.Http;
 
 namespace WebAdmin.Repositories
 {
-    public class CommuniqueRepository
+    public class CategoryRepository
     {
         private static readonly string BaseURL;
         private static readonly HttpClient client;
 
-        public CommuniqueRepository()
+        public CategoryRepository()
         {
            this.BaseURL = clsApiConnection.BaseURL;
            this.client = new HttpClient();
@@ -29,13 +29,27 @@ namespace WebAdmin.Repositories
 
         public async Task<bool> Post(Communique communique)
         {
-           bool response = await client.PostAsync($"Communique/Post");
+           StringContent body = 
+             new StringContent(
+                JsonConvert.SerializeObject(communique),
+                Encoding.UTF8,
+                "application/json"
+                );
+
+           bool response = await client.PostAsync($"Communique/Post", body);
            return response;
         }
 
         public async Task<bool> Patch(Communique communique)
         {
-           bool response = await client.PatchAsync($"Communique/Patch");
+            StringContent body = 
+             new StringContent(
+                JsonConvert.SerializeObject(communique),
+                Encoding.UTF8,
+                "application/json"
+                );
+
+           bool response = await client.PatchAsync($"Communique/Patch", body);
            return response;
         }
 
