@@ -1,5 +1,4 @@
 # ReachUp!
-## Closed Beta Version: October 29
 
 <p>
 <img alt="Csharp" src="https://img.shields.io/badge/-C%23-7022DC?style=flat-square&logo=c-sharp&logoColor=white" />
@@ -123,8 +122,8 @@ We're using:
 - [x] WebAPI **(completed, but always on edit and rising)**
 - [ ] Web Application - coding **(idling)**
 - [ ] Web Application - design **(on development)**
-- [ ] Cross-Platform Mobile App **(main functionality almost ready)**
-- [X] MapMaker - for the developers **(debug errors)**
+- [ ] Cross-Platform Mobile App **(main functionality ready)**
+- [X] MapMaker - map module **(completed)**
 
 ## About Officers Contributors
 
