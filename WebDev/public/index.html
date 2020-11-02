@@ -6,129 +6,83 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="google-signin-client_id" content="14900610881-8re4ccif04vqcc87hlpppbso6bhs3n3u.apps.googleusercontent.com.apps.googleusercontent.com">
     <link rel="stylesheet" href="../src/style/MapMaker.style.css">
-    <link rel="stylesheet" href="../src/style/style.css">
     <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-	<link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link href="../src/style/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
     <title>ReachUp! Dev - Login</title>
 </head>
-<body>
+<body style="background-color: #666666;">
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@0.4.0/dist/lottie-player.js"></script>
+    <!--<lottie-player
+                src="https://assets3.lottiefiles.com/packages/If20_47dwpmff.json"
+                background="transparent" 
+                speed="1"
+                style="width: 100px; height: 100px;"
+                loop autoplay>
+    </lottie-player>-->
+    <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-43">
+						ReachUp! Developer
+					</span>
+					
+					
+					<div class="wrap-input100 validate-input">
+						<input id="txtEmail" class="input100" type="text">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Email</span>
+					</div>
+					
+					
+					<div class="wrap-input100 validate-input">
+						<input id="txtPassword" class="input100" type="password">
+						<span class="focus-input100"></span>
+						<span class="label-input100">Senha</span>
+					</div>
+
+					<div class="flex-sb-m w-full p-t-3 p-b-32">
+						<div class="contact100-form-checkbox">
+							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<label class="label-checkbox100" for="ckb1">
+								Lembre-me
+							</label>
+						</div>
+
+						<div>
+							<a href="#" class="txt1">
+								Esqueceu sua senha?
+							</a>
+						</div>
+					</div>
+			
+
+					<div class="container-login100-form-btn">
+						<button id="btnLogin" class="login100-form-btn">
+							Entrar
+						</button>
+					</div>
+				</form>
+
+				<div class="login100-more" style="background-image: url('../src/files/images/');">
+				</div>
+			</div>
+		</div>
+	</div>
    <script src="../src/Scripts/jquery-3.5.1.min.js"></script>
    <script src="../src/Scripts/bootstrap.min.js"></script>
-   <script src="https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js"></script>
-   <script src="https://apis.google.com/js/platform.js" async defer></script>
-   <script type="script" src="../src/services/FacebookApi.js"></script>
-   <script type="script" src="../src/services/GoogleApi.js"></script>
-   <script type="script" src="../src/services/GitHubOAuth.js"></script>
-   <script async defer crossorigin="anonymous" 
-   src="https://connect.facebook.net/pt_BR/sdk.js"></script>
-
-   <style>
-    body {
-        overflow-y: hidden;
-        background-image: url('assets/images/shopping.jpg');
-        height: 100%;
-
-        /* Center and scale the image nicely */
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-   </style>
-
-<div class="container" id="guestContainer">
-    <div class="row vertical-center-row">
-        <div class="container">
-            <main role="main" class="pb-3">
-            </main>
-        </div>
-    </div>
-</div>
-
-   <div id="logreg-forms">
-
-    <form method="post" class="form-signin" >
-
-        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">ReachUp | Sign in</h1>
-        <div class="social-login">
-            <a id="github-button" class="btn btn-block btn-social btn-github">
-                <i class="fa fa-github"></i> Sign in with Github
-            </a>
-            <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
-            <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
-        </div>
-        <p style="text-align:center"> OR  </p>
-        <span class="msgError" style="color:red;margin-bottom:5px">@ViewBag.SiginError</span>
-        <input asp-for="Email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-        <input asp-for="Password" type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-
-        <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
-        <a href="#" id="forgot_pswd">Forgot password?</a>
-        <hr>
-        <!-- <p>Don't have an account!</p>  -->
-        <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i> Sign up New Account</button>
-    </form>
-
-    <form action="/reset/password/" class="form-reset">
-        <input type="email" id="resetEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-        <button class="btn btn-primary btn-block" type="submit">Reset Password</button>
-        <a href="#" id="cancel_reset"><i class="fas fa-angle-left"></i> Back</a>
-    </form>
-
-    <form action="/signup/" class="form-signup">
-        <div class="social-login">
-            <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign up with Facebook</span> </button>
-        </div>
-        <div class="social-login">
-            <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign up with Google+</span> </button>
-        </div>
-
-        <p style="text-align:center">OR</p>
-
-        <input type="text" id="user-name" class="form-control" placeholder="Full name" required="" autofocus="">
-        <input type="email" id="user-email" class="form-control" placeholder="Email address" required autofocus="">
-        <input type="password" id="user-pass" class="form-control" placeholder="Password" required autofocus="">
-        <input type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required autofocus="">
-
-        <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
-        <a href="#" id="cancel_signup"><i class="fas fa-angle-left"></i> Back</a>
-    </form>
-    <br>
-
-</div>
-<p style="text-align:center">
-    <a href="http://bit.ly/2RjWFMfunction toggleResetPswd(e){
-       e.preventDefault();
-       $('#logreg-forms .form-signin').toggle() // display:block or none
-       $('#logreg-forms .form-reset').toggle() // display:block or none
-       }
-       function toggleSignUp(e){
-       e.preventDefault();
-       $('#logreg-forms .form-signin').toggle(); // display:block or none
-       $('#logreg-forms .form-signup').toggle(); // display:block or none
-       }
-       $(()=>
-        {
-        // Login Register Form
-        $('#logreg-forms #forgot_pswd').click(toggleResetPswd);
-        $('#logreg-forms #cancel_reset').click(toggleResetPswd);
-        $('#logreg-forms #btn-signup').click(toggleSignUp);
-        $('#logreg-forms #cancel_signup').click(toggleSignUp);
-        })g" target="_blank" style="color:black">
-    </a>
-</p>
-
-
-
-   <!--<section id="login">
-      <a id="github-button" class="btn btn-block btn-social btn-github">
-        <i class="fa fa-github"></i> Sign in with Github
-      </a>
-      <fb:login-button 
-      scope="public_profile,email" 
-      onlogin="checkLoginState();"
-      >
-      </fb:login-button>
-   </section>-->
-
+   <script src="../build/main.bundle.js"></script>
+   <script type="module" src="../src/Scripts/login.js"></script>
+  
 </body>
 </html>
