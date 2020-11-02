@@ -11,7 +11,12 @@ export module LocalController {
     
      public async Get(id : number)
      {
-        return await this.httpGet(`Local/Get?id=${id}`)
+        return await this.httpGet(`Local/Get?id=${id}`);
+     }
+
+     public async GetAll(type: number)
+     {
+        return await this.httpGet(`Local/GetAll?type=${type}`);
      }
 
      public async GetByBeacon(uuid : string)
