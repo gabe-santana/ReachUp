@@ -59,6 +59,26 @@ namespace ReachUp
 
         }
 
+        /// <summary>
+        ///  Developer constructor (mapMaker)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <param name="floor"></param>
+        /// <param name="admins"></param>
+        /// <param name="beacons"></param>
+        public Local(int id, int type, string name, ushort floor,
+        List<User> admins = null, List<Beacon> beacons = null ) :base()
+        {
+           this.IdLocal = id;
+           this.Type = type;
+           this.Name = name;
+           this.Floor = floor; 
+           this.Admins = admins;
+           this.Beacons = beacons;
+        }
+
         #endregion
 
         #region Public Methods
@@ -163,6 +183,42 @@ namespace ReachUp
             }
 
             return null;
+        }
+
+        public Task<Local> ByBeacon(string uuid)
+        {
+           if (base.DQLCommand(Procedure.pegarLocalBeacon, ref this.Data, 
+               new string[,] {
+                   {"pBeacon", uuid.ToString()}
+               }))
+               {
+                   Local local = null;
+                   List<User> admins = new List<User>();
+                   List<Beacon> beacons = new List<Beacon>();
+                   if (this.Data.HasRows)
+                   {
+                       while (this.Data.Read())
+                       {
+                           local = new Local(
+                               this.Data["cd_local"].ToString(),
+                               this.Data["nm_tipo_local"].ToString(),
+                               this.Data["nm_local"].ToString(),
+                               this.Data["cd_andar"].ToString(),
+                               admins.Add(
+                                 this.Data["Admins"].ToString()
+                               ),
+                               beacons.Add(
+                                 this.Data["Beacons"].ToString()
+                               )
+                               
+                           );
+                       }
+                       this.Data.Close();
+                       base.Disconnect();
+                       return Task.FromResult(local);
+                   }
+               }
+               return null;
         }
 
         public Task<List<Local>> GetAll(string type)

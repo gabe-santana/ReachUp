@@ -37,6 +37,15 @@ namespace ReachUpWebAPI.Controllers
         }
 
         [Authorize]
+        [HttpGet("ByBeacon")]
+        public async Task<IActionResult> ByBeacon(string uuid)
+        {
+            if (!string.IsNullOrWhiteSpace(uuid))
+                return Ok(await new Local().ByBeacon(uuid))
+            return BadRequest("Parameters are null");
+        }
+
+        [Authorize]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(string type)
         {
@@ -66,7 +75,6 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-<<<<<<< HEAD
         /*[Authorize(Roles = "adm")]
         [HttpPost("AddOpHours")]
         public async Task<IActionResult> AddOpHours([FromBody] Local local, [FromBody] OpeningHours openingHours) 
@@ -75,16 +83,7 @@ namespace ReachUpWebAPI.Controllers
                 return Ok(await local.AddOpHours());
             return BadRequest("Parameters are null");
         }*/
-=======
-        //[Authorize(Roles = "adm")]
-        //[HttpPost("AddOpHours")]
-        //public async Task<IActionResult> AddOpHours([FromBody] Local local, [FromBody] OpeningHours openingHours) 
-        //{
-        //    if (local != null && openingHours != null)
-        //        return Ok(await local.AddOpHours());
-        //    return BadRequest("Parameters are null");
-        //}
->>>>>>> 4b08a72a7c52f9f3ff5bf4c34d3f47c4c001d1c1
+
 
         [Authorize(Roles = "adm")]
         [HttpPatch]

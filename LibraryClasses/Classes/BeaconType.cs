@@ -65,6 +65,31 @@ namespace ReachUp
             return null;
         }
 
+        public Task<BeaconType> Get(int id)
+        {
+           if (base.DQLCommand(
+               $"SELECT * FROM tipo_beacon WHERE cd_tipo_beacon ={id}",
+               ref this.Data
+           ))
+           {
+               BeaconType beaconType = null;
+               if (this.Data.HasRows)
+               {
+                   while(this.Data.Read())
+                   {
+                       beaconType = new BeaconType(
+                         this.Data["cd_tipo_beacon"].ToString(),
+                         this.Data["nm_tipo_beacon"].ToString()
+                       );
+                   }
+                   this.Data.Close();
+               }
+               base.Disconnect();
+               return Task.FromResult(beaconType);
+           }
+           return null;
+        }
+
         public Task<bool> Add()
         {
             if (base.DMLCommand(
@@ -72,6 +97,34 @@ namespace ReachUp
             ))
             {
                return Task.FromResult(true);
+            }
+            return Task.FromResult(false);
+        }
+
+        public Task<bool> Update()
+        {
+            if (base.DMLCommand(
+                $"UPDATE tipo_beacon SET cd_tipo_beacon={this.Id}, nm_tipo_beacon={this.Name}"
+            ))
+            {
+               return Task.FromResult(true);
+            }
+            return Task.FromResult(false);
+        }
+
+        public Task<bool> Delete(int id)
+        {
+            if (base.DMLCommand(
+                $"DELETE FROM beacon WHERE cd_tipo_beacon={id}"
+            ))
+            {
+               if (base.DMLCommand(
+                   $"DELETE FROM tipo_beacon WHERE cd_tipo_beacon={id}"
+               ))
+               {
+                  return Task.FromResult(true);
+               }
+               return Task.FromResult(false);
             }
             return Task.FromResult(false);
         }

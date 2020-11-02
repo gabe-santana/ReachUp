@@ -15,6 +15,7 @@ namespace ReachUp
         public string Role{ get; set; }
         public Local AdmLocal { get; set; }
         public string Token { get; set; }
+        public string AdmType { get; set; }
 
         #endregion
 
@@ -52,15 +53,17 @@ namespace ReachUp
         }
 
         /// <summary>
-        /// Get store admins constructor
+        /// Get Local by Beacon (admins constructor)
         /// </summary>
         /// <param name="name"></param>
         /// <param name="email"></param>
-        public User(string name, string email)
+        /// <param name="admType"></param>
+        public User(string name, string email, string admType)
          : base()
         {
             this.Name = name;
             this.Email = email;
+            this.AdmType = admType;
         }
 
         #endregion

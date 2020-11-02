@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Guilherme\\reachup\\WebAPI\\WebAPI.csproj": {}
+    "C:\\Users\\Guilherme\\reachup\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Guilherme\\reachup\\LibraryClasses\\BusinessLayer.csproj": {
+    "C:\\Users\\Guilherme\\reachup\\LibraryClasses\\BusinessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Guilherme\\reachup\\LibraryClasses\\BusinessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\Guilherme\\reachup\\LibraryClasses\\BusinessLayer.csproj",
         "projectName": "BusinessLayer",
-        "projectPath": "c:\\Users\\Guilherme\\reachup\\LibraryClasses\\BusinessLayer.csproj",
+        "projectPath": "C:\\Users\\Guilherme\\reachup\\LibraryClasses\\BusinessLayer.csproj",
         "packagesPath": "C:\\Users\\Guilherme\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Guilherme\\reachup\\LibraryClasses\\obj\\",
+        "outputPath": "C:\\Users\\Guilherme\\reachup\\LibraryClasses\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Guilherme\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -62,14 +62,14 @@
         }
       }
     },
-    "c:\\Users\\Guilherme\\reachup\\WebAPI\\WebAPI.csproj": {
+    "C:\\Users\\Guilherme\\reachup\\WebAPI\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Guilherme\\reachup\\WebAPI\\WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Guilherme\\reachup\\WebAPI\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "c:\\Users\\Guilherme\\reachup\\WebAPI\\WebAPI.csproj",
+        "projectPath": "C:\\Users\\Guilherme\\reachup\\WebAPI\\WebAPI.csproj",
         "packagesPath": "C:\\Users\\Guilherme\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Guilherme\\reachup\\WebAPI\\obj\\",
+        "outputPath": "C:\\Users\\Guilherme\\reachup\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Guilherme\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -85,8 +85,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "c:\\Users\\Guilherme\\reachup\\LibraryClasses\\BusinessLayer.csproj": {
-                "projectPath": "c:\\Users\\Guilherme\\reachup\\LibraryClasses\\BusinessLayer.csproj"
+              "C:\\Users\\Guilherme\\reachup\\LibraryClasses\\BusinessLayer.csproj": {
+                "projectPath": "C:\\Users\\Guilherme\\reachup\\LibraryClasses\\BusinessLayer.csproj"
               }
             }
           }

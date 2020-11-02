@@ -13,6 +13,8 @@ namespace ReachUp
         public int Type { get; set; }
         public string UUID { get; set; }
         public Local LocalBeacon { get; set; }
+
+        public string TypeName {get; set; }
         #endregion
 
         #region Fields    
@@ -35,9 +37,20 @@ namespace ReachUp
   
         }
 
-        public Beacon(string uuid, int v) : this(uuid)
+        public Beacon(string uuid, int v) : base()
         {
             this.v = v;
+        }
+
+        /// <summary>
+        /// Get Local by Beacon (beacons constructor)
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <param name="typeName"></param>
+        public Beacon(string uuid, string typeName)
+        {
+            this.UUID = uuid;
+            this.TypeName = TypeName;
         }
         #endregion
 

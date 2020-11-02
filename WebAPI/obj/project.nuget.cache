@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hG0SDg685ctySo/6qJQLK+E3kgndtLSMGzMEYl82HXD0hU4lZsJ8to3HgELpEZkCU6M4z7lrNdan0M+4Hfp+dQ==",
+  "dgSpecHash": "O4JQlqxfd+iKFuzVuiXMbIlF6rxt/iJ3wUUOSeq9RoCUE7yY7YveItFGNplZp9rLA92qa34BiS88Rzgyx7NOBQ==",
   "success": true,
-  "projectFilePath": "c:\\Users\\Guilherme\\reachup\\WebAPI\\WebAPI.csproj",
+  "projectFilePath": "C:\\Users\\Guilherme\\reachup\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Guilherme\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\Guilherme\\.nuget\\packages\\google.protobuf\\3.6.1\\google.protobuf.3.6.1.nupkg.sha512",
