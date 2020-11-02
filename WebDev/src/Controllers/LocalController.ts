@@ -24,11 +24,10 @@ export module LocalController {
         return await this.httpGet(`Local/ByBeacon?uuid=${uuid}`)
      }
 
-     public async Add(id : number, type : number, name : string, floor : number,
-      admins : Admin.clsAdmin, beacons : Beacon.clsBeacon )
+     public async Add(type : number, name : string, floor : number)
      {
         return await this.httpPost(`Local/Post`,
-          new Local.clsLocal(id, type, name, floor, null, null)
+          new Local.clsLocal(null, type, name, floor, null, null)
           );
      } 
 

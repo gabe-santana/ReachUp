@@ -1,0 +1,18 @@
+
+.areaFiltro {
+    position: relative;
+    margin-top: -25px;
+    margin-left: 100px;
+}
+
+.areaFiltro select {
+    position: absolute;
+    margin-top: -40px;
+    margin-left: 125px;
+}
+
+.barraPesquisa {
+   background-color: #295c96;
+   color: #ffffff;
+   border-radius: 20px 20px 20px;
+}
