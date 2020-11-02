@@ -564,6 +564,27 @@ BEGIN
 	WHERE l.cd_local = pID;
 END$$
 
+DROP PROCEDURE IF EXISTS pegarLocalBeacon$$
+CREATE PROCEDURE pegarLocalBeacon(pBeacon varchar(36))
+BEGIN
+  SELECT l.cd_local, tl.nm_tipo_local, l.nm_local, l.cd_andar, 
+  group_concat(a.nm_email_administrador, a.nm_administrador, ta.nm_tipo_administrador) 
+  as Admins, 
+  group_concat(b.cd_uuid_beacon, tb.nm_tipo_beacon) as Beacons
+  FROM `local` l 
+  INNER JOIN beacon b
+  ON (l.cd_local = b.cd_local)
+  INNER JOIN tipo_beacon tb
+  ON (b.cd_tipo_beacon = tb.cd_tipo_beacon)
+  INNER JOIN tipo_local tl
+  ON (l.cd_tipo_local = tl.cd_tipo_local)
+  INNER JOIN administrador a
+  ON (l.cd_local = a.cd_local)
+  INNER JOIN tipo_administrador ta
+  ON (a.cd_tipo_administrador = ta.nm_tipo_administrador)
+  WHERE b.cd_uuid_beacon = pBeacon;
+END$$ 
+
 DROP PROCEDURE IF EXISTS pegarLocais$$
 CREATE PROCEDURE pegarLocais(pTipo VARCHAR(45))
 BEGIN
