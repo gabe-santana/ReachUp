@@ -1,0 +1,134 @@
+{
+	"version": 0.1,
+	"shopping": "Praiamar Shopping",
+	"address": "R. Alexandre Martins, 80 - Aparecida, Santos - SP, 11025-202",
+	"metersByUnity": 1.0,
+	"widthUnits": 52,
+	"heightUnits": 52,
+	"triBeaconsPerFloor": 3,
+	"floors": [{
+		"locates": [{
+			"beacons": [{
+				"uuid": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+				"position": {
+					"x": 2.0,
+					"y": 3.0,
+					"floor": 0
+				}
+			}],
+			"id": 0,
+			"position": {
+				"x0": 0.0,
+				"y0": 0.0,
+				"x": 5.0,
+				"y": 5.0,
+				"floor": 0
+			}
+		}],
+		"halls": [
+			[]
+		],
+		"triBeacons": [{
+			"uuid": "",
+			"position": {
+				"x": 6.0,
+				"y": 6.0,
+				"floor": 0
+			}
+		}]
+	},
+	{
+		"locates": [{
+			"beacons": [{
+				"uuid": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+				"position": {
+					"x": 12.0,
+					"y": 3.0,
+					"floor": 0
+				}
+			}],
+			"id": 0,
+			"position": {
+				"x0": 0.0,
+				"y0": 0.0,
+				"x": 24.0,
+				"y": 24.0,
+				"floor": 0
+			}
+		}],
+		"halls": [
+			[]
+		],
+		"triBeacons": [{
+			"uuid": "",
+			"position": {
+				"x": 10.0,
+				"y": 10.0,
+				"floor": 0
+			}
+		}]
+	},
+	{
+		"locates": [{
+			"beacons": [{
+				"uuid": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+				"position": {
+					"x": 15.0,
+					"y": 7.0,
+					"floor": 0
+				}
+			}],
+			"id": 0,
+			"position": {
+				"x0": 3.0,
+				"y0": 3.0,
+				"x":  9.0,
+				"y": 9.0,
+				"floor": 0
+			}
+		}],
+		"halls": [
+			[]
+		],
+		"triBeacons": [{
+			"uuid": "",
+			"position": {
+				"x": 21.0,
+				"y": 21.0,
+				"floor": 0
+			}
+		}]
+	},
+	{
+		"locates": [{
+			"beacons": [{
+				"uuid": "f7826da6-4fa2-4e98-8024-bc5b71e0893e",
+				"position": {
+					"x": 30.0,
+					"y": 9.0,
+					"floor": 0
+				}
+			}],
+			"id": 0,
+			"position": {
+				"x0": 2.0,
+				"y0": 2.0,
+				"x": 3.0,
+				"y": 3.0,
+				"floor": 0
+			}
+		}],
+		"halls": [
+			[]
+		],
+		"triBeacons": [{
+			"uuid": "",
+			"position": {
+				"x": 30.0,
+				"y": 30.0,
+				"floor": 0
+			}
+		}]
+	}
+  ]
+}

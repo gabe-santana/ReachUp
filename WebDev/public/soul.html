@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../src/style/MapMaker.style.css">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <title>ReachUp! Dev - MapMaker</title>
+</head>
+<body>
+   <script src="../src/Scripts/jquery-3.5.1.min.js"></script>
+   <script src="../src/Scripts/bootstrap.min.js"></script>
+
+   <input id="copyToClipBoard" type="text" hidden>
+   <section id="top-painel">
+     
+     <div id="top-controls">
+       Set Corner:
+       <label>
+           <input id="cbCornerUp" type="checkbox" name="cbGetter" checked="true">
+              Up
+           </label>
+
+           <label>
+               <input id="cbCornerDown" type="checkbox" name="cbGetter" checked="true">
+                   Down
+          </label>
+
+           <label>
+               <input id="cbCornerRight" type="checkbox" name="cbGetter" checked="true">
+                   Right
+           </label>
+
+           <label>
+               <input id="cbCornerLeft" type="checkbox" name="cbGetter" checked="true">
+                   Left
+           </label>
+
+           <button class="mapBtn" id="addRoute">Add Corner</button>
+ 
+     </div>
+
+   </section>
+
+
+
+   <section id="bottom-painel" >
+       <label>
+           <span>UUID</span>
+           <input  id="uuid" type="text" >
+       </label>
+
+       <label>
+       <span>Current Floor</span>
+           <input  id="floor" type="number" value="0"  width="20px">
+       </label>
+
+       <label>
+       <span>Local ID</span>
+           <input  id="localid" type="number" value="0"  width="20px">
+       </label>
+
+       <label>
+
+   
+
+
+
+       <span>Plan</span>
+            <input  id="plan" type="file" value="0"  width="20px">
+        </label>
+           <br/>
+           <br/>
+           <div>
+               <label>
+               <input id="cbHall" type="radio" name="cbSetter">
+                   Hall
+               </label>
+   
+               <label>
+
+               <label>
+               <input id="cbCorner" type="radio" name="cbSetter">
+                   Corner
+               </label>
+   
+               <label>
+
+
+               <input id="cbBeacon" type="radio" name="cbSetter">
+                   Beacon
+               </label>
+   
+               <label>
+                   <input  id="cbILocal"  type="radio" name="cbSetter">
+                   Local (Initial Position)
+               </label>
+   
+               <label>
+                   <input  id="cbELocal" type="radio" name="cbSetter">
+                   Local (End Position)
+               </label>
+   
+           </div>
+           <br/>
+       <button class="mapBtn" id="addRoute">Add hall</button>
+ 
+       <button class="mapBtn" id="addLocal">Add local</button>
+       <button class="mapBtn" id="addAll">Add all</button>
+       <button class="mapBtn" id="clear">Clear</button>
+       <button class="mapBtn" id="clearSquare">Clear square</button>
+       <button class="mapBtn" id="showMap" disabled>Show map</button>
+  
+       <br/>
+
+   
+   </section>
+
+ 
+
+   <section id="mapContainer"></section>
+   <br/>
+
+    <script src="../build/main.bundle.js"></script>
+    <script type="module" src="../src/services/ApiConnection.ts"></script>
+    <script type="module" src="../src/Models/MallPlan.ts"></script>
+    <script type="module" src="../src/Controllers/AccountController.ts"></script>
+    <script type="module" src="../src/Scripts/routines.script.js"></script>
+    <script type="module" src="../src/Scripts/events.script.js"></script>
+</body>
+</html>
