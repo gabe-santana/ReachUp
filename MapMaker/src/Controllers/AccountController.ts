@@ -1,28 +1,22 @@
-/// <reference path='../Models/Account.ts'/>
-/// <reference path='../Models/UserToken.ts'/>
+/// <reference path='../services/ApiConnection.ts'/>
 
-import { Account } from "../Models/Account";
-import { UserToken } from "../Models/UserToken";
-import { IUser } from "../Interfaces/IUser";
-import { UserTokenController } from "./UserTokenController";
-
-interface IAccount {
-  index(email : string, password : string) : Promise<any>;
-}
+import { ApiConnection } from "../services/ApiConnection";
 
 export module AccountController {
 
-  export class clsAccountController extends Account.clsAccount implements IAccount {
-    constructor(){
-      super();
-    }
-
-    public async index(email : string, password : string) {
-      const User : IUser = {
-        email: email,
-        password: password
-      }  
-      return await this.login(User);
-    }
-  }
+    export class clsAccountController extends ApiConnection.clsApiConnection {
+         constructor(){
+           super();
+         }
+        
+         public async login(email : string, password : string)
+         {
+            return await 
+             this.httpGet(
+               `Account/Login?Email=${email}
+               &Password=${password}
+               &role=dev`
+            );
+         } 
+     }
 }

@@ -1,32 +1,12 @@
-/// <reference path='../Models/MallPlan.ts'/>
+/// <reference path='../services/ApiConnection.ts'/>
+/// <reference path='../Scripts/routines.script.js'/>
 
-import { MallPlan } from "../Models/MallPlan";
+import { ApiConnection } from "../services/ApiConnection";
 
 export module MallPlanController {
-
-    export class clsMallPlanController extends MallPlan.clsMallPlan {
-         constructor(){
-           super();
-         }
-        
-         public async getMap() {
-            return await this.get();
-         }
-
-         public async putMap()
-         {
-            return await this.put();
-         }
-
-         
-         public async getMapImages()
-         {
-            return await this.getImages();
-         }
-
-         public async getFloor(floor : number)
-         {
-            return await this.getFloorImage(floor);
-         }
-     }
+  export class clsMallPlanController extends ApiConnection.clsApiConnection {
+    constructor(){
+      super();
+    }
+  } 
 }
