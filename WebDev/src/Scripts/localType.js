@@ -1,4 +1,4 @@
-import { LocalTypeController } from '../Controllers/LocalTypeController';
+import { LocalTypeController } from '../Controllers/LocalTypeController.ts';
 
 $( async () => {
 

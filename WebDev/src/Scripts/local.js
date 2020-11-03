@@ -1,6 +1,8 @@
-import { LocalController } from '../Controllers/LocalController';
+///<reference path="../Controllers/LocalController.ts"/>
 
-$(() => {
+import { LocalController } from '../Controllers/LocalController.ts';
+
+$( async () => {
 
    await getAll($("#cmbLocalType").val());
 
