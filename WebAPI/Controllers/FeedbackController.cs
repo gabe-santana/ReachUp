@@ -42,10 +42,12 @@ namespace ReachUpWebAPI.Controllers
 
         [Authorize(Roles = "adm,cli")]
         [HttpGet]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> Get(int id, int type)
         {
-            if (!string.IsNullOrWhiteSpace(id.ToString()))
-                return Ok(await new Feedback().Get(id));
+            if (!string.IsNullOrWhiteSpace(id.ToString())
+                && !string.IsNullOrWhiteSpace(type.ToString())
+               )
+                return Ok(await new Feedback().Get(id, type));
             return BadRequest("Parameters are null");
         }
 

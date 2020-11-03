@@ -87,7 +87,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm,dev")]
+        [Authorize]
         [HttpGet("GetImage")]
         public async Task<IActionResult> GetImage(int id)
         {
@@ -105,7 +105,7 @@ namespace ReachUpWebAPI.Controllers
            return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm,dev")]
+        [Authorize]
         [HttpPost("UploadImage")]
         public async Task<string> UploadImage([FromForm] IFormFile file)
         {
