@@ -1,6 +1,11 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
 using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
@@ -9,6 +14,13 @@ namespace ReachUpWebAPI.Controllers
     [ApiController]
     public class LocalController : ControllerBase
     {
+        private readonly IWebHostEnvironment _environment;
+
+        public LocalController(IWebHostEnvironment environment)
+        {
+            _environment = environment;
+        }
+
         #region Actions
         [Authorize]
         [HttpGet("Connect")]
@@ -36,14 +48,14 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize]
+        /*[Authorize]
         [HttpGet("ByBeacon")]
         public async Task<IActionResult> ByBeacon(string uuid)
         {
             if (!string.IsNullOrWhiteSpace(uuid))
-                return Ok(await new Local().ByBeacon(uuid))
+                return Ok(await new Local().ByBeacon(uuid));
             return BadRequest("Parameters are null");
-        }
+        }*/
 
         [Authorize]
         [HttpGet("GetAll")]
@@ -74,6 +86,72 @@ namespace ReachUpWebAPI.Controllers
                 return Ok(await local.Add());
             return BadRequest("Parameters are null");
         }
+
+        [Authorize(Roles = "adm,dev")]
+        [HttpGet("GetImage")]
+        public async Task<IActionResult> GetImage(int id)
+        {
+           if (!string.IsNullOrWhiteSpace(id.ToString())) 
+           {
+              using(FileStream fileStream = System.IO.File.OpenRead(
+                     _environment.WebRootPath + $"/images/local/{id}.jpg"
+                    )
+                 )
+              {
+                 // ---- //
+                 return Ok("await Imagem");
+              }
+           }
+           return BadRequest("Parameters are null");
+        }
+
+        [Authorize(Roles = "adm,dev")]
+        [HttpPost("UploadImage")]
+        public async Task<string> UploadImage([FromForm] IFormFile file)
+        {
+            string validExtensions = "jpg, png, image/jpeg, image/png";
+
+            if (file.Length > 0)
+            {
+               //string extension = Path.GetExtension(file.FileName);
+
+              if (validExtensions.Contains(file.ContentType))
+              {
+                 //try
+                 //{
+                   if(!Directory.Exists(_environment.WebRootPath + "/images/local/"))
+                   {
+                       Directory.CreateDirectory(_environment.WebRootPath + "/images/local/");
+                   }
+                   else if (System.IO.File.Exists(_environment.WebRootPath + "/images/local/" + file.FileName))
+                   {
+                       System.IO.File.Delete(_environment.WebRootPath + "/images/local/" + file.FileName);
+                   }
+
+                   using (FileStream filestream = 
+                            System.IO.File.Create(
+                             _environment.WebRootPath + "/images/local" +
+                             file.FileName
+                             )
+                         )
+                    {
+                       await file.CopyToAsync(filestream);
+                       filestream.Flush();
+                       return "Ok!";
+                    }
+                //}
+
+               /*erro CS0119*/ 
+                /*catch (Exception ex)
+                {
+                   return ex.ToString();
+                }*/
+              }
+              return "Tipo de arquivo inválido!";
+            }
+            return "Falha no envio do arquivo!";
+        }
+        
 
         /*[Authorize(Roles = "adm")]
         [HttpPost("AddOpHours")]
@@ -125,14 +203,14 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm")]
+        /*[Authorize(Roles = "adm")]
         [HttpGet("GetAdmins")]
         public async Task<IActionResult> GetAdmins(int local)
         {
             if (!string.IsNullOrWhiteSpace(local.ToString()))
                 return Ok(await new Local().GetAdmins(local));
             return BadRequest("Parameters are null");
-        }
+        }*/
 
         [Authorize(Roles = "adm")]
         [HttpPost("ConnectAdmin")]

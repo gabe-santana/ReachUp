@@ -1,10 +1,13 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ReachUp;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
@@ -12,6 +15,13 @@ namespace ReachUpWebAPI.Controllers
     [ApiController]
     public class CommuniqueController : ControllerBase
     {
+        private readonly IWebHostEnvironment _environment;
+
+        public CommuniqueController(IWebHostEnvironment environment)
+        {
+            _environment = environment;
+        }
+
         [Authorize(Roles = "cli")]
         [HttpGet("Receive")]
         public async Task<IActionResult> Receive([FromBody] User user, [FromQuery] int local) 
@@ -57,6 +67,9 @@ namespace ReachUpWebAPI.Controllers
             } 
             return results;          
         }
+
+        // Get Image
+        // Upload Image
 
         [Authorize (Roles = "loj,adm")]
         [HttpPatch]

@@ -17,14 +17,14 @@ namespace ReachUpWebAPI.Controllers
            return Ok(await new BeaconType().GetAll());
         }
 
-        [Authorize(Roles = "dev")]
+        /*[Authorize(Roles = "dev")]
         [HttpGet]
         public async Task<IActionResult> Get(int id)
         {
            if (!string.IsNullOrWhiteSpace(id.ToString()))
                return Ok(await new BeaconType().Get(id));
            return BadRequest("Parameters are null");
-        }
+        }*/
 
         [Authorize(Roles = "dev")]
         [HttpPost]
@@ -49,7 +49,7 @@ namespace ReachUpWebAPI.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             if (!string.IsNullOrWhiteSpace(id.ToString()))
-                return Ok(await new beaconType().Delete(id));
+                return Ok(await new BeaconType().Delete(id));
             return BadRequest("Parameters are null");
         }
     }
