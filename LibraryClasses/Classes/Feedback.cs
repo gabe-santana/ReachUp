@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ReachUp
@@ -10,8 +11,8 @@ namespace ReachUp
     public class Feedback : clsDatabase
     {
         #region Properties
-        public int FeedbackId { get; set; }
-        public ushort Type { get; set; }
+        [JsonIgnore] public int FeedbackId { get; set; }
+        [JsonIgnore] public ushort Type { get; set; }
         public User FeedbackUser { get; set; }
         public string Description { get; set; }
         public DateTime FeedbackDate { get; set; }
@@ -130,10 +131,11 @@ namespace ReachUp
             return null;
         }
 
-        public async Task<Feedback> Get(int id) 
+        public async Task<Feedback> Get(int id, int type) 
         {
             if (base.DQLCommand(Procedure.pegarFeedback, ref this.Data, new string[,] {
-                {"pFeedback", id.ToString()}
+                {"pFeedback", id.ToString()},
+                {"pTipo", type.ToString()}
             }))
             {
                 Feedback feedback = null;

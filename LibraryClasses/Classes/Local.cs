@@ -14,13 +14,16 @@ namespace ReachUp
         #region Properties 
         public int IdLocal { get; set; }
         [JsonIgnore] public int Type { get; set; }
+        public string TypeName { get;set; }
         public string Name { get; set; }
         public ushort Floor { get; set; }
-        public List<User> Admins { get;set; }
-        public string DescriptionSubCategories { get; set; }
-        public string StrOPHour { get; set; }
-        public string StrEHour { get; set; }
-        public List<Beacon> Beacons = new List<Beacon>();
+        [JsonIgnore] public List<User> Admins { get;set; }
+        [JsonIgnore] public string DescriptionSubCategories { get; set; }
+        [JsonIgnore] public string StrOPHour { get; set; }
+        [JsonIgnore] public string StrEHour { get; set; }
+        //public List<Beacon> Beacons = new List<Beacon>();
+        public List<Beacon> Beacons  {get;set;}
+        public string BeaconsUUID {get;set;}
 
 
         private List<SubCategory> SubCategories = new List<SubCategory>();
@@ -60,6 +63,42 @@ namespace ReachUp
         }
 
         /// <summary>
+        ///  Connect constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <param name="floor"></param>
+        public Local(int id, int type, string name, ushort floor) 
+        :base()
+        {
+           this.IdLocal = id;
+           this.Type = type;
+           this.Name = name;
+           this.Floor = floor; 
+        }
+
+        /// <summary>
+        ///  Get by Id constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="typeName"></param>
+        /// <param name="name"></param>
+        /// <param name="floor"></param>
+        /// <param name="beacons"></param>
+        public Local(int id, string typeName, string name, ushort floor,
+        string beaconsUUID) 
+        :base()
+        {
+           this.IdLocal = id;
+           this.TypeName = typeName;
+           this.Name = name;
+           this.Floor = floor; 
+           this.BeaconsUUID = beaconsUUID;
+        }
+        
+        
+        /// <summary>
         ///  Developer constructor (mapMaker)
         /// </summary>
         /// <param name="id"></param>
@@ -79,7 +118,7 @@ namespace ReachUp
            this.Beacons = beacons;
         }
 
-        #endregion
+        #endregion;
 
         #region Public Methods
         public Task<Local> ConnectBeaconLocal(string uuid)
@@ -91,19 +130,19 @@ namespace ReachUp
             {
                 if (this.Data.HasRows)
                 {
+                    Local local = null;
                     while (this.Data.Read())
                     {
-                        Local local = new Local(
+                        local = new Local(
                             int.Parse(this.Data["cd_local"].ToString()),
                             int.Parse(this.Data["cd_tipo_local"].ToString()),
                             this.Data["nm_local"].ToString(),
-                            ushort.Parse(this.Data["cd_andar"].ToString()),
-                            this.Data["sub_categorias"].ToString().Replace(",",", ")
+                            ushort.Parse(this.Data["cd_andar"].ToString())
                         );
-                        this.Data.Close();
-                        base.Disconnect();
-                        return Task.FromResult(local);
                     }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return Task.FromResult(local);
                 }
                 this.Data.Close();
                 base.Disconnect();
@@ -156,32 +195,23 @@ namespace ReachUp
                 Local local = null;
                 if (this.Data.HasRows)
                 {
-                    try
+                    while (this.Data.Read())
                     {
-                        while (this.Data.Read())
-                        {
-                            local = new Local(
-                                id, int.Parse(this.Data["cd_tipo_local"].ToString()),
-                                this.Data["nm_local"].ToString(), 
-                                ushort.Parse(this.Data["cd_andar"].ToString()),
-                                null,
-                                this.Data["Beacons"].ToString());
-                            local.StrOPHour = this.Data["hr_abertura"].ToString();
-                            local.StrEHour = this.Data["hr_fechamento"].ToString();
-                           
-
-                            this.Data.Close();
-                            base.Disconnect();
-                               return Task.FromResult(local);
-                        }
+                        local = new Local(
+                            id, this.Data["nm_tipo_local"].ToString(),
+                            this.Data["nm_local"].ToString(), 
+                            ushort.Parse(this.Data["cd_andar"].ToString()),
+                            this.Data["Beacons"].ToString()
+                           );
                     }
-                    catch(MySqlException e) { Console.WriteLine(e); }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return Task.FromResult(local);
                 }
-               
-
-             
+                this.Data.Close();
+                base.Disconnect();
+                return null;
             }
-
             return null;
         }
 
