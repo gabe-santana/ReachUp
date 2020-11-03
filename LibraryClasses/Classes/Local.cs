@@ -185,7 +185,7 @@ namespace ReachUp
             return null;
         }
 
-        public Task<Local> ByBeacon(string uuid)
+        /*public Task<Local> ByBeacon(string uuid)
         {
            if (base.DQLCommand(Procedure.pegarLocalBeacon, ref this.Data, 
                new string[,] {
@@ -219,7 +219,7 @@ namespace ReachUp
                    }
                }
                return null;
-        }
+        }*/
 
         public Task<List<Local>> GetAll(string type)
         {
@@ -363,7 +363,7 @@ namespace ReachUp
                 return Task.FromResult(false);
         }
 
-        public Task<List<User>> GetAdmins(int local)
+        /*public Task<List<User>> GetAdmins(int local)
         {
              if (base.DQLCommand(Procedure.lojistasLoja, ref this.Data,
                 new string[,] {
@@ -389,7 +389,7 @@ namespace ReachUp
                 return Task.FromResult(Admins);
             }
             return null;
-        }
+        }*/
 
         public Task<bool> ConnectAdmin(string email, int local)
         {

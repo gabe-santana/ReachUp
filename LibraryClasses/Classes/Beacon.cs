@@ -55,7 +55,7 @@ namespace ReachUp
         #endregion
 
         #region Methods
-        public async Task<Beacon> Get(string uuid) 
+        public Task<Beacon> Get(string uuid) 
         {
             if (base.DQLCommand(Procedure.pegarBeacon, ref this.Data,
                     new string[,] {
@@ -75,7 +75,7 @@ namespace ReachUp
                 }
                 this.Data.Close();
                 base.Disconnect();
-                return beacon;
+                return Task.FromResult(beacon);
             }
 
             return null;

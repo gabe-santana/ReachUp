@@ -65,7 +65,7 @@ namespace ReachUp
             return null;
         }
 
-        public Task<BeaconType> Get(int id)
+        /*public Task<BeaconType> Get(int id)
         {
            if (base.DQLCommand(
                $"SELECT * FROM tipo_beacon WHERE cd_tipo_beacon ={id}",
@@ -88,7 +88,7 @@ namespace ReachUp
                return Task.FromResult(beaconType);
            }
            return null;
-        }
+        }*/
 
         public Task<bool> Add()
         {
@@ -104,7 +104,7 @@ namespace ReachUp
         public Task<bool> Update()
         {
             if (base.DMLCommand(
-                $"UPDATE tipo_beacon SET cd_tipo_beacon={this.Id}, nm_tipo_beacon={this.Name}"
+                $"UPDATE tipo_beacon SET nm_tipo_beacon={this.Name} WHERE cd_tipo_beacon={this.Id}"
             ))
             {
                return Task.FromResult(true);
