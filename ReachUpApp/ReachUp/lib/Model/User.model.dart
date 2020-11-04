@@ -1,43 +1,38 @@
+import 'package:ReachUp/Model/Local.dart';
+
 class User {
-  String id;
-  String name;
   String email;
+  String name;
+  String password;
   String role;
+  Local admLocal;
   String token;
 
-  User(this.id, this.name, this.email, this.role, this.token);
+  User(
+      {this.email,
+      this.name,
+      this.password,
+      this.role,
+      this.admLocal,
+      this.token});
 
   User.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
     email = json['email'];
+    name = json['name'];
+    password = json['password'];
     role = json['role'];
+    admLocal = json['admLocal'];
     token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
     data['email'] = this.email;
+    data['name'] = this.name;
+    data['password'] = this.password;
     data['role'] = this.role;
+    data['admLocal'] = this.admLocal;
     data['token'] = this.token;
     return data;
   }
-
-  User Get(){
-    return User(
-      "0",
-      "José",
-      "jose@email.com",
-      "cli",
-      "xpto"
-    );
-  }
-  bool login()
-  {
-    return true;
-  }
-
-  void logout(){}
 }
