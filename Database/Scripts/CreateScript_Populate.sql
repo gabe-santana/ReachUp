@@ -336,6 +336,21 @@ CALL cadastrarUsuario("doloresfuertesdabarriga@email.com", "Dolores Fuertes da B
 CALL cadastrarUsuario("inocenciogoes@email.com", "Inocêncio Goes", "125463", "cli", null);
 CALL cadastrarUsuario("leandrokarmal@email.com", "Leandro Karmal", "125463", "cli", null);
 
+/* Ordem: SubCategoria -> Categoria */
+
+CALL definirPreferencia("leandrokarmal@email.com", 0, 0); 
+CALL definirPreferencia("leandrokarmal@email.com", 0, 1); 
+CALL definirPreferencia("leandrokarmal@email.com", 0, 2); 
+CALL definirPreferencia("leandrokarmal@email.com", 2, 1); 
+CALL definirPreferencia("leandrokarmal@email.com", 6, 4); 
+CALL definirPreferencia("leandrokarmal@email.com", 7, 4); 
+
+CALL definirPreferencia("inocenciogoes@email.com", 1, 4); 
+CALL definirPreferencia("inocenciogoes@email.com", 2, 4); 
+
+CALL clientePrefere("leandrokarmal@email.com");
+CALL clientePrefere("inocenciogoes@email.com");
+
 CALL criarFeedback(5, "jonathanjoestar@email.com", "Os corredores são bem espaçosos, mas em alguns pontos não há piso tátil.", 3);
 CALL criarFeedback(6, "jonathanjoestar@email.com", "Os corredores entre as mesas são muito apertados, eu sempre acabo esbarrando em algumas.", 2);
 CALL criarFeedback(8, "jonathanjoestar@email.com", "A praça de lazer no último andar é muito aconchegante e acessível, gostei", 5);

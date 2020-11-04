@@ -194,19 +194,18 @@ BEGIN
 	SELECT 
 	cl.nm_email_cliente , 
 	cl.nm_cliente,
-	group_concat(c.cd_categoria) as "cd_categories" , 
-	group_concat(c.nm_categoria) as "nm_categories" , 
-	group_concat(sc.cd_sub_categoria) as "cd_sub_categories", 
-	group_concat(sc.nm_sub_categoria) as "nm_sub_categories"  
+	pc.cd_categoria, pc.cd_sub_categoria,
+    sc.nm_sub_categoria
 	FROM preferencia_cliente AS pc 
 	INNER JOIN sub_categoria AS sc 
 	ON pc.cd_sub_categoria = sc.cd_sub_categoria 
+    AND pc.cd_categoria = sc.cd_categoria
 	INNER JOIN cliente as cl
 	ON cl.nm_email_cliente = pc.nm_email_cliente
 	INNER JOIN categoria AS c 
 	ON sc.cd_categoria = c.cd_categoria 
 	WHERE pc.nm_email_cliente = pEmail
-	GROUP BY c.cd_categoria AND  sc.cd_sub_categoria; 
+	ORDER BY pc.cd_categoria;
 END$$
 
 DROP PROCEDURE IF EXISTS criarFeedback$$
