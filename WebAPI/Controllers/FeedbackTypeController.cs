@@ -25,5 +25,24 @@ namespace ReachUpWebAPI.Controllers
                 return Ok(await feedbackType.Add());
             return BadRequest("Parameters are null");
         }
+
+        [Authorize(Roles = "adm")]
+        [HttpPatch]
+        public async Task<IActionResult> Patch([FromBody] FeedbackType feedbackType)
+        {
+            if (feedbackType != null)
+                return Ok(await feedbackType.Update());
+            return BadRequest("Parameters are null");
+        }
+
+        [Authorize(Roles = "adm")]
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (!string.IsNullOrWhiteSpace(id.ToString()))
+                return Ok(await new FeedbackType().Delete(id));
+            return BadRequest("Parameters are null");
+        }
+
     }
 }

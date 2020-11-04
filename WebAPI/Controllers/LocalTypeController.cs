@@ -25,5 +25,23 @@ namespace ReachUpWebAPI.Controllers
                 return Ok(await localType.Add());
             return BadRequest("Parameters are null");
         }
+
+        [Authorize(Roles = "adm")]
+        [HttpPatch]
+        public async Task<IActionResult> Patch([FromBody] LocalType localType)
+        {
+            if (localType != null)
+                return Ok(await localType.Update());
+            return BadRequest("Parameters are null");
+        }
+
+        [Authorize(Roles = "adm")]
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (!string.IsNullOrWhiteSpace(id.ToString()))
+                return Ok(await new LocalType().Delete(id));
+            return BadRequest("Parameters are null");
+        }
     }
 }

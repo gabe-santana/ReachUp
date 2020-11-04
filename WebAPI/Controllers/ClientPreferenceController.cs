@@ -22,10 +22,10 @@ namespace ReachUpWebAPI.Controllers
 
         [Authorize (Roles = "cli")]
         [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromQuery] string email, [FromBody] ClientPreference clientPreference)
+        public async Task<IActionResult> Add([FromBody] ClientPreference clientPreference)
         {
-            if (!string.IsNullOrWhiteSpace(email) && clientPreference != null)
-              return  Ok(await clientPreference.Add(email));
+            if (clientPreference != null)
+              return  Ok(await clientPreference.Add());
            return BadRequest("Parameters are null");
         }
 
