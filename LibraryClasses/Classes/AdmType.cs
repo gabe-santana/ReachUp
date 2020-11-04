@@ -67,12 +67,31 @@ namespace ReachUp
 
         public Task<bool> Add()
         {
-            if (base.DMLCommand(
-                $"INSERT INTO tipo_administrador VALUES ({this.Id}, {this.Name})"
+            if (base.DQLCommand(
+                $"SELECT COUNT(*) as Count FROM tipo_administrador",
+                ref this.Data
             ))
             {
-               return Task.FromResult(true);
+                int Count = 0;
+                while (this.Data.Read()) 
+                {
+                   Count = int.Parse(this.Data["Count"].ToString());
+                }
+
+               if (base.DMLCommand(
+                $"INSERT INTO tipo_administrador VALUES ({Count}, {this.Name})"
+                ))
+                {
+                   this.Data.Close();
+                   base.Disconnect();
+                   return Task.FromResult(true);
+                }
+                this.Data.Close();
+                base.Disconnect();
+                return Task.FromResult(false);
             }
+            this.Data.Close();
+            base.Disconnect();
             return Task.FromResult(false);
         }
 

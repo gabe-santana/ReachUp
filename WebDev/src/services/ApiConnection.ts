@@ -1,14 +1,34 @@
-import { UserToken } from "../Models/UserToken";
 import { ApiConfig } from "./ApiConfig";
 
 export module ApiConnection {
   
     export class clsApiConnection extends ApiConfig.clsApiConfig {
-      private readonly _token : string;
       constructor() {
           super();
-          var tokenAcess = new UserToken.clsUserToken();
-          //this._token = tokenAcess.getToken();
+       }
+
+       private getToken(name : string) : string
+       {
+          var cookies = document.cookie,
+              prefix = name + '=',
+              begin = cookies.indexOf('; ' + prefix);
+
+          if (begin == -1) {
+            begin = cookies.indexOf(prefix);
+
+            if (begin != 0) {
+              return null;
+            }
+          } else {
+             begin += 2;
+          }
+
+          var end = cookies.indexOf(';', begin);
+
+          if (end == -1) {
+            end = cookies.length;
+          }
+          return unescape(cookies.substring(begin + prefix.length, end));
        }
 
        public async httpGet(str : string, options : Array<string> = [])
@@ -21,7 +41,7 @@ export module ApiConnection {
                 'Accept-Ranges': 'bytes',
                 'Content-Type':'application/json',
                 'Pragma': 'no-cache',
-                'Authorization': 'Bearer ' + this._token,
+                'Authorization': 'Bearer ' + this.getToken('userToken'),
                 'X-Custom-Header': 'ProcessThisImmediately',
                 'WWW-Authenticate': 'Basic',
                 'Connection': 'close',
@@ -47,7 +67,7 @@ export module ApiConnection {
                   'Accept-Ranges': 'bytes',
                   'Content-Type':'application/json',
                   'Pragma': 'no-cache',
-                  'Authorization': 'Bearer ' + this._token,
+                  'Authorization': 'Bearer ' + this.getToken('userToken'),
                   'X-Custom-Header': 'ProcessThisImmediately',
                   'WWW-Authenticate': 'Basic',
                   'Connection': 'close',
@@ -74,7 +94,7 @@ export module ApiConnection {
                 'Accept-Ranges': 'bytes',
                 'Content-Type':'application/json',
                 'Pragma': 'no-cache',
-                'Authorization': 'Bearer ' + this._token,
+                'Authorization': 'Bearer ' + this.getToken('userToken'),
                 'X-Custom-Header': 'ProcessThisImmediately',
                 'WWW-Authenticate': 'Basic',
                 'Connection': 'close',
@@ -101,7 +121,7 @@ export module ApiConnection {
                 'Accept-Ranges': 'bytes',
                 'Content-Type':'application/json',
                 'Pragma': 'no-cache',
-                'Authorization': 'Bearer ' + this._token,
+                'Authorization': 'Bearer ' + this.getToken('userToken'),
                 'X-Custom-Header': 'ProcessThisImmediately',
                 'WWW-Authenticate': 'Basic',
                 'Connection': 'close',
@@ -127,7 +147,7 @@ export module ApiConnection {
                 'Accept-Ranges': 'bytes',
                 'Content-Type':'application/json',
                 'Pragma': 'no-cache',
-                'Authorization': 'Bearer ' + this._token,
+                'Authorization': 'Bearer ' + this.getToken('userToken'),
                 'X-Custom-Header': 'ProcessThisImmediately',
                 'WWW-Authenticate': 'Basic',
                 'Connection': 'close',
@@ -143,7 +163,7 @@ export module ApiConnection {
 
        }
 
-       public async httpGetBlob(str : string, options : Array<string> = []) : Promise<Blob>
+      /* public async httpGetBlob(str : string, options : Array<string> = []) : Promise<Blob>
        {
           const response = await fetch(this.url() + str, {
               mode: 'cors',
@@ -153,7 +173,7 @@ export module ApiConnection {
                 'Accept-Ranges': 'bytes',
                 'Content-Type':'application/octet-stream',
                 'Pragma': 'no-cache',
-                'Authorization': 'Bearer ' + this._token,
+                'Authorization': 'Bearer ' + this.getToken('userToken'),
                 'X-Custom-Header': 'ProcessThisImmediately',
                 'WWW-Authenticate': 'Basic',
                 'Connection': 'close',
@@ -179,7 +199,7 @@ export module ApiConnection {
                 'Accept-Ranges': 'bytes',
                 'Content-Type':'application/octet-stream',
                 'Pragma': 'no-cache',
-                'Authorization': 'Bearer ' + this._token,
+                'Authorization': 'Bearer ' + this.getToken('userToken'),
                 'X-Custom-Header': 'ProcessThisImmediately',
                 'WWW-Authenticate': 'Basic',
                 'Connection': 'close',
@@ -193,6 +213,6 @@ export module ApiConnection {
             const json = await response.json();
             return json;
 
-       }
+       } */
    }
 }

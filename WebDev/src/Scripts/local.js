@@ -1,8 +1,34 @@
-///<reference path="../Controllers/LocalController.ts"/>
-
 import { LocalController } from '../Controllers/LocalController.ts';
 
-$( async () => {
+$(() => {
+
+  document.cookie = `userToken=TOKEN_DJ`
+  alert(document.cookie);
+  //main();
+
+  function main() { document.cookie = `userToken=TOKEN_DJ`;
+
+  var cookies = document.cookie,
+              prefix = 'userToken' + '=',
+              begin = cookies.indexOf('; ' + prefix);
+
+          if (begin == -1) {
+            begin = cookies.indexOf(prefix);
+
+            if (begin != 0) {
+              return null;
+            }
+          } else {
+             begin += 2;
+          }
+
+          var end = cookies.indexOf(';', begin);
+
+          if (end == -1) {
+            end = cookies.length;
+          }
+          console.log(cookies.substring(begin + prefix.length, end));
+        }
 
    await getAll($("#cmbLocalType").val());
 
@@ -52,5 +78,9 @@ $( async () => {
         })
         content.append(row);
       })
+    })
+
+    $("#adicionarLocal").click(() => {
+      window.location.href = "../../public/adicionarLocal.html";
     })
 })

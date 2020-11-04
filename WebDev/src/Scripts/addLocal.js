@@ -1,20 +1,31 @@
 import { LocalController } from '../Controllers/LocalController';
+import { BeaconController } from '../Controllers/BeaconController';
+import { BeaconType } from '../Models/BeaconType';
+import { Local } from '../Models/Local';
 
 $(() => {
 
-  $("#adicionar").change(async () => {
+  $('#btnGuardarLocal').click(() => {
+    const localsList = $('#localsList');
+    localsList.append();
+  })
 
-    const type = '',
-          name = '',
-          floor = 0;
+  $("#btnAdicionar").change(async () => {
+
+    const type = $('#cmbLocalType').val(),
+          name = $('#txtLocalName').val(),
+          floor = $('#txtLocalFloor').val();
     const clsLocal = new LocalController.clsLocalController();
-    const response = await clsLocal.Add(type, name, floor);
+    
+    if (await clsLocal.Add(type, name, floor))
+    {
+       const uuid = $('#txtLocalBeacon').val();
+       const clsBeacon = new BeaconController.clsBeaconController();
 
-    if (response){
-      alert('Local adicionado com sucesso!');
-      return;
+       /*if (await clsBeacon.Post(uuid, 
+             new BeaconType.clsBeaconType(0),
+             new Local.clsLocal()))*/
     }
-    alert ('Erro ao adicionar local!');
-    return;
+    return 'erro ao add local';
   })
 })

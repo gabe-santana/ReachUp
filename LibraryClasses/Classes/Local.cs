@@ -9,8 +9,6 @@ namespace ReachUp
 {
     public class Local : clsDatabase
     {
-
-
         #region Properties 
         public int IdLocal { get; set; }
         [JsonIgnore] public int Type { get; set; }

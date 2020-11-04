@@ -1,8 +1,21 @@
-///<reference path="../Controllers/AccountController.ts"/>
-
 import { AccountController } from '../Controllers/AccountController';
+import { clsUserToken } from '../Scripts/userToken';
 
 $(() => {
+  
+    deleteCookies();
+    
+    function deleteCookies()
+    {
+       var cookies = document.cookie.split(';');
+
+       for (let i = 0; i < cookies.length; i++) {
+         let cookie = cookies[i];
+         let eqPos = cookie.indexOf('=');
+         let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+         document.cookie = name + '=';
+        }
+    }
 
     async function login(email, password)
     {
@@ -27,9 +40,12 @@ $(() => {
         (domain.search('.')!=-1) && 
         (domain.indexOf('.')>=-1) && 
         (domain.lastIndexOf('.')==-1 < domain.length -1)) {
-           
-          if (await login (email, password)){
-            window.location.replace('boss.html');
+
+          const response = await login (email, password);
+
+          if (typeof response.token != undefined) {
+            document.cookie = `userToken=${response.token}`;
+            window.location.replace('../../public/boss.html');
           }
         }
         alert("Email inválido!");

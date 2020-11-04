@@ -9,6 +9,7 @@ $( async () => {
 
    localTypes.forEach(localType => {
      const option = document.createElement('option');
+     option.innerHTML = localType.id;
      option.innerText = localType.name;
      cmbTypes.append(option);
    })

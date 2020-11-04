@@ -2,11 +2,9 @@ export module BeaconType {
    export class clsBeaconType  {
 
     public Id : number;
-    public Name: string;
     
-    constructor(id : number, name : string){
+    constructor(id : number){
       this.Id = id;
-      this.Name = name;
     }
   }
 }

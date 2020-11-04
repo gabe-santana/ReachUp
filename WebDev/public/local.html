@@ -60,7 +60,7 @@
       <div class="sidebar-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="#">
+            <a class="nav-link" href="boss.html">
               <!--<span class="nav-icon" data-feather="home"></span>
               Home <span class="sr-only">(current)</span>-->
               <span class="fas fa-home"></span>
@@ -68,7 +68,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="local.html">
+            <a class="nav-link active" href="#">
               <!--<span class="nav-icon" data-feather="shopping-cart"></span>-->
               <span class="fas fa-map-marker-alt"></span>
               Locais
@@ -89,7 +89,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="rating.html">
               <!--<span class="nav-icon" data-feather="bar-chart-2"></span>-->
               <span class="fas fa-star"></span>
               Avaliações
@@ -148,9 +148,9 @@
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
       <br>
-      <form action="adicionarLocal.html">
-        <button id="adicionarLocal" type="submit" style="margin-left: -5px;"><span class="fas fa-plus"></span>  Adicionar</button>
-      </form>
+        <a href="adicionarLocal.html">
+          <button id="adicionarLocal" type="button" style="margin-left: -5px;"><span class="fas fa-plus"></span>  Adicionar</button>
+          </a>
       <section class="areaFiltro">
         <p style="font-size: 16px;">Filtre a exibição:</p>
         <select id="cmbLocalType">
@@ -169,15 +169,15 @@
               <th>Beacon principal</th>
             </tr>
           </thead>
-         <!-- <tbody>
+         <tbody>
             <tr>
               <td>1,001</td>
-              <td>Lorem</td>
+              <td>Lorem</td>.
               <td>ipsum</td>
               <td>dolor</td>
               <td>sit</td>
             </tr>
-          </tbody> -->
+          </tbody> 
         </table>
       </div>
     </main>
@@ -188,9 +188,8 @@
    <script src="../src/Scripts/jquery-3.5.1.min.js"></script>
    <script src="../src/Scripts/bootstrap.min.js"></script>
    <script src="../build/main.bundle.js"></script>
-   <script type="module" src="../src/Controllers/LocalTypeController.ts"></script>
-   <script type="module" src="../src/Controllers/LocalController.ts"></script>
    <script type="module" src="../src/Scripts/localType.js"></script>
    <script type="module" src="../src/Scripts/local.js"></script>
     </body>
+    
 </html>
