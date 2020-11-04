@@ -28,6 +28,12 @@ namespace ReachUp
             this.CategoryName = Name;
             this.CategoryDescription = Description;
         }
+
+        public Category(string Name, string Description) : base() 
+        {
+            this.CategoryName = Name;
+            this.CategoryDescription = Description;
+        }
         #endregion
         #region Methods
 
@@ -46,12 +52,14 @@ namespace ReachUp
                         category = new Category(int.Parse(this.Data["cd_categoria"].ToString()), 
                             this.Data["nm_categoria"].ToString(), this.Data["ds_categoria"].ToString());
                     }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return Task.FromResult(category);
                 }
 
                 this.Data.Close();
                 base.Disconnect();
-
-                return Task.FromResult(category);
+                return null;
             }
             return null;
         }
@@ -88,7 +96,6 @@ namespace ReachUp
         public Task<bool> Add() 
         {
             if (base.DMLCommand(Procedure.cadastrarCategoria, new string[,] {
-                {"pCategoria", this.CategoryId.ToString()},
                 {"pNome", this.CategoryName},
                 {"pDs", this.CategoryDescription}
             }))
@@ -96,6 +103,7 @@ namespace ReachUp
                 base.Disconnect();
                 return Task.FromResult(true);
             }
+ 
             base.Disconnect();
             return Task.FromResult(false);
         }

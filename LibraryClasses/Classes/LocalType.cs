@@ -67,8 +67,38 @@ namespace ReachUp
 
         public Task<bool> Add()
         {
+            if (base.DQLCommand(
+                $"SELECT COUNT(*) as Count FROM tipo_local",
+                ref this.Data
+            ))
+            {
+                int Count = 0;
+                while (this.Data.Read()) 
+                {
+                   Count = int.Parse(this.Data["Count"].ToString());
+                }
+
+               if (base.DMLCommand(
+                $"INSERT INTO tipo_local VALUES ({Count}, {this.Name})"
+                ))
+                {
+                   this.Data.Close();
+                   base.Disconnect();
+                   return Task.FromResult(true);
+                }
+                this.Data.Close();
+                base.Disconnect();
+                return Task.FromResult(false);
+            }
+            this.Data.Close();
+            base.Disconnect();
+            return Task.FromResult(false);
+        }
+
+        public Task<bool> Update()
+        {
             if (base.DMLCommand(
-                $"INSERT INTO tipo_local VALUES ({this.Id}, {this.Name})"
+                $"UPDATE tipo_local SET nm_tipo_local={this.Name} WHERE cd_tipo_local={this.Id}"
             ))
             {
                return Task.FromResult(true);
@@ -76,6 +106,22 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        public Task<bool> Delete(int id)
+        {
+            if (base.DMLCommand(
+                $"DELETE FROM local WHERE cd_tipo_local={id}"
+            ))
+            {
+               if (base.DMLCommand(
+                   $"DELETE FROM tipo_local WHERE cd_tipo_local={id}"
+               ))
+               {
+                  return Task.FromResult(true);
+               }
+               return Task.FromResult(false);
+            }
+            return Task.FromResult(false);
+        }
         #endregion
 
     }

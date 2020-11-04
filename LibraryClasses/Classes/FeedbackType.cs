@@ -67,11 +67,58 @@ namespace ReachUp
 
         public Task<bool> Add()
         {
+            if (base.DQLCommand(
+                $"SELECT COUNT(*) as Count FROM tipo_feedback",
+                ref this.Data
+            ))
+            {
+                int Count = 0;
+                while (this.Data.Read()) 
+                {
+                   Count = int.Parse(this.Data["Count"].ToString());
+                }
+
+               if (base.DMLCommand(
+                $"INSERT INTO tipo_feedback VALUES ({Count}, {this.Name})"
+                ))
+                {
+                   this.Data.Close();
+                   base.Disconnect();
+                   return Task.FromResult(true);
+                }
+                this.Data.Close();
+                base.Disconnect();
+                return Task.FromResult(false);
+            }
+            this.Data.Close();
+            base.Disconnect();
+            return Task.FromResult(false);
+        }
+
+        public Task<bool> Update()
+        {
             if (base.DMLCommand(
-                $"INSERT INTO tipo_feedback VALUES ({this.Id}, {this.Name})"
+                $"UPDATE tipo_feedback SET nm_tipo_feedback={this.Name} WHERE cd_tipo_feedback={this.Id}"
             ))
             {
                return Task.FromResult(true);
+            }
+            return Task.FromResult(false);
+        }
+
+        public Task<bool> Delete(int id)
+        {
+            if (base.DMLCommand(
+                $"DELETE FROM feedback WHERE cd_tipo_feedback={id}"
+            ))
+            {
+               if (base.DMLCommand(
+                   $"DELETE FROM tipo_feedback WHERE cd_tipo_feedback={id}"
+               ))
+               {
+                  return Task.FromResult(true);
+               }
+               return Task.FromResult(false);
             }
             return Task.FromResult(false);
         }

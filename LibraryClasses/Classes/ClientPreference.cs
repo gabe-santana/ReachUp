@@ -11,6 +11,7 @@ namespace ReachUp
     {
         #region Properties
         public List<SubCategory> SubCategories = new List<SubCategory>();
+        public string ClientEmail { get; set; }
         #endregion
 
         #region Fields
@@ -19,15 +20,18 @@ namespace ReachUp
         #region Constructor
         public ClientPreference() : base() { }
 
-        public ClientPreference(List<SubCategory> SubCategories) : base() 
+        public ClientPreference(List<SubCategory> SubCategories, 
+         string clientEmail) : base() 
         {
             this.SubCategories = SubCategories;
+            this.ClientEmail = clientEmail;
         }
         #endregion
 
 
         #region Methods
-        public async Task<ClientPreference> GetAll(string email) 
+       
+        public async Task<List<SubCategory>> GetAll(string email) 
         {
             if (base.DQLCommand(Procedure.clientePrefere, ref this.Data, 
                 new string[,] {
@@ -36,41 +40,38 @@ namespace ReachUp
             {
                 if (this.Data.HasRows)
                 {
+                    List<SubCategory> subCategories = new List<SubCategory>();
                     while (this.Data.Read())
                     {
-                        string[] cd_subcategories = this.Data["cd_sub_categories"].ToString().Split(',');
-                        string[] cd_categories = this.Data["cd_categories"].ToString().Split(',');
-                        string[] nm_subcategories = this.Data["nm_sub_categories"].ToString().Split(',');
-                        List<SubCategory> subCategories = new List<SubCategory>();
-                        int i = 0;
-                        foreach (var cd_subcategory in cd_subcategories)
-                        {
-                            subCategories.Add(new SubCategory(
-                                    int.Parse(cd_subcategory),
-                                    await new Category().Get(int.Parse(cd_categories[i])),
-                                    nm_subcategories[i]
-                                ));
-                            i++;
-                        }
-                     
-                        this.Data.Close();
-                        base.Disconnect();
-                        return new ClientPreference(subCategories); 
+                        subCategories.Add(new SubCategory(
+                            int.Parse(this.Data["cd_sub_categoria"].ToString()),
+                            await new Category().Get(
+                                int.Parse(this.Data["cd_categoria"].ToString())
+                            ),
+                            this.Data["nm_sub_categoria"].ToString()
+                          )
+                       );
                     }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return subCategories;
                 }    
+                this.Data.Close();
+                base.Disconnect();
+                return null;
             }
             this.Data.Close();
             base.Disconnect();
             return null;
         }
 
-        public Task<bool> Add(string email)
+        public Task<bool> Add()
         {
             for (int i = 0; i < this.SubCategories.Count(); i++)
             {
                 if (!base.DMLCommand(Procedure.definirPreferencia, 
                    new string[,] {
-                  {"pEmail", email},
+                  {"pEmail", this.ClientEmail},
                   {"pCdSubCategoria", this.SubCategories[i].SubCategoryId.ToString()},
                   {"pCdCategoria", this.SubCategories[i].Category.CategoryId.ToString()}
                   }))
@@ -83,7 +84,7 @@ namespace ReachUp
 
         public Task<bool> Delete(string email, int category, int subCategory)
         {
-             if (base.DMLCommand(Procedure.definirPreferencia, 
+             if (base.DMLCommand(Procedure.removerPreferencia, 
                 new string[,] {
                 {"pEmail", email},
                 {"pCdSubCategoria", category.ToString()},

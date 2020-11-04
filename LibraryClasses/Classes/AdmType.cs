@@ -95,6 +95,34 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        public Task<bool> Update()
+        {
+            if (base.DMLCommand(
+                $"UPDATE tipo_administrador SET nm_tipo_administrador={this.Name} WHERE cd_tipo_administrador={this.Id}"
+            ))
+            {
+               return Task.FromResult(true);
+            }
+            return Task.FromResult(false);
+        }
+
+        public Task<bool> Delete(int id)
+        {
+            if (base.DMLCommand(
+                $"DELETE FROM administrador WHERE cd_tipo_administrador={id}"
+            ))
+            {
+               if (base.DMLCommand(
+                   $"DELETE FROM tipo_administrador WHERE cd_tipo_administrador={id}"
+               ))
+               {
+                  return Task.FromResult(true);
+               }
+               return Task.FromResult(false);
+            }
+            return Task.FromResult(false);
+        }
+
         #endregion
 
     }
