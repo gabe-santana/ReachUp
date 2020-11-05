@@ -70,6 +70,58 @@ namespace ReachUp
 
         #region Public Methods
 
+        public Task<bool> CheckEmail(string email, string role)
+        {
+
+           if (role == "cli")
+           {
+              if (base.DQLCommand(
+                $"SELECT COUNT(*) as Count from cliente WHERE nm_email_cliente={email}",
+                ref this.Data
+              ))
+              {
+                 if (this.Data.HasRows)
+                 {
+                    if (this.Data.Read())
+                    {
+                       if (int.Parse(this.Data["Count"].ToString()) == 1)
+                       {
+                          return Task.FromResult(true);
+                       }
+                       return Task.FromResult(false);
+                    }
+                 }
+                 base.Disconnect();
+                 return null;
+              }
+              return null;
+           }
+           else if (role == "loj" || role == "adm" || role == "dev")
+           {
+              if (base.DQLCommand(
+                $"SELECT COUNT(*) as Count from administrador WHERE nm_email_administrador={email}",
+                ref this.Data
+              ))
+              {
+                 if (this.Data.HasRows)
+                 {
+                    if (this.Data.Read())
+                    {
+                       if (int.Parse(this.Data["Count"].ToString()) == 1)
+                       {
+                          return Task.FromResult(true);
+                       }
+                       return Task.FromResult(false);
+                    }
+                 }
+                 base.Disconnect();
+                 return null;
+              }
+              return null;
+           }
+           return null;
+        }
+
         public bool Login() 
         {
             if (base.DQLCommand(Procedure.logarUsuario,
