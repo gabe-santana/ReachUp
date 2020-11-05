@@ -48,20 +48,20 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        /*[Authorize]
+        [Authorize]
         [HttpGet("ByBeacon")]
         public async Task<IActionResult> ByBeacon(string uuid)
         {
             if (!string.IsNullOrWhiteSpace(uuid))
                 return Ok(await new Local().ByBeacon(uuid));
             return BadRequest("Parameters are null");
-        }*/
+        }
 
         [Authorize]
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll(string type)
+        public async Task<IActionResult> GetAll(int type)
         {
-            if (!string.IsNullOrWhiteSpace(type))
+            if (!string.IsNullOrWhiteSpace(type.ToString()))
                 return Ok(await new Local().GetAll(type));
             return BadRequest("Parameters are null");
         }
@@ -74,6 +74,17 @@ namespace ReachUpWebAPI.Controllers
                && !string.IsNullOrWhiteSpace(weekDay.ToString())
                )
                 return Ok(await new Local().FetchOpHours(local, weekDay));
+            return BadRequest("Parameters are null");
+        }
+
+        [Authorize]
+        [HttpDelete("DeleteOpHours")]
+        public async Task<IActionResult> DeleteOpHours(int local, int weekDay)
+        {
+            if (!string.IsNullOrWhiteSpace(local.ToString()) 
+               && !string.IsNullOrWhiteSpace(weekDay.ToString())
+               )
+                return Ok(await new Local().DeleteOpHours(local, weekDay));
             return BadRequest("Parameters are null");
         }
         
@@ -153,14 +164,14 @@ namespace ReachUpWebAPI.Controllers
         }
         
 
-        /*[Authorize(Roles = "adm")]
+        [Authorize(Roles = "adm")]
         [HttpPost("AddOpHours")]
-        public async Task<IActionResult> AddOpHours([FromBody] Local local, [FromBody] OpeningHours openingHours) 
+        public async Task<IActionResult> AddOpHours([FromBody] Local local) 
         {
-            if (local != null && openingHours != null)
+            if (local != null)
                 return Ok(await local.AddOpHours());
             return BadRequest("Parameters are null");
-        }*/
+        }
 
 
         [Authorize(Roles = "adm")]
