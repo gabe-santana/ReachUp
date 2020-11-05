@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using System.Text.Json;
+using System;
+
 
 namespace ReachUp
 {
@@ -148,6 +149,22 @@ namespace ReachUp
             return false;
         }
 
+        public Task<string> RecoverPassword(string email)
+        {
+           string cod = GenerateGuidCode();
+           if (base.DMLCommand(Procedure.recuperarSenha,
+               new string[,]{
+                   {"pEmail", email},
+                   {"pCdValidacao", cod}
+               }
+             
+           ))
+           {
+              return Task.FromResult(cod);
+           }
+           return Task.FromResult("Erro");
+        }
+
         public async Task<List<User>> GetAll(string role)
         {
             List<User> _return = new List<User>();
@@ -271,6 +288,16 @@ namespace ReachUp
         #endregion
 
         #region Private Methods
+
+        private static string GenerateGuidCode()
+        {
+           long i = 1;
+           foreach (byte b in Guid.NewGuid().ToByteArray())
+           {
+              i *= ((int)b + 1);
+           }
+           return string.Format("{0:x}", i - DateTime.Now.Ticks);
+        }
 
         #endregion
     }

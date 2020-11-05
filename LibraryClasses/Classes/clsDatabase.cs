@@ -72,7 +72,8 @@ namespace ReachUp
             pegarSubCategoriasComunicado,
             pegarSubcategoriasLocal,
             pegarLocalBeacon,
-            removerHorarioAlternativoLocal
+            removerHorarioAlternativoLocal,
+            recuperarSenha
         }
 
         #endregion
