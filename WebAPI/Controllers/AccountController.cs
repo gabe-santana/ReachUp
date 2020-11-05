@@ -29,6 +29,17 @@ namespace ReachUpWebAPI.Controllers
         #endregion
 
         #region Actions
+
+        [HttpGet("CheckEmail")]
+        public async Task<IActionResult> CheckEmail(string email, string role)
+        {
+            if (!string.IsNullOrWhiteSpace(email)
+                && !string.IsNullOrWhiteSpace(role)
+               )
+                return Ok(await new User().CheckEmail(email, role));
+            return BadRequest("Parameters are null");
+        }
+
         [HttpGet("Login")]
         public async Task<IActionResult> Login([FromQuery] User user) 
         {
