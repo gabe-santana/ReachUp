@@ -48,8 +48,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [HttpGet("Login")]
-        public async Task<IActionResult> Login([FromQuery] User user) 
+        [HttpGet("SignIn")]
+        public async Task<IActionResult> SignIn([FromQuery] User user) 
         {
             if (user != null)
                 if (user.Login()) 
@@ -57,6 +57,21 @@ namespace ReachUpWebAPI.Controllers
                 else
                     return NotFound();
             return BadRequest("Parameters are null");
+        }
+
+        [HttpGet("RecoverPassword")]
+        public async Task<IActionResult> RecoverPassword(string email)
+        {
+            if (!string.IsNullOrWhiteSpace(email))
+                return Ok(await new User().RecoverPassword(email));
+            return BadRequest("Parameters are null");
+        }
+
+        [HttpGet("SignOut")]
+        public async Task<IActionResult> SignOut([FromQuery] User user)
+        {
+            if (user != null)
+               return Ok(DiscardJSONWebToken(user));
         }
         #endregion
 
@@ -100,6 +115,11 @@ namespace ReachUpWebAPI.Controllers
         //    );
 
         //    return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private bool DiscardJSONWebToken(User user)
+        {
+           return false;
         }
         #endregion
     }

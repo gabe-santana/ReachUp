@@ -1,5 +1,5 @@
 {
-  "FilePath": "c:\\Users\\Guilherme\\reachup\\ReachUpWebAPI\\ReachUpWebAPI.csproj",
+  "FilePath": "c:\\Users\\Guilherme\\reachup\\WebAPI\\WebAPI.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "3.0",
@@ -14389,7 +14389,7 @@
     ],
     "CSharpLanguageVersion": 800
   },
-  "RootNamespace": "ReachUpWebAPI",
+  "RootNamespace": "WebAPI",
   "Documents": [],
   "SerializationFormat": "0.2"
 }
