@@ -233,7 +233,7 @@ END$$
 DROP PROCEDURE IF EXISTS conectarBeacon$$
 CREATE PROCEDURE conectarBeacon(pUUID varchar(36))
 BEGIN
-	SELECT tb.nm_tipo_beacon, l.cd_local, tl.cd_tipo_local, l.cd_andar, l.nm_local,
+	SELECT tb.nm_tipo_beacon, l.cd_local, tl.nm_tipo_local, l.cd_andar, l.nm_local,
 	l.cd_andar  FROM beacon AS b
 	INNER JOIN tipo_beacon AS tb
 	ON b.cd_tipo_beacon  = tb.cd_tipo_beacon
@@ -418,6 +418,14 @@ BEGIN
    VALUES (pLocal, pDia, pAbertura, pFechamento);
 END$$
 
+DROP PROCEDURE IF EXISTS removerHorarioAlternativoLocal$$
+CREATE PROCEDURE removerHorarioAlternativoLocal(pLocal int, pDia int)
+BEGIN
+   DELETE FROM horario_local
+   WHERE cd_local = pLocal
+   AND cd_dia_semana = pDia;
+END$$
+
 DROP PROCEDURE IF EXISTS defSubCategoriaLocal$$
 CREATE PROCEDURE defSubCategoriaLocal(plocal int, pCategoria int, pSubCategoria int)
 BEGIN
@@ -555,9 +563,9 @@ DROP PROCEDURE IF EXISTS pegarLocalBeacon$$
 CREATE PROCEDURE pegarLocalBeacon(pBeacon varchar(36))
 BEGIN
   SELECT l.cd_local, tl.nm_tipo_local, l.nm_local, l.cd_andar, 
-  group_concat(a.nm_email_administrador, a.nm_administrador, ta.nm_tipo_administrador) 
+  group_concat(a.nm_administrador + "-" + ta.nm_tipo_administrador) 
   as Admins, 
-  group_concat(b.cd_uuid_beacon, tb.nm_tipo_beacon) as Beacons
+  group_concat(b.cd_uuid_beacon + "-" + tb.nm_tipo_beacon) as Beacons
   FROM `local` l 
   INNER JOIN beacon b
   ON (l.cd_local = b.cd_local)
@@ -568,28 +576,34 @@ BEGIN
   INNER JOIN administrador a
   ON (l.cd_local = a.cd_local)
   INNER JOIN tipo_administrador ta
-  ON (a.cd_tipo_administrador = ta.nm_tipo_administrador)
+  ON (a.cd_tipo_administrador = ta.cd_tipo_administrador)
   WHERE b.cd_uuid_beacon = pBeacon;
 END$$ 
 
 DROP PROCEDURE IF EXISTS pegarLocais$$
-CREATE PROCEDURE pegarLocais(pTipo VARCHAR(45))
+CREATE PROCEDURE pegarLocais(pTipo INT)
 BEGIN
-	SELECT l.cd_local, tl.cd_tipo_local, l.nm_local, l.cd_andar,group_concat(b.cd_uuid_beacon) AS  Beacons FROM `local` AS l 
+	SELECT l.cd_local, 
+	tl.nm_tipo_local, l.nm_local, 
+    l.cd_andar, group_concat(b.cd_uuid_beacon) AS  Beacons FROM `local` AS l 
 	INNER JOIN tipo_local AS tl
 	ON l.cd_tipo_local = tl.cd_tipo_local
 	INNER JOIN beacon AS b
 	ON  l.cd_local = b.cd_local
-	WHERE tl.nm_tipo_local = pTipo
+	WHERE l.cd_tipo_local = pTipo
 	GROUP BY l.cd_local;
 END$$
 
 DROP PROCEDURE IF EXISTS atualizarLocal$$
-CREATE PROCEDURE atualizarLocal(pLocal int, pTipo int, pNome varchar(45), pAndar int(3))
+CREATE PROCEDURE atualizarLocal(pLocal int, pTipo int, pNome varchar(45), pAndar int(3), pAbertura time, pFechamento time)
 BEGIN
-	UPDATE  `local`  SET cd_tipo_local = pTipo WHERE cd_local = pLocal;
-	UPDATE  `local`  SET nm_local = pNome WHERE cd_local = pLocal;
-	UPDATE  `local`  SET cd_andar = pAndar WHERE cd_local = pLocal;
+	UPDATE  `local`  
+    SET cd_tipo_local = pTipo,
+    nm_local = pNome,
+    cd_andar = pAndar,
+    hr_abertura = pAbertura,
+    hr_fechamento = pFechamento
+	WHERE cd_local = pLocal;
 END$$
 
 DROP PROCEDURE IF EXISTS deletarLocal$$
