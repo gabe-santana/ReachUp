@@ -31,6 +31,7 @@ namespace ReachUp
 
         #region Methods
        
+        // OK 
         public async Task<List<SubCategory>> GetAll(string email) 
         {
             if (base.DQLCommand(Procedure.clientePrefere, ref this.Data, 
@@ -65,6 +66,7 @@ namespace ReachUp
             return null;
         }
 
+        // OK
         public Task<bool> Add()
         {
             for (int i = 0; i < this.SubCategories.Count(); i++)
@@ -82,6 +84,7 @@ namespace ReachUp
             return Task.FromResult(true);
         }
 
+        // 404 NOT FOUND
         public Task<bool> Delete(string email, int category, int subCategory)
         {
              if (base.DMLCommand(Procedure.removerPreferencia, 

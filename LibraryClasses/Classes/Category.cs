@@ -37,6 +37,7 @@ namespace ReachUp
         #endregion
         #region Methods
 
+        // 404 NOT FOUND
         public Task<Category> Get(int id) 
         {
             if (base.DQLCommand(Procedure.pegarCategoria, ref this.Data,
@@ -64,6 +65,7 @@ namespace ReachUp
             return null;
         }
 
+        // OK 
         public Task<List<Category>> GetAll() 
         {
             if (base.DQLCommand(
@@ -93,6 +95,7 @@ namespace ReachUp
             return null;
         }
 
+        // 404 NOT FOUND
         public Task<bool> Add() 
         {
             if (base.DMLCommand(Procedure.cadastrarCategoria, new string[,] {

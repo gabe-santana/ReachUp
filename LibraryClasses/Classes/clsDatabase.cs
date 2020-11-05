@@ -17,7 +17,7 @@ namespace ReachUp
 
         // Please, my colleagues, keep this on order 
         // Future improvement: separate by objects/models
-        // COUNT: 49
+        // COUNT: 50
         #region StoredProcedures
         [System.Flags]
         public enum Procedure
@@ -71,7 +71,8 @@ namespace ReachUp
             pegarSubCategorias,
             pegarSubCategoriasComunicado,
             pegarSubcategoriasLocal,
-            pegarLocalBeacon
+            pegarLocalBeacon,
+            removerHorarioAlternativoLocal
         }
 
         #endregion

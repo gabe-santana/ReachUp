@@ -15,6 +15,9 @@ namespace ReachUp
         public string TypeName { get;set; }
         public string Name { get; set; }
         public ushort Floor { get; set; }
+        public string OpeningHour {get; set;}
+        public string ClosingHour {get; set;}
+        public string BeaconUUID {get; set;}
         [JsonIgnore] public List<User> Admins { get;set; }
         [JsonIgnore] public string DescriptionSubCategories { get; set; }
         [JsonIgnore] public string StrOPHour { get; set; }
@@ -23,11 +26,14 @@ namespace ReachUp
         public List<Beacon> Beacons  {get;set;}
         public string BeaconsUUID {get;set;}
 
+        public string AdminsList {get; set;}
+        public string BeaconsList {get; set;}
 
-        private List<SubCategory> SubCategories = new List<SubCategory>();
 
-        private List<OpeningHours> OpeningHours_List = new List<OpeningHours>();
-        private OpeningHours OpeningHours { get;set; }
+        public List<SubCategory> SubCategories = new List<SubCategory>();
+
+        public List<OpeningHours> OpeningHours_List = new List<OpeningHours>();
+        public OpeningHours OpeningHours { get;set; }
 
 
         #endregion
@@ -64,20 +70,20 @@ namespace ReachUp
         ///  Connect constructor
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="type"></param>
+        /// <param name="typeName"></param>
         /// <param name="name"></param>
         /// <param name="floor"></param>
-        public Local(int id, int type, string name, ushort floor) 
+        public Local(int id, string typeName, string name, ushort floor) 
         :base()
         {
            this.IdLocal = id;
-           this.Type = type;
+           this.TypeName = typeName;
            this.Name = name;
            this.Floor = floor; 
         }
 
         /// <summary>
-        ///  Get by Id constructor
+        ///  Get by Id/GetAll by type constructor
         /// </summary>
         /// <param name="id"></param>
         /// <param name="typeName"></param>
@@ -97,28 +103,84 @@ namespace ReachUp
         
         
         /// <summary>
-        ///  Developer constructor (mapMaker)
+        ///  Developer constructor (WebDev)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="typeName"></param>
+        /// <param name="name"></param>
+        /// <param name="floor"></param>
+        /// <param name="adminsList"></param>
+        /// <param name="beaconsList"></param>
+        public Local(int id, string typeName, string name, ushort floor,
+        string adminsList, string beaconsList) :base()
+        {
+           this.IdLocal = id;
+           this.TypeName = typeName;
+           this.Name = name;
+           this.Floor = floor; 
+           this.AdminsList = adminsList;
+           this.BeaconsList = beaconsList;
+        }
+
+        /// <summary>
+        ///  Add local constructor
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <param name="floor"></param>
+        /// <param name="openingHour"></param>
+        /// <param name="closingHour"></param>
+        /// <param name="beaconUUID"></param>
+        public Local(int type, string name, ushort floor, 
+        string openingHour, string closingHour, string beaconUUID) 
+        :base()
+        {
+           this.Type = type;
+           this.Name = name;
+           this.Floor = floor;
+           this.OpeningHour = openingHour; 
+           this.ClosingHour = closingHour; 
+           this.BeaconUUID = beaconUUID;
+        }
+
+        /// <summary>
+        ///  Define alternate time constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="openingHours"></param>
+        public Local(int id, OpeningHours openingHours = null) 
+        :base()
+        {
+           this.IdLocal = id;
+           this.OpeningHours = openingHours;
+        }
+
+        /// <summary>
+        ///  Update local constructor
         /// </summary>
         /// <param name="id"></param>
         /// <param name="type"></param>
         /// <param name="name"></param>
         /// <param name="floor"></param>
-        /// <param name="admins"></param>
-        /// <param name="beacons"></param>
-        public Local(int id, int type, string name, ushort floor,
-        List<User> admins = null, List<Beacon> beacons = null ) :base()
+        /// <param name="openingHour"></param>
+        /// <param name="closingHour"></param>
+        public Local(int id, int type, string name, ushort floor, 
+        string openingHour, string closingHour) 
+        :base()
         {
            this.IdLocal = id;
            this.Type = type;
            this.Name = name;
-           this.Floor = floor; 
-           this.Admins = admins;
-           this.Beacons = beacons;
+           this.Floor = floor;
+           this.OpeningHour = openingHour; 
+           this.ClosingHour = closingHour; 
         }
 
         #endregion;
 
         #region Public Methods
+
+        // OK 
         public Task<Local> ConnectBeaconLocal(string uuid)
         {
             if (base.DQLCommand(Procedure.conectarBeacon, ref this.Data,
@@ -133,7 +195,7 @@ namespace ReachUp
                     {
                         local = new Local(
                             int.Parse(this.Data["cd_local"].ToString()),
-                            int.Parse(this.Data["cd_tipo_local"].ToString()),
+                            this.Data["nm_tipo_local"].ToString(),
                             this.Data["nm_local"].ToString(),
                             ushort.Parse(this.Data["cd_andar"].ToString())
                         );
@@ -149,6 +211,7 @@ namespace ReachUp
             return null;
         }
 
+        // OK 
         public Task<List<Local>> Search(string search)
         {
             List<Local> locals = new List<Local>();
@@ -183,6 +246,7 @@ namespace ReachUp
             return null;
         }
 
+        // 404 NOT FOUND
         public Task<Local> Get(int id)
         {
             if (base.DQLCommand(Procedure.pegarLocal, ref this.Data,
@@ -213,84 +277,95 @@ namespace ReachUp
             return null;
         }
 
-        /*public Task<Local> ByBeacon(string uuid)
+        // System.FormatException: Input string was not in a correct format.
+        public Task<Local> ByBeacon(string uuid)
         {
            if (base.DQLCommand(Procedure.pegarLocalBeacon, ref this.Data, 
                new string[,] {
                    {"pBeacon", uuid.ToString()}
                }))
                {
-                   Local local = null;
-                   List<User> admins = new List<User>();
-                   List<Beacon> beacons = new List<Beacon>();
                    if (this.Data.HasRows)
                    {
+                       Local local = null;
+
                        while (this.Data.Read())
                        {
                            local = new Local(
-                               this.Data["cd_local"].ToString(),
+                               int.Parse(this.Data["cd_local"].ToString()),
                                this.Data["nm_tipo_local"].ToString(),
                                this.Data["nm_local"].ToString(),
-                               this.Data["cd_andar"].ToString(),
-                               admins.Add(
-                                 this.Data["Admins"].ToString()
-                               ),
-                               beacons.Add(
-                                 this.Data["Beacons"].ToString()
-                               )
-                               
-                           );
+                               ushort.Parse(this.Data["cd_andar"].ToString()),
+                               this.Data["Admins"].ToString(),
+                               this.Data["Beacons"].ToString()
+                            );
                        }
                        this.Data.Close();
                        base.Disconnect();
                        return Task.FromResult(local);
                    }
+                   this.Data.Close();
+                   base.Disconnect();
+                   return null;
                }
                return null;
-        }*/
+        }
 
-        public Task<List<Local>> GetAll(string type)
+        // OK (com exceção ao pesquisar pelo tipo 7 - serviço)
+        // System.OverflowException: Value was either too large or too small for a UInt16.
+        public Task<List<Local>> GetAll(int type)
         {
             if (base.DQLCommand(Procedure.pegarLocais, ref this.Data,
                 new string[,] {
                     { "pTipo", type.ToString()}
                 }))
             {
-                List<Local> local = new List<Local>();
                 if (this.Data.HasRows)
                 {
+                    List<Local> locals = new List<Local>();
+
                     while (this.Data.Read())
                     {
-                        local.Add(new Local(int.Parse(this.Data["cd_local"].ToString()), int.Parse(this.Data["cd_tipo_local"].ToString()),
-                            this.Data["nm_local"].ToString(), ushort.Parse(this.Data["cd_andar"].ToString()),
-                            this.Data["sub_categorias"].ToString().Replace(",",", "),                       
-                            this.Data["Beacons"].ToString()));
+                        locals.Add(
+                            new Local(
+                            int.Parse(this.Data["cd_local"].ToString()), 
+                            this.Data["nm_tipo_local"].ToString(),
+                            this.Data["nm_local"].ToString(), 
+                            ushort.Parse(this.Data["cd_andar"].ToString()),
+                            this.Data["Beacons"].ToString()
+                            )
+                        );
                     }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return Task.FromResult(locals);
                 }
                 this.Data.Close();
                 base.Disconnect();
-
-                return Task.FromResult(local);
+                return null;
             }
             return null;
         }
 
-
+        // 404 NOT FOUND
         public Task<bool> Add()
         {
             if (base.DMLCommand(Procedure.cadastrarLocal, 
                 new string[,] {
                     {"pTipo", this.Type.ToString()}, {"pNome", this.Name },
-                    { "pAndar", this.Floor.ToString()},
-                    { "pUUIDBeacon", this.Beacons.Find(x => x.Type == 0).UUID.ToString()}
+                    {"pAndar", this.Floor.ToString()},
+                    {"pAbertura", this.OpeningHour},
+                    {"pFechamento", this.ClosingHour},
+                    {"pUUIDBeacon", this.BeaconUUID }
                 }))
             {
                 return Task.FromResult(true);
             }
-            return Task.FromResult(false);;
+            return Task.FromResult(false);
         }
 
-        /*public Task<bool> AddOpHours()
+        // OK 
+        public Task<bool> AddOpHours()
         {
             if (base.DMLCommand(Procedure.defHorarioAlternativoLocal,
                new string[,] {
@@ -303,14 +378,17 @@ namespace ReachUp
                return Task.FromResult(true);
             }
             return Task.FromResult(false);
-        }*/
+        }
 
+        // 404 NOT FOUND
         public Task<bool> Update()
         {
             if (base.DMLCommand(Procedure.atualizarLocal,
                 new string[,] {
                     {"pLocal", this.IdLocal.ToString()}, {"pTipo", this.Type.ToString() },
-                    {"pNome", this.Name}, {"pAndar", this.Floor.ToString() }
+                    {"pNome", this.Name}, {"pAndar", this.Floor.ToString() },
+                    {"pAbertura", this.OpeningHour},
+                    {"pFechamento", this.ClosingHour}
                 }))
             {
                 return Task.FromResult(true);
@@ -319,6 +397,7 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        // OK 
         public Task<OpeningHours> FetchOpHours(int local, int weekDay)
         {
             if (base.DQLCommand(Procedure.buscarHorarioAlternativoLocal, ref this.Data,
@@ -327,24 +406,42 @@ namespace ReachUp
                     { "pDia", weekDay.ToString() }
                 }))
             {
-                OpeningHours opHours = null;
+
                 if (this.Data.HasRows)
                 {
+                    OpeningHours opHours = null;
+
                     while (this.Data.Read())
                     {
                        opHours = new OpeningHours(
                            weekDay,
-                           DateTime.Parse(this.Data["hr_abertura"].ToString()),
-                           DateTime.Parse(this.Data["hr_fechamento"].ToString())
+                           this.Data["hr_abertura"].ToString(),
+                           this.Data["hr_fechamento"].ToString()
                         );
                     }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return Task.FromResult(opHours);
                 }
                 this.Data.Close();
                 base.Disconnect();
-
-                return Task.FromResult(opHours);
+                return null;
             }
             return null;
+        }
+
+        // OK 
+        public Task<bool> DeleteOpHours(int local, int weekDay)
+        {
+            if (base.DMLCommand(Procedure.removerHorarioAlternativoLocal,
+               new string[,] {
+                {"pLocal", local.ToString()},
+                {"pDia", weekDay.ToString()}
+               }))
+            {
+               return Task.FromResult(true);
+            }
+            return Task.FromResult(false);
         }
 
         public Task<bool> Delete(int id) 
