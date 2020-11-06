@@ -236,7 +236,6 @@ C:\Users\Gabriel\Documents\Repositories\ReachUp\WebAPI\bin\Debug\netcoreapp3.1\z
 C:\Users\Gabriel\Documents\Repositories\ReachUp\WebAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Gabriel\Documents\Repositories\ReachUp\WebAPI\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\Gabriel\Documents\Repositories\ReachUp\WebAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
-C:\Users\Gabriel\Documents\Repositories\ReachUp\WebAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Cryptography.Pkcs.dll
 C:\Users\Gabriel\Documents\Repositories\ReachUp\WebAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Gabriel\Documents\Repositories\ReachUp\WebAPI\bin\Debug\netcoreapp3.1\BusinessLayer.dll
 C:\Users\Gabriel\Documents\Repositories\ReachUp\WebAPI\bin\Debug\netcoreapp3.1\BusinessLayer.pdb
@@ -375,3 +374,6 @@ C:\Users\Guilherme\reachup\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.csproj.CopyComp
 C:\Users\Guilherme\reachup\WebAPI\obj\Debug\netcoreapp3.1\staticwebassets\WebAPI.StaticWebAssets.Manifest.cache
 C:\Users\Guilherme\reachup\WebAPI\obj\Debug\netcoreapp3.1\staticwebassets\WebAPI.StaticWebAssets.xml
 C:\Users\Guilherme\reachup\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.genruntimeconfig.cache
+C:\Users\Gabriel\Documents\Repositories\ReachUp\WebAPI\bin\Debug\netcoreapp3.1\MailKit.dll
+C:\Users\Gabriel\Documents\Repositories\ReachUp\WebAPI\bin\Debug\netcoreapp3.1\MimeKit.dll
+C:\Users\Gabriel\Documents\Repositories\ReachUp\WebAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Security.Cryptography.Pkcs.dll

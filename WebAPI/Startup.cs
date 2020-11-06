@@ -17,6 +17,8 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
+using ReachUp;
+using ReachUpWebAPI.Controllers;
 
 namespace ReachUpWebAPI
 {
@@ -33,9 +35,11 @@ namespace ReachUpWebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             var emailConfig = Configuration
-                .GetSection("EmailConfiguration")
-                .Get<EmailConfig>();
-                services.AddSingleton(emailConfig);
+               .GetSection("EmailConfiguration")
+               .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+
+            services.AddScoped<EmailSender>();
 
             var key = Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]);
             services.AddAuthentication(x =>
@@ -101,20 +105,7 @@ namespace ReachUpWebAPI
 
           
 
-        }
+        }   
 
-        public void ConfigureServices(IServiceCollection services)
-
-    var emailConfig = Configuration
-        .GetSection("EmailConfiguration")
-        .Get<EmailConfiguration>();
-    services.AddSingleton(emailConfig);
-
-    services.AddControllers();
-
-
-        private class ConfigureMvcOptions
-        {
-        }
     }
 }

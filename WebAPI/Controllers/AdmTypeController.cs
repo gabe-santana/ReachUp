@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,7 +16,7 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-           return Ok(await new AdmType().GetAll());
+            return Ok(await new AdmType().GetAll());
         }
 
         [Authorize(Roles = "adm, dev")]

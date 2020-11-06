@@ -48,8 +48,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [HttpGet("SignIn")]
-        public async Task<IActionResult> SignIn([FromQuery] User user) 
+        [HttpPost("SignIn")]
+        public IActionResult SignIn([FromBody] User user) 
         {
             if (user != null)
                 if (user.Login()) 
@@ -72,6 +72,8 @@ namespace ReachUpWebAPI.Controllers
         {
             if (user != null)
                return Ok(DiscardJSONWebToken(user));
+
+            return BadRequest("Parameters are null");
         }
         #endregion
 
@@ -87,38 +89,19 @@ namespace ReachUpWebAPI.Controllers
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.Role, user.Role)
                 }),
-                Expires = DateTime.UtcNow.AddHours(2),
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             user.Token = tokenHandler.WriteToken(token);
             return user;
 
-    
-
-        //var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.Config["Jwt:Key"]));
-        //    var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-        //    var Claims = new Claim[]
-        //    {
-        //        new Claim(ClaimTypes.Role, user.Role),
-        //        new Claim(JwtRegisteredClaimNames.Email, user.Email),
-        //        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        //    };
-
-        //    var token = new JwtSecurityToken(
-        //        issuer: this.Config["Jwt:Issuer"],
-        //        audience: this.Config["Jwt:Issuer"],
-        //        Claims,
-        //        expires: DateTime.Now.AddMinutes(120),
-        //        signingCredentials: credentials
-        //    );
-
-        //    return new JwtSecurityTokenHandler().WriteToken(token);
+  
         }
 
         private bool DiscardJSONWebToken(User user)
         {
+           //TODO
            return false;
         }
         #endregion

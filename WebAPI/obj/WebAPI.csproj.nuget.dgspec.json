@@ -130,7 +130,7 @@
             },
             "MimeKit": {
               "target": "Package",
-              "version": "[*, )"
+              "version": "[2.9.2, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

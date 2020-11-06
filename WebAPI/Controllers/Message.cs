@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using MailKit;
 using MimeKit;
 
 public class Message 
@@ -8,10 +11,9 @@ public class Message
 
     public Message(string to, string subject, string content)
     {
-       To = new MailboxAddress(to);
+       To = MailboxAddress.Parse(to);
 
        Subject = subject;
        Content = content;
     }
-
 }

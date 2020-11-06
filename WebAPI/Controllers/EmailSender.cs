@@ -3,39 +3,43 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ReachUp;
-using MailKit;
 using MimeKit;
 using MailKit.Net.Smtp;
 
 namespace ReachUpWebAPI.Controllers
 {
+   /*public interface IEmailSender 
+   {
+      Task SendEmailAsync(Message message);
+   }*/
 
-    public class EmailSender : ControllerBase
-    {
-       private readonly EmailConfig _emailConfig;
+   [Route("api/[controller]")]
+   [ApiController]
+   public class EmailSender : ControllerBase
+   {
+      private readonly EmailConfiguration _emailConfig;
 
-       public EmailSender(EmailConfig emailConfig)
-       {
+      public EmailSender(EmailConfiguration emailConfig)
+      {
           _emailConfig = emailConfig;
-       }
+      }
 
-       public async Task SendEmailAsync(Message message)
-       {
+      public async Task SendEmailAsync(Message message)
+      {
           var emailMessage = CreateEmailMessage(message);
           await SendAsync(emailMessage);
-       }
+      }
 
        [Authorize(Roles="cli, adm, loj")]
-       [HttpGet("GetRecoverPasswordEmail")]
-       public async Task GetRecoverPasswordEmail(string userEmail, 
-         string emailName, string emailContent)
+       [HttpPost("PostRecoverPasswordEmail")]
+       public async Task PostRecoverPasswordEmail([FromBody] EmailConfiguration emailConfiguration)
        {
           var rng = new Random();
           var message = new Message(
-             userEmail, emailName, emailContent
+             emailConfiguration.UserEmail, emailConfiguration.EmailName, emailConfiguration.EmailContent
           );
 
-          await _emailSender.SendEmailAsync(message);
+          await SendEmailAsync(message);
           
        }
 
@@ -43,9 +47,9 @@ namespace ReachUpWebAPI.Controllers
        {
           var emailMessage = new MimeMessage();
           emailMessage.From.Add(
-             new MailboxAddress(_emailConfig.From)
+             MailboxAddress.Parse(_emailConfig.From)
              );
-         emailMessage.To.AddRange(message.To);
+         emailMessage.To.Add(message.To);
          emailMessage.Subject = message.Subject;
          emailMessage.Body = 
            new TextPart(
