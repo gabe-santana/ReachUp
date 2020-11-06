@@ -9,6 +9,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'SignUp.view.dart';
 
 class SignView extends StatelessWidget {
+  String signInStatus;
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +37,7 @@ class SignView extends StatelessWidget {
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
                       child: Column(
                         children: [
-                          Image.asset("assets/images/icons/ReachUp.png",
+                          Image.asset("assets/images/icons/launch/ReachUp.png",
                               width: 150),
                         ],
                       )),
@@ -69,8 +71,8 @@ class SignView extends StatelessWidget {
                   SignInButtonBuilder(
                       text: 'Criar uma nova conta',
                       icon: Icons.account_circle,
-                      onPressed: () {
-                        Navigator.push(
+                      onPressed: () async{
+                      signInStatus = await Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => SignUp()),
                         );

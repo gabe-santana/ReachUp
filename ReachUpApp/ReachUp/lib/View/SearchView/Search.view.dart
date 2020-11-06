@@ -1,4 +1,4 @@
-import 'package:ReachUp/Controller/LocalController.dart';
+import 'package:ReachUp/Controller/Local.controller.dart';
 import 'package:ReachUp/Model/Local.dart';
 import 'package:ReachUp/View/SearchView/SearchCard.dart';
 import 'package:flutter/material.dart';

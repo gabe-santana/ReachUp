@@ -1,11 +1,8 @@
+import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Model/User.model.dart';
-import 'package:fa_stepper/fa_stepper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-final _focusNode = FocusNode();
 
 List<GlobalKey<FormState>> formKeys = [
   GlobalKey<FormState>(),
@@ -30,16 +27,8 @@ class MyData {
 class _SignUpState extends State<SignUp> {
   User user = new User();
   final _formKey = GlobalKey<FormState>();
-  bool nameStep = true;
-  bool emailStep = false;
-  bool pwdStep = false;
-  int currentStep;
 
-  @override
-  void dispose() {
-    super.dispose();
-    _focusNode.dispose();
-  }
+  int currentStep;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +38,28 @@ class _SignUpState extends State<SignUp> {
           title: Text("Criar uma nova conta"),
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) => CustomDialog(
+                            icon: Icons.info_outline,
+                            title: "Info",
+                            description:
+                                "O cadastro é necessário para usar o ReachUp.\n\n" +
+                                    "Através dele podemos identificá-lo, autenticá-lo\n" +
+                                    "e lhe proporcionar uma melhor experiência!",
+                            buttonOK: RaisedButton(
+                              color: Theme.of(context).colorScheme.primary,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                "OK",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ));
+                },
                 icon: Icon(Icons.info_outline, color: Colors.white))
           ],
         ),
@@ -57,7 +67,7 @@ class _SignUpState extends State<SignUp> {
         body: Align(
           alignment: Alignment.center,
           child: Column(children: [
-            Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 10)), 
+            Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 10)),
             SignInButtonBuilder(
               icon: FontAwesomeIcons.google,
               width: MediaQuery.of(context).size.width * 0.7,
@@ -85,6 +95,7 @@ class StepperBody extends StatefulWidget {
 }
 
 class _StepperBodyState extends State<StepperBody> {
+  static final _focusNode = FocusNode();
   int currStep = 0;
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -99,16 +110,13 @@ class _StepperBodyState extends State<StepperBody> {
     });
   }
 
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    super.dispose();
-  }
-
   List<Step> steps = [
     Step(
         title: const Text('Nome'),
-        subtitle: const Text('Como devemos chamá-lo(a)?'),
+        subtitle: const Text(
+          'Como devemos chamá-lo(a)?',
+          style: TextStyle(fontSize: 16),
+        ),
         isActive: true,
         //state: StepState.error,
         state: StepState.indexed,
@@ -153,7 +161,7 @@ class _StepperBodyState extends State<StepperBody> {
                 },
                 decoration: InputDecoration(
                     labelText: 'Sobrenome',
-                    hintText: 'Ciclano...',
+                    hintText: 'Ciclano',
                     //filled: true,
                     icon: const Icon(Icons.person),
                     labelStyle:
@@ -165,12 +173,15 @@ class _StepperBodyState extends State<StepperBody> {
 
     Step(
         title: const Text('E-mail'),
-        subtitle: const Text('Nosso meio de contato...'),
+        subtitle: const Text(
+          'Meio de contato',
+          style: TextStyle(fontSize: 16),
+        ),
         isActive: true,
         state: StepState.indexed,
         // state: StepState.disabled,
         content: Form(
-          key: formKeys[2],
+          key: formKeys[1],
           child: Column(
             children: <Widget>[
               TextFormField(
@@ -178,7 +189,7 @@ class _StepperBodyState extends State<StepperBody> {
                 autocorrect: false,
                 validator: (value) {
                   if (value.isEmpty || !value.contains('@')) {
-                    return 'Please enter valid email';
+                    return 'E-mail inválido!';
                   }
                 },
                 onSaved: (String value) {
@@ -186,8 +197,8 @@ class _StepperBodyState extends State<StepperBody> {
                 },
                 maxLines: 1,
                 decoration: InputDecoration(
-                    labelText: 'Enter your email',
-                    hintText: 'Enter a email address',
+                    labelText: 'E-mail',
+                    hintText: 'examplo@email.com',
                     icon: const Icon(Icons.email),
                     labelStyle:
                         TextStyle(decorationStyle: TextDecorationStyle.solid)),
@@ -197,19 +208,23 @@ class _StepperBodyState extends State<StepperBody> {
         )),
     Step(
         title: const Text('Senha'),
-        // subtitle: const Text('Subtitle'),
+        subtitle: const Text(
+          'Sua senha',
+          style: TextStyle(fontSize: 16),
+        ),
         isActive: true,
         state: StepState.indexed,
         content: Form(
-          key: formKeys[3],
+          key: formKeys[2],
           child: Column(
             children: <Widget>[
               TextFormField(
-                keyboardType: TextInputType.number,
+                obscureText: true,
+                keyboardType: TextInputType.text,
                 autocorrect: false,
                 validator: (value) {
-                  if (value.isEmpty || value.length > 2) {
-                    return 'Please enter valid age';
+                  if (value.isEmpty || value.length < 6) {
+                    return 'Senha inválida! (minimo 6 caracteres)';
                   }
                 },
                 maxLines: 1,
@@ -217,9 +232,29 @@ class _StepperBodyState extends State<StepperBody> {
                   data.age = value;
                 },
                 decoration: InputDecoration(
-                    labelText: 'Enter your age',
-                    hintText: 'Enter age',
-                    icon: const Icon(Icons.explicit),
+                    labelText: 'Senha',
+                    hintText: 'Sua nova senha',
+                    icon: const FaIcon(FontAwesomeIcons.key),
+                    labelStyle:
+                        TextStyle(decorationStyle: TextDecorationStyle.solid)),
+              ),
+              TextFormField(
+                obscureText: true,
+                keyboardType: TextInputType.number,
+                autocorrect: false,
+                validator: (value) {
+                  if (value.isEmpty || value.length < 6) {
+                    return 'Senha inválida! (minimo 6 caracteres)';
+                  }
+                },
+                maxLines: 1,
+                onSaved: (String value) {
+                  data.age = value;
+                },
+                decoration: InputDecoration(
+                    labelText: 'Confirmar Senha',
+                    hintText: 'Digite a senha novamente',
+                    icon: const FaIcon(FontAwesomeIcons.key),
                     labelStyle:
                         TextStyle(decorationStyle: TextDecorationStyle.solid)),
               ),
@@ -228,16 +263,19 @@ class _StepperBodyState extends State<StepperBody> {
         )),
 
     Step(
-        title: const Text('Termos'),
-        subtitle: const Text('Subtitle'),
+        title: const Text('Preferencias'),
+        subtitle: const Text(
+          'Do que você gosta?',
+          style: TextStyle(fontSize: 16),
+        ),
         isActive: true,
         state: StepState.indexed,
         content: Form(
-          key: formKeys[4],
+          key: formKeys[3],
           child: Column(
             children: <Widget>[
               TextFormField(
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.text,
                 autocorrect: false,
                 validator: (value) {
                   if (value.isEmpty || value.length > 2) {

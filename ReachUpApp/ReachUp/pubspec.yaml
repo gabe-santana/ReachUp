@@ -61,14 +61,21 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
-    - assets/images/map/floor0.jpg
-    - assets/images/map/floor1.jpg
-    - assets/animations/pin.json
+    #Animations
+    - assets/animations/user-location.json
     - assets/animations/pin-pointer.json
     - assets/animations/search.json
-    - assets/animations/user-location.json
-    - assets/images/icons/user-location.png
-    - assets/images/icons/ReachUp.png
+    - assets/animations/pin.json
+
+    #Images
+    - assets/images/map/floor0.jpg
+    - assets/images/map/floor1.jpg
+    
+    - assets/images/icons/widgets/user-location.png
+    - assets/images/icons/launch/ReachUp.png
+
+    #Config
+    - assets/config/global/config-global.json
     - assets/map/map.json
 
   # The following line ensures that the Material Icons font is
