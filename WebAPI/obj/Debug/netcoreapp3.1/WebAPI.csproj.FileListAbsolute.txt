@@ -377,3 +377,5 @@ C:\Users\Guilherme\reachup\WebAPI\obj\Debug\netcoreapp3.1\WebAPI.genruntimeconfi
 C:\Users\Gabriel\Documents\Repositories\ReachUp\WebAPI\bin\Debug\netcoreapp3.1\MailKit.dll
 C:\Users\Gabriel\Documents\Repositories\ReachUp\WebAPI\bin\Debug\netcoreapp3.1\MimeKit.dll
 C:\Users\Gabriel\Documents\Repositories\ReachUp\WebAPI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\Guilherme\reachup\WebAPI\bin\Debug\netcoreapp3.1\MailKit.dll
+C:\Users\Guilherme\reachup\WebAPI\bin\Debug\netcoreapp3.1\MimeKit.dll

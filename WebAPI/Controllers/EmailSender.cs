@@ -17,9 +17,9 @@ namespace ReachUpWebAPI.Controllers
    [ApiController]
    public class EmailSender : ControllerBase
    {
-      private readonly EmailConfiguration _emailConfig;
+      private readonly ReachUp.EmailConfiguration _emailConfig;
 
-      public EmailSender(EmailConfiguration emailConfig)
+      public EmailSender(ReachUp.EmailConfiguration emailConfig)
       {
           _emailConfig = emailConfig;
       }
@@ -30,7 +30,7 @@ namespace ReachUpWebAPI.Controllers
           await SendAsync(emailMessage);
       }
 
-       [Authorize(Roles="cli, adm, loj")]
+       [Authorize(Roles="cli,adm,loj")]
        [HttpPost("PostRecoverPasswordEmail")]
        public async Task PostRecoverPasswordEmail([FromBody] EmailConfiguration emailConfiguration)
        {

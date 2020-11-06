@@ -36,6 +36,20 @@ namespace ReachUp
         { }
 
         /// <summary>
+        /// SignIn constructor
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <param name="role"></param>
+        public User(string email, string password, string role)
+         : base()
+        {
+            this.Email = email;
+            this.Password = password;
+            this.Role = role; 
+        }
+
+        /// <summary>
         /// Add user path constructor
         /// </summary>
         /// <param name="name"></param>
@@ -53,7 +67,7 @@ namespace ReachUp
             
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Get Local by Beacon (admins constructor)
         /// </summary>
         /// <param name="name"></param>
@@ -65,7 +79,7 @@ namespace ReachUp
             this.Name = name;
             this.Email = email;
             this.AdmType = admType;
-        }
+        }*/
 
         #endregion
 
