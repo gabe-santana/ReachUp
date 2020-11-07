@@ -69,6 +69,28 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        //[Authorize(Roles="cli,loj,adm")]
+        [HttpGet("TryUpdatePassword")]
+        public async Task<IActionResult> TryUpdatePassword(string email, string cod)
+        {
+            if (!string.IsNullOrWhiteSpace(email)
+                && !string.IsNullOrWhiteSpace(cod))
+                return Ok(await new User().TryUpdatePassword(email, cod));
+            return BadRequest("Parameters are null");
+        }
+
+        //[Authorize(Roles="cli,loj,adm")]
+        [HttpPatch("UpdatePassword")]
+        public async Task<IActionResult> UpdatePassword([FromQuery] string email, [FromQuery] string role, [FromQuery] string password)
+        {
+            if (!string.IsNullOrWhiteSpace(email)
+                && !string.IsNullOrWhiteSpace(role)
+                && !string.IsNullOrWhiteSpace(password))
+                return Ok(await new User().UpdatePassword(email, role, password));
+            return BadRequest("Parameters are null");
+        }
+
+
         [HttpGet("SignOut")]
         public async Task<IActionResult> SignOut([FromQuery] User user)
         {

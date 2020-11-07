@@ -187,6 +187,88 @@ namespace ReachUp
             return false;
         }
 
+        public async Task<bool> TryUpdatePassword(string email, string cod)
+        {
+            if (base.DQLCommand(
+                $"SELECT COUNT(*) as Count from recuperacao_senha WHERE nm_email_usuario={email} AND cd_validacao={cod}",
+                ref this.Data
+            ))
+            {
+               if (this.Data.HasRows)
+               {
+                    if (this.Data.Read())
+                    {
+                       if (int.Parse(this.Data["Count"].ToString()) > 0)
+                       {
+                           if (base.DQLCommand(
+                               $"SELECT dt_validade as Validity from recuperacao_senha WHERE nm_email_usuario={email} AND cd_validacao={cod}",
+                               ref this.Data
+                           ))
+                           {
+                               if (this.Data.HasRows)
+                               {
+                                   if (this.Data.Read())
+                                   {
+                                       if (DateTime.Compare(
+                                            new DateTime(),
+                                            Convert.ToDateTime(this.Data["Validity"].ToString()))
+                                            <= 0)
+                                       {
+                                          this.Data.Close();
+                                          base.Disconnect();
+                                          return true;
+                                       }
+                                       this.Data.Close();
+                                       base.Disconnect();
+                                       return false;
+                                    }
+                                    base.Disconnect();
+                                    return false;
+                               }
+                               base.Disconnect();
+                               return false;
+                           }
+                           base.Disconnect();
+                           return false;
+                       }
+                       this.Data.Close();
+                       base.Disconnect();
+                       return false;
+                    }
+                    base.Disconnect();
+                    return false;
+                }
+                base.Disconnect();
+                return false;
+            }
+            return false;
+        }
+
+        public async Task<bool> UpdatePassword(string email, string role, string password)
+        {
+           if (role == "cli")
+           {
+              if (base.DMLCommand(
+                $"UPDATE cliente SET nm_senha_cliente={password} WHERE nm_email_cliente={email}"
+              ))
+              {
+                 return true;
+              }
+              return false;
+           }
+           else if (role == "loj" || role == "adm" || role == "dev")
+           {
+              if (base.DMLCommand(
+                 $"UPDATE administrador SET nm_senha_administrador={password} WHERE nm_email_administrador={email}"
+              ))
+              {
+                 return true;
+              }
+              return false;
+           }
+           return false;
+        }
+
         public async Task<List<User>> GetAll(string role)
         {
             List<User> _return = new List<User>();
