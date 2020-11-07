@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System;
 
-
 namespace ReachUp
 {
     public class User : clsDatabase
@@ -163,7 +162,7 @@ namespace ReachUp
             return false;
         }
 
-        public Task<string> RecoverPassword(string email)
+        public async Task<bool> RecoverPassword(string email)
         {
            string cod = GenerateGuidCode();
            if (base.DMLCommand(Procedure.recuperarSenha,
@@ -174,9 +173,22 @@ namespace ReachUp
              
            ))
            {
-              return Task.FromResult(cod);
-           }
-           return Task.FromResult("Erro");
+              // Crio uma instância de EmailConfig, passando as informações específicas do email
+              EmailConfiguration emailConfig = 
+               new EmailConfiguration(
+                 email, clsPasswordRecoveryEmail.Name, 
+                 $"{cod} {clsPasswordRecoveryEmail.Content} {clsPasswordRecoveryEmail.RecoveryPageURL}"
+               );
+               // até aqui tá ok
+               // instancio EmailSender passando a instância de EmailConfig
+               EmailSender emailSender = new EmailSender(emailConfig);
+               
+               // Aguardo e retorno o resultado booleano do envio do email
+               return await emailSender.PostRecoverPasswordEmail() 
+               ? true : false;
+            }
+ 
+            return false;
         }
 
         public async Task<List<User>> GetAll(string role)

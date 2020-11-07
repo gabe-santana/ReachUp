@@ -128,6 +128,18 @@ CREATE TABLE IF NOT EXISTS cliente (
   nm_senha_cliente VARCHAR(60) NULL,
   PRIMARY KEY (nm_email_cliente));
 
+-- -----------------------------------------------------
+-- Tabela recuperacao_senha
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS recuperacao_senha ;
+
+CREATE TABLE IF NOT EXISTS recuperacao_senha (
+  nm_email_cliente VARCHAR(100) NOT NULL,
+  cd_validacao VARCHAR(16) NOT NULL,
+  dt_validade DATETIME,
+  PRIMARY KEY (nm_email_cliente, cd_validacao));
+
+
 
 -- -----------------------------------------------------
 -- Tabela tipo_feedback

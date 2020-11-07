@@ -145,6 +145,12 @@ BEGIN
 	END IF;
 END$$
 
+DROP PROCEDURE IF EXISTS recuperarSenha$$
+CREATE PROCEDURE recuperarSenha(pEmail varchar(100), pCdValidacao varchar(16))
+BEGIN
+  INSERT INTO recuperacao_senha VALUES (pEmail, pCdValidacao, DATE_ADD(now(), INTERVAL 1 hour));
+END$$
+
 DROP PROCEDURE IF EXISTS cadastrarCategoria$$
 CREATE PROCEDURE cadastrarCategoria(pNome varchar(45), pDs varchar(200))
 BEGIN
