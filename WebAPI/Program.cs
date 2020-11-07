@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -23,11 +26,19 @@ namespace ReachUpWebAPI
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
-          .ConfigureWebHostDefaults(webBuilder =>
-          {
-              webBuilder.UseStartup<Startup>()
-             .UseUrls("http://192.168.0.12:8000/");
-          });
+          Host.CreateDefaultBuilder()
+   
+        .ConfigureWebHostDefaults(webBuilder =>
+        {
+            webBuilder
+             .UseUrls("http://192.168.0.109:5000")
+            .UseEnvironment("Development")
+            .UseKestrel()
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseIISIntegration()
+            .UseStartup<Startup>();
+      
+        });
+
     }
 }

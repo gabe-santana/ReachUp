@@ -19,6 +19,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
 using ReachUp;
 using ReachUpWebAPI.Controllers;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 namespace ReachUpWebAPI
 {
@@ -79,7 +80,9 @@ namespace ReachUpWebAPI
             services.AddMvcCore()
 
                     .AddAuthorization();
-        
+
+            services.Configure<KestrelServerOptions>(
+           Configuration.GetSection("Kestrel"));
 
         }
 

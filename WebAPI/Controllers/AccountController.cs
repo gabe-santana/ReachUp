@@ -49,8 +49,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [HttpGet("SignIn")]
-        public async Task<IActionResult> SignIn([FromQuery] User user) 
+        [HttpPost("SignIn")]
+        public async Task<IActionResult> SignIn([FromBody] User user) 
         {
             if (user != null)
                 if (user.Login()) 
