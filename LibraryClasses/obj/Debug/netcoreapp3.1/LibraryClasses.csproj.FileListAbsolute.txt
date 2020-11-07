@@ -1,8 +1,0 @@
-C:\Users\Gabriel\Documents\Repositories\ReachUp\LibraryClasses\obj\Debug\netcoreapp3.1\LibraryClasses.csprojAssemblyReference.cache
-C:\Users\Gabriel\Documents\Repositories\ReachUp\LibraryClasses\obj\Debug\netcoreapp3.1\LibraryClasses.AssemblyInfoInputs.cache
-C:\Users\Gabriel\Documents\Repositories\ReachUp\LibraryClasses\obj\Debug\netcoreapp3.1\LibraryClasses.AssemblyInfo.cs
-C:\Users\Gabriel\Documents\Repositories\ReachUp\LibraryClasses\bin\Debug\netcoreapp3.1\LibraryClasses.deps.json
-C:\Users\Gabriel\Documents\Repositories\ReachUp\LibraryClasses\bin\Debug\netcoreapp3.1\LibraryClasses.dll
-C:\Users\Gabriel\Documents\Repositories\ReachUp\LibraryClasses\bin\Debug\netcoreapp3.1\LibraryClasses.pdb
-C:\Users\Gabriel\Documents\Repositories\ReachUp\LibraryClasses\obj\Debug\netcoreapp3.1\LibraryClasses.dll
-C:\Users\Gabriel\Documents\Repositories\ReachUp\LibraryClasses\obj\Debug\netcoreapp3.1\LibraryClasses.pdb

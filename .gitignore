@@ -1,4 +1,2 @@
-.vscode
-/node_modules
-backend/node_modules
-MapMaker/node_modules
+ReachUpApp/.vs
+ReachUpApp/.vscode
