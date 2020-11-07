@@ -31,7 +31,7 @@ namespace ReachUpWebAPI
         .ConfigureWebHostDefaults(webBuilder =>
         {
             webBuilder
-             .UseUrls("http://192.168.0.109:5000")
+             .UseUrls("http://192.168.0.12:8000")
             .UseEnvironment("Development")
             .UseKestrel()
             .UseContentRoot(Directory.GetCurrentDirectory())

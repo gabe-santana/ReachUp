@@ -25,12 +25,10 @@ namespace ReachUp
        public async Task<bool> PostRecoverPasswordEmail()
        {
           var rng = new Random();
-          // Instancio Message passando as informações específicas de EmailConfig
           var message = new Message(
              _emailConfig.UserEmail, _emailConfig.EmailName, _emailConfig.EmailContent
           );
           
-          // Aguardo e retorno
           return await SendEmailAsync(message) ? true : false;
           
        }
@@ -39,7 +37,7 @@ namespace ReachUp
        {
           var emailMessage = new MimeMessage();
           emailMessage.From.Add(
-             MailboxAddress.Parse(ParserOptions.Default, "csoft.company@gmail.com")
+             MailboxAddress.Parse(clsEmailStaticConfigs.UserName)
              );
          emailMessage.To.Add(message.To);
          emailMessage.Subject = message.Subject;
@@ -57,10 +55,9 @@ namespace ReachUp
           {
              try 
              {
-                // aqui as informações padrão para envio de emails, contidas no JSON são utilizadas
-                await client.ConnectAsync(_emailConfig.SmtpServer, _emailConfig.Port, true);
+                await client.ConnectAsync(clsEmailStaticConfigs.SmtpServer, clsEmailStaticConfigs.Port, true);
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
-                await client.AuthenticateAsync(_emailConfig.UserName, _emailConfig.Password);
+                await client.AuthenticateAsync(clsEmailStaticConfigs.UserName, clsEmailStaticConfigs.Password);
 
                 await client.SendAsync(mailMessage);
              }

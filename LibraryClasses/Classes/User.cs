@@ -173,17 +173,13 @@ namespace ReachUp
              
            ))
            {
-              // Crio uma instância de EmailConfig, passando as informações específicas do email
               EmailConfiguration emailConfig = 
                new EmailConfiguration(
                  email, clsPasswordRecoveryEmail.Name, 
                  $"{cod} {clsPasswordRecoveryEmail.Content} {clsPasswordRecoveryEmail.RecoveryPageURL}"
                );
-               // até aqui tá ok
-               // instancio EmailSender passando a instância de EmailConfig
                EmailSender emailSender = new EmailSender(emailConfig);
                
-               // Aguardo e retorno o resultado booleano do envio do email
                return await emailSender.PostRecoverPasswordEmail() 
                ? true : false;
             }
