@@ -10,14 +10,8 @@ namespace WebAdmin.Repositories
 {
     public class UserRepository
     {
-        private static readonly string BaseURL;
-        private static readonly HttpClient client;
-
-        public UserRepository()
-        { 
-           this.BaseURL = clsApiConnection.BaseURL;
-           this.client = new HttpClient();
-        }
+        private static readonly string BaseURL = clsApiConnection.BaseURL;
+        private static readonly HttpClient client = new HttpClient();
 
         public async Task<User> Login(User user) 
         {

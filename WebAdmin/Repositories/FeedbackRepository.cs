@@ -10,14 +10,8 @@ namespace WebAdmin.Repositories
 {
     public class FeedbackRepository
     {
-        private static readonly string BaseURL;
-        private static readonly HttpClient client;
-
-        public FeedbackRepository()
-        {
-           this.BaseURL = clsApiConnection.BaseURL;
-           this.client = new HttpClient();
-        }
+        private static readonly string BaseURL = clsApiConnection.BaseURL;
+        private static readonly HttpClient client = new HttpClient();
 
         public async Task<List<Feedback>> ByDate(int type, string begin, string end)
         {

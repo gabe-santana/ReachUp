@@ -5,19 +5,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAdmin.Models;
 using System.Net.Http;
+using System.IO;
 
 namespace WebAdmin.Repositories
 {
     public class LocalRepository
     {
-        private static readonly string BaseURL;
-        private static readonly HttpClient client;
-
-        public LocalRepository()
-        {
-           this.BaseURL = clsApiConnection.BaseURL;
-           this.client = new HttpClient();
-        }
+        private static readonly string BaseURL = clsApiConnection.BaseURL;
+        private static readonly HttpClient client = new HttpClient();
 
         public async Task<Local> Get(int id)
         {
@@ -68,6 +63,16 @@ namespace WebAdmin.Repositories
              JsonConvert.DeserializeObject<List<string>>(response);
 
            return _times;
+        }
+
+        /*public async Task<File> GetImage(int id)
+        {
+            
+        }*/
+
+        public async Task<string> UploadImage()
+        {
+
         }
     }
 }

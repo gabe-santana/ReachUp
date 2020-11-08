@@ -10,14 +10,8 @@ namespace WebAdmin.Repositories
 {
     public class AdmTypeRepository
     {
-        private static readonly string BaseURL;
-        private static readonly HttpClient client;
-
-        public AdmTypeRepository()
-        {
-           this.BaseURL = clsApiConnection.BaseURL;
-           this.client = new HttpClient();
-        }
+        private static readonly string BaseURL = clsApiConnection.BaseURL;
+        private static readonly HttpClient client = new HttpClient();
 
         public async Task<object> GetAll()
         {

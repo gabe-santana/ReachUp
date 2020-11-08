@@ -8,11 +8,6 @@ namespace WebAdmin.Repositories
 {
     static class clsApiConnection
     {
-        public static readonly string BaseURL;
-
-        static clsApiConnection()
-        {
-           this.BaseURL = "http://192.168.0.109:5000/api";
-        }
+        public static readonly string BaseURL = "http://192.168.0.109:5000/api";
     }
 }

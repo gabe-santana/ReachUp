@@ -10,14 +10,8 @@ namespace WebAdmin.Repositories
 {
     public class CategoryRepository
     {
-        private static readonly string BaseURL;
-        private static readonly HttpClient client;
-
-        public CategoryRepository()
-        {
-           this.BaseURL = clsApiConnection.BaseURL;
-           this.client = new HttpClient();
-        }
+        private static readonly string BaseURL = clsApiConnection.BaseURL;
+        private static readonly HttpClient client = new HttpClient();
 
         public async Task<List<Communique>> Get(int local)
         {
