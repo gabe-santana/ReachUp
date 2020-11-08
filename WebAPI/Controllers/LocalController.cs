@@ -108,8 +108,17 @@ namespace ReachUpWebAPI.Controllers
         {
            if (!string.IsNullOrWhiteSpace(id.ToString())) 
            {
-              var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/local/{id}.png");
-              return File(image, "image/png");
+              try 
+              {
+                 var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/local/{id}.png");
+                 return File(image, "image/png");
+              }
+
+              catch
+              {
+                 return NotFound("Imagem não encontrada");
+              }
+              
            }
            return BadRequest("Parameters are null");
         }

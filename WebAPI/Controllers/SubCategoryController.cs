@@ -32,8 +32,15 @@ namespace ReachUpWebAPI.Controllers
               && !string.IsNullOrWhiteSpace(subCategoryId.ToString()) 
               ) 
            {
-              var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/subCategory/{categoryId}_{subCategoryId}.svg");
-              return File(image, "image/svg+xml");
+              try 
+              {
+                  var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/subCategory/{categoryId}_{subCategoryId}.svg");
+                  return File(image, "image/svg+xml");
+              }
+              catch
+              {
+                  return NotFound("Ícone não encontrado");
+              }
            }
            return BadRequest("Parameters are null");
         }
