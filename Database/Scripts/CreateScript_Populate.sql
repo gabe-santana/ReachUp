@@ -270,7 +270,7 @@ CALL cadastrarUsuario("adm@email.com", "Administrator", "123", "adm", null);
 
 /* OS DEVS DESSA PARADA AQUI */
 
-CALL cadastrarUsuario("guilhermedjrdjrjan@email.com", "Guilherme Djrdjrjan", "123", "dev", null);
+CALL cadastrarUsuario("guilhermedjrdjrjan@gmail.com", "Guilherme Djrdjrjan", "123", "dev", null);
 CALL cadastrarUsuario("dev@email.com", "Gabriel Santana", "123", "dev", null);
 
 /* ------------------------- */

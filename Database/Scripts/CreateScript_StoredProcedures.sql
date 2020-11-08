@@ -151,6 +151,38 @@ BEGIN
   INSERT INTO recuperacao_senha VALUES (pEmail, pCdValidacao, DATE_ADD(now(), INTERVAL 1 hour));
 END$$
 
+
+DROP PROCEDURE IF EXISTS verificarRecuperacaoSenha$$
+CREATE PROCEDURE verificarRecuperacaoSenha(pEmail varchar(100), pCdValidacao varchar(16))
+BEGIN
+  declare _count int;
+  declare _validade DATETIME;
+  SELECT count(*) INTO @_count FROM recuperacao_senha
+  WHERE nm_email_usuario = pEmail AND cd_validacao = pCdValidacao;
+
+  IF (@_count = 1) THEN
+    SELECT dt_validade INTO @_validade FROM recuperacao_senha
+    WHERE nm_email_usuario = pEmail AND cd_validacao = pCdValidacao;
+	IF (@_validade >= now()) THEN
+      SELECT 1 as result;
+    ELSE
+      SELECT 0 as result;
+    END IF;
+  ELSE
+    SELECT 0 as result;
+  END IF;
+END$$
+
+DROP PROCEDURE IF EXISTS atualizarSenha$$
+CREATE PROCEDURE atualizarSenha(pEmail varchar(100), pRole varchar(3), pSenha varchar(60))
+BEGIN
+	IF (pRole = "cli") THEN
+      UPDATE cliente SET nm_senha_cliente = md5(pSenha) WHERE nm_email_cliente = pEmail;
+    ELSE 
+	  UPDATE administrador SET nm_senha_administrador = md5(pSenha) WHERE nm_email_administrador = pEmail;
+    END IF;
+END$$
+
 DROP PROCEDURE IF EXISTS cadastrarCategoria$$
 CREATE PROCEDURE cadastrarCategoria(pNome varchar(45), pDs varchar(200))
 BEGIN
