@@ -91,7 +91,7 @@ class ReachUp extends StatelessWidget {
       title: 'ReachUp!',
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
-      home: Home(),
+      home: SignView(),
     );
   }
 }

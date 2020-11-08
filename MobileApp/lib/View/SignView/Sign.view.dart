@@ -10,10 +10,11 @@ import 'SignUp.view.dart';
 
 class SignView extends StatelessWidget {
   String signInStatus;
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: SignUp(),
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -21,16 +22,13 @@ class SignView extends StatelessWidget {
                     Theme.of(context).colorScheme.secondaryVariant,
                     BlendMode.color),
                 image: NetworkImage(
-                  "https://media-cdn.tripadvisor.com/media/photo-s/11/98/7f/3e/photo3jpg.jpg"
-                ),
+                    "https://media-cdn.tripadvisor.com/media/photo-s/11/98/7f/3e/photo3jpg.jpg"),
                 fit: BoxFit.cover)),
         child: ClipRRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
             child: Center(
-            
               child: Column(
-                
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
@@ -48,7 +46,6 @@ class SignView extends StatelessWidget {
                   ),
                   SignInButtonBuilder(
                     icon: FontAwesomeIcons.google,
-                 
                     text: "Entrar com Google",
                     onPressed: () {},
                     backgroundColor: Color(0xFFCB1F27),
@@ -68,16 +65,14 @@ class SignView extends StatelessWidget {
                       endIndent: 50,
                     ),
                   ),
-                  SignInButtonBuilder(
+                  Builder(
+                    builder: (context) => SignInButtonBuilder(
                       text: 'Criar uma nova conta',
                       icon: Icons.account_circle,
-                      onPressed: () async{
-                      signInStatus = await Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SignUp()),
-                        );
-                      },
-                      backgroundColor: Theme.of(context).colorScheme.primary)
+                      onPressed: () => Scaffold.of(context).openEndDrawer(),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
                 ],
               ),
             ),
