@@ -38,7 +38,7 @@ namespace ReachUpWebAPI.Controllers
 
         [Authorize]
         [HttpPost("UploadImage")]
-        public async Task<string> UploadImage([FromForm] IFormFile file, int id)
+        public async Task<string> UploadImage([FromForm] IFormFile file)
         {
             List<string> validExtensions = new List<string>(
                 new string[] { ".svg" });

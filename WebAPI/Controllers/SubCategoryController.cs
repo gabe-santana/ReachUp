@@ -1,6 +1,13 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.Linq;
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
 using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
@@ -9,6 +16,74 @@ namespace ReachUpWebAPI.Controllers
     [ApiController]
     public class SubCategoryController : ControllerBase
     {
+        private IHostingEnvironment _hostingEnvironment;
+
+        [Obsolete]
+        public SubCategoryController(IHostingEnvironment hostingEnvironment)
+        {
+            this._hostingEnvironment = hostingEnvironment;
+        }
+
+        [Authorize]
+        [HttpGet("GetImage")]
+        public async Task<IActionResult> GetImage(int categoryId, int subCategoryId)
+        {
+           if (!string.IsNullOrWhiteSpace(categoryId.ToString())
+              && !string.IsNullOrWhiteSpace(subCategoryId.ToString()) 
+              ) 
+           {
+              var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/subCategory/{categoryId}_{subCategoryId}.svg");
+              return File(image, "image/svg+xml");
+           }
+           return BadRequest("Parameters are null");
+        }
+
+        [Authorize]
+        [HttpPost("UploadImage")]
+        public async Task<string> UploadImage([FromForm] IFormFile file)
+        {
+            List<string> validExtensions = new List<string>(
+                new string[] { ".svg" });
+
+            if (file.Length > 0)
+            {
+               string extension = Path.GetExtension(file.FileName);
+
+              if (validExtensions.Contains(extension))
+              {
+                 try
+                 {
+                   if(!Directory.Exists(_hostingEnvironment.ContentRootPath + "/App_Data/subCategory/"))
+                   {
+                       Directory.CreateDirectory(_hostingEnvironment.ContentRootPath + "/App_Data/subCategory/");
+                   }
+                   else if (System.IO.File.Exists(_hostingEnvironment.ContentRootPath + "/App_Data/subCategory/" + file.FileName))
+                   {
+                       System.IO.File.Delete(_hostingEnvironment.ContentRootPath + "/App_Data/subCategory/" + file.FileName);
+                   }
+
+                   using (FileStream filestream = 
+                            System.IO.File.Create(
+                             _hostingEnvironment.ContentRootPath + "/App_Data/subCategory/" +
+                             file.FileName
+                             )
+                         )
+                    {
+                       await file.CopyToAsync(filestream);
+                       filestream.Flush();
+                       return "Ok!";
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                   return ex.ToString();
+                }
+              }
+              return "Tipo de arquivo inválido!";
+            }
+            return "Falha no envio do arquivo!";
+        } 
 
         [Authorize]
         [HttpGet("GetAll")]
