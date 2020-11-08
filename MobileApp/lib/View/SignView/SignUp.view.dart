@@ -8,7 +8,6 @@ List<GlobalKey<FormState>> formKeys = [
   GlobalKey<FormState>(),
   GlobalKey<FormState>(),
   GlobalKey<FormState>(),
-  GlobalKey<FormState>(),
   GlobalKey<FormState>()
 ];
 
@@ -17,15 +16,7 @@ class SignUp extends StatefulWidget {
   _SignUpState createState() => _SignUpState();
 }
 
-class MyData {
-  String name = '';
-  String phone = '';
-  String email = '';
-  String age = '';
-}
-
 class _SignUpState extends State<SignUp> {
-  User user = new User();
   final _formKey = GlobalKey<FormState>();
 
   int currentStep;
@@ -89,6 +80,12 @@ class _SignUpState extends State<SignUp> {
   }
 }
 
+class UserData {
+  String name = '';
+  String email = '';
+  String password = '';
+}
+
 class StepperBody extends StatefulWidget {
   @override
   _StepperBodyState createState() => _StepperBodyState();
@@ -96,10 +93,11 @@ class StepperBody extends StatefulWidget {
 
 class _StepperBodyState extends State<StepperBody> {
   static final _focusNode = FocusNode();
+  static UserData user = UserData();
+
   int currStep = 0;
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  static MyData data = MyData();
 
   @override
   void initState() {
@@ -112,7 +110,7 @@ class _StepperBodyState extends State<StepperBody> {
 
   List<Step> steps = [
     Step(
-        title: const Text('Nome'),
+        title: Text('Nome', style: TextStyle(color: Color(0xFF525252))),
         subtitle: const Text(
           'Como devemos chamá-lo(a)?',
           style: TextStyle(fontSize: 16),
@@ -125,11 +123,13 @@ class _StepperBodyState extends State<StepperBody> {
           child: Column(
             children: <Widget>[
               TextFormField(
+                initialValue: "Gabriel",
                 focusNode: _focusNode,
                 keyboardType: TextInputType.text,
                 autocorrect: false,
-                onSaved: (String value) {
-                  data.name = value;
+                onSaved: (value) {
+                  user.name = value;
+                  print(user.name);
                 },
                 maxLines: 1,
                 //initialValue: 'Aseem Wangoo',
@@ -137,6 +137,7 @@ class _StepperBodyState extends State<StepperBody> {
                   if (value.isEmpty || value.length < 4) {
                     return 'Nome inválido!';
                   }
+                  return null;
                 },
                 decoration: InputDecoration(
                     labelText: 'Nome',
@@ -147,10 +148,12 @@ class _StepperBodyState extends State<StepperBody> {
                         TextStyle(decorationStyle: TextDecorationStyle.solid)),
               ),
               TextFormField(
+                initialValue: "Santana",
                 keyboardType: TextInputType.text,
                 autocorrect: false,
-                onSaved: (String value) {
-                  data.name = value;
+                onSaved: (value) {
+                  user.name += " $value";
+                  print(user.name);
                 },
                 maxLines: 1,
                 //initialValue: 'Aseem Wangoo',
@@ -170,9 +173,8 @@ class _StepperBodyState extends State<StepperBody> {
             ],
           ),
         )),
-
     Step(
-        title: const Text('E-mail'),
+        title: Text('E-mail', style: TextStyle(color: Color(0xFF525252))),
         subtitle: const Text(
           'Meio de contato',
           style: TextStyle(fontSize: 16),
@@ -185,6 +187,7 @@ class _StepperBodyState extends State<StepperBody> {
           child: Column(
             children: <Widget>[
               TextFormField(
+                initialValue: "Santana@email.com",
                 keyboardType: TextInputType.emailAddress,
                 autocorrect: false,
                 validator: (value) {
@@ -192,8 +195,8 @@ class _StepperBodyState extends State<StepperBody> {
                     return 'E-mail inválido!';
                   }
                 },
-                onSaved: (String value) {
-                  data.email = value;
+                onSaved: (value) {
+                  user.email = value;
                 },
                 maxLines: 1,
                 decoration: InputDecoration(
@@ -207,7 +210,7 @@ class _StepperBodyState extends State<StepperBody> {
           ),
         )),
     Step(
-        title: const Text('Senha'),
+        title: Text('Senha', style: TextStyle(color: Color(0xFF525252))),
         subtitle: const Text(
           'Sua senha',
           style: TextStyle(fontSize: 16),
@@ -219,6 +222,7 @@ class _StepperBodyState extends State<StepperBody> {
           child: Column(
             children: <Widget>[
               TextFormField(
+                initialValue: "1234567",
                 obscureText: true,
                 keyboardType: TextInputType.text,
                 autocorrect: false,
@@ -228,8 +232,8 @@ class _StepperBodyState extends State<StepperBody> {
                   }
                 },
                 maxLines: 1,
-                onSaved: (String value) {
-                  data.age = value;
+                onSaved: (value) {
+                  user.password = value;
                 },
                 decoration: InputDecoration(
                     labelText: 'Senha',
@@ -239,6 +243,7 @@ class _StepperBodyState extends State<StepperBody> {
                         TextStyle(decorationStyle: TextDecorationStyle.solid)),
               ),
               TextFormField(
+                initialValue: "1234567",
                 obscureText: true,
                 keyboardType: TextInputType.number,
                 autocorrect: false,
@@ -248,9 +253,7 @@ class _StepperBodyState extends State<StepperBody> {
                   }
                 },
                 maxLines: 1,
-                onSaved: (String value) {
-                  data.age = value;
-                },
+                onSaved: (value) {},
                 decoration: InputDecoration(
                     labelText: 'Confirmar Senha',
                     hintText: 'Digite a senha novamente',
@@ -261,92 +264,34 @@ class _StepperBodyState extends State<StepperBody> {
             ],
           ),
         )),
-
-    Step(
-        title: const Text('Preferencias'),
-        subtitle: const Text(
-          'Do que você gosta?',
-          style: TextStyle(fontSize: 16),
-        ),
-        isActive: true,
-        state: StepState.indexed,
-        content: Form(
-          key: formKeys[3],
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                keyboardType: TextInputType.text,
-                autocorrect: false,
-                validator: (value) {
-                  if (value.isEmpty || value.length > 2) {
-                    return 'Please enter valid age';
-                  }
-                },
-                maxLines: 1,
-                onSaved: (String value) {
-                  data.age = value;
-                },
-                decoration: InputDecoration(
-                    labelText: 'Enter your age',
-                    hintText: 'Enter age',
-                    icon: const Icon(Icons.explicit),
-                    labelStyle:
-                        TextStyle(decorationStyle: TextDecorationStyle.solid)),
-              ),
-            ],
-          ),
-        )),
-    //  Step(
-    //     title: const Text('Fifth Step'),
-    //     subtitle: const Text('Subtitle'),
-    //     isActive: true,
-    //     state: StepState.complete,
-    //     content: const Text('Enjoy Step Fifth'))
   ];
 
   @override
   Widget build(BuildContext context) {
     void showSnackBarMessage(String message,
         [MaterialColor color = Colors.red]) {
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text(message), backgroundColor: Theme.of(context).colorScheme.error,));
     }
 
-    void _submitDetails() {
+    void _submitForm() {
       final FormState formState = _formKey.currentState;
 
       if (!formState.validate()) {
-        showSnackBarMessage('Please enter correct data');
+        showSnackBarMessage('Preencha todos os campos!',);
       } else {
         formState.save();
-        print("Name: ${data.name}");
-        print("Phone: ${data.phone}");
-        print("Email: ${data.email}");
-        print("Age: ${data.age}");
 
-        showDialog(
-            context: context,
-            child: AlertDialog(
-              title: Text("Details"),
-              //content:  Text("Hello World"),
-              content: SingleChildScrollView(
-                child: ListBody(
-                  children: <Widget>[
-                    Text("Name : " + data.name),
-                    Text("Phone : " + data.phone),
-                    Text("Email : " + data.email),
-                    Text("Age : " + data.age),
-                  ],
-                ),
-              ),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ));
+        formKeys.forEach((key) {
+          if (!key.currentState.validate()) {
+            showSnackBarMessage('Preencha todos os campos!');
+          }else{
+            key.currentState.save();
+          }
+        });
+
+        print("Name: ${user.name}");
+        print("Phone: ${user.email}");
+        print("Email: ${user.password}");
       }
     }
 
@@ -356,6 +301,32 @@ class _StepperBodyState extends State<StepperBody> {
           key: _formKey,
           child: ListView(children: <Widget>[
             Stepper(
+              controlsBuilder: (BuildContext context,
+                  {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  child: Row(
+                    children: <Widget>[
+                      FlatButton(
+                          onPressed: onStepContinue,
+                          color: Theme.of(context).colorScheme.primary,
+                          child: Text("Próximo",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16))),
+                      currStep != 0
+                          ? FlatButton(
+                              onPressed: onStepCancel,
+                              child: const Text(
+                                'Voltar',
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 16),
+                              ),
+                            )
+                          : Container(),
+                    ],
+                  ),
+                );
+              },
               physics: ClampingScrollPhysics(),
               steps: steps,
               type: StepperType.vertical,
@@ -363,23 +334,13 @@ class _StepperBodyState extends State<StepperBody> {
               onStepContinue: () {
                 setState(() {
                   if (formKeys[currStep].currentState.validate()) {
+                    formKeys[currStep].currentState.save();
                     if (currStep < steps.length - 1) {
                       currStep = currStep + 1;
                     } else {
                       currStep = 0;
                     }
                   }
-                  // else {
-                  // Scaffold
-                  //     .of(context)
-                  //     .showSnackBar( SnackBar(content:  Text('$currStep')));
-
-                  // if (currStep == 1) {
-                  //   print('First Step');
-                  //   print('object' + FocusScope.of(context).toStringDeep());
-                  // }
-
-                  // }
                 });
               },
               onStepCancel: () {
@@ -397,14 +358,24 @@ class _StepperBodyState extends State<StepperBody> {
                 });
               },
             ),
-            // RaisedButton(
-            //   child: Text(
-            //     'Save details',
-            //     style: TextStyle(color: Colors.white),
-            //   ),
-            //   onPressed: _submitDetails,
-            //   color: Colors.blue,
-            // ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+              child: RaisedButton(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Próxima etapa ',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                    FaIcon(FontAwesomeIcons.arrowRight,
+                        color: Colors.white, size: 16)
+                  ],
+                ),
+                onPressed: _submitForm,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
           ]),
         ));
   }
