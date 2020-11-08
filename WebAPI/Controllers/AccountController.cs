@@ -70,7 +70,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         //[Authorize(Roles="cli,loj,adm")]
-        [HttpGet("TryUpdatePassword")]
+        /*[HttpGet("TryUpdatePassword")]
         public async Task<IActionResult> TryUpdatePassword(string email, string cod)
         {
             if (!string.IsNullOrWhiteSpace(email)
@@ -88,7 +88,7 @@ namespace ReachUpWebAPI.Controllers
                 && !string.IsNullOrWhiteSpace(password))
                 return Ok(await new User().UpdatePassword(email, role, password));
             return BadRequest("Parameters are null");
-        }
+        }*/
 
 
         [HttpGet("SignOut")]

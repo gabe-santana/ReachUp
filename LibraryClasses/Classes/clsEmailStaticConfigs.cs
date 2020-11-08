@@ -11,6 +11,6 @@ namespace ReachUp
        public static readonly string SmtpServer = "smtp.gmail.com";
        public static readonly int Port = 465;
        public static readonly string UserName = "csoft.company@gmail.com";
-       public static readonly string Password = "nossa senha, que está no .env da WebAPI";
+       public static readonly string Password = "IT$snYwN8QSMGmzbM9yqw&vhMs9L";
     }
 }

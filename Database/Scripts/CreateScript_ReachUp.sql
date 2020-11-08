@@ -134,10 +134,10 @@ CREATE TABLE IF NOT EXISTS cliente (
 DROP TABLE IF EXISTS recuperacao_senha ;
 
 CREATE TABLE IF NOT EXISTS recuperacao_senha (
-  nm_email_cliente VARCHAR(100) NOT NULL,
+  nm_email_usuario VARCHAR(100) NOT NULL,
   cd_validacao VARCHAR(16) NOT NULL,
   dt_validade DATETIME,
-  PRIMARY KEY (nm_email_cliente, cd_validacao));
+  PRIMARY KEY (nm_email_usuario, cd_validacao));
 
 
 

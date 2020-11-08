@@ -1,6 +1,13 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.Linq;
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
 using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
@@ -9,6 +16,25 @@ namespace ReachUpWebAPI.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
+        private IHostingEnvironment _hostingEnvironment;
+
+        [Obsolete]
+        public CategoryController(IHostingEnvironment hostingEnvironment)
+        {
+            this._hostingEnvironment = hostingEnvironment;
+        }
+
+        [Authorize]
+        [HttpGet("GetImage")]
+        public async Task<IActionResult> GetImage(int id)
+        {
+           if (!string.IsNullOrWhiteSpace(id.ToString())) 
+           {
+              var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/category/{id}.svg");
+              return File(image, "image/svg+xml");
+           }
+           return BadRequest("Parameters are null");
+        }
 
         [Authorize]
         [HttpGet]

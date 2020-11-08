@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using System.Linq;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,11 +16,13 @@ namespace ReachUpWebAPI.Controllers
     [ApiController]
     public class LocalController : ControllerBase
     {
-        private readonly IWebHostEnvironment _environment;
+ 
+        private IHostingEnvironment _hostingEnvironment;
 
-        public LocalController(IWebHostEnvironment environment)
+        [Obsolete]
+        public LocalController(IHostingEnvironment hostingEnvironment)
         {
-            _environment = environment;
+            this._hostingEnvironment = hostingEnvironment;
         }
 
         #region Actions
@@ -104,19 +108,13 @@ namespace ReachUpWebAPI.Controllers
         {
            if (!string.IsNullOrWhiteSpace(id.ToString())) 
            {
-              using(FileStream fileStream = System.IO.File.OpenRead(
-                     _environment.WebRootPath + $"/images/local/{id}.jpg"
-                    )
-                 )
-              {
-                 // ---- //
-                 return Ok("await Imagem");
-              }
+              var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/local/{id}.png");
+              return File(image, "image/png");
            }
            return BadRequest("Parameters are null");
         }
 
-        [Authorize]
+        /*[Authorize]
         [HttpPost("UploadImage")]
         public async Task<string> UploadImage([FromForm] IFormFile file)
         {
@@ -130,18 +128,18 @@ namespace ReachUpWebAPI.Controllers
               {
                  //try
                  //{
-                   if(!Directory.Exists(_environment.WebRootPath + "/images/local/"))
+                   if(!Directory.Exists(_hostingEnvironment.ContentRootPath + "/images/local/"))
                    {
-                       Directory.CreateDirectory(_environment.WebRootPath + "/images/local/");
+                       Directory.CreateDirectory(_hostingEnvironment.ContentRootPath + "/images/local/");
                    }
-                   else if (System.IO.File.Exists(_environment.WebRootPath + "/images/local/" + file.FileName))
+                   else if (System.IO.File.Exists(_hostingEnvironment.ContentRootPath + "/images/local/" + file.FileName))
                    {
-                       System.IO.File.Delete(_environment.WebRootPath + "/images/local/" + file.FileName);
+                       System.IO.File.Delete(_hostingEnvironment.ContentRootPath + "/images/local/" + file.FileName);
                    }
 
                    using (FileStream filestream = 
                             System.IO.File.Create(
-                             _environment.WebRootPath + "/images/local" +
+                             _hostingEnvironment.ContentRootPath + "/images/local" +
                              file.FileName
                              )
                          )
@@ -157,11 +155,11 @@ namespace ReachUpWebAPI.Controllers
                 {
                    return ex.ToString();
                 }*/
-              }
+            /*  }
               return "Tipo de arquivo inválido!";
             }
             return "Falha no envio do arquivo!";
-        }
+        } */
         
 
         [Authorize(Roles = "adm")]
