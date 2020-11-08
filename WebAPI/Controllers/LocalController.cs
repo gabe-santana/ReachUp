@@ -114,32 +114,33 @@ namespace ReachUpWebAPI.Controllers
            return BadRequest("Parameters are null");
         }
 
-        /*[Authorize]
+        [Authorize]
         [HttpPost("UploadImage")]
-        public async Task<string> UploadImage([FromForm] IFormFile file)
+        public async Task<string> UploadImage([FromForm] IFormFile file, int id)
         {
-            string validExtensions = "jpg, png, image/jpeg, image/png";
+            List<string> validExtensions = new List<string>(
+                new string[] { ".png" });
 
             if (file.Length > 0)
             {
-               //string extension = Path.GetExtension(file.FileName);
+               string extension = Path.GetExtension(file.FileName);
 
-              if (validExtensions.Contains(file.ContentType))
+              if (validExtensions.Contains(extension))
               {
-                 //try
-                 //{
-                   if(!Directory.Exists(_hostingEnvironment.ContentRootPath + "/images/local/"))
+                 try
+                 {
+                   if(!Directory.Exists(_hostingEnvironment.ContentRootPath + "/App_Data/local/"))
                    {
-                       Directory.CreateDirectory(_hostingEnvironment.ContentRootPath + "/images/local/");
+                       Directory.CreateDirectory(_hostingEnvironment.ContentRootPath + "/App_Data/local/");
                    }
-                   else if (System.IO.File.Exists(_hostingEnvironment.ContentRootPath + "/images/local/" + file.FileName))
+                   else if (System.IO.File.Exists(_hostingEnvironment.ContentRootPath + "/App_Data/local/" + file.FileName))
                    {
-                       System.IO.File.Delete(_hostingEnvironment.ContentRootPath + "/images/local/" + file.FileName);
+                       System.IO.File.Delete(_hostingEnvironment.ContentRootPath + "/App_Data/local/" + file.FileName);
                    }
 
                    using (FileStream filestream = 
                             System.IO.File.Create(
-                             _hostingEnvironment.ContentRootPath + "/images/local" +
+                             _hostingEnvironment.ContentRootPath + "/App_Data/local/" +
                              file.FileName
                              )
                          )
@@ -148,18 +149,17 @@ namespace ReachUpWebAPI.Controllers
                        filestream.Flush();
                        return "Ok!";
                     }
-                //}
+                }
 
-               /*erro CS0119*/ 
-                /*catch (Exception ex)
+                catch (Exception ex)
                 {
                    return ex.ToString();
-                }*/
-            /*  }
+                }
+             }
               return "Tipo de arquivo inválido!";
             }
             return "Falha no envio do arquivo!";
-        } */
+        } 
         
 
         [Authorize(Roles = "adm")]
