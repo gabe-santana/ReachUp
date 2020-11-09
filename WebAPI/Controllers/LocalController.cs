@@ -106,32 +106,46 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet("GetImage")]
         public async Task<IActionResult> GetImage(int id, int type)
         {
-           if (!string.IsNullOrWhiteSpace(id.ToString())) 
+           // Exceção: mesmo sem o tipo, o if é "passado". 
+           // Nessa ocasião, caso o local não tenha imagem, o ícone do tipo "loja" acaba sendo exibido
+           if (!string.IsNullOrWhiteSpace(id.ToString())
+              && !string.IsNullOrWhiteSpace(type.ToString())) 
            {
+              FileStream image = null;
+
               try 
               {
-                 var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/local/{id}.png");
-                 return File(image, "image/png");
+                 image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/local/{id}.png");
               }
 
               catch
               {
-                 try
+                 if (type == 6)
                  {
-                     if (type == 6)
-                     {
-                        var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/localType/0.png");
-                        return File(image, "image/png");
-                     }
-                     var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/localType/{type}.png");
-                     return File(image, "image/png");
+                    try
+                    {
+                       image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/localType/0.png");
+                    }
+
+                    catch
+                    {
+                       return NotFound();
+                    }     
                  }
-                 
-                 catch
-                 {
-                     return NotFound();
+                 else
+                 {   
+                     try
+                     {
+                        image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/localType/{type}.png");
+                     }
+
+                     catch
+                     {
+                         return NotFound();
+                     }
                  }
               }
+              return File(image, "image/png");
               
            }
            return BadRequest("Parameters are null");
@@ -139,26 +153,24 @@ namespace ReachUpWebAPI.Controllers
 
         /*[Authorize]
         [HttpGet("GetImages")]
-        public async Task<IActionResult> GetImages(List<int> ids)
+        public async Task<IActionResult> GetImages([FromForm] List<int> ids)
         {
            if (ids.Any()) 
-           {
-              foreach (var id in ids)
-              {
-                 try 
-                 {
-                    var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/local/{id}.png");
-                    return File(image, "image/png");
-                 }
-
-                 catch
-                 {
-                    return NotFound();
-                 }
-              }
-              
-           }
+              return Ok(await ImagesGet(ids));
            return BadRequest("Parameters are null");
+        }*/
+
+        /*private async Task<List<FileStream>> ImagesGet(List<int> ids)
+        {
+           List<FileStream> files = new List<FileStream>();
+
+           foreach (var id in ids)
+           {
+              files.Add(
+                  System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/local/{id}.png")
+              );
+           }
+           return files;
         }*/
 
         [Authorize]
