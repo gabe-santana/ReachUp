@@ -104,7 +104,7 @@ namespace ReachUpWebAPI.Controllers
 
         [Authorize]
         [HttpGet("GetImage")]
-        public async Task<IActionResult> GetImage(int id)
+        public async Task<IActionResult> GetImage(int id, int type)
         {
            if (!string.IsNullOrWhiteSpace(id.ToString())) 
            {
@@ -116,12 +116,50 @@ namespace ReachUpWebAPI.Controllers
 
               catch
               {
-                 return NotFound("Imagem não encontrada");
+                 try
+                 {
+                     if (type == 6)
+                     {
+                        var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/localType/0.png");
+                        return File(image, "image/png");
+                     }
+                     var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/localType/{type}.png");
+                     return File(image, "image/png");
+                 }
+                 
+                 catch
+                 {
+                     return NotFound();
+                 }
               }
               
            }
            return BadRequest("Parameters are null");
         }
+
+        /*[Authorize]
+        [HttpGet("GetImages")]
+        public async Task<IActionResult> GetImages(List<int> ids)
+        {
+           if (ids.Any()) 
+           {
+              foreach (var id in ids)
+              {
+                 try 
+                 {
+                    var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/local/{id}.png");
+                    return File(image, "image/png");
+                 }
+
+                 catch
+                 {
+                    return NotFound();
+                 }
+              }
+              
+           }
+           return BadRequest("Parameters are null");
+        }*/
 
         [Authorize]
         [HttpPost("UploadImage")]
@@ -177,8 +215,13 @@ namespace ReachUpWebAPI.Controllers
             List<string> validExtensions = new List<string>(
                 new string[] { ".png" });
 
+            List<string> flaws = new List<string>();
+
+            int i = -1;
             foreach (var file in files)
             {
+               i++;
+
                if (file.Length > 0)
                {
                   string extension = Path.GetExtension(file.FileName);
@@ -187,11 +230,15 @@ namespace ReachUpWebAPI.Controllers
                   {
                       try
                       {
-                          if(!Directory.Exists(_hostingEnvironment.ContentRootPath + "/App_Data/local/"))
+                          if (i == 0)
                           {
-                             Directory.CreateDirectory(_hostingEnvironment.ContentRootPath + "/App_Data/local/");
+                              if (!Directory.Exists(_hostingEnvironment.ContentRootPath + "/App_Data/local/"))
+                              {
+                                  Directory.CreateDirectory(_hostingEnvironment.ContentRootPath + "/App_Data/local/");
+                              }
                           }
-                          else if (System.IO.File.Exists(_hostingEnvironment.ContentRootPath + "/App_Data/local/" + file.FileName))
+                          
+                          if (System.IO.File.Exists(_hostingEnvironment.ContentRootPath + "/App_Data/local/" + file.FileName))
                           {
                              System.IO.File.Delete(_hostingEnvironment.ContentRootPath + "/App_Data/local/" + file.FileName);
                           }
@@ -214,9 +261,33 @@ namespace ReachUpWebAPI.Controllers
                          return ex.ToString();
                       }
                   }
-                  return $"Envio das imagens interrompido - Exceção na imagem {file.FileName}: Tipo de arquivo inválido!";
+                  flaws.Add(file.FileName);
+                  continue;
                }
-               return $"Envio das imagens interrompido - Falha no envio da imagem {file.FileName}";
+               flaws.Add(file.FileName);
+               continue;
+            }
+
+            if (flaws.Any())
+            {
+               /*string errorReport = "Houve falha no envio da(s) imagem(ns): ";
+
+               for (int j = 0; j < flaws.Count; i++)
+               {
+                  if (j == flaws.Count - 1 && j != 0)
+                  {
+                     errorReport += " e" + flaws[j] + ".";
+                  }
+                  else if (j == 0)
+                  {
+                     errorReport += flaws[j];
+                  }
+                  else
+                  {
+                     errorReport += ", " + flaws[j];
+                  }
+               }*/
+               return "Número de falhas: " + Convert.ToString(flaws.Count);
             }
             return "Tudo ok!";
         }
