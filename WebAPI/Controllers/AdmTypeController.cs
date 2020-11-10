@@ -12,6 +12,7 @@ namespace ReachUpWebAPI.Controllers
     public class AdmTypeController : ControllerBase
     {
 
+        // OK 
         [Authorize(Roles = "adm, dev")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
@@ -19,6 +20,7 @@ namespace ReachUpWebAPI.Controllers
             return Ok(await new AdmType().GetAll());
         }
 
+        // OK 
         [Authorize(Roles = "adm, dev")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AdmType admType)
@@ -27,8 +29,9 @@ namespace ReachUpWebAPI.Controllers
                 return Ok(await admType.Add());
             return BadRequest("Parameters are null");
         }
-
-        [Authorize(Roles = "dev")]
+        
+        // OK 
+        [Authorize(Roles = "adm, dev")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] AdmType admType)
         {
@@ -37,7 +40,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "dev")]
+        // OK 
+        [Authorize(Roles = "adm, dev")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {

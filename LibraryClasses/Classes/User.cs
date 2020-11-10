@@ -66,74 +66,48 @@ namespace ReachUp
             
         }
 
-        /*/// <summary>
-        /// Get Local by Beacon (admins constructor)
+        /// <summary>
+        /// Get admins (local) constructor
         /// </summary>
         /// <param name="name"></param>
         /// <param name="email"></param>
-        /// <param name="admType"></param>
-        public User(string name, string email, string admType)
+        public User(string name, string email)
          : base()
         {
             this.Name = name;
-            this.Email = email;
-            this.AdmType = admType;
-        }*/
+            this.Email = email;           
+        }
+
+        
 
         #endregion
 
         #region Public Methods
 
-        public Task<bool> CheckEmail(string email, string role)
+        public async Task<bool> CheckEmail(string email, string role)
         {
-
-           if (role == "cli")
-           {
-              if (base.DQLCommand(
-                $"SELECT COUNT(*) as Count from cliente WHERE nm_email_cliente={email}",
-                ref this.Data
-              ))
-              {
-                 if (this.Data.HasRows)
-                 {
-                    if (this.Data.Read())
-                    {
-                       if (int.Parse(this.Data["Count"].ToString()) == 1)
-                       {
-                          return Task.FromResult(true);
-                       }
-                       return Task.FromResult(false);
-                    }
-                 }
-                 base.Disconnect();
-                 return null;
+            if (base.DQLCommand(Procedure.checarEmail, ref this.Data, 
+                new string[,] {
+                  {"pEmail", email }, {"pRole", role }
               }
-              return null;
-           }
-           else if (role == "loj" || role == "adm" || role == "dev")
-           {
-              if (base.DQLCommand(
-                $"SELECT COUNT(*) as Count from administrador WHERE nm_email_administrador={email}",
-                ref this.Data
-              ))
-              {
-                 if (this.Data.HasRows)
-                 {
-                    if (this.Data.Read())
-                    {
-                       if (int.Parse(this.Data["Count"].ToString()) == 1)
-                       {
-                          return Task.FromResult(true);
-                       }
-                       return Task.FromResult(false);
-                    }
-                 }
-                 base.Disconnect();
-                 return null;
-              }
-              return null;
-           }
-           return null;
+            ))
+            {
+               if (this.Data.HasRows)
+               {
+                   if (this.Data.Read())
+                   {
+                      bool _result = Convert.ToBoolean(int.Parse(this.Data["result"].ToString()));
+                      this.Data.Close();
+                      base.Disconnect();
+                      return _result;
+                   }
+                   base.Disconnect();
+                   return false;
+               }
+               base.Disconnect();
+               return false;
+            }
+            return false;
         }
 
         public bool Login() 

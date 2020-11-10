@@ -39,7 +39,7 @@ namespace ReachUp
 
         #region Methods
 
-        public Task<List<AdmType>> GetAll()
+        public async Task<List<AdmType>> GetAll()
         {
             if (base.DQLCommand(
                 "SELECT * from tipo_administrador", ref this.Data
@@ -58,70 +58,55 @@ namespace ReachUp
                         );
                     }
                     this.Data.Close();
+                    base.Disconnect();
+                    return admTypes;
                 }
                 base.Disconnect();
-                return Task.FromResult(admTypes);
+                return null;
             }
             return null;
         }
 
-        public Task<bool> Add()
+        public async Task<bool> Add()
         {
-            if (base.DQLCommand(
-                $"SELECT COUNT(*) as Count FROM tipo_administrador",
-                ref this.Data
+            if (base.DMLCommand(Procedure.adicionarTipo,
+                 new string[,] {
+                     {"pNome", this.Name }, {"pTipo", "adm" }
+                 }
             ))
             {
-                int Count = 0;
-                while (this.Data.Read()) 
-                {
-                   Count = int.Parse(this.Data["Count"].ToString());
-                }
-
-               if (base.DMLCommand(
-                $"INSERT INTO tipo_administrador VALUES ({Count}, {this.Name})"
-                ))
-                {
-                   this.Data.Close();
-                   base.Disconnect();
-                   return Task.FromResult(true);
-                }
-                this.Data.Close();
-                base.Disconnect();
-                return Task.FromResult(false);
+               return true;
             }
-            this.Data.Close();
-            base.Disconnect();
-            return Task.FromResult(false);
+            return false;
         }
 
-        public Task<bool> Update()
+        public async Task<bool> Update()
         {
-            if (base.DMLCommand(
-                $"UPDATE tipo_administrador SET nm_tipo_administrador={this.Name} WHERE cd_tipo_administrador={this.Id}"
+            if (base.DMLCommand(Procedure.atualizarTipo,
+                 new string[,] {
+                     {"pCd", this.Id.ToString() }, {"pNome", this.Name },
+                     {"pTipo",  "adm" }
+                 }
             ))
             {
-               return Task.FromResult(true);
+               return true;
             }
-            return Task.FromResult(false);
+            return false;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            if (base.DMLCommand(
-                $"DELETE FROM administrador WHERE cd_tipo_administrador={id}"
+            if (base.DMLCommand(Procedure.deletarTipo,
+                 new string[,] {
+                     {"pCd", id.ToString() }, {"pTipo", "adm" }
+                 }
             ))
             {
-               if (base.DMLCommand(
-                   $"DELETE FROM tipo_administrador WHERE cd_tipo_administrador={id}"
-               ))
-               {
-                  return Task.FromResult(true);
-               }
-               return Task.FromResult(false);
+               return true;
             }
-            return Task.FromResult(false);
+            return false;
         }
+
 
         #endregion
 

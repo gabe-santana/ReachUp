@@ -127,6 +127,24 @@ BEGIN
 	
 END$$
 
+DROP PROCEDURE IF EXISTS checarEmail$$
+CREATE PROCEDURE checarEmail(pEmail varchar(100), pRole varchar(3))
+BEGIN
+  declare _count int;
+  IF (pRole = "cli") THEN
+    SELECT count(*) INTO @_count FROM cliente WHERE nm_email_cliente = pEmail;
+  ELSE IF (pRole = "loj" OR pRole = "adm" OR pRole = "dev") THEN 
+         SELECT count(*) INTO @_count FROM administrador WHERE nm_email_administrador = pEmail;
+       END IF;
+  END IF;
+
+  IF (@_count = 1) THEN 
+    SELECT 1 as result;
+  ELSE
+    SELECT 0 as result;
+  END IF;
+END$$
+
 DROP PROCEDURE IF EXISTS logarUsuario$$
 CREATE PROCEDURE logarUsuario(pEmail varchar(100), pSenha varchar(60), pRole varchar(3))
 BEGIN
@@ -181,6 +199,82 @@ BEGIN
     ELSE 
 	  UPDATE administrador SET nm_senha_administrador = md5(pSenha) WHERE nm_email_administrador = pEmail;
     END IF;
+END$$
+
+DROP PROCEDURE IF EXISTS adicionarTipo$$
+CREATE PROCEDURE adicionarTipo(pNome varchar(45), pTipo varchar(3))
+BEGIN
+   declare _cd int;
+   IF (pTipo = "adm") THEN
+     SELECT count(*) INTO @_cd FROM tipo_administrador;
+     INSERT INTO tipo_administrador VALUES (@_cd, pNome);
+   END IF;
+   IF (pTipo = "b") THEN 
+	 SELECT count(*) INTO @_cd FROM tipo_beacon;
+	 INSERT INTO tipo_beacon VALUES (@_cd, pNome);
+   END IF;
+   IF (pTipo = "c") THEN
+	 SELECT count(*) INTO @_cd FROM tipo_comunicado;
+	 INSERT INTO tipo_comunicado VALUES (@_cd, pNome);
+   END IF;
+   IF (pTipo = "f") THEN
+     SELECT count(*) INTO @_cd FROM tipo_feedback;
+     INSERT INTO tipo_feedback VALUES (@_cd, pNome);
+   END IF;
+   IF (pTipo = "l") THEN
+     SELECT count(*) INTO @_cd FROM tipo_local;
+     INSERT INTO tipo_local VALUES (@_cd, pNome);
+   END IF;
+END$$
+
+DROP PROCEDURE IF EXISTS atualizarTipo$$
+CREATE PROCEDURE atualizarTipo(pCd int, pNome varchar(45), pTipo varchar(3))
+BEGIN
+   IF (pTipo = "adm") THEN
+     UPDATE tipo_administrador SET nm_tipo_administrador = pNome  
+     WHERE cd_tipo_administrador = pCd;
+   END IF;
+   IF (pTipo = "b") THEN 
+	 UPDATE tipo_beacon SET nm_tipo_beacon = pNome  
+     WHERE cd_tipo_beacon = pCd;
+   END IF;
+   IF (pTipo = "c") THEN
+	 UPDATE tipo_comunicado SET nm_tipo_comunicado = pNome  
+     WHERE cd_tipo_comunicado = pCd;
+   END IF;
+   IF (pTipo = "f") THEN
+     UPDATE tipo_feedback SET nm_tipo_feedback = pNome  
+     WHERE cd_tipo_feedback = pCd;
+   END IF;
+   IF (pTipo = "l") THEN
+     UPDATE tipo_local SET nm_tipo_local = pNome  
+     WHERE cd_tipo_local = pCd;
+   END IF;
+END$$
+
+DROP PROCEDURE IF EXISTS deletarTipo$$
+CREATE PROCEDURE deletarTipo(pCd int, pTipo varchar(3))
+BEGIN
+   IF (pTipo = "adm") THEN
+     DELETE FROM administrador WHERE cd_tipo_administrador = pCd;
+     DELETE FROM tipo_administrador WHERE cd_tipo_administrador = pCd;
+   END IF;
+   IF (pTipo = "b") THEN 
+	 DELETE FROM beacon WHERE cd_tipo_beacon = pCd;
+     DELETE FROM tipo_beacon WHERE cd_tipo_beacon = pCd;
+   END IF;
+   IF (pTipo = "c") THEN
+	 DELETE FROM comunicado WHERE cd_tipo_comunicado = pCd;
+     DELETE FROM tipo_comunicado WHERE cd_tipo_comunicado = pCd;
+   END IF;
+   IF (pTipo = "f") THEN
+     DELETE FROM feedback WHERE cd_tipo_feedback = pCd;
+     DELETE FROM tipo_feedback WHERE cd_tipo_feedback = pCd;
+   END IF;
+   IF (pTipo = "l") THEN
+     DELETE FROM `local` WHERE cd_tipo_local = pCd;
+     DELETE FROM tipo_local WHERE cd_tipo_local = pCd;
+   END IF;
 END$$
 
 DROP PROCEDURE IF EXISTS cadastrarCategoria$$
@@ -287,15 +381,19 @@ CREATE PROCEDURE receberComunicados(pLocal int)
 BEGIN
 	SELECT * FROM comunicado as c 
 	INNER JOIN `local` as l 
-	ON l.cd_local = 	c.cd_local 
+	ON l.cd_local = c.cd_local 
+    INNER JOIN tipo_comunicado tc
+    ON c.cd_tipo_comunicado = tc.cd_tipo_comunicado
 	WHERE c.cd_tipo_comunicado <> 0
 	AND l.cd_local = pLocal;
 END$$
+
 DROP PROCEDURE IF EXISTS receberPromocoesDirecionadas$$
 CREATE PROCEDURE  receberPromocoesDirecionadas(pLocal int, pCliente varchar(100))
 BEGIN
-			SELECT l.nm_local , c.cd_comunicado, c.cd_tipo_comunicado, c.ds_comunicado , ca.nm_categoria, 
-			sc.nm_sub_categoria , c.dt_inicio_comunicado, c.dt_fim_comunicado 
+			SELECT l.cd_local, l.nm_local , c.cd_comunicado, c.cd_tipo_comunicado, c.ds_comunicado, 
+			GROUP_CONCAT(CONCAT(csc.cd_categoria, '-', csc.cd_sub_categoria)) as subCategorias_preferidas, 
+            c.dt_inicio_comunicado, c.dt_fim_comunicado 
 			FROM `local` as l
 			INNER JOIN comunicado as c
 			ON l.cd_local = c.cd_local 
@@ -309,9 +407,12 @@ BEGIN
 			INNER JOIN preferencia_cliente as pc
 			ON sc.cd_categoria = pc.cd_categoria
 			AND sc.cd_sub_categoria = pc.cd_sub_categoria
-			WHERE sc.cd_categoria = pc.cd_categoria AND sc.cd_sub_categoria = pc.cd_sub_categoria
+			WHERE csc.cd_categoria = pc.cd_categoria 
+            AND csc.cd_sub_categoria = pc.cd_sub_categoria
 			AND pc.nm_email_cliente = pCliente
-			AND curdate() BETWEEN c.dt_inicio_comunicado AND c.dt_fim_comunicado
+			/*AND now() BETWEEN c.dt_inicio_comunicado AND c.dt_fim_comunicado
+				OR c.dt_fim_comunicado = null*/
+            AND now() BETWEEN c.dt_inicio_comunicado AND c.dt_fim_comunicado
 			AND c.cd_tipo_comunicado = 0
 			AND c.cd_local = pLocal
 			GROUP BY c.cd_comunicado;
@@ -411,6 +512,12 @@ END$$
 
 /* Lojista e Administrador */
 
+DROP PROCEDURE IF EXISTS checarBeacon$$
+CREATE PROCEDURE checarBeacon(pUUID varchar(36))
+BEGIN
+  SELECT (SELECT COUNT(*) FROM beacon WHERE cd_uuid_beacon = pUUID) as result;
+END$$
+
 DROP PROCEDURE IF EXISTS cadastrarLocal$$
 CREATE PROCEDURE cadastrarLocal(pTipo int, pNome varchar(45), pAndar int(3), pAbertura time , pFechamento time, pUUIDBeacon varchar(36))
 BEGIN
@@ -493,10 +600,21 @@ CREATE PROCEDURE publicarComunicado(
 	pDataFim datetime)
 BEGIN
 		DECLARE 	_cd int;
-		SELECT COUNT(cd_comunicado) INTO @_cd FROM comunicado;
-		INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, pDataInicio, pDataFim);
-		/*INSERT INTO comunicado_sub_categoria VALUES (@_cd, pCategoria, pSubCategoria);*/
-		
+		SELECT COUNT(*) INTO @_cd FROM comunicado;
+
+        IF (pDataInicio = null AND pDataFim = null) THEN
+		INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, now(), null);
+        ELSE 
+             IF (pDataInicio = null) THEN
+             INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, now(), pDataFim);
+             ELSE
+                  IF (pDataFim = null) THEN 
+                  INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, pDataInicio, null);
+                  ELSE
+					  INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, pDataInicio, pDataFim);
+                  END IF;
+             END IF;
+	    END IF;
 END$$
 
 DROP PROCEDURE IF EXISTS relacionarComunicadoSubCategoria$$
@@ -581,8 +699,8 @@ DROP PROCEDURE IF EXISTS pegarLocal$$
 CREATE PROCEDURE pegarLocal(pID INT)
 BEGIN
 	SELECT 
-    tl.nm_tipo_local, l.nm_local, l.cd_andar, 
-	group_concat(b.cd_uuid_beacon) AS  Beacons FROM `local` AS l 
+    tl.nm_tipo_local, l.cd_tipo_local, l.nm_local, l.cd_andar, 
+	b.cd_uuid_beacon FROM `local` AS l 
 	INNER JOIN tipo_local AS tl
 	ON l.cd_tipo_local = tl.cd_tipo_local
 	INNER JOIN beacon AS b
@@ -594,41 +712,22 @@ BEGIN
 	AND scl.cd_sub_categoria = sc.cd_sub_categoria
 	INNER JOIN categoria as c
 	ON sc.cd_categoria = c.cd_categoria
-	WHERE l.cd_local = pID;
+	WHERE l.cd_local = pID 
+    AND b.cd_tipo_beacon = 0;
 END$$
-
-DROP PROCEDURE IF EXISTS pegarLocalBeacon$$
-CREATE PROCEDURE pegarLocalBeacon(pBeacon varchar(36))
-BEGIN
-  SELECT l.cd_local, tl.nm_tipo_local, l.nm_local, l.cd_andar, 
-  group_concat(a.nm_administrador + "-" + ta.nm_tipo_administrador) 
-  as Admins, 
-  group_concat(b.cd_uuid_beacon + "-" + tb.nm_tipo_beacon) as Beacons
-  FROM `local` l 
-  INNER JOIN beacon b
-  ON (l.cd_local = b.cd_local)
-  INNER JOIN tipo_beacon tb
-  ON (b.cd_tipo_beacon = tb.cd_tipo_beacon)
-  INNER JOIN tipo_local tl
-  ON (l.cd_tipo_local = tl.cd_tipo_local)
-  INNER JOIN administrador a
-  ON (l.cd_local = a.cd_local)
-  INNER JOIN tipo_administrador ta
-  ON (a.cd_tipo_administrador = ta.cd_tipo_administrador)
-  WHERE b.cd_uuid_beacon = pBeacon;
-END$$ 
 
 DROP PROCEDURE IF EXISTS pegarLocais$$
 CREATE PROCEDURE pegarLocais(pTipo INT)
 BEGIN
-	SELECT l.cd_local, 
+	SELECT l.cd_local, l.cd_tipo_local,
 	tl.nm_tipo_local, l.nm_local, 
-    l.cd_andar, group_concat(b.cd_uuid_beacon) AS  Beacons FROM `local` AS l 
+    l.cd_andar, b.cd_uuid_beacon FROM `local` AS l 
 	INNER JOIN tipo_local AS tl
 	ON l.cd_tipo_local = tl.cd_tipo_local
 	INNER JOIN beacon AS b
 	ON  l.cd_local = b.cd_local
 	WHERE l.cd_tipo_local = pTipo
+    AND b.cd_tipo_beacon = 0
 	GROUP BY l.cd_local;
 END$$
 
@@ -647,9 +746,11 @@ END$$
 DROP PROCEDURE IF EXISTS deletarLocal$$
 CREATE PROCEDURE deletarLocal(pLocal int)
 BEGIN
-	DELETE FROM categoria_local WHERE cd_local = pLocal;
+	DELETE FROM sub_categoria_local WHERE cd_local = pLocal;
 	DELETE FROM comunicado WHERE cd_local = pLocal;
 	DELETE FROM beacon WHERE cd_local = pLocal;
+    UPDATE administrador SET cd_local = null WHERE cd_local = pLocal;
+    DELETE FROM horario_local WHERE cd_local = pLocal;
 	DELETE FROM `local` WHERE cd_local = pLocal;
 END$$
 
@@ -728,8 +829,7 @@ BEGIN
 	AND csc.cd_sub_categoria = sc.cd_sub_categoria
 	INNER JOIN categoria as c
 	ON sc.cd_categoria = c.cd_categoria
-	WHERE csc.cd_comunicado = pComunicado
-	GROUP BY sc.cd_categoria;
+	WHERE csc.cd_comunicado = pComunicado;
 END$$
 
 DROP PROCEDURE IF EXISTS pegarSubcategoriasLocal$$

@@ -65,87 +65,44 @@ namespace ReachUp
             return null;
         }
 
-        /*public Task<BeaconType> Get(int id)
+        public async Task<bool> Add()
         {
-           if (base.DQLCommand(
-               $"SELECT * FROM tipo_beacon WHERE cd_tipo_beacon ={id}",
-               ref this.Data
-           ))
-           {
-               BeaconType beaconType = null;
-               if (this.Data.HasRows)
-               {
-                   while(this.Data.Read())
-                   {
-                       beaconType = new BeaconType(
-                         this.Data["cd_tipo_beacon"].ToString(),
-                         this.Data["nm_tipo_beacon"].ToString()
-                       );
-                   }
-                   this.Data.Close();
-               }
-               base.Disconnect();
-               return Task.FromResult(beaconType);
-           }
-           return null;
-        }*/
-
-        public Task<bool> Add()
-        {
-            if (base.DQLCommand(
-                $"SELECT COUNT(*) as Count FROM tipo_beacon",
-                ref this.Data
+            if (base.DMLCommand(Procedure.adicionarTipo,
+                 new string[,] {
+                     {"pNome", this.Name }, {"pTipo", Convert.ToString('b') }
+                 }
             ))
             {
-                int Count = 0;
-                while (this.Data.Read()) 
-                {
-                   Count = int.Parse(this.Data["Count"].ToString());
-                }
-
-               if (base.DMLCommand(
-                $"INSERT INTO tipo_beacon VALUES ({Count}, {this.Name})"
-                ))
-                {
-                   this.Data.Close();
-                   base.Disconnect();
-                   return Task.FromResult(true);
-                }
-                this.Data.Close();
-                base.Disconnect();
-                return Task.FromResult(false);
+               return true;
             }
-            this.Data.Close();
-            base.Disconnect();
-            return Task.FromResult(false);
+            return false;
         }
 
-        public Task<bool> Update()
+        public async Task<bool> Update()
         {
-            if (base.DMLCommand(
-                $"UPDATE tipo_beacon SET nm_tipo_beacon={this.Name} WHERE cd_tipo_beacon={this.Id}"
+            if (base.DMLCommand(Procedure.atualizarTipo,
+                 new string[,] {
+                     {"pCd", this.Id.ToString() }, {"pNome", this.Name },
+                     {"pTipo", Convert.ToString('b') }
+                 }
             ))
             {
-               return Task.FromResult(true);
+               return true;
             }
-            return Task.FromResult(false);
+            return false;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            if (base.DMLCommand(
-                $"DELETE FROM beacon WHERE cd_tipo_beacon={id}"
+            if (base.DMLCommand(Procedure.deletarTipo,
+                 new string[,] {
+                     {"pCd", id.ToString() }, {"pTipo", Convert.ToString('b') }
+                 }
             ))
             {
-               if (base.DMLCommand(
-                   $"DELETE FROM tipo_beacon WHERE cd_tipo_beacon={id}"
-               ))
-               {
-                  return Task.FromResult(true);
-               }
-               return Task.FromResult(false);
+               return true;
             }
-            return Task.FromResult(false);
+            return false;
         }
 
         #endregion

@@ -9,7 +9,7 @@ namespace ReachUpWebAPI.Controllers
     [ApiController]
     public class BeaconTypeController : ControllerBase
     {
-
+        // OK 
         [Authorize(Roles = "adm, dev")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
@@ -17,15 +17,7 @@ namespace ReachUpWebAPI.Controllers
            return Ok(await new BeaconType().GetAll());
         }
 
-        /*[Authorize(Roles = "dev")]
-        [HttpGet]
-        public async Task<IActionResult> Get(int id)
-        {
-           if (!string.IsNullOrWhiteSpace(id.ToString()))
-               return Ok(await new BeaconType().Get(id));
-           return BadRequest("Parameters are null");
-        }*/
-
+        // OK 
         [Authorize(Roles = "dev")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] BeaconType beaconType)
@@ -35,6 +27,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize(Roles = "dev")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] BeaconType beaconType)
@@ -44,6 +37,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize(Roles = "dev")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)

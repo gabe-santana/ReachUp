@@ -31,16 +31,19 @@ namespace ReachUpWebAPI.Controllers
 
         #region Actions
 
+        // OK
         [HttpGet("CheckEmail")]
         public async Task<IActionResult> CheckEmail(string email, string role)
         {
             if (!string.IsNullOrWhiteSpace(email)
-                && !string.IsNullOrWhiteSpace(role)
-               )
-                return Ok(await new User().CheckEmail(email, role));
+                && !string.IsNullOrWhiteSpace(role))
+                {
+                    return Ok(await new User().CheckEmail(email, role));
+                }
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [HttpPost("SignUp")]
         public async Task<IActionResult> SignUp([FromBody] User user)
         {
@@ -49,6 +52,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK
         [HttpPost("SignIn")]
         public async Task<IActionResult> SignIn([FromBody] User user) 
         {
@@ -60,7 +64,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        //[Authorize(Roles="cli,loj,adm")]
+        // OK
+        [Authorize(Roles="cli,loj,adm")]
         [HttpGet("RecoverPassword")]
         public async Task<IActionResult> RecoverPassword(string email)
         {
@@ -69,7 +74,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        //[Authorize(Roles="cli,loj,adm")]
+        // OK
+        [Authorize(Roles="cli,loj,adm")]
         [HttpGet("TryUpdatePassword")]
         public async Task<IActionResult> TryUpdatePassword(string email, string cod)
         {
@@ -79,7 +85,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        //[Authorize(Roles="cli,loj,adm")]
+        // OK 
+        [Authorize(Roles="cli,loj,adm")]
         [HttpPatch("UpdatePassword")]
         public async Task<IActionResult> UpdatePassword([FromQuery] string email, [FromQuery] string role, [FromQuery] string password)
         {
@@ -90,7 +97,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-
+        // Implementação pendente
+        [Authorize]
         [HttpGet("SignOut")]
         public async Task<IActionResult> SignOut([FromQuery] User user)
         {

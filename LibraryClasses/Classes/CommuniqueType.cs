@@ -65,62 +65,44 @@ namespace ReachUp
             return null;
         }
 
-        public Task<bool> Add()
+        public async Task<bool> Add()
         {
-            if (base.DQLCommand(
-                $"SELECT COUNT(*) as Count FROM tipo_comunicado",
-                ref this.Data
+            if (base.DMLCommand(Procedure.adicionarTipo,
+                 new string[,] {
+                     {"pNome", this.Name }, {"pTipo", Convert.ToString('c') }
+                 }
             ))
             {
-                int Count = 0;
-                while (this.Data.Read()) 
-                {
-                   Count = int.Parse(this.Data["Count"].ToString());
-                }
-
-               if (base.DMLCommand(
-                $"INSERT INTO tipo_comunicado VALUES ({Count}, {this.Name})"
-                ))
-                {
-                   this.Data.Close();
-                   base.Disconnect();
-                   return Task.FromResult(true);
-                }
-                this.Data.Close();
-                base.Disconnect();
-                return Task.FromResult(false);
+               return true;
             }
-            this.Data.Close();
-            base.Disconnect();
-            return Task.FromResult(false);
+            return false;
         }
 
-        public Task<bool> Update()
+        public async Task<bool> Update()
         {
-            if (base.DMLCommand(
-                $"UPDATE tipo_comunicado SET nm_tipo_comunicado={this.Name} WHERE cd_tipo_comunicado={this.Id}"
+            if (base.DMLCommand(Procedure.atualizarTipo,
+                 new string[,] {
+                     {"pCd", this.Id.ToString() }, {"pNome", this.Name },
+                     {"pTipo", Convert.ToString('c') }
+                 }
             ))
             {
-               return Task.FromResult(true);
+               return true;
             }
-            return Task.FromResult(false);
+            return false;
         }
-
-        public Task<bool> Delete(int id)
+        
+        public async Task<bool> Delete(int id)
         {
-            if (base.DMLCommand(
-                $"DELETE FROM comunicado WHERE cd_tipo_comunicado={id}"
+            if (base.DMLCommand(Procedure.deletarTipo,
+                 new string[,] {
+                     {"pCd", id.ToString() }, {"pTipo", Convert.ToString('c') }
+                 }
             ))
             {
-               if (base.DMLCommand(
-                   $"DELETE FROM tipo_comunicado WHERE cd_tipo_comunicado={id}"
-               ))
-               {
-                  return Task.FromResult(true);
-               }
-               return Task.FromResult(false);
+               return true;
             }
-            return Task.FromResult(false);
+            return false;
         }
 
         #endregion

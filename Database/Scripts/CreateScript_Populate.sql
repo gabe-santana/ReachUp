@@ -559,20 +559,20 @@ CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | 3º Andar ",  3,  '08:00
 CALL cadastrarLocal(4, "Escada Rolante Praiamar Shopping | 3º Andar ",  3,  '09:25:00', '19:35:00', "7deb0ba1-a928-11ea-adc1-0242ac1200f9");
 CALL cadastrarLocal(5, "Elevador Praiamar Shopping | 3º Andar ",  3,  '09:25:00', '19:35:00', "7deb0ba0-f921-a1ea-adc1-0242ac120092");
 
-CALL cadastrarLocal(2, "Cinema Roxy | Recepção",  4,  '08:00:00', '23:59:59', "8deafff1-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinemark | Recepção",  4,  '08:00:00', '23:59:59', "8deafff1-f928-11ea-adc1-0242ac120013");
 
-CALL cadastrarLocal(2, "Cinema Roxy | Sala 1",  4,  '08:00:00', '23:59:59', "8aeafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Cinema Roxy | Sala 2",  4,  '08:00:00', '23:59:59', "8beafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Cinema Roxy | Sala 3",  4,  '08:00:00', '23:59:59', "8ceafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinemark | Sala 1",  4,  '08:00:00', '23:59:59', "8aeafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinemark | Sala 2",  4,  '08:00:00', '23:59:59', "8beafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinemark | Sala 3",  4,  '08:00:00', '23:59:59', "8ceafcfe-f928-11ea-adc1-0242ac120013");
 
-CALL cadastrarLocal(2, "Cinema Roxy | Sala 4",  4,  '08:00:00', '23:59:59', "8deafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Cinema Roxy | Sala 5",  4,  '08:00:00', '23:59:59', "8eeafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Cinema Roxy | Sala 6",  4,  '08:00:00', '23:59:59', "8feafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Cinema Roxy | Sala 7",  4,  '08:00:00', '23:59:59', "8e1afcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinemark | Sala 4",  4,  '08:00:00', '23:59:59', "8deafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinemark | Sala 5",  4,  '08:00:00', '23:59:59', "8eeafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinemark | Sala 6",  4,  '08:00:00', '23:59:59', "8feafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinemark | Sala 7",  4,  '08:00:00', '23:59:59', "8e1afcfe-f928-11ea-adc1-0242ac120013");
 
-CALL cadastrarLocal(2, "Cinema Roxy | Sala 8",  4,  '08:00:00', '23:59:59', "8dsafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Cinema Roxy | Sala 9",  4,  '08:00:00', '23:59:59', "8d4afcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Cinema Roxy | Sala 10",  4,  '08:00:00', '23:59:59', "85eafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinemark | Sala 8",  4,  '08:00:00', '23:59:59', "8dsafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinemark | Sala 9",  4,  '08:00:00', '23:59:59', "8d4afcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(2, "Cinemark | Sala 10",  4,  '08:00:00', '23:59:59', "85eafcfe-f928-11ea-adc1-0242ac120013");
 
 CALL cadastrarLocal(3, "Banheiro Praiamar Shopping | 4º Andar ",  4,  '08:00:00', '23:59:59', "8deb0cfe-f928-11ea-adc1-0242ac120013");
 CALL cadastrarLocal(3, "Bebedouro Praiamar Shopping | 4º Andar ",  4,  '09:25:00', '19:35:00', "8deb0ba0-f928-11ea-adc1-0242ac120023");
@@ -2044,21 +2044,72 @@ CALL defSubCategoriaLocal(258, 20, 0);
 
 /* ------------ ! ------------- */
 
-SELECT * from `local`;
+/* ------ COMUNICADOS ------- */
 
-/* COMUNICADOS - Arrumar os locais e acrescentar novos, de acordo com as possibilidades */
+/* Promoções direcionadas */
 
-CALL publicarComunicado(7, 0, 1, 0,"Loja fechada por tempo indeterminado, devido à pandemia do novo Coronavírus", now(), null);
-CALL publicarComunicado(8, 0, 2, 0,"Compre o Galaxy Note20 em até 12x sem juros, e ganhe um voucher de R$ 2000!", now(), null);
-CALL publicarComunicado(9, 0, 1, 0,"Desconto de 30% em toda a loja! Aproveite, é apenas neste fim de semana!", now(), '2020-09-20 23:00:00');
-CALL publicarComunicado(11, 3, 0, 0,"Cuidado! Entrada escorregadia!", now(), DATE_ADD(now(), INTERVAL 30 minute));
-CALL publicarComunicado(12, 0, 1, 0,"Pagando no cartão, você ganha 15% de desconto!", now(), null);
-CALL publicarComunicado(19, 1, 2, 0, "50% de desconto em todos os jogos e HQ's!", now(), '2020-09-24 21:00:00');
-CALL publicarComunicado(19, 1, 3, 0, "50% de desconto em todos os jogos e HQ's!", now(), '2020-09-24 21:00:00');
-CALL publicarComunicado(38, 0, 1, 0,"Chegou a nova TV 8K da LG, com tecnologia NanoCell e tamanho de 75 polegadas! Não se preocupe mais com distorção de cores e ângulo de visão, adquira já!", now(), null);
-CALL publicarComunicado(115, 3, 2, 0,"Banheiro interditado!", now(), DATE_ADD(now(), INTERVAL 1 hour));
-CALL publicarComunicado(153, 2, 2, 0, "Prato do dia: escargot ao molho madeira", now(), DATE_ADD(now(), INTERVAL 3 hour));
-CALL publicarComunicado(6, 0, 0, 0,"50% de desconto em todos os produtos!", now(), '2020-09-30 22:00:00'); 
-CALL publicarComunicado(6, 1, 0, 0, "Desconto maior para produtos de informática: 80%!", now(), '2020-09-30 22:00:00'); 
-CALL publicarComunicado(217, 4, 4, 0, "Preços: Meia entrada - R$ 18.00; Inteira: R$ 32.00", now(), null);
-CALL publicarComunicado(217, 2, 5, 0, "Próxima sessâo: 'Sonic: O filme' - Sala 4, às 17:00. Dublado. Duração: 1h40m", now(), DATE_ADD(now(), INTERVAL 45 minute));
+/* - Samsung - */
+CALL publicarComunicado(7, 0, "Compre o Galaxy Note20 em até 12x sem juros, e ganhe um voucher de R$ 2000!", now(), null);
+CALL relacionarComunicadoSubCategoria(0, 0); /* Informática - Hardware */
+
+CALL pegarSubCategoriasComunicado(0);
+
+/* - Mão Única - */
+CALL publicarComunicado(18, 0, "50% de desconto em todos os jogos e HQ's!", now(), '2020-12-02 13:30:00');
+CALL relacionarComunicadoSubCategoria(1, 0); /* Categoria jogos inteira */
+CALL relacionarComunicadoSubCategoria(1, 1);
+CALL relacionarComunicadoSubCategoria(1, 2);
+CALL relacionarComunicadoSubCategoria(1, 3);
+CALL relacionarComunicadoSubCategoria(1, 4);
+CALL relacionarComunicadoSubCategoria(1, 5);
+CALL relacionarComunicadoSubCategoria(1, 6);
+
+CALL relacionarComunicadoSubCategoria(9, 1); /* Literatura - Comic store */
+
+CALL pegarSubCategoriasComunicado(1);
+
+/* Promoções gerais */
+
+/* - Casa das Cuecas - */
+CALL publicarComunicado(31, 1, "Desconto de 90% em toda a loja! Aproveite, é apenas neste fim de semana!", now(), '2020-09-20 23:00:00');
+
+/* - Cinemark | Sala 4 - */
+CALL publicarComunicado(146, 1, "Próxima sessâo: 'Sonic: O filme', às 17:00. Dublado. Duração: 1h40m", now(), DATE_ADD(now(), INTERVAL 45 minute));
+
+/* - Cinemark | Recepção - */
+CALL publicarComunicado(142, 1, "Próxima sessâo: 'Sonic: O filme', às 17:00. Dublado. Duração: 1h40m", now(), DATE_ADD(now(), INTERVAL 45 minute));
+
+/* - Life's Good LG - */
+CALL publicarComunicado(9, 1, "Chegou a nossa nova TV 8K, com tecnologia NanoCell e tamanho de 75 polegadas! Não se preocupe mais com distorção de cores e ângulo de visão, adquira já!", now(), null);
+
+/* - Divino Fogão - */
+CALL publicarComunicado(129, 1, "Prato do dia: escargot ao molho madeira", now(), DATE_ADD(now(), INTERVAL 3 hour));
+
+/* - Polo Play - */
+CALL publicarComunicado(25, 1, "50% de desconto em todos os produtos!", now(), '2020-09-30 22:00:00'); 
+
+/* - Lojas Americanas - */
+CALL publicarComunicado(5, 1, "Desconto maior para produtos de informática: 80%!", now(), '2020-09-30 22:00:00'); 
+
+
+
+/* Notificações */
+
+/* - Hihappy - */
+CALL publicarComunicado(6, 2, "Loja fechada por tempo indeterminado, devido à pandemia do novo Coronavírus", now(), null);
+
+/* - Banheiro Praiamar Shopping | 1º Andar - */
+CALL publicarComunicado(102, 2, "Banheiro interditado!", now(), DATE_ADD(now(), INTERVAL 1 hour));
+
+/* Alertas */
+
+/* - Carmen Steffens - */
+CALL publicarComunicado(12, 3, "Cuidado! Entrada escorregadia!", now(), DATE_ADD(now(), INTERVAL 30 minute));
+
+/* Preços */
+
+/* - Kyowa - */
+CALL publicarComunicado(50, 4, "Pagando no cartão, você ganha 15% de desconto!", now(), null);
+
+/* - Cinemark | Recepção - */
+CALL publicarComunicado(142, 4, "Preços: Meia entrada - R$ 18.00; Inteira: R$ 32.00", now(), null);
