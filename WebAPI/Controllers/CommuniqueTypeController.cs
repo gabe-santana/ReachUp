@@ -9,7 +9,7 @@ namespace ReachUpWebAPI.Controllers
     [ApiController]
     public class CommuniqueTypeController : ControllerBase
     {
-
+        // OK 
         [Authorize(Roles = "adm")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
@@ -17,6 +17,7 @@ namespace ReachUpWebAPI.Controllers
            return Ok(await new CommuniqueType().GetAll());
         }
 
+        // OK 
         [Authorize(Roles = "adm")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CommuniqueType communiqueType)
@@ -26,6 +27,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize(Roles = "adm")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] CommuniqueType communiqueType)
@@ -35,6 +37,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize(Roles = "adm")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)

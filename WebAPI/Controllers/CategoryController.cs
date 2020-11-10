@@ -24,6 +24,7 @@ namespace ReachUpWebAPI.Controllers
             this._hostingEnvironment = hostingEnvironment;
         }
 
+        // OK 
         [Authorize]
         [HttpGet("GetImage")]
         public async Task<IActionResult> GetImage(int id)
@@ -43,6 +44,7 @@ namespace ReachUpWebAPI.Controllers
            return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize]
         [HttpPost("UploadImage")]
         public async Task<string> UploadImage([FromForm] IFormFile file)
@@ -90,6 +92,7 @@ namespace ReachUpWebAPI.Controllers
             return "Falha no envio do arquivo!";
         } 
 
+        // OK 
         [Authorize]
         [HttpPost("UploadImages")]
         public async Task<string> UploadImages([FromForm] List<IFormFile> files)
@@ -140,7 +143,6 @@ namespace ReachUpWebAPI.Controllers
             }
             return "Tudo ok!";
         }
-
 
         [Authorize]
         [HttpGet]

@@ -217,7 +217,7 @@ INSERT INTO tipo_comunicado
 VALUES
 (
 	3,
-    "Alarme"
+    "Alerta"
 );
 
 INSERT INTO tipo_comunicado

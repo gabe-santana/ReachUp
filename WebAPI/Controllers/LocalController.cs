@@ -26,6 +26,8 @@ namespace ReachUpWebAPI.Controllers
         }
 
         #region Actions
+
+        // OK 
         [Authorize]
         [HttpGet("Connect")]
         public async Task<IActionResult> Connect(string uuid) 
@@ -35,6 +37,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize]
         [HttpGet("Search")]
         public async Task<IActionResult> Search(string s) 
@@ -43,6 +46,8 @@ namespace ReachUpWebAPI.Controllers
                 return Ok(await new Local().Search(s));
             return BadRequest("Parameters are null");
         }
+
+        // OK 
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> Get(int id)
@@ -52,15 +57,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize]
-        [HttpGet("ByBeacon")]
-        public async Task<IActionResult> ByBeacon(string uuid)
-        {
-            if (!string.IsNullOrWhiteSpace(uuid))
-                return Ok(await new Local().ByBeacon(uuid));
-            return BadRequest("Parameters are null");
-        }
-
+        // OK (com exceção ao pesquisar pelo tipo 7 - serviço)
+        // System.OverflowException: Value was either too large or too small for a UInt16.
         [Authorize]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(int type)
@@ -70,6 +68,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize]
         [HttpGet("FetchOpHours")]
         public async Task<IActionResult> FetchOpHours(int local, int weekDay)
@@ -80,7 +79,8 @@ namespace ReachUpWebAPI.Controllers
                 return Ok(await new Local().FetchOpHours(local, weekDay));
             return BadRequest("Parameters are null");
         }
-
+ 
+        // OK 
         [Authorize]
         [HttpDelete("DeleteOpHours")]
         public async Task<IActionResult> DeleteOpHours(int local, int weekDay)
@@ -91,9 +91,19 @@ namespace ReachUpWebAPI.Controllers
                 return Ok(await new Local().DeleteOpHours(local, weekDay));
             return BadRequest("Parameters are null");
         }
-        
 
-        [Authorize(Roles = "adm")]
+        // OK 
+        [Authorize(Roles="")]
+        [HttpGet("CheckBeacon")]
+        public async Task<IActionResult> CheckBeacon(string uuid)
+        {
+            if (!string.IsNullOrWhiteSpace(uuid))
+               return Ok(await new Local().CheckBeacon(uuid));
+            return BadRequest("Parameters are null");
+        }
+        
+        // OK 
+        [Authorize(Roles = "dev")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Local local) 
         {
@@ -102,6 +112,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize]
         [HttpGet("GetImage")]
         public async Task<IActionResult> GetImage(int id, int type)
@@ -173,6 +184,7 @@ namespace ReachUpWebAPI.Controllers
            return files;
         }*/
 
+        // OK 
         [Authorize]
         [HttpPost("UploadImage")]
         public async Task<string> UploadImage([FromForm] IFormFile file)
@@ -220,6 +232,7 @@ namespace ReachUpWebAPI.Controllers
             return "Falha no envio do arquivo!";
         }
 
+        // OK, melhorias pendentes
         [Authorize]
         [HttpPost("UploadImages")]
         public async Task<string> UploadImages([FromForm] List<IFormFile> files)
@@ -305,7 +318,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
 
-
+        // OK 
         [Authorize(Roles = "adm")]
         [HttpPost("AddOpHours")]
         public async Task<IActionResult> AddOpHours([FromBody] Local local) 
@@ -315,7 +328,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-
+        //OK 
         [Authorize(Roles = "adm")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] Local local)
@@ -325,7 +338,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-
+        // OK 
         [Authorize(Roles = "adm")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
@@ -335,15 +348,17 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        /*[Authorize(Roles = "adm")]
+        // OK 
+        [Authorize(Roles = "adm")]
         [HttpPost("AddSubCategories")]
         public async Task<IActionResult> AddSubCategories([FromBody] Local local) 
         {
             if (local != null)
                 return Ok(await local.AddSubCategories());
             return BadRequest("Parameters are null");
-        }*/
+        }
 
+        // OK 
         [Authorize(Roles = "adm")]
         [HttpDelete("DeleteSubCategory")]
         public async Task<IActionResult> DeleteSubCategory(int local, int category, int subCategory)
@@ -356,15 +371,17 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        /*[Authorize(Roles = "adm")]
+        // OK 
+        [Authorize(Roles = "adm")]
         [HttpGet("GetAdmins")]
         public async Task<IActionResult> GetAdmins(int local)
         {
             if (!string.IsNullOrWhiteSpace(local.ToString()))
                 return Ok(await new Local().GetAdmins(local));
             return BadRequest("Parameters are null");
-        }*/
+        }
 
+        // OK
         [Authorize(Roles = "adm")]
         [HttpPost("ConnectAdmin")]
         public async Task<IActionResult> ConnectAdmin(string email, int local) 

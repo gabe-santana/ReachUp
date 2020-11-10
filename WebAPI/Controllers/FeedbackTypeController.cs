@@ -9,7 +9,7 @@ namespace ReachUpWebAPI.Controllers
     [ApiController]
     public class FeedbackTypeController : ControllerBase
     {
-
+        // OK 
         [Authorize(Roles = "adm, dev")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
@@ -17,6 +17,7 @@ namespace ReachUpWebAPI.Controllers
            return Ok(await new FeedbackType().GetAll());
         }
 
+        // OK 
         [Authorize(Roles = "adm, dev")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] FeedbackType feedbackType)
@@ -26,6 +27,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize(Roles = "adm")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] FeedbackType feedbackType)
@@ -35,6 +37,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize(Roles = "adm")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)

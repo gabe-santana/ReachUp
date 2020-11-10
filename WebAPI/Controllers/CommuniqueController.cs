@@ -24,16 +24,19 @@ namespace ReachUpWebAPI.Controllers
             this._hostingEnvironment = hostingEnvironment;
         }
 
-        [Authorize(Roles = "cli")]
+        // OK, melhorar (trazer apenas as subcategorias que são preferências do cliente)
+        //[Authorize(Roles = "cli")]
         [HttpGet("Receive")]
-        public async Task<IActionResult> Receive([FromBody] User user, [FromQuery] int local) 
+        public async Task<IActionResult> Receive(string email, int local) 
         {
-            if (user != null && !string.IsNullOrWhiteSpace(local.ToString()))
-                return Ok(await new Communique().Receive(user, local));
+            if (!string.IsNullOrWhiteSpace(email)
+                && !string.IsNullOrWhiteSpace(local.ToString()))
+                return Ok(await new Communique().Receive(email, local));
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "loj,adm,cli")]
+        // OK 
+        //[Authorize(Roles = "loj,adm,cli")]
         [HttpGet]
         public async Task<IActionResult> Get(int local) 
         {
@@ -42,6 +45,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize]
         [HttpGet("GetImage")]
         public async Task<IActionResult> GetImage(int id)
@@ -61,34 +65,25 @@ namespace ReachUpWebAPI.Controllers
            return BadRequest("Parameters are null");
         }
 
-        [Authorize (Roles = "loj,adm")]
+        // OK 
+        //[Authorize (Roles = "loj,adm")]
         [HttpPost]
-        /* This is an action in which none, only the first or both
-        commands can work */
-        public List<bool> Post([FromBody] Communique communique) 
+        public async Task<IActionResult> Post([FromBody] Communique communique) 
         {
             if (communique != null)
-            {
-               return Steps(communique);
-            }
-            List<bool> result = new List<bool>();
-            result.Add(false);
-            return result;
+               return Ok(await communique.Add());
+           return BadRequest("Parameters are null");
         }
 
-        /* Accessing the amount of "bool" and its values,
-        we can later interpret the action final result*/
-        static List<bool> Steps(Communique communique)
+        [HttpPost("BindSubCategories")]
+        public async Task<IActionResult> BindSubCategories([FromBody] Communique communique) 
         {
-            List<bool> results = new List<bool>();
-            foreach (bool task in communique.Add())
-            {
-               // Yield return returns here
-               results.Add(task);
-            } 
-            return results;          
+            if (communique != null)
+               return Ok(await communique.BindSubCategories());
+           return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize]
         [HttpPost("UploadImage")]
         public async Task<string> UploadImage([FromForm] IFormFile file)
@@ -136,6 +131,7 @@ namespace ReachUpWebAPI.Controllers
             return "Falha no envio do arquivo!";
         } 
 
+        // OK 
         [Authorize]
         [HttpPost("UploadImages")]
         public async Task<string> UploadImages([FromForm] List<IFormFile> files)
@@ -187,7 +183,7 @@ namespace ReachUpWebAPI.Controllers
             return "Tudo ok!";
         }
 
-        [Authorize (Roles = "loj,adm")]
+        //[Authorize (Roles = "loj,adm")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] Communique communique)
         {
@@ -197,12 +193,16 @@ namespace ReachUpWebAPI.Controllers
            return BadRequest("Parameters are null");
         }
 
-        [Authorize (Roles = "loj,adm")]
+        // isso está sendo autorizado mesmo sem o parâmetro de tipo
+        //[Authorize (Roles = "loj,adm")]
         [HttpDelete]
-        public async Task<IActionResult> Delete(int id) 
+        public async Task<IActionResult> Delete(int id, int type) 
         {
-            if (!string.IsNullOrWhiteSpace(id.ToString()))
-                return Ok(await new Communique().Delete(id));
+            if (!string.IsNullOrWhiteSpace(id.ToString())
+                && !string.IsNullOrWhiteSpace(type.ToString()))
+                {
+                    return Ok(await new Communique().Delete(id, type));
+                }
             return BadRequest("Parameters are null");
         }
     }

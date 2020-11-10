@@ -27,6 +27,17 @@ namespace ReachUp
             this.SubCategoryName = Name;
         }
 
+        /// <summary>
+        ///  Add local subcategories constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="category"></param>
+        public SubCategory(int Id, Category Category) : base() 
+        {
+            this.SubCategoryId = Id;
+            this.Category = Category;
+        }
+
         public async Task<List<SubCategory>> GetAll()
         {
            if (base.DQLCommand(Procedure.pegarSubCategorias, ref this.Data)) 

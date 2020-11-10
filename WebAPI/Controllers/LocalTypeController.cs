@@ -25,6 +25,7 @@ namespace ReachUpWebAPI.Controllers
             this._hostingEnvironment = hostingEnvironment;
         }
 
+        // OK 
         [Authorize(Roles = "adm, dev")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
@@ -32,6 +33,7 @@ namespace ReachUpWebAPI.Controllers
            return Ok(await new LocalType().GetAll());
         }
 
+        // OK 
         [Authorize(Roles = "adm, dev")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] LocalType localType)
@@ -41,7 +43,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm")]
+        // OK 
+        [Authorize(Roles = "adm, dev")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] LocalType localType)
         {
@@ -50,7 +53,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm")]
+        // OK 
+        [Authorize(Roles = "adm, dev")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
@@ -59,6 +63,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize]
         [HttpGet("GetImage")]
         public async Task<IActionResult> GetImage(int id)
@@ -80,6 +85,7 @@ namespace ReachUpWebAPI.Controllers
            return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize]
         [HttpPost("UploadImage")]
         public async Task<string> UploadImage([FromForm] IFormFile file)
@@ -127,6 +133,7 @@ namespace ReachUpWebAPI.Controllers
             return "Falha no envio do arquivo!";
         }
 
+        // OK 
         [Authorize]
         [HttpPost("UploadImages")]
         public async Task<string> UploadImages([FromForm] List<IFormFile> files)
@@ -177,7 +184,5 @@ namespace ReachUpWebAPI.Controllers
             }
             return "Tudo ok!";
         }
-
-
     }
 }

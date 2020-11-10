@@ -62,9 +62,10 @@ namespace ReachUp
                 {"pUUID", uuid}
                 }))
             {
-                Beacon beacon = null;
                 if (this.Data.HasRows)
                 {
+                    Beacon beacon = null;
+
                     while (this.Data.Read())
                     {
                         beacon = new Beacon(uuid,
@@ -72,12 +73,13 @@ namespace ReachUp
                             
                             );
                     }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return Task.FromResult(beacon);
                 }
-                this.Data.Close();
                 base.Disconnect();
-                return Task.FromResult(beacon);
+                return null;
             }
-
             return null;
         }
 
@@ -88,9 +90,10 @@ namespace ReachUp
                  {"pTipo", type.ToString()}
              }))
             {
-                List<Beacon> beacons = new List<Beacon>();
                 if (this.Data.HasRows)
                 {
+                    List<Beacon> beacons = new List<Beacon>();
+
                     while (this.Data.Read())
                     {
                         beacons.Add(new Beacon(
@@ -102,9 +105,11 @@ namespace ReachUp
                         ));
                     }
                     this.Data.Close();
+                    base.Disconnect();
+                    return beacons;
                 }
                 base.Disconnect();
-                return beacons;
+                return null;
             }
             return null;
         }
@@ -116,9 +121,10 @@ namespace ReachUp
                  {"pLocal", local.ToString()}
              }))
              {
-                List<Beacon> beacons = new List<Beacon>();
                 if (this.Data.HasRows)
                 {
+                    List<Beacon> beacons = new List<Beacon>();
+
                     while (this.Data.Read())
                     {
                         beacons.Add(new Beacon(
@@ -130,9 +136,11 @@ namespace ReachUp
                         ));
                     }
                     this.Data.Close();
+                    base.Disconnect();
+                    return beacons;
                 }
                 base.Disconnect();
-                return beacons;
+                return null;
              }
              return null;
         }

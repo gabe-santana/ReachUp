@@ -34,6 +34,15 @@ namespace ReachUp
             this.CategoryName = Name;
             this.CategoryDescription = Description;
         }
+
+        /// <summary>
+        ///  Add local subcategories constructor (subCategory)
+        /// </summary>
+        /// <param name="id"></param>
+        public Category(int Id) : base() 
+        {
+            this.CategoryId = Id;
+        }
         #endregion
         #region Methods
 

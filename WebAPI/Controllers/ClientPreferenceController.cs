@@ -11,9 +11,9 @@ namespace ReachUpWebAPI.Controllers
     {
         #region Actions
 
+        // OK 
         [Authorize(Roles = "cli")]
         [HttpGet("GetAll")]
-        //OK
         public async Task<IActionResult> GetAll(string email)
         {
             if (!string.IsNullOrWhiteSpace(email))
@@ -21,6 +21,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize(Roles = "cli")]
         [HttpPost("Add")]
         public async Task<IActionResult> Add([FromBody] ClientPreference clientPreference)
@@ -30,6 +31,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK
         [Authorize(Roles = "cli,adm")]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] string email, [FromQuery] int category, [FromQuery]int subCategory)
