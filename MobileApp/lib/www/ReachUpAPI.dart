@@ -1,27 +1,30 @@
 import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import '../globals.dart';
 
-class ReachUpAPI {
-  String url = "http://192.168.0.109:8000/api";
+class ReachUpAPI{
+  String url;
   Response response;
   Dio dio;
-  String token;
+  String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaUBlbWFpbC5jb20iLCJyb2xlIjoiY2xpIiwibmJmIjoxNjA0OTY0MDEyLCJleHAiOjE2MDUwNTA0MTIsImlhdCI6MTYwNDk2NDAxMn0.mBisWSp5Carj6MXkU5ciXgc_71u9P1blKCFr0fqo-8A";
 
-  ReachUpAPI() {
-    token = token;
+  ReachUpAPI(){
     dio = new Dio();
+    dio.options.baseUrl = Globals.urlAPI;
+    // dio.interceptors.add(InterceptorControl());
+
     _config();
   }
 
   httpGet(String uri) async {
     try {
       this.response = await dio.get(
-        "${this.url}/$uri",
+        "${dio.options.baseUrl}/$uri",
         options: Options(
             headers: {
               "Authorization":
-                  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbUBlbWFpbC5jb20iLCJyb2xlIjoiYWRtIiwibmJmIjoxNjAzOTczNTYyLCJleHAiOjE2MDM5ODA3NjIsImlhdCI6MTYwMzk3MzU2Mn0.tNozV4PxQXv-qHZuV3lYZXP35Xv8MQDCuMC-CUYklus"
+                  this.token
             },
             followRedirects: false,
             validateStatus: (status) {
@@ -44,4 +47,6 @@ class ReachUpAPI {
     dio.options.headers['content-Type'] = 'application/json';
     dio.options.headers["Authorization"] = "Bearer ${this.token}";
   }
+
+  noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }

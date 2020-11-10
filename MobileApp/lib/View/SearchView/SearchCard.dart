@@ -1,11 +1,12 @@
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Model/Local.dart';
-import 'package:ReachUp/Model/Subcategory.model.dart';
+import 'package:ReachUp/Repositories/Local.repository.dart';
 import 'package:ReachUp/View/HomeView/Home.view.dart';
+import 'package:ReachUp/www/ReachUpAPI.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 
 class SearchCard extends StatefulWidget {
   final Local local;
@@ -21,23 +22,36 @@ class _SearchCardState extends State<SearchCard> {
     return showDialog(
         context: context,
         builder: (BuildContext context) => CustomDialog(
-             icon: FontAwesomeIcons.mapMarkedAlt,
+              icon: FontAwesomeIcons.mapMarkedAlt,
               title: "${local.name}",
               description: "Ir até ${local.name}?",
               buttonOK: IconButton(
-                icon: Icon(Icons.check,  size: 40, color: Colors.green,),
-                onPressed: (){
-                    //chamar rota
-                    Navigator.pop(context);
-                    Navigator.pop(context, true);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => Home(inRouting: true,),));
-                    
+                icon: Icon(
+                  Icons.check,
+                  size: 40,
+                  color: Colors.green,
+                ),
+                onPressed: () {
+                  //chamar rota
+                  Navigator.pop(context);
+                  Navigator.pop(context, true);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Home(
+                          inRouting: true,
+                        ),
+                      ));
                 },
               ),
               buttonNO: IconButton(
-                icon: Icon(Icons.close,  size: 40, color: Colors.red,),
-                onPressed: (){
-                    Navigator.pop(context);
+                icon: Icon(
+                  Icons.close,
+                  size: 40,
+                  color: Colors.red,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
                 },
               ),
             ));
@@ -59,7 +73,7 @@ class _SearchCardState extends State<SearchCard> {
     return Card(
       elevation: 3,
       child: InkWell(
-        splashColor: Colors.blue.withAlpha(30),
+        splashColor: Theme.of(context).primaryColor,
         onTap: () {
           print("IDLOCAL: ${widget.local.idLocal}");
           createAlertDialog(context, widget.local);
@@ -75,22 +89,13 @@ class _SearchCardState extends State<SearchCard> {
                       // right: BorderSide(width: 1.0, color: Colors.grey),
                       ),
                 ),
-                child: Center(
-                  child: FaIcon(
-                      widget.local.type == 0
-                          ? FontAwesomeIcons.store
-                          : widget.local.type == 1
-                              ? FontAwesomeIcons.hamburger
-                              : widget.local.type == 2
-                                  ? FontAwesomeIcons.film
-                                  : widget.local.type == 3
-                                      ? FontAwesomeIcons.bath
-                                      : widget.local.type == 4
-                                          ? FontAwesomeIcons.lastfm
-                                          : FontAwesomeIcons.store,
-                      size: 40,
-                      color: Color(0xFF545454)),
-                ),
+                child: Container(
+                  height: 200,
+                  width: 200,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(child: fetchLocalImage()),
+                  )),
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -141,6 +146,18 @@ class _SearchCardState extends State<SearchCard> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget fetchLocalImage() {
+    return CachedNetworkImage(
+      fit: BoxFit.cover,
+      httpHeaders: {"Authorization": ReachUpAPI().token},
+      imageUrl: LocalRepository().getImage(widget.local),
+      placeholder: (context, url) => CircularProgressIndicator(
+          valueColor: new AlwaysStoppedAnimation<Color>(
+              Theme.of(context).colorScheme.primary)),
+      errorWidget: (context, url, error) => Icon(Icons.error),
     );
   }
 }

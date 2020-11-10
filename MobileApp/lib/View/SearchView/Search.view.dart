@@ -10,13 +10,14 @@ class Search extends StatefulWidget {
   _SearchState createState() => _SearchState();
 }
 
-class _SearchState extends State<Search>  with SingleTickerProviderStateMixin {
-  String search;
-  var _controller = TextEditingController();
-  List<Local> locates;
+class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
   final _formKey = GlobalKey<FormState>();
-  final _LocalController = new LocalController();
-
+  final _localController = new LocalController();
+  String search;
+  List<Local> locates;
+  TabController _tabController;
+  TextEditingController _controller = TextEditingController();
+  
   buildListView() {
     return ListView.builder(
         itemCount: locates.length,
@@ -25,16 +26,13 @@ class _SearchState extends State<Search>  with SingleTickerProviderStateMixin {
         });
   }
 
-TabController _tabController;
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
   void dispose() {
-    
     super.dispose();
   }
 
@@ -85,7 +83,8 @@ TabController _tabController;
                                   });
 
                                   if (val.length > 3)
-                                    _LocalController.search(val)
+                                    _localController
+                                        .search(val)
                                         .then((value) => {
                                               setState(() {
                                                 locates = value;
@@ -148,17 +147,6 @@ TabController _tabController;
                         IconButton(
                           padding: EdgeInsets.fromLTRB(0, 0, 15, 0),
                           icon: Icon(
-                            Icons.filter_list,
-                            size: 35,
-                            color: Colors.white,
-                          ),
-                          onPressed: () {
-                            print("Filter");
-                          },
-                        ),
-                        IconButton(
-                          padding: EdgeInsets.fromLTRB(0, 0, 15, 0),
-                          icon: Icon(
                             Icons.mic,
                             size: 35,
                             color: Colors.white,
@@ -166,7 +154,16 @@ TabController _tabController;
                           onPressed: () {
                             print("Mic");
                           },
-                        )
+                        ),
+                        IconButton(
+                          padding: EdgeInsets.fromLTRB(0, 0, 15, 0),
+                          icon: Icon(
+                            Icons.more_vert,
+                            size: 35,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {},
+                        ),
                       ],
                     ),
                   ),
@@ -174,14 +171,12 @@ TabController _tabController;
               ),
             ],
             bottom: TabBar(
-             
               onTap: (int index) {
                 setState(() {
-                  //get tabbar index 
+                  //get tabbar index
                   tabIndex = index;
                 });
               },
-         
               indicatorColor: Theme.of(context).colorScheme.onPrimary,
               isScrollable: true,
               labelStyle: TextStyle(
@@ -199,11 +194,9 @@ TabController _tabController;
             ),
           ),
           body: SafeArea(
-          
             child: Container(
                 child: Column(
               children: <Widget>[
-               
                 Expanded(
                     child: Padding(
                   padding: EdgeInsets.fromLTRB(10, 0, 10, 10),

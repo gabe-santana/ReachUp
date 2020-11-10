@@ -1,12 +1,18 @@
 
+import 'dart:io';
 import 'package:ReachUp/View/SignView/Sign.view.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'View/HomeView/Home.view.dart';
-import 'View/SignView/Signup.view.dart';
 
+import 'View/DebugView/Debug.view.dart';
 
 void main() {
+    FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.dumpErrorToConsole(details);
+    if (kReleaseMode)
+      exit(1);
+  };
   runApp(ReachUp());
 }
 
@@ -91,7 +97,7 @@ class ReachUp extends StatelessWidget {
       title: 'ReachUp!',
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
-      home: SignView(),
+      home: DebugView(),
     );
   }
 }
