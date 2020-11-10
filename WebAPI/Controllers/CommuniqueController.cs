@@ -36,7 +36,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "loj,adm,cli")]
+        //[Authorize(Roles = "loj,adm,cli")]
         [HttpGet]
         public async Task<IActionResult> Get(int local) 
         {
@@ -65,6 +65,7 @@ namespace ReachUpWebAPI.Controllers
            return BadRequest("Parameters are null");
         }
 
+        // OK 
         //[Authorize (Roles = "loj,adm")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Communique communique) 
@@ -192,12 +193,16 @@ namespace ReachUpWebAPI.Controllers
            return BadRequest("Parameters are null");
         }
 
+        // isso está sendo autorizado mesmo sem o parâmetro de tipo
         //[Authorize (Roles = "loj,adm")]
         [HttpDelete]
-        public async Task<IActionResult> Delete(int id) 
+        public async Task<IActionResult> Delete(int id, int type) 
         {
-            if (!string.IsNullOrWhiteSpace(id.ToString()))
-                return Ok(await new Communique().Delete(id));
+            if (!string.IsNullOrWhiteSpace(id.ToString())
+                && !string.IsNullOrWhiteSpace(type.ToString()))
+                {
+                    return Ok(await new Communique().Delete(id, type));
+                }
             return BadRequest("Parameters are null");
         }
     }

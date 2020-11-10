@@ -65,7 +65,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK
-        [Authorize(Roles="cli,loj,adm")]
+        //[Authorize(Roles="cli,loj,adm")]
         [HttpGet("RecoverPassword")]
         public async Task<IActionResult> RecoverPassword(string email)
         {

@@ -11,7 +11,7 @@ namespace ReachUp
     public class Communique : clsDatabase
     {
         #region Properties
-        public Communique(int communiqueId, ushort type, Local communiqueLocal, string description, DateTime startDate, DateTime endDate) 
+        public Communique(int communiqueId, ushort type, Local communiqueLocal, string description, string startDate, string endDate) 
         {
             this.CommuniqueId = communiqueId;
                 this.Type = type;
@@ -27,10 +27,8 @@ namespace ReachUp
         public Local CommuniqueLocal { get; set; }
         public List<SubCategory> CommuniqueSubCategory = new List<SubCategory>();
         public string Description { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public string NewCommuniqueStartDate { get; set; }
-        public string NewCommuniqueEndDate { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
 
         #endregion
 
@@ -42,14 +40,14 @@ namespace ReachUp
         public Communique() : base() { }
 
         public Communique(int id, ushort Type, List<SubCategory> SubCategories,
-             string Description,  DateTime StartDate,
-             DateTime EndDate, Local local) : base()
+             string Description,  string startDate,
+             string endDate, Local local) : base()
         {
             this.CommuniqueId = id;
             this.CommuniqueSubCategory = SubCategories;
             this.Description = Description;
-            this.StartDate = StartDate;
-            this.EndDate = EndDate;
+            this.StartDate = startDate;
+            this.EndDate = endDate;
             this.Type = Type;
             this.CommuniqueLocal = local;
         }
@@ -60,13 +58,13 @@ namespace ReachUp
         /// <param name="id"></param>
         /// <param name="category"></param>
         public Communique(int local, ushort type, string description,
-        string newStartDate, string newEndDate) : base()
+        string startDate, string endDate) : base()
         {
             this.LocalId = local;
             this.Type = type;
             this.Description = description;
-            this.NewCommuniqueStartDate = newStartDate;
-            this.NewCommuniqueEndDate = newEndDate;
+            this.StartDate = startDate;
+            this.EndDate = endDate;
         }
         #endregion
 
@@ -90,8 +88,8 @@ namespace ReachUp
                             ushort.Parse(this.Data["cd_tipo_comunicado"].ToString()),
                             await new SubCategory().ByCommunique(int.Parse(this.Data["cd_comunicado"].ToString())),
                             this.Data["ds_comunicado"].ToString(),
-                            DateTime.Parse(this.Data["dt_inicio_comunicado"].ToString()),
-                            DateTime.Parse(this.Data["dt_fim_comunicado"].ToString()),
+                            this.Data["dt_inicio_comunicado"].ToString(),
+                            this.Data["dt_fim_comunicado"].ToString(),
                             await new Local().Get(int.Parse(this.Data["cd_local"].ToString()))
                             ));
                     }
@@ -123,8 +121,8 @@ namespace ReachUp
                                             ushort.Parse(this.Data["cd_tipo_comunicado"].ToString()),
                                             await new SubCategory().ByCommunique(int.Parse(this.Data["cd_comunicado"].ToString())),
                                             this.Data["ds_comunicado"].ToString(),
-                                            DateTime.Parse(this.Data["dt_inicio_comunicado"].ToString()),
-                                            DateTime.Parse(this.Data["dt_fim_comunicado"].ToString()),
+                                            this.Data["dt_inicio_comunicado"].ToString(),
+                                            this.Data["dt_fim_comunicado"].ToString(),
                                             await new Local().Get(int.Parse(this.Data["cd_local"].ToString()))
                                       )
                             ); 
@@ -145,8 +143,8 @@ namespace ReachUp
                 {"pLocal", this.LocalId.ToString() },
                 {"pTipo", this.Type.ToString() },
                 {"pDs", this.Description.ToString() },
-                {"pDataInicio", this.NewCommuniqueStartDate.ToString() },
-                {"pDataFim", this.NewCommuniqueEndDate.ToString() }
+                {"pDataInicio", this.StartDate.ToString() },
+                {"pDataFim", this.EndDate.ToString() }
               }))
               {
                  return Task.FromResult(true);
@@ -187,10 +185,11 @@ namespace ReachUp
         }
   
 
-        public Task<bool> Delete(int id) 
+        public Task<bool> Delete(int id, int type) 
         {
             if (base.DMLCommand(Procedure.deletarComunicado, new string[,] {
-                {"pComunicado", id.ToString()}
+                {"pComunicado", id.ToString()},
+                {"pTipo", type.ToString()}
             })) 
             {
                 return Task.FromResult(true);

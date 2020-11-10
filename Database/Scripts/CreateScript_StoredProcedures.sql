@@ -435,9 +435,13 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS deletarComunicado$$
-CREATE PROCEDURE deletarComunicado(pComunicado int )
+CREATE PROCEDURE deletarComunicado(pComunicado int, pTipo int)
 BEGIN
-	DELETE FROM comunicado WHERE cd_comunicado = pComunicado;
+    IF (pTipo = 0) THEN
+	DELETE FROM comunicado_sub_categoria WHERE cd_comunicado = pComunicado;
+    END IF;
+    DELETE FROM comunicado WHERE cd_comunicado = pComunicado;
+
 END$$
 
 DROP FUNCTION IF EXISTS pesquisarNomeCategoria$$
@@ -602,19 +606,20 @@ BEGIN
 		DECLARE 	_cd int;
 		SELECT COUNT(*) INTO @_cd FROM comunicado;
 
-        IF (pDataInicio = null AND pDataFim = null) THEN
+        /*IF (pDataInicio is null AND pDataFim is null) THEN
 		INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, now(), null);
         ELSE 
-             IF (pDataInicio = null) THEN
+             IF (pDataInicio is null) THEN
              INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, now(), pDataFim);
              ELSE
-                  IF (pDataFim = null) THEN 
+                  IF (pDataFim is null) THEN 
                   INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, pDataInicio, null);
                   ELSE
 					  INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, pDataInicio, pDataFim);
                   END IF;
              END IF;
-	    END IF;
+	    END IF;*/
+        INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, pDataInicio, pDataFim);
 END$$
 
 DROP PROCEDURE IF EXISTS relacionarComunicadoSubCategoria$$

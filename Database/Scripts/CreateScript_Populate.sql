@@ -2077,7 +2077,7 @@ CALL publicarComunicado(31, 1, "Desconto de 90% em toda a loja! Aproveite, é ap
 CALL publicarComunicado(146, 1, "Próxima sessâo: 'Sonic: O filme', às 17:00. Dublado. Duração: 1h40m", now(), DATE_ADD(now(), INTERVAL 45 minute));
 
 /* - Cinemark | Recepção - */
-CALL publicarComunicado(142, 1, "Próxima sessâo: 'Sonic: O filme', às 17:00. Dublado. Duração: 1h40m", now(), DATE_ADD(now(), INTERVAL 45 minute));
+CALL publicarComunicado(142, 1, "Próxima sessâo: 'Sonic: O filme', às 17:00. Sala 4. Dublado. Duração: 1h40m", now(), DATE_ADD(now(), INTERVAL 45 minute));
 
 /* - Life's Good LG - */
 CALL publicarComunicado(9, 1, "Chegou a nossa nova TV 8K, com tecnologia NanoCell e tamanho de 75 polegadas! Não se preocupe mais com distorção de cores e ângulo de visão, adquira já!", now(), null);
