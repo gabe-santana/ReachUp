@@ -1,14 +1,18 @@
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
+import 'package:ReachUp/Controller/Category.controller.dart';
+import 'package:ReachUp/Model/Category.model.dart';
 import 'package:ReachUp/Model/User.model.dart';
+import 'package:ReachUp/View/SignView/SignUpPreferences.view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../globals.dart';
+
 List<GlobalKey<FormState>> formKeys = [
-  GlobalKey<FormState>(),
-  GlobalKey<FormState>(),
-  GlobalKey<FormState>(),
-  GlobalKey<FormState>()
+  GlobalKey<FormState>(), //Username formState
+  GlobalKey<FormState>(), //Useremail formState
+  GlobalKey<FormState>(), //Userpassword formState
 ];
 
 class SignUp extends StatefulWidget {
@@ -18,7 +22,6 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
-
   int currentStep;
 
   @override
@@ -81,9 +84,9 @@ class _SignUpState extends State<SignUp> {
 }
 
 class UserData {
-  String name = '';
-  String email = '';
-  String password = '';
+  String name;
+  String email;
+  String password;
 }
 
 class StepperBody extends StatefulWidget {
@@ -92,6 +95,8 @@ class StepperBody extends StatefulWidget {
 }
 
 class _StepperBodyState extends State<StepperBody> {
+  final CategoryController _categoryController = new CategoryController();
+
   static final _focusNode = FocusNode();
   static UserData user = UserData();
 
@@ -270,33 +275,57 @@ class _StepperBodyState extends State<StepperBody> {
   Widget build(BuildContext context) {
     void showSnackBarMessage(String message,
         [MaterialColor color = Colors.red]) {
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text(message), backgroundColor: Theme.of(context).colorScheme.error,));
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(message),
+        backgroundColor: Theme.of(context).colorScheme.error,
+      ));
     }
 
     void _submitForm() {
       final FormState formState = _formKey.currentState;
+      bool validated = true;
 
       if (!formState.validate()) {
-        showSnackBarMessage('Preencha todos os campos!',);
+        showSnackBarMessage(
+          'Preencha todos os campos corretamente!',
+        );
       } else {
         formState.save();
 
         formKeys.forEach((key) {
           if (!key.currentState.validate()) {
-            showSnackBarMessage('Preencha todos os campos!');
-          }else{
+            showSnackBarMessage('Preencha todos os campos corretamente!');
+            validated = false;
+          } else {
             key.currentState.save();
           }
         });
 
-        print("Name: ${user.name}");
-        print("Phone: ${user.email}");
-        print("Email: ${user.password}");
+        if (validated) {
+          print("Name: ${user.name}");
+          print("Phone: ${user.email}");
+          print("Email: ${user.password}");
+
+          Globals.user = new User(
+              name: user.name,
+              email: user.email,
+              password: user.password,
+              role: "cli");
+          //send _user to [POST] api/Account/SignUp
+
+          List<Category> categories = new List<Category>();
+
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SignUpPreferencesView()),
+          );
+        }
+        ;
       }
     }
 
     return Container(
-        width: MediaQuery.of(context).size.width * 0.9,
+        width: MediaQuery.of(context).size.width,
         child: Form(
           key: _formKey,
           child: ListView(children: <Widget>[
@@ -304,15 +333,15 @@ class _StepperBodyState extends State<StepperBody> {
               controlsBuilder: (BuildContext context,
                   {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
                 return Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   child: Row(
                     children: <Widget>[
                       FlatButton(
                           onPressed: onStepContinue,
                           color: Theme.of(context).colorScheme.primary,
                           child: Text("Próximo",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16))),
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 16))),
                       currStep != 0
                           ? FlatButton(
                               onPressed: onStepCancel,
@@ -359,7 +388,7 @@ class _StepperBodyState extends State<StepperBody> {
               },
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: RaisedButton(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
