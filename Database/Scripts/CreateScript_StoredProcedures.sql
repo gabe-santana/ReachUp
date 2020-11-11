@@ -145,6 +145,16 @@ BEGIN
   END IF;
 END$$
 
+DROP PROCEDURE IF EXISTS pegarCategorias$$
+CREATE PROCEDURE pegarCategorias(pGeral bool) 
+BEGIN
+   IF (pGeral) THEN
+     SELECT * from categoria;
+   ELSE
+     SELECT * FROM categoria WHERE ic_especial = 0;
+   END IF;
+END$$
+
 DROP PROCEDURE IF EXISTS logarUsuario$$
 CREATE PROCEDURE logarUsuario(pEmail varchar(100), pSenha varchar(60), pRole varchar(3))
 BEGIN
@@ -277,8 +287,9 @@ BEGIN
    END IF;
 END$$
 
+/* Alterada */
 DROP PROCEDURE IF EXISTS cadastrarCategoria$$
-CREATE PROCEDURE cadastrarCategoria(pNome varchar(45), pDs varchar(200))
+CREATE PROCEDURE cadastrarCategoria(pNome varchar(45), pDs varchar(200), pEspecial bool)
 BEGIN
 	DECLARE _cd int;
 	SELECT COUNT(cd_categoria) INTO @_cd FROM categoria;
@@ -286,7 +297,8 @@ BEGIN
 	(
 		@_cd ,
 		pNome,
-		pDs
+		pDs,
+        pEspecial
 	);
 END$$
 
@@ -798,13 +810,14 @@ BEGIN
 	SELECT * FROM categoria WHERE cd_categoria = pCategoria;
 END$$
 
-
+/* Atualizada */
 DROP PROCEDURE IF EXISTS atualizarCategoria$$
-CREATE PROCEDURE atualizarCategoria(pCategoria INT, pNome varchar(45), pDs varchar(200))
+CREATE PROCEDURE atualizarCategoria(pCategoria INT, pNome varchar(45), pDs varchar(200), pEspecial bool)
 BEGIN
 	UPDATE categoria
     SET nm_categoria = pNome,
-        ds_categoria = pDs
+        ds_categoria = pDs,
+        ic_especial = pEspecial
     WHERE cd_categoria = pCategoria;
 END$$
 
@@ -822,6 +835,13 @@ BEGIN
 	INNER JOIN categoria as c
 	ON sc.cd_categoria = c.cd_categoria
 	GROUP BY sc.cd_categoria;
+END$$
+
+DROP PROCEDURE IF EXISTS pegarSubCategoriasCategoria$$
+CREATE PROCEDURE pegarSubCategoriasCategoria(pCategoria int)
+BEGIN
+   SELECT cd_sub_categoria, nm_sub_categoria FROM sub_categoria
+   WHERE cd_categoria = pCategoria;
 END$$
 
 DROP PROCEDURE IF EXISTS pegarSubCategoriasComunicado$$

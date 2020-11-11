@@ -146,15 +146,17 @@ namespace ReachUpWebAPI.Controllers
             return "Tudo ok!";
         }
 
-
+        // OK 
         [Authorize]
-        [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("ByCategory")]
+        public async Task<IActionResult> ByCategory(int category)
         {
-           return Ok(await new SubCategory().GetAll());
+            if (!string.IsNullOrWhiteSpace(category.ToString()))
+                return Ok(await new SubCategory().ByCategory(category));
+            return BadRequest("Parameters are null");
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("ByLocal")]
         public async Task<IActionResult> ByLocal(int local)
         {
@@ -163,7 +165,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("ByCommunique")]
         public async Task<IActionResult> ByCommunique(int communique)
         {
@@ -172,7 +174,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm")]
+        //[Authorize(Roles = "adm")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] SubCategory subCategory)
         {
@@ -181,7 +183,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles="adm")]
+        //[Authorize(Roles="adm")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int category, int subCategory)
         {

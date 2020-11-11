@@ -21,12 +21,12 @@
 
 /* Categorias aplicáveis em lojas (e suas subcategorias) */
 
-CALL cadastrarCategoria("Informática", "Produtos tecnólogicos de uso geral e específico no mundo da tecnologia da informação");
+CALL cadastrarCategoria("Informática", "Produtos tecnólogicos de uso geral e específico no mundo da tecnologia da informação", 0);
 CALL cadastrarSubCategoria(0, "Hardware");
 CALL cadastrarSubCategoria(0, "Software");
 CALL cadastrarSubCategoria(0, "Periféricos");
 
-CALL cadastrarCategoria("Jogos","Jogos e semelhantes, ao entretenimento de diversos tipos");
+CALL cadastrarCategoria("Jogos","Jogos e semelhantes, ao entretenimento de diversos tipos", 0);
 CALL cadastrarSubCategoria(1, "RPG");
 CALL cadastrarSubCategoria(1, "Aventura");
 CALL cadastrarSubCategoria(1, "Ação");
@@ -37,7 +37,7 @@ CALL cadastrarSubCategoria(1, "Infantil");
 CALL cadastrarSubCategoria(1, "Para computadores");
 CALL cadastrarSubCategoria(1, "Para consoles");
 
-CALL cadastrarCategoria("Eletrônicos","Utensílios do mundo da eletrônica");
+CALL cadastrarCategoria("Eletrônicos","Utensílios do mundo da eletrônica", 0);
 CALL cadastrarSubCategoria(2, "Carregadores");
 CALL cadastrarSubCategoria(2, "Equipamentos de medição");
 CALL cadastrarSubCategoria(2, "Componentes eletrônicos");
@@ -45,13 +45,13 @@ CALL cadastrarSubCategoria(2, "Instrumentos de solda");
 CALL cadastrarSubCategoria(2, "Componentes de solda");
 CALL cadastrarSubCategoria(2, "Placas eletrônicas");
 
-CALL cadastrarCategoria("Eletrodomésticos","Máquinas eletrodomésticas");
+CALL cadastrarCategoria("Eletrodomésticos","Máquinas eletrodomésticas", 0);
 CALL cadastrarSubCategoria(3, "Refrigeração em geral");
 CALL cadastrarSubCategoria(3, "Refrigeração a gás");
 CALL cadastrarSubCategoria(3, "Ventilação");
 CALL cadastrarSubCategoria(3, "Termo elétrico");
 
-CALL cadastrarCategoria("Roupas","Vestimentas gerais");
+CALL cadastrarCategoria("Roupas","Vestimentas gerais", 0);
 CALL cadastrarSubCategoria(4, "Calçados simples");
 CALL cadastrarSubCategoria(4, "Blusas, camisas e camisetas");
 CALL cadastrarSubCategoria(4, "Calças e bermudas");
@@ -72,7 +72,7 @@ CALL cadastrarSubCategoria(4, "Moda infantil");
 CALL cadastrarSubCategoria(4, "Vestidos");
 CALL cadastrarSubCategoria(4, "Meias");
 
-CALL cadastrarCategoria("Acessórios","Vestimentas para o corpo");
+CALL cadastrarCategoria("Acessórios","Vestimentas para o corpo", 0);
 CALL cadastrarSubCategoria(5, "De mão");
 CALL cadastrarSubCategoria(5, "Pulseiras");
 CALL cadastrarSubCategoria(5, "Colares/Pescoço");
@@ -85,14 +85,14 @@ CALL cadastrarSubCategoria(5, "Lenços");
 CALL cadastrarSubCategoria(5, "Anéis");
 
 
-CALL cadastrarCategoria("Categoria 1,99","Produtos de preço acessíveis e com funcionalidades distintas ");
+CALL cadastrarCategoria("Categoria 1,99","Produtos de preço acessíveis e com funcionalidades distintas ", 0);
 CALL cadastrarSubCategoria(6, "Objetos de uso geral");
 CALL cadastrarSubCategoria(6, "Objetos de cozinha");
 CALL cadastrarSubCategoria(6, "Peças de roupa 1,99");
 CALL cadastrarSubCategoria(6, "Alimentos 1,99");
 CALL cadastrarSubCategoria(6, "Sacolas");
 
-CALL cadastrarCategoria("Alimentação","Alimentação");
+CALL cadastrarCategoria("Alimentação","Alimentação", 1);
 CALL cadastrarSubCategoria(7, "Doceria");
 CALL cadastrarSubCategoria(7, "Chocolateria");
 CALL cadastrarSubCategoria(7, "Bolos e tortas");
@@ -102,27 +102,27 @@ CALL cadastrarSubCategoria(7, "Castanhas, nozes e amêndoas");
 CALL cadastrarSubCategoria(7, "Sorvetes");
 
 /* Categoria cancelada - nenhum local se associa a ela  */
-CALL cadastrarCategoria("Cultura","Cultura");
+CALL cadastrarCategoria("Cultura","Cultura", 1);
 CALL cadastrarSubCategoria(8, "Obras literárias Cultura");
 CALL cadastrarSubCategoria(8, "Obras artísticas Cultura");
 CALL cadastrarSubCategoria(8, "Obras musicais Cultura");
 /* ------------------ */
 
-CALL cadastrarCategoria("Literatura","Produtos envolvendo entretimento no mundo dos livros");
+CALL cadastrarCategoria("Literatura","Produtos envolvendo entretimento no mundo dos livros", 0);
 CALL cadastrarSubCategoria(9, "Livraria");
 CALL cadastrarSubCategoria(9, "Comic store");
 CALL cadastrarSubCategoria(9, "Mangá Store");
 
-CALL cadastrarCategoria("Mercados", "Mercadinhos, hipermercados e quitandas");
+CALL cadastrarCategoria("Mercados", "Mercadinhos, hipermercados e quitandas", 1);
 CALL cadastrarSubCategoria(10, "Hipermercado");
 CALL cadastrarSubCategoria(10, "Mercadinho");
 CALL cadastrarSubCategoria(10, "Quitanda");
 
-CALL cadastrarCategoria("Drogaria", "Farmácias e lojas farmaucêticas");
+CALL cadastrarCategoria("Drogaria", "Farmácias e lojas farmaucêticas", 1);
 CALL cadastrarSubCategoria(11, "Farmácia");
 CALL cadastrarSubCategoria(11, "Loja de manipulados");
 
-CALL cadastrarCategoria("Casa", "Acessórios para casa");
+CALL cadastrarCategoria("Casa", "Acessórios para casa", 0);
 CALL cadastrarSubCategoria(12, "Móveis");
 CALL cadastrarSubCategoria(12, "Lustres e abajures");
 CALL cadastrarSubCategoria(12, "Quadros e esculturas");
@@ -133,70 +133,70 @@ CALL cadastrarSubCategoria(12, "Filtros de água");
 CALL cadastrarSubCategoria(12, "Cama, mesa e banho");
 CALL cadastrarSubCategoria(12, "Colchões");
 
-CALL cadastrarCategoria("Pet-shop", "Lojas para seu querido animalzinho");
+CALL cadastrarCategoria("Pet-shop", "Lojas para seu querido animalzinho", 1);
 CALL cadastrarSubCategoria(13, "Pet-shop");
 
 /* Categorias aplicáveis em restaurantes */
 
-CALL cadastrarCategoria("Frutos do mar", "Frutos do mar");
+CALL cadastrarCategoria("Frutos do mar", "Frutos do mar", 1);
 CALL cadastrarSubCategoria(14, "Seafood");
-CALL cadastrarCategoria("Self-service", "Monte seu prato e pague por kilo");
+CALL cadastrarCategoria("Self-service", "Monte seu prato e pague por kilo", 1);
 CALL cadastrarSubCategoria(15, "Montar prato");
-CALL cadastrarCategoria("Lanchonete", "Lanchonetes... huummm");
+CALL cadastrarCategoria("Lanchonete", "Lanchonetes... huummm", 1);
 CALL cadastrarSubCategoria(16, "Snack bar");
-CALL cadastrarCategoria("Comida japonesa", "Experimente o incrível sabor da culinária japonesa");
+CALL cadastrarCategoria("Comida japonesa", "Experimente o incrível sabor da culinária japonesa", 1);
 CALL cadastrarSubCategoria(17, "Japan Food");
-CALL cadastrarCategoria("Pastelaria", "Pastéis.... quero de flango!");
+CALL cadastrarCategoria("Pastelaria", "Pastéis.... quero de flango!", 1);
 CALL cadastrarSubCategoria(18, "Pastry Shop");
-CALL cadastrarCategoria("Fast-food", "Locais perfeitos para você matar sua fome sem perder tempo");
+CALL cadastrarCategoria("Fast-food", "Locais perfeitos para você matar sua fome sem perder tempo", 1);
 CALL cadastrarSubCategoria(19, "Fast-food");
-CALL cadastrarCategoria("Churrascaria", "Carnes suculentas... mal-passado, ao ponto ou bem-passado? À sua vontade");
+CALL cadastrarCategoria("Churrascaria", "Carnes suculentas... mal-passado, ao ponto ou bem-passado? À sua vontade", 1);
 CALL cadastrarSubCategoria(20, "Steakhouse");
-CALL cadastrarCategoria("Casa de massas", "Spaghetti, nhoque, lasanha, ravioli, etc.");
+CALL cadastrarCategoria("Casa de massas", "Spaghetti, nhoque, lasanha, ravioli, etc.", 1);
 CALL cadastrarSubCategoria(21, "Pasta House");
-CALL cadastrarCategoria("Pizzaria", "Pizzas quentinhas e deliciosas");
+CALL cadastrarCategoria("Pizzaria", "Pizzas quentinhas e deliciosas", 1);
 CALL cadastrarSubCategoria(22, "Pizzas");
-CALL cadastrarCategoria("Esfiharia", "Não tem dinheiro para comer pizza? Então compre esfihas!");
+CALL cadastrarCategoria("Esfiharia", "Não tem dinheiro para comer pizza? Então compre esfihas!", 1);
 CALL cadastrarSubCategoria(23, "Esfihas");
 
 /*Categorias aplicáveis em cinema */
 
-CALL cadastrarCategoria("Cinema", "O local mais amado do shopping!");
+CALL cadastrarCategoria("Cinema", "O local mais amado do shopping!", 1);
 CALL cadastrarSubCategoria(24, "Movies Theater");
 
 /*Categorias aplicáveis em necessidades */
 
-CALL cadastrarCategoria("Banheiro", "Banheiros limpos e confortáveis");
+CALL cadastrarCategoria("Banheiro", "Banheiros limpos e confortáveis", 1);
 CALL cadastrarSubCategoria(25, "Toilet");
-CALL cadastrarCategoria("Berçário", "Berçários para você amamentar ou trocar a fralda do seu bebê");
+CALL cadastrarCategoria("Berçário", "Berçários para você amamentar ou trocar a fralda do seu bebê", 1);
 CALL cadastrarSubCategoria(26, "Nursery");
-CALL cadastrarCategoria("Bebedouro", "Bebedouros com água fria, morna ou quente");
+CALL cadastrarCategoria("Bebedouro", "Bebedouros com água fria, morna ou quente", 1);
 CALL cadastrarSubCategoria(27, "Fountain");
-CALL cadastrarCategoria("Telefone", "Telefones para você se comunicar com o mundo lá fora");
+CALL cadastrarCategoria("Telefone", "Telefones para você se comunicar com o mundo lá fora", 1);
 CALL cadastrarSubCategoria(28, "Telephone");
 
 /*Categorias aplicáveis em escada */
 
-CALL cadastrarCategoria("Escada fixa", "Escadas fixas para sua locomoção entre os andares do shopping");
+CALL cadastrarCategoria("Escada fixa", "Escadas fixas para sua locomoção entre os andares do shopping", 1);
 CALL cadastrarSubCategoria(29, "Fixed Ladder");
-CALL cadastrarCategoria("Escada rolante", "Escadas rolantes para sua locomoção entre os andares do shopping");
+CALL cadastrarCategoria("Escada rolante", "Escadas rolantes para sua locomoção entre os andares do shopping", 1);
 CALL cadastrarSubCategoria(30, "Moving Ladder");
 
 /*Categorias aplicáveis em elevador */
 
-CALL cadastrarCategoria("Elevador", "Elevadores para sua locomoção entre os andares do shopping");
+CALL cadastrarCategoria("Elevador", "Elevadores para sua locomoção entre os andares do shopping", 1);
 CALL cadastrarSubCategoria(31, "Lift");
 
 /* Categorias aplicáveis em praça */ 
 
-CALL cadastrarCategoria("Praça de alimentação", "Praças de alimentação, com inúmeros restaurantes e lanchonetes, para você matar sua fome");
+CALL cadastrarCategoria("Praça de alimentação", "Praças de alimentação, com inúmeros restaurantes e lanchonetes, para você matar sua fome", 1);
 CALL cadastrarSubCategoria(32, "Food Court");
-CALL cadastrarCategoria("Praça de lazer", "Praças de lazer com Wi-Fi grátis, assentos aconchegantes, fontes e estátuas para você descansar do barulho do shopping ou do seu grande tour de compras");
+CALL cadastrarCategoria("Praça de lazer", "Praças de lazer com Wi-Fi grátis, assentos aconchegantes, fontes e estátuas para você descansar do barulho do shopping ou do seu grande tour de compras", 1);
 CALL cadastrarSubCategoria(33, "Leisure Plaza");
 
 /* Categorias aplicáveis em serviços */
 
-CALL cadastrarCategoria("Beleza e cuidado pessoal", "Serviços e lojas especializadas de beleza, higiene e cuidado pessoal; tatuagens; etc");
+CALL cadastrarCategoria("Beleza e cuidado pessoal", "Serviços e lojas especializadas de beleza, higiene e cuidado pessoal; tatuagens; etc", 0);
 CALL cadastrarSubCategoria(34, "Salão de beleza");
 CALL cadastrarSubCategoria(34, "Pedicure");
 CALL cadastrarSubCategoria(34, "Manicure");
@@ -207,26 +207,26 @@ CALL cadastrarSubCategoria(34, "Barbearia");
 CALL cadastrarSubCategoria(34, "Produtos naturais");
 CALL cadastrarSubCategoria(34, "Depilação a laser");
 
-CALL cadastrarCategoria("Medicina", "Serviços médicos");
+CALL cadastrarCategoria("Medicina", "Serviços médicos", 0);
 CALL cadastrarSubCategoria(35, "Clínica Geral");
 CALL cadastrarSubCategoria(35, "Odontologia");
 CALL cadastrarSubCategoria(35, "Oftalmologia");
 CALL cadastrarSubCategoria(35, "Cardiovascular");
 
-CALL cadastrarCategoria("Finanças", "Bancos e lotéricas para você cuidar do seu dinheiro com segurança");
+CALL cadastrarCategoria("Finanças", "Bancos e lotéricas para você cuidar do seu dinheiro com segurança", 1);
 CALL cadastrarSubCategoria(36, "Banco");
 CALL cadastrarSubCategoria(36, "Lotérica");
 CALL cadastrarSubCategoria(36, "Agência de câmbio");
 
-CALL cadastrarCategoria("Telefonia celular", "Operadoras de telefone");
+CALL cadastrarCategoria("Telefonia celular", "Operadoras de telefone", 1);
 CALL cadastrarSubCategoria(37, "Operadora de telefonia celular");
 
-CALL cadastrarCategoria("Agenciamento de viagens", "Agências de viagem");
+CALL cadastrarCategoria("Agenciamento de viagens", "Agências de viagem", 1);
 CALL cadastrarSubCategoria(38, "Agência de viagem");
 
 /* Categoria aplicável a lojas */
 
-CALL cadastrarCategoria("Esportes", "Artigos e objetos esportivos");
+CALL cadastrarCategoria("Esportes", "Artigos e objetos esportivos", 0);
 CALL cadastrarSubCategoria(39, "Bolas");
 CALL cadastrarSubCategoria(39, "Redes");
 CALL cadastrarSubCategoria(39, "Raquetes");
@@ -236,34 +236,34 @@ CALL cadastrarSubCategoria(39, "Mesas de sinuca");
 
 /* Categoria de restaurante */
 
-CALL cadastrarCategoria("Comida italiana", "Desfrute da maravilhosa culinária italiana!");
+CALL cadastrarCategoria("Comida italiana", "Desfrute da maravilhosa culinária italiana!", 1);
 CALL cadastrarSubCategoria(40, "Italian Food");
 
-CALL cadastrarCategoria("Comida árabe", "Se apaixone pela gastronomia árabe!");
+CALL cadastrarCategoria("Comida árabe", "Se apaixone pela gastronomia árabe!", 1);
 CALL cadastrarSubCategoria(41, "Arabic Food");
 
-CALL cadastrarCategoria("Comida australiana", "Conheça as gostosuras da Austrália!");
+CALL cadastrarCategoria("Comida australiana", "Conheça as gostosuras da Austrália!", 1);
 CALL cadastrarSubCategoria(42, "Australian Food");
 
-CALL cadastrarCategoria("Comida mineira", "Ô trem bão de comida, sô!");
+CALL cadastrarCategoria("Comida mineira", "Ô trem bão de comida, sô!", 1);
 CALL cadastrarSubCategoria(43, "Comida de Minas Gerais");
 
 /* -- */
 
-CALL cadastrarCategoria("Fotografia", "Estúdios e lojas de fotografia");
+CALL cadastrarCategoria("Fotografia", "Estúdios e lojas de fotografia", 0);
 CALL cadastrarSubCategoria(44, "Estúdio de fotografia");
 CALL cadastrarSubCategoria(44, "Loja de fotografia");
 
-CALL cadastrarCategoria("Esoterismo", "Lojas de produtos esotéricos");
+CALL cadastrarCategoria("Esoterismo", "Lojas de produtos esotéricos", 0);
 CALL cadastrarSubCategoria(45, "Índia");
 
-CALL cadastrarCategoria("Construção", "Lojas de material de construção");
+CALL cadastrarCategoria("Construção", "Lojas de material de construção", 0);
 CALL cadastrarSubCategoria(46, "Building");
 
-CALL cadastrarCategoria("Lava-rápido", "Lojas que lavam seu carro num passe de mágica");
+CALL cadastrarCategoria("Lava-rápido", "Lojas que lavam seu carro num passe de mágica", 1);
 CALL cadastrarSubCategoria(47, "Car-wash");
 
-CALL cadastrarCategoria("Parquinho de diversões", "A criançada vai adorar!");
+CALL cadastrarCategoria("Parquinho de diversões", "A criançada vai adorar!", 1);
 CALL cadastrarSubCategoria(48, "Amusement Park");
 
 CALL cadastrarUsuario("adm@email.com", "Administrator", "123", "adm", null);

@@ -38,32 +38,45 @@ namespace ReachUp
             this.Category = Category;
         }
 
-        public async Task<List<SubCategory>> GetAll()
+        /// <summary>
+        ///  Get by category constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        public SubCategory(int Id, string name) : base() 
         {
-           if (base.DQLCommand(Procedure.pegarSubCategorias, ref this.Data)) 
-           {
-              if (this.Data.HasRows)
-              {
-                  List<SubCategory> subCategories = new List<SubCategory>();
+            this.SubCategoryId = Id;
+            this.SubCategoryName = name;
+        }
 
-                  while (this.Data.Read())
-                  {
-                     subCategories.Add(
-                         new SubCategory(
-                              int.Parse(this.Data["cd_sub_categoria"].ToString()),
-                              await new Category().Get(int.Parse(this.Data["cd_categoria"].ToString())),
-                              this.Data["nm_sub_categoria"].ToString()
+        public Task<List<SubCategory>> ByCategory(int category)
+        {
+            if (base.DQLCommand(Procedure.pegarSubCategoriasCategoria, ref this.Data,
+                 new string[,]{
+                     {"pCategoria", category.ToString()}
+             }))
+            {
+                if (this.Data.HasRows)
+                {
+                    List<SubCategory> subCategories = new List<SubCategory>();
+
+                    while (this.Data.Read())
+                    {
+                        subCategories.Add(
+                            new SubCategory(
+                               int.Parse(this.Data["cd_sub_categoria"].ToString()),
+                               this.Data["nm_sub_categoria"].ToString()
                             )
                         );
-                   }
-
-                   this.Data.Close();
-                   base.Disconnect();
-                   return subCategories;
-              }
-           }
-
-           return null;
+                    }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return Task.FromResult(subCategories);
+                }
+                base.Disconnect();
+                return null;
+            }
+            return null;
         }
 
         public async Task<List<SubCategory>> ByLocal(int local) 
@@ -90,6 +103,8 @@ namespace ReachUp
                     base.Disconnect();
                     return subCategories;
                 }
+                base.Disconnect();
+                return null;
             }
             return null;
         }
@@ -118,6 +133,8 @@ namespace ReachUp
                     base.Disconnect();
                     return subCategories;
                 }
+                base.Disconnect();
+                return null;
             }
             return null;
         }

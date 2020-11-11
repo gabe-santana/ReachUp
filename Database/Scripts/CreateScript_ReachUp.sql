@@ -222,6 +222,7 @@ CREATE TABLE IF NOT EXISTS categoria (
   cd_categoria INT NOT NULL,
   nm_categoria VARCHAR(45) NOT NULL,
   ds_categoria VARCHAR(200) NOT NULL,
+  ic_especial bool,
   PRIMARY KEY (cd_categoria));
 
 
