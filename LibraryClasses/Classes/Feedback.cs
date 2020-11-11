@@ -45,28 +45,27 @@ namespace ReachUp
                     {"pGeral", "1"}
                 }))
             {
-                List<Feedback> feedbacks = new List<Feedback>();
                 if (this.Data.HasRows)
                 {
+                    List<Feedback> feedbacks = new List<Feedback>();
+
                     while (this.Data.Read())
                     {
                         feedbacks.Add(new Feedback(
-                                await new User().Get("cli", this.Data["nm_email_cliente"].ToString()),
-                                this.Data["ds_feedback"].ToString(),
-                                DateTime.Parse(this.Data["dt_feedback"].ToString()),
-                                ushort.Parse(this.Data["qt_estrelas_feedback"].ToString())
-                            ));
+                           await new User().Get("cli", this.Data["nm_email_cliente"].ToString()),
+                           this.Data["ds_feedback"].ToString(),
+                           DateTime.Parse(this.Data["dt_feedback"].ToString()),
+                           ushort.Parse(this.Data["qt_estrelas_feedback"].ToString())
+                            )
+                        );
                     }
-
                     this.Data.Close();
                     base.Disconnect();
                     return await Task.FromResult(feedbacks);
                 }
-
-                this.Data.Close();
                 base.Disconnect();
+                return null;
             }
-
             return null;
         }
 
@@ -78,9 +77,10 @@ namespace ReachUp
                     {"pGeral", "0"}
                 }))
             {
-                List<Feedback> feedbacks = new List<Feedback>();
                 if (this.Data.HasRows)
                 {
+                    List<Feedback> feedbacks = new List<Feedback>();
+
                     while (this.Data.Read())
                     {
                         feedbacks.Add(new Feedback(
@@ -90,13 +90,13 @@ namespace ReachUp
                                 ushort.Parse(this.Data["qt_estrelas_feedback"].ToString())
                             ));
                     }
+                    this.Data.Close();
+                    base.Disconnect();
                     return await Task.FromResult(feedbacks);
                 }
-
-                this.Data.Close();
                 base.Disconnect();
+                return null;
             }
-
             return null;
         }
 
@@ -106,28 +106,28 @@ namespace ReachUp
                 {"pEmail", email}
             })) 
             {
-                List<Feedback> feedbacks = new List<Feedback>();
                 if (this.Data.HasRows)
                 {
+                    List<Feedback> feedbacks = new List<Feedback>();
+
                     while (this.Data.Read()) 
                     {
                         feedbacks.Add(
-                                new Feedback(
-                                        await new User().Get("cli", this.Data["nm_email_cliente"].ToString()),
-                                        this.Data["ds_feedback"].ToString(),
-                                        DateTime.Parse(this.Data["dt_feedback"].ToString()),
-                                        ushort.Parse(this.Data["qt_estrelas_feedback"].ToString())
-                                    )
+                            new Feedback(
+                              await new User().Get("cli", this.Data["nm_email_cliente"].ToString()),
+                              this.Data["ds_feedback"].ToString(),
+                              DateTime.Parse(this.Data["dt_feedback"].ToString()),
+                              ushort.Parse(this.Data["qt_estrelas_feedback"].ToString())
+                                )
                             );
                     }
                     this.Data.Close();
                     base.Disconnect();
                     return await Task.FromResult(feedbacks);
                 }
-                this.Data.Close();
                 base.Disconnect();
+                return null;
             }
-
             return null;
         }
 
@@ -138,24 +138,25 @@ namespace ReachUp
                 {"pTipo", type.ToString()}
             }))
             {
-                Feedback feedback = null;
                 if (this.Data.HasRows)
                 {
+                    Feedback feedback = null;
+
                     while (this.Data.Read()) 
                     {
                         feedback = new Feedback(
-                                await new User().Get("cli", this.Data["nm_email_cliente"].ToString()),
-                                this.Data["ds_feedback"].ToString(),
-                                DateTime.Parse(this.Data["dt_feedback"].ToString()),
-                                ushort.Parse(this.Data["qt_estrelas_feedback"].ToString())
-                            );
+                           await new User().Get("cli", this.Data["nm_email_cliente"].ToString()),
+                           this.Data["ds_feedback"].ToString(),
+                           DateTime.Parse(this.Data["dt_feedback"].ToString()),
+                           ushort.Parse(this.Data["qt_estrelas_feedback"].ToString())
+                        );
                     }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return await Task.FromResult(feedback);
                 }
-
-                this.Data.Close();
                 base.Disconnect();
-
-                return await Task.FromResult(feedback);
+                return null;
             }
             return null;
         }
@@ -169,9 +170,9 @@ namespace ReachUp
                 {"pQt", this.Stars.ToString()}
             })) 
             {
-                return  Task.FromResult(true);
+                return Task.FromResult(true);
             }
-            return  Task.FromResult(false);
+            return Task.FromResult(false);
         }
 
         public Task<bool> Add() 
@@ -229,8 +230,7 @@ namespace ReachUp
 
             return Task.FromResult(-1);
         }*/
-
-            #endregion
+        #endregion
 
     }
 }

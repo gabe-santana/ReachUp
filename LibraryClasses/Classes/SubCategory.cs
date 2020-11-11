@@ -12,6 +12,7 @@ namespace ReachUp
         #region Properties
         public int SubCategoryId { get; set; }
         public Category Category { get;set; }
+        public int CategoryId {get; set; }
         public string SubCategoryName { get; set; }
         public SubCategory() : base() { }
         #endregion
@@ -154,8 +155,11 @@ namespace ReachUp
 
         public Task<bool> Delete(int category, int subCategory)
         {
-           if (base.DMLCommand(
-                $"DELETE FROM sub_categoria WHERE cd_categoria = {category} AND cd_sub_categoria = {subCategory}"
+           if (base.DMLCommand(Procedure.removerSubCategoria,
+                new string[,]{
+                   {"pCategoria", category.ToString()},
+                   {"pSubCategoria", subCategory.ToString()}
+                }
             ))
             {
                return Task.FromResult(true);

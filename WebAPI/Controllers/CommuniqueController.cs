@@ -25,6 +25,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK, melhorar (trazer apenas as subcategorias que são preferências do cliente)
+        // "Problema" de datas null 
         //[Authorize(Roles = "cli")]
         [HttpGet("Receive")]
         public async Task<IActionResult> Receive(string email, int local) 
@@ -75,6 +76,7 @@ namespace ReachUpWebAPI.Controllers
            return BadRequest("Parameters are null");
         }
 
+        // OK 
         [HttpPost("BindSubCategories")]
         public async Task<IActionResult> BindSubCategories([FromBody] Communique communique) 
         {
@@ -183,7 +185,17 @@ namespace ReachUpWebAPI.Controllers
             return "Tudo ok!";
         }
 
-        //[Authorize (Roles = "loj,adm")]
+        // OK 
+        [HttpDelete("DisbindSubCategories")]
+        public async Task<IActionResult> DisbindSubCategories([FromBody] Communique communique) 
+        {
+            if (communique != null)
+               return Ok(await communique.DisbindSubCategories());
+           return BadRequest("Parameters are null");
+        }
+
+        // OK 
+        [Authorize (Roles = "loj,adm")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] Communique communique)
         {

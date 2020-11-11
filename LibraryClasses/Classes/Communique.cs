@@ -56,7 +56,10 @@ namespace ReachUp
         ///  Add communique constructor
         /// </summary>
         /// <param name="id"></param>
-        /// <param name="category"></param>
+        /// <param name="type"></param>
+        /// <param name="description"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
         public Communique(int local, ushort type, string description,
         string startDate, string endDate) : base()
         {
@@ -66,6 +69,39 @@ namespace ReachUp
             this.StartDate = startDate;
             this.EndDate = endDate;
         }
+
+        /// <summary>
+        ///  Bind and disbind subcategories constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="subCategories"></param>
+        public Communique(int communiqueId, List<SubCategory> subCategories) : base()
+        {
+            this.CommuniqueId = communiqueId;
+            this.CommuniqueSubCategory = subCategories;
+        }
+
+        /// <summary>
+        ///  Update communique constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <param name="description"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="local"></param>
+        public Communique(int id, ushort Type,
+             string Description,  string startDate,
+             string endDate, Local local) : base()
+        {
+            this.CommuniqueId = id;
+            this.Description = Description;
+            this.StartDate = startDate;
+            this.EndDate = endDate;
+            this.Type = Type;
+            this.CommuniqueLocal = local;
+        }
+
         #endregion
 
         #region Methods
@@ -158,6 +194,7 @@ namespace ReachUp
             {
                 if (!base.DMLCommand(Procedure.relacionarComunicadoSubCategoria, 
                        new string[,] {
+                      {"pComunicado", this.CommuniqueId.ToString()},
                       {"pCategoria", this.CommuniqueSubCategory[i].Category.CategoryId.ToString() },
                       {"pSubCategoria", this.CommuniqueSubCategory[i].SubCategoryId.ToString() }
                 }))
@@ -182,6 +219,23 @@ namespace ReachUp
                 return Task.FromResult(true);
             }
             return Task.FromResult(false);
+        }
+
+        public Task<bool> DisbindSubCategories()
+        {
+            for (int i = 0; i < this.CommuniqueSubCategory.Count(); i++)
+            {
+                if (!base.DMLCommand(Procedure.removerSubCategoriaComunicado, 
+                       new string[,] {
+                      {"pComunicado", this.CommuniqueId.ToString()},
+                      {"pCategoria", this.CommuniqueSubCategory[i].Category.CategoryId.ToString() },
+                      {"pSubCategoria", this.CommuniqueSubCategory[i].SubCategoryId.ToString() }
+                }))
+                {
+                    return Task.FromResult(false);
+                }
+            }
+            return Task.FromResult(true);
         }
   
 

@@ -2050,21 +2050,21 @@ CALL defSubCategoriaLocal(258, 20, 0);
 
 /* - Samsung - */
 CALL publicarComunicado(7, 0, "Compre o Galaxy Note20 em até 12x sem juros, e ganhe um voucher de R$ 2000!", now(), null);
-CALL relacionarComunicadoSubCategoria(0, 0); /* Informática - Hardware */
+CALL relacionarComunicadoSubCategoria(0, 0, 0); /* Informática - Hardware */
 
 CALL pegarSubCategoriasComunicado(0);
 
 /* - Mão Única - */
 CALL publicarComunicado(18, 0, "50% de desconto em todos os jogos e HQ's!", now(), '2020-12-02 13:30:00');
-CALL relacionarComunicadoSubCategoria(1, 0); /* Categoria jogos inteira */
-CALL relacionarComunicadoSubCategoria(1, 1);
-CALL relacionarComunicadoSubCategoria(1, 2);
-CALL relacionarComunicadoSubCategoria(1, 3);
-CALL relacionarComunicadoSubCategoria(1, 4);
-CALL relacionarComunicadoSubCategoria(1, 5);
-CALL relacionarComunicadoSubCategoria(1, 6);
+CALL relacionarComunicadoSubCategoria(1, 1, 0); /* Categoria jogos inteira */
+CALL relacionarComunicadoSubCategoria(1, 1, 1);
+CALL relacionarComunicadoSubCategoria(1, 1, 2);
+CALL relacionarComunicadoSubCategoria(1, 1, 3);
+CALL relacionarComunicadoSubCategoria(1, 1, 4);
+CALL relacionarComunicadoSubCategoria(1, 1, 5);
+CALL relacionarComunicadoSubCategoria(1, 1, 6);
 
-CALL relacionarComunicadoSubCategoria(9, 1); /* Literatura - Comic store */
+CALL relacionarComunicadoSubCategoria(1, 9, 1); /* Literatura - Comic store */
 
 CALL pegarSubCategoriasComunicado(1);
 

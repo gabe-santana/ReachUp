@@ -15,9 +15,8 @@ namespace ReachUp
         private string ErrorMessage { get; set; }
         #endregion
 
-        // Please, my colleagues, keep this on order 
         // Future improvement: separate by objects/models
-        // COUNT: 55
+        // COUNT: 57
         #region StoredProcedures
         [System.Flags]
         public enum Procedure
@@ -82,7 +81,9 @@ namespace ReachUp
             deletarTipo,
             checarBeacon,
             pegarCategorias,
-            pegarSubCategoriasCategoria
+            pegarSubCategoriasCategoria,
+            removerSubCategoria,
+            removerSubCategoriaComunicado
         }
 
         #endregion

@@ -453,7 +453,6 @@ BEGIN
 	DELETE FROM comunicado_sub_categoria WHERE cd_comunicado = pComunicado;
     END IF;
     DELETE FROM comunicado WHERE cd_comunicado = pComunicado;
-
 END$$
 
 DROP FUNCTION IF EXISTS pesquisarNomeCategoria$$
@@ -635,12 +634,20 @@ BEGIN
 END$$
 
 DROP PROCEDURE IF EXISTS relacionarComunicadoSubCategoria$$
-CREATE PROCEDURE relacionarComunicadoSubCategoria(
+CREATE PROCEDURE relacionarComunicadoSubCategoria(pComunicado int,
           pCategoria int, pSubCategoria int)
 BEGIN
-  DECLARE 	_cd int;
-  SELECT MAX(cd_comunicado) INTO @_cd FROM comunicado;
-  INSERT INTO comunicado_sub_categoria VALUES (@_cd, pCategoria, pSubCategoria);
+  INSERT INTO comunicado_sub_categoria VALUES (pComunicado, pCategoria, pSubCategoria);
+END$$
+
+DROP PROCEDURE IF EXISTS removerSubCategoriaComunicado$$
+CREATE PROCEDURE removerSubCategoriaComunicado(pComunicado int,
+          pCategoria int, pSubCategoria int)
+BEGIN
+   DELETE FROM comunicado_sub_categoria
+   WHERE cd_comunicado = pComunicado
+   AND cd_categoria = pCategoria
+   AND cd_sub_categoria = pSubCategoria;
 END$$
 
 DROP PROCEDURE IF EXISTS cadastrarBeacon$$
@@ -825,6 +832,15 @@ DROP PROCEDURE IF EXISTS removerCategoria$$
 CREATE PROCEDURE removerCategoria(pCategoria int)
 BEGIN
 	DELETE FROM categoria WHERE cd_categoria = pCategoria;
+END$$
+
+DROP PROCEDURE IF EXISTS removerSubCategoria$$
+CREATE PROCEDURE removerSubCategoria(pCategoria int, pSubCategoria int)
+BEGIN
+   DELETE FROM preferencia_cliente WHERE cd_categoria = pCategoria AND cd_sub_categoria = pSubCategoria;
+   DELETE FROM sub_categoria_local WHERE cd_categoria = pCategoria AND cd_sub_categoria = pSubCategoria;
+   DELETE FROM comunicado_sub_categoria WHERE cd_categoria = pCategoria AND cd_sub_categoria = pSubCategoria;
+   DELETE FROM sub_categoria  WHERE cd_categoria = pCategoria AND cd_sub_categoria = pSubCategoria;
 END$$
 
 DROP PROCEDURE IF EXISTS pegarSubCategorias$$
