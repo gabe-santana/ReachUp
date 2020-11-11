@@ -78,29 +78,30 @@ CREATE PROCEDURE pegarUsuarios(pRole varchar(3))
 BEGIN
 	IF (pRole = "cli") THEN
 		SELECT 
-		nm_cliente as "nm_user", nm_email_cliente as "nm_email_user", 
-		nm_senha_cliente as "nm_senha_user"
+		nm_cliente as "nm_user", 
+        nm_email_cliente as "nm_email_user"
 		FROM cliente;
 	END IF;
 	
 	IF (pRole = "loj") THEN
 		SELECT 
-		nm_administrador as "nm_user", nm_email_administrador as "nm_email_user", 
-		nm_senha_administrador as "nm_senha_user", cd_local 
+		nm_administrador as "nm_user", 
+        nm_email_administrador as "nm_email_user",
+		cd_local 
 		FROM administrador where cd_tipo_administrador = 1;
 	END IF;
 	
 	IF (pRole = "adm") THEN
 		SELECT 
-		nm_administrador as "nm_user", nm_email_administrador as "nm_email_user", 
-		nm_senha_administrador as "nm_senha_user"
+		nm_administrador as "nm_user", 
+        nm_email_administrador as "nm_email_user"
 		FROM administrador where cd_tipo_administrador = 0;	
 	END IF;
 
     IF (pRole = "dev") THEN
 		SELECT 
-		nm_administrador as "nm_user", nm_email_administrador as "nm_email_user", 
-		nm_senha_administrador as "nm_senha_user"
+		nm_administrador as "nm_user", 
+        nm_email_administrador as "nm_email_user" 
 		FROM administrador where cd_tipo_administrador = 2;	
 	END IF;
 END$$
@@ -331,7 +332,6 @@ BEGIN
 END$$
 
 
-
 DROP PROCEDURE IF EXISTS clientePrefere$$
 CREATE PROCEDURE clientePrefere(pEmail varchar(100))
 BEGIN
@@ -356,14 +356,16 @@ DROP PROCEDURE IF EXISTS criarFeedback$$
 CREATE PROCEDURE criarFeedback(pTipo int, pEmail varchar(100),  pDs text, pQt int(1)) 
 BEGIN	
 	DECLARE 	_cd int;
-	SELECT COUNT(cd_feedback) INTO @_cd FROM feedback WHERE cd_tipo_feedback = pTipo;
+	SELECT COUNT(*) INTO @_cd FROM feedback WHERE cd_tipo_feedback = pTipo;
 	INSERT INTO feedback VALUES (@_cd, pTipo, pEmail, pDs, curdate(), pQt) ;
 END$$
 
 DROP PROCEDURE IF EXISTS deletarFeedback$$ 
-CREATE PROCEDURE deletarFeedback(pFeedback int)
+CREATE PROCEDURE deletarFeedback(pFeedback int, pTipo int)
 BEGIN
-	DELETE FROM feedback WHERE cd_feedback = pFeedback;
+	DELETE FROM feedback 
+    WHERE cd_feedback = pFeedback
+    AND cd_tipo_feedback = pTipo;
 END$$
 
 DROP PROCEDURE IF EXISTS pegarFeedback$$
@@ -656,66 +658,39 @@ BEGIN
 	INSERT INTO beacon VALUES (pUUID, pTipo, pLocal);
 END$$
 
-DROP PROCEDURE IF EXISTS atualizarBeacon$$
-CREATE PROCEDURE atualizarBeacon(pUUID varchar(36), pTipo int, pLocal int)
-BEGIN
-	UPDATE beacon SET cd_tipo_beacon = pTipo WHERE cd_uuid_beacon = pUUID;
-	UPDATE beacon SET cd_local = pLocal WHERE cd_uuid_beacon = pUUID;
-END$$
-
 DROP PROCEDURE IF EXISTS atualizarFeedback$$
-CREATE PROCEDURE atualizarFeedback(pFeedback int, pTipo int, pEmail varchar(100),  pDs text, pQt int(1)) 
+CREATE PROCEDURE atualizarFeedback(pFeedback int, pTipo int, pDs text, pQt int(1)) 
 BEGIN
-	UPDATE feedback SET cd_tipo_feedback = pTipo WHERE cd_feedback = pFeedback;
-	UPDATE feedback SET nm_email_cliente = pEmail WHERE cd_feedback = pFeedback;
-	UPDATE feedback SET ds_feedback = pDs WHERE cd_feedback = pFeedback;
-	UPDATE feedback SET dt_feedback = now() WHERE cd_feedback = pFeedback;
-	UPDATE feedback SET qt_estrelas_feedback = pQt WHERE cd_feedback = pFeedback;
+	UPDATE feedback 
+    SET ds_feedback = pDs,
+    qt_estrelas_feedback = pQt
+    WHERE cd_tipo_feedback = pTipo
+    AND cd_feedback = pFeedback;
 
 END$$
 
 DROP PROCEDURE IF EXISTS FeedbackPorCliente$$
 CREATE PROCEDURE FeedbackPorCliente(pEmail varchar(100))
 BEGIN
-	SELECT * FROM feedback WHERE nm_email_cliente = pEmail;
+	SELECT f.cd_feedback, f.cd_tipo_feedback, tf.nm_tipo_feedback,
+    f.nm_email_cliente, f.ds_feedback, f.dt_feedback, f.qt_estrelas_feedback 
+    FROM feedback f
+    INNER JOIN tipo_feedback tf
+    ON f.cd_tipo_feedback = tf.cd_tipo_feedback
+    WHERE nm_email_cliente = pEmail
+    ORDER BY cd_tipo_feedback;
 END$$
 
 DROP PROCEDURE IF EXISTS acessoFeedbacks$$
 CREATE PROCEDURE acessoFeedbacks(pTipo int, dataInicio date , dataFim date, pGeral bool)
 BEGIN
 	IF pGeral = false THEN
-				SELECT nm_email_cliente, ds_feedback, qt_estrelas_feedback, dt_feedback FROM feedback 
+				SELECT cd_tipo_feedback, nm_email_cliente, ds_feedback, qt_estrelas_feedback, dt_feedback FROM feedback 
 				WHERE dt_feedback BETWEEN  dataInicio AND dataFim
 				AND cd_tipo_feedback = pTipo;
 	ELSE
-				SELECT nm_email_cliente, ds_feedback, qt_estrelas_feedback,dt_feedback FROM feedback 
+				SELECT cd_tipo_feedback, nm_email_cliente, ds_feedback, qt_estrelas_feedback,dt_feedback FROM feedback 
 				WHERE cd_tipo_feedback = pTipo;
-	END IF;
-END$$
-
-/*DROP FUNCTION IF EXISTS mediaFeedbacks$$
-CREATE FUNCTION mediaFeedbacks( dataInicio date, dataFim date, pGeral bool) RETURNS INT(1)
-BEGIN
-	DECLARE media INT(1);
-	IF pGeral = false THEN
-		SELECT  avg(qt_estrelas_feedback)INTO @media FROM feedback 	
-		WHERE cd_tipo_feedback = 0 AND dt_feedback BETWEEN  dataInicio AND dataFim;
-	ELSE
-		SELECT avg(qt_estrelas_feedback) INTO @media FROM feedback
-		 WHERE cd_tipo_feedback = 0 ;
-	END IF;
-	RETURN  @media;
-END$$*/
-
-DROP PROCEDURE IF EXISTS mediaFeedbacks$$
-CREATE PROCEDURE mediaFeedbacks( dataInicio date, dataFim date, pGeral bool)
-BEGIN
-	IF pGeral = false THEN
-		SELECT  avg(qt_estrelas_feedback) as media FROM feedback 	
-		WHERE cd_tipo_feedback = 0 AND dt_feedback BETWEEN  dataInicio AND dataFim;
-	ELSE
-		SELECT avg(qt_estrelas_feedback) as media FROM feedback
-		 WHERE cd_tipo_feedback = 0 ;
 	END IF;
 END$$
 
@@ -955,7 +930,6 @@ BEGIN
     OR 
 	formatString(sc.nm_sub_categoria) LIKE formatString(concat("%",search,"%"))
 
-	/* ------ Check the active issue ------- */
     /*OR
 	formatString(ca.nm_categoria) RLIKE formatString(concat("%", search REGEXP '.',"%"))
     AND

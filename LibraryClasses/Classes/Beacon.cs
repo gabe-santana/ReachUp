@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ReachUp
@@ -14,12 +15,11 @@ namespace ReachUp
         public string UUID { get; set; }
         public Local LocalBeacon { get; set; }
 
-        public string TypeName {get; set; }
+        [JsonIgnore] public string TypeName {get; set; }
         #endregion
 
         #region Fields    
         private MySqlDataReader Data = null;
-        private int v;
         #endregion
 
         #region Constructor
@@ -37,9 +37,10 @@ namespace ReachUp
   
         }
 
-        public Beacon(string uuid, int v) : base()
+        public Beacon(string uuid, int type) : base()
         {
-            this.v = v;
+            this.UUID = uuid;
+            this.Type = type;
         }
 
         /// <summary>
@@ -50,12 +51,12 @@ namespace ReachUp
         public Beacon(string uuid, string typeName)
         {
             this.UUID = uuid;
-            this.TypeName = TypeName;
+            this.TypeName = typeName;
         }
         #endregion
 
         #region Methods
-        public Task<Beacon> Get(string uuid) 
+        public async Task<Beacon> Get(string uuid) 
         {
             if (base.DQLCommand(Procedure.pegarBeacon, ref this.Data,
                     new string[,] {
@@ -69,13 +70,16 @@ namespace ReachUp
                     while (this.Data.Read())
                     {
                         beacon = new Beacon(uuid,
-                            int.Parse(this.Data["cd_tipo_beacon"].ToString())
+                            int.Parse(this.Data["cd_tipo_beacon"].ToString()),
+                            await new Local().Get(
+                                int.Parse(this.Data["cd_local"].ToString())
+                            )
                             
-                            );
+                        );
                     }
                     this.Data.Close();
                     base.Disconnect();
-                    return Task.FromResult(beacon);
+                    return beacon;
                 }
                 base.Disconnect();
                 return null;
@@ -96,13 +100,15 @@ namespace ReachUp
 
                     while (this.Data.Read())
                     {
-                        beacons.Add(new Beacon(
+                        beacons.Add(
+                            new Beacon(
                             this.Data["cd_uuid_beacon"].ToString(),
-                            int.Parse(type.ToString()),
+                            type,
                             await new Local().Get(
                                 int.Parse(this.Data["cd_local"].ToString())
                                 )
-                        ));
+                            )
+                        );
                     }
                     this.Data.Close();
                     base.Disconnect();
@@ -127,13 +133,15 @@ namespace ReachUp
 
                     while (this.Data.Read())
                     {
-                        beacons.Add(new Beacon(
+                        beacons.Add(
+                            new Beacon(
                             this.Data["cd_uuid_beacon"].ToString(),
                             int.Parse(this.Data["cd_tipo_beacon"].ToString()),
                             await new Local().Get(
-                                int.Parse(local.ToString())
+                                local
                                 )
-                        ));
+                            )
+                        );
                     }
                     this.Data.Close();
                     base.Disconnect();
@@ -149,22 +157,10 @@ namespace ReachUp
         {
             if (base.DMLCommand(Procedure.cadastrarBeacon,
                 new string[,] {
-                    {"pUUID" , this.UUID}, {"pTipo", this.Type.ToString()} ,
+                    {"pUUID" , this.UUID}, {"pTipo", this.Type.ToString()},
                     {"pLocal", this.LocalBeacon.IdLocal.ToString()}
                  }
                 ))
-            {
-                return Task.FromResult(true);
-            }
-            return Task.FromResult(false);
-        }
-
-        public Task<bool> Update() 
-        {
-            if (base.DMLCommand(Procedure.atualizarBeacon, new string[,] {
-                {"pUUID", this.UUID}, {"pTipo", this.Type.ToString()},
-                {"pLocal", this.LocalBeacon.IdLocal.ToString()}
-            }))
             {
                 return Task.FromResult(true);
             }

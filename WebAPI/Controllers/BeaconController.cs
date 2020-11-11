@@ -10,7 +10,7 @@ namespace ReachUpWebAPI.Controllers
     public class BeaconController : ControllerBase
     {
 
-        [Authorize(Roles = "adm, dev")]
+        //[Authorize(Roles = "adm, dev")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(int type)
         {
@@ -19,7 +19,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm,dev")]
+        // OK 
+        //[Authorize(Roles = "adm,dev")]
         [HttpGet]
         public async Task<IActionResult> Get(string uuid)
         {
@@ -28,7 +29,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm, dev")]
+        // OK 
+        //[Authorize(Roles = "adm, dev")]
         [HttpGet("ByLocal")]
         public async Task<IActionResult> ByLocal(int local)
         {
@@ -37,8 +39,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-
-        [Authorize(Roles = "adm,dev")]
+        // OK 
+        //[Authorize(Roles = "adm,dev")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Beacon beacon)
         {
@@ -47,16 +49,8 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize(Roles = "adm, dev")]
-        [HttpPatch]
-        public async Task<IActionResult> Patch([FromBody] Beacon beacon)
-        {
-            if (beacon != null)
-                return Ok(await beacon.Update());
-            return BadRequest("Parameters are null");
-        }
-
-        [Authorize(Roles = "adm, dev")]
+        // OK 
+        //[Authorize(Roles = "adm, dev")]
         [HttpDelete]
         public async Task<IActionResult> Delete(string uuid)
         {

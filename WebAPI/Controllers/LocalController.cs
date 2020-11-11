@@ -162,32 +162,10 @@ namespace ReachUpWebAPI.Controllers
            return BadRequest("Parameters are null");
         }
 
-        /*[Authorize]
-        [HttpGet("GetImages")]
-        public async Task<IActionResult> GetImages([FromForm] List<int> ids)
-        {
-           if (ids.Any()) 
-              return Ok(await ImagesGet(ids));
-           return BadRequest("Parameters are null");
-        }*/
-
-        /*private async Task<List<FileStream>> ImagesGet(List<int> ids)
-        {
-           List<FileStream> files = new List<FileStream>();
-
-           foreach (var id in ids)
-           {
-              files.Add(
-                  System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/local/{id}.png")
-              );
-           }
-           return files;
-        }*/
-
         // OK 
         [Authorize]
         [HttpPost("UploadImage")]
-        public async Task<string> UploadImage([FromForm] IFormFile file)
+        public async Task<bool> UploadImage([FromForm] IFormFile file)
         {
             List<string> validExtensions = new List<string>(
                 new string[] { ".png" });
@@ -201,13 +179,10 @@ namespace ReachUpWebAPI.Controllers
                  try
                  {
                    if(!Directory.Exists(_hostingEnvironment.ContentRootPath + "/App_Data/local/"))
-                   {
                        Directory.CreateDirectory(_hostingEnvironment.ContentRootPath + "/App_Data/local/");
-                   }
+
                    else if (System.IO.File.Exists(_hostingEnvironment.ContentRootPath + "/App_Data/local/" + file.FileName))
-                   {
                        System.IO.File.Delete(_hostingEnvironment.ContentRootPath + "/App_Data/local/" + file.FileName);
-                   }
 
                    using (FileStream filestream = 
                             System.IO.File.Create(
@@ -218,34 +193,31 @@ namespace ReachUpWebAPI.Controllers
                     {
                        await file.CopyToAsync(filestream);
                        filestream.Flush();
-                       return "Ok!";
+                       return true;
                     }
                 }
 
-                catch (Exception ex)
+                catch
                 {
-                   return ex.ToString();
+                   return false;
                 }
              }
-              return "Tipo de arquivo inválido!";
+              return false;
             }
-            return "Falha no envio do arquivo!";
+            return false;
         }
 
-        // OK, melhorias pendentes
+        // OK
         [Authorize]
         [HttpPost("UploadImages")]
-        public async Task<string> UploadImages([FromForm] List<IFormFile> files)
+        public async Task<bool> UploadImages([FromForm] List<IFormFile> files)
         {
             List<string> validExtensions = new List<string>(
                 new string[] { ".png" });
 
-            List<string> flaws = new List<string>();
-
             int i = -1;
             foreach (var file in files)
             {
-               i++;
 
                if (file.Length > 0)
                {
@@ -255,18 +227,16 @@ namespace ReachUpWebAPI.Controllers
                   {
                       try
                       {
+                          i++;
+
                           if (i == 0)
                           {
                               if (!Directory.Exists(_hostingEnvironment.ContentRootPath + "/App_Data/local/"))
-                              {
-                                  Directory.CreateDirectory(_hostingEnvironment.ContentRootPath + "/App_Data/local/");
-                              }
+                                   Directory.CreateDirectory(_hostingEnvironment.ContentRootPath + "/App_Data/local/");
                           }
                           
                           if (System.IO.File.Exists(_hostingEnvironment.ContentRootPath + "/App_Data/local/" + file.FileName))
-                          {
-                             System.IO.File.Delete(_hostingEnvironment.ContentRootPath + "/App_Data/local/" + file.FileName);
-                          }
+                               System.IO.File.Delete(_hostingEnvironment.ContentRootPath + "/App_Data/local/" + file.FileName);
 
                           using (FileStream filestream = 
                                    System.IO.File.Create(
@@ -281,40 +251,16 @@ namespace ReachUpWebAPI.Controllers
                           }
                       }
 
-                      catch (Exception ex)
+                      catch
                       {
-                         return ex.ToString();
+                         continue;
                       }
                   }
-                  flaws.Add(file.FileName);
                   continue;
                }
-               flaws.Add(file.FileName);
                continue;
             }
-
-            if (flaws.Any())
-            {
-               /*string errorReport = "Houve falha no envio da(s) imagem(ns): ";
-
-               for (int j = 0; j < flaws.Count; i++)
-               {
-                  if (j == flaws.Count - 1 && j != 0)
-                  {
-                     errorReport += " e" + flaws[j] + ".";
-                  }
-                  else if (j == 0)
-                  {
-                     errorReport += flaws[j];
-                  }
-                  else
-                  {
-                     errorReport += ", " + flaws[j];
-                  }
-               }*/
-               return "Número de falhas: " + Convert.ToString(flaws.Count);
-            }
-            return "Tudo ok!";
+            return true;
         }
 
 

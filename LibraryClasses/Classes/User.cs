@@ -78,7 +78,6 @@ namespace ReachUp
             this.Email = email;           
         }
 
-        
 
         #endregion
 
@@ -202,17 +201,17 @@ namespace ReachUp
 
         public async Task<List<User>> GetAll(string role)
         {
-            List<User> _return = new List<User>();
-
-            if (base.DQLCommand(Procedure.pegarUsuarios,
-                  ref this.Data,
+    
+            if (base.DQLCommand(Procedure.pegarUsuarios, ref this.Data,
                   new string[,] {
-                    { "pRole", role }
+                    {"pRole", role }
               }))
             {
-                User user = null;
                 if (this.Data.HasRows)
                 {
+                    User user = null;
+                    List<User> users = new List<User>();
+
                     while (this.Data.Read())
                     {
                         user = new User();
@@ -221,29 +220,33 @@ namespace ReachUp
                         user.Role = role;
                         if (role == "loj")
                         {
-                            user.AdmLocal = await new Local().Get(int.Parse(this.Data["cd_local"].ToString()));
+                            user.AdmLocal = await new Local().Get(
+                                int.Parse(this.Data["cd_local"].ToString())
+                                );
                         }
-                        _return.Add(user);
+                        users.Add(user);
                     }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return users;
                 }
-                this.Data.Close();
                 base.Disconnect();
-                return _return;
+                return null;
             }
             return null;
         }
 
         public async Task<User> Get(string role, string email)
         {
-            if (base.DQLCommand(Procedure.pegarUsuario,
-              ref this.Data,
+            if (base.DQLCommand(Procedure.pegarUsuario, ref this.Data,
                   new string[,] {
                     { "pRole", role } , { "pEmail", email }
              }))
             {
-                User user = null;
                 if (this.Data.HasRows)
                 {
+                    User user = null;
+
                     while (this.Data.Read())
                     {
                         user = new User();
@@ -252,39 +255,34 @@ namespace ReachUp
                         user.Role = role;
                         if (role == "loj")
                         {
-                            user.AdmLocal = await new Local().Get(int.Parse(this.Data["cd_local"].ToString()));
+                            user.AdmLocal = await new Local().Get(
+                                int.Parse(this.Data["cd_local"].ToString())
+                                );
                         }
                     }
                     this.Data.Close();
                     base.Disconnect();
                     return user;
                 }
+                base.Disconnect();
+                return null;
             }
-
             return null;
         }
 
         public Task<bool> Add()
         {
-            int IdLocal = -1;
+            int IdLocal;
 
-            switch (this.Role)
-            {
-                case "cli":
-                    IdLocal = -1; ;
-                    break;
-                case "adm":
-                    IdLocal = -1;
-                    break;
-                case "loj":
-                    IdLocal = this.AdmLocal.IdLocal;
-                    break;
-            }
+            IdLocal = this.Role == "loj" 
+                      ? this.AdmLocal.IdLocal 
+                      : -1;
+
             if (base.DMLCommand(Procedure.cadastrarUsuario,
                     new string[,] {
-                    { "pEmail", this.Email }, { "pNome", this.Name },
-                    { "pSenha", this.Password }, {"pRole", this.Role },
-                    { "pLocal" ,  IdLocal.ToString()}
+                    {"pEmail", this.Email}, {"pNome", this.Name},
+                    {"pSenha", this.Password}, {"pRole", this.Role},
+                    {"pLocal" ,  IdLocal.ToString()}
                 }))
             {
                 return Task.FromResult(true);
@@ -296,8 +294,8 @@ namespace ReachUp
         {
             if (base.DMLCommand(Procedure.atualizarUsuario,
               new string[,] {
-                    { "pRole", this.Role } , { "pEmail", this.Email },
-                    { "pNome", this.Name },  { "pSenha", this.Password }
+                    {"pRole", this.Role} , {"pEmail", this.Email},
+                    {"pNome", this.Name},  {"pSenha", this.Password}
              }))
             {
                 return Task.FromResult(true);

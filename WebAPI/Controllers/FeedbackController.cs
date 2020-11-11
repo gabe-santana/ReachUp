@@ -9,6 +9,7 @@ namespace ReachUpWebAPI.Controllers
     [ApiController]
     public class FeedbackController : ControllerBase
     {
+        // OK 
         [Authorize(Roles = "adm")]
         [HttpGet("ByDate")]
         public async Task<IActionResult> ByDate(int type, string begin, string end)
@@ -21,6 +22,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize(Roles = "cli,adm")]
         [HttpGet("ByUser")]
         public async Task<IActionResult> ByUser(string email) 
@@ -31,6 +33,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
 
+        // OK
         [Authorize(Roles = "adm")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(int type)
@@ -40,6 +43,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize(Roles = "adm,cli")]
         [HttpGet]
         public async Task<IActionResult> Get(int id, int type)
@@ -51,46 +55,35 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize(Roles = "cli")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Feedback feedback) 
         {
             if (feedback != null)
-                if (HttpContextId.IsOwn(HttpContext, feedback.FeedbackUser.Email))
-                    return Ok(await feedback.Add());
+                return Ok(await feedback.Add());
             return BadRequest("Parameters are null");
         }
 
-
+        // OK 
         [Authorize (Roles = "cli")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] Feedback feedback) 
         {
             if (feedback != null)
-                if (HttpContextId.IsOwn(HttpContext, feedback.FeedbackUser.Email))
-                    return Ok(await feedback.Update());
+                return Ok(await feedback.Update());
             return BadRequest("Parameters are null");
         }
 
+        // OK 
         [Authorize(Roles = "adm")]
         [HttpDelete]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, int type)
         {
-            if (!string.IsNullOrWhiteSpace(id.ToString()))
-                return Ok(await new Feedback().Delete(id));
+            if (!string.IsNullOrWhiteSpace(id.ToString())
+               && !string.IsNullOrWhiteSpace(type.ToString()))
+                return Ok(await new Feedback().Delete(id, type));
             return BadRequest("Parameters are null");
         }
-
-        /*[Authorize(Roles = "adm")]
-        [HttpGet("GetAverage")]
-        public async Task<IActionResult> GetAverage(DateTime startDate, DateTime endDate, bool isGeneral)
-        {
-            if (!string.IsNullOrWhiteSpace(startDate.ToString())
-                && !string.IsNullOrWhiteSpace(endDate.ToString())
-                && !string.IsNullOrWhiteSpace(isGeneral.ToString())
-               )
-                return Ok(await new Feedback().GetAverage(startDate, endDate, isGeneral));
-            return BadRequest("Parameters are null");
-        }*/
     }
 }

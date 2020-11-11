@@ -13,9 +13,10 @@ namespace ReachUp
         #region Properties
         [JsonIgnore] public int FeedbackId { get; set; }
         [JsonIgnore] public ushort Type { get; set; }
+        public string TypeName {get; set; }
         public User FeedbackUser { get; set; }
         public string Description { get; set; }
-        public DateTime FeedbackDate { get; set; }
+        public string FeedbackDate { get; set; }
         public ushort Stars { get; set; }
         #endregion
 
@@ -26,13 +27,84 @@ namespace ReachUp
         #region Constructor
         public Feedback() : base() { }
 
-        public Feedback(User FeedbackUser, string Description, DateTime FeedbackDate,
-             ushort Stars) : base()
+        public Feedback(User FeedbackUser, string Description, string FeedbackDate,
+             ushort Stars, ushort type) : base()
         {
             this.FeedbackUser = FeedbackUser;
             this.Description = Description;
-            this.FeedbackDate = FeedbackDate;
+            this.FeedbackDate = FeedbackDate.Substring(0, 10);
             this.Stars = Stars;
+            this.Type = type;
+        }
+
+         /// <summary>
+        ///  Get by user constructor
+        /// </summary>
+        /// <param name="feedbackUser"></param>
+        /// <param name="description"></param>
+        /// <param name="date"></param>
+        /// <param name="stars"></param>
+        /// <param name="type"></param>
+        /// <param name="id"></param>
+        /// <param name="typeName"></param>
+         public Feedback(User FeedbackUser, string Description, string FeedbackDate,
+             ushort Stars, ushort type, int id, string typeName) : base()
+         {
+            this.FeedbackUser = FeedbackUser;
+            this.Description = Description;
+            this.FeedbackDate = FeedbackDate.Substring(0, 10);
+            this.Stars = Stars;
+            this.Type = type;
+            this.FeedbackId = id;
+            this.TypeName = typeName;
+        }
+
+         /// <summary>
+        ///  Get by key (type + id) constructor
+        /// </summary>
+        /// <param name="feedbackUser"></param>
+        /// <param name="description"></param>
+        /// <param name="date"></param>
+        /// <param name="stars"></param>
+         public Feedback(User FeedbackUser, string Description, string FeedbackDate,
+             ushort Stars) : base()
+         {
+            this.FeedbackUser = FeedbackUser;
+            this.Description = Description;
+            this.FeedbackDate = FeedbackDate.Substring(0, 10);
+            this.Stars = Stars;
+        }
+
+        /// <summary>
+        ///  Add constructor
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="feedbackUser"></param>
+        /// <param name="description"></param>
+        /// <param name="stars"></param>
+        public Feedback(ushort type, User feedbackUser, string description, ushort stars) 
+         : base()
+        {
+            this.Type = type;
+            this.FeedbackUser = feedbackUser;
+            this.Description = description;
+            this.Stars = stars;
+        }
+
+        /// <summary>
+        ///  Update constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <param name="description"></param>
+        /// <param name="stars"></param>
+        public Feedback(int id, ushort type, string description, ushort stars) 
+         : base()
+        {
+            this.FeedbackId = id;
+            this.Type = type;
+            this.Description = description;
+            this.Stars = stars;
         }
         #endregion
 
@@ -51,11 +123,14 @@ namespace ReachUp
 
                     while (this.Data.Read())
                     {
-                        feedbacks.Add(new Feedback(
-                           await new User().Get("cli", this.Data["nm_email_cliente"].ToString()),
+                        feedbacks.Add(
+                            new Feedback(
+                           await new User().Get("cli", 
+                             this.Data["nm_email_cliente"].ToString()),
                            this.Data["ds_feedback"].ToString(),
-                           DateTime.Parse(this.Data["dt_feedback"].ToString()),
-                           ushort.Parse(this.Data["qt_estrelas_feedback"].ToString())
+                           this.Data["dt_feedback"].ToString(),
+                           ushort.Parse(this.Data["qt_estrelas_feedback"].ToString()),
+                           ushort.Parse(this.Data["cd_tipo_feedback"].ToString())
                             )
                         );
                     }
@@ -83,12 +158,16 @@ namespace ReachUp
 
                     while (this.Data.Read())
                     {
-                        feedbacks.Add(new Feedback(
-                                await new User().Get("cli", this.Data["nm_email_cliente"].ToString()),
+                        feedbacks.Add(
+                            new Feedback(
+                                await new User().Get("cli", 
+                                  this.Data["nm_email_cliente"].ToString()),
                                 this.Data["ds_feedback"].ToString(),
-                                DateTime.Parse(this.Data["dt_feedback"].ToString()),
-                                ushort.Parse(this.Data["qt_estrelas_feedback"].ToString())
-                            ));
+                                this.Data["dt_feedback"].ToString(),
+                                ushort.Parse(this.Data["qt_estrelas_feedback"].ToString()),
+                                ushort.Parse(this.Data["cd_tipo_feedback"].ToString())
+                            )
+                        );
                     }
                     this.Data.Close();
                     base.Disconnect();
@@ -114,10 +193,14 @@ namespace ReachUp
                     {
                         feedbacks.Add(
                             new Feedback(
-                              await new User().Get("cli", this.Data["nm_email_cliente"].ToString()),
+                              await new User().Get("cli", 
+                                this.Data["nm_email_cliente"].ToString()),
                               this.Data["ds_feedback"].ToString(),
-                              DateTime.Parse(this.Data["dt_feedback"].ToString()),
-                              ushort.Parse(this.Data["qt_estrelas_feedback"].ToString())
+                              this.Data["dt_feedback"].ToString(),
+                              ushort.Parse(this.Data["qt_estrelas_feedback"].ToString()),
+                              ushort.Parse(this.Data["cd_tipo_feedback"].ToString()),
+                              int.Parse(this.Data["cd_feedback"].ToString()),
+                              this.Data["nm_tipo_feedback"].ToString()
                                 )
                             );
                     }
@@ -145,9 +228,10 @@ namespace ReachUp
                     while (this.Data.Read()) 
                     {
                         feedback = new Feedback(
-                           await new User().Get("cli", this.Data["nm_email_cliente"].ToString()),
+                           await new User().Get("cli", 
+                            this.Data["nm_email_cliente"].ToString()),
                            this.Data["ds_feedback"].ToString(),
-                           DateTime.Parse(this.Data["dt_feedback"].ToString()),
+                           this.Data["dt_feedback"].ToString(),
                            ushort.Parse(this.Data["qt_estrelas_feedback"].ToString())
                         );
                     }
@@ -159,20 +243,6 @@ namespace ReachUp
                 return null;
             }
             return null;
-        }
-        public Task<bool> Update()
-        {
-            if (base.DMLCommand(Procedure.atualizarFeedback, new string[,] {
-                {"pFeedback", this.FeedbackId.ToString() },
-                {"pTipo", this.Type.ToString()},
-                {"pEmail", this.FeedbackUser.Email},
-                {"pDs", this.Description},
-                {"pQt", this.Stars.ToString()}
-            })) 
-            {
-                return Task.FromResult(true);
-            }
-            return Task.FromResult(false);
         }
 
         public Task<bool> Add() 
@@ -189,48 +259,31 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
-        public Task<bool> Delete(int id)
+        public Task<bool> Update()
         {
-            if (base.DMLCommand(Procedure.deletarFeedback, new string[,] {
-                {"pFeedback", id.ToString()}
-            }))
+            if (base.DMLCommand(Procedure.atualizarFeedback, new string[,] {
+                {"pFeedback", this.FeedbackId.ToString() },
+                {"pTipo", this.Type.ToString()},
+                {"pDs", this.Description},
+                {"pQt", this.Stars.ToString()}
+            })) 
             {
                 return Task.FromResult(true);
-
             }
             return Task.FromResult(false);
         }
 
-        /*public Task<int> GetAverage(DateTime startDate, DateTime endDate, bool isGeneral)
+        public Task<bool> Delete(int id, int type)
         {
-           int average;
-
-            if (base.DQLCommand(Procedure.mediaFeedbacks, ref this.Data,
-                new string[,] {
-                    {"dataInicio", startDate.ToString() },
-                    {"dataFim", endDate.ToString() },
-                    {"pGeral", isGeneral.ToString() },
-                }))
-                {
-                  if (this.Data.HasRows)
-                  {
-                    if (this.Data.Read())
-                    {
-                        average = int.Parse(this.Data["media"].ToString());
-                    }
-
-                    this.Data.Close();
-                    base.Disconnect();
-                    return Task.FromResult(average);
-                  }
-
-                this.Data.Close();
-                base.Disconnect();
+            if (base.DMLCommand(Procedure.deletarFeedback, new string[,] {
+                {"pFeedback", id.ToString()},
+                {"pTipo", type.ToString()}
+            }))
+            {
+                return Task.FromResult(true);
             }
-
-            return Task.FromResult(-1);
-        }*/
+            return Task.FromResult(false);
+        }
         #endregion
-
     }
 }

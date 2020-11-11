@@ -11,7 +11,7 @@ namespace ReachUpWebAPI.Controllers
     {
         #region Actions
 
-        [Authorize (Roles = "adm, dev")]
+        //[Authorize (Roles = "adm, dev")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(string role)
         {
@@ -20,7 +20,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public async Task<IActionResult> Get(string role, string email)
         {
@@ -31,7 +31,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] User user)
         {
@@ -40,7 +40,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] User user)
         {
@@ -52,7 +52,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpDelete]
         public async Task<IActionResult> Delete(string role, string email)
         {
