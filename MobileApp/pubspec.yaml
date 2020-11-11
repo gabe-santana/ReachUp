@@ -48,6 +48,7 @@ dependencies:
   giffy_dialog:
   flutter_signin_button: ^1.1.0
   fa_stepper: ^0.0.2
+  async: ^2.4.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
