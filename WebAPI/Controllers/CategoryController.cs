@@ -154,7 +154,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
         
-        // OK 
+        [AllowAnonymous]
         [Authorize]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(bool isGeneral)

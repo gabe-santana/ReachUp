@@ -147,6 +147,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
+        [AllowAnonymous]
         [Authorize]
         [HttpGet("ByCategory")]
         public async Task<IActionResult> ByCategory(int category)
