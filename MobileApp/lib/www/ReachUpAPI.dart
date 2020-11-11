@@ -7,7 +7,7 @@ class ReachUpAPI{
   String url;
   Response response;
   Dio dio;
-  String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaUBlbWFpbC5jb20iLCJyb2xlIjoiY2xpIiwibmJmIjoxNjA0OTY0MDEyLCJleHAiOjE2MDUwNTA0MTIsImlhdCI6MTYwNDk2NDAxMn0.mBisWSp5Carj6MXkU5ciXgc_71u9P1blKCFr0fqo-8A";
+  String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaUBlbWFpbC5jb20iLCJyb2xlIjoiY2xpIiwibmJmIjoxNjA1MDUxNzU3LCJleHAiOjE2MDUxMzgxNTcsImlhdCI6MTYwNTA1MTc1N30.cPE_n7ZtrKS1HWAhE76N4IZuDiEKut5yzMIINXpPNjY";
 
   ReachUpAPI(){
     dio = new Dio();

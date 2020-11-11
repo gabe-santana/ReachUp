@@ -1,19 +1,21 @@
-import 'package:ReachUp/Model/Category.model.dart';
+import 'package:ReachUp/Model/Subcategory.model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../globals.dart';
 
-class CategoryCardView extends StatefulWidget {
-  @override
-  _CategoryCardViewState createState() => _CategoryCardViewState();
-  Category category;
+class SubCategoryCard extends StatefulWidget {
+  SubCategory subCategory;
+
   bool checked = false;
 
-  CategoryCardView(this.category);
+
+    SubCategoryCard(this.subCategory);
+  @override
+  _SubCategoryCardState createState() => _SubCategoryCardState();
 }
 
-class _CategoryCardViewState extends State<CategoryCardView> {
+class _SubCategoryCardState extends State<SubCategoryCard> {
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -43,19 +45,13 @@ class _CategoryCardViewState extends State<CategoryCardView> {
                       Container(
                         width: 120,
                         child: Text(
-                          widget.category.categoryName,
+                          widget.subCategory.subCategoryName,
                           overflow: TextOverflow.clip,
                           style: TextStyle(
                               color: Theme.of(context).colorScheme.onBackground,
                               fontSize: 18),
                         ),
                       ),
-                      // Text(widget.category.categoryDescription,
-                      // overflow: TextOverflow.clip,
-                      // style: TextStyle(
-                      //   color: Colors.grey,
-                      //   fontSize: 12,
-                      // ),)
                     ],
                   )
                 ],
@@ -63,14 +59,14 @@ class _CategoryCardViewState extends State<CategoryCardView> {
               controlAffinity: ListTileControlAffinity.trailing,
               value: widget.checked,
               onChanged: (val) {
-          
                 setState(() {
                   widget.checked = val;
 
+                  
                   if(val){
-                    Globals.categoriesChecked.add(widget.category);
+                    Globals.subCategoriesChecked.add(widget.subCategory);
                   }else{
-                         Globals.categoriesChecked.removeWhere((ctg) => ctg == widget.category);
+                    Globals.subCategoriesChecked.removeWhere((ctg) => ctg == widget.subCategory);
                   }
                 });
               }),
