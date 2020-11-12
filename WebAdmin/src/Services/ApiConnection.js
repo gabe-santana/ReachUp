@@ -24,7 +24,7 @@ class clsApiConnection  {
 
           if (end == -1) {
             end = cookies.length;
-          }
+          }.
           return unescape(cookies.substring(begin + prefix.length, end));
        }
 

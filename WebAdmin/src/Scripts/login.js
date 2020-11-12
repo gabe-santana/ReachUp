@@ -39,8 +39,6 @@ $(() => {
         (domain.indexOf('.')>=-1) && 
         (domain.lastIndexOf('.')==-1 < domain.length -1)) {*/
 
-        
-
           const response = await login (email, password);
 
           alert("Tentei logar!");
