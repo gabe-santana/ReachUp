@@ -4,7 +4,7 @@ import 'Model/Subcategory.model.dart';
 import 'Model/User.model.dart';
 
 class Globals{
-  static User user;
+  static User user = new User();
   static bool isLoggedIn = false;
   static String urlAPI;
 

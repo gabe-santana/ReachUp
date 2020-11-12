@@ -6,6 +6,7 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'SignIn.view.dart';
 import 'SignUp.view.dart';
 
 class SignView extends StatelessWidget {
@@ -42,7 +43,9 @@ class SignView extends StatelessWidget {
                   SignInButton(
                     Buttons.Email,
                     text: "Entrar com E-mail",
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SignInView()));
+                    },
                   ),
                   SignInButtonBuilder(
                     icon: FontAwesomeIcons.google,

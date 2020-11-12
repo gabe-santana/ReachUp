@@ -1,10 +1,9 @@
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
+import 'package:ReachUp/Controller/Account.controller.dart';
 import 'package:ReachUp/Controller/SubCategory.controller.dart';
-import 'package:ReachUp/Model/Category.model.dart';
 import 'package:ReachUp/Model/Subcategory.model.dart';
 import 'package:ReachUp/View/HomeView/Home.view.dart';
 import 'package:ReachUp/globals.dart';
-import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -36,6 +35,7 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
     );
   }
 
+  AccountController accountController = new AccountController();
   @override
   Widget build(BuildContext context) {
     void showSnackBarMessage(ctx, String message,
@@ -91,25 +91,36 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Próxima etapa ',
+                        categoryIndex == Globals.categoriesChecked.length - 2
+                            ? 'Próxima etapa '
+                            : "Finalizar",
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
-                      FaIcon(FontAwesomeIcons.arrowRight,
-                          color: Colors.white, size: 16)
+                      categoryIndex == Globals.categoriesChecked.length - 2
+                          ? FaIcon(FontAwesomeIcons.arrowRight,
+                              color: Colors.white, size: 16)
+                          : Icon(Icons.check, color: Colors.white, size: 16)
                     ],
                   ),
                   onPressed: () {
                     print("index cat");
-                    print( Globals.categoriesChecked.length -      categoryIndex);
+                    print(Globals.categoriesChecked.length - categoryIndex);
                     if (Globals.subCategoriesChecked.isNotEmpty) {
-                        if(categoryIndex < Globals.categoriesChecked.length - 1){
-                          setState(() {
-                            categoryIndex++;
-                          });
-                        }
-                        else{
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-                        }
+                      if (categoryIndex <
+                          Globals.categoriesChecked.length - 1) {
+                        setState(() {
+                          categoryIndex++;
+                        });
+                      } else {
+                        accountController.signUp().then((value) {
+                          Globals.user = value;
+                        });
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => Home()),
+                          (Route<dynamic> route) => false,
+                        );
+                      }
                     } else
                       showSnackBarMessage(
                           context, "Escolha pelo menos um item!");

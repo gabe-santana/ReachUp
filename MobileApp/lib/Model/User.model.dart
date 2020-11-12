@@ -6,7 +6,7 @@ class User {
   String password;
   String role;
   Local admLocal;
-  String token;
+  String token = "";
 
   User(
       {this.email,

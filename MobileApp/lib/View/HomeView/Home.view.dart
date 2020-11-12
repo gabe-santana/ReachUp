@@ -1,3 +1,4 @@
+import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/View/DeveloperView/BeaconBroadcast.view.dart';
 import 'package:ReachUp/View/DeveloperView/Compass.view.dart';
 import 'package:ReachUp/View/HomeView/HomeMap.view.dart';
@@ -5,6 +6,8 @@ import 'package:ReachUp/View/MapView/Map.view.dart';
 import 'package:ReachUp/View/SearchView/Search.view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '../../globals.dart';
 
 class FragmentWidget extends StatelessWidget {
   Widget contentWidget;
@@ -16,7 +19,9 @@ class FragmentWidget extends StatelessWidget {
 
 class Home extends StatefulWidget {
   bool inRouting;
-  Home({this.inRouting = false});
+  bool isNoob;
+
+  Home({this.inRouting = false, this.isNoob = false});
   _HomeState createState() => _HomeState();
 }
 
@@ -39,8 +44,49 @@ class _HomeState extends State<Home> {
     setState(() => _selectedIndex = index);
   }
 
+
+createAlertDialog(BuildContext context, String msg) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) => CustomDialog(
+              icon: FontAwesomeIcons.mapMarkedAlt,
+              title: "Seja Bem-vindo(a)!",
+              description: "Olá ${Globals.user.name}! Agora você pode aproveitar todas as funcionalidades,"+
+              " , não se esqueça de dar seu feedback para que possamos melhorar suas experiência.",
+              buttonOK: IconButton(
+                icon: Icon(
+                  Icons.check,
+                  size: 40,
+                  color: Colors.green,
+                ),
+                onPressed: () {
+                  //chamar rota
+                  Navigator.pop(context);
+                  Navigator.pop(context, true);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Home(
+                          inRouting: true,
+                        ),
+                      ));
+                },
+              ),
+              buttonNO: IconButton(
+                icon: Icon(
+                  Icons.close,
+                  size: 40,
+                  color: Colors.red,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ));
+}
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
         drawer: Drawer(
           child: ListView(
@@ -92,7 +138,7 @@ class _HomeState extends State<Home> {
                             size: 85,
                           ),
                           Container(
-                              child: Text('Username',
+                              child: Text(Globals.user.name,
                                   style: TextStyle(
                                       color: Theme.of(context)
                                           .colorScheme
@@ -101,7 +147,7 @@ class _HomeState extends State<Home> {
                           Container(
                               child: Opacity(
                             opacity: 0.5,
-                            child: Text('Username@email.com',
+                            child: Text(Globals.user.email,
                                 style: TextStyle(
                                     color: Theme.of(context)
                                         .colorScheme
