@@ -3,13 +3,12 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import '../globals.dart';
 
-class ReachUpAPI{
+class ReachUpAPI {
   String url;
   Response response;
   Dio dio;
-  String token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNsaUBlbWFpbC5jb20iLCJyb2xlIjoiY2xpIiwibmJmIjoxNjA1MDUxNzU3LCJleHAiOjE2MDUxMzgxNTcsImlhdCI6MTYwNTA1MTc1N30.cPE_n7ZtrKS1HWAhE76N4IZuDiEKut5yzMIINXpPNjY";
 
-  ReachUpAPI(){
+  ReachUpAPI() {
     dio = new Dio();
     dio.options.baseUrl = Globals.urlAPI;
     // dio.interceptors.add(InterceptorControl());
@@ -17,15 +16,30 @@ class ReachUpAPI{
     _config();
   }
 
+  httpPost(String uri, dynamic data) async{
+    try {
+      this.response = await dio.post(
+        "${dio.options.baseUrl}/$uri",
+        data: data,
+        options: Options(
+            
+            headers: {"Authorization": "Bearer ${Globals.user.token != null ?  Globals.user.token : 'xpto'}"},
+            followRedirects: false,
+            validateStatus: (status) {
+              return status < 500;
+            }),
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
   httpGet(String uri) async {
     try {
       this.response = await dio.get(
         "${dio.options.baseUrl}/$uri",
         options: Options(
-            headers: {
-              "Authorization":
-                  this.token
-            },
+            headers: {"Authorization":  "Bearer ${Globals.user.token != null ?  Globals.user.token : 'xpto'}"},
             followRedirects: false,
             validateStatus: (status) {
               return status < 500;
@@ -45,7 +59,7 @@ class ReachUpAPI{
     };
 
     dio.options.headers['content-Type'] = 'application/json';
-    dio.options.headers["Authorization"] = "Bearer ${this.token}";
+    dio.options.headers["Authorization"] =  "Bearer ${Globals.user.token != null ?  Globals.user.token : 'xpto'}";
   }
 
   noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
