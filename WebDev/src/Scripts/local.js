@@ -30,7 +30,7 @@ $(() => {
           console.log(cookies.substring(begin + prefix.length, end));
         }
 
-   await getAll($("#cmbLocalType").val());
+   getAll($("#cmbLocalType").val());
 
    $("#cmbLocalType").change(async () => {
      const type = this.val();
