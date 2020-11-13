@@ -65,7 +65,6 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK
-        //[Authorize(Roles="cli,loj,adm")]
         [HttpGet("RecoverPassword")]
         public async Task<IActionResult> RecoverPassword(string email)
         {
@@ -75,7 +74,6 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK
-        [Authorize(Roles="cli,loj,adm")]
         [HttpGet("TryUpdatePassword")]
         public async Task<IActionResult> TryUpdatePassword(string email, string cod)
         {
@@ -86,7 +84,6 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles="cli,loj,adm")]
         [HttpPatch("UpdatePassword")]
         public async Task<IActionResult> UpdatePassword([FromQuery] string email, [FromQuery] string role, [FromQuery] string password)
         {

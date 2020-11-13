@@ -7,36 +7,40 @@ class clsBeaconController {
 
     async Get(uuid)
     {
-       return await this.api.httpGet(`Beacon/Get?uuid=${uuid}`);
+       return await 
+        this.api.httpGet(`Beacon?uuid=${uuid}`);
     }
 
     async GetAll(type)
     {
-       return await this.api.httpGet(`Beacon/GetAll?type=${type}`);
+       return await 
+        this.api.httpGet(`Beacon/GetAll?type=${type}`);
     }
 
     async ByLocal(id)
     {
-       return await this.api.httpGet(`Beacon/ByLocal?local=${id}`);
+       return await 
+        this.api.httpGet(`Beacon/ByLocal?local=${id}`);
     }
 
-    async Post(uuid, Type, 
-      Local)
+    async Post(Beacon)
     {
-       return await this.api.httpPost('Beacon/Post',
-         new Beacon.clsBeacon(uuid, type, local)
+       return await 
+        this.api.httpPost(
+           'Beacon/',
+           {
+              uuid: Beacon.uuid,
+              type: Beacon.BeaconType.Id,
+              local: Beacon.Local.Id
+           }
+          
         );
-    }
-
-    async Patch(uuid, Type, 
-      Local)
-    {
-       return await this.api.httpPatch('Beacon/Patch',
-         new Beacon.clsBeacon(uuid, type, local));
     }
 
     async Delete(uuid)
     {
-       return await this.api.httpDelete(`Beacon/Delete?uuid=${uuid}`);
+       return await 
+        this.api.httpDelete(
+           `Beacon?uuid=${uuid}`);
     }
-  }
+}

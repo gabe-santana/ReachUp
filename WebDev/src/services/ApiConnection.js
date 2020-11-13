@@ -4,31 +4,7 @@ class clsApiConnection {
           this.config = new clsApiConfig();
        }
 
-       getToken(name)
-       {
-          var cookies = document.cookie,
-              prefix = name + '=',
-              begin = cookies.indexOf('; ' + prefix);
-
-          if (begin == -1) {
-            begin = cookies.indexOf(prefix);
-
-            if (begin != 0) {
-              return null;
-            }
-          } else {
-             begin += 2;
-          }
-
-          var end = cookies.indexOf(';', begin);
-
-          if (end == -1) {
-            end = cookies.length;
-          }
-          return unescape(cookies.substring(begin + prefix.length, end));
-       }
-
-       async httpGet(str, options = [])
+       async httpAnonymousGet(str, options = [])
        {
           const response = await fetch(this.config.url() + str, {
               mode: 'cors',
@@ -38,7 +14,6 @@ class clsApiConnection {
                 'Accept-Ranges': 'bytes',
                 'Content-Type':'application/json',
                 'Pragma': 'no-cache',
-                'Authorization': 'Bearer ' + this.getToken('userToken'),
                 'X-Custom-Header': 'ProcessThisImmediately',
                 'WWW-Authenticate': 'Basic',
                 'Connection': 'close',
@@ -53,32 +28,76 @@ class clsApiConnection {
             return json;
        }
 
-       async httpPost(str, data, options = [])
+       async httpGet(str, options = [])
        {
           const response = await fetch(this.config.url() + str, {
               mode: 'cors',
-              method: 'POST',
-              body: JSON.stringify(data),
+              method: 'GET',
               headers: {
                 'Accept':'application/json',
-                  'Accept-Ranges': 'bytes',
-                  'Content-Type':'application/json',
-                  'Pragma': 'no-cache',
-                  'Authorization': 'Bearer ' + this.getToken('userToken'),
-                  'X-Custom-Header': 'ProcessThisImmediately',
-                  'WWW-Authenticate': 'Basic',
-                  'Connection': 'close',
+                'Accept-Ranges': 'bytes',
+                'Content-Type':'application/json',
+                'Pragma': 'no-cache',
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                'X-Custom-Header': 'ProcessThisImmediately',
+                'WWW-Authenticate': 'Basic',
+                'Connection': 'close',
               },
               cache: 'no-cache',
               credentials: 'same-origin',
               redirect: 'follow',
               referrerPolicy: 'no-referrer'
             })
+
+            const json = await response.json();
+            return json;
+       }
+
+       async httpAnonymousPost(str, data, options = [])
+       {
+          const response = await fetch(this.config.url() + str, {
+              //mode: 'cors',
+              method: 'POST',
+              body: JSON.stringify(data),
+              headers: {
+                'Accept':'application/json',
+                  'Content-Type':'application/json',
+              },
+              /*cache: 'no-cache',
+              credentials: 'same-origin',
+              redirect: 'follow',
+              referrerPolicy: 'no-referrer'*/
+            })
             
             const json = await response.json();
+            console.log(json);
             return json;
 
        }
+
+       async httpPost(str, data, options = [])
+       {
+          const response = await fetch(this.config.url() + str, {
+              //mode: 'cors',
+              method: 'POST',
+              body: JSON.stringify(data),
+              headers: {
+                'Accept':'application/json',
+                  'Content-Type':'application/json',
+                  'Authorization': 'Bearer ' + localStorage.getItem('token'),
+              },
+              /*cache: 'no-cache',
+              credentials: 'same-origin',
+              redirect: 'follow',
+              referrerPolicy: 'no-referrer'*/
+            })
+            
+            const json = await response.json();
+            console.log(json);
+            return json;
+
+       }
+
 
        async httpPut(str, data, options = [])
        {
@@ -91,7 +110,33 @@ class clsApiConnection {
                 'Accept-Ranges': 'bytes',
                 'Content-Type':'application/json',
                 'Pragma': 'no-cache',
-                'Authorization': 'Bearer ' + this.getToken('userToken'),
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
+                'X-Custom-Header': 'ProcessThisImmediately',
+                'WWW-Authenticate': 'Basic',
+                'Connection': 'close',
+              },
+              cache: 'no-cache',
+              credentials: 'same-origin',
+              redirect: 'follow',
+              referrerPolicy: 'no-referrer'
+            })
+
+            const json = await response.json();
+            return json;
+
+       }
+
+       async httpAnonymousPatch(str, data, options = [])
+       {
+          const response = await fetch(this.config.url() + str, {
+              mode: 'cors',
+              method: 'PATCH',
+              body: JSON.stringify(data),
+              headers: {
+                'Accept':'application/json',
+                'Accept-Ranges': 'bytes',
+                'Content-Type':'application/json',
+                'Pragma': 'no-cache',
                 'X-Custom-Header': 'ProcessThisImmediately',
                 'WWW-Authenticate': 'Basic',
                 'Connection': 'close',
@@ -118,7 +163,7 @@ class clsApiConnection {
                 'Accept-Ranges': 'bytes',
                 'Content-Type':'application/json',
                 'Pragma': 'no-cache',
-                'Authorization': 'Bearer ' + this.getToken('userToken'),
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 'X-Custom-Header': 'ProcessThisImmediately',
                 'WWW-Authenticate': 'Basic',
                 'Connection': 'close',
@@ -144,7 +189,7 @@ class clsApiConnection {
                 'Accept-Ranges': 'bytes',
                 'Content-Type':'application/json',
                 'Pragma': 'no-cache',
-                'Authorization': 'Bearer ' + this.getToken('userToken'),
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 'X-Custom-Header': 'ProcessThisImmediately',
                 'WWW-Authenticate': 'Basic',
                 'Connection': 'close',
