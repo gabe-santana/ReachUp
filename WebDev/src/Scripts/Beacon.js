@@ -1,7 +1,3 @@
-import { BeaconController } from '../Controllers/BeaconController';
-import { BeaconTypeController } from '../Controllers/BeaconTypeController';
-import { LocalController } from '../Controllers/LocalController';
-
 $(() => {
 
   $("#adicionar").change(async () => {
@@ -9,7 +5,7 @@ $(() => {
     const uuid = '',
           name = '',
           floor = 0;
-    const clsBeacon = new BeaconController.clsBeaconController();
+    const clsBeacon = clsBeaconController();
     const response = await clsBeacon.Post(
       uuid,
     )
