@@ -45,15 +45,22 @@ class clsLocalController {
 
      async Add(Local)
      {
+        console.log(JSON.stringify({type: Local.LocalType,
+         name: Local.Name, 
+         floor: Local.Floor,
+         openingHour: Local.OpeningHour,
+         closingHour: Local.ClosingHour,
+         beaconUUID: Local.BeaconUUID}));
         return await 
           this.api.httpPost(
           `Local/`,
           {
-             type: Local.LocalType.Id,
+             type: Local.LocalType,
              name: Local.Name, 
              floor: Local.Floor,
              openingHour: Local.OpeningHour,
-             closingHour: Local.ClosingHour
+             closingHour: Local.ClosingHour,
+             beaconUUID: Local.BeaconUUID
 
           }
         );

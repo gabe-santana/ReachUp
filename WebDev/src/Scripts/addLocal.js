@@ -1,4 +1,3 @@
-
 $(() => {
 
   $('#btnGuardarLocal').click(() => {
@@ -6,22 +5,27 @@ $(() => {
     localsList.append();
   })
 
-  $("#btnAdicionar").change(async () => {
+  $("#btnAdicionar").click(async () => {
 
-    const type = $('#cmbLocalType').val(),
-          name = $('#txtLocalName').val(),
-          floor = $('#txtLocalFloor').val();
-    const clsLocal = clsLocalController();
-    
-    if (await clsLocal.Add(type, name, floor))
-    {
-       const uuid = $('#txtLocalBeacon').val();
-       const clsBeacon = clsBeaconController();
+    const clsLocal = new clsLocalController();
 
-       /*if (await clsBeacon.Post(uuid, 
-             new BeaconType.clsBeaconType(0),
-             new Local.clsLocal()))*/
-    }
-    return 'erro ao add local';
+    const uuid = $('#txtLocalBeacon').val();
+
+    //if (await clsLocal.checkBeacon(uuid))
+    //{
+      const type = $('#cmbLocalType').val(),
+            name = $('#txtLocalName').val(),
+            floor = $('#txtLocalFloor').val(),
+            openingHour = $('#txtLocalOpening').val(),
+            closingHour = $('#txtLocalClosing').val();
+
+      const local = new Local(
+        type, name, floor, openingHour, closingHour, uuid
+      );
+
+
+
+      await clsLocal.Add(local);
+    //}
   })
 })
