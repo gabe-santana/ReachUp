@@ -30,9 +30,9 @@ class CommuniqueController {
     return communiqueRepository.bindSubCategories(communique);
   }
 
-  Future<bool> disbindSubCategories(dynamic communique) async {
-    return communiqueRepository.disbindSubCategories(communique);
-  }
+  // Future<bool> disbindSubCategories(dynamic communique) async {
+  //   return communiqueRepository.disbindSubCategories(communique);
+  // }
 
   Future<bool> update(dynamic communique) async {
     return communiqueRepository.update(communique);

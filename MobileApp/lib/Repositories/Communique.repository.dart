@@ -6,7 +6,7 @@ import '../globals.dart';
 class CommuniqueRepository extends ReachUpAPI {
   CommuniqueRepository() : super() {}
   String getImage(Communique communique) {
-    return "${Globals.urlAPI}/Communique/GetImage?id=${communique.idCommunique}";
+    return "${Globals.urlAPI}/Communique/GetImage?id=${communique.id}";
   }
 
   Future<List<Communique>> byLocal(int local) async {
@@ -39,14 +39,14 @@ class CommuniqueRepository extends ReachUpAPI {
       return false;
   }
 
-  Future<bool> disbindSubCategories(dynamic json) async {
-    await super.httpDelete("Communique/DisbindSubCategories", json);
-    print("response: ${super.response.data}");
-    if (super.response.statusCode == 200) {
-      return true;
-    } else
-      return false;
-  }
+  // Future<bool> disbindSubCategories(dynamic json) async {
+  //   await super.httpDelete("Communique/DisbindSubCategories", json);
+  //   print("response: ${super.response.data}");
+  //   if (super.response.statusCode == 200) {
+  //     return true;
+  //   } else
+  //     return false;
+  // }
 
   Future<bool> update(dynamic json) async {
     await super.httpPatch("Communique/", json);

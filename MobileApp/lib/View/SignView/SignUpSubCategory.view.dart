@@ -1,11 +1,11 @@
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
+import 'package:ReachUp/Controller/Account.controller.dart';
 import 'package:ReachUp/Controller/SubCategory.controller.dart';
-import 'package:ReachUp/Model/Category.model.dart';
 import 'package:ReachUp/Model/Subcategory.model.dart';
 import 'package:ReachUp/View/HomeView/Home.view.dart';
 import 'package:ReachUp/globals.dart';
-import 'package:async/async.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'SubCategoryCard.view.dart';
@@ -25,9 +25,13 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
     super.initState();
   }
 
+  @override
+  void deactivate() {
+    EasyLoading.dismiss();
+    super.deactivate();
+  }
+
   Widget buildListView(List<SubCategory> subCategoriesByCat) {
-    print("length");
-    print(subCategoriesByCat.length);
 
     return ListView.builder(
       itemCount: subCategoriesByCat.length,
@@ -36,6 +40,7 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
     );
   }
 
+  AccountController accountController = new AccountController();
   @override
   Widget build(BuildContext context) {
     void showSnackBarMessage(ctx, String message,
@@ -91,25 +96,37 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Próxima etapa ',
+                        categoryIndex == Globals.categoriesChecked.length - 2
+                            ? 'Próxima etapa '
+                            : "Finalizar",
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
-                      FaIcon(FontAwesomeIcons.arrowRight,
-                          color: Colors.white, size: 16)
+                      categoryIndex == Globals.categoriesChecked.length - 2
+                          ? FaIcon(FontAwesomeIcons.arrowRight,
+                              color: Colors.white, size: 16)
+                          : Icon(Icons.check, color: Colors.white, size: 16)
                     ],
                   ),
                   onPressed: () {
                     print("index cat");
-                    print( Globals.categoriesChecked.length -      categoryIndex);
+                    print(Globals.categoriesChecked.length - categoryIndex);
                     if (Globals.subCategoriesChecked.isNotEmpty) {
-                        if(categoryIndex < Globals.categoriesChecked.length - 1){
-                          setState(() {
-                            categoryIndex++;
-                          });
-                        }
-                        else{
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
-                        }
+                      if (categoryIndex <
+                          Globals.categoriesChecked.length - 1) {
+                        setState(() {
+                          categoryIndex++;
+                        });
+                      } else {
+                        accountController.signUp().then((value) {
+                          Globals.user = value;
+                        });
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Home(isNoob: true)),
+                          (Route<dynamic> route) => false,
+                        );
+                      }
                     } else
                       showSnackBarMessage(
                           context, "Escolha pelo menos um item!");
@@ -128,16 +145,15 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
           .getByCategory(Globals.categoriesChecked[categoryIndex].categoryId),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          debugPrint('Step 3, build widget: ${snapshot.data}');
-          // Build the widget with data.
+          EasyLoading.dismiss();
+
           return buildListView(snapshot.data);
         } else {
-          // We can show the loading view until the data comes back.
-          debugPrint('Step 1, build loading widget');
-          return Center(
-              child: CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).colorScheme.primary)));
+
+          return Builder(builder: (context){
+              EasyLoading.show(status: "Buscando itens...");
+              return Container();
+          });
         }
       },
     );

@@ -17,7 +17,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
   List<Local> locates;
   TabController _tabController;
   TextEditingController _controller = TextEditingController();
-  
+
   buildListView() {
     return ListView.builder(
         itemCount: locates.length,

@@ -61,7 +61,7 @@ class _SignUpState extends State<SignUp> {
         body: Align(
           alignment: Alignment.center,
           child: Column(children: [
-            Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 10)),
+            Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 5)),
             SignInButtonBuilder(
               icon: FontAwesomeIcons.google,
               width: MediaQuery.of(context).size.width * 0.7,
@@ -128,7 +128,7 @@ class _StepperBodyState extends State<StepperBody> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                initialValue: "Gabriel",
+          
                 focusNode: _focusNode,
                 keyboardType: TextInputType.text,
                 autocorrect: false,
@@ -137,7 +137,6 @@ class _StepperBodyState extends State<StepperBody> {
                   print(user.name);
                 },
                 maxLines: 1,
-                //initialValue: 'Aseem Wangoo',
                 validator: (value) {
                   if (value.isEmpty || value.length < 4) {
                     return 'Nome inválido!';
@@ -153,15 +152,13 @@ class _StepperBodyState extends State<StepperBody> {
                         TextStyle(decorationStyle: TextDecorationStyle.solid)),
               ),
               TextFormField(
-                initialValue: "Santana",
                 keyboardType: TextInputType.text,
                 autocorrect: false,
                 onSaved: (value) {
-                  user.name += " $value";
+                  user.name = "${user.name.trim()} $value";
                   print(user.name);
                 },
                 maxLines: 1,
-                //initialValue: 'Aseem Wangoo',
                 validator: (value) {
                   if (value.isEmpty || value.length < 4) {
                     return 'Sobrenome inválido!';
@@ -192,7 +189,6 @@ class _StepperBodyState extends State<StepperBody> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                initialValue: "Santana@email.com",
                 keyboardType: TextInputType.emailAddress,
                 autocorrect: false,
                 validator: (value) {
@@ -227,7 +223,6 @@ class _StepperBodyState extends State<StepperBody> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                initialValue: "1234567",
                 obscureText: true,
                 keyboardType: TextInputType.text,
                 autocorrect: false,
@@ -248,7 +243,6 @@ class _StepperBodyState extends State<StepperBody> {
                         TextStyle(decorationStyle: TextDecorationStyle.solid)),
               ),
               TextFormField(
-                initialValue: "1234567",
                 obscureText: true,
                 keyboardType: TextInputType.number,
                 autocorrect: false,
@@ -336,13 +330,15 @@ class _StepperBodyState extends State<StepperBody> {
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   child: Row(
                     children: <Widget>[
-                      FlatButton(
-                          onPressed: onStepContinue,
-                          color: Theme.of(context).colorScheme.primary,
-                          child: Text("Próximo",
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 16))),
-                      currStep != 0
+                      currStep != 2
+                          ? FlatButton(
+                              onPressed: onStepContinue,
+                              color: Theme.of(context).colorScheme.primary,
+                              child: Text("Próximo",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 16)))
+                          : Container(),
+                      currStep != 0 && currStep != 2
                           ? FlatButton(
                               onPressed: onStepCancel,
                               child: const Text(
@@ -351,7 +347,7 @@ class _StepperBodyState extends State<StepperBody> {
                                     TextStyle(color: Colors.grey, fontSize: 16),
                               ),
                             )
-                          : Container(),
+                          : Container()
                     ],
                   ),
                 );

@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
+import '../../globals.dart';
+
 class SearchCard extends StatefulWidget {
   final Local local;
 
@@ -60,6 +62,8 @@ class _SearchCardState extends State<SearchCard> {
   String showSubcategories() {
     String _r = "";
     List<String> subcats = widget.local.descriptionSubCategories.split(",");
+    
+    
     int i = 0;
     subcats.forEach((subcat) {
       if (i <= 2) _r += subcat + " ";
@@ -115,8 +119,8 @@ class _SearchCardState extends State<SearchCard> {
                     Container(
                         padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                         width: MediaQuery.of(context).size.width * 0.5,
-                        child: Text(
-                          showSubcategories(),
+                        child: Text("",
+                          // showSubcategories(),
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.grey,
@@ -152,7 +156,7 @@ class _SearchCardState extends State<SearchCard> {
   Widget fetchLocalImage() {
     return CachedNetworkImage(
       fit: BoxFit.cover,
-      httpHeaders: {"Authorization": ReachUpAPI().token},
+      httpHeaders: {"Authorization": "Bearer ${Globals.user.token}"},
       imageUrl: LocalRepository().getImage(widget.local),
       placeholder: (context, url) => CircularProgressIndicator(
           valueColor: new AlwaysStoppedAnimation<Color>(
