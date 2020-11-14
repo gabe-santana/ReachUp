@@ -3,8 +3,10 @@ import 'package:ReachUp/View/DeveloperView/BeaconBroadcast.view.dart';
 import 'package:ReachUp/View/DeveloperView/Compass.view.dart';
 import 'package:ReachUp/View/HomeView/HomeMap.view.dart';
 import 'package:ReachUp/View/MapView/Map.view.dart';
+import 'package:ReachUp/View/NotificationsView/Notifications.view.dart';
 import 'package:ReachUp/View/SearchView/Search.view.dart';
 import 'package:ReachUp/View/SignView/Sign.view.dart';
+import 'package:ReachUp/View/_Layouts/HomeLayout.layout.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -33,6 +35,7 @@ class _HomeState extends State<Home> {
     switch (pos) {
       case 0:
         return FragmentWidget(MapView(inRouting: widget.inRouting));
+
       case 7:
         return FragmentWidget(BroadcastBeacon());
       case 8:
@@ -65,6 +68,14 @@ class _HomeState extends State<Home> {
             )));
   }
 
+  _navigateTo(Widget bodyContent, String title, String info) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => HomeLayout(
+                titlePage: title, info: info, bodyContent: bodyContent)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +86,7 @@ class _HomeState extends State<Home> {
                 height: 130,
                 child: DrawerHeader(
                   margin: EdgeInsets.all(0.0),
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
                   child: Stack(
                     children: <Widget>[
                       Positioned(
@@ -159,15 +170,15 @@ class _HomeState extends State<Home> {
                             },
                           ),
                           ListTile(
-                            contentPadding: EdgeInsets.fromLTRB(15, 0, 0, 10),
-                            title: ItemMenuTitle(
-                                title: "Notificações",
-                                icon: FontAwesomeIcons.solidBell,
-                                selected: _selectedIndex == 1),
-                            onTap: () {
-                              _onSelectItem(1);
-                            },
-                          ),
+                              contentPadding: EdgeInsets.fromLTRB(15, 0, 0, 10),
+                              title: ItemMenuTitle(
+                                  title: "Notificações",
+                                  icon: FontAwesomeIcons.solidBell,
+                                  selected: _selectedIndex == 1),
+                              onTap: () {
+                                _navigateTo(NotificationsView(), "Notificações",
+                                    "Suas notificações estarão sempre aqui");
+                              }),
                           ListTile(
                             contentPadding: EdgeInsets.fromLTRB(15, 0, 0, 10),
                             title: ItemMenuTitle(
@@ -175,7 +186,8 @@ class _HomeState extends State<Home> {
                                 icon: FontAwesomeIcons.houseUser,
                                 selected: _selectedIndex == 2),
                             onTap: () {
-                              _onSelectItem(2);
+                              _navigateTo(NotificationsView(), "Visitas",
+                                  "O histórico de suas visitas estarão sempre aqui");
                             },
                           ),
                         ],
@@ -197,7 +209,7 @@ class _HomeState extends State<Home> {
                             child: Padding(
                               padding: EdgeInsets.fromLTRB(15, 10, 0, 15),
                               child: const Text(
-                                "Configurações",
+                                "Definições",
                                 style:
                                     TextStyle(fontSize: 18, color: Colors.grey),
                               ),
@@ -210,7 +222,8 @@ class _HomeState extends State<Home> {
                                 icon: FontAwesomeIcons.headset,
                                 selected: _selectedIndex == 3),
                             onTap: () {
-                              _onSelectItem(3);
+                              _navigateTo(NotificationsView(), "Narrador",
+                                  "Aqui você pode alterar suas configurações do narrador de rota");
                             },
                           ),
                           ListTile(
@@ -220,7 +233,8 @@ class _HomeState extends State<Home> {
                                 icon: FontAwesomeIcons.tools,
                                 selected: _selectedIndex == 4),
                             onTap: () {
-                              _onSelectItem(4);
+                              _navigateTo(NotificationsView(), "Configurações",
+                                  "Aqui você pode configurar de tudo");
                             },
                           ),
                         ],
@@ -255,7 +269,8 @@ class _HomeState extends State<Home> {
                                 icon: FontAwesomeIcons.solidStar,
                                 selected: _selectedIndex == 5),
                             onTap: () {
-                              _onSelectItem(5);
+                              _navigateTo(NotificationsView(), "Feedback",
+                                  "Aqui você pode dar seu feedback e colaborar com o projeto");
                             },
                           ),
                           ListTile(
@@ -265,7 +280,8 @@ class _HomeState extends State<Home> {
                                 icon: FontAwesomeIcons.infoCircle,
                                 selected: _selectedIndex == 6),
                             onTap: () {
-                              _onSelectItem(6);
+                              _navigateTo(NotificationsView(), "Info",
+                                  "Quem somos nós?");
                             },
                           ),
                         ],
