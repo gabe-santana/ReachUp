@@ -10,7 +10,7 @@ namespace ReachUpWebAPI.Controllers
     public class BeaconTypeController : ControllerBase
     {
         // OK 
-        [Authorize(Roles = "adm, dev")]
+        //[Authorize(Roles = "adm, dev")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {

@@ -163,7 +163,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize]
+        //[Authorize]
         [HttpPost("UploadImage")]
         public async Task<bool> UploadImage([FromForm] IFormFile file)
         {

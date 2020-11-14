@@ -45,10 +45,10 @@ namespace ReachUpWebAPI.Controllers
         public async Task<IActionResult> Patch([FromBody] User user)
         {
             if (!user.Equals(null)) 
-                if (HttpContextId.IsOwn(HttpContext, user.Email)) 
+                //if (HttpContextId.IsOwn(HttpContext, user.Email)) 
                     return Ok(await user.Update());
-                else
-                    return BadRequest("Request denied");
+                //else
+                    //return BadRequest("Request denied");
             return BadRequest("Parameters are null");
         }
 

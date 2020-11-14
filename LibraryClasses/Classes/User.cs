@@ -149,7 +149,7 @@ namespace ReachUp
               EmailConfiguration emailConfig = 
                new EmailConfiguration(
                  email, clsPasswordRecoveryEmail.Name, 
-                 $"{cod} {clsPasswordRecoveryEmail.Content} {clsPasswordRecoveryEmail.RecoveryPageURL}"
+                 $"<strong>{cod}</strong> {clsPasswordRecoveryEmail.Content} {clsPasswordRecoveryEmail.RecoveryPageURL}"
                );
                EmailSender emailSender = new EmailSender(emailConfig);
                
