@@ -103,7 +103,7 @@ namespace ReachUpWebAPI.Controllers
         }
         
         // OK 
-        [Authorize(Roles = "dev")]
+        //[Authorize(Roles = "dev")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Local local) 
         {

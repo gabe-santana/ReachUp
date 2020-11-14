@@ -16,6 +16,12 @@ class clsLocalController {
           this.api.httpGet(`Local/GetAll?type=${type}`);
     }
 
+    async get(id)
+    {
+        return await
+         this.api.httpGet(`Local?id=${id}`)
+    }
+
      async GetByBeacon(uuid)
      {
         return await this.api.httpGet(`Local/ByBeacon?uuid=${uuid}`)
@@ -29,21 +35,38 @@ class clsLocalController {
           )
      }
 
-     async Add(type, name, floor, opening, closing)
+     async checkBeacon(uuid)
+     {
+        return await
+         this.api.httpGet(
+            `Local/CheckBeacon?uuid=${uuid}`
+         )
+     }
+
+     async Add(Local)
      {
         return await 
           this.api.httpPost(
           `Local/`,
           {
-             type: type,
-             name: name, 
-             floor: floor,
-             openingHour: opening,
-             closingHour: closing
+             type: Local.LocalType,
+             name: Local.Name, 
+             floor: Local.Floor,
+             openingHour: Local.OpeningHour,
+             closingHour: Local.ClosingHour,
+             beaconUUID: Local.BeaconUUID
 
           }
         );
-     } 
+     }
+     
+     async uploadImage(image)
+     {
+        return await 
+          this.api.httpPostFile(
+             `Local/UploadImage/`, image, 'image/png'
+          )
+     }
 
      async delete(id)
      {

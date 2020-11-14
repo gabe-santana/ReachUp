@@ -33,12 +33,12 @@ namespace ReachUpWebAPI.Controllers
            {
               try 
               {
-                  var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/category/{id}.svg");
-                  return File(image, "image/svg+xml");
+                  var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/category/{id}.png");
+                  return File(image, "image/png");
               }
               catch
               {
-                  return NotFound("Ícone não encontrado");
+                  return NotFound("Icon not found");
               }
            }
            return BadRequest("Parameters are null");
@@ -50,7 +50,7 @@ namespace ReachUpWebAPI.Controllers
         public async Task<bool> UploadImage([FromForm] IFormFile file)
         {
             List<string> validExtensions = new List<string>(
-                new string[] { ".svg" });
+                new string[] { ".png" });
 
             if (file.Length > 0)
             {
@@ -95,7 +95,7 @@ namespace ReachUpWebAPI.Controllers
         public async Task<bool> UploadImages([FromForm] List<IFormFile> files)
         {
             List<string> validExtensions = new List<string>(
-                new string[] { ".svg" });
+                new string[] { ".png" });
 
             int i = -1;
             foreach (var file in files)
