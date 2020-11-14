@@ -23,9 +23,20 @@ $(() => {
         type, name, floor, openingHour, closingHour, uuid
       );
 
+      if (await clsLocal.Add(local))
+      {
 
+          // pegar código do local que foi adicionado, após a primeira requisição
+          // se arquivo foi selecionado
+          var imagePath = $('#btnLocalImage').val();
 
-      await clsLocal.Add(local);
+          if (imagePath.indexOf('C:\\fakepath\\') > -1)
+          {
+             imagePath = imagePath.replace('C:\\fakepath\\', '../../dev_assets/');
+          }
+
+          //await clsLocal.uploadImage(image);
+      }
     //}
   })
 })

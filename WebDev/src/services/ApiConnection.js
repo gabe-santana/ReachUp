@@ -53,6 +53,22 @@ class clsApiConnection {
             return json;
        }
 
+       async httpGetFile(str, fileType, options = [])
+       {
+          const response = await fetch(this.config.url() + str, {
+              mode: 'cors',
+              method: 'GET',
+              headers: {
+                'Accept': `${fileType}`,
+                'Content-Type':`${fileType}`,
+              },
+          })
+
+            const blob = await response.blob();
+            console.log(blob);
+            return blob;
+       }
+
        async httpAnonymousPost(str, data, options = [])
        {
           const response = await fetch(this.config.url() + str, {
@@ -96,6 +112,22 @@ class clsApiConnection {
             console.log(json);
             return json;
 
+       }
+
+       async httpPostFile(str, file, fileType, options = [])
+       {
+          const response = await fetch(this.config.url() + str, {
+              mode: 'cors',
+              method: 'POST',
+              body: file,
+              headers: {
+                'Accept':`${fileType}`,
+                  'Content-Type':`${fileType}`,
+              },
+          })
+          const json = await response.json();
+          console.log(json);
+          return json;
        }
 
 

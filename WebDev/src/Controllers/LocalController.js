@@ -45,12 +45,6 @@ class clsLocalController {
 
      async Add(Local)
      {
-        console.log(JSON.stringify({type: Local.LocalType,
-         name: Local.Name, 
-         floor: Local.Floor,
-         openingHour: Local.OpeningHour,
-         closingHour: Local.ClosingHour,
-         beaconUUID: Local.BeaconUUID}));
         return await 
           this.api.httpPost(
           `Local/`,
@@ -64,7 +58,15 @@ class clsLocalController {
 
           }
         );
-     } 
+     }
+     
+     async uploadImage(image)
+     {
+        return await 
+          this.api.httpPostFile(
+             `Local/UploadImage/`, image, 'image/png'
+          )
+     }
 
      async delete(id)
      {

@@ -1,6 +1,6 @@
 $(() => {
 
-    $('#btnAdicionar').click(async () => {
+    $('#btnEditar').click(async () => {
 
         const clsAdmin = new AdminController();
 
@@ -10,6 +10,6 @@ $(() => {
 
         const admin = new Admin(email, name, password);
 
-        await clsAdmin.add(admin);
+        await clsAdmin.update(admin);
     })
 })
