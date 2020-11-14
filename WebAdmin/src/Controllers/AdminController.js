@@ -2,27 +2,13 @@ class AdminController {
     api;
 
     constructor(){
-        this.api = new clsApiConnection();
+        this.api = new ApiConnection();
     }
 
     async getAll()
     {
         return await
-         this.api.httpAnonymousGet(`User/GetAll?role=adm`)
-    }
-
-    async add(Admin)
-    {
-        return await
-         this.api.httpAnonymousPost(
-             `User/`,
-             {
-                email: Admin.Email,
-                name: Admin.Name,
-                password: Admin.Password,
-                role: 'adm'
-             }
-         )
+         this.api.httpAnonymousGet(`User/GetAll?role=loj`)
     }
 
     async update(Admin)
@@ -34,7 +20,7 @@ class AdminController {
                  email: Admin.Email,
                  name:  Admin.Name,
                  password: Admin.Password,
-                 role: 'adm'
+                 role: 'loj'
              }
          )
     }

@@ -1,20 +1,20 @@
-class LocalTypeController {
+class AdmTypeController {
     api;
     constructor(){
         this.api = new ApiConnection();
     }
-
+    
     async getAll()
     {
         return await
-         this.api.httpAnonymousGet('LocalType/GetAll');
+         this.api.httpGet('AdmType/GetAll');
     }
 
     async add(name)
     {
         return await
-         this.api.httpAnonymousPost(
-             'LocalType/',
+         this.api.httpPost(
+             'AdmType/',
              {
                 name: name
              }
@@ -24,8 +24,8 @@ class LocalTypeController {
     async update(id, name)
     {
         return await
-         this.api.httpAnonymousPatch(
-             'LocalType/',
+         this.api.httpPatch(
+             'AdmType/',
              {
                 id: id,
                 name: name
@@ -36,6 +36,6 @@ class LocalTypeController {
     async delete(id)
     {
         return await
-         this.api.httpAnonymousDelete(`LocalType?id=${id}`);
+         this.api.httpGet(`AdmType?id=${id}`);
     }
 }

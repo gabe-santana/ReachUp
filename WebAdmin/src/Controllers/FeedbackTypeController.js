@@ -1,19 +1,19 @@
 class FeedbackTypeController {
     api;
     constructor(){
-        this.api = new clsApiConnection();
+        this.api = new ApiConnection();
     }
 
     async getAll()
     {
         return await
-         this.api.httpGet('FeedbackType/GetAll');
+         this.api.httpAnonymousGet('FeedbackType/GetAll');
     }
 
     async add(name)
     {
         return await
-         this.api.httpPost(
+         this.api.httpAnonymousPost(
              'FeedbackType/',
              {
                 name: name
@@ -24,7 +24,7 @@ class FeedbackTypeController {
     async update(id, name)
     {
         return await
-         this.api.httpPatch(
+         this.api.httpAnonymousPatch(
              'FeedbackType/',
              {
                 id: id,
@@ -36,6 +36,6 @@ class FeedbackTypeController {
     async delete(id)
     {
         return await
-         this.api.httpGet(`FeedbackType?id=${id}`);
+         this.api.httpAnonymousDelete(`FeedbackType?id=${id}`);
     }
 }

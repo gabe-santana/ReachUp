@@ -1,7 +1,7 @@
-class clsAccountController {
+class AccountController {
          api;
          constructor(){
-           this.api = new clsApiConnection();
+           this.api = new ApiConnection();
          }
         
          async login(email, password)
@@ -55,8 +55,4 @@ class clsAccountController {
                 );
          }
 
-         async singOut()
-         {
-
-         }
      }

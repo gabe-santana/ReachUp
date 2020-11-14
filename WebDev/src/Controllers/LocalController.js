@@ -27,14 +27,6 @@ class clsLocalController {
         return await this.api.httpGet(`Local/ByBeacon?uuid=${uuid}`)
      }
 
-     async GetAdmins(id)
-     {
-        return await
-          this.api.httpGet(
-             `Local/GetAdmins?local=${id}`
-          )
-     }
-
      async checkBeacon(uuid)
      {
         return await

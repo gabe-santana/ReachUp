@@ -1,19 +1,19 @@
 class CommuniqueTypeController {
     api;
     constructor(){
-        this.api = new clsApiConnection();
+        this.api = new ApiConnection();
     }
 
     async getAll()
     {
         return await
-         this.api.httpGet('CommuniqueType/GetAll');
+         this.api.httpAnonymousGet('CommuniqueType/GetAll');
     }
 
     async add(name)
     {
         return await
-         this.api.httpPost(
+         this.api.httpAnonymousPost(
              'CommuniqueType/',
              {
                 name: name
@@ -24,7 +24,7 @@ class CommuniqueTypeController {
     async update(id, name)
     {
         return await
-         this.api.httpPatch(
+         this.api.httpAnonymousPatch(
              'CommuniqueType/',
              {
                 id: id,
@@ -36,6 +36,6 @@ class CommuniqueTypeController {
     async delete(id)
     {
         return await
-         this.api.httpGet(`CommuniqueType?id=${id}`);
+         this.api.httpAnonymousDelete(`CommuniqueType?id=${id}`);
     }
 }

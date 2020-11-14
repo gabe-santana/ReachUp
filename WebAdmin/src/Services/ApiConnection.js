@@ -1,162 +1,239 @@
-class clsApiConnection  {
-      config;
-      constructor() {
-          this.config = new clsApiConfig();
-       }
+class ApiConnection {
+  config;
+  constructor() {
+      this.config = new clsApiConfig();
+   }
 
-       getToken(name)
-       {
-          var cookies = document.cookie,
-              prefix = name + '=',
-              begin = cookies.indexOf('; ' + prefix);
+   async httpAnonymousGet(str, options = [])
+   {
+      const response = await fetch(this.config.url() + str, {
+          mode: 'cors',
+          method: 'GET',
+          headers: {
+            'Accept':'application/json',
+            'Accept-Ranges': 'bytes',
+            'Content-Type':'application/json',
+            'Pragma': 'no-cache',
+            'X-Custom-Header': 'ProcessThisImmediately',
+            'WWW-Authenticate': 'Basic',
+            'Connection': 'close',
+          },
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer'
+        })
 
-          if (begin == -1) {
-            begin = cookies.indexOf(prefix);
+        const json = await response.json();
+        return json;
+   }
 
-            if (begin != 0) {
-              return null;
-            }
-          } else {
-             begin += 2;
-          }
+   async httpGet(str, options = [])
+   {
+      const response = await fetch(this.config.url() + str, {
+          mode: 'cors',
+          method: 'GET',
+          headers: {
+            'Accept':'application/json',
+            'Accept-Ranges': 'bytes',
+            'Content-Type':'application/json',
+            'Pragma': 'no-cache',
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'X-Custom-Header': 'ProcessThisImmediately',
+            'WWW-Authenticate': 'Basic',
+            'Connection': 'close',
+          },
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer'
+        })
 
-          var end = cookies.indexOf(';', begin);
+        const json = await response.json();
+        return json;
+   }
 
-          if (end == -1) {
-            end = cookies.length;
-          }.
-          return unescape(cookies.substring(begin + prefix.length, end));
-       }
+   async httpGetFile(str, fileType, options = [])
+   {
+      const response = await fetch(this.config.url() + str, {
+          mode: 'cors',
+          method: 'GET',
+          headers: {
+            'Accept': `${fileType}`,
+            'Content-Type':`${fileType}`,
+          },
+      })
 
-       async httpGet(str, options = [])
-       {
-          const response = await fetch(this.config.url() + str, {
-              mode: 'cors',
-              method: 'GET',
-              headers: {
-                'Accept':'application/json',
-                'Accept-Ranges': 'bytes',
-                'Content-Type':'application/json',
-                'Pragma': 'no-cache',
-                'Authorization': 'Bearer ' + this.getToken('userToken'),
-                'X-Custom-Header': 'ProcessThisImmediately',
-                'WWW-Authenticate': 'Basic',
-                'Connection': 'close',
-              },
-              cache: 'no-cache',
-              credentials: 'same-origin',
-              redirect: 'follow',
-              referrerPolicy: 'no-referrer'
-            })
+        const blob = await response.blob();
+        console.log(blob);
+        return blob;
+   }
 
-            const json = await response.json();
-            return json;
-       }
+   async httpAnonymousPost(str, data, options = [])
+   {
+      const response = await fetch(this.config.url() + str, {
+          //mode: 'cors',
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Accept':'application/json',
+              'Content-Type':'application/json',
+          },
+          /*cache: 'no-cache',
+          credentials: 'same-origin',
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer'*/
+        })
+        
+        const json = await response.json();
+        console.log(json);
+        return json;
 
-       async httpPost(str, data, options = [])
-       {
-          const response = await fetch(this.config.url() + str, {
-              mode: 'cors',
-              method: 'POST',
-              body: JSON.stringify(data),
-              headers: {
-                'Accept':'application/json',
-                  'Accept-Ranges': 'bytes',
-                  'Content-Type':'application/json',
-                  'Pragma': 'no-cache',
-                  //'Authorization': 'Bearer ' + this.getToken('userToken'),
-                  'X-Custom-Header': 'ProcessThisImmediately',
-                  'WWW-Authenticate': 'Basic',
-                  'Connection': 'close',
-              },
-              cache: 'no-cache',
-              credentials: 'same-origin',
-              redirect: 'follow',
-              referrerPolicy: 'no-referrer'
-            })
-            
-            const json = await response.json();
-            return json;
+   }
 
-       }
+   async httpPost(str, data, options = [])
+   {
+      const response = await fetch(this.config.url() + str, {
+          //mode: 'cors',
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Accept':'application/json',
+              'Content-Type':'application/json',
+              'Authorization': 'Bearer ' + localStorage.getItem('token'),
+          },
+          /*cache: 'no-cache',
+          credentials: 'same-origin',
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer'*/
+        })
+        
+        const json = await response.json();
+        console.log(json);
+        return json;
 
-       async httpPut(str, data, options = [])
-       {
-          const response = await fetch(this.config.url() + str, {
-              mode: 'cors',
-              method: 'PUT',
-              body: JSON.stringify(data),
-              headers: {
-                'Accept':'application/json',
-                'Accept-Ranges': 'bytes',
-                'Content-Type':'application/json',
-                'Pragma': 'no-cache',
-                'Authorization': 'Bearer ' + this.getToken('userToken'),
-                'X-Custom-Header': 'ProcessThisImmediately',
-                'WWW-Authenticate': 'Basic',
-                'Connection': 'close',
-              },
-              cache: 'no-cache',
-              credentials: 'same-origin',
-              redirect: 'follow',
-              referrerPolicy: 'no-referrer'
-            })
+   }
 
-            const json = await response.json();
-            return json;
+   async httpPostFile(str, file, fileType, options = [])
+   {
+      const response = await fetch(this.config.url() + str, {
+          mode: 'cors',
+          method: 'POST',
+          body: file,
+          headers: {
+            'Accept':`${fileType}`,
+              'Content-Type':`${fileType}`,
+          },
+      })
+      const json = await response.json();
+      console.log(json);
+      return json;
+   }
 
-       }
 
-       async httpPatch(str, data, options = [])
-       {
-          const response = await fetch(this.config.url() + str, {
-              mode: 'cors',
-              method: 'PATCH',
-              body: JSON.stringify(data),
-              headers: {
-                'Accept':'application/json',
-                'Accept-Ranges': 'bytes',
-                'Content-Type':'application/json',
-                'Pragma': 'no-cache',
-                'Authorization': 'Bearer ' + this.getToken('userToken'),
-                'X-Custom-Header': 'ProcessThisImmediately',
-                'WWW-Authenticate': 'Basic',
-                'Connection': 'close',
-              },
-              cache: 'no-cache',
-              credentials: 'same-origin',
-              redirect: 'follow',
-              referrerPolicy: 'no-referrer'
-            })
+   async httpPut(str, data, options = [])
+   {
+      const response = await fetch(this.config.url() + str, {
+          mode: 'cors',
+          method: 'PUT',
+          body: JSON.stringify(data),
+          headers: {
+            'Accept':'application/json',
+            'Accept-Ranges': 'bytes',
+            'Content-Type':'application/json',
+            'Pragma': 'no-cache',
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'X-Custom-Header': 'ProcessThisImmediately',
+            'WWW-Authenticate': 'Basic',
+            'Connection': 'close',
+          },
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer'
+        })
 
-            const json = await response.json();
-            return json;
+        const json = await response.json();
+        return json;
 
-       }
+   }
 
-       async httpDelete(str, options = [])
-       {
-          const response = await fetch(this.config.url() + str, {
-              mode: 'cors',
-              method: 'DELETE',
-              headers: {
-                'Accept':'application/json',
-                'Accept-Ranges': 'bytes',
-                'Content-Type':'application/json',
-                'Pragma': 'no-cache',
-                'Authorization': 'Bearer ' + this.getToken('userToken'),
-                'X-Custom-Header': 'ProcessThisImmediately',
-                'WWW-Authenticate': 'Basic',
-                'Connection': 'close',
-              },
-              cache: 'no-cache',
-              credentials: 'same-origin',
-              redirect: 'follow',
-              referrerPolicy: 'no-referrer'
-            })
-              
-            const json = await response.json();
-            return json;
+   async httpAnonymousPatch(str, data, options = [])
+   {
+      const response = await fetch(this.config.url() + str, {
+          mode: 'cors',
+          method: 'PATCH',
+          body: JSON.stringify(data),
+          headers: {
+            'Accept':'application/json',
+            'Accept-Ranges': 'bytes',
+            'Content-Type':'application/json',
+            'Pragma': 'no-cache',
+            'X-Custom-Header': 'ProcessThisImmediately',
+            'WWW-Authenticate': 'Basic',
+            'Connection': 'close',
+          },
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer'
+        })
 
-       }
+        const json = await response.json();
+        return json;
+
+   }
+
+   async httpPatch(str, data, options = [])
+   {
+      const response = await fetch(this.config.url() + str, {
+          mode: 'cors',
+          method: 'PATCH',
+          body: JSON.stringify(data),
+          headers: {
+            'Accept':'application/json',
+            'Accept-Ranges': 'bytes',
+            'Content-Type':'application/json',
+            'Pragma': 'no-cache',
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'X-Custom-Header': 'ProcessThisImmediately',
+            'WWW-Authenticate': 'Basic',
+            'Connection': 'close',
+          },
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer'
+        })
+
+        const json = await response.json();
+        return json;
+
+   }
+
+   async httpDelete(str, options = [])
+   {
+      const response = await fetch(this.config.url() + str, {
+          mode: 'cors',
+          method: 'DELETE',
+          headers: {
+            'Accept':'application/json',
+            'Accept-Ranges': 'bytes',
+            'Content-Type':'application/json',
+            'Pragma': 'no-cache',
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
+            'X-Custom-Header': 'ProcessThisImmediately',
+            'WWW-Authenticate': 'Basic',
+            'Connection': 'close',
+          },
+          cache: 'no-cache',
+          credentials: 'same-origin',
+          redirect: 'follow',
+          referrerPolicy: 'no-referrer'
+        })
+          
+        const json = await response.json();
+        return json;
+
+   }
 }

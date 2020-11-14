@@ -1,7 +1,7 @@
 class CategoryController {
     api;
     constructor(){
-        this.api = new clsApiConnection();
+        this.api = new ApiConnection();
     }
     
     async getById(id)
