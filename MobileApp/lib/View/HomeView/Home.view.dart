@@ -388,7 +388,7 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
             title: const Text(
               "ReachUp!",
-              style: TextStyle(fontSize: 30),
+              style: TextStyle(fontSize: 25),
             ),
             leading: Builder(
               builder: (BuildContext context) {
