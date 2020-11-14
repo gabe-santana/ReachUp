@@ -156,7 +156,7 @@ class _SearchCardState extends State<SearchCard> {
   Widget fetchLocalImage() {
     return CachedNetworkImage(
       fit: BoxFit.cover,
-      httpHeaders: {"Authorization": Globals.user.token},
+      httpHeaders: {"Authorization": "Bearer ${Globals.user.token}"},
       imageUrl: LocalRepository().getImage(widget.local),
       placeholder: (context, url) => CircularProgressIndicator(
           valueColor: new AlwaysStoppedAnimation<Color>(

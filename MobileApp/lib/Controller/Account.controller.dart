@@ -15,4 +15,8 @@ class AccountController {
     Future signIn() async{
     return await this.accountRepository.signIn();
   }
+
+  Future checkEmail() async{
+    return await this.accountRepository.checkEmail();
+  }
 }

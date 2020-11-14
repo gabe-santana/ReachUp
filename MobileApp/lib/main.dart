@@ -1,19 +1,14 @@
-
 import 'dart:io';
 import 'package:ReachUp/View/SignView/Sign.view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'View/DebugView/Debug.view.dart';
 
 void main() {
-    FlutterError.onError = (FlutterErrorDetails details) {
-    FlutterError.dumpErrorToConsole(details);
-    if (kReleaseMode)
-      exit(1);
-  };
   runApp(ReachUp());
+  configLoading();
 }
 
 var darkTheme = ThemeData(
@@ -50,24 +45,19 @@ var darkTheme = ThemeData(
 );
 
 var lightTheme = ThemeData(
-  primaryColor:  Color(0xFF008D9E),
+  primaryColor: Color(0xFF008D9E),
   colorScheme: ColorScheme(
     brightness: Brightness.light,
-
     primary: Color(0xFF008D9E),
     onPrimary: Colors.white,
     primaryVariant: Color(0xFF006d7a),
-
     secondary: Color(0xFF006d7a),
     secondaryVariant: Color(0xFF012529),
     onSecondary: Colors.white,
-
     background: Colors.white,
     onBackground: Color(0xFF525252),
-
     error: Color(0xFFd42839),
     onError: Colors.white,
-
     surface: Color(0xFF212121),
     onSurface: Colors.white,
   ),
@@ -88,8 +78,6 @@ var lightTheme = ThemeData(
   visualDensity: VisualDensity.adaptivePlatformDensity,
 );
 
-
-
 class ReachUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -98,6 +86,10 @@ class ReachUp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
       home: DebugView(),
+      builder: (BuildContext context, Widget child) {
+        /// make sure that loading can be displayed in front of all other widgets
+        return FlutterEasyLoading(child: child);
+      },
     );
   }
 }
@@ -118,3 +110,17 @@ class MyCustomRoute<T> extends MaterialPageRoute<T> {
   }
 }
 
+void configLoading() {
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.custom
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = Colors.white
+    ..backgroundColor = Color(0xFF008D9E)
+    ..indicatorColor = Colors.white
+    ..textColor = Colors.white
+    ..maskColor = Color(0xFF008D9E).withOpacity(0.5)
+    ..userInteractions = false;
+}

@@ -15,14 +15,12 @@ class _DebugViewState extends State<DebugView> {
   GlobalKey<NavigatorState> navigateKey = GlobalKey<NavigatorState>();
 
   Future<bool> _backPressed(GlobalKey<NavigatorState> _navigateKey) async {
-    //Checks if current Navigator still has screens on the stack
+
     if (_navigateKey.currentState.canPop()) {
-      // 'maybePop' method handles the decision of 'pop' to another WillPopScope if they exist.
-      //If no other WillPopScope exists, it returns true
+
       _navigateKey.currentState.maybePop();
       return Future<bool>.value(false);
     }
-//if nothing remains in the stack, it simply pops
     return Future<bool>.value(true);
   }
 
@@ -96,9 +94,9 @@ class _DebugViewState extends State<DebugView> {
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();
                       debugPrint("URL API: ${Globals.urlAPI}\n");
-
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => SignView()));
+          
+                      Navigator.push(context, 
+                          MaterialPageRoute(builder: (BuildContext context) => SignView()));
                     }
                   },
                   color: Theme.of(context).colorScheme.primary,

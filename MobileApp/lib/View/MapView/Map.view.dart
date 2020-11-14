@@ -298,7 +298,7 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
                               ? MatrixRoute(
                                   this.currentRoute, _scale, _dimensionMap)
                               : Container()
-                          : Center(child: CircularProgressIndicator())
+                          : Container()
                       : Container(),
                   AnimatedPositioned(
                       left: userMarkPosition.x * _scale,

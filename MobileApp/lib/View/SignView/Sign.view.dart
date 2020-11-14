@@ -9,7 +9,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'SignIn.view.dart';
 import 'SignUp.view.dart';
 
-class SignView extends StatelessWidget {
+class SignView extends StatefulWidget {
+  @override
+  _SignViewState createState() => _SignViewState();
+}
+
+class _SignViewState extends State<SignView> {
   String signInStatus;
 
   @override
@@ -22,8 +27,7 @@ class SignView extends StatelessWidget {
                 colorFilter: ColorFilter.mode(
                     Theme.of(context).colorScheme.secondaryVariant,
                     BlendMode.color),
-                image: NetworkImage(
-                    "https://media-cdn.tripadvisor.com/media/photo-s/11/98/7f/3e/photo3jpg.jpg"),
+                image: AssetImage("assets/images/bkg/bkg_initial_screen.jpg"),
                 fit: BoxFit.cover)),
         child: ClipRRect(
           child: BackdropFilter(

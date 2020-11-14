@@ -3,6 +3,7 @@ import 'package:ReachUp/Controller/Category.controller.dart';
 import 'package:ReachUp/Controller/SubCategory.controller.dart';
 import 'package:ReachUp/Model/Category.model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:async/async.dart';
 import '../../globals.dart';
@@ -19,8 +20,6 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
 
   final CategoryController _categoryController = new CategoryController();
 
-
-
   bool accepted = false;
 
   @override
@@ -32,6 +31,12 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
     _memoizer = AsyncMemoizer();
   }
 
+  @override
+  void deactivate() {
+    EasyLoading.dismiss();
+    super.deactivate();
+  }
+
   _fetchData() {
     return this._memoizer.runOnce(() async {
       return this._categoryController.getAll();
@@ -39,13 +44,12 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
   }
 
   Widget buildListView(List<Category> categories) {
-
-     List<CategoryCardView> cards = categories.map((e) => CategoryCardView(e)).toList();
+    List<CategoryCardView> cards =
+        categories.map((e) => CategoryCardView(e)).toList();
 
     return ListView(children: cards);
   }
 
- 
   @override
   Widget build(BuildContext context) {
     void showSnackBarMessage(ctx, String message,
@@ -55,7 +59,8 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
         backgroundColor: Theme.of(context).colorScheme.error,
       ));
     }
- SubCategoryController subCategoryController = new SubCategoryController();
+
+    SubCategoryController subCategoryController = new SubCategoryController();
     return Scaffold(
         appBar: AppBar(
           title: Text("Minhas Preferências"),
@@ -112,16 +117,12 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
                           ],
                         ),
                         onPressed: () {
-                          if (Globals.categoriesChecked.isNotEmpty){
-                       
-
-                                Navigator.push(
+                          if (Globals.categoriesChecked.isNotEmpty) {
+                            Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => SignUpSubCategory()));
-                          
-                          }
-                          else
+                          } else
                             showSnackBarMessage(
                                 context, "Escolha pelo menos uma categoria!");
                         },
@@ -254,12 +255,14 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
             future: _fetchData(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                EasyLoading.dismiss();
                 return Center(child: buildListView(snapshot.data));
               } else {
-                return Center(
-                  child: CircularProgressIndicator(
-                      valueColor: new AlwaysStoppedAnimation<Color>(
-                          Theme.of(context).colorScheme.primary)),
+                return Builder(
+                  builder: (context) {
+                    EasyLoading.show(status: "Buscando itens...");
+                    return Container();
+                  },
                 );
               }
             }));

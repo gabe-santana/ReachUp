@@ -25,4 +25,16 @@ class AccountRepository extends ReachUpAPI {
 
     return null;
   }
+
+
+  Future<bool> checkEmail() async{
+    await super.httpGet("Account/CheckEmail?email=${Globals.user.email}&role=${Globals.user.role}");
+    print(super.response.data);
+    if (super.response.statusCode == 200) {
+      return super.response.data;
+    }
+
+    return null;
+  }
+
 }

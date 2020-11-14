@@ -5,6 +5,7 @@ import 'package:ReachUp/Model/Subcategory.model.dart';
 import 'package:ReachUp/View/HomeView/Home.view.dart';
 import 'package:ReachUp/globals.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'SubCategoryCard.view.dart';
@@ -24,9 +25,13 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
     super.initState();
   }
 
+  @override
+  void deactivate() {
+    EasyLoading.dismiss();
+    super.deactivate();
+  }
+
   Widget buildListView(List<SubCategory> subCategoriesByCat) {
-    print("length");
-    print(subCategoriesByCat.length);
 
     return ListView.builder(
       itemCount: subCategoriesByCat.length,
@@ -117,7 +122,8 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
                         });
                         Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (context) => Home()),
+                          MaterialPageRoute(
+                              builder: (context) => Home(isNoob: true)),
                           (Route<dynamic> route) => false,
                         );
                       }
@@ -139,16 +145,15 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
           .getByCategory(Globals.categoriesChecked[categoryIndex].categoryId),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          debugPrint('Step 3, build widget: ${snapshot.data}');
-          // Build the widget with data.
+          EasyLoading.dismiss();
+
           return buildListView(snapshot.data);
         } else {
-          // We can show the loading view until the data comes back.
-          debugPrint('Step 1, build loading widget');
-          return Center(
-              child: CircularProgressIndicator(
-                  valueColor: new AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).colorScheme.primary)));
+
+          return Builder(builder: (context){
+              EasyLoading.show(status: "Buscando itens...");
+              return Container();
+          });
         }
       },
     );
