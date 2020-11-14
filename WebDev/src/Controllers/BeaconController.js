@@ -1,4 +1,4 @@
-class clsBeaconController {
+class BeaconController {
     api;
         
     constructor(){
@@ -23,15 +23,17 @@ class clsBeaconController {
         this.api.httpGet(`Beacon/ByLocal?local=${id}`);
     }
 
-    async Post(Beacon)
+    async add(Beacon, localId)
     {
        return await 
-        this.api.httpPost(
+        this.api.httpAnonymousPost(
            'Beacon/',
            {
-              uuid: Beacon.uuid,
-              type: Beacon.BeaconType.Id,
-              local: Beacon.Local.Id
+              uuid: Beacon.UUID,
+              type: Beacon.Type,
+              localBeacon: {
+                 idLocal: localId
+              }
            }
           
         );

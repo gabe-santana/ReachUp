@@ -1,4 +1,4 @@
-class clsBeaconTypeController {
+class BeaconTypeController {
     api;
     constructor(){
       this.api = new clsApiConnection();

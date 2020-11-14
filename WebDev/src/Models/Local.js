@@ -9,7 +9,7 @@ class Local {
     Admins;
     Beacons;
 
-    constructor(type, name, floor, openingHour, closingHour, beaconUUID, id = -1, admins = [], beacons = []) {
+    constructor(type = -1, name = '', floor = -1, openingHour = '', closingHour = '', beaconUUID = '', id = -1, admins = [], beacons = []) {
       this.Id = id;
       this.LocalType = type;
       this.Name = name;

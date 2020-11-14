@@ -1,11 +1,11 @@
 class Beacon {
     UUID;
-    BeaconType;
-    Local;
+    Type;
+    BeaconLocal;
      
-     constructor(uuid, type = -1, local = -1) {
+     constructor(uuid, type = -1, beaconLocal = {}) {
        this.UUID = uuid;
-       this.BeaconType = type;
-       this.Local = local;
+       this.Type = type;
+       this.BeaconLocal = beaconLocal;
      }
    }
