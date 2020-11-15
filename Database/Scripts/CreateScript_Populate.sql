@@ -2089,7 +2089,7 @@ CALL publicarComunicado(129, 1, "Prato do dia: escargot ao molho madeira", now()
 CALL publicarComunicado(25, 1, "50% de desconto em todos os produtos!", now(), '2020-09-30 22:00:00'); 
 
 /* - Lojas Americanas - */
-CALL publicarComunicado(5, 1, "Desconto maior para produtos de informática: 80%!", now(), '2020-09-30 22:00:00'); 
+CALL publicarComunicado(5, 1, "Desconto maior para produtos de informática: 80%!", now(), '2020-12-02 22:30:00'); 
 
 
 
@@ -2113,3 +2113,40 @@ CALL publicarComunicado(50, 4, "Pagando no cartão, você ganha 15% de desconto!
 
 /* - Cinemark | Recepção - */
 CALL publicarComunicado(142, 4, "Preços: Meia entrada - R$ 18.00; Inteira: R$ 32.00", now(), null);
+
+/* Vários comunicados da Americanas */
+
+CALL publicarComunicado(5, 0, "Chegaram os novos Galaxy Note20 e Note20 Ultra!", '2020-09-18 09:07:31', '2020-10-31 22:30:00');
+CALL relacionarComunicadoSubCategoria (14, 0, 0);
+
+CALL publicarComunicado(5, 0, "50% de desconto em todas as roupas, somente neste fim de semana!", '2020-10-31 09:13:47', '2020-11-01 22:30:00');
+CALL relacionarComunicadoSubCategoria (15, 4, 0);
+CALL relacionarComunicadoSubCategoria (15, 4, 1);
+CALL relacionarComunicadoSubCategoria (15, 4, 2);
+CALL relacionarComunicadoSubCategoria (15, 4, 3);
+CALL relacionarComunicadoSubCategoria (15, 4, 4);
+CALL relacionarComunicadoSubCategoria (15, 4, 8);
+CALL relacionarComunicadoSubCategoria (15, 4, 9);
+CALL relacionarComunicadoSubCategoria (15, 4, 11);
+CALL relacionarComunicadoSubCategoria (15, 4, 12);
+CALL relacionarComunicadoSubCategoria (15, 4, 13);
+
+
+CALL publicarComunicado(5, 1, "O gerente enlouqueceu neste domingo! Toda a loja com 30% de desconto!", '2020-11-15 08:57:24', '2020-11-15 22:30:00');
+CALL publicarComunicado(5, 1, "O gerente enlouqueceu neste domingo! Toda a loja com 15% de desconto!", '2020-08-21 10:53:04', '2020-08-21 22:30:00');
+CALL publicarComunicado(5, 1, "O gerente enlouqueceu neste sábado! Toda a loja com 20% de desconto!", '2020-06-06 08:07:12', '2020-06-06 22:30:00');
+
+CALL publicarComunicado(5, 1, "Pagando com nosso cartão, você ganha 5% de desconto em todas as compras!", '2020-01-01 11:01:40', '2020-12-31 22:30:00');
+ 
+CALL publicarComunicado(5, 2, "Loja fechada hoje, excepcionalmente, para manutenção", '2020-11-05 22:41:52', '2020-11-06 22:30:00');
+CALL publicarComunicado(5, 2, "Loja fechada hoje, excepcionalmente, para manutenção", '2020-08-13 22:36:30', '2020-08-14 22:30:00');
+
+CALL publicarComunicado(5, 3, "Cuidado! Entrada escorregadia!", '2020-10-10 14:32:03', '2020-10-10 14:52:03');
+
+
+
+
+
+
+
+
