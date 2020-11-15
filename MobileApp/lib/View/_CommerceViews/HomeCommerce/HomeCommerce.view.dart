@@ -6,6 +6,7 @@ import 'package:ReachUp/View/_Layouts/HomeLayout.layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 
 import '../../../globals.dart';
 
@@ -20,7 +21,37 @@ class HomeCommerceView extends StatefulWidget {
   _HomeCommerceViewState createState() => _HomeCommerceViewState();
 }
 
+class CommuniqueTypeAnalitic {
+  static int specifOff = 5;
+  static int generalOff = 10;
+  static int notifications = 3;
+  static int alerts = 2;
+}
+
 class _HomeCommerceViewState extends State<HomeCommerceView> {
+  final GlobalKey<AnimatedCircularChartState> _chartKey =
+      new GlobalKey<AnimatedCircularChartState>();
+
+  List<CircularStackEntry> data = <CircularStackEntry>[
+    new CircularStackEntry(
+      <CircularSegmentEntry>[
+        new CircularSegmentEntry(
+            CommuniqueTypeAnalitic.alerts.toDouble(), Colors.red[300],
+            rankKey: 'Q1'),
+        new CircularSegmentEntry(
+            CommuniqueTypeAnalitic.specifOff.toDouble(), Colors.orange[300],
+            rankKey: 'Q2'),
+        new CircularSegmentEntry(
+            CommuniqueTypeAnalitic.generalOff.toDouble(), Colors.purple[300],
+            rankKey: 'Q3'),
+        new CircularSegmentEntry(
+            CommuniqueTypeAnalitic.notifications.toDouble(), Colors.yellow[300],
+            rankKey: 'Q4'),
+      ],
+      rankKey: 'Quarterly Profits',
+    ),
+  ];
+
   Future _fetchData() {
     return Future<bool>.value(true);
   }
@@ -161,12 +192,26 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                    child: Container(
-                        child: Text("Comunicados",
-                            style: TextStyle(
-                              fontSize: 19,
-                            ))),
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                      child: Container(
+                        child: DropdownButton<String>(
+                          items:
+                              <String>['Comunicados ativos', 'Todos os Comunicados'].map((String value) {
+                            return new DropdownMenuItem<String>(
+                              value: value,
+                              child: new Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (_) {},
+                        ),
+                      )),
+                  Container(
+                    child: AnimatedCircularChart(
+                      key: _chartKey,
+                      size: const Size(300.0, 300.0),
+                      initialChartData: data,
+                      chartType: CircularChartType.Pie,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -175,9 +220,10 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                           child: Icon(FontAwesomeIcons.shoppingCart,
-                              color: Colors.orange),
+                              color: Colors.orange[300]),
                         ),
-                        Text("0 Promoções direcionadas",
+                        Text(
+                            "${CommuniqueTypeAnalitic.specifOff} Promoções direcionadas",
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onBackground,
@@ -193,10 +239,11 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                           padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                           child: Icon(
                             Icons.chat,
-                            color: Colors.purple,
+                            color: Colors.purple[300],
                           ),
                         ),
-                        Text("0 Promoções gerais",
+                        Text(
+                            "${CommuniqueTypeAnalitic.generalOff} Promoções gerais",
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onBackground,
@@ -210,10 +257,11 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                          child:
-                              Icon(Icons.notifications, color: Colors.yellow),
+                          child: Icon(Icons.notifications,
+                              color: Colors.yellow[300]),
                         ),
-                        Text("0 Notificações",
+                        Text(
+                            "${CommuniqueTypeAnalitic.notifications} Notificações",
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onBackground,
@@ -227,9 +275,9 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                          child: Icon(Icons.report, color: Colors.red),
+                          child: Icon(Icons.report, color: Colors.red[300]),
                         ),
-                        Text("0 Alertas",
+                        Text("${CommuniqueTypeAnalitic.alerts} Alertas",
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onBackground,
@@ -242,25 +290,6 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
             ),
           ),
         ),
-        Card(
-            child: InkWell(
-          onTap: () {},
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                  child: Container(
-                      child: Text("Comunicados",
-                          style: TextStyle(
-                            fontSize: 19,
-                          ))),
-                ),
-              ],
-            ),
-          ),
-        ))
       ],
     );
   }
