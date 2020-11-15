@@ -109,7 +109,7 @@ namespace ReachUp
             return false;
         }
 
-        public bool Login() 
+        public async Task<bool> Login() 
         {
             if (base.DQLCommand(Procedure.logarUsuario,
                 ref this.Data,
@@ -123,6 +123,13 @@ namespace ReachUp
                     while (this.Data.Read())
                     {
                         this.Name = this.Data["nm_user"].ToString();
+                        
+                        if (this.Role == "loj")
+                        {
+                            this.AdmLocal = await new Local().Get(
+                               int.Parse(this.Data["cd_local"].ToString()));
+                        }
+
                     }
                     this.Data.Close();
                     base.Disconnect();
@@ -133,6 +140,33 @@ namespace ReachUp
                 return false;
             }
             return false;
+        }
+
+        public async Task<Local> GetShopkeeperLocal(string email)
+        {
+            if (base.DQLCommand(Procedure.pegarLocalLojista, ref this.Data,
+              new string[,]{
+                  {"pEmail", email}
+              }
+            ))
+            {
+                if (this.Data.HasRows)
+                {
+                    Local local = null;
+                    if (this.Data.Read())
+                    {
+                       local = await new Local().Get(
+                           int.Parse(this.Data["cd_local"].ToString())
+                       );
+                    }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return local;
+                }
+                base.Disconnect();
+                return null;
+            }
+            return null;
         }
 
         public async Task<bool> RecoverPassword(string email)

@@ -57,11 +57,19 @@ namespace ReachUpWebAPI.Controllers
         public async Task<IActionResult> SignIn([FromBody] User user) 
         {
             if (user != null)
-                if (user.Login()) 
+                if (await user.Login()) 
                     return Ok(GenerateJSONWebToken(user));
                 else
                     return NotFound();
             return BadRequest("Parameters are null");
+        }
+
+        [HttpGet("GetShopkeeperLocal")]
+        public async Task<IActionResult> GetShopkeeperLocal(string email)
+        {
+            if (!string.IsNullOrWhiteSpace(email))
+               return Ok(await new User().GetShopkeeperLocal(email));
+            return BadRequest("Parameters are null");   
         }
 
         // OK
@@ -116,7 +124,7 @@ namespace ReachUpWebAPI.Controllers
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, user.Role)
+                    new Claim(ClaimTypes.Role, user.Role),
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

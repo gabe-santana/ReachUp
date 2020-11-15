@@ -38,7 +38,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize]
+        //[Authorize]
         [HttpGet("Search")]
         public async Task<IActionResult> Search(string s) 
         {
@@ -48,7 +48,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public async Task<IActionResult> Get(int id)
         {
@@ -59,7 +59,7 @@ namespace ReachUpWebAPI.Controllers
 
         // OK (com exceção ao pesquisar pelo tipo 7 - serviço)
         // System.OverflowException: Value was either too large or too small for a UInt16.
-        [Authorize]
+        //[Authorize]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(int type)
         {

@@ -165,13 +165,26 @@ BEGIN
 		nm_senha_cliente as "nm_senha_user"
 		FROM cliente WHERE nm_email_cliente = pEmail 
 		AND nm_senha_cliente = md5 (pSenha);
-	ELSE
-		SELECT 
-		 nm_administrador as "nm_user", nm_email_administrador as "nm_email_user", 
-		nm_senha_administrador as "nm_senha_user"
-		FROM administrador WHERE nm_email_administrador= pEmail 
-		AND nm_senha_administrador = md5 (pSenha);
+	ELSE IF (pRole = "loj") THEN
+		    SELECT 
+		    nm_administrador as "nm_user", nm_email_administrador as "nm_email_user", 
+		    nm_senha_administrador as "nm_senha_user", cd_local
+		    FROM administrador WHERE nm_email_administrador= pEmail 
+		    AND nm_senha_administrador = md5 (pSenha);
+         ELSE 
+            SELECT 
+		    nm_administrador as "nm_user", nm_email_administrador as "nm_email_user", 
+		    nm_senha_administrador as "nm_senha_user"
+		    FROM administrador WHERE nm_email_administrador= pEmail 
+		    AND nm_senha_administrador = md5 (pSenha);
+         END IF;
 	END IF;
+END$$
+
+DROP PROCEDURE IF EXISTS pegarLocalLojista$$
+CREATE PROCEDURE pegarLocalLojista(pEmail varchar(100))
+BEGIN
+  SELECT cd_local FROM administrador WHERE nm_email_administrador = pEmail;
 END$$
 
 DROP PROCEDURE IF EXISTS recuperarSenha$$
@@ -432,11 +445,31 @@ BEGIN
 			GROUP BY c.cd_comunicado;
 END$$
 
-/*DROP PROCEDURE IF EXISTS pegarComunicados$$
-CREATE PROCEDURE pegarComunicados(pLocal int)
+DROP PROCEDURE IF EXISTS pegarTodasPromocoesDirecionadasLocal$$
+CREATE PROCEDURE pegarTodasPromocoesDirecionadasLocal(pLocal int)
 BEGIN
-	SELECT * FROM comunicado WHERE cd_local = pLocal;
-END$$*/ /* Maybe this is not useful */
+   SELECT l.cd_local, l.nm_local , c.cd_comunicado, c.cd_tipo_comunicado, c.ds_comunicado, 
+			GROUP_CONCAT(CONCAT(csc.cd_categoria, '-', csc.cd_sub_categoria)) as subCategorias, 
+            c.dt_inicio_comunicado, c.dt_fim_comunicado 
+			FROM `local` as l
+			INNER JOIN comunicado as c
+			ON l.cd_local = c.cd_local 
+			INNER JOIN comunicado_sub_categoria as csc
+			ON c.cd_comunicado = csc.cd_comunicado
+			INNER JOIN sub_categoria as sc
+			ON csc.cd_categoria = sc.cd_categoria
+			AND csc.cd_sub_categoria = sc.cd_sub_categoria
+			INNER JOIN categoria as ca
+			ON sc.cd_categoria = ca.cd_categoria
+			WHERE 
+			/*AND now() BETWEEN c.dt_inicio_comunicado AND c.dt_fim_comunicado
+				OR c.dt_fim_comunicado = null*/
+            now() BETWEEN c.dt_inicio_comunicado AND c.dt_fim_comunicado
+			AND c.cd_tipo_comunicado = 0
+			AND c.cd_local = pLocal
+			GROUP BY c.cd_comunicado;
+END$$
+
 
 DROP PROCEDURE IF EXISTS atualizarComunicado$$
 CREATE PROCEDURE atualizarComunicado(pComunicado int, pLocal int, pTipo int, pDs text, pDataInicio datetime, pDataFim datetime)
@@ -539,9 +572,109 @@ DROP PROCEDURE IF EXISTS cadastrarLocal$$
 CREATE PROCEDURE cadastrarLocal(pTipo int, pNome varchar(45), pAndar int(3), pAbertura time , pFechamento time, pUUIDBeacon varchar(36))
 BEGIN
 	DECLARE _cd int;
+    DECLARE qtLinhasTabelaComEsseHorarioDom int;
+    DECLARE qtLinhasTabelaComEsseHorarioSeg int;
+    DECLARE qtLinhasTabelaComEsseHorarioTer int;
+    DECLARE qtLinhasTabelaComEsseHorarioQua int;
+    DECLARE qtLinhasTabelaComEsseHorarioQui int;
+    DECLARE qtLinhasTabelaComEsseHorarioSex int;
+    DECLARE qtLinhasTabelaComEsseHorarioSab int;
+
 	SELECT COUNT(cd_local) INTO @_cd FROM `local`;
 	INSERT INTO `local` VALUES (@_cd, pTipo, pNome, pAndar, pAbertura, pFechamento);
 	INSERT INTO beacon VALUES (pUUIDBeacon, 0,  @_cd);
+
+    SELECT count(*) into qtLinhasTabelaComEsseHorarioDom
+    from horario 
+    WHERE cd_dia_semana = 0
+    AND hr_abertura = pAbertura
+    AND hr_fechamento = pFechamento;
+
+    SELECT count(*) into qtLinhasTabelaComEsseHorarioSeg
+    from horario 
+    WHERE cd_dia_semana = 1
+    AND hr_abertura = pAbertura
+    AND hr_fechamento = pFechamento;
+
+     SELECT count(*) into qtLinhasTabelaComEsseHorarioTer
+    from horario 
+    WHERE cd_dia_semana = 2
+    AND hr_abertura = pAbertura
+    AND hr_fechamento = pFechamento;
+
+     SELECT count(*) into qtLinhasTabelaComEsseHorarioQua
+    from horario 
+    WHERE cd_dia_semana = 3
+    AND hr_abertura = pAbertura
+    AND hr_fechamento = pFechamento;
+
+     SELECT count(*) into qtLinhasTabelaComEsseHorarioQui
+    from horario 
+    WHERE cd_dia_semana = 4
+    AND hr_abertura = pAbertura
+    AND hr_fechamento = pFechamento;
+
+     SELECT count(*) into qtLinhasTabelaComEsseHorarioSex
+    from horario 
+    WHERE cd_dia_semana = 5
+    AND hr_abertura = pAbertura
+    AND hr_fechamento = pFechamento;
+
+     SELECT count(*) into qtLinhasTabelaComEsseHorarioSab
+    from horario 
+    WHERE cd_dia_semana = 6
+    AND hr_abertura = pAbertura
+    AND hr_fechamento = pFechamento;
+
+    IF qtLinhasTabelaComEsseHorarioDom = 0 then
+      INSERT INTO horario
+     VALUES (0, pAbertura, pFechamento);
+   END IF;
+
+   IF qtLinhasTabelaComEsseHorarioSeg = 0 then
+      INSERT INTO horario
+     VALUES (1, pAbertura, pFechamento);
+   END IF;
+
+   IF qtLinhasTabelaComEsseHorarioTer = 0 then
+      INSERT INTO horario
+     VALUES (2, pAbertura, pFechamento);
+   END IF;
+
+   IF qtLinhasTabelaComEsseHorarioQua = 0 then
+      INSERT INTO horario
+     VALUES (3, pAbertura, pFechamento);
+   END IF;
+
+   IF qtLinhasTabelaComEsseHorarioQui = 0 then
+      INSERT INTO horario
+     VALUES (4, pAbertura, pFechamento);
+   END IF;
+
+   IF qtLinhasTabelaComEsseHorarioSex = 0 then
+      INSERT INTO horario
+     VALUES (5, pAbertura, pFechamento);
+   END IF;
+
+   IF qtLinhasTabelaComEsseHorarioSab = 0 then
+      INSERT INTO horario
+     VALUES (6, pAbertura, pFechamento);
+   END IF;
+
+   INSERT INTO horario_local
+   VALUES (@_cd, 0, pAbertura, pFechamento);
+   INSERT INTO horario_local
+   VALUES (@_cd, 1, pAbertura, pFechamento);
+   INSERT INTO horario_local
+   VALUES (@_cd, 2, pAbertura, pFechamento);
+   INSERT INTO horario_local
+   VALUES (@_cd, 3, pAbertura, pFechamento);
+   INSERT INTO horario_local
+   VALUES (@_cd, 4, pAbertura, pFechamento);
+   INSERT INTO horario_local
+   VALUES (@_cd, 5, pAbertura, pFechamento);
+   INSERT INTO horario_local
+   VALUES (@_cd, 6, pAbertura, pFechamento);
 END$$
 
 DROP PROCEDURE IF EXISTS defHorarioAlternativoLocal$$
@@ -550,7 +683,6 @@ BEGIN
 
   /*DECLARE horarioNaoExiste boolean;*/
   DECLARE qtLinhasTabelaComEsseHorario int;
-
   /*SELECT NOT EXISTS (
     SELECT 1 from horario 
     WHERE cd_dia_semana = pDia
@@ -576,6 +708,11 @@ BEGIN
      VALUES (pDia, pAbertura, pFechamento);
    END IF;
 
+   DELETE FROM horario_local
+   WHERE cd_local = pLocal
+   AND cd_dia_semana = pDia;
+    
+ 
    INSERT INTO horario_local
    VALUES (pLocal, pDia, pAbertura, pFechamento);
 END$$
@@ -698,19 +835,17 @@ DROP PROCEDURE IF EXISTS pegarLocal$$
 CREATE PROCEDURE pegarLocal(pID INT)
 BEGIN
 	SELECT 
-    tl.nm_tipo_local, l.cd_tipo_local, l.nm_local, l.cd_andar, 
-	b.cd_uuid_beacon FROM `local` AS l 
+    tl.nm_tipo_local, l.cd_tipo_local, l.cd_local, l.nm_local, l.cd_andar, 
+	b.cd_uuid_beacon, l.hr_abertura, l.hr_fechamento,
+    GROUP_CONCAT(CONCAT(hl.cd_dia_semana, '-', hl.hr_abertura, '-', hl.hr_fechamento)) 
+    as horarios_alternativos 
+	FROM `local` AS l 
 	INNER JOIN tipo_local AS tl
 	ON l.cd_tipo_local = tl.cd_tipo_local
+    INNER JOIN horario_local as hl
+    ON l.cd_local = hl.cd_local
 	INNER JOIN beacon AS b
 	ON l.cd_local = b.cd_local
-	INNER JOIN sub_categoria_local as scl
-	ON l.cd_local = scl.cd_local
-	INNER JOIN sub_categoria as sc
-	ON scl.cd_categoria = sc.cd_categoria
-	AND scl.cd_sub_categoria = sc.cd_sub_categoria
-	INNER JOIN categoria as c
-	ON sc.cd_categoria = c.cd_categoria
 	WHERE l.cd_local = pID 
     AND b.cd_tipo_beacon = 0;
 END$$
@@ -720,9 +855,14 @@ CREATE PROCEDURE pegarLocais(pTipo INT)
 BEGIN
 	SELECT l.cd_local, l.cd_tipo_local,
 	tl.nm_tipo_local, l.nm_local, 
-    l.cd_andar, b.cd_uuid_beacon FROM `local` AS l 
+    l.cd_andar, b.cd_uuid_beacon, l.hr_abertura, l.hr_fechamento,
+    GROUP_CONCAT(CONCAT(hl.cd_dia_semana, '-', hl.hr_abertura, '-', hl.hr_fechamento))
+    as horarios_alternativos
+    FROM `local` AS l 
 	INNER JOIN tipo_local AS tl
 	ON l.cd_tipo_local = tl.cd_tipo_local
+    INNER JOIN horario_local as hl
+    ON l.cd_local = hl.cd_local
 	INNER JOIN beacon AS b
 	ON  l.cd_local = b.cd_local
 	WHERE l.cd_tipo_local = pTipo
@@ -900,6 +1040,7 @@ BEGIN
 	l.nm_local, tl.nm_tipo_local, l.cd_andar,
 	l.hr_abertura,
 	l.hr_fechamento,
+    b.cd_uuid_beacon,
 	substring_index(group_concat(DISTINCT ca.nm_categoria SEPARATOR ','), ',', 3) as categorias,
 	substring_index(group_concat(DISTINCT sc.nm_sub_categoria SEPARATOR ','), ',', 3) as sub_categorias,
     count(DISTINCT(ca.cd_categoria)) as categoriesCount,
@@ -912,6 +1053,13 @@ BEGIN
 
 	JOIN tipo_local AS tl 
 	ON l.cd_tipo_local = tl.cd_tipo_local
+    
+    JOIN beacon AS b
+    ON l.cd_local = b.cd_local
+
+    JOIN horario_local as hl
+    ON l.cd_local = hl.cd_local
+
 	JOIN sub_categoria_local as scl
 	ON l.cd_local = scl.cd_local
 
@@ -940,6 +1088,7 @@ BEGIN
 	OR
 	formatString(l.cd_andar) LIKE formatString(concat("%",search,"%"))
 
+    AND b.cd_uuid_beacon = 0
 	GROUP BY l.cd_local
     ORDER BY categoriesCount DESC , subCategoriesCount DESC;
 END$$

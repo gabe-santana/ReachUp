@@ -11,29 +11,16 @@ namespace ReachUp
     {
         #region Properties 
         public int IdLocal { get; set; }
-        [JsonIgnore] public int Type { get; set; }
+        public int Type { get; set; }
         public string TypeName { get;set; }
         public string Name { get; set; }
         public ushort Floor { get; set; }
         public string OpeningHour {get; set;}
         public string ClosingHour {get; set;}
         public string BeaconUUID {get; set;}
-        [JsonIgnore] public List<User> Admins { get;set; }
-        [JsonIgnore] public string DescriptionSubCategories { get; set; }
-        [JsonIgnore] public string StrOPHour { get; set; }
-        [JsonIgnore] public string StrEHour { get; set; }
-        //public List<Beacon> Beacons = new List<Beacon>();
-        public List<Beacon> Beacons  {get;set;}
-
-        public string AdminsList {get; set;}
-        public string BeaconsList {get; set;}
-
-
-        public List<SubCategory> SubCategories = new List<SubCategory>();
-
-        public List<OpeningHours> OpeningHours_List = new List<OpeningHours>();
-        public OpeningHours OpeningHours { get;set; }
-
+        public List<OpeningHours> AlternativeOpeningHours {get; set;}
+        public List<SubCategory> SubCategories {get; set;}
+        public OpeningHours OpeningHours {get; set;}
 
         #endregion
 
@@ -45,8 +32,7 @@ namespace ReachUp
         public Local() : base() { }
 
         public Local(int id, int type, string name, string typeName, ushort floor, 
-        string DescriptionSubCategories , string uuids = null, 
-        List<SubCategory> SubCategories = null, List<OpeningHours> OpeningHours_List = null
+          string openingHour, string closingHour, string beaconUUID, List<OpeningHours> alternativeOpeningHours = null
        ) : base()
         {
             this.IdLocal = id;
@@ -54,16 +40,10 @@ namespace ReachUp
             this.Name = name;
             this.TypeName = typeName;
             this.Floor = floor; 
-            this.DescriptionSubCategories = DescriptionSubCategories;
-            this.SubCategories = SubCategories;
-            this.OpeningHours_List = OpeningHours_List;
-            this.OpeningHours = OpeningHours;
-
-            if (uuids != null)
-            {
-                 AddBeacon(uuids);   
-            }
-
+            this.OpeningHour = openingHour;
+            this.ClosingHour = closingHour;
+            this.BeaconUUID = beaconUUID;
+            this.AlternativeOpeningHours = alternativeOpeningHours;
         }
 
         /// <summary>
@@ -83,16 +63,18 @@ namespace ReachUp
         }
 
         /// <summary>
-        ///  Get by Id/GetAll by type constructor
+        ///  Search constructor
         /// </summary>
         /// <param name="id"></param>
         /// <param name="type"></param>
         /// <param name="typeName"></param>
         /// <param name="name"></param>
         /// <param name="floor"></param>
-        /// <param name="beacons"></param>
+        /// <param name="openingHour"></param>
+        /// <param name="closingHour"></param>
+        /// <param name="beaconUUID"></param>
         public Local(int id, int type, string typeName, string name, ushort floor,
-        string beaconUUID) 
+        string openingHour, string closingHour, string beaconUUID) 
         :base()
         {
            this.IdLocal = id;
@@ -100,30 +82,12 @@ namespace ReachUp
            this.TypeName = typeName;
            this.Name = name;
            this.Floor = floor; 
+           this.OpeningHour = openingHour;
+           this.ClosingHour = closingHour;
            this.BeaconUUID = beaconUUID;
         }
         
-        
-        /// <summary>
-        ///  Developer constructor (WebDev)
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="typeName"></param>
-        /// <param name="name"></param>
-        /// <param name="floor"></param>
-        /// <param name="adminsList"></param>
-        /// <param name="beaconsList"></param>
-        public Local(int id, string typeName, string name, ushort floor,
-        string adminsList, string beaconsList) :base()
-        {
-           this.IdLocal = id;
-           this.TypeName = typeName;
-           this.Name = name;
-           this.Floor = floor; 
-           this.AdminsList = adminsList;
-           this.BeaconsList = beaconsList;
-        }
-
+    
         /// <summary>
         ///  Add local constructor
         /// </summary>
@@ -231,7 +195,7 @@ namespace ReachUp
                 if (this.Data.HasRows)
                 {
                     List<Local> locals = new List<Local>();
-                    int i = 0;
+
                     while (this.Data.Read())
                     {
                         locals.Add(new Local(
@@ -240,14 +204,11 @@ namespace ReachUp
                                  this.Data["nm_tipo_local"].ToString(),
                                  this.Data["nm_local"].ToString(),
                                  ushort.Parse(this.Data["cd_andar"].ToString()),
-                                 this.Data["sub_categorias"].ToString().Replace(",", ", "))
-                         
-                               
-                            );
-
-                        locals[i].StrOPHour = this.Data["hr_abertura"].ToString();
-                        locals[i].StrEHour = this.Data["hr_fechamento"].ToString();
-                        i++;
+                                 this.Data["hr_abertura"].ToString(),
+                                 this.Data["hr_fechamento"].ToString(),
+                                 this.Data["cd_uuid_beacon"].ToString()
+                              ) 
+                        );
                     }
                     this.Data.Close();
                     base.Disconnect();
@@ -272,12 +233,29 @@ namespace ReachUp
 
                     while (this.Data.Read())
                     {
+                        List<OpeningHours> alternativeOpHours = new List<OpeningHours>();
+                        string[] horas = this.Data["horarios_alternativos"].ToString().Split(',');
+
+                        for (int i = 0; i < horas.Length; i++)
+                           {
+                               alternativeOpHours.Add(
+                                   new OpeningHours(
+                                     int.Parse(horas[i].Substring(0,1)),
+                                     horas[i].Substring(2,8),
+                                     horas[i].Substring(11,8)
+                                   )
+                               );
+                           }
+                        
                         local = new Local(
                             id, int.Parse(this.Data["cd_tipo_local"].ToString()),
-                            this.Data["nm_tipo_local"].ToString(),
-                            this.Data["nm_local"].ToString(), 
+                            this.Data["nm_local"].ToString(),
+                            this.Data["nm_tipo_local"].ToString(), 
                             ushort.Parse(this.Data["cd_andar"].ToString()),
-                            this.Data["cd_uuid_beacon"].ToString()
+                            this.Data["hr_abertura"].ToString(),
+                            this.Data["hr_fechamento"].ToString(),
+                            this.Data["cd_uuid_beacon"].ToString(),
+                            alternativeOpHours
                            );
                     }
                     this.Data.Close();
@@ -303,14 +281,31 @@ namespace ReachUp
 
                     while (this.Data.Read())
                     {
+                        List<OpeningHours> alternativeOpHours = new List<OpeningHours>();
+                        string[] horas = this.Data["horarios_alternativos"].ToString().Split(',');
+
+                        for (int i = 0; i < horas.Length; i++)
+                           {
+                               alternativeOpHours.Add(
+                                   new OpeningHours(
+                                     int.Parse(horas[i].Substring(0,1)),
+                                     horas[i].Substring(2,8),
+                                     horas[i].Substring(11,8)
+                                   )
+                               );
+                           }
+
                         locals.Add(
                             new Local(
                             int.Parse(this.Data["cd_local"].ToString()), 
                             int.Parse(this.Data["cd_tipo_local"].ToString()),
-                            this.Data["nm_tipo_local"].ToString(),
-                            this.Data["nm_local"].ToString(), 
+                            this.Data["nm_local"].ToString(),
+                            this.Data["nm_tipo_local"].ToString(), 
                             ushort.Parse(this.Data["cd_andar"].ToString()),
-                            this.Data["cd_uuid_beacon"].ToString()
+                            this.Data["hr_abertura"].ToString(),
+                            this.Data["hr_fechamento"].ToString(),
+                            this.Data["cd_uuid_beacon"].ToString(),
+                            alternativeOpHours
                             )
                         );
                     }
@@ -531,13 +526,6 @@ namespace ReachUp
 
 
         #endregion
-
-        #region Private Methods
-        private async void AddBeacon(string uuid)
-        {
-            this.Beacons.Add(await new Beacon().Get(uuid));
-        }
-        #endregion 
 
     }
 }

@@ -46,6 +46,15 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        //[Authorize(Roles = "loj")]
+        [HttpGet("GetLocalDirectedPromotions")]
+        public async Task<IActionResult> GetLocalDirectedPromotions(int local)
+        {
+            if (!string.IsNullOrWhiteSpace(local.ToString()))
+                return Ok(await new Communique().GetLocalDirectedPromotions(local));
+            return BadRequest("Parameters are null");
+        }
+
         // OK 
         [Authorize]
         [HttpGet("GetImage")]
