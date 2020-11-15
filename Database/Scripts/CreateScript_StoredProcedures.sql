@@ -405,6 +405,7 @@ BEGIN
     INNER JOIN tipo_comunicado tc
     ON c.cd_tipo_comunicado = tc.cd_tipo_comunicado
 	WHERE c.cd_tipo_comunicado <> 0
+    AND now() BETWEEN c.dt_inicio_comunicado AND c.dt_fim_comunicado
 	AND l.cd_local = pLocal;
 END$$
 
@@ -462,6 +463,37 @@ BEGIN
 			AND c.cd_tipo_comunicado = 0
 			AND c.cd_local = pLocal
 			GROUP BY c.cd_comunicado;
+END$$
+
+DROP PROCEDURE IF EXISTS pegarHistoricoPromocoesLocal$$
+CREATE PROCEDURE pegarHistoricoPromocoesLocal(pLocal int, pGeral bool)
+BEGIN
+   IF (pGeral) THEN
+     SELECT * FROM comunicado as c 
+	INNER JOIN `local` as l 
+	ON l.cd_local = c.cd_local 
+    INNER JOIN tipo_comunicado tc
+    ON c.cd_tipo_comunicado = tc.cd_tipo_comunicado
+	WHERE c.cd_tipo_comunicado <> 0
+	AND l.cd_local = pLocal;
+   ELSE
+     SELECT l.cd_local, l.nm_local , c.cd_comunicado, c.cd_tipo_comunicado, c.ds_comunicado, 
+			GROUP_CONCAT(CONCAT(csc.cd_categoria, '-', csc.cd_sub_categoria)) as subCategorias, 
+            c.dt_inicio_comunicado, c.dt_fim_comunicado 
+			FROM `local` as l
+			INNER JOIN comunicado as c
+			ON l.cd_local = c.cd_local 
+			INNER JOIN comunicado_sub_categoria as csc
+			ON c.cd_comunicado = csc.cd_comunicado
+			INNER JOIN sub_categoria as sc
+			ON csc.cd_categoria = sc.cd_categoria
+			AND csc.cd_sub_categoria = sc.cd_sub_categoria
+			INNER JOIN categoria as ca
+			ON sc.cd_categoria = ca.cd_categoria
+			WHERE c.cd_tipo_comunicado = 0
+			AND c.cd_local = pLocal
+			GROUP BY c.cd_comunicado;
+	END IF;
 END$$
 
 

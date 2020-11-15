@@ -55,6 +55,16 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        //[Authorize(Roles="loj")]
+        [HttpGet("GetLocalCommuniqueHistory")]
+        public async Task<IActionResult> GetLocalCommuniqueHistory(int local, bool isGeneral)
+        {
+            if (!string.IsNullOrWhiteSpace(local.ToString())
+                && !string.IsNullOrWhiteSpace(isGeneral.ToString()))
+                return Ok(await new Communique().GetLocalCommuniqueHistory(local, isGeneral));
+            return BadRequest("Parameters are null");
+        }
+
         // OK 
         [Authorize]
         [HttpGet("GetImage")]

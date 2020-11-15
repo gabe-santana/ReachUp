@@ -227,6 +227,67 @@ namespace ReachUp
            return null;
         }
 
+        public async Task<List<Communique>> GetLocalCommuniqueHistory(int local, bool isGeneral)
+        {
+            if (base.DQLCommand(Procedure.pegarHistoricoPromocoesLocal, ref this.Data,
+                 new string[,]{
+                     {"pLocal", local.ToString()},
+                     {"pGeral", Convert.ToInt32(isGeneral).ToString()}
+                 }
+            ))
+            {
+                if (this.Data.HasRows)
+                {
+                    List<Communique> communiques = new List<Communique>();
+
+                    if (isGeneral)
+                    {
+                       while (this.Data.Read())
+                       {
+                           communiques.Add(
+                                  new Communique(
+                                            int.Parse(this.Data["cd_comunicado"].ToString()),
+                                            ushort.Parse(this.Data["cd_tipo_comunicado"].ToString()),
+                                            await new SubCategory().ByCommunique(int.Parse(this.Data["cd_comunicado"].ToString())),
+                                            this.Data["ds_comunicado"].ToString(),
+                                            this.Data["dt_inicio_comunicado"].ToString(),
+                                            this.Data["dt_fim_comunicado"].ToString(),
+                                            await new Local().Get(int.Parse(this.Data["cd_local"].ToString()))
+                                      )
+                            ); 
+                       }
+                       this.Data.Close();
+                       base.Disconnect();
+                       return communiques;
+                    }
+    
+                    else 
+                    {
+                        while (this.Data.Read())
+                        {
+                            communiques.Add(
+                           new Communique(
+                            int.Parse(this.Data["cd_comunicado"].ToString()),
+                            ushort.Parse(this.Data["cd_tipo_comunicado"].ToString()),
+                            await new SubCategory().ByCommunique(int.Parse(this.Data["cd_comunicado"].ToString())),
+                            this.Data["ds_comunicado"].ToString(),
+                            this.Data["dt_inicio_comunicado"].ToString(),
+                            this.Data["dt_fim_comunicado"].ToString(),
+                            await new Local().Get(int.Parse(this.Data["cd_local"].ToString()))
+                           )
+                          );
+                        }
+                        this.Data.Close();
+                        base.Disconnect();
+                        return communiques;
+                    }
+                }
+                base.Disconnect();
+                return null;
+            }
+            return null;
+        }
+
         public Task<bool> Add()
         {
            if (base.DMLCommand(Procedure.publicarComunicado, new string[,] {
