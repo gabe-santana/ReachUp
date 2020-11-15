@@ -48,27 +48,219 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
     return ListView(
       children: [
         Card(
-          child: Column(
-            children: [
-              Container(child: Text("Tipo local Nome local")),
-              Container(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [Text("Andar: "), Text("0")],
+          child: InkWell(
+            onTap: () {},
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      child: Center(
+                        child: FaIcon(
+                          FontAwesomeIcons.image,
+                          size: 80,
+                        ),
+                      ),
                     ),
-                    Row(
-                      children: [Text("Horário de abertura: "), Text("0")],
+                  ),
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                            child: Container(
+                                child: Text("Nome local",
+                                    style: TextStyle(
+                                      fontSize: 19,
+                                    ))),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.mapMarkedAlt,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                                Text(
+                                  "Andar: 0",
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    fontSize: 16,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                  child: FaIcon(FontAwesomeIcons.clock,
+                                      color: Colors.green),
+                                ),
+                                Text(
+                                  "Abre às: 0",
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.green),
+                                )
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.clock,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                                Text(
+                                  "Fecha às: 0",
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.red),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    Row(
-                      children: [Text("Horário de fechamento: "), Text("0")],
-                    )
-                  ],
-                ),
-              )
-            ],
+                  ),
+                ],
+              ),
+            ),
           ),
-        )
+        ),
+        Card(
+          child: InkWell(
+            onTap: () {},
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                    child: Container(
+                        child: Text("Comunicados",
+                            style: TextStyle(
+                              fontSize: 19,
+                            ))),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                          child: Icon(FontAwesomeIcons.shoppingCart,
+                              color: Colors.orange),
+                        ),
+                        Text("0 Promoções direcionadas",
+                            style: TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                                fontSize: 16))
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                          child: Icon(
+                            Icons.chat,
+                            color: Colors.purple,
+                          ),
+                        ),
+                        Text("0 Promoções gerais",
+                            style: TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                                fontSize: 16))
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                          child:
+                              Icon(Icons.notifications, color: Colors.yellow),
+                        ),
+                        Text("0 Notificações",
+                            style: TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                                fontSize: 16))
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                          child: Icon(Icons.report, color: Colors.red),
+                        ),
+                        Text("0 Alertas",
+                            style: TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                                fontSize: 16))
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Card(
+            child: InkWell(
+          onTap: () {},
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                  child: Container(
+                      child: Text("Comunicados",
+                          style: TextStyle(
+                            fontSize: 19,
+                          ))),
+                ),
+              ],
+            ),
+          ),
+        ))
       ],
     );
   }
