@@ -2,6 +2,7 @@ import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/View/DeveloperView/BeaconBroadcast.view.dart';
 import 'package:ReachUp/View/DeveloperView/Compass.view.dart';
 import 'package:ReachUp/View/HomeView/HomeMap.view.dart';
+import 'package:ReachUp/View/HomeView/WalkingInfo.view.dart';
 import 'package:ReachUp/View/MapView/Map.view.dart';
 import 'package:ReachUp/View/NotificationsView/Notifications.view.dart';
 import 'package:ReachUp/View/SearchView/Search.view.dart';
@@ -69,6 +70,7 @@ class _HomeState extends State<Home> {
   }
 
   _navigateTo(Widget bodyContent, String title, String info) {
+
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -86,16 +88,9 @@ class _HomeState extends State<Home> {
                 height: 130,
                 child: DrawerHeader(
                   margin: EdgeInsets.all(0.0),
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 15),
                   child: Stack(
                     children: <Widget>[
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        child: IconButton(
-                            icon: Icon(Icons.settings, color: Colors.white),
-                            onPressed: null),
-                      ),
                       Positioned(
                         bottom: 0,
                         child: Row(
@@ -120,7 +115,7 @@ class _HomeState extends State<Home> {
                                                 .onSecondary,
                                             fontSize: 25))),
                                 Container(
-                                    width: MediaQuery.of(context).size.width,
+                                    width: MediaQuery.of(context).size.width * 0.7,
                                     child: Opacity(
                                       opacity: 0.5,
                                       child: Text(Globals.user.email,
@@ -475,13 +470,7 @@ class _HomeState extends State<Home> {
                                         ),
                                       ),
                                     ),
-                                    Text('Walking Info',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                            fontSize: 24.0)),
+                                 WalkingInfoView()
                                   ],
                                 ));
                               });

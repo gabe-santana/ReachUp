@@ -1,5 +1,6 @@
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/View/SignView/Sign.view.dart';
+import 'package:ReachUp/View/SignView/SignIn.view.dart';
 import 'package:flutter/material.dart';
 
 import '../../globals.dart';
@@ -23,6 +24,9 @@ class _DebugViewState extends State<DebugView> {
     }
     return Future<bool>.value(true);
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,12 +67,28 @@ class _DebugViewState extends State<DebugView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Container(
+                  width: 250,
+                  child: CheckboxListTile(
+                    title: Text("Entrar como lojista"),
+              
+                    activeColor:  Theme.of(context).colorScheme.primary,
+                    value: VersionConfig.isCommerceVersion,
+                    onChanged: (value) {
+                     setState(() {
+           
+                        VersionConfig.isCommerceVersion = value;
+                     });
+                    },
+
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
                   child: Container(
                     width: 200,
                     child: TextFormField(
-                      initialValue: "192.168.0.",
+                      initialValue: "192.168.0.106",
                       keyboardType: TextInputType.text,
                       autocorrect: false,
                       onSaved: (value) {
@@ -96,7 +116,8 @@ class _DebugViewState extends State<DebugView> {
                       debugPrint("URL API: ${Globals.urlAPI}\n");
           
                       Navigator.push(context, 
-                          MaterialPageRoute(builder: (BuildContext context) => SignView()));
+                          MaterialPageRoute(builder: (BuildContext context) => 
+                          VersionConfig.isCommerceVersion ? SignInView() : SignView()));
                     }
                   },
                   color: Theme.of(context).colorScheme.primary,
