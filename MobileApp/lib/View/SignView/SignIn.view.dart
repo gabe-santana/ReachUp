@@ -2,6 +2,7 @@ import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Account.controller.dart';
 import 'package:ReachUp/View/HomeView/Home.view.dart';
 import 'package:ReachUp/View/SignView/ForgotPassword.view.dart';
+import 'package:ReachUp/View/_CommerceViews/HomeCommerce/HomeCommerce.view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -53,8 +54,9 @@ class _SignInViewState extends State<SignInView> {
                       builder: (BuildContext context) => CustomDialog(
                             icon: Icons.info_outline,
                             title: "Info",
-                            description:
-                                "Caso você seja um cliente selecione a opção Cliente, caso o contrário, selecione a opção Lojista",
+                            description: VersionConfig.isCommerceVersion
+                                ? "Acesse sua conta com  os dados que lhe foram passados pela administração do shopping"
+                                : "Informe seu Email e senha para entrar",
                             buttonOK: RaisedButton(
                               color: Theme.of(context).colorScheme.primary,
                               onPressed: () {
@@ -154,8 +156,9 @@ class _SignInViewState extends State<SignInView> {
                           onPressed: () {
                             if (_formKey.currentState.validate()) {
                               _formKey.currentState.save();
-                              Globals.user.role = "cli";
-
+                              VersionConfig.isCommerceVersion
+                                  ? Globals.user.role = "loj"
+                                  : Globals.user.role = "cli";
                               EasyLoading.show(status: "Carregando");
                               accountController.signIn().then((value) {
                                 EasyLoading.dismiss();
@@ -165,7 +168,9 @@ class _SignInViewState extends State<SignInView> {
                                   Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Home()),
+                                        builder: (context) => VersionConfig.isCommerceVersion ? 
+                                        HomeCommerceView(): 
+                                        Home()),
                                     (Route<dynamic> route) => false,
                                   );
                                 } else {

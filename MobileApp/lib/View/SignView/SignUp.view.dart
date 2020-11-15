@@ -244,7 +244,7 @@ class _StepperBodyState extends State<StepperBody> {
               ),
               TextFormField(
                 obscureText: true,
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.text,
                 autocorrect: false,
                 validator: (value) {
                   if (value.isEmpty || value.length < 6) {
