@@ -165,19 +165,12 @@ BEGIN
 		nm_senha_cliente as "nm_senha_user"
 		FROM cliente WHERE nm_email_cliente = pEmail 
 		AND nm_senha_cliente = md5 (pSenha);
-	ELSE IF (pRole = "loj") THEN
-		    SELECT 
-		    nm_administrador as "nm_user", nm_email_administrador as "nm_email_user", 
-		    nm_senha_administrador as "nm_senha_user", cd_local
-		    FROM administrador WHERE nm_email_administrador= pEmail 
-		    AND nm_senha_administrador = md5 (pSenha);
-         ELSE 
+	ELSE
             SELECT 
 		    nm_administrador as "nm_user", nm_email_administrador as "nm_email_user", 
 		    nm_senha_administrador as "nm_senha_user"
 		    FROM administrador WHERE nm_email_administrador= pEmail 
 		    AND nm_senha_administrador = md5 (pSenha);
-         END IF;
 	END IF;
 END$$
 

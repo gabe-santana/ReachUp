@@ -64,6 +64,7 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        [Authorize (Roles="loj")]
         [HttpGet("GetShopkeeperLocal")]
         public async Task<IActionResult> GetShopkeeperLocal(string email)
         {

@@ -123,13 +123,6 @@ namespace ReachUp
                     while (this.Data.Read())
                     {
                         this.Name = this.Data["nm_user"].ToString();
-                        
-                        if (this.Role == "loj")
-                        {
-                            this.AdmLocal = await new Local().Get(
-                               int.Parse(this.Data["cd_local"].ToString()));
-                        }
-
                     }
                     this.Data.Close();
                     base.Disconnect();
