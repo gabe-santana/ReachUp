@@ -412,7 +412,8 @@ DROP PROCEDURE IF EXISTS receberPromocoesDirecionadas$$
 CREATE PROCEDURE  receberPromocoesDirecionadas(pLocal int, pCliente varchar(100))
 BEGIN
 			SELECT l.cd_local, l.nm_local , c.cd_comunicado, c.cd_tipo_comunicado, c.ds_comunicado, 
-			GROUP_CONCAT(CONCAT(csc.cd_categoria, '-', csc.cd_sub_categoria)) as subCategorias_preferidas, 
+			GROUP_CONCAT(CONCAT(csc.cd_categoria, '-', csc.cd_sub_categoria, '-', sc.nm_sub_categoria)) 
+            as subCategorias_preferidas, 
             c.dt_inicio_comunicado, c.dt_fim_comunicado 
 			FROM `local` as l
 			INNER JOIN comunicado as c
@@ -925,6 +926,12 @@ BEGIN
 	SELECT * FROM categoria WHERE cd_categoria = pCategoria;
 END$$
 
+DROP PROCEDURE IF EXISTS pegarSubCategoria$$
+CREATE PROCEDURE pegarSubCategoria (pCategoria INT, pSubCategoria INT)
+BEGIN
+  SELECT nm_sub_categoria FROM sub_categoria 
+  WHERE cd_categoria = pCategoria AND cd_sub_categoria = pSubCategoria;
+END$$
 /* Atualizada */
 DROP PROCEDURE IF EXISTS atualizarCategoria$$
 CREATE PROCEDURE atualizarCategoria(pCategoria INT, pNome varchar(45), pDs varchar(200), pEspecial bool)

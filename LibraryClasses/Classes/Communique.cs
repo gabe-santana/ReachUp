@@ -119,10 +119,28 @@ namespace ReachUp
 
                     while (this.Data.Read())
                     {
+                        List<SubCategory> favoriteSubCategories = new List<SubCategory>();
+                        string[] subs = this.Data["subCategorias_preferidas"].ToString().Split(',');
+
+                        for (int i = 0; i < subs.Length; i++)
+                        {
+                            string[] subData = subs[i].Split('-');
+
+                            favoriteSubCategories.Add(
+                                new SubCategory(
+                                int.Parse(subData[1]),
+                                await new Category().Get(
+                                    int.Parse(subData[0])
+                                ),
+                                subData[2]
+                             )
+                            );
+                        }
+
                         communiques.Add(new Communique(
                             int.Parse(this.Data["cd_comunicado"].ToString()),
                             ushort.Parse(this.Data["cd_tipo_comunicado"].ToString()),
-                            await new SubCategory().ByCommunique(int.Parse(this.Data["cd_comunicado"].ToString())),
+                            favoriteSubCategories,
                             this.Data["ds_comunicado"].ToString(),
                             this.Data["dt_inicio_comunicado"].ToString(),
                             this.Data["dt_fim_comunicado"].ToString(),

@@ -50,6 +50,36 @@ namespace ReachUp
             this.SubCategoryName = name;
         }
 
+        public Task<SubCategory> Get(int categoryId, int subCategoryId)
+        {
+           if (base.DQLCommand(Procedure.pegarSubCategoria, ref this.Data,
+              new string[,]{
+                  {"pCategoria", categoryId.ToString()},
+                  {"pSubCategoria", subCategoryId.ToString()}
+              }
+           ))
+           {
+               if (this.Data.HasRows)
+               {
+                   SubCategory subCategory = null;
+
+                   if (this.Data.Read())
+                   {
+                       subCategory = new SubCategory(
+                           subCategoryId,
+                           this.Data["nm_sub_categoria"].ToString()
+                       );
+                   }
+                   this.Data.Close();
+                   base.Disconnect();
+                   return Task.FromResult(subCategory);
+               }
+               base.Disconnect();
+               return null;
+           }
+           return null;
+        }
+
         public Task<List<SubCategory>> ByCategory(int category)
         {
             if (base.DQLCommand(Procedure.pegarSubCategoriasCategoria, ref this.Data,

@@ -146,6 +146,16 @@ namespace ReachUpWebAPI.Controllers
             return true;
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> Get(int categoryId, int subCategoryId)
+        {
+            if (!string.IsNullOrWhiteSpace(categoryId.ToString())
+                && !string.IsNullOrWhiteSpace(subCategoryId.ToString()))
+                 return Ok(await new SubCategory().Get(categoryId, subCategoryId));
+            return BadRequest("Parameters are null");
+        }
+
         // OK 
         [AllowAnonymous]
         [Authorize]
