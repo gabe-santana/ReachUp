@@ -19,4 +19,8 @@ class AccountController {
   Future checkEmail() async{
     return await this.accountRepository.checkEmail();
   }
+
+  Future getShopkeeperLocal() async {
+    return await this.accountRepository.getShopkeeperLocal();
+  }
 }

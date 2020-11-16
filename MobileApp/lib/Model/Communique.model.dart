@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class Communique {
   int id;
   int localId;
@@ -18,8 +20,8 @@ class Communique {
     id = json['id'];
     type = json['type'];
     description = json['description'];
-    startDate = json['startDate'];
-    endDate = json['endDate'];
+    startDate = DateFormat('dd/MM/yyyy hh:mm:ss').parse(json['startDate']);
+    endDate = DateFormat('dd/MM/yyyy hh:mm:ss').parse(json['endDate']);
   }
 
   Map<String, dynamic> toJson() {

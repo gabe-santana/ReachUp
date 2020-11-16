@@ -5,8 +5,8 @@ class Local {
   String name;
   int floor;
   String descriptionSubCategories;
-  String strOPHour;
-  String strEHour;
+  String openingHour;
+  String closingHour;
 
   Local(
       {this.beacons,
@@ -15,8 +15,8 @@ class Local {
       this.name,
       this.floor,
       this.descriptionSubCategories,
-      this.strOPHour,
-      this.strEHour});
+      this.openingHour,
+      this.closingHour});
 
   Local.fromJson(Map<String, dynamic> json) {
     if (json['beacons'] != null) {
@@ -30,8 +30,8 @@ class Local {
     name = json['name'];
     floor = json['floor'];
     descriptionSubCategories = json['descriptionSubCategories'];
-    strOPHour = json['strOPHour'];
-    strEHour = json['strEHour'];
+    openingHour = json['openingHour'];
+    closingHour = json['closingHour'];
   }
 
   Map<String, dynamic> toJson() {
@@ -44,8 +44,8 @@ class Local {
     data['name'] = this.name;
     data['floor'] = this.floor;
     data['descriptionSubCategories'] = this.descriptionSubCategories;
-    data['strOPHour'] = this.strOPHour;
-    data['strEHour'] = this.strEHour;
+    data['openingHour'] = this.openingHour;
+    data['closingHour'] = this.closingHour;
     return data;
   }
 }
