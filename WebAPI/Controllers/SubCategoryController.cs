@@ -35,8 +35,8 @@ namespace ReachUpWebAPI.Controllers
            {
               try 
               {
-                  var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/subCategory/{categoryId}_{subCategoryId}.svg");
-                  return File(image, "image/svg+xml");
+                  var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/subCategory/{categoryId}/{subCategoryId}.png");
+                  return File(image, "image/png");
               }
               catch
               {
@@ -46,13 +46,13 @@ namespace ReachUpWebAPI.Controllers
            return BadRequest("Parameters are null");
         }
 
-        // OK 
+        // OK - Arrumar path nas actions de upload
         [Authorize]
         [HttpPost("UploadImage")]
         public async Task<bool> UploadImage([FromForm] IFormFile file)
         {
             List<string> validExtensions = new List<string>(
-                new string[] { ".svg" });
+                new string[] { ".png" });
 
             if (file.Length > 0)
             {
