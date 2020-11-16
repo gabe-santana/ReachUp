@@ -1,3 +1,4 @@
+import 'package:ReachUp/Model/Local.dart';
 import 'package:ReachUp/Model/User.model.dart';
 import 'package:ReachUp/View/SignView/SignUp.view.dart';
 import 'package:ReachUp/globals.dart';
@@ -32,6 +33,16 @@ class AccountRepository extends ReachUpAPI {
     print(super.response.data);
     if (super.response.statusCode == 200) {
       return super.response.data;
+    }
+
+    return null;
+  }
+
+  Future<Local> getShopkeeperLocal() async{
+    await super.httpGet("Account/GetShopkeeperLocal?Email=${Globals.user.email}");
+    print(super.response.data);
+    if (super.response.statusCode == 200) {
+      return Local.fromJson(super.response.data);
     }
 
     return null;

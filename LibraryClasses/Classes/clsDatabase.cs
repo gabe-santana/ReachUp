@@ -52,6 +52,7 @@ namespace ReachUp
             cadastrarBeacon,
             atualizarFeedback,
             FeedbackPorCliente,
+            pegarComunicados,
             acessoFeedbacks,
             pegarLocal,
             pegarLocais,

@@ -14,13 +14,14 @@ namespace ReachUp
         public Category Category { get;set; }
         public int CategoryId {get; set; }
         public string SubCategoryName { get; set; }
-        public SubCategory() : base() { }
+     
         #endregion
+
 
         #region Fields    
         private MySqlDataReader Data = null;
         #endregion
-
+        public SubCategory() : base() { }
         public SubCategory(int Id, Category Category, string Name) : base() 
         {
             this.SubCategoryId = Id;
@@ -168,6 +169,11 @@ namespace ReachUp
                 return null;
             }
             return null;
+        }
+
+        public static explicit operator SubCategory(List<SubCategory> v)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<bool> Add()

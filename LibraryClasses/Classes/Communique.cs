@@ -11,21 +11,21 @@ namespace ReachUp
     public class Communique : clsDatabase
     {
         #region Properties
-        public Communique(int communiqueId, ushort type, Local communiqueLocal, string description, string startDate, string endDate) 
+        public Communique(int communiqueId, ushort type, Local communiqueLocal, string description, string startDate, string endDate)
         {
             this.CommuniqueId = communiqueId;
-                this.Type = type;
-                this.CommuniqueLocal = communiqueLocal;
-                this.Description = description;
-                this.StartDate = startDate;
-                this.EndDate = endDate;
-               
+            this.Type = type;
+            this.CommuniqueLocal = communiqueLocal;
+            this.Description = description;
+            this.StartDate = startDate;
+            this.EndDate = endDate;
+
         }
         public int CommuniqueId { get; set; }
-        public int LocalId {get; set; }
+        public int LocalId { get; set; }
         [JsonIgnore] public ushort Type { get; set; }
         public Local CommuniqueLocal { get; set; }
-        public List<SubCategory> CommuniqueSubCategory = new List<SubCategory>();
+        public List<SubCategory> CommuniqueSubCategory;
         public string Description { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
@@ -40,7 +40,7 @@ namespace ReachUp
         public Communique() : base() { }
 
         public Communique(int id, ushort Type, List<SubCategory> SubCategories,
-             string Description,  string startDate,
+             string Description, string startDate,
              string endDate, Local local) : base()
         {
             this.CommuniqueId = id;
@@ -70,6 +70,8 @@ namespace ReachUp
             this.EndDate = endDate;
         }
 
+
+
         /// <summary>
         ///  Bind and disbind subcategories constructor
         /// </summary>
@@ -91,7 +93,7 @@ namespace ReachUp
         /// <param name="endDate"></param>
         /// <param name="local"></param>
         public Communique(int id, ushort Type,
-             string Description,  string startDate,
+             string Description, string startDate,
              string endDate, Local local) : base()
         {
             this.CommuniqueId = id;
@@ -102,9 +104,60 @@ namespace ReachUp
             this.CommuniqueLocal = local;
         }
 
+        public Communique(int communiqueId, ushort type, string description,
+        string startDate, string endDate, int LocalId, List<SubCategory> subCategories) : base()
+        {
+            this.CommuniqueId = communiqueId;
+            this.Type = type;
+            this.Description = description;
+            this.StartDate = startDate;
+            this.EndDate = endDate;
+            this.LocalId = LocalId;
+            this.CommuniqueSubCategory = subCategories;
+        }
+
+
         #endregion
 
         #region Methods
+
+        public async Task<List<Communique>> GetAll(int local, bool general)
+        {
+            if (base.DQLCommand(Procedure.pegarComunicados, ref this.Data, new string[,] {
+                {"pLocal", local.ToString()},
+                {"pGeral", general ? "1" : "0"}
+            }))
+            {
+                if (this.Data.HasRows) 
+                {
+                    List<Communique> communiques = new List<Communique>();
+                    while (this.Data.Read())
+                    { 
+      
+                            communiques.Add(
+                              new Communique(
+                                      int.Parse(this.Data["cd_comunicado"].ToString()),
+                                      ushort.Parse(this.Data["cd_tipo_comunicado"].ToString()),
+                                      this.Data["ds_comunicado"].ToString(),
+                                      this.Data["dt_inicio_comunicado"].ToString(),
+                                      this.Data["dt_fim_comunicado"].ToString(),
+                                      int.Parse(this.Data["cd_local"].ToString()),
+                                      await new SubCategory().ByCommunique(int.Parse(this.Data["cd_comunicado"].ToString()))
+                                  )
+                          );
+                        
+                    }
+                    this.Data.Close();
+                    base.Disconnect();
+
+                    return communiques;
+                }
+            }
+
+            return null;
+          
+        }
+
         public async Task<List<Communique>> Receive(string email, int local)
         {
             if (base.DQLCommand(Procedure.receberPromocoesDirecionadas, ref this.Data,

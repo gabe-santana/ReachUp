@@ -1,8 +1,15 @@
+import 'dart:math';
+
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
+import 'package:ReachUp/Controller/Account.controller.dart';
+import 'package:ReachUp/Controller/Communique.controller.dart';
+import 'package:ReachUp/Controller/Local.controller.dart';
 import 'package:ReachUp/Model/Communique.model.dart';
 import 'package:ReachUp/Model/Local.dart';
+import 'package:ReachUp/Repositories/Local.repository.dart';
 import 'package:ReachUp/View/SignView/SignIn.view.dart';
 import 'package:ReachUp/View/_Layouts/HomeLayout.layout.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,9 +18,8 @@ import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import '../../../globals.dart';
 
 class DashBoardData {
-  List<Communique> communiques;
-
-  DashBoardData({this.communiques});
+  static List<Communique> communiques;
+  static Local local;
 }
 
 class HomeCommerceView extends StatefulWidget {
@@ -22,38 +28,85 @@ class HomeCommerceView extends StatefulWidget {
 }
 
 class CommuniqueTypeAnalitic {
-  static int specifOff = 5;
-  static int generalOff = 10;
-  static int notifications = 3;
-  static int alerts = 2;
+  int specifOff;
+  int generalOff;
+  int notifications;
+  int alerts;
+
+  CommuniqueTypeAnalitic(
+      {this.specifOff, this.generalOff, this.notifications, this.alerts});
+
+  static List<String> communiqueListFilter = <String>[
+    'Comunicados ativos',
+    'Todos os Comunicados'
+  ];
+  static String communiqueFilter = communiqueListFilter[0];
 }
 
 class _HomeCommerceViewState extends State<HomeCommerceView> {
+  AccountController accountController = new AccountController();
+  CommuniqueController communiqueController = new CommuniqueController();
+
   final GlobalKey<AnimatedCircularChartState> _chartKey =
       new GlobalKey<AnimatedCircularChartState>();
 
-  List<CircularStackEntry> data = <CircularStackEntry>[
-    new CircularStackEntry(
-      <CircularSegmentEntry>[
-        new CircularSegmentEntry(
-            CommuniqueTypeAnalitic.alerts.toDouble(), Colors.red[300],
-            rankKey: 'Q1'),
-        new CircularSegmentEntry(
-            CommuniqueTypeAnalitic.specifOff.toDouble(), Colors.orange[300],
-            rankKey: 'Q2'),
-        new CircularSegmentEntry(
-            CommuniqueTypeAnalitic.generalOff.toDouble(), Colors.purple[300],
-            rankKey: 'Q3'),
-        new CircularSegmentEntry(
-            CommuniqueTypeAnalitic.notifications.toDouble(), Colors.yellow[300],
-            rankKey: 'Q4'),
-      ],
-      rankKey: 'Quarterly Profits',
-    ),
-  ];
+  List<CircularStackEntry> data;
 
-  Future _fetchData() {
-    return Future<bool>.value(true);
+  CommuniqueTypeAnalitic communiqueTypeAnalitic;
+
+  Future _fetchData() async {
+    await accountController.getShopkeeperLocal().then((value) async {
+      DashBoardData.local = value;
+
+      await communiqueController
+          .getByLocal(DashBoardData.local.idLocal)
+          .then((value) {
+        DashBoardData.communiques = value;
+
+        this.communiqueTypeAnalitic = new CommuniqueTypeAnalitic(
+          specifOff: DashBoardData.communiques
+              .where((communique) => communique.type == 0)
+              .toList()
+              .length,
+          generalOff: DashBoardData.communiques
+              .where((communique) => communique.type == 1)
+              .toList()
+              .length,
+          notifications: DashBoardData.communiques
+              .where((communique) => communique.type == 2)
+              .toList()
+              .length,
+          alerts: DashBoardData.communiques
+              .where((communique) => communique.type == 3)
+              .toList()
+              .length,
+        );
+        this.data = <CircularStackEntry>[
+          new CircularStackEntry(
+            <CircularSegmentEntry>[
+              new CircularSegmentEntry(
+                  communiqueTypeAnalitic.alerts.toDouble(), Colors.red[300],
+                  rankKey: 'Q1'),
+              new CircularSegmentEntry(
+                  communiqueTypeAnalitic.specifOff.toDouble(),
+                  Colors.orange[300],
+                  rankKey: 'Q2'),
+              new CircularSegmentEntry(
+                  communiqueTypeAnalitic.generalOff.toDouble(),
+                  Colors.purple[300],
+                  rankKey: 'Q3'),
+              new CircularSegmentEntry(
+                  communiqueTypeAnalitic.notifications.toDouble(),
+                  Colors.yellow[300],
+                  rankKey: 'Q4'),
+            ],
+            rankKey: 'Quarterly Profits',
+          ),
+        ];
+      });
+    });
+
+    return DashBoardData;
   }
 
   Widget bodyBuilder() {
@@ -91,9 +144,19 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                       width: MediaQuery.of(context).size.width * 0.3,
                       height: MediaQuery.of(context).size.height * 0.3,
                       child: Center(
-                        child: FaIcon(
-                          FontAwesomeIcons.image,
-                          size: 80,
+                        child: CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          httpHeaders: {
+                            "Authorization": "Bearer ${Globals.user.token}"
+                          },
+                          imageUrl:
+                              LocalRepository().getImage(DashBoardData.local),
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(
+                                  valueColor: new AlwaysStoppedAnimation<Color>(
+                                      Theme.of(context).colorScheme.primary)),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                       ),
                     ),
@@ -108,7 +171,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                             child: Container(
-                                child: Text("Nome local",
+                                child: Text(DashBoardData.local.name,
                                     style: TextStyle(
                                       fontSize: 19,
                                     ))),
@@ -127,7 +190,9 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                                   ),
                                 ),
                                 Text(
-                                  "Andar: 0",
+                                  DashBoardData.local.floor == 0
+                                      ? "Térreo"
+                                      : "${DashBoardData.local.floor}º Andar",
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.primary,
@@ -148,7 +213,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                                       color: Colors.green),
                                 ),
                                 Text(
-                                  "Abre às: 0",
+                                  "Abre às: ${DashBoardData.local.openingHour}",
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.green),
                                 )
@@ -168,7 +233,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                                   ),
                                 ),
                                 Text(
-                                  "Fecha às: 0",
+                                  "Fecha às: ${DashBoardData.local.closingHour}",
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.red),
                                 )
@@ -195,14 +260,27 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                       child: Container(
                         child: DropdownButton<String>(
-                          items:
-                              <String>['Comunicados ativos', 'Todos os Comunicados'].map((String value) {
+                          value: CommuniqueTypeAnalitic.communiqueFilter,
+                          items: CommuniqueTypeAnalitic.communiqueListFilter
+                              .map((String value) {
                             return new DropdownMenuItem<String>(
                               value: value,
-                              child: new Text(value),
+                              child: new Text(value,
+                                  style: TextStyle(
+                                      fontSize: 19,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground)),
                             );
                           }).toList(),
-                          onChanged: (_) {},
+                          onChanged: (selectedItem) {
+                            setState(() {
+                              CommuniqueTypeAnalitic.communiqueFilter =
+                                  selectedItem;
+
+                              _chartKey.currentState.updateData(data);
+                            });
+                          },
                         ),
                       )),
                   Container(
@@ -223,7 +301,11 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                               color: Colors.orange[300]),
                         ),
                         Text(
-                            "${CommuniqueTypeAnalitic.specifOff} Promoções direcionadas",
+                            communiqueTypeAnalitic.specifOff > 0
+                                ? communiqueTypeAnalitic.specifOff == 1
+                                    ? "1 Promoção direcionada"
+                                    : "${communiqueTypeAnalitic.specifOff} Promoções direcionadas"
+                                : "Nenhuma promoção direcionada",
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onBackground,
@@ -243,7 +325,11 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                           ),
                         ),
                         Text(
-                            "${CommuniqueTypeAnalitic.generalOff} Promoções gerais",
+                            communiqueTypeAnalitic.generalOff > 0
+                                ? communiqueTypeAnalitic.generalOff == 1
+                                    ? "1 Promoção geral"
+                                    : "${communiqueTypeAnalitic.generalOff} Promoções gerais"
+                                : "Nenhuma promoção geral",
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onBackground,
@@ -261,7 +347,11 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                               color: Colors.yellow[300]),
                         ),
                         Text(
-                            "${CommuniqueTypeAnalitic.notifications} Notificações",
+                             communiqueTypeAnalitic.notifications > 0
+                                ? communiqueTypeAnalitic.notifications == 1
+                                    ? "1 Notificação"
+                                    : "${communiqueTypeAnalitic.notifications} Notificações"
+                                : "Nenhuma notificação",
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onBackground,
@@ -277,7 +367,12 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                           padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                           child: Icon(Icons.report, color: Colors.red[300]),
                         ),
-                        Text("${CommuniqueTypeAnalitic.alerts} Alertas",
+                        Text(
+                            communiqueTypeAnalitic.notifications > 0
+                                ? communiqueTypeAnalitic.notifications == 1
+                                    ? "1 Alerta"
+                                    : "${communiqueTypeAnalitic.notifications} Alertas"
+                                : "Nenhum alerta",
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onBackground,

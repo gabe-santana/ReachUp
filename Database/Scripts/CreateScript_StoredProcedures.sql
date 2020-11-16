@@ -1124,5 +1124,20 @@ BEGIN
 	GROUP BY l.cd_local
     ORDER BY categoriesCount DESC , subCategoriesCount DESC;
 END$$
+
+
+
+DROP PROCEDURE IF EXISTS pegarComunicados$$
+CREATE PROCEDURE pegarComunicados(pLocal int, pGeral bool)
+BEGIN
+	if(pGeral = true) THEN
+		SELECT * FROM comunicado WHERE cd_local = pLocal GROUP BY cd_comunicado;
+	ELSE
+		SELECT * FROM comunicado WHERE cd_local = pLocal AND 
+		curdate() between dt_inicio_comunicado and dt_fim_comunicado
+	GROUP BY cd_comunicado;
+	END IF;
+END$$
+
 DELIMITER ;
 SHOW PROCEDURE STATUS WHERE db = "reachup";
