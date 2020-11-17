@@ -5,18 +5,20 @@ import '../globals.dart';
 
 class CommuniqueRepository extends ReachUpAPI {
   CommuniqueRepository() : super() {}
+
+
   String getImage(Communique communique) {
     return "${Globals.urlAPI}/Communique/GetImage?id=${communique.id}";
   }
 
-  Future<List<Communique>> byLocal(int local) async {
-    await super.httpGet("Communique?local=$local");
-    print("response: ${super.response.data}");
+
+
+  Future<List<Communique>> byLocal(int local, bool general) async {
+    await super.httpGet("Communique/GetAll?local=$local&general=$general");
     if (super.response.statusCode == 200) {
-      List<Communique> communiques = List<Communique>.from(
+      return List<Communique>.from(
           super.response.data.map((i) => Communique.fromJson(i)));
-      print(communiques[0].description);
-      return communiques;
+
     } else
       return null;
   }

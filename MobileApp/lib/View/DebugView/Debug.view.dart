@@ -88,7 +88,7 @@ class _DebugViewState extends State<DebugView> {
                   child: Container(
                     width: 200,
                     child: TextFormField(
-                      initialValue: "192.168.0.106",
+                      initialValue: "192.168.0.105",
                       keyboardType: TextInputType.text,
                       autocorrect: false,
                       onSaved: (value) {

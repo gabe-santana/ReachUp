@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../globals.dart';
+import '../../main.dart';
 
 class FragmentWidget extends StatelessWidget {
   Widget contentWidget;
@@ -69,14 +70,7 @@ class _HomeState extends State<Home> {
             )));
   }
 
-  _navigateTo(Widget bodyContent, String title, String info) {
 
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => HomeLayout(
-                titlePage: title, info: info, bodyContent: bodyContent)));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -171,8 +165,8 @@ class _HomeState extends State<Home> {
                                   icon: FontAwesomeIcons.solidBell,
                                   selected: _selectedIndex == 1),
                               onTap: () {
-                                _navigateTo(NotificationsView(), "Notificações",
-                                    "Suas notificações estarão sempre aqui");
+                                navigateTo(NotificationsView(), "Notificações",
+                                    "Suas notificações estarão sempre aqui", context);
                               }),
                           ListTile(
                             contentPadding: EdgeInsets.fromLTRB(15, 0, 0, 10),
@@ -181,8 +175,8 @@ class _HomeState extends State<Home> {
                                 icon: FontAwesomeIcons.houseUser,
                                 selected: _selectedIndex == 2),
                             onTap: () {
-                              _navigateTo(NotificationsView(), "Visitas",
-                                  "O histórico de suas visitas estarão sempre aqui");
+                              navigateTo(NotificationsView(), "Visitas",
+                                  "O histórico de suas visitas estarão sempre aqui", context);
                             },
                           ),
                         ],
@@ -217,8 +211,8 @@ class _HomeState extends State<Home> {
                                 icon: FontAwesomeIcons.headset,
                                 selected: _selectedIndex == 3),
                             onTap: () {
-                              _navigateTo(NotificationsView(), "Narrador",
-                                  "Aqui você pode alterar suas configurações do narrador de rota");
+                              navigateTo(NotificationsView(), "Narrador",
+                                  "Aqui você pode alterar suas configurações do narrador de rota", context);
                             },
                           ),
                           ListTile(
@@ -228,8 +222,8 @@ class _HomeState extends State<Home> {
                                 icon: FontAwesomeIcons.tools,
                                 selected: _selectedIndex == 4),
                             onTap: () {
-                              _navigateTo(NotificationsView(), "Configurações",
-                                  "Aqui você pode configurar de tudo");
+                              navigateTo(NotificationsView(), "Configurações",
+                                  "Aqui você pode configurar de tudo", context);
                             },
                           ),
                         ],
@@ -264,8 +258,8 @@ class _HomeState extends State<Home> {
                                 icon: FontAwesomeIcons.solidStar,
                                 selected: _selectedIndex == 5),
                             onTap: () {
-                              _navigateTo(NotificationsView(), "Feedback",
-                                  "Aqui você pode dar seu feedback e colaborar com o projeto");
+                              navigateTo(NotificationsView(), "Feedback",
+                                  "Aqui você pode dar seu feedback e colaborar com o projeto", context);
                             },
                           ),
                           ListTile(
@@ -275,8 +269,8 @@ class _HomeState extends State<Home> {
                                 icon: FontAwesomeIcons.infoCircle,
                                 selected: _selectedIndex == 6),
                             onTap: () {
-                              _navigateTo(NotificationsView(), "Info",
-                                  "Quem somos nós?");
+                              navigateTo(NotificationsView(), "Info",
+                                  "Quem somos nós?", context);
                             },
                           ),
                         ],
