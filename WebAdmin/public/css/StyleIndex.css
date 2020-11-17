@@ -137,3 +137,27 @@ body {
   margin-left: 10px;
   margin-right: 10px;
 }
+
+#centro{
+  margin-left: 43%;
+  background-color: white;
+  color: black;
+  border-color: white;
+}
+
+#centro2{
+  margin-left: 55%;
+}
+
+#centro3{
+  margin-left: 55%;
+  background-color: white;
+  color: black;
+  border-color: white;
+}
+
+  #branco{
+  background-color: white;
+  color: black;
+  border-color: white;
+}
