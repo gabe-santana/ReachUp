@@ -21,6 +21,17 @@ USE  ReachUp;
 DELIMITER $$
 /* Cliente */
 
+DROP PROCEDURE IF EXISTS pegarInfoShopping$$
+CREATE PROCEDURE pegarInfoShopping()
+BEGIN
+  SELECT s.cd_shopping, nm_shopping, ds_mensagem, 
+  GROUP_CONCAT(CONCAT(hs.cd_dia_semana, '-', hs.hr_abertura, '-', hs.hr_fechamento)) 
+  as horarios_funcionamento
+  FROM shopping s
+  INNER JOIN horario_shopping hs
+  ON s.cd_shopping = hs.cd_shopping;
+END$$
+
 DROP PROCEDURE IF EXISTS atualizarUsuario$$
 CREATE PROCEDURE atualizarUsuario(pRole varchar(3), pEmail varchar(100), pNome varchar(45), pSenha varchar(60))
 BEGIN
@@ -588,6 +599,25 @@ END$$
 
 /* Lojista e Administrador */
 
+DROP PROCEDURE IF EXISTS defHorarioShopping$$
+CREATE PROCEDURE defHorarioShopping(pDia int, pAbertura time, pFechamento time)
+BEGIN
+   DELETE FROM horario_shopping
+   WHERE cd_dia_semana = pDia
+   AND cd_shopping = 0;
+
+   INSERT INTO horario_shopping values (0, pDia, pAbertura, pFechamento);
+END$$
+
+DROP PROCEDURE IF EXISTS atualizarShopping$$
+CREATE PROCEDURE atualizarShopping(pNome varchar(100), pMensagem TEXT)
+BEGIN
+  UPDATE shopping 
+  SET nm_shopping = pNome,
+  ds_mensagem = pMensagem
+  WHERE cd_shopping = 0; 
+END$$ 
+
 DROP PROCEDURE IF EXISTS checarBeacon$$
 CREATE PROCEDURE checarBeacon(pUUID varchar(36))
 BEGIN
@@ -607,7 +637,7 @@ BEGIN
     DECLARE qtLinhasTabelaComEsseHorarioSab int;
 
 	SELECT COUNT(cd_local) INTO @_cd FROM `local`;
-	INSERT INTO `local` VALUES (@_cd, pTipo, pNome, pAndar, pAbertura, pFechamento);
+	INSERT INTO `local` VALUES (@_cd, pTipo, pNome, pAndar, pAbertura, pFechamento, 1);
 	INSERT INTO beacon VALUES (pUUIDBeacon, 0,  @_cd);
 
     SELECT count(*) into qtLinhasTabelaComEsseHorarioDom
@@ -805,6 +835,23 @@ BEGIN
   INSERT INTO comunicado_sub_categoria VALUES (pComunicado, pCategoria, pSubCategoria);
 END$$
 
+DROP PROCEDURE IF EXISTS editarDisponibilidadeLocal$$
+CREATE PROCEDURE editarDisponibilidadeLocal(pLocal int)
+BEGIN
+   DECLARE local_esta_disponivel int;
+
+   SELECT ic_disponivel INTO @local_esta_disponivel FROM `local`
+   WHERE cd_local = pLocal;
+
+   IF (@local_esta_disponivel) THEN 
+      UPDATE `local` SET ic_disponivel = 0 
+      WHERE cd_local = pLocal;
+   ELSE
+      UPDATE `local` SET ic_disponivel = 1 
+      WHERE cd_local = pLocal;
+   END IF;
+END$$
+
 DROP PROCEDURE IF EXISTS removerSubCategoriaComunicado$$
 CREATE PROCEDURE removerSubCategoriaComunicado(pComunicado int,
           pCategoria int, pSubCategoria int)
@@ -862,9 +909,9 @@ CREATE PROCEDURE pegarLocal(pID INT)
 BEGIN
 	SELECT 
     tl.nm_tipo_local, l.cd_tipo_local, l.cd_local, l.nm_local, l.cd_andar, 
-	b.cd_uuid_beacon, l.hr_abertura, l.hr_fechamento,
+	b.cd_uuid_beacon, l.hr_abertura, l.hr_fechamento, l.ic_disponivel,
     GROUP_CONCAT(CONCAT(hl.cd_dia_semana, '-', hl.hr_abertura, '-', hl.hr_fechamento)) 
-    as horarios_alternativos 
+    as horarios_alternativos
 	FROM `local` AS l 
 	INNER JOIN tipo_local AS tl
 	ON l.cd_tipo_local = tl.cd_tipo_local
@@ -881,7 +928,7 @@ CREATE PROCEDURE pegarLocais(pTipo INT)
 BEGIN
 	SELECT l.cd_local, l.cd_tipo_local,
 	tl.nm_tipo_local, l.nm_local, 
-    l.cd_andar, b.cd_uuid_beacon, l.hr_abertura, l.hr_fechamento,
+    l.cd_andar, b.cd_uuid_beacon, l.hr_abertura, l.hr_fechamento, l.ic_disponivel,
     GROUP_CONCAT(CONCAT(hl.cd_dia_semana, '-', hl.hr_abertura, '-', hl.hr_fechamento))
     as horarios_alternativos
     FROM `local` AS l 
@@ -1072,6 +1119,7 @@ BEGIN
 	l.nm_local, tl.nm_tipo_local, l.cd_andar,
 	l.hr_abertura,
 	l.hr_fechamento,
+    l.ic_disponivel,
     b.cd_uuid_beacon,
 	substring_index(group_concat(DISTINCT ca.nm_categoria SEPARATOR ','), ',', 3) as categorias,
 	substring_index(group_concat(DISTINCT sc.nm_sub_categoria SEPARATOR ','), ',', 3) as sub_categorias,
@@ -1121,6 +1169,7 @@ BEGIN
 	formatString(l.cd_andar) LIKE formatString(concat("%",search,"%"))
 
     AND b.cd_uuid_beacon = 0
+    AND l.ic_disponivel = 1
 	GROUP BY l.cd_local
     ORDER BY categoriesCount DESC , subCategoriesCount DESC;
 END$$

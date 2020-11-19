@@ -16,6 +16,36 @@
 -- Script // Populate                                         --
 -- -----------------------------------------------------
 
+/* Ligação do shopping com o serviço da ReachUp! */
+
+INSERT INTO shopping VALUES (0, "Shopping Praiamar", "Bem vindo ao shopping Praiamar!");
+
+/* Definição dos horários de funcionamento do shopping */
+
+CALL defHorarioShopping(0, '11:00:00', '22:00:00');
+CALL defHorarioShopping(1, '10:00:00', '22:00:00');
+CALL defHorarioShopping(2, '10:00:00', '22:00:00');
+CALL defHorarioShopping(3, '10:00:00', '22:00:00');
+CALL defHorarioShopping(4, '10:00:00', '22:00:00');
+CALL defHorarioShopping(5, '10:00:00', '22:00:00');
+CALL defHorarioShopping(6, '10:00:00', '22:00:00');
+
+/* Atualizar horários de funcionamento do shopping */
+
+CALL defHorarioShopping(5, '12:00:00', '22:00:00');
+CALL defHorarioShopping(0, '12:00:00', '22:00:00');
+
+/* Atualizar nome e/ou mensagem do shopping */
+
+CALL atualizarShopping("Praiamar", "Bem vindo!");
+
+/* Pegar todas as informações do shopping */
+
+CALL pegarInfoShopping();
+
+
+
+
 /* Nota de desenvolvimento - CUIDADO: Categorias + subcategorias são independentes (não têm ligação alguma) com tipos de local */
 /*Todos os locais, independente do tipo, possuem categorias, e não apenas lojas.*/
 

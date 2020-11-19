@@ -47,6 +47,15 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        //[Authorize(Roles="adm,loj")]
+        [HttpGet("Seek")]
+        public async Task<IActionResult> Seek(string s)
+        {
+            if (!string.IsNullOrWhiteSpace(s))
+                return Ok(await new Local().Seek(s));
+            return BadRequest("Parameters are null");
+        }
+
         // OK 
         //[Authorize]
         [HttpGet]
@@ -336,6 +345,15 @@ namespace ReachUpWebAPI.Controllers
                 && !string.IsNullOrWhiteSpace(local.ToString())
                )
                 return Ok(await new Local().ConnectAdmin(email, local));
+            return BadRequest("Parameters are null");
+        }
+
+        //[Authorize(Roles="adm,loj")]
+        [HttpPatch("UpdateAvailability")]
+        public async Task<IActionResult> UpdateAvailability(int local)
+        {
+            if (!string.IsNullOrWhiteSpace(local.ToString()))
+                return Ok(await new Local().UpdateAvailability(local));
             return BadRequest("Parameters are null");
         }
 

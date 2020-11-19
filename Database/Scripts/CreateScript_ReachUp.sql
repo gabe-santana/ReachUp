@@ -25,6 +25,29 @@ USE ReachUp ;
 /*SET GLOBAL hr_abertura_shopping = '10:00:00';
 SET GLOBAL hr_fechamento_shopping = '20:00:00';*/
 
+DROP TABLE IF EXISTS shopping;
+
+CREATE TABLE IF NOT EXISTS shopping (
+  cd_shopping INT NOT NULL,
+  nm_shopping VARCHAR(100) NOT NULL,
+  ds_mensagem TEXT,
+  PRIMARY KEY (cd_shopping)
+);
+
+DROP TABLE IF EXISTS horario_shopping;
+
+CREATE TABLE IF NOT EXISTS horario_shopping (
+  cd_shopping INT NOT NULL,
+  cd_dia_semana INT NOT NULL,
+  hr_abertura TIME,
+  hr_fechamento TIME,
+  PRIMARY KEY (cd_shopping, cd_dia_semana),
+  CONSTRAINT fk_shopping_horario_shopping
+    FOREIGN KEY (cd_shopping)
+    REFERENCES shopping(cd_shopping)
+);
+ 
+
 -- -----------------------------------------------------
 -- Tabela tipo_administrador
 -- -----------------------------------------------------
@@ -57,6 +80,7 @@ CREATE TABLE IF NOT EXISTS local (
   cd_andar INT(3) NOT NULL,
   hr_abertura TIME,
   hr_fechamento TIME,
+  ic_disponivel bool,
   PRIMARY KEY (cd_local),
   CONSTRAINT fk_local_tipo_local
     FOREIGN KEY (cd_tipo_local)

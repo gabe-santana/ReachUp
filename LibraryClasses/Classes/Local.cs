@@ -21,6 +21,7 @@ namespace ReachUp
         public List<OpeningHours> AlternativeOpeningHours {get; set;}
         public List<SubCategory> SubCategories {get; set;}
         public OpeningHours OpeningHours {get; set;}
+        public bool IsAvailable {get; set;}
 
         #endregion
 
@@ -32,7 +33,7 @@ namespace ReachUp
         public Local() : base() { }
 
         public Local(int id, int type, string name, string typeName, ushort floor, 
-          string openingHour, string closingHour, string beaconUUID, List<OpeningHours> alternativeOpeningHours = null
+          string openingHour, string closingHour, bool isAvailable, string beaconUUID, List<OpeningHours> alternativeOpeningHours = null
        ) : base()
         {
             this.IdLocal = id;
@@ -42,6 +43,7 @@ namespace ReachUp
             this.Floor = floor; 
             this.OpeningHour = openingHour;
             this.ClosingHour = closingHour;
+            this.IsAvailable = isAvailable;
             this.BeaconUUID = beaconUUID;
             this.AlternativeOpeningHours = alternativeOpeningHours;
         }
@@ -74,7 +76,7 @@ namespace ReachUp
         /// <param name="closingHour"></param>
         /// <param name="beaconUUID"></param>
         public Local(int id, int type, string typeName, string name, ushort floor,
-        string openingHour, string closingHour, string beaconUUID) 
+        string openingHour, string closingHour, string beaconUUID, bool isAvailable) 
         :base()
         {
            this.IdLocal = id;
@@ -85,6 +87,7 @@ namespace ReachUp
            this.OpeningHour = openingHour;
            this.ClosingHour = closingHour;
            this.BeaconUUID = beaconUUID;
+           this.IsAvailable = isAvailable;
         }
         
     
@@ -198,6 +201,43 @@ namespace ReachUp
 
                     while (this.Data.Read())
                     {
+                        if (Convert.ToBoolean(this.Data["ic_disponivel"].ToString()))
+                        {
+                            locals.Add(new Local(
+                                 int.Parse(this.Data["cd_local"].ToString()),
+                                 int.Parse(this.Data["cd_tipo_local"].ToString()),
+                                 this.Data["nm_tipo_local"].ToString(),
+                                 this.Data["nm_local"].ToString(),
+                                 ushort.Parse(this.Data["cd_andar"].ToString()),
+                                 this.Data["hr_abertura"].ToString(),
+                                 this.Data["hr_fechamento"].ToString(),
+                                 this.Data["cd_uuid_beacon"].ToString(),
+                                 Convert.ToBoolean(this.Data["ic_disponivel"].ToString())
+                              ) 
+                           );
+                        }
+                    }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return Task.FromResult(locals);
+                }
+                base.Disconnect();
+                return null;
+            }
+            return null;
+        }
+
+        public Task<List<Local>> Seek(string search)
+        {
+            if (base.DQLCommand(Procedure.pesquisar, ref this.Data,
+                new string[,] { { "search", search } }))
+            {
+                if (this.Data.HasRows)
+                {
+                    List<Local> locals = new List<Local>();
+
+                    while (this.Data.Read())
+                    {
                         locals.Add(new Local(
                                  int.Parse(this.Data["cd_local"].ToString()),
                                  int.Parse(this.Data["cd_tipo_local"].ToString()),
@@ -206,7 +246,8 @@ namespace ReachUp
                                  ushort.Parse(this.Data["cd_andar"].ToString()),
                                  this.Data["hr_abertura"].ToString(),
                                  this.Data["hr_fechamento"].ToString(),
-                                 this.Data["cd_uuid_beacon"].ToString()
+                                 this.Data["cd_uuid_beacon"].ToString(),
+                                 Convert.ToBoolean(this.Data["ic_disponivel"].ToString())
                               ) 
                         );
                     }
@@ -254,6 +295,7 @@ namespace ReachUp
                             ushort.Parse(this.Data["cd_andar"].ToString()),
                             this.Data["hr_abertura"].ToString(),
                             this.Data["hr_fechamento"].ToString(),
+                            Convert.ToBoolean(this.Data["ic_disponivel"].ToString()),
                             this.Data["cd_uuid_beacon"].ToString(),
                             alternativeOpHours
                            );
@@ -304,6 +346,7 @@ namespace ReachUp
                             ushort.Parse(this.Data["cd_andar"].ToString()),
                             this.Data["hr_abertura"].ToString(),
                             this.Data["hr_fechamento"].ToString(),
+                            Convert.ToBoolean(this.Data["ic_disponivel"].ToString()),
                             this.Data["cd_uuid_beacon"].ToString(),
                             alternativeOpHours
                             )
@@ -522,6 +565,19 @@ namespace ReachUp
                    return Task.FromResult(true);
                 }
                 return Task.FromResult(false);
+        }
+
+        public Task<bool> UpdateAvailability(int local)
+        {
+            if (base.DMLCommand(Procedure.editarDisponibilidadeLocal, 
+              new string[,]{
+                  {"pLocal", local.ToString()}
+              }
+            ))
+            {
+                return Task.FromResult(true);
+            }
+            return Task.FromResult(false);
         }
 
 
