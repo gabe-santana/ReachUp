@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 import 'View/DebugView/Debug.view.dart';
 import 'View/_Layouts/HomeLayout.layout.dart';
 
@@ -28,7 +29,7 @@ var darkTheme = ThemeData(
     error: Color(0xFFd42839),
     onError: Colors.white,
     surface: Color(0xFF212121),
-    onSurface: Colors.white,
+    onSurface: Colors.black,
   ),
   appBarTheme: AppBarTheme(
     centerTitle: true,
@@ -97,19 +98,22 @@ class ReachUp extends StatelessWidget {
   }
 }
 
+navigateTo(Widget bodyContent, String titlePage, String info,
+    BuildContext context, bool scale) {
+  Navigator.push(
+      context,
+      !scale
+          ? SlideRightRoute(
+              page: HomeLayout(
+                  titlePage: titlePage, info: info, bodyContent: bodyContent))
+          : ScaleRoute(
+              page: HomeLayout(
+                  titlePage: titlePage, info: info, bodyContent: bodyContent)));
+}
 
-navigateTo(Widget bodyContent, String titlePage, String info, BuildContext context) {
-    Navigator.push(
-        context,
-        SlideRightRoute(page: HomeLayout(titlePage: titlePage, info:info, bodyContent: bodyContent)));
-  }
-
-  navigateDirectly(Widget page, BuildContext context) {
-    Navigator.push(
-        context,
-        SlideRightRoute(page: page));
-  }
-
+navigateDirectly(Widget page, BuildContext context) {
+  Navigator.push(context, SlideRightRoute(page: page));
+}
 
 //Pages Transitions
 // class MyCustomRoute<T> extends MaterialPageRoute<T> {
@@ -144,16 +148,46 @@ class SlideRightRoute extends PageRouteBuilder {
             Widget child,
           ) =>
               SlideTransition(
-                
-                position: Tween<Offset>(
-                  
-                  begin: const Offset(1, 0),
-                  end: Offset.zero,
-                ).animate(animation),
-                child: child,
-              ),
+            position: Tween<Offset>(
+              begin: const Offset(1, 0),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          ),
         );
 }
+
+class ScaleRoute extends PageRouteBuilder {
+  final Widget page;
+  ScaleRoute({this.page})
+      : super(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              ScaleTransition(
+            scale: Tween<double>(
+              begin: 0.0,
+              end: 1.0,
+            ).animate(
+              CurvedAnimation(
+                parent: animation,
+                curve: Curves.fastOutSlowIn,
+              ),
+            ),
+            child: child,
+          ),
+        );
+}
+
 void configLoading() {
   EasyLoading.instance
     ..displayDuration = const Duration(milliseconds: 2000)

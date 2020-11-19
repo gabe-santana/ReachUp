@@ -41,73 +41,76 @@ class CommuniqueTypeAnalitic {
 
   static List<String> communiqueListFilter = <String>[
     'Comunicados ativos',
-    'Todos os Comunicados'
+    'Todos os Comunicados',
+
+  
   ];
   static String communiqueFilter = communiqueListFilter[0];
-  static bool general = false;
-  
+  static bool general = true;
 }
 
 class _HomeCommerceViewState extends State<HomeCommerceView> {
-
-  updateData(){
-     this.communiqueTypeAnalitic = new CommuniqueTypeAnalitic(
-                  specifOff: DashBoardData.communiques
-                      .where((communique) =>
-                          communique.type == 0 && (CommuniqueTypeAnalitic.general
-                              ? isCurrentDateInRange(
-                                  communique.startDate, communique.endDate)
-                              : true))
-                      .toList()
-                      .length,
-                  generalOff: DashBoardData.communiques
-                      .where((communique) =>
-                          communique.type == 1 && (CommuniqueTypeAnalitic.general
-                              ? isCurrentDateInRange(
-                                  communique.startDate, communique.endDate)
-                              : true))
-                      .toList()
-                      .length,
-                  notifications: DashBoardData.communiques
-                      .where((communique) =>
-                          communique.type == 2 && (CommuniqueTypeAnalitic.general
-                              ? isCurrentDateInRange(
-                                  communique.startDate, communique.endDate)
-                              : true))
-                      .toList()
-                      .length,
-                  alerts: DashBoardData.communiques
-                      .where((communique) =>
-                          communique.type == 3 && (CommuniqueTypeAnalitic.general
-                              ? isCurrentDateInRange(
-                                  communique.startDate, communique.endDate)
-                              : true))
-                      .toList()
-                      .length,
-                );
-                this.data = <CircularStackEntry>[
-                  new CircularStackEntry(
-                    <CircularSegmentEntry>[
-                      new CircularSegmentEntry(
-                          this.communiqueTypeAnalitic.alerts.toDouble(),
-                          Colors.red[300],
-                          rankKey: 'Q1'),
-                      new CircularSegmentEntry(
-                          this.communiqueTypeAnalitic.specifOff.toDouble(),
-                          Colors.orange[300],
-                          rankKey: 'Q2'),
-                      new CircularSegmentEntry(
-                          this.communiqueTypeAnalitic.generalOff.toDouble(),
-                          Colors.purple[300],
-                          rankKey: 'Q3'),
-                      new CircularSegmentEntry(
-                          this.communiqueTypeAnalitic.notifications.toDouble(),
-                          Colors.yellow[300],
-                          rankKey: 'Q4'),
-                    ],
-                    rankKey: 'Quarterly Profits',
-                  ),
-                ];
+  updateData() {
+    this.communiqueTypeAnalitic = new CommuniqueTypeAnalitic(
+      specifOff: DashBoardData.communiques
+          .where((communique) =>
+              communique.type == 0 &&
+              (CommuniqueTypeAnalitic.general
+                  ? isCurrentDateInRange(
+                      communique.startDate, communique.endDate)
+                  : true))
+          .toList()
+          .length,
+      generalOff: DashBoardData.communiques
+          .where((communique) =>
+              communique.type == 1 &&
+              (CommuniqueTypeAnalitic.general
+                  ? isCurrentDateInRange(
+                      communique.startDate, communique.endDate)
+                  : true))
+          .toList()
+          .length,
+      notifications: DashBoardData.communiques
+          .where((communique) =>
+              communique.type == 2 &&
+              (CommuniqueTypeAnalitic.general
+                  ? isCurrentDateInRange(
+                      communique.startDate, communique.endDate)
+                  : true))
+          .toList()
+          .length,
+      alerts: DashBoardData.communiques
+          .where((communique) =>
+              communique.type == 3 &&
+              (CommuniqueTypeAnalitic.general
+                  ? isCurrentDateInRange(
+                      communique.startDate, communique.endDate)
+                  : true))
+          .toList()
+          .length,
+    );
+    this.data = <CircularStackEntry>[
+      new CircularStackEntry(
+        <CircularSegmentEntry>[
+          new CircularSegmentEntry(
+              this.communiqueTypeAnalitic.alerts.toDouble(), Colors.red[300],
+              rankKey: 'Q1'),
+          new CircularSegmentEntry(
+              this.communiqueTypeAnalitic.specifOff.toDouble(),
+              Colors.orange[300],
+              rankKey: 'Q2'),
+          new CircularSegmentEntry(
+              this.communiqueTypeAnalitic.generalOff.toDouble(),
+              Colors.purple[300],
+              rankKey: 'Q3'),
+          new CircularSegmentEntry(
+              this.communiqueTypeAnalitic.notifications.toDouble(),
+              Colors.yellow[300],
+              rankKey: 'Q4'),
+        ],
+        rankKey: 'Quarterly Profits',
+      ),
+    ];
   }
 
   AsyncMemoizer _memoizer;
@@ -153,7 +156,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
           updateData();
         });
       });
-      
+
       return DashBoardData;
     });
   }
@@ -165,7 +168,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 EasyLoading.dismiss();
-               
+
                 return Center(child: buildListView());
               } else {
                 return Builder(
@@ -343,6 +346,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                       )),
                   Container(
                     child: AnimatedCircularChart(
+                      duration: Duration(seconds: 1),
                       key: _chartKey,
                       size: const Size(300.0, 300.0),
                       initialChartData: data,
@@ -447,8 +451,6 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
     );
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -542,8 +544,12 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                             icon: Icons.store,
                           ),
                           onTap: () {
-                             navigateTo(StoreView(), "Minha loja",
-                                  "Aqui você pode editar os dados de sua loja!", context);
+                              Navigator.pop(context);
+                            navigateTo(
+                                StoreView(),
+                                "Minha loja",
+                                "Aqui você pode editar os dados de sua loja!",
+                                context, false);
                           },
                         ),
                         ListTile(
@@ -553,7 +559,11 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                               icon: Icons.chat,
                             ),
                             onTap: () {
-                             navigateDirectly(CommuniqueView(communiques: DashBoardData.communiques), context);
+                                Navigator.pop(context);
+                              navigateDirectly(
+                                  CommuniqueView(
+                                      communiques: DashBoardData.communiques),
+                                  context);
                             }),
                         Container(
                           padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -585,8 +595,9 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                                   icon: FontAwesomeIcons.infoCircle,
                                 ),
                                 onTap: () {
+                                    Navigator.pop(context);
                                   navigateTo(HomeCommerceView(), "Info",
-                                      "Quem somos nós?", context);
+                                      "Quem somos nós?", context, false);
                                 },
                               ),
                             ],
@@ -642,6 +653,8 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                                                     SignInView()),
                                             (Route<dynamic> route) => false,
                                           );
+
+                                          this.dispose();
                                         },
                                         child: Text(
                                           "Sair",
@@ -663,12 +676,12 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
         appBar: AppBar(
             title: const Text(
               "ReachUp!",
-              style: TextStyle(fontSize: 25),
+              style: TextStyle(fontSize: 23),
             ),
             leading: Builder(
               builder: (BuildContext context) {
                 return IconButton(
-                  icon: const Icon(Icons.menu, size: 35),
+                  icon: const Icon(Icons.menu, size: 25),
                   onPressed: () {
                     Scaffold.of(context).openDrawer();
                   },
@@ -680,7 +693,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
             actions: <Widget>[
               Builder(
                 builder: (context) => IconButton(
-                  icon: Icon(Icons.more_vert, size: 35, color: Colors.white),
+                  icon: Icon(Icons.more_vert, size: 25, color: Colors.white),
                   onPressed: () => Scaffold.of(context).openEndDrawer(),
                   tooltip:
                       MaterialLocalizations.of(context).openAppDrawerTooltip,

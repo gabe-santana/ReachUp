@@ -50,6 +50,10 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
     return ListView(children: cards);
   }
 
+  void selectItem(){
+    print("selecionou");
+  }
+
   @override
   Widget build(BuildContext context) {
     void showSnackBarMessage(ctx, String message,

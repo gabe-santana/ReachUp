@@ -166,7 +166,7 @@ class _HomeState extends State<Home> {
                                   selected: _selectedIndex == 1),
                               onTap: () {
                                 navigateTo(NotificationsView(), "Notificações",
-                                    "Suas notificações estarão sempre aqui", context);
+                                    "Suas notificações estarão sempre aqui", context, false);
                               }),
                           ListTile(
                             contentPadding: EdgeInsets.fromLTRB(15, 0, 0, 10),
@@ -176,7 +176,7 @@ class _HomeState extends State<Home> {
                                 selected: _selectedIndex == 2),
                             onTap: () {
                               navigateTo(NotificationsView(), "Visitas",
-                                  "O histórico de suas visitas estarão sempre aqui", context);
+                                  "O histórico de suas visitas estarão sempre aqui", context, false);
                             },
                           ),
                         ],
@@ -212,7 +212,7 @@ class _HomeState extends State<Home> {
                                 selected: _selectedIndex == 3),
                             onTap: () {
                               navigateTo(NotificationsView(), "Narrador",
-                                  "Aqui você pode alterar suas configurações do narrador de rota", context);
+                                  "Aqui você pode alterar suas configurações do narrador de rota", context, false);
                             },
                           ),
                           ListTile(
@@ -223,7 +223,7 @@ class _HomeState extends State<Home> {
                                 selected: _selectedIndex == 4),
                             onTap: () {
                               navigateTo(NotificationsView(), "Configurações",
-                                  "Aqui você pode configurar de tudo", context);
+                                  "Aqui você pode configurar de tudo", context, false);
                             },
                           ),
                         ],
@@ -259,7 +259,7 @@ class _HomeState extends State<Home> {
                                 selected: _selectedIndex == 5),
                             onTap: () {
                               navigateTo(NotificationsView(), "Feedback",
-                                  "Aqui você pode dar seu feedback e colaborar com o projeto", context);
+                                  "Aqui você pode dar seu feedback e colaborar com o projeto", context, false);
                             },
                           ),
                           ListTile(
@@ -270,7 +270,7 @@ class _HomeState extends State<Home> {
                                 selected: _selectedIndex == 6),
                             onTap: () {
                               navigateTo(NotificationsView(), "Info",
-                                  "Quem somos nós?", context);
+                                  "Quem somos nós?", context, false);
                             },
                           ),
                         ],

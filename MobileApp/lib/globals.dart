@@ -1,5 +1,6 @@
 import 'package:ReachUp/Model/Category.model.dart';
 
+import 'Model/Communique.model.dart';
 import 'Model/Subcategory.model.dart';
 import 'Model/User.model.dart';
 import 'dart:convert';
@@ -14,6 +15,9 @@ class Globals {
 
   static List<Category> categoriesChecked = new List<Category>();
   static List<SubCategory> subCategoriesChecked = new List<SubCategory>();
+
+  static List<Communique> selectedCommuniques = new List<Communique>();
+
 }
 
 class VersionConfig {

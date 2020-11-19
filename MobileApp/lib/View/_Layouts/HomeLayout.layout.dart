@@ -15,10 +15,11 @@ class _HomeLayoutState extends State<HomeLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: true,
         appBar: AppBar(
           title: Text(
             widget.titlePage,
-            style: TextStyle(fontSize: 25),
+            style: TextStyle(fontSize: 23),
           ),
           actions: [
             IconButton(
@@ -41,12 +42,12 @@ class _HomeLayoutState extends State<HomeLayout> {
                             ),
                           ));
                 },
-                icon: Icon(Icons.info_outline, size: 35, color: Colors.white))
+                icon: Icon(Icons.info_outline, size: 25, color: Colors.white))
           ],
           leading: Builder(
             builder: (BuildContext context) {
               return IconButton(
-                icon: const Icon(Icons.arrow_back, size: 35),
+                icon: const Icon(Icons.arrow_back, size: 25),
                 onPressed: () {
                   Navigator.pop(context);
                 },
