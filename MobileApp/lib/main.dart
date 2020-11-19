@@ -1,10 +1,14 @@
 import 'dart:io';
+import 'package:ReachUp/Model/Communique.model.dart';
 import 'package:ReachUp/View/SignView/Sign.view.dart';
+import 'package:ReachUp/View/_CommerceViews/HomeCommerce/CommuniqueView/Communique.view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get/get.dart';
 import 'View/DebugView/Debug.view.dart';
+import 'View/_Layouts/HomeLayout.layout.dart';
 
 void main() {
   runApp(ReachUp());
@@ -25,7 +29,7 @@ var darkTheme = ThemeData(
     error: Color(0xFFd42839),
     onError: Colors.white,
     surface: Color(0xFF212121),
-    onSurface: Colors.white,
+    onSurface: Colors.black,
   ),
   appBarTheme: AppBarTheme(
     centerTitle: true,
@@ -94,20 +98,94 @@ class ReachUp extends StatelessWidget {
   }
 }
 
-//Pages Transitions
-class MyCustomRoute<T> extends MaterialPageRoute<T> {
-  MyCustomRoute({WidgetBuilder builder, RouteSettings settings})
-      : super(builder: builder, settings: settings);
+navigateTo(Widget bodyContent, String titlePage, String info,
+    BuildContext context, bool scale) {
+  Navigator.push(
+      context,
+      !scale
+          ? SlideRightRoute(
+              page: HomeLayout(
+                  titlePage: titlePage, info: info, bodyContent: bodyContent))
+          : ScaleRoute(
+              page: HomeLayout(
+                  titlePage: titlePage, info: info, bodyContent: bodyContent)));
+}
 
-  @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
-    return new SlideTransition(
-      position: Tween(begin: Offset(1, 0.0), end: Offset(0.0, 0.0))
-          .animate(animation),
-      child: child,
-    );
-  }
+navigateDirectly(Widget page, BuildContext context) {
+  Navigator.push(context, SlideRightRoute(page: page));
+}
+
+//Pages Transitions
+// class MyCustomRoute<T> extends MaterialPageRoute<T> {
+//   MyCustomRoute({WidgetBuilder builder, RouteSettings settings})
+//       : super(builder: builder, settings: settings);
+
+//   @override
+//   Widget buildTransitions(BuildContext context, Animation<double> animation,
+//       Animation<double> secondaryAnimation, Widget child) {
+//     return new SlideTransition(
+//       position: Tween(begin: Offset(1, 0.0), end: Offset(0.0, 0.0))
+//           .animate(animation),
+//       child: child,
+//     );
+//   }
+// }
+
+class SlideRightRoute extends PageRouteBuilder {
+  final Widget page;
+  SlideRightRoute({this.page})
+      : super(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(1, 0),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          ),
+        );
+}
+
+class ScaleRoute extends PageRouteBuilder {
+  final Widget page;
+  ScaleRoute({this.page})
+      : super(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              ScaleTransition(
+            scale: Tween<double>(
+              begin: 0.0,
+              end: 1.0,
+            ).animate(
+              CurvedAnimation(
+                parent: animation,
+                curve: Curves.fastOutSlowIn,
+              ),
+            ),
+            child: child,
+          ),
+        );
 }
 
 void configLoading() {

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Account.controller.dart';
 import 'package:ReachUp/Controller/Communique.controller.dart';
@@ -8,14 +6,19 @@ import 'package:ReachUp/Model/Communique.model.dart';
 import 'package:ReachUp/Model/Local.dart';
 import 'package:ReachUp/Repositories/Local.repository.dart';
 import 'package:ReachUp/View/SignView/SignIn.view.dart';
+import 'package:ReachUp/View/_CommerceViews/HomeCommerce/StoreView/Store.view.dart';
 import 'package:ReachUp/View/_Layouts/HomeLayout.layout.dart';
+import 'package:async/async.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
+import 'package:intl/intl.dart';
 
-import '../../../globals.dart';
+import '../../../../globals.dart';
+import '../../../../main.dart';
+import '../CommuniqueView/Communique.view.dart';
 
 class DashBoardData {
   static List<Communique> communiques;
@@ -38,12 +41,98 @@ class CommuniqueTypeAnalitic {
 
   static List<String> communiqueListFilter = <String>[
     'Comunicados ativos',
-    'Todos os Comunicados'
+    'Todos os Comunicados',
+
+  
   ];
   static String communiqueFilter = communiqueListFilter[0];
+  static bool general = true;
 }
 
 class _HomeCommerceViewState extends State<HomeCommerceView> {
+  updateData() {
+    this.communiqueTypeAnalitic = new CommuniqueTypeAnalitic(
+      specifOff: DashBoardData.communiques
+          .where((communique) =>
+              communique.type == 0 &&
+              (CommuniqueTypeAnalitic.general
+                  ? isCurrentDateInRange(
+                      communique.startDate, communique.endDate)
+                  : true))
+          .toList()
+          .length,
+      generalOff: DashBoardData.communiques
+          .where((communique) =>
+              communique.type == 1 &&
+              (CommuniqueTypeAnalitic.general
+                  ? isCurrentDateInRange(
+                      communique.startDate, communique.endDate)
+                  : true))
+          .toList()
+          .length,
+      notifications: DashBoardData.communiques
+          .where((communique) =>
+              communique.type == 2 &&
+              (CommuniqueTypeAnalitic.general
+                  ? isCurrentDateInRange(
+                      communique.startDate, communique.endDate)
+                  : true))
+          .toList()
+          .length,
+      alerts: DashBoardData.communiques
+          .where((communique) =>
+              communique.type == 3 &&
+              (CommuniqueTypeAnalitic.general
+                  ? isCurrentDateInRange(
+                      communique.startDate, communique.endDate)
+                  : true))
+          .toList()
+          .length,
+    );
+    this.data = <CircularStackEntry>[
+      new CircularStackEntry(
+        <CircularSegmentEntry>[
+          new CircularSegmentEntry(
+              this.communiqueTypeAnalitic.alerts.toDouble(), Colors.red[300],
+              rankKey: 'Q1'),
+          new CircularSegmentEntry(
+              this.communiqueTypeAnalitic.specifOff.toDouble(),
+              Colors.orange[300],
+              rankKey: 'Q2'),
+          new CircularSegmentEntry(
+              this.communiqueTypeAnalitic.generalOff.toDouble(),
+              Colors.purple[300],
+              rankKey: 'Q3'),
+          new CircularSegmentEntry(
+              this.communiqueTypeAnalitic.notifications.toDouble(),
+              Colors.yellow[300],
+              rankKey: 'Q4'),
+        ],
+        rankKey: 'Quarterly Profits',
+      ),
+    ];
+  }
+
+  AsyncMemoizer _memoizer;
+  @override
+  initState() {
+    // _categoryController.getAll().then((value) => () {
+    //       categories = value;
+    //     });
+    super.initState();
+    _memoizer = AsyncMemoizer();
+  }
+
+  bool isCurrentDateInRange(DateTime startDate, DateTime endDate) {
+    final currentDate = DateTime.now();
+    print(
+        "Hoje é $currentDate\nComunicado começou em $startDate e terminou em $endDate");
+
+    startDate = DateFormat("yyyy-MM-dd hh:mm:ss").parse(startDate.toString());
+    endDate = DateFormat("yyyy-MM-dd hh:mm:ss").parse(endDate.toString());
+    return currentDate.isAfter(startDate) && currentDate.isBefore(endDate);
+  }
+
   AccountController accountController = new AccountController();
   CommuniqueController communiqueController = new CommuniqueController();
 
@@ -55,58 +144,21 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
   CommuniqueTypeAnalitic communiqueTypeAnalitic;
 
   Future _fetchData() async {
-    await accountController.getShopkeeperLocal().then((value) async {
-      DashBoardData.local = value;
+    return this._memoizer.runOnce(() async {
+      await accountController.getShopkeeperLocal().then((value) async {
+        DashBoardData.local = value;
 
-      await communiqueController
-          .getByLocal(DashBoardData.local.idLocal)
-          .then((value) {
-        DashBoardData.communiques = value;
+        await communiqueController
+            .getByLocal(DashBoardData.local.idLocal, true)
+            .then((value) {
+          DashBoardData.communiques = value;
 
-        this.communiqueTypeAnalitic = new CommuniqueTypeAnalitic(
-          specifOff: DashBoardData.communiques
-              .where((communique) => communique.type == 0)
-              .toList()
-              .length,
-          generalOff: DashBoardData.communiques
-              .where((communique) => communique.type == 1)
-              .toList()
-              .length,
-          notifications: DashBoardData.communiques
-              .where((communique) => communique.type == 2)
-              .toList()
-              .length,
-          alerts: DashBoardData.communiques
-              .where((communique) => communique.type == 3)
-              .toList()
-              .length,
-        );
-        this.data = <CircularStackEntry>[
-          new CircularStackEntry(
-            <CircularSegmentEntry>[
-              new CircularSegmentEntry(
-                  communiqueTypeAnalitic.alerts.toDouble(), Colors.red[300],
-                  rankKey: 'Q1'),
-              new CircularSegmentEntry(
-                  communiqueTypeAnalitic.specifOff.toDouble(),
-                  Colors.orange[300],
-                  rankKey: 'Q2'),
-              new CircularSegmentEntry(
-                  communiqueTypeAnalitic.generalOff.toDouble(),
-                  Colors.purple[300],
-                  rankKey: 'Q3'),
-              new CircularSegmentEntry(
-                  communiqueTypeAnalitic.notifications.toDouble(),
-                  Colors.yellow[300],
-                  rankKey: 'Q4'),
-            ],
-            rankKey: 'Quarterly Profits',
-          ),
-        ];
+          updateData();
+        });
       });
-    });
 
-    return DashBoardData;
+      return DashBoardData;
+    });
   }
 
   Widget bodyBuilder() {
@@ -116,6 +168,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 EasyLoading.dismiss();
+
                 return Center(child: buildListView());
               } else {
                 return Builder(
@@ -154,7 +207,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                           placeholder: (context, url) =>
                               CircularProgressIndicator(
                                   valueColor: new AlwaysStoppedAnimation<Color>(
-                                      Theme.of(context).colorScheme.primary)),
+                                      Colors.grey)),
                           errorWidget: (context, url, error) =>
                               Icon(Icons.error),
                         ),
@@ -275,9 +328,17 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                           }).toList(),
                           onChanged: (selectedItem) {
                             setState(() {
+                              int index = CommuniqueTypeAnalitic
+                                  .communiqueListFilter
+                                  .indexOf(selectedItem);
+
+                              index == 0
+                                  ? CommuniqueTypeAnalitic.general = true
+                                  : CommuniqueTypeAnalitic.general = false;
                               CommuniqueTypeAnalitic.communiqueFilter =
                                   selectedItem;
 
+                              updateData();
                               _chartKey.currentState.updateData(data);
                             });
                           },
@@ -285,6 +346,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                       )),
                   Container(
                     child: AnimatedCircularChart(
+                      duration: Duration(seconds: 1),
                       key: _chartKey,
                       size: const Size(300.0, 300.0),
                       initialChartData: data,
@@ -328,7 +390,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                             communiqueTypeAnalitic.generalOff > 0
                                 ? communiqueTypeAnalitic.generalOff == 1
                                     ? "1 Promoção geral"
-                                    : "${communiqueTypeAnalitic.generalOff} Promoções gerais"
+                                    : "${this.communiqueTypeAnalitic.generalOff} Promoções gerais"
                                 : "Nenhuma promoção geral",
                             style: TextStyle(
                                 color:
@@ -347,10 +409,10 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                               color: Colors.yellow[300]),
                         ),
                         Text(
-                             communiqueTypeAnalitic.notifications > 0
-                                ? communiqueTypeAnalitic.notifications == 1
+                            this.communiqueTypeAnalitic.notifications > 0
+                                ? this.communiqueTypeAnalitic.notifications == 1
                                     ? "1 Notificação"
-                                    : "${communiqueTypeAnalitic.notifications} Notificações"
+                                    : "${this.communiqueTypeAnalitic.notifications} Notificações"
                                 : "Nenhuma notificação",
                             style: TextStyle(
                                 color:
@@ -368,10 +430,10 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                           child: Icon(Icons.report, color: Colors.red[300]),
                         ),
                         Text(
-                            communiqueTypeAnalitic.notifications > 0
-                                ? communiqueTypeAnalitic.notifications == 1
+                            this.communiqueTypeAnalitic.notifications > 0
+                                ? this.communiqueTypeAnalitic.notifications == 1
                                     ? "1 Alerta"
-                                    : "${communiqueTypeAnalitic.notifications} Alertas"
+                                    : "${this.communiqueTypeAnalitic.alerts} Alertas"
                                 : "Nenhum alerta",
                             style: TextStyle(
                                 color:
@@ -387,14 +449,6 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
         ),
       ],
     );
-  }
-
-  _navigateTo(Widget bodyContent, String title, String info) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => HomeLayout(
-                titlePage: title, info: info, bodyContent: bodyContent)));
   }
 
   @override
@@ -489,7 +543,14 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                             title: "Minha Loja",
                             icon: Icons.store,
                           ),
-                          onTap: () {},
+                          onTap: () {
+                              Navigator.pop(context);
+                            navigateTo(
+                                StoreView(),
+                                "Minha loja",
+                                "Aqui você pode editar os dados de sua loja!",
+                                context, false);
+                          },
                         ),
                         ListTile(
                             contentPadding: EdgeInsets.fromLTRB(15, 0, 0, 10),
@@ -498,8 +559,11 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                               icon: Icons.chat,
                             ),
                             onTap: () {
-                              _navigateTo(HomeCommerceView(), "Notificações",
-                                  "Suas notificações estarão sempre aqui");
+                                Navigator.pop(context);
+                              navigateDirectly(
+                                  CommuniqueView(
+                                      communiques: DashBoardData.communiques),
+                                  context);
                             }),
                         Container(
                           padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -531,8 +595,9 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                                   icon: FontAwesomeIcons.infoCircle,
                                 ),
                                 onTap: () {
-                                  _navigateTo(HomeCommerceView(), "Info",
-                                      "Quem somos nós?");
+                                    Navigator.pop(context);
+                                  navigateTo(HomeCommerceView(), "Info",
+                                      "Quem somos nós?", context, false);
                                 },
                               ),
                             ],
@@ -588,6 +653,8 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                                                     SignInView()),
                                             (Route<dynamic> route) => false,
                                           );
+
+                                          this.dispose();
                                         },
                                         child: Text(
                                           "Sair",
@@ -609,12 +676,12 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
         appBar: AppBar(
             title: const Text(
               "ReachUp!",
-              style: TextStyle(fontSize: 25),
+              style: TextStyle(fontSize: 23),
             ),
             leading: Builder(
               builder: (BuildContext context) {
                 return IconButton(
-                  icon: const Icon(Icons.menu, size: 35),
+                  icon: const Icon(Icons.menu, size: 25),
                   onPressed: () {
                     Scaffold.of(context).openDrawer();
                   },
@@ -626,7 +693,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
             actions: <Widget>[
               Builder(
                 builder: (context) => IconButton(
-                  icon: Icon(Icons.more_vert, size: 35, color: Colors.white),
+                  icon: Icon(Icons.more_vert, size: 25, color: Colors.white),
                   onPressed: () => Scaffold.of(context).openEndDrawer(),
                   tooltip:
                       MaterialLocalizations.of(context).openAppDrawerTooltip,

@@ -2,7 +2,7 @@ import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Account.controller.dart';
 import 'package:ReachUp/View/HomeView/Home.view.dart';
 import 'package:ReachUp/View/SignView/ForgotPassword.view.dart';
-import 'package:ReachUp/View/_CommerceViews/HomeCommerce/HomeCommerce.view.dart';
+import 'package:ReachUp/View/_CommerceViews/HomeCommerce/HomeView/HomeCommerce.view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

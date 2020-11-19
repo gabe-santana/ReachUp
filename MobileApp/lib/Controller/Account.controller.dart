@@ -12,7 +12,7 @@ class AccountController {
     return await this.accountRepository.signUp();
   }
 
-    Future signIn() async{
+  Future signIn() async{
     return await this.accountRepository.signIn();
   }
 

@@ -9,8 +9,8 @@ class CommuniqueController {
     communiqueRepository = new CommuniqueRepository();
   }
 
-  Future<List<Communique>> getByLocal(int localId) async {
-    return communiqueRepository.byLocal(localId);
+  Future<List<Communique>> getByLocal(int localId, bool general) async {
+    return communiqueRepository.byLocal(localId, general);
   }
 
   Future<bool> add(int localId, int type, String description, DateTime start,
