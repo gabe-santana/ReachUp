@@ -41,7 +41,7 @@ CALL atualizarShopping("Praiamar", "Bem vindo!");
 
 /* Pegar todas as informações do shopping */
 
-CALL pegarInfoShopping();
+CALL pegarInfoShopping(0);
 
 
 

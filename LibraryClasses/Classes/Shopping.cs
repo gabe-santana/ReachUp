@@ -65,7 +65,11 @@ namespace ReachUp
 
         public Task<Shopping> Get()
         {
-            if (base.DQLCommand(Procedure.pegarInfoShopping, ref this.Data))
+            if (base.DQLCommand(Procedure.pegarInfoShopping, ref this.Data,
+                new string[,]{
+                    {"pShopping", "0"}
+                }
+            ))
             {
                 if (this.Data.HasRows)
                 {

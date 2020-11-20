@@ -22,14 +22,15 @@ DELIMITER $$
 /* Cliente */
 
 DROP PROCEDURE IF EXISTS pegarInfoShopping$$
-CREATE PROCEDURE pegarInfoShopping()
+CREATE PROCEDURE pegarInfoShopping(pShopping int)
 BEGIN
   SELECT s.cd_shopping, nm_shopping, ds_mensagem, 
   GROUP_CONCAT(CONCAT(hs.cd_dia_semana, '-', hs.hr_abertura, '-', hs.hr_fechamento)) 
   as horarios_funcionamento
   FROM shopping s
   INNER JOIN horario_shopping hs
-  ON s.cd_shopping = hs.cd_shopping;
+  ON s.cd_shopping = hs.cd_shopping
+  WHERE s.cd_shopping = pShopping;
 END$$
 
 DROP PROCEDURE IF EXISTS atualizarUsuario$$
