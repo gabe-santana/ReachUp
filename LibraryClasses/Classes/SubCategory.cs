@@ -21,7 +21,18 @@ namespace ReachUp
         #region Fields    
         private MySqlDataReader Data = null;
         #endregion
-        public SubCategory() : base() { }
+
+        /// <summary>
+        /// Null constructor
+        /// </summary>
+        public SubCategory() : base() {}
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="Category"></param>
+        /// <param name="Name"></param>
         public SubCategory(int Id, Category Category, string Name) : base() 
         {
             this.SubCategoryId = Id;
@@ -51,6 +62,12 @@ namespace ReachUp
             this.SubCategoryName = name;
         }
 
+        /// <summary>
+        /// Gets a subcategory from its concatenated key
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <param name="subCategoryId"></param>
+        /// <returns>Subcategory object</returns>
         public Task<SubCategory> Get(int categoryId, int subCategoryId)
         {
            if (base.DQLCommand(Procedure.pegarSubCategoria, ref this.Data,
@@ -81,6 +98,11 @@ namespace ReachUp
            return null;
         }
 
+        /// <summary>
+        /// Gets all subcategories of a category
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns>Subcategory object list</returns>
         public Task<List<SubCategory>> ByCategory(int category)
         {
             if (base.DQLCommand(Procedure.pegarSubCategoriasCategoria, ref this.Data,
@@ -111,6 +133,11 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Gets all subcategories of a local
+        /// </summary>
+        /// <param name="local"></param>
+        /// <returns>Subcategory object list</returns>
         public async Task<List<SubCategory>> ByLocal(int local) 
         {
             if (base.DQLCommand(Procedure.pegarSubcategoriasLocal, ref this.Data, new string[,] {
@@ -141,6 +168,11 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Gets all subcategories of a targeted promotion
+        /// </summary>
+        /// <param name="communique"></param>
+        /// <returns>Subcategory object list</returns>
         public async Task<List<SubCategory>> ByCommunique(int communique) 
         {
             if (base.DQLCommand(Procedure.pegarSubCategoriasComunicado, ref this.Data, new string[,] {
@@ -171,11 +203,10 @@ namespace ReachUp
             return null;
         }
 
-        public static explicit operator SubCategory(List<SubCategory> v)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Registers a subcategory
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> Add()
         {
            if (base.DMLCommand(Procedure.cadastrarSubCategoria, 
@@ -189,6 +220,12 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Deletes a subcategory
+        /// </summary>
+        /// <param name="category"></param>
+        /// <param name="subCategory"></param>
+        /// <returns>Bool</returns>
         public Task<bool> Delete(int category, int subCategory)
         {
            if (base.DMLCommand(Procedure.removerSubCategoria,

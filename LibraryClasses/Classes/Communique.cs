@@ -11,16 +11,6 @@ namespace ReachUp
     public class Communique : clsDatabase
     {
         #region Properties
-        public Communique(int communiqueId, ushort type, Local communiqueLocal, string description, string startDate, string endDate)
-        {
-            this.CommuniqueId = communiqueId;
-            this.Type = type;
-            this.CommuniqueLocal = communiqueLocal;
-            this.Description = description;
-            this.StartDate = startDate;
-            this.EndDate = endDate;
-
-        }
         public int CommuniqueId { get; set; }
         public int LocalId { get; set; }
         [JsonIgnore] public ushort Type { get; set; }
@@ -37,7 +27,30 @@ namespace ReachUp
         #endregion
 
         #region Constructor
-        public Communique() : base() { }
+
+        /// <summary>
+        /// Null constructor
+        /// </summary>
+        public Communique() : base() {}
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="communiqueId"></param>
+        /// <param name="type"></param>
+        /// <param name="communiqueLocal"></param>
+        /// <param name="description"></param>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        public Communique(int communiqueId, ushort type, Local communiqueLocal, string description, string startDate, string endDate)
+        {
+            this.CommuniqueId = communiqueId;
+            this.Type = type;
+            this.CommuniqueLocal = communiqueLocal;
+            this.Description = description;
+            this.StartDate = startDate;
+            this.EndDate = endDate;
+        }
 
         public Communique(int id, ushort Type, List<SubCategory> SubCategories,
              string Description, string startDate,
@@ -69,8 +82,6 @@ namespace ReachUp
             this.StartDate = startDate;
             this.EndDate = endDate;
         }
-
-
 
         /// <summary>
         ///  Bind and disbind subcategories constructor
@@ -158,6 +169,13 @@ namespace ReachUp
           
         }
 
+        /// <summary>
+        /// Gets all active targeted promotions of a local that are relevant to a client
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="local"></param>
+        /// <returns>Communique object list</returns>
+        /// <remarks>Only the subcategories of the promotions that are also preferences of the client are returned</remarks>
         public async Task<List<Communique>> Receive(string email, int local)
         {
             if (base.DQLCommand(Procedure.receberPromocoesDirecionadas, ref this.Data,
@@ -210,6 +228,11 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Gets all active non-targeted communiques of a local
+        /// </summary>
+        /// <param name="local"></param>
+        /// <returns>Communique object list</returns>
         public async Task<List<Communique>> Get(int local) 
         {
             if (base.DQLCommand(Procedure.receberComunicados, ref this.Data, new string[,] {
@@ -244,6 +267,12 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Gets all active targeted promotions of a local
+        /// </summary>
+        /// <param name="local"></param>
+        /// <returns>Communique object list</returns>
+        /// <remarks>All subcategories of the promotions are returned</remarks>
         public async Task<List<Communique>> GetLocalDirectedPromotions(int local)
         {
            if (base.DQLCommand(Procedure.pegarTodasPromocoesDirecionadasLocal, ref this.Data,
@@ -280,6 +309,12 @@ namespace ReachUp
            return null;
         }
 
+        /// <summary>
+        /// Gets all communiques of a local
+        /// </summary>
+        /// <param name="local"></param>
+        /// <param name="isGeneral"></param>
+        /// <returns>Communique object list</returns>
         public async Task<List<Communique>> GetLocalCommuniqueHistory(int local, bool isGeneral)
         {
             if (base.DQLCommand(Procedure.pegarHistoricoPromocoesLocal, ref this.Data,
@@ -341,6 +376,10 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Adds a new communique
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> Add()
         {
            if (base.DMLCommand(Procedure.publicarComunicado, new string[,] {
@@ -356,6 +395,10 @@ namespace ReachUp
               return Task.FromResult(false);
          }
 
+        /// <summary>
+        /// Adds subcategories to a targeted promotion
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> BindSubCategories()
         {
             for (int i = 0; i < this.CommuniqueSubCategory.Count(); i++)
@@ -373,6 +416,10 @@ namespace ReachUp
             return Task.FromResult(true);
         }
 
+        /// <summary>
+        /// Updates a communique
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> Update()
         {
             if (base.DMLCommand(Procedure.atualizarComunicado, new string[,] {
@@ -389,6 +436,10 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Deletes subcategories of a targeted promotion
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> DisbindSubCategories()
         {
             for (int i = 0; i < this.CommuniqueSubCategory.Count(); i++)
@@ -406,7 +457,12 @@ namespace ReachUp
             return Task.FromResult(true);
         }
   
-
+        /// <summary>
+        /// Deletes a communique
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <returns>Bool</returns>
         public Task<bool> Delete(int id, int type) 
         {
             if (base.DMLCommand(Procedure.deletarComunicado, new string[,] {

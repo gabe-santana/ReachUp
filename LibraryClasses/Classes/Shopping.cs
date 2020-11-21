@@ -27,8 +27,18 @@ namespace ReachUp
 
         #region Constructors
 
+        /// <summary>
+        /// Null constructor
+        /// </summary>
         public Shopping() : base () { }
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="message"></param>
+        /// <param name="listOpeningHours"></param>
         public Shopping(int id, string name, string message, List<OpeningHours> listOpeningHours = null) : base()
         {
             this.Id = id;
@@ -63,6 +73,11 @@ namespace ReachUp
 
         #region Public Methods
 
+
+        /// <summary>
+        /// Get the shopping
+        /// </summary>
+        /// <returns>Shopping object</returns>
         public Task<Shopping> Get()
         {
             if (base.DQLCommand(Procedure.pegarInfoShopping, ref this.Data,
@@ -107,6 +122,10 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Updates the shopping's opening hours, on a specific weekday
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> UpdateOpeningHours()
         {
             if (base.DMLCommand(Procedure.defHorarioShopping, new string[,] {
@@ -120,6 +139,10 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Updates the mall name and/or welcome message
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> Update()
         {
             if (base.DMLCommand(Procedure.atualizarShopping,

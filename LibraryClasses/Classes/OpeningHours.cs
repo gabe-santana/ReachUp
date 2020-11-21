@@ -16,6 +16,18 @@ namespace ReachUp
         #endregion
 
         #region Constructor
+
+        /// <summary>
+        /// Null constructor
+        /// </summary>
+        public OpeningHours() {}
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="weekDay"></param>
+        /// <param name="openingTime"></param>
+        /// <param name="closingTime"></param>
         public OpeningHours(int weekDay, string openingTime, string closingTime)
         {
             this.WeekDay = weekDay;

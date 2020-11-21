@@ -17,9 +17,19 @@ namespace ReachUp
         #region Fields
         MySqlDataReader Data = null;
         #endregion
-        #region Constructor
-        public ClientPreference() : base() { }
 
+        #region Constructor
+
+        /// <summary>
+        /// Null constructor
+        /// </summary>
+        public ClientPreference() : base() {}
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="SubCategories"></param>
+        /// <param name="clientEmail"></param>
         public ClientPreference(List<SubCategory> SubCategories, 
          string clientEmail) : base() 
         {
@@ -31,7 +41,11 @@ namespace ReachUp
 
         #region Methods
        
-        // OK 
+        /// <summary>
+        /// Gets a client's preferences
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>SubCategory object list</returns>
         public async Task<List<SubCategory>> GetAll(string email) 
         {
             if (base.DQLCommand(Procedure.clientePrefere, ref this.Data, 
@@ -66,7 +80,10 @@ namespace ReachUp
             return null;
         }
 
-        // OK
+        /// <summary>
+        /// Adds a client's preferences
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> Add()
         {
             for (int i = 0; i < this.SubCategories.Count(); i++)
@@ -84,7 +101,13 @@ namespace ReachUp
             return Task.FromResult(true);
         }
 
-        // 404 NOT FOUND
+        /// <summary>
+        /// Deletes a preference of a client
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="category"></param>
+        /// <param name="subCategory"></param>
+        /// <returns>Bool</returns>
         public Task<bool> Delete(string email, int category, int subCategory)
         {
              if (base.DMLCommand(Procedure.removerPreferencia, 

@@ -23,7 +23,18 @@ namespace ReachUp
         #endregion
 
         #region Constructor
-        public Beacon() : base() { }
+
+        /// <summary>
+        /// Null constructor
+        /// </summary>
+        public Beacon() : base() {}
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <param name="type"></param>
+        /// <param name="local"></param>
         public Beacon(string uuid, int type, Local local) : base()
         {
             this.UUID = uuid;
@@ -31,20 +42,8 @@ namespace ReachUp
             this.LocalBeacon = local;
         }
 
-        public Beacon(string uuid) : base()
-        {
-            this.UUID = uuid;
-  
-        }
-
-        public Beacon(string uuid, int type) : base()
-        {
-            this.UUID = uuid;
-            this.Type = type;
-        }
-
         /// <summary>
-        /// Get Local by Beacon (beacons constructor)
+        /// Get Local by Beacon
         /// </summary>
         /// <param name="uuid"></param>
         /// <param name="typeName"></param>
@@ -56,6 +55,12 @@ namespace ReachUp
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Gets a beacon from its uuid
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <returns>Beacon object</returns>
         public async Task<Beacon> Get(string uuid) 
         {
             if (base.DQLCommand(Procedure.pegarBeacon, ref this.Data,
@@ -87,6 +92,11 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Picks up beacons of a type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns>Beacon object list</returns>
         public async Task<List<Beacon>> GetAll(int type)
         {
             if (base.DQLCommand(Procedure.pegarBeaconsTipo, ref this.Data,
@@ -120,6 +130,13 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Picks up the identification beacons of a local
+        /// </summary>
+        /// <param name="local"></param>
+        /// <returns>Beacon object list</returns>
+        /// <remarks>In a larger and more faithful to reality project scope, a location could have several beacons,
+        /// not just one. The system already supports this possibility, even though it is not portrayed</remarks>
         public async Task<List<Beacon>> ByLocal(int local)
         {
              if (base.DQLCommand(Procedure.pegarBeaconsDeLocal, ref this.Data,
@@ -153,6 +170,11 @@ namespace ReachUp
              return null;
         }
 
+        /// <summary>
+        /// Adds a beacon
+        /// </summary>
+        /// <returns>Bool</returns>
+        /// <remarks>The local id should be non-null</remarks>
         public Task<bool> Add() 
         {
             if (base.DMLCommand(Procedure.cadastrarBeacon,
@@ -167,6 +189,11 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Deletes a beacon
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <returns>Bool</returns>
         public Task<bool> Delete(string uuid) 
         {
             if (base.DMLCommand(Procedure.deletarBeacon, new string[,]{

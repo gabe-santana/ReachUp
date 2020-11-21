@@ -19,18 +19,27 @@ namespace ReachUp
         #endregion
 
         #region Constructor
-        public CommuniqueType() : base() { }
+
+        /// <summary>
+        /// Null constructor
+        /// </summary>
+        public CommuniqueType() : base() {}
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
         public CommuniqueType(int id, string name) : base()
         {
             this.Id = id;
             this.Name = name;
         }
 
-        public CommuniqueType(int id) : base()
-        {
-            this.Id = id;
-        }
-
+        /// <summary>
+        /// Add constructor
+        /// </summary>
+        /// <param name="name"></param>
         public CommuniqueType(string name) : base()
         {
             this.Name = name;
@@ -39,6 +48,11 @@ namespace ReachUp
 
         #region Methods
 
+
+        /// <summary>
+        /// Gets all communique types
+        /// </summary>
+        /// <returns>CommuniqueType object list</returns>
         public Task<List<CommuniqueType>> GetAll()
         {
             if (base.DQLCommand(
@@ -65,6 +79,10 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Registers a new communique type
+        /// </summary>
+        /// <returns>Bool</returns>
         public async Task<bool> Add()
         {
             if (base.DMLCommand(Procedure.adicionarTipo,
@@ -78,6 +96,10 @@ namespace ReachUp
             return false;
         }
 
+        /// <summary>
+        /// Updates a communique type: its name
+        /// </summary>
+        /// <returns>Bool</returns>
         public async Task<bool> Update()
         {
             if (base.DMLCommand(Procedure.atualizarTipo,
@@ -92,6 +114,11 @@ namespace ReachUp
             return false;
         }
         
+        /// <summary>
+        /// Deletes a communique type
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Bool</returns>
         public async Task<bool> Delete(int id)
         {
             if (base.DMLCommand(Procedure.deletarTipo,

@@ -19,18 +19,27 @@ namespace ReachUp
         #endregion
 
         #region Constructor
-        public FeedbackType() : base() { }
+
+        /// <summary>
+        /// Null constructor
+        /// </summary>
+        public FeedbackType() : base() {}
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
         public FeedbackType(int id, string name) : base()
         {
             this.Id = id;
             this.Name = name;
         }
 
-        public FeedbackType(int id) : base()
-        {
-            this.Id = id;
-        }
-
+        /// <summary>
+        /// Add constructor
+        /// </summary>
+        /// <param name="name"></param>
         public FeedbackType(string name) : base()
         {
             this.Name = name;
@@ -39,6 +48,10 @@ namespace ReachUp
 
         #region Methods
 
+        /// <summary>
+        /// Gets all feedback types
+        /// </summary>
+        /// <returns>FeedbackType object list</returns>
         public Task<List<FeedbackType>> GetAll()
         {
             if (base.DQLCommand(
@@ -65,6 +78,10 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Registers a new feedback type
+        /// </summary>
+        /// <returns>Bool</returns>
         public async Task<bool> Add()
         {
             if (base.DMLCommand(Procedure.adicionarTipo,
@@ -78,6 +95,10 @@ namespace ReachUp
             return false;
         }
 
+        /// <summary>
+        /// Updates a feedback type: its name
+        /// </summary>
+        /// <returns>Bool</returns>
         public async Task<bool> Update()
         {
             if (base.DMLCommand(Procedure.atualizarTipo,
@@ -92,6 +113,11 @@ namespace ReachUp
             return false;
         }
 
+        /// <summary>
+        /// Deletes a feedback type
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Bool</returns>
         public async Task<bool> Delete(int id)
         {
             if (base.DMLCommand(Procedure.deletarTipo,

@@ -21,8 +21,19 @@ namespace ReachUp
         #endregion
 
         #region Constructor
-        public Category() : base() { }
 
+        /// <summary>
+        /// Null constructor
+        /// </summary>
+        public Category() : base() {}
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <param name="Name"></param>
+        /// <param name="Description"></param>
+        /// <param name="isSpecial"></param>
         public Category(int Id, string Name, string Description, bool isSpecial) : base() 
         {
             this.CategoryId = Id;
@@ -31,17 +42,17 @@ namespace ReachUp
             this.IsSpecial = isSpecial;
         }
 
-        public Category(int Id, string Name, string Description) : base() 
+        /// <summary>
+        /// Add constructor
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <param name="Description"></param>
+        /// <param name="isSpecial"></param>
+        public Category(string Name, string Description, bool isSpecial) : base() 
         {
-            this.CategoryId = Id;
             this.CategoryName = Name;
             this.CategoryDescription = Description;
-        }
-
-        public Category(string Name, string Description) : base() 
-        {
-            this.CategoryName = Name;
-            this.CategoryDescription = Description;
+            this.IsSpecial = isSpecial;
         }
 
         /// <summary>
@@ -55,6 +66,11 @@ namespace ReachUp
         #endregion
         #region Methods
 
+        /// <summary>
+        /// Gets a category from its ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Category object</returns>
         public Task<Category> Get(int id) 
         {
             if (base.DQLCommand(Procedure.pegarCategoria, ref this.Data,
@@ -85,6 +101,13 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Gets all categories, or all non-special categories
+        /// </summary>
+        /// <param name="isGeneral"></param>
+        /// <returns>Category object list</returns>
+        /// <remarks>"True" parameter returns all categories; "false" returns all non-special categories, that can be 
+        /// chosen by the clients as preferences and associated with targeted promotions<remarks>
         public Task<List<Category>> GetAll(bool isGeneral) 
         {
             if (base.DQLCommand(Procedure.pegarCategorias, ref this.Data,
@@ -117,6 +140,10 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Adds a new category
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> Add() 
         {
             if (base.DMLCommand(Procedure.cadastrarCategoria, new string[,] {
@@ -133,6 +160,10 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Updates a category
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> Update()
         {
            if (base.DMLCommand(Procedure.atualizarCategoria, new string[,] {
@@ -149,6 +180,12 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Deletes a category
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Bool</returns>
+        /// <remarks>Caution: this action performs several chain exclusions</remarks>
         public Task<bool> Delete(int id)
         {
             if (base.DMLCommand(Procedure.removerCategoria, new string[,] {

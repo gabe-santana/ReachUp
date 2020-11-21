@@ -71,7 +71,6 @@ namespace ReachUp
             pegarSubCategoriasComunicado,
             pegarSubcategoriasLocal,
             pegarLocalBeacon,
-            removerHorarioAlternativoLocal,
             recuperarSenha,
             verificarRecuperacaoSenha,
             atualizarSenha,

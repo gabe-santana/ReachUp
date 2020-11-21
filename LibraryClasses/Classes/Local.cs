@@ -30,8 +30,25 @@ namespace ReachUp
         #endregion
 
         #region Constructor
-        public Local() : base() { }
 
+        /// <summary>
+        /// Null constructor
+        /// </summary>
+        public Local() : base() {}
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <param name="typeName"></param>
+        /// <param name="floor"></param>
+        /// <param name="openingHour"></param>
+        /// <param name="closingHour"></param>
+        /// <param name="isAvailable"></param>
+        /// <param name="beaconUUID"></param>
+        /// <param name="alternativeOpeningHours"></param>
         public Local(int id, int type, string name, string typeName, ushort floor, 
           string openingHour, string closingHour, bool isAvailable, string beaconUUID, List<OpeningHours> alternativeOpeningHours = null
        ) : base()
@@ -161,6 +178,11 @@ namespace ReachUp
 
         #region Public Methods
 
+        /// <summary>
+        /// Takes the basic information of a local from its identification beacon
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <returns>Local object</returns>
         public Task<Local> ConnectBeaconLocal(string uuid)
         {
             if (base.DQLCommand(Procedure.conectarBeacon, ref this.Data,
@@ -190,6 +212,12 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Picks up locals from user-client search
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns>Local object list</returns>
+        /// <remarks>Returns only available locations, that are not temporarily banned or something</remarks>
         public Task<List<Local>> Search(string search)
         {
             if (base.DQLCommand(Procedure.pesquisar, ref this.Data,
@@ -227,6 +255,12 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Picks up locals from user-dev or user-admin search
+        /// </summary>
+        /// <param name="search"></param>
+        /// <returns>Local object list</returns>
+        /// <remarks>Returns all found locations</remarks>
         public Task<List<Local>> Seek(string search)
         {
             if (base.DQLCommand(Procedure.pesquisar, ref this.Data,
@@ -261,6 +295,11 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Get a local from its ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Local object</returns>
         public Task<Local> Get(int id)
         {
             if (base.DQLCommand(Procedure.pegarLocal, ref this.Data,
@@ -310,6 +349,11 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Gets locals of a type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns>Local object list</returns>
         public Task<List<Local>> GetAll(int type)
         {
             if (base.DQLCommand(Procedure.pegarLocais, ref this.Data,
@@ -362,6 +406,13 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Checks if a beacon is already registered, from its uuid
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <returns>Boolean</returns>
+        /// <remarks>Use this method to prevent a local from being registered, if the beacon being associated with it already exists. 
+        /// This avoid incomplete registration of the location information.</remarks>
         public Task<string> CheckBeacon(string uuid)
         {
            if (base.DQLCommand(Procedure.checarBeacon, ref this.Data,
@@ -388,6 +439,12 @@ namespace ReachUp
            return Task.FromResult("Erro na verificação de existência do beacon");
         }
 
+        /// <summary>
+        /// Registers a new local
+        /// </summary>
+        /// <returns>Bool</returns>
+        /// <remarks>Alternate opening hours are added, on all weekdays, with the standard opening hours.
+        /// This avoids errors in other actions of the system</remarks>
         public Task<bool> Add()
         {
             if (base.DMLCommand(Procedure.cadastrarLocal, 
@@ -404,6 +461,11 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Updates the local's alternate opening hours, on a specific weekday
+        /// </summary>
+        /// <returns>Bool</returns>
+        /// <remarks>The old alternate opening hours of the local on this weekday is deleted</remarks>
         public Task<bool> AddOpHours()
         {
             if (base.DMLCommand(Procedure.defHorarioAlternativoLocal,
@@ -419,6 +481,10 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Updates the local: type, name, floor and standard opening hours
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> Update()
         {
             if (base.DMLCommand(Procedure.atualizarLocal,
@@ -436,6 +502,12 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Gets the local's alternate opening hours on a weekday
+        /// </summary>
+        /// <param name="local"></param>
+        /// <param name="weekDay"></param>
+        /// <returns>OpeningHours object</returns>
         public Task<OpeningHours> FetchOpHours(int local, int weekDay)
         {
             if (base.DQLCommand(Procedure.buscarHorarioAlternativoLocal, ref this.Data,
@@ -466,20 +538,16 @@ namespace ReachUp
             }
             return null;
         }
-
-        public Task<bool> DeleteOpHours(int local, int weekDay)
-        {
-            if (base.DMLCommand(Procedure.removerHorarioAlternativoLocal,
-               new string[,] {
-                {"pLocal", local.ToString()},
-                {"pDia", weekDay.ToString()}
-               }))
-            {
-               return Task.FromResult(true);
-            }
-            return Task.FromResult(false);
-        }
-
+        
+        /// <summary>
+        /// Deletes a location from its ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Bool</returns>
+        /// <remarks>This action may only be done when removing the beacon from a physical space in the mall, 
+        /// without putting a new one in place, as the area will no longer be used. To change the local that owns
+        /// the physical space, use the "Update" method. To change the location identification beacon, use the
+        /// Beacon class addition method, after removing the old beacon.</remarks>
         public Task<bool> Delete(int id) 
         {
             if (base.DMLCommand(Procedure.deletarLocal,
@@ -493,6 +561,11 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Adds subcategories to a local
+        /// </summary>
+        /// <returns>Bool</returns>
+        /// <remarks>This action should be performed after registering the location, or changing the establishiment that owns it</remarks>
         public Task<bool> AddSubCategories()
         {
             for (int i = 0; i < this.SubCategories.Count; i++)
@@ -510,6 +583,14 @@ namespace ReachUp
             return Task.FromResult(true);
         }
 
+        /// <summary>
+        /// Delete a subcategory from a local
+        /// </summary>
+        /// <param name="local"></param>
+        /// <param name="category"></param>
+        /// <param name="subCategory"></param>
+        /// <returns>Bool</returns>
+        /// <remarks>This action should be performed after changing the establishiment that owns the location</remarks>
         public Task<bool> DeleteSubCategory(int local, int category, int subCategory)
         {
              if (base.DMLCommand(Procedure.removerSubCategoriaLocal, 
@@ -524,6 +605,12 @@ namespace ReachUp
                 return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Gets the administrators of a local
+        /// </summary>
+        /// <param name="local"></param>
+        /// <returns>User object list</returns>
+        /// <remarks>Reminder: only shopkeepers can be connected to a location; the mall administrators does not have this explicit relationship</remarks>
         public Task<List<User>> GetAdmins(int local)
         {
              if (base.DQLCommand(Procedure.lojistasLoja, ref this.Data,
@@ -554,6 +641,13 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Connects a shopkeeper to a local
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="local"></param>
+        /// <returns>Bool</returns>
+        /// <remarks>This action should be performed after registering the shopkeeper</remarks>
         public Task<bool> ConnectAdmin(string email, int local)
         {
             if (base.DMLCommand(Procedure.darAdm, 
@@ -567,6 +661,11 @@ namespace ReachUp
                 return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Updates the availability status of a local (banned or not), according to the current state
+        /// </summary>
+        /// <param name="local"></param>
+        /// <returns>Bool</returns>
         public Task<bool> UpdateAvailability(int local)
         {
             if (base.DMLCommand(Procedure.editarDisponibilidadeLocal, 

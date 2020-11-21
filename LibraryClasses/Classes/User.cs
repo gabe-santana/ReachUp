@@ -30,9 +30,7 @@ namespace ReachUp
         /// <summary>
         /// Null Constructor
         /// </summary>
-        public User()
-          : base()
-        { }
+        public User() : base() {}
 
         /// <summary>
         /// SignIn constructor
@@ -83,6 +81,12 @@ namespace ReachUp
 
         #region Public Methods
 
+        /// <summary>
+        /// Checks if a user exists
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="role"></param>
+        /// <returns>Bool</returns>
         public async Task<bool> CheckEmail(string email, string role)
         {
             if (base.DQLCommand(Procedure.checarEmail, ref this.Data, 
@@ -109,6 +113,10 @@ namespace ReachUp
             return false;
         }
 
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <returns>Bool</returns>
         public async Task<bool> Login() 
         {
             if (base.DQLCommand(Procedure.logarUsuario,
@@ -135,6 +143,11 @@ namespace ReachUp
             return false;
         }
 
+        /// <summary>
+        /// Gets the local a shopkeeper is associated with
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>Local object</returns>
         public async Task<Local> GetShopkeeperLocal(string email)
         {
             if (base.DQLCommand(Procedure.pegarLocalLojista, ref this.Data,
@@ -162,6 +175,11 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Generates a password recovery GUID code and sends it by e-mail 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>Bool</returns>
         public async Task<bool> RecoverPassword(string email)
         {
            string cod = GenerateGuidCode();
@@ -187,6 +205,12 @@ namespace ReachUp
             return false;
         }
 
+        /// <summary>
+        /// Checks if a password recovery code exists and is still valid
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="cod"></param>
+        /// <returns>Bool</returns>
         public async Task<bool> TryUpdatePassword(string email, string cod)
         {
             if (base.DQLCommand(Procedure.verificarRecuperacaoSenha,
@@ -213,6 +237,13 @@ namespace ReachUp
             return false;
         }
 
+        /// <summary>
+        /// Updates a user' password
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="role"></param>
+        /// <param name="password"></param>
+        /// <returns>Bool</returns>
         public async Task<bool> UpdatePassword(string email, string role, string password)
         {
            if(base.DMLCommand(Procedure.atualizarSenha, new string[,] {
@@ -226,6 +257,11 @@ namespace ReachUp
            return false;
         }
 
+        /// <summary>
+        /// Get all users of a role
+        /// </summary>
+        /// <param name="role"></param>
+        /// <returns>User object list</returns>
         public async Task<List<User>> GetAll(string role)
         {
     
@@ -263,6 +299,12 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Gets a user
+        /// </summary>
+        /// <param name="role"></param>
+        /// <param name="email"></param>
+        /// <returns>User object</returns>
         public async Task<User> Get(string role, string email)
         {
             if (base.DQLCommand(Procedure.pegarUsuario, ref this.Data,
@@ -297,6 +339,10 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Registers a user
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> Add()
         {
             int IdLocal;
@@ -317,6 +363,10 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Updates a user
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> Update() 
         {
             if (base.DMLCommand(Procedure.atualizarUsuario,
@@ -331,6 +381,12 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Deletes a user
+        /// </summary>
+        /// <param name="role"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public Task<bool> Delete(string role, string email)
         {
             if (base.DMLCommand(Procedure.deletarUsuario,

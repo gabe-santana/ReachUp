@@ -25,8 +25,20 @@ namespace ReachUp
         #endregion
 
         #region Constructor
-        public Feedback() : base() { }
 
+        /// <summary>
+        /// Null constructor
+        /// </summary>
+        public Feedback() : base() {}
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="FeedbackUser"></param>
+        /// <param name="Description"></param>
+        /// <param name="FeedbackDate"></param>
+        /// <param name="Stars"></param>
+        /// <param name="type"></param>>
         public Feedback(User FeedbackUser, string Description, string FeedbackDate,
              ushort Stars, ushort type) : base()
         {
@@ -109,6 +121,12 @@ namespace ReachUp
         #endregion
 
         #region Methods
+
+        /// <summary>
+        /// Gets all feedbacks of a type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns>Feedback object list</returns>
         public async Task<List<Feedback>> GetAll(int type)
         {
             if (base.DQLCommand(Procedure.acessoFeedbacks, ref this.Data,
@@ -144,6 +162,13 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Gets all feedbacks of a type, that were made within a period of time
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="begin"></param>
+        /// <param name="end"></param>
+        /// <returns>Feedback object list</returns>
         public async Task<List<Feedback>> ByDate(int type, string begin, string end)
         {
             if (base.DQLCommand(Procedure.acessoFeedbacks, ref this.Data,
@@ -179,6 +204,11 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Gets all feedbacks of a client
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>Feedback object list</returns>
         public async Task<List<Feedback>> ByUser(string email) 
         {
             if (base.DQLCommand(Procedure.FeedbackPorCliente, ref this.Data, new string[,] {
@@ -214,6 +244,12 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Gets a feedback from its concatenated key
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <returns>Feedback object</returns>
         public async Task<Feedback> Get(int id, int type) 
         {
             if (base.DQLCommand(Procedure.pegarFeedback, ref this.Data, new string[,] {
@@ -245,6 +281,10 @@ namespace ReachUp
             return null;
         }
 
+        /// <summary>
+        /// Registers a feedback
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> Add() 
         {
             if (base.DMLCommand(Procedure.criarFeedback, new string[,] {
@@ -259,6 +299,10 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Updates a feedback
+        /// </summary>
+        /// <returns>Bool</returns>
         public Task<bool> Update()
         {
             if (base.DMLCommand(Procedure.atualizarFeedback, new string[,] {
@@ -273,6 +317,12 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
+        /// <summary>
+        /// Deletes a feedback
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="type"></param>
+        /// <returns>Bool</returns>
         public Task<bool> Delete(int id, int type)
         {
             if (base.DMLCommand(Procedure.deletarFeedback, new string[,] {

@@ -19,18 +19,27 @@ namespace ReachUp
         #endregion
 
         #region Constructor
-        public AdmType() : base() { }
+
+        /// <summary>
+        /// Null constructor
+        /// </summary>
+        public AdmType() : base() {}
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
         public AdmType(int id, string name) : base()
         {
             this.Id = id;
             this.Name = name;
         }
 
-        public AdmType(int id) : base()
-        {
-            this.Id = id;
-        }
-
+        /// <summary>
+        /// Add constructor
+        /// </summary>
+        /// <param name="name"></param>
         public AdmType(string name) : base()
         {
             this.Name = name;
