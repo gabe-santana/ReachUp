@@ -90,18 +90,6 @@ namespace ReachUpWebAPI.Controllers
         }
  
         // OK 
-        [Authorize]
-        [HttpDelete("DeleteOpHours")]
-        public async Task<IActionResult> DeleteOpHours(int local, int weekDay)
-        {
-            if (!string.IsNullOrWhiteSpace(local.ToString()) 
-               && !string.IsNullOrWhiteSpace(weekDay.ToString())
-               )
-                return Ok(await new Local().DeleteOpHours(local, weekDay));
-            return BadRequest("Parameters are null");
-        }
-
-        // OK 
         [Authorize(Roles="")]
         [HttpGet("CheckBeacon")]
         public async Task<IActionResult> CheckBeacon(string uuid)

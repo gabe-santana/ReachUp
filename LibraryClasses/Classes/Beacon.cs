@@ -14,6 +14,7 @@ namespace ReachUp
         public int Type { get; set; }
         public string UUID { get; set; }
         public Local LocalBeacon { get; set; }
+        public Box BoxBeacon {get; set; }
 
         [JsonIgnore] public string TypeName {get; set; }
         #endregion
@@ -43,6 +44,20 @@ namespace ReachUp
         }
 
         /// <summary>
+        /// Add constructor
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <param name="type"></param>
+        /// <param name="box"></param>
+        /// <returns></returns>
+        public Beacon(string uuid, int type, Box box) : base()
+        {
+            this.UUID = uuid;
+            this.Type = type;
+            this.BoxBeacon = box;
+        }
+
+        /// <summary>
         /// Get Local by Beacon
         /// </summary>
         /// <param name="uuid"></param>
@@ -51,6 +66,17 @@ namespace ReachUp
         {
             this.UUID = uuid;
             this.TypeName = typeName;
+        }
+
+        /// <summary>
+        /// Constructor used in the Box class, on GetByLocal method
+        /// </summary>
+        /// <param name="uuid"></param>
+        /// <param name="type"></param>
+        public Beacon(string uuid, int type)
+        {
+            this.UUID = uuid;
+            this.Type = type;
         }
         #endregion
 
@@ -174,13 +200,13 @@ namespace ReachUp
         /// Adds a beacon
         /// </summary>
         /// <returns>Bool</returns>
-        /// <remarks>The local id should be non-null</remarks>
+        /// <remarks>The box id should be non-null</remarks>
         public Task<bool> Add() 
         {
             if (base.DMLCommand(Procedure.cadastrarBeacon,
                 new string[,] {
                     {"pUUID" , this.UUID}, {"pTipo", this.Type.ToString()},
-                    {"pLocal", this.LocalBeacon.IdLocal.ToString()}
+                    {"pBox", this.BoxBeacon.Id.ToString()}
                  }
                 ))
             {

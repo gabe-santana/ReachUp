@@ -50,7 +50,7 @@ namespace ReachUp
         /// <param name="beaconUUID"></param>
         /// <param name="alternativeOpeningHours"></param>
         public Local(int id, int type, string name, string typeName, ushort floor, 
-          string openingHour, string closingHour, bool isAvailable, string beaconUUID, List<OpeningHours> alternativeOpeningHours = null
+          string openingHour, string closingHour, bool isAvailable, List<OpeningHours> alternativeOpeningHours = null
        ) : base()
         {
             this.IdLocal = id;
@@ -61,7 +61,6 @@ namespace ReachUp
             this.OpeningHour = openingHour;
             this.ClosingHour = closingHour;
             this.IsAvailable = isAvailable;
-            this.BeaconUUID = beaconUUID;
             this.AlternativeOpeningHours = alternativeOpeningHours;
         }
 
@@ -116,9 +115,8 @@ namespace ReachUp
         /// <param name="floor"></param>
         /// <param name="openingHour"></param>
         /// <param name="closingHour"></param>
-        /// <param name="beaconUUID"></param>
         public Local(int type, string name, ushort floor, 
-        string openingHour, string closingHour, string beaconUUID) 
+        string openingHour, string closingHour) 
         :base()
         {
            this.Type = type;
@@ -126,7 +124,6 @@ namespace ReachUp
            this.Floor = floor;
            this.OpeningHour = openingHour; 
            this.ClosingHour = closingHour; 
-           this.BeaconUUID = beaconUUID;
         }
 
         /// <summary>
@@ -335,7 +332,6 @@ namespace ReachUp
                             this.Data["hr_abertura"].ToString(),
                             this.Data["hr_fechamento"].ToString(),
                             Convert.ToBoolean(this.Data["ic_disponivel"].ToString()),
-                            this.Data["cd_uuid_beacon"].ToString(),
                             alternativeOpHours
                            );
                     }
@@ -391,7 +387,6 @@ namespace ReachUp
                             this.Data["hr_abertura"].ToString(),
                             this.Data["hr_fechamento"].ToString(),
                             Convert.ToBoolean(this.Data["ic_disponivel"].ToString()),
-                            this.Data["cd_uuid_beacon"].ToString(),
                             alternativeOpHours
                             )
                         );
@@ -452,8 +447,7 @@ namespace ReachUp
                     {"pTipo", this.Type.ToString()}, {"pNome", this.Name },
                     {"pAndar", this.Floor.ToString()},
                     {"pAbertura", this.OpeningHour},
-                    {"pFechamento", this.ClosingHour},
-                    {"pUUIDBeacon", this.BeaconUUID }
+                    {"pFechamento", this.ClosingHour}
                 }))
             {
                 return Task.FromResult(true);
