@@ -138,6 +138,36 @@ body {
   margin-right: 10px;
 }
 
+#arrumado{
+  margin-right: 500px;
+  margin-left: 20px;
+}
+
+#saidae{
+  float: right;
+}
+
+#saidae2{
+  float: right;
+  margin-right: 15px;
+}
+
+#saidae3{
+  margin-top: 25px;
+}
+
+#saidae4{
+  margin-top: 0px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+#saidae5{
+  margin-top: 25px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
 #centro{
   margin-left: 43%;
   background-color: white;
@@ -156,8 +186,37 @@ body {
   border-color: white;
 }
 
-  #branco{
+#branco{
   background-color: white;
   color: black;
   border-color: white;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-right: 100px;
+  margin-left: 100px;
+  padding: 50px;
+}
+
+.icone{
+  float: right;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+@media screen and (max-width: 1000px) {
+   #branco{
+    margin-left: 5px;
+    margin-right: 5px;
+   }
+
+#barra{
+  width: 60%;
+}
+
+#btnResponsa{
+  width: 40%;
+}
+
 }
