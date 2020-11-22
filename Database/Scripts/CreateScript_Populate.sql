@@ -398,328 +398,809 @@ CALL criarFeedback(0, "fabianacruz@email.com", "As cabines dos banheiros são ap
 
 
 /* Não existe */
-CALL cadastrarLocal(0, "Livraria Praiamar Shopping ",  1,  '09:25:00', '19:35:00', "77ab0e0c-f928-11ea-eee1-0242ac120002");
+CALL cadastrarLocal(0, "Livraria Praiamar Shopping ",  1,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Praiamar", 0, "77ab0e0c-f928-11ea-eee1-0242ac120002");
 
 
-CALL cadastrarLocal(0, "Livraria Saraiva",  3, '10:00:00', '20:00:00',"adeafe8a-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "Livraria Saraiva",  3, '10:00:00', '20:00:00');
+CALL cadastrarBox("Box 1 Saraiva", 1, "adeafe8a-f928-11ea-adc1-0242ac120002");
 
 /* Não existem */
-CALL cadastrarLocal(0, "Livraria Cultura",  2, '11:00:00', '18:59:59',"7beafe8a-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Livraria Nobel",  1, '10:00:00', '17:59:59',"7deace8a-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Livraria Martins Fontes",  1, '10:00:00', '22:59:59',"fdeafe8a-f928-11ea-adc1-0242ac120002");	
-CALL cadastrarLocal(0, "Lojas Americanas",  0, '09:00:00', '22:30:00', "7deaf908-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "Livraria Cultura",  2, '11:00:00', '18:59:59');
+CALL cadastrarBox("Box 1 Livraria Cultura", 2, "7beafe8a-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Livraria Nobel",  1, '10:00:00', '17:59:59');
+CALL cadastrarBox("Box 1 Livraria Nobel", 3, "7deace8a-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Livraria Martins Fontes",  1, '10:00:00', '22:59:59');	
+CALL cadastrarBox("Box 1 Martins Fontes", 4, "fdeafe8a-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Lojas Americanas",  0, '09:00:00', '22:30:00');
+CALL cadastrarBox("Box 1 Americanas", 5, "7deaf908-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Rihappy",  2, '12:00:00', '20:00:00');
+CALL cadastrarBox("Box 1 Rihappy", 6, "7deafb92-f928-11ea-adc1-0242ac120002");
 
 
-CALL cadastrarLocal(0, "Rihappy",  2, '12:00:00', '20:00:00', "7deafb92-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "Samsung",  1, '12:00:00', '20:00:00');
+CALL cadastrarBox("Box 1 Samsung", 7, "7deafd68-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "MM Santos",  0, '10:00:00', '22:00:00');
+CALL cadastrarBox("Box 1 MM Santos", 8, "7deaff8e-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Life's Good LG",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Life's Good LG", 9, "7deb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Shoulder",  1, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Shoulder", 10, "7deb1582-f928-11ea-adc1-0242ac12000a");
+
+CALL cadastrarLocal(0, "Havaianas",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Havaianas", 11, "7deb1582-f928-11ea-adc1-0242ac1200a2");
+
+CALL cadastrarLocal(0, "Carmen Steffens",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Carmen Steffens", 12, "7deb1582-f928-11ea-adc1-0242aa120002");
+
+CALL cadastrarLocal(0, "Sthill",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Sthill", 13, "7deb1582-f928-11ea-adc1-0242ac1a0002");
+
+CALL cadastrarLocal(0, "SPOT",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 SPOT", 14, "7deb1582-f928-11ea-adc1-024bac120002");
+
+
+CALL cadastrarLocal(0, "Mahogany",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Mahogany", 15, "7deb1582-f928-11ea-adca-0242ac120002");
+
+
+CALL cadastrarLocal(0, "Program Moda",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Program Moda", 16, "7deb1582-f928-a1ea-adc1-0242ac120002");
+
+
+CALL cadastrarLocal(0, "Belliótica",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Belliótica", 17,  "7deb1582-f928-11aa-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Mão Única",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Mão Única", 18, "7deb1582-fa28-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Pontal",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Pontal", 19, "7deb1592-fab8-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Stilleto",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Stilleto", 20, "7deb15a2-f928-11ea-adc1-0242ac120002");
+
+
+CALL cadastrarLocal(0, "Clube Melissa",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Clube Melissa", 21, "adeb1582-f928-11ea-adc1-0242ac120002");
+
+
+CALL cadastrarLocal(0, "Hawaii Surf Point",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Hawaii Surf Point", 22, "7ceb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "RetrôMania",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 RetrôMania", 23, "7deb1582-fc28-11ea-adc1-0242ac120002");
+
+
+CALL cadastrarLocal(0, "Reserva",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Reserva", 24, "7deb1582-f92c-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Polo Play",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Polo Play", 25, "7debf58a-fc28-11ea-adc1-0242ac120002");
+
+
+CALL cadastrarLocal(0, "Maybelline NY",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Maybelline NY", 26, "7dcb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Arezzo",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Arezzo", 27, "7deb1582-f928-11ea-adc1-1242ac120002");
+
+
+CALL cadastrarLocal(0, "Authentic Feet",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Authentic Feet", 28, "7deb1582-f928-11ea-2dc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Tennis Station",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Tennis Station", 29, "7deb1582-f928-11ea-a3c1-0242ac120002");
+
+CALL cadastrarLocal(0, "Piticas",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Piticas", 30, "7deb1582-f928-11ea-adc1-02424c160002");
+
+CALL cadastrarLocal(0, "Casa das Cuecas",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Casa das Cuecas", 31, "7deb1582-f928-11ea-5dc1-0262ac120002");
+
+CALL cadastrarLocal(0, "Puket",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Puket", 32, "7deb1582-f928-11ea-adc1-0242ac1c0a02");
+
+CALL cadastrarLocal(0, "Brooksfield",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Brooksfield", 33, "7deb1582-f928-11ea-adc1-024dac120002");
+
+CALL cadastrarLocal(0, "Sapataria do Futuro",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Sapataria do Futuro", 34,  "7deb1582-f928-11ea-fdc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Coisas da Casa",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Coisas da Casa", 35, "7deb1582-fe28-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Simplesmente Bárbara",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Simplesmente Bárbara", 36, "7deb1582-f928-11ef-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Fast Shop",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Fast Shop", 37, "7deb1582-19e8-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "A Esportiva",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 A Esportiva", 38, "1deb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Cacau Show",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Cacau Show", 39, "2deb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "LOFT",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 LOFT", 40, "3deb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Relicário",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Relicário", 41, "4deb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Andisport Futebol",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Andisport Futebol", 42, "5deb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Le Postiche",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Le Postiche", 43, "6deb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Crocs",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Crocs", 44, "afeb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Criatiff",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Criatiff", 45, "faeb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Bluebeach",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Bluebeach", 46, "afeb1513-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "SIDE WALK",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 SIDE WALK", 47,  "bdeb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Usaflex",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Usaflex", 48, "cdeb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Beautybox",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Beautybox", 49, "ddeb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Kyowa",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Kyowa", 50, "edeb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Chilli Beans",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Chilli Beans", 51, "fdeb1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Adcos",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Adcos", 52, "456a1582-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "PUC",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 PUC", 53, "7deba5ff-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "M&M Santos",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 M&M Santos", 54, "7ffabc82-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Maze",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Maze", 55, "7deb1581-aaf8-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(7, "Estúdio de Sombrancelha",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Estúdio de Sombrancelha", 56, "faeb1582-f928-11ea-adc1-0242ac120005");
+
+CALL cadastrarLocal(0, "Quem disse, Berenice?",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Quem disse, Berenice?", 57, "7deb1582-f928-11ea-adc1-0242ac120004");
+
+CALL cadastrarLocal(7, "AngioCorpore",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 AngioCorpore", 58, "7deb1582-f928-11ea-adc1-0242ac120003");
+
+CALL cadastrarLocal(0, "O'Clus Personal Ótica",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 O'Clus Personal Ótica", 59, "7deb1582-f928-11ea-adc1-0242ac1200a0");
+
+CALL cadastrarLocal(0, "Fabiana Zaitun",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Fabiana Zaitun", 60, "7deb1582-f928-11ea-adc1-0242ac1200b0");
+
+CALL cadastrarLocal(7, "Doctor Feet",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Doctor Feet", 61, "7deb1582-f928-11ea-adc1-0242ac120ba2");
+
+CALL cadastrarLocal(0, "Nutty Bavarian",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Nutty Bavarian", 62,  "7deb1582-f928-11ea-adc1-0242ac12af04");
+
+CALL cadastrarLocal(0, "L'Occitane en Provence",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 L'Occitane en Provence", 63, "7deb1582-f928-11ea-adc1-0242ac1e0002");
+
+CALL cadastrarLocal(0, "Planet Girls",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Planet Girls", 64, "7deb1582-f928-11ea-adc1-0242ac150ab2");
+
+CALL cadastrarLocal(0, "Kopenhagen",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Kopenhagen", 65, "7deb1582-f928-11ea-adc1-0242ac140202");
+
+CALL cadastrarLocal(0, "Mr. CAT",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Mr. CAT", 66, "7deb1582-f928-11ea-adc1-0242ac120ffa");
+
+CALL cadastrarLocal(0, "Club Pitanga",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Club Pitanga", 67, "7deb1582-f928-11ea-adc1-0242ac177002");
+
+CALL cadastrarLocal(0, "Mega Body Store",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Mega Body Store", 68, "7deb1582-f928-11ea-adc1-0242ac120077");
+
+CALL cadastrarLocal(0, "Regalo's",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Regalo's", 69, "7deb1582-f928-11ea-adc1-0242ac12077a");
+
+CALL cadastrarLocal(0, "Relojoaria Zenith",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Relojoaria Zenith", 70, "7deb1582-f928-11ea-adc1-0242ba120502");
+
+CALL cadastrarLocal(0, "John John",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 John John", 71, "7deb1582-f928-11ea-adc1-0242ac1200ff");
+
+CALL cadastrarLocal(0, "Cia Marítima",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Cia Marítima", 72, "7deb1582-f928-11ea-adc1-0242ac12a002");
+
+CALL cadastrarLocal(7, "Claro",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Claro", 73, "7deb00e2-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(7, "Vivo",  1, '12:15:00', '20:45:00');
+CALL cadastrarBox("Box 1 Vivo", 74,  "7deb022c-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(7, "Oi",  2, '08:00:00', '23:30:00');
+CALL cadastrarBox("Box 1 Oi", 75, "7deb033a-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(7, "Nextel",  2, '08:00:00', '23:30:00');
+CALL cadastrarBox("Box 1 Nextel", 76, "7deb033a-f928-11ea-adc1-ffa2ac120002");
+
+CALL cadastrarLocal(0, "Bibi Calçados",  0, '10:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Bibi Calçados", 77, "7deb16ae-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(1, "McDonald's Sorveteria",  0, '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 McDonald's Sorveteria", 78, "7deb06be-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(7, "Banco Caixa",  0, '09:00:00', '22:30:00');
+CALL cadastrarBox("Box 1 Banco Caixa", 79, "7deb1442-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(7, "Banco Itaú",  0,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Banco Itaú", 80, "7deb132a-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(7, "Banco do Brasil",  1,  '11:00:00', '21:30:00');
+CALL cadastrarBox("Box 1 Banco do Brasil", 81, "ab7b132a-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(7, "Banco Pan",  1,  '09:25:00', '21:00:00');
+CALL cadastrarBox("Box 1 Banco Pan", 82, "7deb132a-f928-1e77-adc1-0242ac120002");
+
+CALL cadastrarLocal(7, "Lotérica Praiamar Shopping",  0,  '09:25:00', '18:00:00');
+CALL cadastrarBox("Box 1 Lotérica Praiamar Shopping", 83, "ac7b132a-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(1, "Cafeteria Praiamar Shopping",  0,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Cafeteria Praiamar Shopping", 84, "7deb1244-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(1, "Padaria Praiamar Shopping",  0,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Padaria Praiamar Shopping", 85, "7deb1104-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Carrefour",  0,  '08:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Carrefour", 86, "7deb0fb0-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(2, "Livraria Praiamar Shopping",  0,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Livraria Praiamar Shopping", 87, "7deb0e0c-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(3, "Banheiro Praiamar Shopping | Térreo",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Banheiro Praiamar Shopping | Térreo", 88, "7deb0cfe-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(3, "Bebedouro Praiamar Shopping | Térreo",  0,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Bebedouro Praiamar Shopping | Térreo", 89, "7deb0ba0-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | Térreo",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Escada Fixa Praiamar Shopping | Térreo", 90, "7deb0cf1-a928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(4, "Escada Rolante Praiamar Shopping | Térreo",  0,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Escada Rolante Praiamar Shopping | Térreo", 91, "7deb0ba1-a928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(5, "Elevador Praiamar Shopping | Térreo",  0,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Elevador Praiamar Shopping | Térreo", 92, "7deb0ba0-f921-a1ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0, "Adidas ",  1,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Adidas", 93, "7deb0bd0-f928-11ea-adc1-0242ac120092");
+
+CALL cadastrarLocal(7, "CVC",  1,  '09:25:00', '20:35:00');
+CALL cadastrarBox("Box 1 CVC", 94, "7deb0bd0-f9d8-11ea-adc1-0242ac120092");
+
+CALL cadastrarLocal(0, "Apple",  1,  '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Apple", 95, "7daa0bd0-f9d8-11ea-adc1-0242ac121092");
+
+CALL cadastrarLocal(7, "Club Men Salon",  1,  '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Club Men Salon", 96, "9daa0bd0-f9d8-11ea-adc1-0242ac121092");
+
+CALL cadastrarLocal(0, "Riachuelo",  1,  '09:00:00', '23:35:00');
+CALL cadastrarBox("Box 1 Riachuelo", 97, "9ffacad0-a1d8-19ea-adc1-0242bc121092");
+
+
+CALL cadastrarLocal(0, "Renner",  1,  '09:30:00', '23:35:00');
+CALL cadastrarBox("Box 1 Renner", 98, "9ffacad0-a1d8-1bea-adc1-0a42cd121092");
+
+CALL cadastrarLocal(0, "Drogaria São Paulo",  1,  '08:35:00', '19:35:00');
+CALL cadastrarBox("Box 1 Drogaria São Paulo", 99, "9ffacad0-a1a8-1bea-adc1-0a4aad121092");
+
+CALL cadastrarLocal(0, "Dudalina",  1,  '08:35:00', '19:35:00');
+CALL cadastrarBox("Box 1 Dudalina", 100, "9ffacad0-a1a8-1bea-fff1-0a4aad121092");
+
+CALL cadastrarLocal(1, "Fom - Quiosque",  1,  '08:35:00', '19:35:00');
+CALL cadastrarBox("Box 1 Fom - Quiosque", 101, "9afacad0-a1a8-1bfa-aab1-0a4aaf121090");
+
+CALL cadastrarLocal(3, "Banheiro Praiamar Shopping | 1º Andar",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Banheiro Praiamar Shopping | 1º Andar", 102, "9deb0cfe-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(3, "Bebedouro Praiamar Shopping | 1º Andar",  1,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Bebedouro Praiamar Shopping | 1º Andar", 103, "adeb0ba0-f928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | 1º Andar",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Escada Fixa Praiamar Shopping | 1º Andar", 104, "adeb0cf1-a928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(4, "Escada Rolante Praiamar Shopping | 1º Andar",  1,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Escada Rolante Praiamar Shopping | 1º Andar", 105, "adeb0ba1-a928-11ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(5, "Elevador Praiamar Shopping | 1º Andar",  1,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Elevador Praiamar Shopping | 1º Andar", 106, "adeb0ba0-f921-a1ea-adc1-0242ac120002");
+
+CALL cadastrarLocal(0,  "Polishop",  2,  '08:35:00', '23:35:00');
+CALL cadastrarBox("Box 1 Polishop", 107, "7affdbb0-a1a8-1afa-bdbf-ba4bff121091");
+
+CALL cadastrarLocal(3, "Banheiro Praiamar Shopping | 2º Andar",  2,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Banheiro Praiamar Shopping | 2º Andar", 108, "9deb0cfe-f928-11ea-adc1-0242ac120012");
+
+CALL cadastrarLocal(3, "Bebedouro Praiamar Shopping | 2º Andar",  2,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Bebedouro Praiamar Shopping | 2º Andar", 109,  "adeb0ba0-f928-11ea-adc1-0242ac120022");
+
+CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | 2º Andar",  2,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Escada Fixa Praiamar Shopping | 2º Andar", 110, "adeb0cf1-a928-11ea-adc1-0242ac120032");
+
+CALL cadastrarLocal(4, "Escada Rolante Praiamar Shopping | 2º Andar",  2,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Escada Rolante Praiamar Shopping | 2º Andar", 111, "adeb0ba1-a928-11ea-adc1-0242ac120042");
+
+CALL cadastrarLocal(5, "Elevador Praiamar Shopping | 2º Andar",  2,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Elevador Praiamar Shopping | 2º Andar", 112, "adeb0ba0-f921-a1ea-adc1-0242ac120052");
 
 
 
-CALL cadastrarLocal(0, "Samsung",  1, '12:00:00', '20:00:00', "7deafd68-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(1, "McDonald's",  3,  '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 McDonald's", 113, "adeb0ba0-f921-affa-adc1-0242ac120052");
+
+CALL cadastrarLocal(1, "Burger King",  3,  '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Burger King", 114, "affb0ba0-f921-affa-adc1-0242ac120052");
+
+CALL cadastrarLocal(1, "Subway",  3,  '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Subway", 115, "ffacdba0-f921-affa-adc1-0242ac120052");
+
+CALL cadastrarLocal(1, "Burger + | Rizzo",  3,  '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Burger + | Rizzo", 116, "adeffba0-f921-affa-adc1-0242ac120052");
+
+CALL cadastrarLocal(1, "Giraffa's",  3,  '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Giraffa's", 117, "adefaaa0-f921-affa-adc1-0342ac120052");
+
+CALL cadastrarLocal(1, "Rockabilly",  3,  '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Rockabilly", 118, "adefab10-f921-affa-adc1-0342ac120052");
+
+CALL cadastrarLocal(1,"Outback", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Outback", 119, "adef2310-f9a1-eeb1-ee21-0342ac120052");
+
+CALL cadastrarLocal(1,"Mania de Churrasco Prime Steak House", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Mania de Churrasco Prime Steak House", 120, "adef2310-faf1-bdb1-a121-0342ac120052");
+
+CALL cadastrarLocal(1,"Mania de Churrasco", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Mania de Churrasco", 121, "adrf2310-faf1-bdb1-a121-0342ac120052");
+
+CALL cadastrarLocal(1,"Spoleto", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Spoleto", 122, "adef2310-f961-bdb1-a1ff-0342ac120052");
+
+CALL cadastrarLocal(1,"Bom D+", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Bom D+", 123, "adefc310-f921-bdb1-a121-0342ac120152");
+
+CALL cadastrarLocal(1,"All Beef's", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 All Beef's", 124, "adef2310-c921-bdb1-a124-0342ac120052");
+
+CALL cadastrarLocal(1,"Patroni Premium", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Patroni Premium", 125, "adef2310-fa21-bdw1-a121-0342ac120052");
+
+CALL cadastrarLocal(1,"Liliana Pasta & Pizza", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Liliana Pasta & Pizza", 126, "adef231a-f521-bdb1-a121-0342ac120052");
+
+CALL cadastrarLocal(1,"Máfia di Pasta", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Máfia di Pasta", 127, "adef271a-f921-bdb1-a121-0342ac120052");
+
+CALL cadastrarLocal(1,"Vivenda do Camarão", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Vivenda do Camarão", 128, "adaf2310-f921-bdb2-a121-0342ac120052");
+
+CALL cadastrarLocal(1,"Divino Fogão", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Divino Fogão", 129, "adef2310-f921-adb1-a421-0342ac120052");
+
+CALL cadastrarLocal(0,"Divino Grão", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Divino Grão", 130, "adef2310-f921-adb1-a121-0342ac120057");
+
+CALL cadastrarLocal(1,"Pizza Hut", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Pizza Hut", 131, "adef2310-f928-bda1-a121-0342ac120052");
+
+CALL cadastrarLocal(1,"Haru", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Haru", 132, "adef2310-f921-bqa1-a121-0342ac120052");
+
+CALL cadastrarLocal(1,"Gendai", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Gendai", 133, "adef2310-f921-bda1-a161-0342ac120052");
+
+CALL cadastrarLocal(1,"Saluá Esfihas", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Saluá Esfihas", 134, "adef2310-f921-bda1-a121-0342sc120052");
+
+CALL cadastrarLocal(1,"Tottene", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Tottene", 135,  "adef2310-f921-bda1-a121-0362ac120052");
+
+CALL cadastrarLocal(1,"Bacio di Latte", 3, '09:25:00', '23:35:00');
+CALL cadastrarBox("Box 1 Bacio di Latte", 136, "adef2310-f921-bda1-a131-0342ac120052");
+
+CALL cadastrarLocal(3, "Banheiro Praiamar Shopping | 3º Andar",  3,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Banheiro Praiamar Shopping | 3º Andar", 137, "7deb0cfe-f928-11ea-adc1-0242ac1200a9");
+
+CALL cadastrarLocal(3, "Bebedouro Praiamar Shopping | 3º Andar",  3,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Bebedouro Praiamar Shopping | 3º Andar", 138, "7deb0ba0-f928-11ea-adc1-0242ac120087");
+
+CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | 3º Andar",  3,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Escada Fixa Praiamar Shopping | 3º Andar", 139, "7f9b0cfa-a928-11ea-adc1-0242ac120089");
+
+CALL cadastrarLocal(4, "Escada Rolante Praiamar Shopping | 3º Andar",  3,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Escada Rolante Praiamar Shopping | 3º Andar", 140, "7deb0ba1-a928-11ea-adc1-0242ac1200f9");
+
+CALL cadastrarLocal(5, "Elevador Praiamar Shopping | 3º Andar",  3,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Elevador Praiamar Shopping | 3º Andar", 141, "7deb0ba0-f921-a1ea-adc1-0242ac120092");
+
+CALL cadastrarLocal(2, "Cinemark | Recepção",  4,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Cinemark | Recepção", 142, "8deafff1-f928-11ea-adc1-0242ac120013");
+
+CALL cadastrarLocal(2, "Cinemark | Sala 1",  4,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Cinemark | Sala 1", 143, "8aeafcfe-f928-11ea-adc1-0242ac120013");
+
+CALL cadastrarLocal(2, "Cinemark | Sala 2",  4,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Cinemark | Sala 2", 144, "8beafcfe-f928-11ea-adc1-0242ac120013");
+
+CALL cadastrarLocal(2, "Cinemark | Sala 3",  4,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Cinemark | Sala 3", 145, "8ceafcfe-f928-11ea-adc1-0242ac120013");
+
+CALL cadastrarLocal(2, "Cinemark | Sala 4",  4,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Cinemark | Sala 4", 146, "8deafcfe-f928-11ea-adc1-0242ac120013");
+
+CALL cadastrarLocal(2, "Cinemark | Sala 5",  4,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Cinemark | Sala 5", 147, "8eeafcfe-f928-11ea-adc1-0242ac120013");
+
+CALL cadastrarLocal(2, "Cinemark | Sala 6",  4,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Cinemark | Sala 6", 148, "8feafcfe-f928-11ea-adc1-0242ac120013");
+
+CALL cadastrarLocal(2, "Cinemark | Sala 7",  4,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Cinemark | Sala 7", 149, "8e1afcfe-f928-11ea-adc1-0242ac120013");
+
+CALL cadastrarLocal(2, "Cinemark | Sala 8",  4,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Cinemark | Sala 8", 150, "8dsafcfe-f928-11ea-adc1-0242ac120013");
+
+CALL cadastrarLocal(2, "Cinemark | Sala 9",  4,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Cinemark | Sala 9", 151, "8d4afcfe-f928-11ea-adc1-0242ac120013");
+
+CALL cadastrarLocal(2, "Cinemark | Sala 10",  4,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Cinemark | Sala 10", 152, "85eafcfe-f928-11ea-adc1-0242ac120013");
+
+CALL cadastrarLocal(3, "Banheiro Praiamar Shopping | 4º Andar",  4,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Banheiro Praiamar Shopping | 4º Andar", 153, "8deb0cfe-f928-11ea-adc1-0242ac120013");
+
+CALL cadastrarLocal(3, "Bebedouro Praiamar Shopping | 4º Andar",  4,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Bebedouro Praiamar Shopping | 4º Andar", 154, "8deb0ba0-f928-11ea-adc1-0242ac120023");
+
+CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | 4º Andar",  4,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Escada Fixa Praiamar Shopping | 4º Andar", 155, "8deb0cf1-a928-11ea-adc1-0242ac120032");
+
+CALL cadastrarLocal(4, "Escada Rolante Praiamar Shopping | 4º Andar",  4,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Escada Rolante Praiamar Shopping | 4º Andar", 156, "8deb0ba1-a928-11ea-adc1-0242ac130042");
+
+CALL cadastrarLocal(5, "Elevador Praiamar Shopping | 4º Andar",  4,  '09:25:00', '19:35:00');
+CALL cadastrarBox("Box 1 Elevador Praiamar Shopping | 4º Andar", 157, "8deb0ba0-f921-a1ea-adc1-0242ac120053");
+
+CALL cadastrarLocal(6, "Praça de Alimentação", 3, '09:00:00', '23:00:00');
+CALL cadastrarBox("Box 1 Praça de Alimentação", 158, "8deb0ba0-f921-a1ea-adc1-02bfac120053");
+
+CALL cadastrarLocal(6, "Praça de Descanso (com Wi-Fi)", 4, '09:00:00', '23:00:00');
+CALL cadastrarBox("Box 1 Praça de Descanso (com Wi-Fi)", 159, "81eb0ba0-f921-a1ea-adc1-02bfac120053");
+
+CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | 3º Andar",  3,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Escada Fixa Praiamar Shopping | 3º Andar", 160, "adeb0cf1-a928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Santa Lolla",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Santa Lolla", 161, "adeb0cf1-a928-12ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Camisaria Colombo",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Camisaria Colombo", 162, "adeb0cf1-a528-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Colcci",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Colcci", 163, "aseb0cf1-a928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Calvin Klein", 1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Calvin Klein", 164, "aaeb0cf1-a928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "M&M Gamer",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 M&M Gamer", 165, "axeb0cf1-a928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Alhambra",  2,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Alhambra", 166, "adeb0cf1-a928-11ea-acc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Anacapri", 1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Anacapri", 167, "adeb0cf1-a928-11ea-abc1-0942ac120032");
+
+CALL cadastrarLocal(7, "Banco 24 Horas Tecbanc (Caixa Eletrônico)",  2,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Banco 24 Horas Tecbanc (Caixa Eletrônico)", 168, "adeb0sf1-a928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Bio Mundo", 1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Bio Mundo", 169, "adeb0cf1-a928-11ee-adc1-0942ac120032");
 
 
-CALL cadastrarLocal(0, "MM Santos",  0, '10:00:00', '22:00:00', "7deaff8e-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "Brasil Cacau",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Brasil Cacau", 170, "adeb0cf1-a924-11ea-adc1-0942ac120032");
 
+CALL cadastrarLocal(0, "Camicado",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Camicado", 171, "adeb0cf1-a928-11eq-adc1-0942ac120032");
 
-CALL cadastrarLocal(0, "Life's Good LG",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "Capodarte",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Capodarte", 172, "adeb0cf1-a928-11xa-adc1-0942ac120032");
 
+CALL cadastrarLocal(0, "Caravella",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Caravella", 173, "adeb0cf1-a928-11ea-aoc1-0942ac120032");
 
-CALL cadastrarLocal(0, "Shoulder",  1, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac12000a");
-CALL cadastrarLocal(0, "Havaianas",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac1200a2");
-CALL cadastrarLocal(0, "Carmen Steffens",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242aa120002");
-CALL cadastrarLocal(0, "Sthill",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac1a0002");
-CALL cadastrarLocal(0, "SPOT",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-024bac120002");
-CALL cadastrarLocal(0, "Mahogany",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adca-0242ac120002");
-CALL cadastrarLocal(0, "Program Moda",  0, '09:25:00', '19:35:00', "7deb1582-f928-a1ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Belliótica",  0, '09:25:00', '19:35:00', "7deb1582-f928-11aa-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Mão Única",  0, '09:25:00', '19:35:00', "7deb1582-fa28-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Pontal",  0, '09:25:00', '19:35:00', "7deb1592-fab8-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Stilleto",  0, '09:25:00', '19:35:00', "7deb15a2-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Clube Melissa",  0, '09:25:00', '19:35:00', "adeb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Hawaii Surf Point",  0, '09:25:00', '19:35:00', "7ceb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "RetrôMania",  0, '09:25:00', '19:35:00', "7deb1582-fc28-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Reserva",  0, '09:25:00', '19:35:00', "7deb1582-f92c-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Polo Play",  0, '09:25:00', '19:35:00', "7debf58a-fc28-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Maybelline NY",  0, '09:25:00', '19:35:00', "7dcb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Arezzo",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-1242ac120002");
-CALL cadastrarLocal(0, "Authentic Feet",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-2dc1-0242ac120002");
-CALL cadastrarLocal(0, "Tennis Station",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-a3c1-0242ac120002");
-CALL cadastrarLocal(0, "Piticas",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-02424c160002");
-CALL cadastrarLocal(0, "Casa das Cuecas",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-5dc1-0262ac120002");
-CALL cadastrarLocal(0, "Puket",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac1c0a02");
-CALL cadastrarLocal(0, "Brooksfield",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-024dac120002");
-CALL cadastrarLocal(0, "Sapataria do Futuro",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-fdc1-0242ac120002");
-CALL cadastrarLocal(0, "Coisas da Casa",  0, '09:25:00', '19:35:00', "7deb1582-fe28-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Simplesmente Bárbara",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ef-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Fast Shop",  0, '09:25:00', '19:35:00', "7deb1582-19e8-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "A Esportiva",  0, '09:25:00', '19:35:00', "1deb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Cacau Show",  0, '09:25:00', '19:35:00', "2deb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "LOFT",  0, '09:25:00', '19:35:00', "3deb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Relicário",  0, '09:25:00', '19:35:00', "4deb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Andisport Futebol",  0, '09:25:00', '19:35:00', "5deb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Le Postiche",  0, '09:25:00', '19:35:00', "6deb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Crocs",  0, '09:25:00', '19:35:00', "afeb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Criatiff",  0, '09:25:00', '19:35:00', "faeb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Bluebeach",  0, '09:25:00', '19:35:00', "afeb1513-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "SIDE WALK",  0, '09:25:00', '19:35:00', "bdeb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Usaflex",  0, '09:25:00', '19:35:00', "cdeb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Beautybox",  0, '09:25:00', '19:35:00', "ddeb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Kyowa",  0, '09:25:00', '19:35:00', "edeb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Chilli Beans",  0, '09:25:00', '19:35:00', "fdeb1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Adcos",  0, '09:25:00', '19:35:00', "456a1582-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "PUC",  0, '09:25:00', '19:35:00', "7deba5ff-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "M&M Santos",  0, '09:25:00', '19:35:00', "7ffabc82-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(0, "Maze",  0, '09:25:00', '19:35:00', "7deb1581-aaf8-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(7, "Estúdio de Sombrancelha",  0, '09:25:00', '19:35:00', "faeb1582-f928-11ea-adc1-0242ac120005");
-CALL cadastrarLocal(0, "Quem disse, Berenice?",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac120004");
-CALL cadastrarLocal(7, "AngioCorpore",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac120003");
-CALL cadastrarLocal(0, "O'Clus Personal Ótica",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac1200a0");
-CALL cadastrarLocal(0, "Fabiana Zaitun",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac1200b0");
-CALL cadastrarLocal(7, "Doctor Feet",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac120ba2");
-CALL cadastrarLocal(0, "Nutty Bavarian",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac12af04");
-CALL cadastrarLocal(0, "L'Occitane en Provence",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac1e0002");
-CALL cadastrarLocal(0, "Planet Girls",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac150ab2");
-CALL cadastrarLocal(0, "Kopenhagen",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac140202");
-CALL cadastrarLocal(0, "Mr. CAT",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac120ffa");
-CALL cadastrarLocal(0, "Club Pitanga",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac177002");
-CALL cadastrarLocal(0, "Mega Body Store",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac120077");
-CALL cadastrarLocal(0, "Regalo's",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac12077a");
-CALL cadastrarLocal(0, "Relojoaria Zenith",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ba120502");
-CALL cadastrarLocal(0, "John John",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac1200ff");
-CALL cadastrarLocal(0, "Cia Marítima",  0, '09:25:00', '19:35:00', "7deb1582-f928-11ea-adc1-0242ac12a002");
+CALL cadastrarLocal(7, "Casa de Câmbio",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Casa de Câmbio", 174, "adeb0cf1-a928-11ha-adc1-0942ac120032");
 
+CALL cadastrarLocal(0, "Deny Sports",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Deny Sports", 175, "adex0cf1-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(7, "Claro",  0, '09:25:00', '19:35:00', "7deb00e2-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(7, "Vivo",  1, '12:15:00', '20:45:00', "7deb022c-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(7, "Oi",  2, '08:00:00', '23:30:00', "7deb033a-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(7, "Nextel",  2, '08:00:00', '23:30:00', "7deb033a-f928-11ea-adc1-ffa2ac120002");
+CALL cadastrarLocal(0, "Dhemy",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Dhemy", 176, "adeb0cf1-a928-11ca-adc1-0942ac120032");
 
-CALL cadastrarLocal(0, "Bibi Calçados",  0, '10:00:00', '23:59:59', "7deb16ae-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(7, "Espaço Laser",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Espaço Laser", 177, "adeb0cf1-a928-11en-adc1-0942ac120032");
 
+CALL cadastrarLocal(0, "Filtros Europa",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Filtros Europa", 178, "adeb0cf1-a928-11ja-adc1-0942ac120032");
 
-CALL cadastrarLocal(1, "McDonald's Sorveteria",  0, '09:25:00', '19:35:00', "7deb06be-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "First Class",  2,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 First Class", 179, "adeb0cf1-a928-11eç-adc1-0942ac120032");
 
-CALL cadastrarLocal(7, "Banco Caixa",  0, '09:00:00', '22:30:00', "7deb1442-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(7, "Banco Itaú",  0,  '09:25:00', '19:35:00', "7deb132a-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(7, "Banco do Brasil",  1,  '11:00:00', '21:30:00', "ab7b132a-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(7, "Banco Pan",  1,  '09:25:00', '21:00:00', "7deb132a-f928-1e77-adc1-0242ac120002");
-CALL cadastrarLocal(7, "Lotérica Praiamar Shopping",  0,  '09:25:00', '18:00:00', "ac7b132a-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "Follow up",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Follow up", 180, "adeb0cf1-a928-11ez-adc1-0942ac120032");
 
-CALL cadastrarLocal(1, "Cafeteria Praiamar Shopping ",  0,  '09:25:00', '19:35:00', "7deb1244-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(1, "Padaria Praiamar Shopping ",  0,  '09:25:00', '19:35:00', "7deb1104-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "Fulgore",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Fulgore", 181, "adeb0cf1-a928-11ea-adc1-0942ac125032");
 
-CALL cadastrarLocal(0, "Carrefour ",  0,  '08:25:00', '19:35:00', "7deb0fb0-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "Garbo",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Garbo", 182, "adeb0cf1-a928-11ea-adc1-0942ac123032");
 
-CALL cadastrarLocal(2, "Livraria Praiamar Shopping ",  0,  '09:25:00', '19:35:00', "7deb0e0c-f928-11ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "Gomes",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Gomes", 183, "adzb0cf1-a927-11ea-adc1-0242ac120032");
 
-CALL cadastrarLocal(3, "Banheiro Praiamar Shopping | Térreo ",  0,  '08:00:00', '23:59:59', "7deb0cfe-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(3, "Bebedouro Praiamar Shopping | Térreo ",  0,  '09:25:00', '19:35:00', "7deb0ba0-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | Térreo ",  0,  '08:00:00', '23:59:59', "7deb0cf1-a928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(4, "Escada Rolante Praiamar Shopping | Térreo ",  0,  '09:25:00', '19:35:00', "7deb0ba1-a928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(5, "Elevador Praiamar Shopping | Térreo ",  0,  '09:25:00', '19:35:00', "7deb0ba0-f921-a1ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "Granado",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Granado", 184, "adeb0cf2-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(0, "Adidas ",  1,  '09:25:00', '19:35:00', "7deb0bd0-f928-11ea-adc1-0242ac120092");
+CALL cadastrarLocal(0, "Hering Kids",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Hering Kids", 185, "adeb0cf3-a928-11ea-adc1-0942ac120032");
 
+CALL cadastrarLocal(0, "Hering Store",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Hering Store", 186, "adeb0cf4-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(7, "CVC",  1,  '09:25:00', '20:35:00', "7deb0bd0-f9d8-11ea-adc1-0242ac120092");
+CALL cadastrarLocal(0, "Hope",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Hope", 187, "adeb0cf5-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(0, "Apple ",  1,  '09:25:00', '23:35:00', "7daa0bd0-f9d8-11ea-adc1-0242ac121092");
+CALL cadastrarLocal(0, "Hot Water",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Hot Water", 188, "adeb0cf6-a928-11ea-adc1-0942ac120032");
 
+CALL cadastrarLocal(0, "House",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 House", 189, "adeb0cf7-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(7, "Club Men Salon",  1,  '09:25:00', '23:35:00', "9daa0bd0-f9d8-11ea-adc1-0242ac121092");
+CALL cadastrarLocal(0, "Imaginarium",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Imaginarium", 190, "adeb0cf8-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(0, "Riachuelo",  1,  '09:00:00', '23:35:00', "9ffacad0-a1d8-19ea-adc1-0242bc121092");
+CALL cadastrarLocal(0, "Intimissimi",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Intimissimi", 191, "adeb0cf9-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(0, "Renner",  1,  '09:30:00', '23:35:00', "9ffacad0-a1d8-1bea-adc1-0a42cd121092");
+CALL cadastrarLocal(0, "iPlace",  2,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 iPlace", 192, "sdeb0cf1-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(0, "Drogaria São Paulo",  1,  '08:35:00', '19:35:00', "9ffacad0-a1a8-1bea-adc1-0a4aad121092");
+CALL cadastrarLocal(0, "Kallan",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Kallan", 193, "adjb0cf1-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(0, "Dudalina",  1,  '08:35:00', '19:35:00', "9ffacad0-a1a8-1bea-fff1-0a4aad121092");
+CALL cadastrarLocal(0, "Kanto Kent",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Kanto Kent", 194, "aoeb0cf1-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(1, "Fom - Quiosque",  1,  '08:35:00', '19:35:00', "9afacad0-a1a8-1bfa-aab1-0a4aaf121090");
+CALL cadastrarLocal(0, "Kidstok",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Kidstok", 195, "adea0cf1-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(3, "Banheiro Praiamar Shopping | 1º Andar ",  1,  '08:00:00', '23:59:59', "9deb0cfe-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(3, "Bebedouro Praiamar Shopping | 1º Andar ",  1,  '09:25:00', '19:35:00', "adeb0ba0-f928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | 1º Andar ",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(4, "Escada Rolante Praiamar Shopping | 1º Andar ",  1,  '09:25:00', '19:35:00', "adeb0ba1-a928-11ea-adc1-0242ac120002");
-CALL cadastrarLocal(5, "Elevador Praiamar Shopping | 1º Andar ",  1,  '09:25:00', '19:35:00', "adeb0ba0-f921-a1ea-adc1-0242ac120002");
+CALL cadastrarLocal(0, "Lacoste",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Lacoste", 196, "aqeb0cf1-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(0,  "Polishop",  2,  '08:35:00', '23:35:00', "7affdbb0-a1a8-1afa-bdbf-ba4bff121091");
+CALL cadastrarLocal(0, "Le Lis Blanc",  2,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Le Lis Blanc", 197,  "areb0cf1-a928-11ea-adc1-0942ac120032");
 
+CALL cadastrarLocal(0, "Levi's",  2,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Levi's", 198, "adib0cf1-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(3, "Banheiro Praiamar Shopping | 2º Andar ",  2,  '08:00:00', '23:59:59', "9deb0cfe-f928-11ea-adc1-0242ac120012");
-CALL cadastrarLocal(3, "Bebedouro Praiamar Shopping | 2º Andar ",  2,  '09:25:00', '19:35:00', "adeb0ba0-f928-11ea-adc1-0242ac120022");
-CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | 2º Andar ",  2,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ea-adc1-0242ac120032");
-CALL cadastrarLocal(4, "Escada Rolante Praiamar Shopping | 2º Andar ",  2,  '09:25:00', '19:35:00', "adeb0ba1-a928-11ea-adc1-0242ac120042");
-CALL cadastrarLocal(5, "Elevador Praiamar Shopping | 2º Andar ",  2,  '09:25:00', '19:35:00', "adeb0ba0-f921-a1ea-adc1-0242ac120052");
+CALL cadastrarLocal(0, "Lez a Lez",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Lez a Lez", 199, "adeb5cf1-a928-11ea-adc1-0942ac120032");
 
+CALL cadastrarLocal(0, "Lilica & Tigor",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Lilica & Tigor", 200, "ad2b0cf1-a928-11ea-adc1-0942ac120032");
 
+CALL cadastrarLocal(0, "Lindt",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Lindt", 201, "adeb0tf1-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(1, "McDonald's",  3,  '09:25:00', '23:35:00', "adeb0ba0-f921-affa-adc1-0242ac120052");
-CALL cadastrarLocal(1, "Burger King",  3,  '09:25:00', '23:35:00', "affb0ba0-f921-affa-adc1-0242ac120052");
-CALL cadastrarLocal(1, "Subway",  3,  '09:25:00', '23:35:00', "ffacdba0-f921-affa-adc1-0242ac120052");
-CALL cadastrarLocal(1, "Burger + | Rizzo",  3,  '09:25:00', '23:35:00', "adeffba0-f921-affa-adc1-0242ac120052");
+CALL cadastrarLocal(0, "Lupo",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Lupo", 202, "adeb0ci1-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(1, "Giraffa's",  3,  '09:25:00', '23:35:00', "adefaaa0-f921-affa-adc1-0342ac120052");
-CALL cadastrarLocal(1, "Rockabilly",  3,  '09:25:00', '23:35:00', "adefab10-f921-affa-adc1-0342ac120052");
-CALL cadastrarLocal(1,"Outback", 3, '09:25:00', '23:35:00', "adef2310-f9a1-eeb1-ee21-0342ac120052");
-CALL cadastrarLocal(1,"Mania de Churrasco Prime Steak House", 3, '09:25:00', '23:35:00', "adef2310-faf1-bdb1-a121-0342ac120052");
-CALL cadastrarLocal(1,"Mania de Churrasco", 3, '09:25:00', '23:35:00', "adrf2310-faf1-bdb1-a121-0342ac120052");
-CALL cadastrarLocal(1,"Spoleto", 3, '09:25:00', '23:35:00', "adef2310-f961-bdb1-a1ff-0342ac120052");
-CALL cadastrarLocal(1,"Bom D+", 3, '09:25:00', '23:35:00', "adefc310-f921-bdb1-a121-0342ac120152");
-CALL cadastrarLocal(1,"All Beef's", 3, '09:25:00', '23:35:00', "adef2310-c921-bdb1-a124-0342ac120052");
-CALL cadastrarLocal(1,"Patroni Premium", 3, '09:25:00', '23:35:00', "adef2310-fa21-bdw1-a121-0342ac120052");
-CALL cadastrarLocal(1,"Liliana Pasta & Pizza", 3, '09:25:00', '23:35:00', "adef231a-f521-bdb1-a121-0342ac120052");
-CALL cadastrarLocal(1,"Máfia di Pasta", 3, '09:25:00', '23:35:00', "adef271a-f921-bdb1-a121-0342ac120052");
-CALL cadastrarLocal(1,"Vivenda do Camarão", 3, '09:25:00', '23:35:00', "adaf2310-f921-bdb2-a121-0342ac120052");
-CALL cadastrarLocal(1,"Divino Fogão", 3, '09:25:00', '23:35:00', "adef2310-f921-adb1-a421-0342ac120052");
+CALL cadastrarLocal(0, "Marcia Mello",  2,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Marcia Mello", 203, "adpb0cf1-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(0,"Divino Grão", 3, '09:25:00', '23:35:00', "adef2310-f921-adb1-a121-0342ac120057");
+CALL cadastrarLocal(7, "Marisorte Loterias",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Marisorte Loterias", 204, "aweb0cf1-a928-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(1,"Pizza Hut", 3, '09:25:00', '23:35:00', "adef2310-f928-bda1-a121-0342ac120052");
-CALL cadastrarLocal(1,"Haru", 3, '09:25:00', '23:35:00', "adef2310-f921-bqa1-a121-0342ac120052");
-CALL cadastrarLocal(1,"Gendai", 3, '09:25:00', '23:35:00', "adef2310-f921-bda1-a161-0342ac120052");
-CALL cadastrarLocal(1,"Saluá Esfihas", 3, '09:25:00', '23:35:00', "adef2310-f921-bda1-a121-0342sc120052");
-CALL cadastrarLocal(1,"Tottene", 3, '09:25:00', '23:35:00', "adef2310-f921-bda1-a121-0362ac120052");
-CALL cadastrarLocal(1,"Bacio di Latte", 3, '09:25:00', '23:35:00', "adef2310-f921-bda1-a131-0342ac120052");
+CALL cadastrarLocal(0, "Maxxi Color",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Maxxi Color", 205, "xdeb0cf1-a928-12ea-adc1-0942ac120032");
 
+CALL cadastrarLocal(0, "Mendes Tur",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Mendes Tur", 206, "adeb0cf1-a928-13ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(3, "Banheiro Praiamar Shopping | 3º Andar ",  3,  '08:00:00', '23:59:59', "7deb0cfe-f928-11ea-adc1-0242ac1200a9");
-CALL cadastrarLocal(3, "Bebedouro Praiamar Shopping | 3º Andar ",  3,  '09:25:00', '19:35:00', "7deb0ba0-f928-11ea-adc1-0242ac120087");
-CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | 3º Andar ",  3,  '08:00:00', '23:59:59', "7f9b0cfa-a928-11ea-adc1-0242ac120089");
-CALL cadastrarLocal(4, "Escada Rolante Praiamar Shopping | 3º Andar ",  3,  '09:25:00', '19:35:00', "7deb0ba1-a928-11ea-adc1-0242ac1200f9");
-CALL cadastrarLocal(5, "Elevador Praiamar Shopping | 3º Andar ",  3,  '09:25:00', '19:35:00', "7deb0ba0-f921-a1ea-adc1-0242ac120092");
+CALL cadastrarLocal(0, "Miró",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Miró", 207, "adeb0cf1-a928-14ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(2, "Cinemark | Recepção",  4,  '08:00:00', '23:59:59', "8deafff1-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(0, "MMartan",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 MMartan", 208, "adeb0cf1-a928-15ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(2, "Cinemark | Sala 1",  4,  '08:00:00', '23:59:59', "8aeafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Cinemark | Sala 2",  4,  '08:00:00', '23:59:59', "8beafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Cinemark | Sala 3",  4,  '08:00:00', '23:59:59', "8ceafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(0, "Monte Carlo",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Monte Carlo", 209, "adeb0cf1-a928-16ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(2, "Cinemark | Sala 4",  4,  '08:00:00', '23:59:59', "8deafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Cinemark | Sala 5",  4,  '08:00:00', '23:59:59', "8eeafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Cinemark | Sala 6",  4,  '08:00:00', '23:59:59', "8feafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Cinemark | Sala 7",  4,  '08:00:00', '23:59:59', "8e1afcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(0, "Morana",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Morana", 210, "adeb0cf1-a928-17ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(2, "Cinemark | Sala 8",  4,  '08:00:00', '23:59:59', "8dsafcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Cinemark | Sala 9",  4,  '08:00:00', '23:59:59', "8d4afcfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(2, "Cinemark | Sala 10",  4,  '08:00:00', '23:59:59', "85eafcfe-f928-11ea-adc1-0242ac120013");
+CALL cadastrarLocal(0, "Murabak",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Murabak", 211, "adeb0cf1-a928-18ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(3, "Banheiro Praiamar Shopping | 4º Andar ",  4,  '08:00:00', '23:59:59', "8deb0cfe-f928-11ea-adc1-0242ac120013");
-CALL cadastrarLocal(3, "Bebedouro Praiamar Shopping | 4º Andar ",  4,  '09:25:00', '19:35:00', "8deb0ba0-f928-11ea-adc1-0242ac120023");
-CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | 4º Andar ",  4,  '08:00:00', '23:59:59', "8deb0cf1-a928-11ea-adc1-0242ac120032");
-CALL cadastrarLocal(4, "Escada Rolante Praiamar Shopping | 4º Andar ",  4,  '09:25:00', '19:35:00', "8deb0ba1-a928-11ea-adc1-0242ac130042");
-CALL cadastrarLocal(5, "Elevador Praiamar Shopping | 4º Andar ",  4,  '09:25:00', '19:35:00', "8deb0ba0-f921-a1ea-adc1-0242ac120053");
+CALL cadastrarLocal(7, "Náutica Tattoo",  0, '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Náutica Tatto", 212, "adeb0cf1-a928-19ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(6, "Praça de Alimentação", 3, '09:00:00', '23:00:00', "8deb0ba0-f921-a1ea-adc1-02bfac120053");
-CALL cadastrarLocal(6, "Praça de Descanso (com Wi-Fi)", 4, '09:00:00', '23:00:00', "81eb0ba0-f921-a1ea-adc1-02bfac120053");
-CALL cadastrarLocal(4, "Escada Fixa Praiamar Shopping | 3º Andar ",  3,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ea-adc1-0942ac120032");
+CALL cadastrarLocal(0, "O Boticário",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 O Boticário", 213,  "adeb0cf1-a928-20ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(0, "Santa Lolla",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-12ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Camisaria Colombo",  0,  '08:00:00', '23:59:59', "adeb0cf1-a528-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Colcci",  1,  '08:00:00', '23:59:59', "aseb0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Calvin Klein", 1,  '08:00:00', '23:59:59', "aaeb0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "M&M Gamer",  0,  '08:00:00', '23:59:59', "axeb0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Alhambra",  2,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ea-acc1-0942ac120032");
-CALL cadastrarLocal(0, "Anacapri", 1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ea-abc1-0942ac120032");
-CALL cadastrarLocal(7, "Banco 24 Horas Tecbanc (Caixa Eletrônico)",  2,  '08:00:00', '23:59:59', "adeb0sf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Bio Mundo", 1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ee-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Brasil Cacau",  0,  '08:00:00', '23:59:59', "adeb0cf1-a924-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Camicado",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11eq-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Capodarte",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11xa-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Caravella",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ea-aoc1-0942ac120032");
-CALL cadastrarLocal(7, "Casa de Câmbio",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ha-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Deny Sports",  0,  '08:00:00', '23:59:59', "adex0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Dhemy",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ca-adc1-0942ac120032");
-CALL cadastrarLocal(7, "Espaço Laser",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11en-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Filtros Europa",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ja-adc1-0942ac120032");
-CALL cadastrarLocal(0, "First Class",  2,  '08:00:00', '23:59:59', "adeb0cf1-a928-11eç-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Follow up",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ez-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Fulgore",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ea-adc1-0942ac125032");
-CALL cadastrarLocal(0, "Garbo",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ea-adc1-0942ac123032");
-CALL cadastrarLocal(0, "Gomes",  1,  '08:00:00', '23:59:59', "adzb0cf1-a927-11ea-adc1-0242ac120032");
-CALL cadastrarLocal(0, "Granado",  1,  '08:00:00', '23:59:59', "adeb0cf2-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Hering Kids",  0,  '08:00:00', '23:59:59', "adeb0cf3-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Hering Store",  1,  '08:00:00', '23:59:59', "adeb0cf4-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Hope",  0,  '08:00:00', '23:59:59', "adeb0cf5-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Hot Water",  1,  '08:00:00', '23:59:59', "adeb0cf6-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "House",  0,  '08:00:00', '23:59:59', "adeb0cf7-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Imaginarium",  1,  '08:00:00', '23:59:59', "adeb0cf8-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Intimissimi",  0,  '08:00:00', '23:59:59', "adeb0cf9-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "iPlace",  2,  '08:00:00', '23:59:59', "sdeb0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Kallan",  1,  '08:00:00', '23:59:59', "adjb0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Kanto Kent",  0,  '08:00:00', '23:59:59', "aoeb0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Kidstok",  0,  '08:00:00', '23:59:59', "adea0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Lacoste",  0,  '08:00:00', '23:59:59', "aqeb0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Le Lis Blanc",  2,  '08:00:00', '23:59:59', "areb0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Levi's",  2,  '08:00:00', '23:59:59', "adib0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Lez a Lez",  1,  '08:00:00', '23:59:59', "adeb5cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Lilica & Tigor",  1,  '08:00:00', '23:59:59', "ad2b0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Lindt",  1,  '08:00:00', '23:59:59', "adeb0tf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Lupo",  0,  '08:00:00', '23:59:59', "adeb0ci1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Marcia Mello",  2,  '08:00:00', '23:59:59', "adpb0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(7, "Marisorte Loterias",  0,  '08:00:00', '23:59:59', "aweb0cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Maxxi Color",  0,  '08:00:00', '23:59:59', "xdeb0cf1-a928-12ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Mendes Tur",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-13ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Miró",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-14ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "MMartan",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-15ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Monte Carlo",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-16ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Morana",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-17ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Murabak",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-18ea-adc1-0942ac120032");
-CALL cadastrarLocal(7, "Náutica Tattoo",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-19ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "O Boticário",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-20ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Organza",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-24ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Ortobom",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-32ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Ótica IX",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-34ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Ótica Martins Zeiss",  1,  '08:00:00', '23:59:59', "adeb0cf1-a978-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Ótica Occhiali",  0,  '08:00:00', '23:59:59', "adxb0cf1-a928-18ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Óticas Carol",  1,  '08:00:00', '23:59:59', "axeb0cf1-a928-19ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Kidz Shoe Store",  0,  '08:00:00', '23:59:59', "adzb0cf1-a928-11eu-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Pandora",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ea-adc2-0942ac120032");
-CALL cadastrarLocal(0, "Pink",  1,  '08:00:00', '23:59:59', "adeb0ff1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Planeta Café",  1,  '08:00:00', '23:59:59', "ader0cf1-a928-11ra-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Quiksilver",  1,  '08:00:00', '23:59:59', "adeb0sf1-a928-11ea-adb1-0942ac120032");
-CALL cadastrarLocal(0, "Radio Nacional",  1,  '08:00:00', '23:59:59', "adxb0cf1-a9t8-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Raquel Bijoux",  1,  '08:00:00', '23:59:59', "adib7cf1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(1, "Rei do Mate",  1,  '08:00:00', '23:59:59', "adeb2cf1-a928-12ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Schutz",  1,  '08:00:00', '23:59:59', "adeb0cf1-a923-11ea-ajc1-0942ac120032");
-CALL cadastrarLocal(0, "Sodimac Dicico",  2,  '08:00:00', '23:59:59', "adeb9cf2-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(1, "Starbucks Coffee",  0,  '08:00:00', '23:59:59', "adeb0ce1-a928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Stroke",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11eb-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Swarovski",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-113a-adc1-0942ac120032");
-CALL cadastrarLocal(0, "The Body Shop",  2,  '08:00:00', '23:59:59', "adeb0cf1-a918-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(7, "TIM",  0,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ea-adl1-0942ac120032");
-CALL cadastrarLocal(0, "Tip Top",  1,  '08:00:00', '23:59:59', "adeb0cf1-a928-11ew-adc1-0942ac120032");
-CALL cadastrarLocal(7, "Top Car",  -3,  '08:00:00', '23:59:59', "adeb0cf1-a928-11el-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Tottene",  1,  '08:00:00', '23:59:59', "adeb0cf1-b928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Track & Field",  1,  '08:00:00', '23:59:59', "adeb0cf1-c928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Valisere",  1,  '08:00:00', '23:59:59', "adeb0cf1-d928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Vermont",  1,  '08:00:00', '23:59:59', "adeb0cf1-e928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Victor Hugo",  1,  '08:00:00', '23:59:59', "adeb0cf1-f928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Vim Vi Venci",  0,  '08:00:00', '23:59:59', "adeb0cf1-g928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Vivara",  0,  '08:00:00', '23:59:59', "adeb0cf1-h928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Viviane Puccinelli",  1,  '08:00:00', '23:59:59', "adeb0cf1-i928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(7, "YellowCom Vivo",  0,  '08:00:00', '23:59:59', "adeb0cf1-j928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(7, "You Play Space",  2,  '08:00:00', '23:59:59', "adeb0cf1-k928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Yuppie",  1,  '08:00:00', '23:59:59', "adeb0cf1-l928-11ea-adc1-0942ac120032");
-CALL cadastrarLocal(0, "Zelo",  0,  '08:00:00', '23:59:59', "adeb0cf1-n928-11ea-adc1-0942ac120032");
+CALL cadastrarLocal(0, "Organza",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Organza", 214, "adeb0cf1-a928-24ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(3, "Berçário Praiamar Shopping | Térreo",  0,  '08:00:00', '23:59:59', "adeb0cf1-n928-11ea-adc1-8942ac120032");
-CALL cadastrarLocal(3, "Berçário Praiamar Shopping | 1º Andar",  1,  '08:00:00', '23:59:59', "adeb0cf1-n928-11ea-adc1-2942ac120032");
-CALL cadastrarLocal(3, "Berçário Praiamar Shopping | 2º Andar",  2,  '08:00:00', '23:59:59', "adeb0cf1-n928-11ea-adc1-1942ac120032");
-CALL cadastrarLocal(3, "Berçário Praiamar Shopping | 3º Andar",  3,  '08:00:00', '23:59:59', "adeb0cf1-n928-11ea-adc1-5942ac120032");
-CALL cadastrarLocal(3, "Berçário Praiamar Shopping | 4º Andar",  4,  '08:00:00', '23:59:59', "adeb0cf1-n928-11ea-avc1-4942ac120032");
+CALL cadastrarLocal(0, "Ortobom",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Ortobom", 215, "adeb0cf1-a928-32ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(3, "Telefone 1 Praiamar Shopping ",  3,  '08:00:00', '23:59:59', "adeb0cf1-n928-13ea-adc1-8942ac120032");
-CALL cadastrarLocal(3, "Telefone 2 Praiamar Shopping ",  3,  '08:00:00', '23:59:59', "adeb0cf1-n928-15ea-adc1-8942ac120032");
-CALL cadastrarLocal(3, "Telefone 3 Praiamar Shopping ",  3,  '08:00:00', '23:59:59', "adeb0cf1-n928-17ea-adc1-8942ac120032");
-CALL cadastrarLocal(3, "Telefone 4 Praiamar Shopping ",  3,  '08:00:00', '23:59:59', "adeb0cf1-n928-19ea-adc1-8942ac120032");
+CALL cadastrarLocal(0, "Ótica IX",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Ótica IX", 216, "adeb0cf1-a928-34ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(1, "Madero",  2,  '18:00:00', '22:00:00', "adeb0cf1-n928-19ea-adc2-8942ac120032");
+CALL cadastrarLocal(0, "Ótica Martins Zeiss",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Ótica Martins Zeiss", 217, "adeb0cf1-a978-11ea-adc1-0942ac120032");
 
-CALL cadastrarLocal(8, "Entrada/Saída Alexandre Martins",  0,  '10:00:00', '22:00:00', "adeb0cf1-f928-19ea-adc2-8942ac120032");
-CALL cadastrarLocal(8, "Entrada/Saída Guaiaó",  0,  '10:00:00', '22:00:00', "adeb0cf1-n928-19ea-adm2-8942ac120032");
-CALL cadastrarLocal(8, "Entrada/Saída Carrefour",  0,  '10:00:00', '22:00:00', "adeb0cf1-n928-76ea-adc2-8942ac120032");
-CALL cadastrarLocal(8, "Entrada/Saída Praiamar Corporate",  4,  '10:00:00', '22:00:00', "adeb2cf1-n928-19ea-adc2-8942ac120032");
+CALL cadastrarLocal(0, "Ótica Occhiali",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Ótica Occhiali", 218, "adxb0cf1-a928-18ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Óticas Carol",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Óticas Carol", 219, "axeb0cf1-a928-19ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Kidz Shoe Store",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Kidz Shoe Store", 220, "adzb0cf1-a928-11eu-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Pandora",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Pandora", 221, "adeb0cf1-a928-11ea-adc2-0942ac120032");
+
+CALL cadastrarLocal(0, "Pink",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Pink", 222, "adeb0ff1-a928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Planeta Café",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Planeta Café", 223, "ader0cf1-a928-11ra-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Quiksilver",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Quiksilver", 224, "adeb0sf1-a928-11ea-adb1-0942ac120032");
+
+CALL cadastrarLocal(0, "Radio Nacional",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Radio Nacional", 225, "adxb0cf1-a9t8-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Raquel Bijoux",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Raquel Bijoux", 226, "adib7cf1-a928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(1, "Rei do Mate",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Rei do Mate", 227, "adeb2cf1-a928-12ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Schutz",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Schutz", 228, "adeb0cf1-a923-11ea-ajc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Sodimac Dicico",  2,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Sodimac Dicico", 229, "adeb9cf2-a928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(1, "Starbucks Coffee",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Starbucks Coffee", 230, "adeb0ce1-a928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Stroke",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Stroke", 231, "adeb0cf1-a928-11eb-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Swarovski",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Swarovski", 232, "adeb0cf1-a928-113a-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "The Body Shop",  2,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 The Body Shop", 233, "adeb0cf1-a918-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(7, "TIM",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 TIM", 234, "adeb0cf1-a928-11ea-adl1-0942ac120032");
+
+CALL cadastrarLocal(0, "Tip Top",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Tip Top", 235, "adeb0cf1-a928-11ew-adc1-0942ac120032");
+
+CALL cadastrarLocal(7, "Top Car",  -3,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Top Car", 236, "adeb0cf1-a928-11el-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Tottene",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Tottene", 237,  "adeb0cf1-b928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Track & Field",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Track & Field", 238, "adeb0cf1-c928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Valisere",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Valisere", 239, "adeb0cf1-d928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Vermont",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Vermont", 240, "adeb0cf1-e928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Victor Hugo",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Victor Hugo", 241,  "adeb0cf1-f928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Vim Vi Venci",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Vim Vi Venvi", 242,  "adeb0cf1-g928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Vivara",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Vivara", 243, "adeb0cf1-h928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Viviane Puccinelli",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Viviane Puccinelli", 244, "adeb0cf1-i928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(7, "YellowCom Vivo",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 YellowCom Vivo", 245, "adeb0cf1-j928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(7, "You Play Space",  2,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 You Play Space", 246, "adeb0cf1-k928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Yuppie",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Yuppie", 247, "adeb0cf1-l928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(0, "Zelo",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Zelo", 248, "adeb0cf1-n928-11ea-adc1-0942ac120032");
+
+CALL cadastrarLocal(3, "Berçário Praiamar Shopping | Térreo",  0,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Berçário Praiamar Shopping | Térreo", 249, "adeb0cf1-n928-11ea-adc1-8942ac120032");
+
+CALL cadastrarLocal(3, "Berçário Praiamar Shopping | 1º Andar",  1,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Berçário Praiamar Shopping | 1º Andar", 250, "adeb0cf1-n928-11ea-adc1-2942ac120032");
+
+CALL cadastrarLocal(3, "Berçário Praiamar Shopping | 2º Andar",  2,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Berçário Praiamar Shopping | 2º Andar", 251, "adeb0cf1-n928-11ea-adc1-1942ac120032");
+
+CALL cadastrarLocal(3, "Berçário Praiamar Shopping | 3º Andar",  3,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Berçário Praiamar Shopping | 3º Andar", 252, "adeb0cf1-n928-11ea-adc1-5942ac120032");
+
+CALL cadastrarLocal(3, "Berçário Praiamar Shopping | 4º Andar",  4,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box 1 Berçário Praiamar Shopping | 4º Andar", 253, "adeb0cf1-n928-11ea-avc1-4942ac120032");
+
+CALL cadastrarLocal(3, "Telefone 1 Praiamar Shopping",  3,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box Telefone 1 Praiamar Shopping", 254, "adeb0cf1-n928-13ea-adc1-8942ac120032");
+
+CALL cadastrarLocal(3, "Telefone 2 Praiamar Shopping",  3,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box Telefone 2 Praiamar Shopping ", 255, "adeb0cf1-n928-15ea-adc1-8942ac120032");
+
+CALL cadastrarLocal(3, "Telefone 3 Praiamar Shopping",  3,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box Telefone 3 Praiamar Shopping", 256, "adeb0cf1-n928-17ea-adc1-8942ac120032");
+
+CALL cadastrarLocal(3, "Telefone 4 Praiamar Shopping",  3,  '08:00:00', '23:59:59');
+CALL cadastrarBox("Box Telefone 4 Praiamar Shopping", 257, "adeb0cf1-n928-19ea-adc1-8942ac120032");
+
+CALL cadastrarLocal(1, "Madero",  2,  '18:00:00', '22:00:00');
+CALL cadastrarBox("Box 1 Madero", 258, "adeb0cf1-n928-19ea-adc2-8942ac120032");
+
+CALL cadastrarLocal(8, "Entrada/Saída Alexandre Martins",  0,  '10:00:00', '22:00:00');
+CALL cadastrarBox("Entrada/Saída Alexandre Martins", 259, "adeb0cf1-f928-19ea-adc2-8942ac120032");
+
+CALL cadastrarLocal(8, "Entrada/Saída Guaiaó",  0,  '10:00:00', '22:00:00');
+CALL cadastrarBox("Entrada/Saída Guaiaó", 260, "adeb0cf1-n928-19ea-adm2-8942ac120032");
+
+CALL cadastrarLocal(8, "Entrada/Saída Carrefour",  0,  '10:00:00', '22:00:00');
+CALL cadastrarBox("Entrada/Saída Carrefour", 261, "adeb0cf1-n928-76ea-adc2-8942ac120032");
+
+CALL cadastrarLocal(8, "Entrada/Saída Praiamar Corporate",  4,  '10:00:00', '22:00:00');
+CALL cadastrarBox("Entrada/Saída Praiamar Corporate", 262, "adeb2cf1-n928-19ea-adc2-8942ac120032");
 
 /* Definir horário alternativo das entradas: no domingo
 o período de funcionamento do shopping é diferente */
@@ -731,10 +1212,14 @@ CALL defHorarioAlternativoLocal(262, 0, '11:00:00', '22:00:00');
 
 /* Exibir a configuração de horário (dia + início + fim) que foi adicionada, pois não existia */
 
-SELECT * from horario 
-where cd_dia_semana = 0
-and hr_abertura = '11:00:00'
-and hr_fechamento = '22:00:00';
+SELECT 
+    *
+from
+    horario
+where
+    cd_dia_semana = 0
+        and hr_abertura = '11:00:00'
+        and hr_fechamento = '22:00:00';
 
 /* Verificar se as entradas, no dia de hoje (suponhamos que seja domingo),
 possuem um horário de funcionamento diferente/alternativo.

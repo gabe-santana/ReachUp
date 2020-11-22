@@ -397,10 +397,12 @@ END$$
 DROP PROCEDURE IF EXISTS conectarBeacon$$
 CREATE PROCEDURE conectarBeacon(pUUID varchar(36))
 BEGIN
-	SELECT tb.nm_tipo_beacon, l.cd_local, tl.nm_tipo_local, l.cd_andar, l.nm_local,
-	l.cd_andar  FROM beacon AS b
+	SELECT l.cd_local, tl.nm_tipo_local, l.cd_andar, l.nm_local
+	FROM beacon AS bc
 	INNER JOIN tipo_beacon AS tb
-	ON b.cd_tipo_beacon  = tb.cd_tipo_beacon
+	ON bc.cd_tipo_beacon  = tb.cd_tipo_beacon
+    INNER JOIN box as b
+    ON bc.cd_box = b.cd_box
 	INNER JOIN `local` as l 
 	ON b.cd_local = l.cd_local
 	INNER JOIN  tipo_local AS tl
@@ -625,8 +627,34 @@ BEGIN
   SELECT (SELECT COUNT(*) FROM beacon WHERE cd_uuid_beacon = pUUID) as result;
 END$$
 
+DROP PROCEDURE IF EXISTS cadastrarBox$$
+CREATE PROCEDURE cadastrarBox(pNome varchar(200), pLocal INT, pBeacon varchar(36))
+BEGIN
+   DECLARE _cd int;
+
+   SELECT count(*) INTO @_cd FROM box;
+   INSERT INTO box values (@_cd, pNome, pLocal);
+   INSERT INTO beacon values (pBeacon, 0, @_cd);
+END$$
+
+DROP PROCEDURE IF EXISTS atualizarBox$$
+CREATE PROCEDURE atualizarBox(pBox INT, pNome varchar(200), pLocal INT)
+BEGIN
+   UPDATE box
+   SET nm_box = pNome,
+       cd_local = pLocal
+   WHERE cd_box = pBox;
+END$$
+
+DROP PROCEDURE IF EXISTS deletarBox$$
+CREATE PROCEDURE deletarBox(pBox INT)
+BEGIN
+  DELETE FROM beacon where cd_box = pBox;
+  DELETE FROM box WHERE cd_box = pBox; 
+END$$
+
 DROP PROCEDURE IF EXISTS cadastrarLocal$$
-CREATE PROCEDURE cadastrarLocal(pTipo int, pNome varchar(45), pAndar int(3), pAbertura time , pFechamento time, pUUIDBeacon varchar(36))
+CREATE PROCEDURE cadastrarLocal(pTipo int, pNome varchar(45), pAndar int(3), pAbertura time , pFechamento time)
 BEGIN
 	DECLARE _cd int;
     DECLARE qtLinhasTabelaComEsseHorarioDom int;
@@ -639,7 +667,6 @@ BEGIN
 
 	SELECT COUNT(cd_local) INTO @_cd FROM `local`;
 	INSERT INTO `local` VALUES (@_cd, pTipo, pNome, pAndar, pAbertura, pFechamento, 1);
-	INSERT INTO beacon VALUES (pUUIDBeacon, 0,  @_cd);
 
     SELECT count(*) into qtLinhasTabelaComEsseHorarioDom
     from horario 
@@ -863,10 +890,11 @@ BEGIN
    AND cd_sub_categoria = pSubCategoria;
 END$$
 
+/* mudei */
 DROP PROCEDURE IF EXISTS cadastrarBeacon$$
-CREATE PROCEDURE cadastrarBeacon(pUUID varchar(36), pTipo int, pLocal int)
+CREATE PROCEDURE cadastrarBeacon(pUUID varchar(36), pTipo int, pBox int)
 BEGIN
-	INSERT INTO beacon VALUES (pUUID, pTipo, pLocal);
+	INSERT INTO beacon VALUES (pUUID, pTipo, pBox);
 END$$
 
 DROP PROCEDURE IF EXISTS atualizarFeedback$$
@@ -905,12 +933,25 @@ BEGIN
 	END IF;
 END$$
 
+DROP PROCEDURE IF EXISTS pegarBoxesLocal$$
+CREATE PROCEDURE pegarBoxesLocal(pLocal INT)
+BEGIN
+  SELECT b.cd_box, b.nm_box,
+  GROUP_CONCAT(CONCAT(bc.cd_uuid_beacon, '-', bc.cd_tipo_beacon))
+  as box_beacons
+  FROM box as b
+  INNER JOIN beacon as bc
+  ON b.cd_box = bc.cd_box
+  WHERE b.cd_local = pLocal
+  GROUP BY b.cd_box;
+END$$
+
 DROP PROCEDURE IF EXISTS pegarLocal$$
 CREATE PROCEDURE pegarLocal(pID INT)
 BEGIN
 	SELECT 
     tl.nm_tipo_local, l.cd_tipo_local, l.cd_local, l.nm_local, l.cd_andar, 
-	b.cd_uuid_beacon, l.hr_abertura, l.hr_fechamento, l.ic_disponivel,
+    l.hr_abertura, l.hr_fechamento, l.ic_disponivel,
     GROUP_CONCAT(CONCAT(hl.cd_dia_semana, '-', hl.hr_abertura, '-', hl.hr_fechamento)) 
     as horarios_alternativos
 	FROM `local` AS l 
@@ -918,10 +959,8 @@ BEGIN
 	ON l.cd_tipo_local = tl.cd_tipo_local
     INNER JOIN horario_local as hl
     ON l.cd_local = hl.cd_local
-	INNER JOIN beacon AS b
-	ON l.cd_local = b.cd_local
 	WHERE l.cd_local = pID 
-    AND b.cd_tipo_beacon = 0;
+    GROUP BY l.cd_local;
 END$$
 
 DROP PROCEDURE IF EXISTS pegarLocais$$
@@ -929,7 +968,8 @@ CREATE PROCEDURE pegarLocais(pTipo INT)
 BEGIN
 	SELECT l.cd_local, l.cd_tipo_local,
 	tl.nm_tipo_local, l.nm_local, 
-    l.cd_andar, b.cd_uuid_beacon, l.hr_abertura, l.hr_fechamento, l.ic_disponivel,
+    l.cd_andar, 
+    l.hr_abertura, l.hr_fechamento, l.ic_disponivel,
     GROUP_CONCAT(CONCAT(hl.cd_dia_semana, '-', hl.hr_abertura, '-', hl.hr_fechamento))
     as horarios_alternativos
     FROM `local` AS l 
@@ -937,10 +977,7 @@ BEGIN
 	ON l.cd_tipo_local = tl.cd_tipo_local
     INNER JOIN horario_local as hl
     ON l.cd_local = hl.cd_local
-	INNER JOIN beacon AS b
-	ON  l.cd_local = b.cd_local
 	WHERE l.cd_tipo_local = pTipo
-    AND b.cd_tipo_beacon = 0
 	GROUP BY l.cd_local;
 END$$
 
@@ -956,33 +993,53 @@ BEGIN
 	WHERE cd_local = pLocal;
 END$$
 
-DROP PROCEDURE IF EXISTS deletarLocal$$
+/* Precisa arrumar - join não funciona */
+/*DROP PROCEDURE IF EXISTS deletarLocal$$
 CREATE PROCEDURE deletarLocal(pLocal int)
 BEGIN
 	DELETE FROM sub_categoria_local WHERE cd_local = pLocal;
 	DELETE FROM comunicado WHERE cd_local = pLocal;
-	DELETE FROM beacon WHERE cd_local = pLocal;
+
+	DELETE beacon, box FROM beacon as bc
+    INNER JOIN box as b 
+    ON bc.cd_box = b.cd_box
+    WHERE b.cd_local = pLocal;
+
     UPDATE administrador SET cd_local = null WHERE cd_local = pLocal;
     DELETE FROM horario_local WHERE cd_local = pLocal;
 	DELETE FROM `local` WHERE cd_local = pLocal;
-END$$
+END$$*/
 
-DROP PROCEDURE IF EXISTS pegarBeacon$$
+/* mudei */
+/*DROP PROCEDURE IF EXISTS pegarBeacon$$
 CREATE PROCEDURE pegarBeacon(pUUID varchar(36))
 BEGIN
-	SELECT * FROM beacon WHERE cd_uuid_beacon = pUUID;
-END$$
+	SELECT uuid_beacon, cd_tipo_beacon, cd_local
+    FROM beacon as bc
+    JOIN box as b
+    ON bc.cd_box = b.cd_box
+    WHERE cd_uuid_beacon = pUUID;
+END$$*/
 
 DROP PROCEDURE IF EXISTS pegarBeaconsDeLocal$$
 CREATE PROCEDURE pegarBeaconsDeLocal(pLocal int )
 BEGIN
-	SELECT * FROM beacon WHERE cd_local = pLocal;
+	SELECT bc.cd_uuid_beacon, bc.cd_tipo_beacon, b.cd_local
+    FROM box as b
+	INNER JOIN beacon as bc 
+    ON b.cd_box = bc.cd_box
+    WHERE b.cd_local = pLocal;
 END$$
 
+
 DROP PROCEDURE IF EXISTS pegarBeaconsTipo$$
-CREATE PROCEDURE pegarBeaconsTipo(pTipo int )
+CREATE PROCEDURE pegarBeaconsTipo(pTipo int)
 BEGIN
-	SELECT * FROM beacon WHERE cd_tipo_beacon = pTipo;
+	SELECT bc.cd_uuid_beacon, bc.cd_tipo_beacon, b.cd_local
+    FROM box as b
+    INNER JOIN beacon as bc
+    ON b.cd_box = bc.cd_box
+    WHERE bc.cd_tipo_beacon = pTipo;
 END$$
 
 

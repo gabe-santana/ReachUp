@@ -88,6 +88,17 @@ CREATE TABLE IF NOT EXISTS local (
     
     );
 
+DROP PROCEDURE IF EXISTS box;
+CREATE TABLE IF NOT EXISTS box (
+   cd_box INT NOT NULL,
+   nm_box VARCHAR(200) NOT NULL,
+   cd_local INT NOT NULL,
+   PRIMARY KEY (cd_box),
+   CONSTRAINT fk_local_box
+     FOREIGN KEY (cd_local)
+     REFERENCES local (cd_local)
+);
+
 -- -----------------------------------------------------
 -- Tabela horario
 -- -----------------------------------------------------
@@ -216,12 +227,12 @@ DROP TABLE IF EXISTS beacon ;
 CREATE TABLE IF NOT EXISTS beacon (
   cd_uuid_beacon VARCHAR(36) NOT NULL,
   cd_tipo_beacon INT NOT NULL,
-  cd_local INT NOT NULL,
+  cd_box INT NOT NULL,
   PRIMARY KEY (cd_uuid_beacon),
-  CONSTRAINT fk_beacon_local
-    FOREIGN KEY (cd_local)
-    REFERENCES local (cd_local),
-  CONSTRAINT fk_beacon_tipo_beacon1
+  CONSTRAINT fk_beacon_box
+    FOREIGN KEY (cd_box)
+    REFERENCES box (cd_box),
+  CONSTRAINT fk_beacon_tipo_beacon
     FOREIGN KEY (cd_tipo_beacon)
     REFERENCES tipo_beacon (cd_tipo_beacon)
     );
