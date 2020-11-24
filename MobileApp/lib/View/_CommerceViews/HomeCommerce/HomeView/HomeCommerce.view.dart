@@ -563,7 +563,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                               navigateDirectly(
                                   CommuniqueView(
                                       communiques: DashBoardData.communiques),
-                                  context);
+                                  context, false);
                             }),
                         Container(
                           padding: EdgeInsets.fromLTRB(0, 0, 0, 10),

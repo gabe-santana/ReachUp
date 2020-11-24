@@ -220,7 +220,7 @@ class _CommuniqueViewState extends State<CommuniqueView> {
         floatingActionButton: FloatingActionButton(
             onPressed: () {
               // Add your onPressed code here!
-              navigateDirectly(AddCommuniqueView(), context);
+              navigateDirectly(AddCommuniqueView(), context, false);
             },
             child: Icon(Icons.add),
             backgroundColor: Colors.green),

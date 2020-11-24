@@ -1,12 +1,6 @@
-import 'dart:io';
-import 'package:ReachUp/Model/Communique.model.dart';
-import 'package:ReachUp/View/SignView/Sign.view.dart';
-import 'package:ReachUp/View/_CommerceViews/HomeCommerce/CommuniqueView/Communique.view.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:get/get.dart';
 import 'View/DebugView/Debug.view.dart';
 import 'View/_Layouts/HomeLayout.layout.dart';
 
@@ -111,8 +105,9 @@ navigateTo(Widget bodyContent, String titlePage, String info,
                   titlePage: titlePage, info: info, bodyContent: bodyContent)));
 }
 
-navigateDirectly(Widget page, BuildContext context) {
-  Navigator.push(context, SlideRightRoute(page: page));
+navigateDirectly(Widget page, BuildContext context, bool size) {
+  Navigator.push(
+      context, size ? ScaleRoute(page: page) : SlideRightRoute(page: page));
 }
 
 //Pages Transitions

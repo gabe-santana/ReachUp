@@ -1,6 +1,9 @@
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
+import 'package:ReachUp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'AddPromotion.view.dart';
 
 class AddCommuniqueView extends StatefulWidget {
   @override
@@ -163,19 +166,20 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                   : Colors.transparent,
               duration: Duration(microseconds: 500),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
                 child: DropdownButtonFormField<DropDownItem>(
                   dropdownColor: Theme.of(context).colorScheme.secondary,
                   decoration: InputDecoration.collapsed(hintText: ''),
                   value: dropDownItems[selectedItemIndex]
                     ..important = selectedItemIndex == 1,
-                  icon: Icon(
-                    // Add this
-                    Icons.keyboard_arrow_down,
-                    size: 25,
-                    color: Colors.white, // Add this
-                    // Add this
-                  ),
+                  icon: IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.keyboard_arrow_down,
+                        size: 25,
+                        color: Colors.white, // Add this
+                        // Add this
+                      )),
                   items: dropDownItems.map((DropDownItem value) {
                     return new DropdownMenuItem<DropDownItem>(
                       value: value,
@@ -183,7 +187,7 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                         children: [
                           //ak
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(15, 0, 20, 0),
+                            padding: const EdgeInsets.fromLTRB(15, 0, 30, 0),
                             child: Icon(
                               value.icon,
                               color: Colors.white,
@@ -225,6 +229,7 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
+                          width: MediaQuery.of(context).size.width,
                           child: Column(
                             children: [
                               AnimatedContainer(
@@ -234,32 +239,29 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                 duration: Duration(milliseconds: 500),
                                 height: selectedItemIndex == 1 ? 60 : 0,
                                 child: ListTile(
+                                  onTap: () {
+                                      navigateTo(AddPromotionView(), "Subcategorias", "Informe as subcategorias da sua promoção", context, true);
+                                  },
                                   title: Row(
                                     children: [
                                       selectedItemIndex == 1
                                           ? Padding(
                                               padding:
                                                   const EdgeInsets.fromLTRB(
-                                                      0, 0, 20, 0),
+                                                      0, 0, 30, 0),
                                               child: Icon(
                                                   Icons.notification_important,
                                                   color: Colors.white),
                                             )
                                           : Container(),
                                       selectedItemIndex == 1
-                                          ? Text("Promoções",
+                                          ? Text("Adicionar Promoções",
                                               style: TextStyle(
                                                   fontSize: 18,
                                                   color: Colors.white))
                                           : Container(),
                                     ],
                                   ),
-                                  trailing: Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                    size: selectedItemIndex == 1 ? 25 : 0,
-                                  ),
-                                  onTap: () {},
                                 ),
                               ),
                             ],
@@ -334,7 +336,7 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                       children: [
                                         Container(
                                           child: Text(
-                                            "Tem validade",
+                                            "Este anúncio prazo",
                                             overflow: TextOverflow.clip,
                                             style: TextStyle(
                                                 color: Theme.of(context)
@@ -355,6 +357,71 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                     hasEndDate = val;
                                   });
                                 }),
+                          ),
+                        ),
+                        AnimatedContainer(
+                          duration: Duration(milliseconds: 500),
+                          height: hasEndDate ? 150 : 0,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: ListTile(
+                                    title: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              10, 0, 20, 0),
+                                          child: Icon(
+                                            Icons.calendar_today,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground,
+                                          ),
+                                        ),
+                                        Text(
+                                            "Data ${pickedDate.day}/${pickedDate.month}/${pickedDate.year}",
+                                            style: TextStyle(fontSize: 16)),
+                                      ],
+                                    ),
+                                    trailing:
+                                        Icon(Icons.edit, color: Colors.grey),
+                                    onTap: _pickDate,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: ListTile(
+                                    title: Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              10, 0, 20, 0),
+                                          child: Icon(
+                                            FontAwesomeIcons.clock,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground,
+                                          ),
+                                        ),
+                                        Text(
+                                            "Horário ${time.hour}h${time.minute}min"),
+                                      ],
+                                    ),
+                                    trailing:
+                                        Icon(Icons.edit, color: Colors.grey),
+                                    onTap: _pickTime,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         Padding(

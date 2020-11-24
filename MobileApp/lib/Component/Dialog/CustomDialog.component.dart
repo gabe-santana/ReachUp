@@ -121,15 +121,13 @@ class CustomWidGetDialog extends StatelessWidget {
 
   Widget content;
   Widget buttonOK;
-  Widget buttonNO;
+  Widget buttaonNO;
   IconData icon;
   final Image image;
 
   CustomWidGetDialog({
     @required this.title,
     @required this.content,
-    @required this.buttonOK,
-    this.buttonNO,
     @required this.icon,
     this.image,
   });
@@ -168,23 +166,25 @@ class CustomWidGetDialog extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16.0),
-              Padding(padding: EdgeInsets.all(10), child: content),
+              Padding(padding: EdgeInsets.all(10), child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: content)),
               SizedBox(height: 24.0),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(); // To close the dialog
-                  },
-                  child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        buttonNO != null ? buttonNO : Container(),
-                        buttonOK
-                      ]),
-                ),
-              ),
+              // Align(
+              //   alignment: Alignment.bottomRight,
+              //   child: FlatButton(
+              //     onPressed: () {
+              //       Navigator.of(context).pop(); // To close the dialog
+              //     },
+              //     child: Row(
+              //         crossAxisAlignment: CrossAxisAlignment.end,
+              //         mainAxisAlignment: MainAxisAlignment.end,
+              //         children: [
+              //           buttonNO != null ? buttonNO : Container(),
+              //           buttonOK
+              //         ]),
+              //   ),
+              // ),
             ],
           ),
         ),
