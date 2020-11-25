@@ -92,7 +92,7 @@ namespace ReachUp
         /// <param name="closingHour"></param>
         /// <param name="beaconUUID"></param>
         public Local(int id, int type, string typeName, string name, ushort floor,
-        string openingHour, string closingHour, string beaconUUID, bool isAvailable) 
+        string openingHour, string closingHour, bool isAvailable) 
         :base()
         {
            this.IdLocal = id;
@@ -102,7 +102,6 @@ namespace ReachUp
            this.Floor = floor; 
            this.OpeningHour = openingHour;
            this.ClosingHour = closingHour;
-           this.BeaconUUID = beaconUUID;
            this.IsAvailable = isAvailable;
         }
         
@@ -236,7 +235,6 @@ namespace ReachUp
                                  ushort.Parse(this.Data["cd_andar"].ToString()),
                                  this.Data["hr_abertura"].ToString(),
                                  this.Data["hr_fechamento"].ToString(),
-                                 this.Data["cd_uuid_beacon"].ToString(),
                                  Convert.ToBoolean(this.Data["ic_disponivel"].ToString())
                               ) 
                            );
@@ -277,7 +275,6 @@ namespace ReachUp
                                  ushort.Parse(this.Data["cd_andar"].ToString()),
                                  this.Data["hr_abertura"].ToString(),
                                  this.Data["hr_fechamento"].ToString(),
-                                 this.Data["cd_uuid_beacon"].ToString(),
                                  Convert.ToBoolean(this.Data["ic_disponivel"].ToString())
                               ) 
                         );

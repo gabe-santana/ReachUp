@@ -153,7 +153,7 @@ namespace ReachUp
                             box_beacons.Add(
                                 new Beacon(
                                     beacons[i].Substring(0, banana),
-                                    beacons[i].Substring(banana + 1, 1);
+                                    beacons[i].Substring(banana + 1, 1)
                                 )
                             );
                         }
