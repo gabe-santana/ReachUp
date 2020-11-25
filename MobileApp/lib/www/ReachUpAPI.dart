@@ -88,7 +88,7 @@ class ReachUpAPI {
 
     httpDelete(String uri) async {
     try {
-      this.response = await dio.get(
+      this.response = await dio.delete(
         "${dio.options.baseUrl}/$uri",
         options: Options(
             headers: {"Authorization":  "Bearer ${Globals.user.token != null ?  Globals.user.token : 'xpto'}"},

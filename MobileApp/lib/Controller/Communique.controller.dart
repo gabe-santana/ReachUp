@@ -13,16 +13,8 @@ class CommuniqueController {
     return communiqueRepository.byLocal(localId, general);
   }
 
-  Future<bool> add(int localId, int type, String description, DateTime start,
-      DateTime end) async {
-    communique = new Communique();
-    communique.localId = localId;
-    communique.type = type;
-    communique.description = description;
-    communique.startDate = start;
-    communique.endDate = end;
-    final data = communique.toJson();
-    return communiqueRepository.add(data);
+  Future<bool> add(Communique communique) async {
+    return communiqueRepository.add(communique);
   }
 
   Future<bool> bindSubCategories() async {

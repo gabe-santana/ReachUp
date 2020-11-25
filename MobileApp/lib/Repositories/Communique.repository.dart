@@ -8,7 +8,7 @@ class CommuniqueRepository extends ReachUpAPI {
 
 
   String getImage(Communique communique) {
-    return "${Globals.urlAPI}/Communique/GetImage?id=${communique.id}";
+    return "${Globals.urlAPI}/Communique/GetImage?id=${communique.communiqueId}";
   }
 
 
@@ -23,8 +23,8 @@ class CommuniqueRepository extends ReachUpAPI {
       return null;
   }
 
-  Future<bool> add(dynamic json) async {
-    await super.httpPost("Communique/", json);
+  Future<bool> add(Communique communique) async {
+    await super.httpPost("Communique/", communique.toJson());
     print("response: ${super.response.data}");
     if (super.response.statusCode == 200) {
       return true;
@@ -60,7 +60,7 @@ class CommuniqueRepository extends ReachUpAPI {
   }
 
   Future<bool> delete(int id, int type) async {
-    await super.httpDelete("Communique?id=${id}&type=${type}");
+    await super.httpDelete("Communique?id=$id&type=$type");
     print("response: ${super.response.data}");
     if (super.response.statusCode == 200) {
       return true;

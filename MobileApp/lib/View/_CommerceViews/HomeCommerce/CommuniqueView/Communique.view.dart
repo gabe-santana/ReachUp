@@ -1,17 +1,17 @@
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
+import 'package:ReachUp/Controller/Communique.controller.dart';
 import 'package:ReachUp/Model/Communique.model.dart';
 import 'package:ReachUp/View/_CommerceViews/HomeCommerce/CommuniqueView/AddCommunique.view.dart';
 import 'package:ReachUp/globals.dart';
 import 'package:ReachUp/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'CommuniqueCard.dart';
 
 class CommuniqueView extends StatefulWidget {
-  List<Communique> communiques;
-
-  CommuniqueView({this.communiques});
+  CommuniqueView();
   @override
   _CommuniqueViewState createState() => _CommuniqueViewState();
 }
@@ -33,7 +33,7 @@ class _CommuniqueViewState extends State<CommuniqueView> {
     List<Communique> filterList;
 
     if (type >= 0) {
-      filterList = widget.communiques
+      filterList = Globals.admLocalCommuniques
           .where((communique) => communique.type == type)
           .toList();
 
@@ -42,7 +42,7 @@ class _CommuniqueViewState extends State<CommuniqueView> {
               CommuniqueCard(communique: c, onSelected: onCommuniqueSelected))
           .toList();
     } else {
-      cards = widget.communiques
+      cards = Globals.admLocalCommuniques
           .map((Communique c) =>
               CommuniqueCard(communique: c, onSelected: onCommuniqueSelected))
           .toList();
@@ -54,7 +54,6 @@ class _CommuniqueViewState extends State<CommuniqueView> {
   }
 
   onCommuniqueSelected(Communique communique, bool remove) {
-    print("comunicado ${communique.description} selecionado!");
 
     setState(() {
       if (remove) {
@@ -87,7 +86,52 @@ class _CommuniqueViewState extends State<CommuniqueView> {
       actions: [
         IconButton(
           icon: Icon(Icons.delete),
-          onPressed: () {},
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) => CustomDialog(
+                      icon: Icons.delete,
+                      title: "Deletar",
+                      description:
+                          "Deseja deletar o(s) item(s) selecionado(s)?",
+                      buttonOK: RaisedButton(
+                        color: Theme.of(context).colorScheme.error,
+                        onPressed: () {
+                             Navigator.pop(context);
+                          setState(() {
+                         
+                            EasyLoading.show();
+
+                            CommuniqueController communiqueController =
+                                new CommuniqueController();
+                            Globals.selectedCommuniques.forEach((comm) {
+                              communiqueController.delete(comm.communiqueId, comm.type);
+                            });
+                            Globals.admLocalCommuniques.removeWhere((admComm) =>   Globals.selectedCommuniques.contains(admComm));
+
+                            Globals.selectedCommuniques.clear();
+                            EasyLoading.dismiss();
+                          });
+                        },
+                        child: Text(
+                          "Deletar",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      buttonNO: FlatButton(
+                        color: Colors.transparent,
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          "Cancelar",
+                          style: TextStyle(
+                              color:
+                                  Theme.of(context).colorScheme.onBackground),
+                        ),
+                      ),
+                    ));
+          },
         )
       ],
       bottom: TabBar(
@@ -145,7 +189,7 @@ class _CommuniqueViewState extends State<CommuniqueView> {
             : AppBar(
                 centerTitle: false,
                 title: Text(
-                  "Comunicados",
+                  "Anúncios",
                   style: TextStyle(fontSize: 23),
                 ),
                 actions: [
@@ -220,7 +264,10 @@ class _CommuniqueViewState extends State<CommuniqueView> {
         floatingActionButton: FloatingActionButton(
             onPressed: () {
               // Add your onPressed code here!
-              navigateDirectly(AddCommuniqueView(), context, false);
+              navigateDirectly(AddCommuniqueView(), context, false)
+                  .then((value) {
+                setState(() {});
+              });
             },
             child: Icon(Icons.add),
             backgroundColor: Colors.green),

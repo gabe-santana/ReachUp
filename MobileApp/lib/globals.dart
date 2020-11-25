@@ -18,6 +18,7 @@ class Globals {
 
   static List<Communique> selectedCommuniques = new List<Communique>();
 
+  static List<Communique> admLocalCommuniques =  new List<Communique>();
 }
 
 class VersionConfig {

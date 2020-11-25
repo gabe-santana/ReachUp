@@ -1,6 +1,5 @@
 import 'package:ReachUp/Model/Local.dart';
 import 'package:ReachUp/Model/User.model.dart';
-import 'package:ReachUp/View/SignView/SignUp.view.dart';
 import 'package:ReachUp/globals.dart';
 import 'package:ReachUp/www/ReachUpAPI.dart';
 

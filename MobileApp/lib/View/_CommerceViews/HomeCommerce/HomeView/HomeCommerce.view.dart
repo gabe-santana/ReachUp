@@ -1,13 +1,11 @@
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Account.controller.dart';
 import 'package:ReachUp/Controller/Communique.controller.dart';
-import 'package:ReachUp/Controller/Local.controller.dart';
 import 'package:ReachUp/Model/Communique.model.dart';
 import 'package:ReachUp/Model/Local.dart';
 import 'package:ReachUp/Repositories/Local.repository.dart';
 import 'package:ReachUp/View/SignView/SignIn.view.dart';
 import 'package:ReachUp/View/_CommerceViews/HomeCommerce/StoreView/Store.view.dart';
-import 'package:ReachUp/View/_Layouts/HomeLayout.layout.dart';
 import 'package:async/async.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -19,11 +17,6 @@ import 'package:intl/intl.dart';
 import '../../../../globals.dart';
 import '../../../../main.dart';
 import '../CommuniqueView/Communique.view.dart';
-
-class DashBoardData {
-  static List<Communique> communiques;
-  static Local local;
-}
 
 class HomeCommerceView extends StatefulWidget {
   @override
@@ -40,10 +33,8 @@ class CommuniqueTypeAnalitic {
       {this.specifOff, this.generalOff, this.notifications, this.alerts});
 
   static List<String> communiqueListFilter = <String>[
-    'Comunicados ativos',
-    'Todos os Comunicados',
-
-  
+    'Anúncios ativos',
+    'Todos os Anúncios',
   ];
   static String communiqueFilter = communiqueListFilter[0];
   static bool general = true;
@@ -52,7 +43,7 @@ class CommuniqueTypeAnalitic {
 class _HomeCommerceViewState extends State<HomeCommerceView> {
   updateData() {
     this.communiqueTypeAnalitic = new CommuniqueTypeAnalitic(
-      specifOff: DashBoardData.communiques
+      specifOff: Globals.admLocalCommuniques
           .where((communique) =>
               communique.type == 0 &&
               (CommuniqueTypeAnalitic.general
@@ -61,7 +52,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                   : true))
           .toList()
           .length,
-      generalOff: DashBoardData.communiques
+      generalOff: Globals.admLocalCommuniques
           .where((communique) =>
               communique.type == 1 &&
               (CommuniqueTypeAnalitic.general
@@ -70,7 +61,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                   : true))
           .toList()
           .length,
-      notifications: DashBoardData.communiques
+      notifications: Globals.admLocalCommuniques
           .where((communique) =>
               communique.type == 2 &&
               (CommuniqueTypeAnalitic.general
@@ -79,7 +70,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                   : true))
           .toList()
           .length,
-      alerts: DashBoardData.communiques
+      alerts: Globals.admLocalCommuniques
           .where((communique) =>
               communique.type == 3 &&
               (CommuniqueTypeAnalitic.general
@@ -126,7 +117,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
   bool isCurrentDateInRange(DateTime startDate, DateTime endDate) {
     final currentDate = DateTime.now();
     print(
-        "Hoje é $currentDate\nComunicado começou em $startDate e terminou em $endDate");
+        "Hoje é $currentDate\Anúncio começou em $startDate e terminou em $endDate");
 
     startDate = DateFormat("yyyy-MM-dd hh:mm:ss").parse(startDate.toString());
     endDate = DateFormat("yyyy-MM-dd hh:mm:ss").parse(endDate.toString());
@@ -144,21 +135,19 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
   CommuniqueTypeAnalitic communiqueTypeAnalitic;
 
   Future _fetchData() async {
-    return this._memoizer.runOnce(() async {
-      await accountController.getShopkeeperLocal().then((value) async {
-        DashBoardData.local = value;
+    await accountController.getShopkeeperLocal().then((value) async {
+      Globals.user.admLocal = value;
 
-        await communiqueController
-            .getByLocal(DashBoardData.local.idLocal, true)
-            .then((value) {
-          DashBoardData.communiques = value;
+      await communiqueController
+          .getByLocal(Globals.user.admLocal.idLocal, true)
+          .then((value) {
+        Globals.admLocalCommuniques = value;
 
-          updateData();
-        });
+        updateData();
       });
-
-      return DashBoardData;
     });
+
+    return Globals.admLocalCommuniques;
   }
 
   Widget bodyBuilder() {
@@ -184,123 +173,116 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
   buildListView() {
     return ListView(
       children: [
-        Card(
-          child: InkWell(
-            onTap: () {},
-            child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      height: MediaQuery.of(context).size.height * 0.3,
-                      child: Center(
-                        child: CachedNetworkImage(
-                          fit: BoxFit.cover,
-                          httpHeaders: {
-                            "Authorization": "Bearer ${Globals.user.token}"
-                          },
-                          imageUrl:
-                              LocalRepository().getImage(DashBoardData.local),
-                          placeholder: (context, url) =>
-                              CircularProgressIndicator(
-                                  valueColor: new AlwaysStoppedAnimation<Color>(
-                                      Colors.grey)),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
+        Column(
+          children: [
+            CachedNetworkImage(
+              fit: BoxFit.fill,
+              width: MediaQuery.of(context).size.width,
+              httpHeaders: {"Authorization": "Bearer ${Globals.user.token}"},
+              imageUrl: LocalRepository().getImage(Globals.user.admLocal),
+              placeholder: (context, url) => Center(
+                child: CircularProgressIndicator(
+                    valueColor: new AlwaysStoppedAnimation<Color>(Colors.grey)),
+              ),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
+            Card(
+              child: InkWell(
+                onTap: () {
+                  setState(() {
+                    updateData();
+                  });
+                },
+                child: Column(
+                  children: [
+                    Container(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                              child: Container(
+                                  child: Text(Globals.user.admLocal.name,
+                                      style: TextStyle(
+                                        fontSize: 19,
+                                      ))),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                    child: FaIcon(
+                                      FontAwesomeIcons.mapMarkedAlt,
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                    ),
+                                  ),
+                                  Text(
+                                    Globals.user.admLocal.floor == 0
+                                        ? "Térreo"
+                                        : "${Globals.user.admLocal.floor}º Andar",
+                                    style: TextStyle(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      fontSize: 16,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                    child: FaIcon(FontAwesomeIcons.clock,
+                                        color: Colors.green),
+                                  ),
+                                  Text(
+                                    "Abre às: ${Globals.user.admLocal.openingHour}",
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.green),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                              child: Row(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                    child: FaIcon(
+                                      FontAwesomeIcons.clock,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Fecha às: ${Globals.user.admLocal.closingHour}",
+                                    style: TextStyle(
+                                        fontSize: 16, color: Colors.red),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                            child: Container(
-                                child: Text(DashBoardData.local.name,
-                                    style: TextStyle(
-                                      fontSize: 19,
-                                    ))),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                  child: FaIcon(
-                                    FontAwesomeIcons.mapMarkedAlt,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                  ),
-                                ),
-                                Text(
-                                  DashBoardData.local.floor == 0
-                                      ? "Térreo"
-                                      : "${DashBoardData.local.floor}º Andar",
-                                  style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                    fontSize: 16,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                  child: FaIcon(FontAwesomeIcons.clock,
-                                      color: Colors.green),
-                                ),
-                                Text(
-                                  "Abre às: ${DashBoardData.local.openingHour}",
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.green),
-                                )
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                  child: FaIcon(
-                                    FontAwesomeIcons.clock,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                                Text(
-                                  "Fecha às: ${DashBoardData.local.closingHour}",
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.red),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
+          ],
         ),
         Card(
           child: InkWell(
@@ -544,26 +526,30 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                             icon: Icons.store,
                           ),
                           onTap: () {
-                              Navigator.pop(context);
+                            Navigator.pop(context);
                             navigateTo(
                                 StoreView(),
                                 "Minha loja",
                                 "Aqui você pode editar os dados de sua loja!",
-                                context, false);
+                                context,
+                                false);
                           },
                         ),
                         ListTile(
                             contentPadding: EdgeInsets.fromLTRB(15, 0, 0, 10),
                             title: ItemMenuTitle(
-                              title: "Comunicados",
+                              title: "Anúncios",
                               icon: Icons.chat,
                             ),
                             onTap: () {
-                                Navigator.pop(context);
-                              navigateDirectly(
-                                  CommuniqueView(
-                                      communiques: DashBoardData.communiques),
-                                  context, false);
+                              Navigator.pop(context);
+                              navigateDirectly(CommuniqueView(), context, false)
+                                  .then((value) {
+                                setState(() {
+                                  updateData();
+                                  _chartKey.currentState.updateData(data);
+                                });
+                              });
                             }),
                         Container(
                           padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
@@ -595,7 +581,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                                   icon: FontAwesomeIcons.infoCircle,
                                 ),
                                 onTap: () {
-                                    Navigator.pop(context);
+                                  Navigator.pop(context);
                                   navigateTo(HomeCommerceView(), "Info",
                                       "Quem somos nós?", context, false);
                                 },

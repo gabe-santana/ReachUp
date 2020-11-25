@@ -1,7 +1,12 @@
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
+import 'package:ReachUp/Controller/Communique.controller.dart';
+import 'package:ReachUp/Model/Communique.model.dart';
+import 'package:ReachUp/View/_CommerceViews/HomeCommerce/CommuniqueView/AddedCommunique.view.dart';
+import 'package:ReachUp/globals.dart';
 import 'package:ReachUp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 
 import 'AddPromotion.view.dart';
 
@@ -30,6 +35,8 @@ class DropDownItem {
 
 class _AddCommuniqueViewState extends State<AddCommuniqueView> {
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+  CommuniqueController communiqueController = new CommuniqueController();
+  Communique communique = new Communique();
 
   List<DropDownItem> dropDownItems = [
     DropDownItem(icon: Icons.category, title: "Selecionar tipo"),
@@ -43,13 +50,19 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
   int selectedItemIndex = 0;
 
   DateTime pickedDate;
+  DateTime pickedEndDate;
   TimeOfDay time;
+  TimeOfDay endTime;
+
+  bool finished = false;
 
   @override
   void initState() {
     super.initState();
     pickedDate = DateTime.now();
+    pickedEndDate = DateTime.now();
     time = TimeOfDay.now();
+    endTime = TimeOfDay.now();
   }
 
   _pickDate() async {
@@ -57,7 +70,7 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
         context: context,
         firstDate: DateTime(DateTime.now().year - 5),
         lastDate: DateTime(DateTime.now().year + 5),
-        initialDate: pickedDate,
+        initialDate: hasEndDate ? pickedEndDate : pickedDate,
         builder: (context, child) {
           return Theme(
             data: ThemeData.light().copyWith(
@@ -79,7 +92,11 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
         });
     if (date != null)
       setState(() {
-        pickedDate = date;
+        if (hasEndDate) {
+          pickedEndDate = date;
+        } else {
+          pickedDate = date;
+        }
       });
   }
 
@@ -118,252 +135,222 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomPadding: true,
-        appBar: AppBar(
-          centerTitle: false,
-          elevation: selectedItemIndex == 1 ? 0 : 5,
-          title: Text(
-            "Novo comunicado",
-            style: TextStyle(fontSize: 23),
-          ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) => CustomDialog(
-                            icon: Icons.info_outline,
-                            title: "Info",
-                            description: "Tela de adicionar comunicados",
-                            buttonOK: RaisedButton(
-                              color: Theme.of(context).colorScheme.primary,
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Text(
-                                "OK",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ));
-                },
-                icon: Icon(Icons.info_outline, size: 25, color: Colors.white))
-          ],
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(Icons.arrow_back, size: 25),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-              );
-            },
-          ),
-          bottom: PreferredSize(
-            child: AnimatedContainer(
-              color: selectedItemIndex == 1
-                  ? Theme.of(context).colorScheme.primary
-                  : Colors.transparent,
-              duration: Duration(microseconds: 500),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-                child: DropdownButtonFormField<DropDownItem>(
-                  dropdownColor: Theme.of(context).colorScheme.secondary,
-                  decoration: InputDecoration.collapsed(hintText: ''),
-                  value: dropDownItems[selectedItemIndex]
-                    ..important = selectedItemIndex == 1,
-                  icon: IconButton(
-                      onPressed: () {},
-                      icon: Icon(
-                        Icons.keyboard_arrow_down,
-                        size: 25,
-                        color: Colors.white, // Add this
-                        // Add this
-                      )),
-                  items: dropDownItems.map((DropDownItem value) {
-                    return new DropdownMenuItem<DropDownItem>(
-                      value: value,
-                      child: Row(
-                        children: [
-                          //ak
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(15, 0, 30, 0),
-                            child: Icon(
-                              value.icon,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Container(
-                            width: 200,
-                            child: new Text(
-                              value.title,
-                              style:
-                                  TextStyle(fontSize: 19, color: Colors.white),
-                            ),
-                          )
-                        ],
-                      ),
+        appBar: this.finished
+            ? AppBar(
+                centerTitle: false,
+                elevation: selectedItemIndex == 1 ? 0 : 5,
+                title: Text(
+                  "Adicionado!",
+                  style: TextStyle(fontSize: 23),
+                ),
+                actions: [
+                  IconButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => CustomDialog(
+                                  icon: Icons.info_outline,
+                                  title: "Info",
+                                  description: "Tela de adicionar comunicados",
+                                  buttonOK: RaisedButton(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "OK",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ));
+                      },
+                      icon: Icon(Icons.info_outline,
+                          size: 25, color: Colors.white))
+                ],
+                leading: Builder(
+                  builder: (BuildContext context) {
+                    return IconButton(
+                      icon: const Icon(Icons.arrow_back, size: 25),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      tooltip: MaterialLocalizations.of(context)
+                          .openAppDrawerTooltip,
                     );
-                  }).toList(),
-                  onChanged: (_selectedItem) {
-                    setState(() {
-                      selectedItemIndex = dropDownItems.indexOf(_selectedItem);
-                    });
                   },
                 ),
-              ),
-            ),
-            preferredSize: Size.fromHeight(50),
-          ),
-        ),
-        resizeToAvoidBottomInset: true,
-        body: Container(
-          child: SingleChildScrollView(
-            child: Center(
-              child: AnimatedPadding(
-                duration: Duration(microseconds: 500),
-                padding: EdgeInsets.fromLTRB(00, 0, 00, 20),
-                child: Container(
-                  child: Form(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            children: [
-                              AnimatedContainer(
-                                color: selectedItemIndex == 1
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Colors.white,
-                                duration: Duration(milliseconds: 500),
-                                height: selectedItemIndex == 1 ? 60 : 0,
-                                child: ListTile(
-                                  onTap: () {
-                                      navigateTo(AddPromotionView(), "Subcategorias", "Informe as subcategorias da sua promoção", context, true);
-                                  },
-                                  title: Row(
-                                    children: [
-                                      selectedItemIndex == 1
-                                          ? Padding(
-                                              padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      0, 0, 30, 0),
-                                              child: Icon(
-                                                  Icons.notification_important,
-                                                  color: Colors.white),
-                                            )
-                                          : Container(),
-                                      selectedItemIndex == 1
-                                          ? Text("Adicionar Promoções",
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  color: Colors.white))
-                                          : Container(),
-                                    ],
+              )
+            : AppBar(
+                centerTitle: false,
+                elevation: selectedItemIndex == 1 ? 0 : 5,
+                title: Text(
+                  "Novo comunicado",
+                  style: TextStyle(fontSize: 23),
+                ),
+                actions: [
+                  IconButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => CustomDialog(
+                                  icon: Icons.info_outline,
+                                  title: "Info",
+                                  description: "Tela de adicionar comunicados",
+                                  buttonOK: RaisedButton(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text(
+                                      "OK",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ));
+                      },
+                      icon: Icon(Icons.info_outline,
+                          size: 25, color: Colors.white))
+                ],
+                leading: Builder(
+                  builder: (BuildContext context) {
+                    return IconButton(
+                      icon: const Icon(Icons.arrow_back, size: 25),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      tooltip: MaterialLocalizations.of(context)
+                          .openAppDrawerTooltip,
+                    );
+                  },
+                ),
+                bottom: PreferredSize(
+                  child: AnimatedContainer(
+                    color: selectedItemIndex == 1
+                        ? Theme.of(context).colorScheme.primary
+                        : Colors.transparent,
+                    duration: Duration(microseconds: 500),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
+                      child: DropdownButtonFormField<DropDownItem>(
+                        dropdownColor: Theme.of(context).colorScheme.secondary,
+                        decoration: InputDecoration.collapsed(hintText: ''),
+                        value: dropDownItems[selectedItemIndex]
+                          ..important = selectedItemIndex == 1,
+                        icon: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.keyboard_arrow_down,
+                              size: 25,
+                              color: Colors.white, // Add this
+                              // Add this
+                            )),
+                        items: dropDownItems.map((DropDownItem value) {
+                          return new DropdownMenuItem<DropDownItem>(
+                            value: value,
+                            child: Row(
+                              children: [
+                                //ak
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(15, 0, 30, 0),
+                                  child: Icon(
+                                    value.icon,
+                                    color: Colors.white,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: ListTile(
-                              title: Row(
-                                children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 0, 20, 0),
-                                    child: Icon(
-                                      Icons.calendar_today,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground,
-                                    ),
+                                Container(
+                                  width: 200,
+                                  child: new Text(
+                                    value.title,
+                                    style: TextStyle(
+                                        fontSize: 19, color: Colors.white),
                                   ),
-                                  Text(
-                                      "Data de início ${pickedDate.day}/${pickedDate.month}/${pickedDate.year}",
-                                      style: TextStyle(fontSize: 16)),
-                                ],
-                              ),
-                              trailing: Icon(Icons.edit, color: Colors.grey),
-                              onTap: _pickDate,
+                                )
+                              ],
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: ListTile(
-                              title: Row(
-                                children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(10, 0, 20, 0),
-                                    child: Icon(
-                                      FontAwesomeIcons.clock,
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onBackground,
-                                    ),
-                                  ),
-                                  Text(
-                                      "Horário de início ${time.hour}h${time.minute}min"),
-                                ],
-                              ),
-                              trailing: Icon(Icons.edit, color: Colors.grey),
-                              onTap: _pickTime,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width,
-                            child: CheckboxListTile(
-                                activeColor: Colors.green,
-                                title: Row(
+                          );
+                        }).toList(),
+                        onChanged: (_selectedItem) {
+                          setState(() {
+                            selectedItemIndex =
+                                dropDownItems.indexOf(_selectedItem);
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  preferredSize: Size.fromHeight(50),
+                ),
+              ),
+        resizeToAvoidBottomInset: true,
+        body: this.finished
+            ? AddedCommuniqueView(newCommunique: (bool _new) {
+                setState(() {
+                  this.finished = !_new;
+                  this.hasEndDate = false;
+                  this.selectedItemIndex = 0;
+                });
+              })
+            : Container(
+                child: SingleChildScrollView(
+                  child: Center(
+                    child: AnimatedPadding(
+                      duration: Duration(microseconds: 500),
+                      padding: EdgeInsets.fromLTRB(00, 0, 00, 20),
+                      child: Container(
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                child: Column(
                                   children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          child: Text(
-                                            "Este anúncio prazo",
-                                            overflow: TextOverflow.clip,
-                                            style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onBackground,
-                                                fontSize: 16),
-                                          ),
+                                    AnimatedContainer(
+                                      color: selectedItemIndex == 1
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .primary
+                                          : Colors.white,
+                                      duration: Duration(milliseconds: 500),
+                                      height: selectedItemIndex == 1 ? 60 : 0,
+                                      child: ListTile(
+                                        onTap: () {
+                                          navigateTo(
+                                              AddPromotionView(),
+                                              "Subcategorias",
+                                              "Informe as subcategorias da sua promoção",
+                                              context,
+                                              true);
+                                        },
+                                        title: Row(
+                                          children: [
+                                            selectedItemIndex == 1
+                                                ? Padding(
+                                                    padding: const EdgeInsets
+                                                        .fromLTRB(0, 0, 30, 0),
+                                                    child: Icon(
+                                                        Icons
+                                                            .notification_important,
+                                                        color: Colors.white),
+                                                  )
+                                                : Container(),
+                                            selectedItemIndex == 1
+                                                ? Text("Adicionar Promoções",
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        color: Colors.white))
+                                                : Container(),
+                                          ],
                                         ),
-                                      ],
-                                    )
+                                      ),
+                                    ),
                                   ],
                                 ),
-                                controlAffinity:
-                                    ListTileControlAffinity.leading,
-                                value: hasEndDate,
-                                onChanged: (val) {
-                                  setState(() {
-                                    hasEndDate = val;
-                                  });
-                                }),
-                          ),
-                        ),
-                        AnimatedContainer(
-                          duration: Duration(milliseconds: 500),
-                          height: hasEndDate ? 150 : 0,
-                          child: Column(
-                            children: [
+                              ),
                               Padding(
                                 padding:
                                     const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -383,7 +370,7 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                           ),
                                         ),
                                         Text(
-                                            "Data ${pickedDate.day}/${pickedDate.month}/${pickedDate.year}",
+                                            "Data de início ${pickedDate.day}/${pickedDate.month}/${pickedDate.year}",
                                             style: TextStyle(fontSize: 16)),
                                       ],
                                     ),
@@ -412,7 +399,7 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                           ),
                                         ),
                                         Text(
-                                            "Horário ${time.hour}h${time.minute}min"),
+                                            "Horário de início ${time.hour}h${time.minute}min"),
                                       ],
                                     ),
                                     trailing:
@@ -421,53 +408,201 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                   ),
                                 ),
                               ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: CheckboxListTile(
+                                      activeColor: Colors.green,
+                                      title: Row(
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                child: Text(
+                                                  "Este anúncio tem prazo",
+                                                  overflow: TextOverflow.clip,
+                                                  style: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .onBackground,
+                                                      fontSize: 16),
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      value: hasEndDate,
+                                      onChanged: (val) {
+                                        setState(() {
+                                          hasEndDate = val;
+                                        });
+                                      }),
+                                ),
+                              ),
+                              AnimatedContainer(
+                                duration: Duration(milliseconds: 500),
+                                height: hasEndDate ? 150 : 0,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 0, 20, 0),
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: ListTile(
+                                          title: Row(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        10, 0, 20, 0),
+                                                child: Icon(
+                                                  Icons.calendar_today,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onBackground,
+                                                ),
+                                              ),
+                                              Text(
+                                                  "Data prazo ${pickedEndDate.day}/${pickedEndDate.month}/${pickedEndDate.year}",
+                                                  style:
+                                                      TextStyle(fontSize: 16)),
+                                            ],
+                                          ),
+                                          trailing: Icon(Icons.edit,
+                                              color: Colors.grey),
+                                          onTap: _pickDate,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          20, 0, 20, 0),
+                                      child: Container(
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: ListTile(
+                                          title: Row(
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        10, 0, 20, 0),
+                                                child: Icon(
+                                                  FontAwesomeIcons.clock,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .onBackground,
+                                                ),
+                                              ),
+                                              Text(
+                                                  "Horário prazo ${endTime.hour}h${endTime.minute}min"),
+                                            ],
+                                          ),
+                                          trailing: Icon(Icons.edit,
+                                              color: Colors.grey),
+                                          onTap: _pickTime,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 20, 20, 20),
+                                child: TextFormField(
+                                  decoration: new InputDecoration(
+                                      labelText: "Descrição",
+                                      alignLabelWithHint: true,
+                                      hintText: "Descreva o comunicado aqui",
+                                      hintStyle: TextStyle(),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                            width: 1.0),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.grey, width: 1.0),
+                                      )),
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: 8,
+                                  maxLength: 1000,
+                                  onSaved: (value) {
+                                    this.communique.description = value;
+                                  },
+                                  validator: (value) {
+                                    if (value.isEmpty) {
+                                      return "Campo obrigatório!";
+                                    }
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                                child: ButtonTheme(
+                                  minWidth: MediaQuery.of(context).size.width,
+                                  child: RaisedButton(
+                                    color: Colors.green,
+                                    onPressed: () {
+                                      //mandar
+                                      if (_formKey.currentState.validate()) {
+                                        _formKey.currentState.save();
+                                        this.communique.type =
+                                            selectedItemIndex - 1;
+                                        this.communique.localId =
+                                            Globals.user.admLocal.idLocal;
+                                        this.communique.startDate = pickedDate;
+
+                                        if (hasEndDate) {
+                                          this.communique.endDate =
+                                              pickedEndDate;
+                                        }
+
+                                        communiqueController
+                                            .add(this.communique)
+                                            .then((value) {
+                                          if (value) {
+                                            setState(() {
+                                              Globals.admLocalCommuniques
+                                                  .add(communique);
+                                              debugPrint("Adicionado");
+                                              this.finished = true;
+                                            });
+                                          } else {
+                                            debugPrint("Não Adicionado");
+                                          }
+                                        });
+                                      }
+                                    },
+                                    child: Text(
+                                      "Adicionar",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
-                          child: TextFormField(
-                            decoration: new InputDecoration(
-                                labelText: "Descrição",
-                                alignLabelWithHint: true,
-                                hintText: "Descreva o comunicado aqui",
-                                hintStyle: TextStyle(),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      width: 1.0),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Colors.grey, width: 1.0),
-                                )),
-                            keyboardType: TextInputType.multiline,
-                            maxLines: 8,
-                            maxLength: 1000,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: ButtonTheme(
-                            minWidth: MediaQuery.of(context).size.width,
-                            child: RaisedButton(
-                              color: Colors.green,
-                              onPressed: () {},
-                              child: Text(
-                                "Adicionar",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
-          ),
-        ));
+              ));
   }
 }

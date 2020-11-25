@@ -94,7 +94,7 @@ class ReachUp extends StatelessWidget {
 
 navigateTo(Widget bodyContent, String titlePage, String info,
     BuildContext context, bool scale) {
-  Navigator.push(
+ return Navigator.push(
       context,
       !scale
           ? SlideRightRoute(
@@ -106,7 +106,7 @@ navigateTo(Widget bodyContent, String titlePage, String info,
 }
 
 navigateDirectly(Widget page, BuildContext context, bool size) {
-  Navigator.push(
+  return Navigator.push(
       context, size ? ScaleRoute(page: page) : SlideRightRoute(page: page));
 }
 
