@@ -1,4 +1,3 @@
-import 'package:ReachUp/Model/Category.model.dart';
 import 'package:ReachUp/Model/Subcategory.model.dart';
 import 'package:ReachUp/Repositories/SubCategory.repository.dart';
 
@@ -12,4 +11,10 @@ class SubCategoryController {
  Future<List<SubCategory>> getByCategory(int categoryId){
     return this.subCategoryRepository.getByCatgory(categoryId);
   }
+
+   Future<List<SubCategory>> getByLocal(int localId){
+    return this.subCategoryRepository.getByLocal(localId);
+  }
+
+
 }

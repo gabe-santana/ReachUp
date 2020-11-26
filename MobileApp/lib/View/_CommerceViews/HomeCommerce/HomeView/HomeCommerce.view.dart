@@ -167,7 +167,8 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                   },
                 );
               }
-            }));
+            })
+            );
   }
 
   buildListView() {

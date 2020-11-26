@@ -562,10 +562,15 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                       //mandar
                                       if (_formKey.currentState.validate()) {
                                         _formKey.currentState.save();
+
+                                        this.communique.communiqueId = 1000;
+                                        
                                         this.communique.type =
                                             selectedItemIndex - 1;
+
                                         this.communique.localId =
                                             Globals.user.admLocal.idLocal;
+
                                         this.communique.startDate = pickedDate;
 
                                         if (hasEndDate) {

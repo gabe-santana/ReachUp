@@ -1,4 +1,6 @@
 import 'package:ReachUp/Model/Category.model.dart';
+import 'package:ReachUp/Repositories/Category.repository.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -30,9 +32,20 @@ class _CategoryCardViewState extends State<CategoryCardView> {
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.30,
                       height: 100,
-                      child: Center(
-                        child: FaIcon(FontAwesomeIcons.image,
-                            color: Colors.grey, size: 60),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.fill,
+                        width: MediaQuery.of(context).size.width,
+                        httpHeaders: {
+                          "Authorization": "Bearer ${Globals.user.token}"
+                        },
+                        imageUrl: CategoryRepository()
+                            .getImage(widget.category.categoryId),
+                        placeholder: (context, url) => Center(
+                          child: CircularProgressIndicator(
+                              valueColor: new AlwaysStoppedAnimation<Color>(
+                                  Colors.grey)),
+                        ),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     ),
                   ),
@@ -63,14 +76,14 @@ class _CategoryCardViewState extends State<CategoryCardView> {
               controlAffinity: ListTileControlAffinity.trailing,
               value: widget.checked,
               onChanged: (val) {
-          
                 setState(() {
                   widget.checked = val;
 
-                  if(val){
+                  if (val) {
                     Globals.categoriesChecked.add(widget.category);
-                  }else{
-                         Globals.categoriesChecked.removeWhere((ctg) => ctg == widget.category);
+                  } else {
+                    Globals.categoriesChecked
+                        .removeWhere((ctg) => ctg == widget.category);
                   }
                 });
               }),

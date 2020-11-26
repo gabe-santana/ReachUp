@@ -1,4 +1,6 @@
 import 'package:ReachUp/Model/Subcategory.model.dart';
+import 'package:ReachUp/Repositories/SubCategory.repository.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -9,8 +11,7 @@ class SubCategoryCard extends StatefulWidget {
 
   bool checked = false;
 
-
-    SubCategoryCard(this.subCategory);
+  SubCategoryCard(this.subCategory);
   @override
   _SubCategoryCardState createState() => _SubCategoryCardState();
 }
@@ -32,9 +33,21 @@ class _SubCategoryCardState extends State<SubCategoryCard> {
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.30,
                       height: 100,
-                      child: Center(
-                        child: FaIcon(FontAwesomeIcons.image,
-                            color: Colors.grey, size: 60),
+                      child: CachedNetworkImage(
+                        fit: BoxFit.fill,
+                        width: MediaQuery.of(context).size.width,
+                        httpHeaders: {
+                          "Authorization": "Bearer ${Globals.user.token}"
+                        },
+                        imageUrl: SubCategoryRepository().getImage(
+                            widget.subCategory.category.categoryId,
+                            widget.subCategory.subCategoryId),
+                        placeholder: (context, url) => Center(
+                          child: CircularProgressIndicator(
+                              valueColor: new AlwaysStoppedAnimation<Color>(
+                                  Colors.grey)),
+                        ),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     ),
                   ),
@@ -62,11 +75,11 @@ class _SubCategoryCardState extends State<SubCategoryCard> {
                 setState(() {
                   widget.checked = val;
 
-                  
-                  if(val){
+                  if (val) {
                     Globals.subCategoriesChecked.add(widget.subCategory);
-                  }else{
-                    Globals.subCategoriesChecked.removeWhere((ctg) => ctg == widget.subCategory);
+                  } else {
+                    Globals.subCategoriesChecked
+                        .removeWhere((ctg) => ctg == widget.subCategory);
                   }
                 });
               }),
