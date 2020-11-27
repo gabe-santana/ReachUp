@@ -97,7 +97,7 @@ $( async () => {
      async function updateLocal(id, name, type, floor)
      {
          const local = new Local(name, type, floor, id);
-         await clsLocal.update(local);
+         await clsLocal.update(local); 
      }
 
      async function updateOpHoursLocal()
