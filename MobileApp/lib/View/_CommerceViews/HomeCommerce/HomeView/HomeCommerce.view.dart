@@ -167,8 +167,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                   },
                 );
               }
-            })
-            );
+            }));
   }
 
   buildListView() {
@@ -346,11 +345,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                               color: Colors.orange[300]),
                         ),
                         Text(
-                            communiqueTypeAnalitic.specifOff > 0
-                                ? communiqueTypeAnalitic.specifOff == 1
-                                    ? "1 Promoção direcionada"
-                                    : "${communiqueTypeAnalitic.specifOff} Promoções direcionadas"
-                                : "Nenhuma promoção direcionada",
+                            "${((communiqueTypeAnalitic.specifOff * 100) / (communiqueTypeAnalitic.specifOff + communiqueTypeAnalitic.generalOff + communiqueTypeAnalitic.notifications + communiqueTypeAnalitic.alerts)).toStringAsPrecision(3)}% Promoções direcionadas",
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onBackground,
@@ -370,11 +365,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                           ),
                         ),
                         Text(
-                            communiqueTypeAnalitic.generalOff > 0
-                                ? communiqueTypeAnalitic.generalOff == 1
-                                    ? "1 Promoção geral"
-                                    : "${this.communiqueTypeAnalitic.generalOff} Promoções gerais"
-                                : "Nenhuma promoção geral",
+                            "${((communiqueTypeAnalitic.generalOff * 100) / (communiqueTypeAnalitic.specifOff + communiqueTypeAnalitic.generalOff + communiqueTypeAnalitic.notifications + communiqueTypeAnalitic.alerts)).toStringAsPrecision(3)}% Promoções gerais",
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onBackground,
@@ -392,11 +383,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                               color: Colors.yellow[300]),
                         ),
                         Text(
-                            this.communiqueTypeAnalitic.notifications > 0
-                                ? this.communiqueTypeAnalitic.notifications == 1
-                                    ? "1 Notificação"
-                                    : "${this.communiqueTypeAnalitic.notifications} Notificações"
-                                : "Nenhuma notificação",
+                            "${((communiqueTypeAnalitic.notifications * 100) / (communiqueTypeAnalitic.specifOff + communiqueTypeAnalitic.generalOff + communiqueTypeAnalitic.notifications + communiqueTypeAnalitic.alerts)).toStringAsPrecision(3)}% Notificações",
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onBackground,
@@ -413,11 +400,7 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                           child: Icon(Icons.report, color: Colors.red[300]),
                         ),
                         Text(
-                            this.communiqueTypeAnalitic.notifications > 0
-                                ? this.communiqueTypeAnalitic.notifications == 1
-                                    ? "1 Alerta"
-                                    : "${this.communiqueTypeAnalitic.alerts} Alertas"
-                                : "Nenhum alerta",
+                            "${((communiqueTypeAnalitic.alerts * 100) / (communiqueTypeAnalitic.specifOff + communiqueTypeAnalitic.generalOff + communiqueTypeAnalitic.notifications + communiqueTypeAnalitic.alerts)).toStringAsPrecision(3)}% Alertas",
                             style: TextStyle(
                                 color:
                                     Theme.of(context).colorScheme.onBackground,

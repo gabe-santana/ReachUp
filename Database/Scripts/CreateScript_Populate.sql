@@ -2595,8 +2595,7 @@ CALL publicarComunicado(146, 1, "Próxima sessâo: 'Sonic: O filme', às 17:00. 
 CALL publicarComunicado(142, 1, "Próxima sessâo: 'Sonic: O filme', às 17:00. Sala 4. Dublado. Duração: 1h40m", now(), DATE_ADD(now(), INTERVAL 45 minute));
 
 /* - Life's Good LG - */
-CALL publicarComunicado(9, 1, "Chegou a nossa nova TV 8K, com tecnologia NanoCell e tamanho de 75 polegadas! Não se preocupe mais com distorção de cores e ângulo de visão, adquira já!", now(), null);
-
+CALL publicarComunicado(7, 0, "Compre o Galaxy Note20 em até 12x sem juros, e ganhe um voucher de R$ 2000!", now(), null);
 /* - Divino Fogão - */
 CALL publicarComunicado(129, 1, "Prato do dia: escargot ao molho madeira", now(), DATE_ADD(now(), INTERVAL 3 hour));
 
@@ -2605,11 +2604,12 @@ CALL publicarComunicado(25, 1, "50% de desconto em todos os produtos!", now(), '
 
 /* - Lojas Americanas - */
 CALL publicarComunicado(5, 1, "Desconto maior para produtos de informática: 80%!", now(), '2020-12-02 22:30:00'); 
-
+CALL publicarComunicado(5, 0, "Compre o Galaxy Note20 em até 12x sem juros, e ganhe um voucher de R$ 2000! (Respostagem)", now(), '2021
+-12-02 22:30:00');
 
 
 /* Notificações */
-
+
 /* - Hihappy - */
 CALL publicarComunicado(6, 2, "Loja fechada por tempo indeterminado, devido à pandemia do novo Coronavírus", now(), null);
 

@@ -47,40 +47,30 @@ VALUES
     "Acessibilidade de elevadores"
 );
 
-INSERT INTO tipo_feedback
-VALUES
-(
-    4,
-    "Acessibilidade de lojas"
-);
 
 INSERT INTO tipo_feedback
 VALUES
 (
-    5,
+    4,
     "Acessibilidade dos corredores"
 );
 
 INSERT INTO tipo_feedback
 VALUES
 (
-    6,
+    5,
     "Acessibilidade da praça de alimentação"
 );
 
 INSERT INTO tipo_feedback
 VALUES
 (
-    7,
-    "Acessibilidade de restaurantes"
+    6,
+    "Acessibilidade em rotas"
 );
 
-INSERT INTO tipo_feedback
-VALUES
-(
-    8,
-    "Acessibilidade dos pontos de lazer"
-);
+
+
 
 
 

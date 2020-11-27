@@ -838,8 +838,11 @@ CREATE PROCEDURE publicarComunicado(
 	pDataFim datetime)
 BEGIN
 		DECLARE 	_cd int;
-		SELECT COUNT(*) INTO @_cd FROM comunicado;
-
+		SELECT max(cd_comunicado)+1 INTO @_cd FROM comunicado;
+	    
+		IF (@_cd is NULL) THEN
+		 SELECT 0 INTO @_cd;
+		END IF;
         /*IF (pDataInicio is null AND pDataFim is null) THEN
 		INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, now(), null);
         ELSE 
@@ -853,7 +856,10 @@ BEGIN
                   END IF;
              END IF;
 	    END IF;*/
-        INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, pDataInicio, pDataFim);
+
+
+	INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, pDataInicio, pDataFim);
+
 END$$
 
 DROP PROCEDURE IF EXISTS relacionarComunicadoSubCategoria$$
@@ -1086,7 +1092,7 @@ BEGIN
 	DELETE FROM categoria WHERE cd_categoria = pCategoria;
 END$$
 
-DROP PROCEDURE IF EXISTS removerSubCategoria$$
+
 CREATE PROCEDURE removerSubCategoria(pCategoria int, pSubCategoria int)
 BEGIN
    DELETE FROM preferencia_cliente WHERE cd_categoria = pCategoria AND cd_sub_categoria = pSubCategoria;
@@ -1094,6 +1100,9 @@ BEGIN
    DELETE FROM comunicado_sub_categoria WHERE cd_categoria = pCategoria AND cd_sub_categoria = pSubCategoria;
    DELETE FROM sub_categoria  WHERE cd_categoria = pCategoria AND cd_sub_categoria = pSubCategoria;
 END$$
+
+
+
 
 DROP PROCEDURE IF EXISTS pegarSubCategorias$$
 CREATE PROCEDURE pegarSubCategorias()
@@ -1108,7 +1117,7 @@ END$$
 DROP PROCEDURE IF EXISTS pegarSubCategoriasCategoria$$
 CREATE PROCEDURE pegarSubCategoriasCategoria(pCategoria int)
 BEGIN
-   SELECT cd_sub_categoria, nm_sub_categoria FROM sub_categoria
+   SELECT cd_categoria, cd_sub_categoria, nm_sub_categoria FROM sub_categoria
    WHERE cd_categoria = pCategoria;
 END$$
 
@@ -1178,7 +1187,6 @@ BEGIN
 	l.hr_abertura,
 	l.hr_fechamento,
     l.ic_disponivel,
-    b.cd_uuid_beacon,
 	substring_index(group_concat(DISTINCT ca.nm_categoria SEPARATOR ','), ',', 3) as categorias,
 	substring_index(group_concat(DISTINCT sc.nm_sub_categoria SEPARATOR ','), ',', 3) as sub_categorias,
     count(DISTINCT(ca.cd_categoria)) as categoriesCount,
@@ -1191,9 +1199,6 @@ BEGIN
 
 	JOIN tipo_local AS tl 
 	ON l.cd_tipo_local = tl.cd_tipo_local
-    
-    JOIN beacon AS b
-    ON l.cd_local = b.cd_local
 
     JOIN horario_local as hl
     ON l.cd_local = hl.cd_local
@@ -1226,7 +1231,6 @@ BEGIN
 	OR
 	formatString(l.cd_andar) LIKE formatString(concat("%",search,"%"))
 
-    AND b.cd_uuid_beacon = 0
     AND l.ic_disponivel = 1
 	GROUP BY l.cd_local
     ORDER BY categoriesCount DESC , subCategoriesCount DESC;

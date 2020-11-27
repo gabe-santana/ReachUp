@@ -31,23 +31,26 @@ class _SubCategoryCardState extends State<SubCategoryCard> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
                     child: Container(
-                      width: MediaQuery.of(context).size.width * 0.30,
-                      height: 100,
-                      child: CachedNetworkImage(
-                        fit: BoxFit.fill,
-                        width: MediaQuery.of(context).size.width,
-                        httpHeaders: {
-                          "Authorization": "Bearer ${Globals.user.token}"
-                        },
-                        imageUrl: SubCategoryRepository().getImage(
-                            widget.subCategory.category.categoryId,
-                            widget.subCategory.subCategoryId),
-                        placeholder: (context, url) => Center(
-                          child: CircularProgressIndicator(
-                              valueColor: new AlwaysStoppedAnimation<Color>(
-                                  Colors.grey)),
+                      width: 70,
+                      height: 70,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: CachedNetworkImage(
+                          fit: BoxFit.fill,
+                          width: MediaQuery.of(context).size.width,
+                          httpHeaders: {
+                            "Authorization": "Bearer ${Globals.user.token}"
+                          },
+                          imageUrl: SubCategoryRepository().getImage(
+                              widget.subCategory.category.categoryId,
+                              widget.subCategory.subCategoryId),
+                          placeholder: (context, url) => Center(
+                            child: CircularProgressIndicator(
+                                valueColor: new AlwaysStoppedAnimation<Color>(
+                                    Colors.grey)),
+                          ),
+                          errorWidget: (context, url, error) => Icon(Icons.error),
                         ),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     ),
                   ),

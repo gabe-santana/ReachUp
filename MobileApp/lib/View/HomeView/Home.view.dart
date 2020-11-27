@@ -70,8 +70,6 @@ class _HomeState extends State<Home> {
             )));
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +107,8 @@ class _HomeState extends State<Home> {
                                                 .onSecondary,
                                             fontSize: 25))),
                                 Container(
-                                    width: MediaQuery.of(context).size.width * 0.7,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.7,
                                     child: Opacity(
                                       opacity: 0.5,
                                       child: Text(Globals.user.email,
@@ -165,20 +164,13 @@ class _HomeState extends State<Home> {
                                   icon: FontAwesomeIcons.solidBell,
                                   selected: _selectedIndex == 1),
                               onTap: () {
-                                navigateTo(NotificationsView(), "Notificações",
-                                    "Suas notificações estarão sempre aqui", context, false);
+                                navigateTo(
+                                    NotificationsView(),
+                                    "Notificações",
+                                    "Suas notificações estarão sempre aqui",
+                                    context,
+                                    false);
                               }),
-                          ListTile(
-                            contentPadding: EdgeInsets.fromLTRB(15, 0, 0, 10),
-                            title: ItemMenuTitle(
-                                title: "Visitas",
-                                icon: FontAwesomeIcons.houseUser,
-                                selected: _selectedIndex == 2),
-                            onTap: () {
-                              navigateTo(NotificationsView(), "Visitas",
-                                  "O histórico de suas visitas estarão sempre aqui", context, false);
-                            },
-                          ),
                         ],
                       ),
                     ),
@@ -211,19 +203,12 @@ class _HomeState extends State<Home> {
                                 icon: FontAwesomeIcons.headset,
                                 selected: _selectedIndex == 3),
                             onTap: () {
-                              navigateTo(NotificationsView(), "Narrador",
-                                  "Aqui você pode alterar suas configurações do narrador de rota", context, false);
-                            },
-                          ),
-                          ListTile(
-                            contentPadding: EdgeInsets.fromLTRB(15, 0, 0, 10),
-                            title: ItemMenuTitle(
-                                title: "Configurações",
-                                icon: FontAwesomeIcons.tools,
-                                selected: _selectedIndex == 4),
-                            onTap: () {
-                              navigateTo(NotificationsView(), "Configurações",
-                                  "Aqui você pode configurar de tudo", context, false);
+                              navigateTo(
+                                  NotificationsView(),
+                                  "Narrador",
+                                  "Aqui você pode alterar suas configurações do narrador de rota",
+                                  context,
+                                  false);
                             },
                           ),
                         ],
@@ -258,8 +243,12 @@ class _HomeState extends State<Home> {
                                 icon: FontAwesomeIcons.solidStar,
                                 selected: _selectedIndex == 5),
                             onTap: () {
-                              navigateTo(NotificationsView(), "Feedback",
-                                  "Aqui você pode dar seu feedback e colaborar com o projeto", context, false);
+                              navigateTo(
+                                  NotificationsView(),
+                                  "Feedback",
+                                  "Aqui você pode dar seu feedback e colaborar com o projeto",
+                                  context,
+                                  false);
                             },
                           ),
                           ListTile(
@@ -398,7 +387,7 @@ class _HomeState extends State<Home> {
             leading: Builder(
               builder: (BuildContext context) {
                 return IconButton(
-                  icon: const Icon(Icons.menu, size: 35),
+                  icon: const Icon(Icons.menu, size: 30),
                   onPressed: () {
                     Scaffold.of(context).openDrawer();
                   },
@@ -408,14 +397,44 @@ class _HomeState extends State<Home> {
               },
             ),
             actions: <Widget>[
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.notifications,
+                        size: 30, color: Colors.white),
+                    onPressed: () {
+                      navigateTo(
+                          NotificationsView(),
+                          "Notificações",
+                          "Suas notificações estarão sempre aqui",
+                          context,
+                          false);
+                    },
+                    tooltip:
+                        MaterialLocalizations.of(context).openAppDrawerTooltip,
+                  ),
+                  Positioned(
+                    top: 3,
+                    right: 3,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.red),
+                      alignment: Alignment.center,
+                      child: Text('0'),
+                    ),
+                  )
+                ],
+              ),
               Builder(
                 builder: (context) => IconButton(
-                  icon: Icon(Icons.search, size: 35, color: Colors.white),
+                  icon: Icon(Icons.search, size: 30, color: Colors.white),
                   onPressed: () => Scaffold.of(context).openEndDrawer(),
                   tooltip:
                       MaterialLocalizations.of(context).openAppDrawerTooltip,
                 ),
-              )
+              ),
             ]),
         body: Container(
           child: Column(children: <Widget>[
@@ -464,7 +483,7 @@ class _HomeState extends State<Home> {
                                         ),
                                       ),
                                     ),
-                                 WalkingInfoView()
+                                    WalkingInfoView()
                                   ],
                                 ));
                               });

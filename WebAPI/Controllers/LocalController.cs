@@ -9,6 +9,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using ReachUp;
+using LibraryClasses.Classes;
 
 namespace ReachUpWebAPI.Controllers
 {
@@ -294,10 +295,10 @@ namespace ReachUpWebAPI.Controllers
         // OK 
         //[Authorize(Roles = "adm")]
         [HttpPost("AddSubCategories")]
-        public async Task<IActionResult> AddSubCategories([FromBody] Local local) 
+        public async Task<IActionResult> AddSubCategories([FromBody] List<SubCategoryLocal> subCategoriesLocal) 
         {
-            if (local != null)
-                return Ok(await local.AddSubCategories());
+            if (subCategoriesLocal != null)
+                return Ok(await new Local().AddSubCategories(subCategoriesLocal));
             return BadRequest("Parameters are null");
         }
 
