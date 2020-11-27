@@ -2,6 +2,8 @@ $( async () => {
 
     const clsLocal = new LocalController();
 
+    const id = 0;
+
     await getByType(0);
 
     function turnLocalsOff()
@@ -24,6 +26,12 @@ $( async () => {
           div2.classList.add('d-flex');
           div2.classList.add('w-100');
           div2.classList.add('justify-content-between');
+
+          /*const icon =  document.createElement('img');
+          icon.src = `../../public/assets/icons/localType/${local.type}.png`;
+          console.log(icon.src);
+
+          div2.append(icon);*/
 
           const h5 = document.createElement('h5');
 

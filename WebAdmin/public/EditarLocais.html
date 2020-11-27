@@ -52,6 +52,7 @@
 <div class="form-group">
     <label for="exampleFormControlSelect1">Andar Selecionado:</label>
     <select id="txtLocalFloor" class="form-control" id="exampleFormControlSelect1">
+      <option>0</option>
       <option>1</option>
       <option>2</option>
       <option>3</option>
@@ -59,28 +60,12 @@
     </select>
   </div>
 
-<br>.
+<br>
 
-<div class="btn-group btn-group-toggle" data-toggle="buttons">
-  <label class="btn btn-primary active">
-    <input type="radio" name="options" id="option1" checked> Vinculado
-  </label>
-  <label class="btn btn-primary">
-    <input type="radio" name="options" id="option3"> Desvinculado
-  </label>
-</div>
+<p>Disponibilidade atual: </p><p id="txtLocalAvailability">Local ativo</p>
+<input type="button" id="btnRefreshAvailability" placeholder="Alterar agora">Alterar</input>
 
-<div class="form-group">
-  <br>
-    <label for="exampleFormControlSelect1">Alterar a Box:</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>Box 63194</option>
-      <option>Box 22194</option>
-      <option>Box 81194</option>
-      <option>Box 69194</option>
-      <option>Box 51194</option>
-    </select>
-  </div><br>
+<br>
 
   <div class="form-group">
       <label for="exampleFormControlSelect1">Horários de funcionamento: </label><br>

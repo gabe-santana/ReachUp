@@ -66,6 +66,12 @@ class LocalController {
           )
     }
 
+    async updateAvailability(id)
+    {
+        return await 
+          this.api.httpAnonymousPatch(`Local/UpdateAvailability?local=${id}`);
+    }
+
     async getAdmins(id)
     {
         return await

@@ -2,6 +2,9 @@ $( async () => {
 
      const clsLocal = new LocalController();
 
+     let _url = new URL(location.href);
+     const localId = _url.searchParams.get('id');
+
      var localType = 0;
 
      var openingHours = {
@@ -35,16 +38,21 @@ $( async () => {
         }
     };
 
-     getLocal(5);
+     getLocal(localId);
 
      async function getLocal(id)
      {
          const local = await clsLocal.get(id);
 
+         console.log(local);
+
          $("#txtLocalName").val(local.name);
-         console.log(local.type); // pegar o tipo certo
-         $("#txtLocalFloor").val(local.type);
+         $("#txtLocalFloor").val(local.floor);
+         console.log(local.floor);
          localType = local.type;
+
+         const pLocalState = $("#txtLocalAvailability");
+         pLocalState.innerText =  local.isAvailable ? 'Local ativo' : 'Local desativo';
 
          const startSeg = $("#startSeg");
          const endSeg = $("#endSeg");
@@ -91,13 +99,25 @@ $( async () => {
          endDom.val(local.alternativeOpeningHours[0].closingTime.substr(0, 5));
          openingHours.dom.closingTime = local.alternativeOpeningHours[0].closingTime.substr(0, 5);
 
-         console.log(openingHours);
      }
 
      async function updateLocal(id, name, type, floor)
      {
          const local = new Local(name, type, floor, id);
          await clsLocal.update(local); 
+     }
+
+     async function refreshLocalAvailability(id)
+     {
+        return await clsLocal.updateAvailability(id);
+     }
+
+     function refreshLocalState()
+     {  
+        const localState = $("#txtLocalAvailability").val();
+        const pLocalState = $("#txtLocalAvailability");
+
+        pLocalState.innerText = localState == 'Local ativo' ? 'Local desativo' : 'Local ativo';
      }
 
      async function updateOpHoursLocal()
@@ -132,59 +152,67 @@ $( async () => {
                    if (startDom != openingHours.dom.openingTime || endDom != openingHours.dom.closingTime)
                    {
                       const openingHours = new OpHours(0, startDom, endDom);
-                      await clsLocal.addOpHours(5, openingHours);
+                      await clsLocal.addOpHours(localId, openingHours);
                    }
                  break;
                  case 1:
                    if (startSeg != openingHours.seg.openingTime || endSeg != openingHours.seg.closingTime)
                    {
                       const openingHours = new OpHours(1, startSeg, endSeg);
-                      await clsLocal.addOpHours(5, openingHours);
+                      await clsLocal.addOpHours(localId, openingHours);
                    }
                  break;
                  case 2:
                    if (startTer != openingHours.ter.openingTime || endTer != openingHours.ter.closingTime)
                    {
                       const openingHours = new OpHours(2, startTer, endTer);
-                      await clsLocal.addOpHours(5, openingHours);
+                      await clsLocal.addOpHours(localId, openingHours);
                    }
                  break;
                  case 3:
                    if (startQua != openingHours.qua.openingTime || endQua != openingHours.qua.closingTime)
                    {
                       const openingHours = new OpHours(3, startQua, endQua);
-                      await clsLocal.addOpHours(5, openingHours);
+                      await clsLocal.addOpHours(localId, openingHours);
                    }
                  break;
                  case 4:
                    if (startQui != openingHours.qui.openingTime || endQui != openingHours.qui.closingTime)
                    {
                       const openingHours = new OpHours(4, startQui, endQui);
-                      await clsLocal.addOpHours(5, openingHours);
+                      await clsLocal.addOpHours(localId, openingHours);
                    }
                  break;
                  case 5:
                    if (startSex != openingHours.sex.openingTime || endSex != openingHours.sex.closingTime)
                    {
                       const openingHours = new OpHours(5, startSex, endSex);
-                      await clsLocal.addOpHours(5, openingHours);
+                      await clsLocal.addOpHours(localId, openingHours);
                    }
                  break;
                  case 6:
                    if (startSab != openingHours.sab.openingTime || endSab != openingHours.sab.closingTime)
                    {
                       const openingHours = new OpHours(6, startSab, endSab);
-                      await clsLocal.addOpHours(5, openingHours);
+                      await clsLocal.addOpHours(localId, openingHours);
                    }
                  break;
              }
          }
      }
 
+     $("#btnRefreshAvailability").click(async () => {
+        if (await refreshLocalAvailability(localId))
+        {
+           refreshLocalState();
+           alert("tentei trocar o estado");
+        }
+     })
+
      $("#btnUpdateLocal").click(async () => {
          const name = $("#txtLocalName").val();
          const floor = $("#txtLocalFloor").val();
-         await updateLocal(5, name, localType, floor);
+         await updateLocal(localId, name, localType, floor);
          await updateOpHoursLocal();
      })
 })
