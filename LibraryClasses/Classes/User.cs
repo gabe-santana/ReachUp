@@ -76,6 +76,21 @@ namespace ReachUp
             this.Email = email;           
         }
 
+        /// <summary>
+        /// Search by name constructor (shopkeeper)
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="email"></param>
+        /// <param name="admLocal"></param>
+        /// <param name="password"></param>
+        public User(string name, string email, Local admLocal, string password)
+        {
+            this.Name = name;
+            this.Email = email;
+            this.AdmLocal = admLocal;
+            this.Password = password;
+        }
+
 
         #endregion
 
@@ -141,6 +156,45 @@ namespace ReachUp
                 return false;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Search shopkeepers by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>User object list</returns>
+        public async Task<List<User>> SearchShopkeeperByName(string name)
+        {
+            if (base.DQLCommand(Procedure.pesquisarUsuarioPorNome, ref this.Data,
+              new string[,]{
+                  {"pNome", name}, {"pRole", "loj"}
+              }
+            ))
+            {
+                if (this.Data.HasRows)
+                {
+                    List<User> users = new List<User>();
+                    while (this.Data.Read())
+                    {
+                        users.Add(
+                            new User(
+                               this.Data["nm_administrador"].ToString(),
+                               this.Data["nm_email_administrador"].ToString(),
+                               await new Local().Get(
+                                   int.Parse(this.Data["cd_local"].ToString())
+                               ),
+                               this.Data["nm_senha_administrador"].ToString()
+                            )
+                        );
+                    }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return users;
+                }
+                base.Disconnect();
+                return null;
+            }
+            return null;
         }
 
         /// <summary>

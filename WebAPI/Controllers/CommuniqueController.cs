@@ -107,13 +107,13 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [HttpPost("BindSubCategories")]
+        /*[HttpPost("BindSubCategories")]
         public async Task<IActionResult> BindSubCategories([FromBody] Communique communique) 
         {
             if (communique != null)
                return Ok(await communique.BindSubCategories());
            return BadRequest("Parameters are null");
-        }
+        }*/
 
         // OK 
         [Authorize]

@@ -64,6 +64,15 @@ namespace ReachUpWebAPI.Controllers
             return BadRequest("Parameters are null");
         }
 
+        //[Authorize(Roles="adm")]
+        [HttpGet("SearchShopkeeperByName")]
+        public async Task<IActionResult> SearchShopkeeperByName(string name)
+        {
+            if (!string.IsNullOrWhiteSpace(name))
+              return Ok(await new User().SearchShopkeeperByName(name));
+            return BadRequest("Parameters are null");  
+        }
+
         //[Authorize (Roles="loj")]
         [HttpGet("GetShopkeeperLocal")]
         public async Task<IActionResult> GetShopkeeperLocal(string email)

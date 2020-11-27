@@ -91,7 +91,6 @@ namespace ReachUp
         /// <param name="floor"></param>
         /// <param name="openingHour"></param>
         /// <param name="closingHour"></param>
-        /// <param name="beaconUUID"></param>
         public Local(int id, int type, string typeName, string name, ushort floor,
         string openingHour, string closingHour, bool isAvailable) 
         :base()

@@ -140,6 +140,17 @@ BEGIN
 	
 END$$
 
+DROP PROCEDURE IF EXISTS pesquisarUsuarioPorNome$$
+CREATE PROCEDURE pesquisarUsuarioPorNome(pNome varchar(45), pRole varchar(3))
+BEGIN
+ IF (pRole = "loj") THEN
+  SELECT nm_email_administrador, cd_local, nm_administrador, nm_senha_administrador
+  FROM administrador
+  WHERE formatString(nm_administrador) LIKE formatString(concat("%", pNome,"%"))
+  AND cd_local IS NOT NULL;
+ END IF;
+END$$
+
 DROP PROCEDURE IF EXISTS checarEmail$$
 CREATE PROCEDURE checarEmail(pEmail varchar(100), pRole varchar(3))
 BEGIN
