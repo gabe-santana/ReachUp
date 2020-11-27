@@ -14,6 +14,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'AddSubCategoryToStore.view.dart';
+import 'EditStore.view.dart';
 
 class StoreView extends StatefulWidget {
   @override
@@ -71,11 +72,15 @@ class _StoreViewState extends State<StoreView> {
                 Positioned(
                     top: 10,
                     right: 10,
-                    child: Icon(
-                      Icons.edit,
-                      color: Theme.of(context).colorScheme.onBackground,
-                      size: 30,
-                    )),
+                    child: IconButton(
+                        icon: Icon(
+                          Icons.edit,
+                          color: Theme.of(context).colorScheme.onBackground,
+                          size: 30,
+                        ),
+                        onPressed: () {
+                          navigateTo(EditSoreView(), "Editar loja", "Aqui você poderá editar os dados referentes a sua loja", context, true);
+                        })),
                 Column(
                   children: [
                     Container(
@@ -208,39 +213,42 @@ class _StoreViewState extends State<StoreView> {
                             tooltip:
                                 "Deletar ${subcategories[index].category.categoryName} ${subcategories[index].subCategoryName}",
                             onPressed: () {
-                                showDialog(
-                context: context,
-                builder: (BuildContext context) => CustomDialog(
-                      icon: Icons.delete,
-                      title: "Deletar",
-                      description:
-                          "Deletar ${subcategories[index].subCategoryName} em ${subcategories[index].category.categoryName} ?",
-                      buttonOK: RaisedButton(
-                        color: Theme.of(context).colorScheme.error,
-                        onPressed: () {
-                             Navigator.pop(context);
-                          setState(() {
-
-                          });
-                        },
-                        child: Text(
-                          "Deletar",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      buttonNO: FlatButton(
-                        color: Colors.transparent,
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          "Cancelar",
-                          style: TextStyle(
-                              color:
-                                  Theme.of(context).colorScheme.onBackground),
-                        ),
-                      ),
-                    ));
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      CustomDialog(
+                                        icon: Icons.delete,
+                                        title: "Deletar",
+                                        description:
+                                            "Deletar ${subcategories[index].subCategoryName} em ${subcategories[index].category.categoryName} ?",
+                                        buttonOK: RaisedButton(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .error,
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                            setState(() {});
+                                          },
+                                          child: Text(
+                                            "Deletar",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        buttonNO: FlatButton(
+                                          color: Colors.transparent,
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text(
+                                            "Cancelar",
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onBackground),
+                                          ),
+                                        ),
+                                      ));
                             },
                             icon: Icon(Icons.delete,
                                 color: Theme.of(context).colorScheme.error),
@@ -319,12 +327,12 @@ class _StoreViewState extends State<StoreView> {
                   icon: Icon(Icons.add),
                   color: Colors.white,
                   onPressed: () {
-                     navigateTo(
-                                AddSubCategoryToStoreView(),
-                                "SubCategorias",
-                                "Aqui você pode adicionar subcategorias a sua loja!",
-                                context,
-                                false);
+                    navigateTo(
+                        AddSubCategoryToStoreView(),
+                        "SubCategorias",
+                        "Aqui você pode adicionar subcategorias a sua loja!",
+                        context,
+                        false);
                   },
                 ),
               ),
