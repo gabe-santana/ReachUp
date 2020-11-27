@@ -34,7 +34,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm, dev")]
+        //[Authorize(Roles = "adm, dev")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] LocalType localType)
         {
@@ -44,7 +44,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm, dev")]
+        //[Authorize(Roles = "adm, dev")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] LocalType localType)
         {
@@ -54,7 +54,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm, dev")]
+        //[Authorize(Roles = "adm, dev")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {

@@ -10,7 +10,7 @@ namespace ReachUpWebAPI.Controllers
     public class FeedbackController : ControllerBase
     {
         // OK 
-        [Authorize(Roles = "adm")]
+        //[Authorize(Roles = "adm")]
         [HttpGet("ByDate")]
         public async Task<IActionResult> ByDate(int type, string begin, string end)
         {
@@ -23,7 +23,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "cli,adm")]
+        //[Authorize(Roles = "cli,adm")]
         [HttpGet("ByUser")]
         public async Task<IActionResult> ByUser(string email) 
         {
@@ -34,7 +34,7 @@ namespace ReachUpWebAPI.Controllers
 
 
         // OK
-        [Authorize(Roles = "adm")]
+        //[Authorize(Roles = "adm")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(int type)
         {
@@ -44,7 +44,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm,cli")]
+        //[Authorize(Roles = "adm,cli")]
         [HttpGet]
         public async Task<IActionResult> Get(int id, int type)
         {
@@ -56,7 +56,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "cli")]
+        //[Authorize(Roles = "cli")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Feedback feedback) 
         {
@@ -66,7 +66,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize (Roles = "cli")]
+        //[Authorize (Roles = "cli")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] Feedback feedback) 
         {
@@ -76,7 +76,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm")]
+        //[Authorize(Roles = "adm")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id, int type)
         {

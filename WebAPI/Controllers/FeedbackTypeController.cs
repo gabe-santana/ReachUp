@@ -26,7 +26,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm, dev")]
+        //[Authorize(Roles = "adm, dev")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
@@ -34,7 +34,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm, dev")]
+        //[Authorize(Roles = "adm, dev")]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] FeedbackType feedbackType)
         {
@@ -44,7 +44,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm")]
+        //[Authorize(Roles = "adm")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] FeedbackType feedbackType)
         {
@@ -54,7 +54,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm")]
+        //[Authorize(Roles = "adm")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
@@ -64,7 +64,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize]
+        //[Authorize]
         [HttpGet("GetImage")]
         public async Task<IActionResult> GetImage(int id)
         {

@@ -28,7 +28,7 @@ namespace ReachUpWebAPI.Controllers
         #region Actions
 
         // OK 
-        [Authorize]
+        //[Authorize]
         [HttpGet("Connect")]
         public async Task<IActionResult> Connect(string uuid) 
         {
@@ -78,7 +78,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize]
+        //[Authorize]
         [HttpGet("FetchOpHours")]
         public async Task<IActionResult> FetchOpHours(int local, int weekDay)
         {
@@ -90,7 +90,7 @@ namespace ReachUpWebAPI.Controllers
         }
  
         // OK 
-        [Authorize(Roles="")]
+        //[Authorize(Roles="")]
         [HttpGet("CheckBeacon")]
         public async Task<IActionResult> CheckBeacon(string uuid)
         {
@@ -262,7 +262,7 @@ namespace ReachUpWebAPI.Controllers
 
 
         // OK 
-        [Authorize(Roles = "adm")]
+        //[Authorize(Roles = "adm")]
         [HttpPost("AddOpHours")]
         public async Task<IActionResult> AddOpHours([FromBody] Local local) 
         {
@@ -272,7 +272,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         //OK 
-        [Authorize(Roles = "adm")]
+        //[Authorize(Roles = "adm")]
         [HttpPatch]
         public async Task<IActionResult> Patch([FromBody] Local local)
         {
@@ -282,7 +282,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm")]
+        //[Authorize(Roles = "adm")]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
@@ -292,7 +292,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm")]
+        //[Authorize(Roles = "adm")]
         [HttpPost("AddSubCategories")]
         public async Task<IActionResult> AddSubCategories([FromBody] Local local) 
         {
@@ -302,7 +302,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm")]
+        //[Authorize(Roles = "adm")]
         [HttpDelete("DeleteSubCategory")]
         public async Task<IActionResult> DeleteSubCategory(int local, int category, int subCategory)
         {
@@ -315,7 +315,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm")]
+        //[Authorize(Roles = "adm")]
         [HttpGet("GetAdmins")]
         public async Task<IActionResult> GetAdmins(int local)
         {
@@ -325,7 +325,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK
-        [Authorize(Roles = "adm")]
+        //[Authorize(Roles = "adm")]
         [HttpPost("ConnectAdmin")]
         public async Task<IActionResult> ConnectAdmin(string email, int local) 
         {
