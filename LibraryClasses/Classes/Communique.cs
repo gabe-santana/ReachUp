@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using BusinessLayer.Classes;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -399,15 +400,15 @@ namespace ReachUp
         /// Adds subcategories to a targeted promotion
         /// </summary>
         /// <returns>Bool</returns>
-        public Task<bool> BindSubCategories()
+        public Task<bool> BindSubCategories(List<CommuniqueSubCategory> CommuniqueSubCategory)
         {
-            for (int i = 0; i < this.CommuniqueSubCategory.Count(); i++)
+            for (int i = 0; i < CommuniqueSubCategory.Count(); i++)
             {
                 if (!base.DMLCommand(Procedure.relacionarComunicadoSubCategoria, 
                        new string[,] {
-                      {"pComunicado", this.CommuniqueId.ToString()},
-                      {"pCategoria", this.CommuniqueSubCategory[i].Category.CategoryId.ToString() },
-                      {"pSubCategoria", this.CommuniqueSubCategory[i].SubCategoryId.ToString() }
+                      {"pComunicado", CommuniqueSubCategory[i].Communique.CommuniqueId.ToString()},
+                      {"pCategoria", CommuniqueSubCategory[i].Category.CategoryId.ToString() },
+                      {"pSubCategoria", CommuniqueSubCategory[i].SubCategory.SubCategoryId.ToString() }
                 }))
                 {
                     return Task.FromResult(false);
