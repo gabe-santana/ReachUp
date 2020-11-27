@@ -11,10 +11,10 @@ namespace ReachUp
     {
         #region Properties
         public int SubCategoryId { get; set; }
-        public Category Category { get;set; }
-        public int CategoryId {get; set; }
+        public Category Category { get; set; }
+        public int CategoryId { get; set; }
         public string SubCategoryName { get; set; }
-     
+
         #endregion
 
 
@@ -25,7 +25,7 @@ namespace ReachUp
         /// <summary>
         /// Null constructor
         /// </summary>
-        public SubCategory() : base() {}
+        public SubCategory() : base() { }
 
         /// <summary>
         /// Default constructor
@@ -33,7 +33,7 @@ namespace ReachUp
         /// <param name="Id"></param>
         /// <param name="Category"></param>
         /// <param name="Name"></param>
-        public SubCategory(int Id, Category Category, string Name) : base() 
+        public SubCategory(int Id, Category Category, string Name) : base()
         {
             this.SubCategoryId = Id;
             this.Category = Category;
@@ -45,7 +45,7 @@ namespace ReachUp
         /// </summary>
         /// <param name="id"></param>
         /// <param name="category"></param>
-        public SubCategory(int Id, Category Category) : base() 
+        public SubCategory(int Id, Category Category) : base()
         {
             this.SubCategoryId = Id;
             this.Category = Category;
@@ -56,7 +56,7 @@ namespace ReachUp
         /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        public SubCategory(int Id, string name) : base() 
+        public SubCategory(int Id, string name) : base()
         {
             this.SubCategoryId = Id;
             this.SubCategoryName = name;
@@ -70,32 +70,32 @@ namespace ReachUp
         /// <returns>Subcategory object</returns>
         public Task<SubCategory> Get(int categoryId, int subCategoryId)
         {
-           if (base.DQLCommand(Procedure.pegarSubCategoria, ref this.Data,
-              new string[,]{
+            if (base.DQLCommand(Procedure.pegarSubCategoria, ref this.Data,
+               new string[,]{
                   {"pCategoria", categoryId.ToString()},
                   {"pSubCategoria", subCategoryId.ToString()}
-              }
-           ))
-           {
-               if (this.Data.HasRows)
-               {
-                   SubCategory subCategory = null;
-
-                   if (this.Data.Read())
-                   {
-                       subCategory = new SubCategory(
-                           subCategoryId,
-                           this.Data["nm_sub_categoria"].ToString()
-                       );
-                   }
-                   this.Data.Close();
-                   base.Disconnect();
-                   return Task.FromResult(subCategory);
                }
-               base.Disconnect();
-               return null;
-           }
-           return null;
+            ))
+            {
+                if (this.Data.HasRows)
+                {
+                    SubCategory subCategory = null;
+
+                    if (this.Data.Read())
+                    {
+                        subCategory = new SubCategory(
+                            subCategoryId,
+                            this.Data["nm_sub_categoria"].ToString()
+                        );
+                    }
+                    this.Data.Close();
+                    base.Disconnect();
+                    return Task.FromResult(subCategory);
+                }
+                base.Disconnect();
+                return null;
+            }
+            return null;
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace ReachUp
         /// </summary>
         /// <param name="category"></param>
         /// <returns>Subcategory object list</returns>
-        public Task<List<SubCategory>> ByCategory(int category)
+        public async Task<List<SubCategory>> ByCategory(int category)
         {
             if (base.DQLCommand(Procedure.pegarSubCategoriasCategoria, ref this.Data,
                  new string[,]{
@@ -119,13 +119,14 @@ namespace ReachUp
                         subCategories.Add(
                             new SubCategory(
                                int.Parse(this.Data["cd_sub_categoria"].ToString()),
+                               await new Category().Get(int.Parse(this.Data["cd_categoria"].ToString())),
                                this.Data["nm_sub_categoria"].ToString()
                             )
                         );
                     }
                     this.Data.Close();
                     base.Disconnect();
-                    return Task.FromResult(subCategories);
+                    return subCategories;
                 }
                 base.Disconnect();
                 return null;
@@ -138,7 +139,7 @@ namespace ReachUp
         /// </summary>
         /// <param name="local"></param>
         /// <returns>Subcategory object list</returns>
-        public async Task<List<SubCategory>> ByLocal(int local) 
+        public async Task<List<SubCategory>> ByLocal(int local)
         {
             if (base.DQLCommand(Procedure.pegarSubcategoriasLocal, ref this.Data, new string[,] {
                 {"pLocal", local.ToString()}
@@ -148,7 +149,7 @@ namespace ReachUp
                 {
                     List<SubCategory> subCategories = new List<SubCategory>();
 
-                    while (this.Data.Read()) 
+                    while (this.Data.Read())
                     {
                         subCategories.Add(
                             new SubCategory(
@@ -173,7 +174,7 @@ namespace ReachUp
         /// </summary>
         /// <param name="communique"></param>
         /// <returns>Subcategory object list</returns>
-        public async Task<List<SubCategory>> ByCommunique(int communique) 
+        public async Task<List<SubCategory>> ByCommunique(int communique)
         {
             if (base.DQLCommand(Procedure.pegarSubCategoriasComunicado, ref this.Data, new string[,] {
                 {"pComunicado", communique.ToString()}
@@ -183,7 +184,7 @@ namespace ReachUp
                 {
                     List<SubCategory> subCategories = new List<SubCategory>();
 
-                    while (this.Data.Read()) 
+                    while (this.Data.Read())
                     {
                         subCategories.Add(
                             new SubCategory(
@@ -209,13 +210,13 @@ namespace ReachUp
         /// <returns>Bool</returns>
         public Task<bool> Add()
         {
-           if (base.DMLCommand(Procedure.cadastrarSubCategoria, 
-             new string[,] {
+            if (base.DMLCommand(Procedure.cadastrarSubCategoria,
+              new string[,] {
                 {"pCdCategoria", this.Category.CategoryId.ToString()},
                 {"pNome", this.SubCategoryName}
-            }))
+             }))
             {
-               return Task.FromResult(true);
+                return Task.FromResult(true);
             }
             return Task.FromResult(false);
         }
@@ -228,17 +229,18 @@ namespace ReachUp
         /// <returns>Bool</returns>
         public Task<bool> Delete(int category, int subCategory)
         {
-           if (base.DMLCommand(Procedure.removerSubCategoria,
-                new string[,]{
+            if (base.DMLCommand(Procedure.removerSubCategoria,
+                 new string[,]{
                    {"pCategoria", category.ToString()},
                    {"pSubCategoria", subCategory.ToString()}
-                }
-            ))
+                 }
+             ))
             {
-               return Task.FromResult(true);
+                return Task.FromResult(true);
             }
             return Task.FromResult(false);
         }
-        
+
+
     }
 }

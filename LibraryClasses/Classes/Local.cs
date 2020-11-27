@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using LibraryClasses.Classes;
+using MySql.Data.MySqlClient;
 using ReachUp;
 using System;
 using System.Collections.Generic;
@@ -557,15 +558,15 @@ namespace ReachUp
         /// </summary>
         /// <returns>Bool</returns>
         /// <remarks>This action should be performed after registering the location, or changing the establishiment that owns it</remarks>
-        public Task<bool> AddSubCategories()
+        public Task<bool> AddSubCategories(List<SubCategoryLocal> subCategoryLocal)
         {
-            for (int i = 0; i < this.SubCategories.Count; i++)
+            for (int i = 0; i < subCategoryLocal.Count; i++)
             {
                 if (!base.DMLCommand(Procedure.defSubCategoriaLocal, 
                 new string[,] {
-                    {"pLocal", this.IdLocal.ToString()},
-                    {"pCategoria", this.SubCategories[i].Category.CategoryId.ToString()},
-                    {"pSubCategoria", this.SubCategories[i].SubCategoryId.ToString()},
+                    {"pLocal", subCategoryLocal[i].Local.IdLocal.ToString()},
+                    {"pCategoria", subCategoryLocal[i].Category.CategoryId.ToString()},
+                    {"pSubCategoria", subCategoryLocal[i].SubCategory.SubCategoryId.ToString()},
                 }))
                 {
                    return Task.FromResult(false);
