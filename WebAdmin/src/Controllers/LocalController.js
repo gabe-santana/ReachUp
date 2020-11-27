@@ -16,6 +16,12 @@ class LocalController {
           this.api.httpAnonymousGet(`Local/Search?s=${s}`);
     }
 
+    async seek(s)
+    {
+      return await 
+        this.api.httpAnonymousGet(`Local/Seek?s=${s}`);
+    }
+
     async getAll(type)
     {
         return await 

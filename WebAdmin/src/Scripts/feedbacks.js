@@ -59,7 +59,6 @@ $( () => {
             const span4 = document.createElement('span');
             span4.classList.add("fa"); 
             span4.classList.add("fa-star");
-            div.append(span4);
 
             const span5 = document.createElement('span');
             span5.classList.add("fa"); 
