@@ -1,7 +1,9 @@
 $( async () => {
 
+    
     const clsFeedbackType = new FeedbackTypeController();
     const feedbackTypes = await clsFeedbackType.getAll();
+    console.log(feedbackTypes);
  
     const cmbTypes = $("#cmbFeedbackType");
  

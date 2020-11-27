@@ -168,6 +168,30 @@ body {
   margin-left: 10px;
 }
 
+#ajuste2{
+  margin-left: 10px;
+}
+
+#ajuste3{
+  width: 200px;
+}
+
+#ajuste4{
+
+  margin-left: 10px;
+}
+
+#ajuste5{
+
+}
+
+#lbl1{
+  margin-left: 15px;
+}
+
+#lbl2{
+}
+
 #centro{
   margin-left: 43%;
   background-color: white;
@@ -195,6 +219,7 @@ body {
   margin-right: 100px;
   margin-left: 100px;
   padding: 50px;
+  height: auto;
 }
 
 .icone{
@@ -204,12 +229,37 @@ body {
   transform: translateY(-50%);
 }
 
+#branco label{
+  text-align: center;
+}
+
+#nav2{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-left: -40px;
+  }
+
+#listgroup3{
+  width: 40%;
+  float: right;
+}
+
+.baixo{
+  overflow:hidden;
+  overflow-y:scroll;
+}
+
+.checked {
+  color: orange;
+}
+
 
 @media screen and (max-width: 1000px) {
    #branco{
     margin-left: 5px;
     margin-right: 5px;
    }
+   
 
 #barra{
   width: 60%;
@@ -219,4 +269,6 @@ body {
   width: 40%;
 }
 
+.checked {
+  color: orange;
 }
