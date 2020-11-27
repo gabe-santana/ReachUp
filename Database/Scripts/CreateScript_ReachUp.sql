@@ -80,7 +80,7 @@ CREATE TABLE IF NOT EXISTS local (
   cd_andar INT(3) NOT NULL,
   hr_abertura TIME,
   hr_fechamento TIME,
-  ic_disponivel bool,
+  ic_disponivel bool default true,
   PRIMARY KEY (cd_local),
   CONSTRAINT fk_local_tipo_local
     FOREIGN KEY (cd_tipo_local)
