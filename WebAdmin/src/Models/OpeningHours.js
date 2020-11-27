@@ -1,4 +1,4 @@
-class OpeningHours {
+class OpHours {
     WeekDay;
     OpeningTime;
     ClosingTime;

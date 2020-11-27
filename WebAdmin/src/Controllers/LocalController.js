@@ -4,16 +4,22 @@ class LocalController {
        this.api = new ApiConnection();
     }
 
+    async get(id)
+    {
+        return await 
+          this.api.httpAnonymousGet(`Local?id=${id}`);
+    }
+
     async search(s)
     {
         return await 
-          this.api.httpGet(`Local/Search?s=${s}`);
+          this.api.httpAnonymousGet(`Local/Search?s=${s}`);
     }
 
     async getAll(type)
     {
         return await 
-          this.api.httpGet(`Local/GetAll?type=${type}`);
+          this.api.httpAnonymousGet(`Local/GetAll?type=${type}`);
     }
 
     async fetchOpHours(localId, weekDay)
@@ -28,67 +34,36 @@ class LocalController {
           this.api.httpAnonymousPatch(
           `Local/`,
           {
-             
-             type: Local.LocalType,
+             idLocal: Local.Id,
+             type: Local.Type,
              name: Local.Name, 
              floor: Local.Floor,
-             openingHour: Local.OpeningHour,
-             closingHour: Local.ClosingHour,
-             beaconUUID: Local.BeaconUUID
-
+             openingHour: null,
+             closingHour: null
           }
         );
     }
 
-    async addSubCategories(local, subCategories)
-    {
-        return await
-          this.api.httpAnonymousPost(
-              `Local/AddSubCategories/`,
-              {
-                  IdLocal: local.Id,
-                  subCategories: JSON.stringify(subCategories)
-              }
-          )
-    }
-
-    async deleteSubCategory(localId, categoryId, subCategoryId)
-    {
-        return await
-         this.api.httpAnonymousDelete(
-             `Local/DeleteSubCategory?local=${localId}&category=${categoryId}&subCategory=${subCategoryId}`
-         )
-    }
-
-    async addOpHours(Local, openingHours)
+    async addOpHours(id, openingHours)
     {
         return await 
           this.api.httpAnonymousPost(
               `Local/AddOpHours/`,
               {
-
+                 idLocal : id,
+                 openingHours: {
+                     weekDay: openingHours.WeekDay,
+                     openingTime: openingHours.OpeningTime,
+                     closingTime: openingHours.ClosingTime
+                 }
               }
-          )
-    }
-
-    async deleteOpHours(localId, weekDay)
-    {
-        return await
-          this.api.httpAnonymousDelete(`Local/DeleteOpHours?local=${localId}&weekDay=${weekDay}`);
-    }
-
-    async uploadImage(image)
-    {
-        return await 
-          this.api.httpPostFile(
-             `Local/UploadImage/`, image, 'image/png'
           )
     }
 
     async getAdmins(id)
     {
         return await
-          this.api.httpGet(
+          this.api.httpAnonymousGet(
              `Local/GetAdmins?local=${id}`
           )
     }
