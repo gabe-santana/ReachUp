@@ -2,14 +2,43 @@ $( async () => {
 
     const clsLocal = new LocalController();
 
-    const id = 0;
-
     await getByType(0);
 
     function turnLocalsOff()
     {
         const localsSection = $("#locals");
         localsSection.empty();
+    }
+
+    function removeLocals(param)
+    {
+       const localsSection = $("#locals");
+       const banana = Array.from(localsSection);
+       
+       if (param == 0)
+       {
+           banana.forEach(local => {
+
+               for (let i = 0; i < local.children.length; i++)
+               {
+                   if (local.children[i].children[2].innerHTML == 'Local desativo')
+                   {
+                      local.children[i].remove();
+                   }
+               }
+           })
+           return;
+       }
+       banana.forEach(local => {
+
+        for (let i = 0; i < local.children.length; i++)
+        {
+            if (local.children[i].children[2].innerHTML == 'Local ativo')
+            {
+               local.children[i].remove();
+            }
+        }
+    })
     }
 
     function showLocals(locals)
@@ -71,6 +100,19 @@ $( async () => {
 
           localsSection.append(div);
         })
+
+        const banana = $("#btnShowOnlyTheAvailable");
+        const apple = $("#btnShowOnlyTheUnavailable");
+
+        if (banana.is(':checked'))
+        {
+            removeLocals(0);
+            alert("ok bye");
+        }
+        else if (apple.is(':checked'))
+        {
+            removeLocals(1);
+        }
     }
 
     async function getByType(type)
@@ -79,7 +121,7 @@ $( async () => {
        showLocals(locals);
     }
 
-    async function Search(search)
+    async function Seek(search)
     {
        const locals = await clsLocal.seek(search);
        showLocals(locals);
@@ -91,7 +133,8 @@ $( async () => {
     })
 
     $("#txtSearch").change( async () => {
+
         const search = $("#txtSearch").val();
-        await Search(search);
+        await Seek(search);
     })
 })
