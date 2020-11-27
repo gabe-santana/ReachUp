@@ -25,7 +25,7 @@ class _CategoryStoreCardState extends State<CategoryStoreCard> {
   SubCategoryController subCategoryController = new SubCategoryController();
 
   Widget buildListView(List<SubCategory> subCategoriesByCat) {
-    subCategoriesByCat.removeWhere((subcat) => Globals.subcategoriesLocal.contains(subcat));
+    // subCategoriesByCat.removeWhere((subcat) => Globals.subcategoriesLocal.contains(subcat));
     return ListView.builder(
       itemCount: subCategoriesByCat.length,
       itemBuilder: (context, index) =>

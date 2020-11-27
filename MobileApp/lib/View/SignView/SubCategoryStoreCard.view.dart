@@ -9,9 +9,13 @@ import '../../globals.dart';
 class SubCategoryStoreCardView extends StatefulWidget {
   SubCategory subCategory;
 
-  bool checked = false;
-
-  SubCategoryStoreCardView(this.subCategory);
+  bool checked;
+  bool exists;
+   
+  SubCategoryStoreCardView(this.subCategory){
+      this.checked = Globals.subCategoriesStoreChecked.contains(this.subCategory);
+      this.exists = Globals.subcategoriesLocal.contains(this.subCategory);
+  }
 
   @override
   _SubCategoryStoreCardViewState createState() =>
@@ -29,7 +33,59 @@ class _SubCategoryStoreCardViewState extends State<SubCategoryStoreCardView> {
           color: Colors.grey[100],
           child: InkWell(
             splashColor: Theme.of(context).primaryColor,
-            child: CheckboxListTile(
+            child: 
+            !widget.exists ? 
+             Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                      child: Container(
+              
+                        width: 40,
+                        height: 40,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: CachedNetworkImage(
+                            fit: BoxFit.fill,
+                          
+                            httpHeaders: {
+                              "Authorization": "Bearer ${Globals.user.token}"
+                            },
+                            imageUrl: SubCategoryRepository().getImage(
+                                widget.subCategory.category.categoryId,
+                                widget.subCategory.subCategoryId),
+                            placeholder: (context, url) => Center(
+                              child: CircularProgressIndicator(
+                                  valueColor: new AlwaysStoppedAnimation<Color>(
+                                      Colors.grey)),
+                            ),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 120,
+                          child: Text(
+                            "${widget.subCategory.subCategoryName} (Já adicionado)",
+                            overflow: TextOverflow.clip,
+                            style: TextStyle(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
+                                fontSize: 18),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                )
+            
+            : CheckboxListTile(
                 activeColor: Theme.of(context).primaryColor,
                 title: Row(
                   children: [
@@ -86,9 +142,9 @@ class _SubCategoryStoreCardViewState extends State<SubCategoryStoreCardView> {
                     widget.checked = val;
 
                     if (val) {
-                      Globals.subCategoriesChecked.add(widget.subCategory);
+                      Globals.subCategoriesStoreChecked.add(widget.subCategory);
                     } else {
-                      Globals.subCategoriesChecked
+                      Globals.subCategoriesStoreChecked
                           .removeWhere((ctg) => ctg == widget.subCategory);
                     }
                   });

@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:ReachUp/Model/Communique.model.dart';
+import 'package:ReachUp/Model/CommuniqueSubCategory.model.dart';
 import 'package:ReachUp/www/ReachUpAPI.dart';
 
 import '../globals.dart';
@@ -32,13 +35,15 @@ class CommuniqueRepository extends ReachUpAPI {
       return false;
   }
 
-  Future<bool> bindSubCategories(dynamic json) async {
-    await super.httpPost("Communique/BindSubCategories", json);
+  Future<bool> bindSubCategories(List<CommuniqueSubCategory> communiqueSubCategory) async {
+ 
+
+    await super.httpPost("Communique/BindSubCategories", json.encode(communiqueSubCategory));
     print("response: ${super.response.data}");
     if (super.response.statusCode == 200) {
-      return true;
+      return super.response.data;
     } else
-      return false;
+      return super.response.data;
   }
 
   // Future<bool> disbindSubCategories(dynamic json) async {

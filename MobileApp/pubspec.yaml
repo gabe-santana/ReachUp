@@ -40,6 +40,7 @@ dependencies:
   cached_network_image: ^2.3.3
   flutter_circular_chart: ^0.1.0
   intl: ^0.16.1
+  flutter_rating_bar: ^3.2.0+1
   get:
   
 dev_dependencies:

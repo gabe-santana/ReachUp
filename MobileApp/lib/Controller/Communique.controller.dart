@@ -1,4 +1,5 @@
 import 'package:ReachUp/Model/Communique.model.dart';
+import 'package:ReachUp/Model/CommuniqueSubCategory.model.dart';
 import 'package:ReachUp/Repositories/Communique.repository.dart';
 
 class CommuniqueController {
@@ -17,10 +18,11 @@ class CommuniqueController {
     return communiqueRepository.add(communique);
   }
 
-  Future<bool> bindSubCategories() async {
-    communique = new Communique();
-    return communiqueRepository.bindSubCategories(communique);
+  Future<bool> bindSubCategories(List<CommuniqueSubCategory> communiqueSubCategory) async {
+    return communiqueRepository.bindSubCategories(communiqueSubCategory);
   }
+
+
 
   // Future<bool> disbindSubCategories(dynamic communique) async {
   //   return communiqueRepository.disbindSubCategories(communique);

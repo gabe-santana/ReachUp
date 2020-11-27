@@ -1,4 +1,5 @@
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
+import 'package:ReachUp/Controller/Local.controller.dart';
 import 'package:ReachUp/Controller/SubCategory.controller.dart';
 import 'package:ReachUp/Model/Category.model.dart';
 import 'package:ReachUp/Model/Subcategory.model.dart';
@@ -22,8 +23,8 @@ class StoreView extends StatefulWidget {
 }
 
 class _StoreViewState extends State<StoreView> {
-  List<SubCategory> subcategories = new List<SubCategory>();
   SubCategoryController subCategoryController = new SubCategoryController();
+  final LocalController _localController = new LocalController();
 
   AsyncMemoizer _memoizer;
   @override
@@ -43,7 +44,6 @@ class _StoreViewState extends State<StoreView> {
           .then((value) {
         EasyLoading.dismiss();
         setState(() {
-          this.subcategories = value;
           Globals.subcategoriesLocal = value;
         });
       });
@@ -80,7 +80,12 @@ class _StoreViewState extends State<StoreView> {
                           size: 30,
                         ),
                         onPressed: () {
-                          navigateTo(EditSoreView(), "Editar loja", "Aqui você poderá editar os dados referentes a sua loja", context, true);
+                          navigateTo(
+                              EditSoreView(),
+                              "Editar loja",
+                              "Aqui você poderá editar os dados referentes a sua loja",
+                              context,
+                              true);
                         })),
                 Column(
                   children: [
@@ -208,11 +213,11 @@ class _StoreViewState extends State<StoreView> {
               child: Builder(builder: (context) {
                 buildlistView();
                 return ListView.builder(
-                    itemCount: this.subcategories.length,
+                    itemCount: Globals.subcategoriesLocal.length,
                     itemBuilder: (context, index) => ListTile(
                           trailing: IconButton(
                             tooltip:
-                                "Deletar ${subcategories[index].category.categoryName} ${subcategories[index].subCategoryName}",
+                                "Deletar ${Globals.subcategoriesLocal[index].category.categoryName} ${Globals.subcategoriesLocal[index].subCategoryName}",
                             onPressed: () {
                               showDialog(
                                   context: context,
@@ -221,14 +226,35 @@ class _StoreViewState extends State<StoreView> {
                                         icon: Icons.delete,
                                         title: "Deletar",
                                         description:
-                                            "Deletar ${subcategories[index].subCategoryName} em ${subcategories[index].category.categoryName} ?",
+                                            "Deletar ${Globals.subcategoriesLocal[index].subCategoryName} em ${Globals.subcategoriesLocal[index].category.categoryName} ?",
                                         buttonOK: RaisedButton(
                                           color: Theme.of(context)
                                               .colorScheme
                                               .error,
                                           onPressed: () {
-                                            Navigator.pop(context);
-                                            setState(() {});
+                                            EasyLoading.show(
+                                                status: "Deletando...");
+                                            _localController
+                                                .deleteSubCategory(
+                                                    Globals
+                                                        .user.admLocal.idLocal,
+                                                    Globals
+                                                        .subcategoriesLocal[
+                                                            index]
+                                                        .category
+                                                        .categoryId,
+                                                    Globals
+                                                        .subcategoriesLocal[
+                                                            index]
+                                                        .subCategoryId)
+                                                .then((value) {
+                                              EasyLoading.dismiss();
+                                              setState(() {
+                                                Globals.subcategoriesLocal
+                                                    .removeAt(index);
+                                              });
+                                              Navigator.pop(context);
+                                            });
                                           },
                                           child: Text(
                                             "Deletar",
@@ -269,10 +295,10 @@ class _StoreViewState extends State<StoreView> {
                                           "Bearer ${Globals.user.token}"
                                     },
                                     imageUrl: SubCategoryRepository().getImage(
-                                        subcategories[index]
-                                            .category
-                                            .categoryId,
-                                        subcategories[index].subCategoryId),
+                                        Globals.subcategoriesLocal[index]
+                                            .category.categoryId,
+                                        Globals.subcategoriesLocal[index]
+                                            .subCategoryId),
                                     placeholder: (context, url) => Center(
                                       child: CircularProgressIndicator(
                                           valueColor:
@@ -289,7 +315,7 @@ class _StoreViewState extends State<StoreView> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "${subcategories[index].category.categoryName}",
+                                    "${Globals.subcategoriesLocal[index].category.categoryName}",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Theme.of(context)
@@ -301,7 +327,7 @@ class _StoreViewState extends State<StoreView> {
                                     width:
                                         MediaQuery.of(context).size.width * 0.5,
                                     child: Text(
-                                      "${subcategories[index].subCategoryName}",
+                                      "${Globals.subcategoriesLocal[index].subCategoryName}",
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                           color: Theme.of(context)
@@ -329,11 +355,24 @@ class _StoreViewState extends State<StoreView> {
                   color: Colors.white,
                   onPressed: () {
                     navigateTo(
-                        AddSubCategoryToStoreView(),
-                        "SubCategorias",
-                        "Aqui você pode adicionar subcategorias a sua loja!",
-                        context,
-                        false);
+                            AddSubCategoryToStoreView(),
+                            "SubCategorias",
+                            "Aqui você pode adicionar subcategorias a sua loja!",
+                            context,
+                            false)
+                        .then((value) {
+                      setState(() {
+                        EasyLoading.show(status: "Carregando...");
+                        subCategoryController
+                            .getByLocal(Globals.user.admLocal.idLocal)
+                            .then((value) {
+                          EasyLoading.dismiss();
+                          setState(() {
+                            Globals.subcategoriesLocal = value;
+                          });
+                        });
+                      });
+                    });
                   },
                 ),
               ),

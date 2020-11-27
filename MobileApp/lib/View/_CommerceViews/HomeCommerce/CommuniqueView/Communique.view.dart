@@ -25,6 +25,7 @@ class _CommuniqueViewState extends State<CommuniqueView> {
     //       categories = value;
     //     });
     super.initState();
+     Globals.subCategoriesPromotionChecked.clear();
     Globals.selectedCommuniques.clear();
   }
 

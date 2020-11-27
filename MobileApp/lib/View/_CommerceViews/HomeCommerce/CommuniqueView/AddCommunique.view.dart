@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Communique.controller.dart';
 import 'package:ReachUp/Model/Communique.model.dart';
+import 'package:ReachUp/Model/CommuniqueSubCategory.model.dart';
 import 'package:ReachUp/View/_CommerceViews/HomeCommerce/CommuniqueView/AddedCommunique.view.dart';
 import 'package:ReachUp/globals.dart';
 import 'package:ReachUp/main.dart';
@@ -16,6 +19,7 @@ class AddCommuniqueView extends StatefulWidget {
 }
 
 class DropDownItem {
+  CommuniqueController communiqueController = new CommuniqueController();
   bool important;
 
   String title;
@@ -320,7 +324,7 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                       child: ListTile(
                                         onTap: () {
                                           navigateTo(
-                                              AddPromotionView(),
+                                              AddPromotionView(communique: this.communique),
                                               "Subcategorias",
                                               "Informe as subcategorias da sua promoção",
                                               context,
@@ -564,7 +568,7 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                         _formKey.currentState.save();
 
                                         this.communique.communiqueId = 1000;
-                                        
+
                                         this.communique.type =
                                             selectedItemIndex - 1;
 
@@ -582,6 +586,47 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                             .add(this.communique)
                                             .then((value) {
                                           if (value) {
+                                            List<CommuniqueSubCategory>
+                                                communiqueSubCategories =
+                                                new List<
+                                                    CommuniqueSubCategory>();
+
+                                            CommuniqueController()
+                                                .getByLocal(
+                                                    Globals
+                                                        .user.admLocal.idLocal,
+                                                    true)
+                                                .then((value) {
+                                              setState(() {
+                                                Globals.admLocalCommuniques =
+                                                    value;
+
+                                                Globals.communiqueSubCategories
+                                                    .forEach(
+                                                        (communiqueSubCategory) {
+                                                  communiqueSubCategories.add(
+                                                      communiqueSubCategory
+                                                        ..communique
+                                                                .communiqueId =
+                                                            Globals
+                                                                .admLocalCommuniques
+                                                                .last
+                                                                .communiqueId);
+                                                });
+                                                print(json.encode(communiqueSubCategories));
+                                                communiqueController
+                                                    .bindSubCategories(
+                                                        communiqueSubCategories).then((value) {
+                                                          if(value){
+                                                            debugPrint("Bindado");
+                                                          }
+                                                          else{
+                                                            debugPrint("Não Bindado");
+                                                          }
+                                                        });
+                                              });
+                                            });
+
                                             setState(() {
                                               Globals.admLocalCommuniques
                                                   .add(communique);

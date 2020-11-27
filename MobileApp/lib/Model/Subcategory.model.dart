@@ -24,4 +24,8 @@ class SubCategory {
     data['subCategoryId'] = this.subCategoryId;
     return data;
   }
+
+  bool operator ==(other) {
+    return this.subCategoryId  == other.subCategoryId;
+  }
 }

@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:ReachUp/Model/Local.dart';
+import 'package:ReachUp/Model/SubCategoryLocal.mode.dart';
 import 'package:ReachUp/www/ReachUpAPI.dart';
 
 import '../globals.dart';
@@ -20,5 +23,25 @@ class LocalRepository extends ReachUpAPI {
       return locates;
     } else
       return null;
+  }
+
+   Future<bool> addSubcategory(List<SubcategoriesLocal>  subcategoriesLocal) async {
+    await super.httpPost("Local/AddSubCategories", json.encode(subcategoriesLocal));
+    print("response: ${super.response.data}");
+    if (super.response.statusCode == 200) {
+      
+      return  true;
+    } else
+      return false;
+  }
+
+    Future<bool> deleteSubCategory(int local, int category, int subcategory) async {
+    await super.httpDelete("Local/DeleteSubCategory?local=$local&category=$category&subcategory=$subcategory");
+    print("response: ${super.response.data}");
+    if (super.response.statusCode == 200) {
+      
+      return  true;
+    } else
+      return false;
   }
 }
