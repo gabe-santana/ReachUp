@@ -145,7 +145,7 @@ class _StepperBodyState extends State<StepperBody> {
                 },
                 decoration: InputDecoration(
                     labelText: 'Nome',
-                    hintText: 'Fulano',
+
                     //filled: true,
                     icon: const Icon(Icons.person),
                     labelStyle:
@@ -166,7 +166,7 @@ class _StepperBodyState extends State<StepperBody> {
                 },
                 decoration: InputDecoration(
                     labelText: 'Sobrenome',
-                    hintText: 'Ciclano',
+        
                     //filled: true,
                     icon: const Icon(Icons.person),
                     labelStyle:
@@ -202,7 +202,7 @@ class _StepperBodyState extends State<StepperBody> {
                 maxLines: 1,
                 decoration: InputDecoration(
                     labelText: 'E-mail',
-                    hintText: 'examplo@email.com',
+    
                     icon: const Icon(Icons.email),
                     labelStyle:
                         TextStyle(decorationStyle: TextDecorationStyle.solid)),
@@ -237,7 +237,7 @@ class _StepperBodyState extends State<StepperBody> {
                 },
                 decoration: InputDecoration(
                     labelText: 'Senha',
-                    hintText: 'Sua nova senha',
+      
                     icon: const FaIcon(FontAwesomeIcons.key),
                     labelStyle:
                         TextStyle(decorationStyle: TextDecorationStyle.solid)),
@@ -255,7 +255,7 @@ class _StepperBodyState extends State<StepperBody> {
                 onSaved: (value) {},
                 decoration: InputDecoration(
                     labelText: 'Confirmar Senha',
-                    hintText: 'Digite a senha novamente',
+                
                     icon: const FaIcon(FontAwesomeIcons.key),
                     labelStyle:
                         TextStyle(decorationStyle: TextDecorationStyle.solid)),

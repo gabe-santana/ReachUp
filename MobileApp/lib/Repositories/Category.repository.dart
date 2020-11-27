@@ -4,7 +4,7 @@ import 'package:ReachUp/www/ReachUpAPI.dart';
 
 class CategoryRepository extends ReachUpAPI {
   String getImage(int categoryId) {
-    return "${Globals.urlAPI}/Category/GetImage?categoryId=$categoryId}";
+    return "${Globals.urlAPI}/Category/GetImage?id=$categoryId";
   }
 
   Future<List<Category>> getAll() async {

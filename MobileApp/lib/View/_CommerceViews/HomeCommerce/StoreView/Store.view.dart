@@ -5,12 +5,15 @@ import 'package:ReachUp/Model/Subcategory.model.dart';
 import 'package:ReachUp/Repositories/Local.repository.dart';
 import 'package:ReachUp/Repositories/SubCategory.repository.dart';
 import 'package:ReachUp/globals.dart';
+import 'package:ReachUp/main.dart';
 import 'package:async/async.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'AddSubCategoryToStore.view.dart';
 
 class StoreView extends StatefulWidget {
   @override
@@ -203,7 +206,7 @@ class _StoreViewState extends State<StoreView> {
                     itemBuilder: (context, index) => ListTile(
                           trailing: IconButton(
                             tooltip:
-                                "Deletar subcategoria ${subcategories[index].subCategoryName}",
+                                "Deletar ${subcategories[index].category.categoryName} ${subcategories[index].subCategoryName}",
                             onPressed: () {
                                 showDialog(
                 context: context,
@@ -211,7 +214,7 @@ class _StoreViewState extends State<StoreView> {
                       icon: Icons.delete,
                       title: "Deletar",
                       description:
-                          "Deletar a subcategoria ${subcategories[index].subCategoryName}?",
+                          "Deletar ${subcategories[index].subCategoryName} em ${subcategories[index].category.categoryName} ?",
                       buttonOK: RaisedButton(
                         color: Theme.of(context).colorScheme.error,
                         onPressed: () {
@@ -315,7 +318,14 @@ class _StoreViewState extends State<StoreView> {
                   padding: EdgeInsets.zero,
                   icon: Icon(Icons.add),
                   color: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                     navigateTo(
+                                AddSubCategoryToStoreView(),
+                                "SubCategorias",
+                                "Aqui você pode adicionar subcategorias a sua loja!",
+                                context,
+                                false);
+                  },
                 ),
               ),
             )
