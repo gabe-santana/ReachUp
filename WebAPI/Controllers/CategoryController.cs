@@ -25,7 +25,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize]
+        [AllowAnonymous]
         [HttpGet("GetImage")]
         public async Task<IActionResult> GetImage(int id)
         {
@@ -38,7 +38,8 @@ namespace ReachUpWebAPI.Controllers
               }
               catch
               {
-                  return NotFound("Icon not found");
+                  var image = System.IO.File.OpenRead(_hostingEnvironment.ContentRootPath + $"/App_Data/default//default.png");
+                    return File(image, "image/png");
               }
            }
            return BadRequest("Parameters are null");

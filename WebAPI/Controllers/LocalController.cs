@@ -9,6 +9,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using ReachUp;
+using LibraryClasses.Classes;
 
 namespace ReachUpWebAPI.Controllers
 {
@@ -292,17 +293,17 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm")]
+        [Authorize(Roles = "adm,loj")]
         [HttpPost("AddSubCategories")]
-        public async Task<IActionResult> AddSubCategories([FromBody] Local local) 
+        public async Task<IActionResult> AddSubCategories([FromBody] List<SubCategoryLocal> subCategoriesLocal) 
         {
-            if (local != null)
-                return Ok(await local.AddSubCategories());
+            if (subCategoriesLocal != null)
+                return Ok(await new Local().AddSubCategories(subCategoriesLocal));
             return BadRequest("Parameters are null");
         }
 
         // OK 
-        [Authorize(Roles = "adm")]
+        [Authorize(Roles = "adm,loj")]
         [HttpDelete("DeleteSubCategory")]
         public async Task<IActionResult> DeleteSubCategory(int local, int category, int subCategory)
         {
@@ -315,7 +316,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "adm")]
+        [Authorize(Roles = "adm,loj")]
         [HttpGet("GetAdmins")]
         public async Task<IActionResult> GetAdmins(int local)
         {
