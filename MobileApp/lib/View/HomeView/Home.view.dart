@@ -1,9 +1,11 @@
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/View/DeveloperView/BeaconBroadcast.view.dart';
 import 'package:ReachUp/View/DeveloperView/Compass.view.dart';
+import 'package:ReachUp/View/FeedbackView/Feedback.view.dart';
 import 'package:ReachUp/View/HomeView/HomeMap.view.dart';
 import 'package:ReachUp/View/HomeView/WalkingInfo.view.dart';
 import 'package:ReachUp/View/MapView/Map.view.dart';
+import 'package:ReachUp/View/NarratorConfigView/NarratorConfig.view.dart';
 import 'package:ReachUp/View/NotificationsView/Notifications.view.dart';
 import 'package:ReachUp/View/SearchView/Search.view.dart';
 import 'package:ReachUp/View/SignView/Sign.view.dart';
@@ -160,16 +162,12 @@ class _HomeState extends State<Home> {
                           ListTile(
                               contentPadding: EdgeInsets.fromLTRB(15, 0, 0, 10),
                               title: ItemMenuTitle(
-                                  title: "Notificações",
+                                  title: "Anúncios",
                                   icon: FontAwesomeIcons.solidBell,
                                   selected: _selectedIndex == 1),
                               onTap: () {
-                                navigateTo(
-                                    NotificationsView(),
-                                    "Notificações",
-                                    "Suas notificações estarão sempre aqui",
-                                    context,
-                                    false);
+                                navigateDirectly(
+                                    NotificationsView(), context, false);
                               }),
                         ],
                       ),
@@ -204,9 +202,9 @@ class _HomeState extends State<Home> {
                                 selected: _selectedIndex == 3),
                             onTap: () {
                               navigateTo(
-                                  NotificationsView(),
+                                  NarratorConfig(),
                                   "Narrador",
-                                  "Aqui você pode alterar suas configurações do narrador de rota",
+                                  "Aqui você pode alterar suas configurações do narrador de voz",
                                   context,
                                   false);
                             },
@@ -244,7 +242,7 @@ class _HomeState extends State<Home> {
                                 selected: _selectedIndex == 5),
                             onTap: () {
                               navigateTo(
-                                  NotificationsView(),
+                                  FeedbackView(),
                                   "Feedback",
                                   "Aqui você pode dar seu feedback e colaborar com o projeto",
                                   context,
@@ -404,12 +402,7 @@ class _HomeState extends State<Home> {
                     icon: Icon(Icons.notifications,
                         size: 30, color: Colors.white),
                     onPressed: () {
-                      navigateTo(
-                          NotificationsView(),
-                          "Notificações",
-                          "Suas notificações estarão sempre aqui",
-                          context,
-                          false);
+                      navigateDirectly(NotificationsView(), context, true);
                     },
                     tooltip:
                         MaterialLocalizations.of(context).openAppDrawerTooltip,

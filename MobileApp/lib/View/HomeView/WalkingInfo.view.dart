@@ -40,7 +40,7 @@ class _WalkingInfoViewState extends State<WalkingInfoView> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 1,
+      length: 2,
       child: Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -63,10 +63,11 @@ class _WalkingInfoViewState extends State<WalkingInfoView> {
                 ),
                 tabs: [
                   Tab(text: "Sugestões"),
+                   Tab(text: "Favoritos"),
                 ],
               ),
             ),
-            Expanded(
+            tabIndex == 0 ?Expanded(
               child: Center(
                   child: ListView(
                 children: [
@@ -92,6 +93,10 @@ class _WalkingInfoViewState extends State<WalkingInfoView> {
                   ),
                 ],
               )),
+            ) : Expanded(
+              child: Center(
+                child: Text("Você não tem locais favoritos no momento!"),
+              ),
             )
           ],
         ),

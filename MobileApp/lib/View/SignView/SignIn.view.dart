@@ -74,133 +74,139 @@ class _SignInViewState extends State<SignInView> {
         ),
         resizeToAvoidBottomInset: true,
         body: Builder(
-          builder: (context) => Container(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    TextFormField(
-                      //  focusNode:  focusNode,
-                      initialValue: "",
-                      keyboardType: TextInputType.emailAddress,
-                      autocorrect: false,
-                      onSaved: (value) {
-                        Globals.user.email = value;
-                      },
-                      maxLines: 1,
-                      //initialValue: 'Aseem Wangoo',
-                      validator: (value) {
-                        if (value.isEmpty ||
-                            !value.contains('@') ||
-                            !value.contains('.')) {
-                          return 'E-mail inválido!';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          labelText: 'E-mail',
-                          hintText: 'examplo@email.com',
-                          //filled: true,
-                          icon: const Icon(Icons.email),
-                          labelStyle: TextStyle(
-                              decorationStyle: TextDecorationStyle.solid)),
-                    ),
-                    TextFormField(
-                      obscureText: true,
-                      initialValue: "",
-                      keyboardType: TextInputType.text,
-                      autocorrect: false,
-                      onSaved: (value) {
-                        Globals.user.password = value;
-                      },
-                      maxLines: 1,
-                      //initialValue: 'Aseem Wangoo',
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Digite uma senha!';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          labelText: 'Senha',
-                          hintText: 'Sua senha',
-                          //filled: true,
-                          icon: const FaIcon(FontAwesomeIcons.key),
-                          labelStyle: TextStyle(
-                              decorationStyle: TextDecorationStyle.solid)),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-                      child: RaisedButton(
-                          color: Theme.of(context).primaryColor,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Entrar ",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 16),
+          builder: (context) => Center(
+                      child: SingleChildScrollView(
+              child: Container(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        TextFormField(
+                          //  focusNode:  focusNode,
+                          initialValue: "",
+                          keyboardType: TextInputType.emailAddress,
+                          autocorrect: false,
+                          onSaved: (value) {
+                            Globals.user.email = value;
+                          },
+                          maxLines: 1,
+                          //initialValue: 'Aseem Wangoo',
+                          validator: (value) {
+                            if (value.isEmpty ||
+                                !value.contains('@') ||
+                                !value.contains('.')) {
+                              return 'E-mail inválido!';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              labelText: 'E-mail',
+                              hintText: 'examplo@email.com',
+                              //filled: true,
+                              icon: const Icon(Icons.email),
+                              labelStyle: TextStyle(
+                                  decorationStyle: TextDecorationStyle.solid)),
+                        ),
+                        TextFormField(
+                          obscureText: true,
+                          initialValue: "",
+                          keyboardType: TextInputType.text,
+                          autocorrect: false,
+                          onSaved: (value) {
+                            Globals.user.password = value;
+                          },
+                          maxLines: 1,
+                          //initialValue: 'Aseem Wangoo',
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Digite uma senha!';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              labelText: 'Senha',
+                              hintText: 'Sua senha',
+                              //filled: true,
+                              icon: const FaIcon(FontAwesomeIcons.key),
+                              labelStyle: TextStyle(
+                                  decorationStyle: TextDecorationStyle.solid)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+                          child: RaisedButton(
+                              color: Theme.of(context).primaryColor,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "Entrar ",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 16),
+                                  ),
+                                  FaIcon(
+                                    FontAwesomeIcons.signInAlt,
+                                    color: Colors.white,
+                                    size: 16,
+                                  )
+                                ],
                               ),
-                              FaIcon(
-                                FontAwesomeIcons.signInAlt,
-                                color: Colors.white,
-                                size: 16,
-                              )
-                            ],
-                          ),
-                          onPressed: () {
-                            if (_formKey.currentState.validate()) {
-                              _formKey.currentState.save();
-                              VersionConfig.isCommerceVersion
-                                  ? Globals.user.role = "loj"
-                                  : Globals.user.role = "cli";
-                              EasyLoading.show(status: "Carregando");
-                              accountController.signIn().then((value) {
-                                EasyLoading.dismiss();
-                                if (value != null) {
-                                  Globals.user = value;
+                              onPressed: () {
+                                if (_formKey.currentState.validate()) {
+                                  _formKey.currentState.save();
+                                  VersionConfig.isCommerceVersion
+                                      ? Globals.user.role = "loj"
+                                      : Globals.user.role = "cli";
+                                  EasyLoading.show(status: "Carregando");
+                                  accountController.signIn().then((value) {
+                                    EasyLoading.dismiss();
+                                    if (value != null) {
+                                      Globals.user = value;
 
-                                  Navigator.pushAndRemoveUntil(
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                VersionConfig.isCommerceVersion
+                                                    ? HomeCommerceView()
+                                                    : Home()),
+                                        (Route<dynamic> route) => false,
+                                      );
+                                    } else {
+                                      showSnackBarMessage(
+                                          context, "Usuário inexistente!");
+                                    }
+                                  });
+                                } else {
+                                  showSnackBarMessage(context,
+                                      "Preencha os campos corretamente!");
+                                }
+                              }),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                          child: FlatButton(
+                              child: Text(
+                                "Esqueci minha senha",
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 16),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => VersionConfig.isCommerceVersion ? 
-                                        HomeCommerceView(): 
-                                        Home()),
-                                    (Route<dynamic> route) => false,
-                                  );
-                                } else {
-                                  showSnackBarMessage(
-                                      context, "Usuário inexistente!");
-                                }
-                              });
-                            } else {
-                              showSnackBarMessage(
-                                  context, "Preencha os campos corretamente!");
-                            }
-                          }),
+                                        builder: (context) =>
+                                            ForgotPasswordView()));
+                              },
+                              color: Colors.transparent),
+                        ),
+                      ],
                     ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: FlatButton(
-                          child: Text(
-                            "Esqueci minha senha",
-                            style: TextStyle(color: Colors.grey, fontSize: 16),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        ForgotPasswordView()));
-                          },
-                          color: Colors.transparent),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),

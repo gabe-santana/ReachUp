@@ -23,7 +23,27 @@ class MapViewWidGet extends StatefulWidget {
   _MapViewWidGetState createState() => _MapViewWidGetState();
 }
 
-class _MapViewWidGetState extends State<MapViewWidGet> {
+class _MapViewWidGetState extends State<MapViewWidGet>
+    with SingleTickerProviderStateMixin {
+  Animatable<Color> background = TweenSequence<Color>(
+    [
+      TweenSequenceItem(
+        weight: 1.0,
+        tween: ColorTween(
+          begin: Colors.orange,
+          end: Colors.orange[300],
+        ),
+      ),
+      TweenSequenceItem(
+        weight: 1.0,
+        tween: ColorTween(
+          begin: Colors.orange[300],
+          end: Colors.orange,
+        ),
+      ),
+    ],
+  );
+
   MapObject mapObject;
   HallController hallController;
 
@@ -52,8 +72,14 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
     return await rootBundle.loadString('assets/map/map.json');
   }
 
+  AnimationController _controller;
+
   @override
   void initState() {
+    _controller = AnimationController(
+      duration: const Duration(seconds: 10),
+      vsync: this,
+    )..repeat();
     super.initState();
 
     initializeTts();
@@ -83,12 +109,11 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
         : null;
   }
 
-  updateRoute() {
-   
-  }
+  updateRoute() {}
 
   @override
   void dispose() {
+    _controller.dispose();
     timer?.cancel();
     _flutterTts.stop();
     super.dispose();
@@ -246,190 +271,194 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
       focusOn(userMarkPosition, MediaQuery.of(context).size / 2);
     }
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return XGestureDetector(
-          onMoveUpdate: _handlePanUpdate,
-          onScaleStart: (details) {
-            _baseScaleFactor = _scale;
-          },
-          onScaleUpdate: _handleScaleUpdate,
-          child: Stack(
-            children: <Widget>[
-              AnimatedPositioned(
-                duration: Duration(milliseconds: 500),
-                top: top,
-                left: left,
-                width: _dimensionMap * _scale,
-                child: Stack(children: [
-                  ColorFiltered(
-                    colorFilter: ColorFilter.mode(
-                        Theme.of(context).colorScheme.secondaryVariant,
-                        BlendMode.hue),
-                    child: Image.asset(
-                      "assets/images/map/floor0.jpg",
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  // MatrixRoute(
-                  //     new List<Halls>()
-                  //       ..add(new Halls(
-                  //           cornerInfo: new CornerInfo(),
-                  //           position: new Position(x: 39, y: 17, floor: 0)))
-                  //             ..add(new Halls(
-                  //           cornerInfo: new CornerInfo(),
-                  //           position: new Position(x: 38, y: 17, floor: 0)))
-                  //             ..add(new Halls(
-                  //           cornerInfo: new CornerInfo(),
-                  //           position: new Position(x: 37, y: 17, floor: 0)))
-                  //             ..add(new Halls(
-                  //           cornerInfo: new CornerInfo(),
-                  //           position: new Position(x: 36, y: 17, floor: 0)))
-                  //             ..add(new Halls(
-                  //           cornerInfo: new CornerInfo(),
-                  //           position: new Position(x: 35, y: 17, floor: 0))),
-                  //     _scale,
-                  //     _dimensionMap),
-                  // ,
-
-                  displayMap
-                      ? widget.inRouting // ? widget.inRouting
-                          ? canUpdateRoute
-                              ? MatrixRoute(
-                                  this.currentRoute, _scale, _dimensionMap)
-                              : Container()
-                          : Container()
-                      : Container(),
-                  AnimatedPositioned(
-                      left: userMarkPosition.x * _scale,
-                      top: userMarkPosition.y * _scale,
-                      duration: Duration(seconds: 1),
-                      child: Transform.rotate(
-                          angle: hasCompass ? 2 * pi * (_heading / 360) : 0,
-                          child: hasCompass
-                              ? GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      Course c = new Course();
-                                      c = new Course()
-                                          .getCourseDirection(_heading);
-                                      print(c.cardialDirection);
-                                      // if (!isPlaying) {
-                                      //   _speakDirection(c.cardialDirection);
-                                      // }
-                                      setState(() {
-                                        switch (c.cardialDirection) {
-                                          case "N":
-                                            this.userMarkPosition.y -= 1;
-                                            break;
-                                          case "E":
-                                            this.userMarkPosition.x += 1;
-                                            break;
-                                          case "S":
-                                            this.userMarkPosition.y += 1;
-                                            break;
-                                          case "W":
-                                            this.userMarkPosition.x -= 1;
-                                            break;
-                                        }
-                                      });
-                                      focusOn(
-                                          userMarkPosition,
-                                          new Size(constraints.maxWidth / 2,
-                                              constraints.maxHeight / 2));
-                                    });
-                                  },
-                                  child: Container(
-                                      height: userMarkDimension * _scale,
-                                      width: userMarkDimension * _scale,
-                                      decoration: BoxDecoration(
-                                          color: Colors.orange.withAlpha(50),
-                                          borderRadius:
-                                              BorderRadius.circular(100)),
-                                      child: Icon(Icons.keyboard_arrow_up,
-                                          size: userMarkDimension * _scale,
-                                          color: Colors.orange)),
-                                )
-                              : Container(
-                                  height: userMarkDimension * _scale,
-                                  width: userMarkDimension * _scale,
-                                  child: FaIcon(FontAwesomeIcons.mapMarkerAlt,
-                                      size: userMarkDimension * _scale,
-                                      color: Colors.orange)))),
-                ]),
-              ),
-              testMovements
-                  ? Positioned(
-                      bottom: 100,
-                      right: 10,
-                      child: RawMaterialButton(
-                        onPressed: () {
-                          setState(() {
-                            Course c = new Course();
-                            c = new Course().getCourseDirection(_heading);
-                            print(c.cardialDirection);
-                            if (!isPlaying) {
-                              _speakDirection(c.cardialDirection);
-                            }
-                            setState(() {
-                              switch (c.cardialDirection) {
-                                case "N":
-                                  this.userMarkPosition.y -= 10;
-                                  break;
-                                case "E":
-                                  this.userMarkPosition.x += 10;
-                                  break;
-                                case "S":
-                                  this.userMarkPosition.y += 10;
-                                  break;
-                                case "W":
-                                  this.userMarkPosition.x -= 10;
-                                  break;
-                              }
-                            });
-                            focusOn(
-                                userMarkPosition,
-                                new Size(constraints.maxWidth / 2,
-                                    constraints.maxHeight / 2));
-                          });
-                        },
-                        elevation: 2.0,
-                        fillColor: Theme.of(context).colorScheme.primary,
-                        child: FaIcon(
-                          FontAwesomeIcons.arrowUp,
-                          color: Colors.white,
-                          size: 35.0,
-                        ),
-                        padding: EdgeInsets.all(15.0),
-                        shape: CircleBorder(),
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) => LayoutBuilder(
+        builder: (context, constraints) {
+          return XGestureDetector(
+            onMoveUpdate: _handlePanUpdate,
+            onScaleStart: (details) {
+              _baseScaleFactor = _scale;
+            },
+            onScaleUpdate: _handleScaleUpdate,
+            child: Stack(
+              children: <Widget>[
+                AnimatedPositioned(
+                  duration: Duration(milliseconds: 500),
+                  top: top,
+                  left: left,
+                  width: _dimensionMap * _scale,
+                  child: Stack(children: [
+                    ColorFiltered(
+                      colorFilter: ColorFilter.mode(
+                          Theme.of(context).colorScheme.secondaryVariant,
+                          BlendMode.hue),
+                      child: Image.asset(
+                        "assets/images/map/floor0.jpg",
+                        fit: BoxFit.cover,
                       ),
-                    )
-                  : Container(),
-              Positioned(
-                bottom: 10,
-                right: 10,
-                child: RawMaterialButton(
-                  onPressed: () {
-                    focusOn(
-                        userMarkPosition,
-                        new Size(constraints.maxWidth / 2,
-                            constraints.maxHeight / 2));
-                  },
-                  elevation: 2.0,
-                  fillColor: Theme.of(context).colorScheme.primary,
-                  child: FaIcon(
-                    FontAwesomeIcons.mapMarkerAlt,
-                    color: Colors.white,
-                    size: 35.0,
-                  ),
-                  padding: EdgeInsets.all(15.0),
-                  shape: CircleBorder(),
+                    ),
+                    // MatrixRoute(
+                    //     new List<Halls>()
+                    //       ..add(new Halls(
+                    //           cornerInfo: new CornerInfo(),
+                    //           position: new Position(x: 39, y: 17, floor: 0)))
+                    //             ..add(new Halls(
+                    //           cornerInfo: new CornerInfo(),
+                    //           position: new Position(x: 38, y: 17, floor: 0)))
+                    //             ..add(new Halls(
+                    //           cornerInfo: new CornerInfo(),
+                    //           position: new Position(x: 37, y: 17, floor: 0)))
+                    //             ..add(new Halls(
+                    //           cornerInfo: new CornerInfo(),
+                    //           position: new Position(x: 36, y: 17, floor: 0)))
+                    //             ..add(new Halls(
+                    //           cornerInfo: new CornerInfo(),
+                    //           position: new Position(x: 35, y: 17, floor: 0))),
+                    //     _scale,
+                    //     _dimensionMap),
+                    // ,
+
+                    displayMap
+                        ? widget.inRouting // ? widget.inRouting
+                            ? canUpdateRoute
+                                ? MatrixRoute(
+                                    this.currentRoute, _scale, _dimensionMap)
+                                : Container()
+                            : Container()
+                        : Container(),
+                    AnimatedPositioned(
+                        left: userMarkPosition.x * _scale,
+                        top: userMarkPosition.y * _scale,
+                        duration: Duration(seconds: 1),
+                        child: Transform.rotate(
+                            angle: hasCompass ? 2 * pi * (_heading / 360) : 0,
+                            child: hasCompass
+                                ? GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        Course c = new Course();
+                                        c = new Course()
+                                            .getCourseDirection(_heading);
+                                        print(c.cardialDirection);
+                                        // if (!isPlaying) {
+                                        //   _speakDirection(c.cardialDirection);
+                                        // }
+                                        setState(() {
+                                          switch (c.cardialDirection) {
+                                            case "N":
+                                              this.userMarkPosition.y -= 1;
+                                              break;
+                                            case "E":
+                                              this.userMarkPosition.x += 1;
+                                              break;
+                                            case "S":
+                                              this.userMarkPosition.y += 1;
+                                              break;
+                                            case "W":
+                                              this.userMarkPosition.x -= 1;
+                                              break;
+                                          }
+                                        });
+                                        focusOn(
+                                            userMarkPosition,
+                                            new Size(constraints.maxWidth / 2,
+                                                constraints.maxHeight / 2));
+                                      });
+                                    },
+                                    child: Container(
+                                        height: userMarkDimension * _scale,
+                                        width: userMarkDimension * _scale,
+                                        decoration: BoxDecoration(
+                                            color: Colors.orange.withAlpha(50),
+                                            borderRadius:
+                                                BorderRadius.circular(100)),
+                                        child: Icon(Icons.keyboard_arrow_up,
+                                            size: userMarkDimension * _scale,
+                                            color: Colors.orange)),
+                                  )
+                                : Container(
+                                    height: userMarkDimension * _scale,
+                                    width: userMarkDimension * _scale,
+                                    child: FaIcon(FontAwesomeIcons.mapMarkerAlt,
+                                        size: userMarkDimension * _scale,
+                                        color: Colors.orange)))),
+                  ]),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
+                testMovements
+                    ? Positioned(
+                        bottom: 100,
+                        right: 10,
+                        child: RawMaterialButton(
+                          onPressed: () {
+                            setState(() {
+                              Course c = new Course();
+                              c = new Course().getCourseDirection(_heading);
+                              print(c.cardialDirection);
+                              if (!isPlaying) {
+                                _speakDirection(c.cardialDirection);
+                              }
+                              setState(() {
+                                switch (c.cardialDirection) {
+                                  case "N":
+                                    this.userMarkPosition.y -= 10;
+                                    break;
+                                  case "E":
+                                    this.userMarkPosition.x += 10;
+                                    break;
+                                  case "S":
+                                    this.userMarkPosition.y += 10;
+                                    break;
+                                  case "W":
+                                    this.userMarkPosition.x -= 10;
+                                    break;
+                                }
+                              });
+                              focusOn(
+                                  userMarkPosition,
+                                  new Size(constraints.maxWidth / 2,
+                                      constraints.maxHeight / 2));
+                            });
+                          },
+                          elevation: 2.0,
+                          fillColor: Theme.of(context).colorScheme.primary,
+                          child: FaIcon(
+                            FontAwesomeIcons.arrowUp,
+                            color: Colors.white,
+                            size: 35.0,
+                          ),
+                          padding: EdgeInsets.all(15.0),
+                          shape: CircleBorder(),
+                        ),
+                      )
+                    : Container(),
+                Positioned(
+                  bottom: 10,
+                  right: 10,
+                  child: RawMaterialButton(
+                    onPressed: () {
+                      focusOn(
+                          userMarkPosition,
+                          new Size(constraints.maxWidth / 2,
+                              constraints.maxHeight / 2));
+                    },
+                    elevation: 2.0,
+                    fillColor: background
+                        .evaluate(AlwaysStoppedAnimation(_controller.value)),
+                    child: FaIcon(
+                      FontAwesomeIcons.mapMarkerAlt,
+                      color: Colors.white,
+                      size: 35.0,
+                    ),
+                    padding: EdgeInsets.all(15.0),
+                    shape: CircleBorder(),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
