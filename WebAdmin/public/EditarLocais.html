@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 bg-black rounded">
   <a class="navbar-brand" href="Menu.html"><img src="img/ReachUpLogo.jpg" width="30" height="30" class="d-inline-block align-top"> ReachUp</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -23,22 +23,39 @@
         <a class="nav-link" href="Locais.html" tabindex="-1" >Locais</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="Lojistas.html" tabindex="-1" >Lojistas</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="Feedback.html" tabindex="-1" >Feedback</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="Perfil.html" tabindex="-1" >Perfil</a>
       </li>
+            <li class="nav-item">
+        <a class="nav-link" href="Categorias.html" tabindex="-1" >Categorias</a>
+      </li>
     </ul>
   </div>
 </nav>
 
-<h3>Easter egg do ReachUp <3</h3>
+<h4>Easter egg do ReachUp <3</h4>
+<h6>Easter egg do ReachUp <3</h6>
 <hr>
 <div id="branco">
 
 <div class="form-group">
-    <label for="exampleFormControlSelect1">Local Selecionado: </label>
-    <input type="text" class="form-control" id="exampleFormControlSelect1" disabled="true" placeholder="Subway">
+    <label for="exampleFormControlSelect1">Nome Local: </label>
+    <input type="text" class="form-control" id="exampleFormControlSelect1" required/>
+    </select>
+  </div>
+
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Andar Selecionado:</label>
+    <select class="form-control" id="exampleFormControlSelect1">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
     </select>
   </div>
 
@@ -63,6 +80,108 @@
       <option>Box 69194</option>
       <option>Box 51194</option>
     </select>
+  </div><br>
+
+  <div class="form-group">
+      <label for="exampleFormControlSelect1">Horários de funcionamento: </label><br>
+      
+      <div class="form-group row">
+        <label for="exampleFormControlSelect1" id="ajuste6" class="col-2 col-form-label">Segunda de:</label>
+        <div class="col-10">
+          <input class="form-control" type="time" value="10:00:00" id="ajuste5">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="exampleFormControlSelect1" id="ajuste6" class="col-2 col-form-label">Até:</label>
+        <div class="col-10">
+          <input class="form-control" type="time" value="22:45:00" id="ajuste5">
+        </div>
+      </div><br>
+
+      <div class="form-group row">
+        <label for="exampleFormControlSelect1" id="ajuste6" class="col-2 col-form-label">Terça de:</label>
+        <div class="col-10">
+          <input class="form-control" type="time" value="10:00:00" id="ajuste5">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="exampleFormControlSelect1" id="ajuste6" class="col-2 col-form-label">Até:</label>
+        <div class="col-10">
+          <input class="form-control" type="time" value="22:45:00" id="ajuste5">
+        </div>
+      </div><br>
+
+      <div class="form-group row">
+        <label for="exampleFormControlSelect1" id="ajuste6" class="col-2 col-form-label">Quarta de:</label>
+        <div class="col-10">
+          <input class="form-control" type="time" value="10:00:00" id="ajuste5">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="exampleFormControlSelect1" id="ajuste6" class="col-2 col-form-label">Até:</label>
+        <div class="col-10">
+          <input class="form-control" type="time" value="22:45:00" id="ajuste5">
+        </div>
+      </div><br>
+
+      <div class="form-group row">
+        <label for="exampleFormControlSelect1" id="ajuste6" class="col-2 col-form-label">Quinta de:</label>
+        <div class="col-10">
+          <input class="form-control" type="time" value="10:00:00" id="ajuste5">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="exampleFormControlSelect1" id="ajuste6" class="col-2 col-form-label">Até:</label>
+        <div class="col-10">
+          <input class="form-control" type="time" value="22:45:00" id="ajuste5">
+        </div>
+      </div><br>
+
+      <div class="form-group row">
+        <label for="exampleFormControlSelect1" id="ajuste6" class="col-2 col-form-label">Sexta de:</label>
+        <div class="col-10">
+          <input class="form-control" type="time" value="10:00:00" id="ajuste5">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="exampleFormControlSelect1" id="ajuste6" class="col-2 col-form-label">Até:</label>
+        <div class="col-10">
+          <input class="form-control" type="time" value="22:45:00" id="ajuste5">
+        </div>
+      </div><br>
+
+      <div class="form-group row">
+        <label for="exampleFormControlSelect1" id="ajuste6" class="col-2 col-form-label">Sábado de:</label>
+        <div class="col-10">
+          <input class="form-control" type="time" value="10:00:00" id="ajuste5">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="exampleFormControlSelect1" id="ajuste6" class="col-2 col-form-label">Até:</label>
+        <div class="col-10">
+          <input class="form-control" type="time" value="22:45:00" id="ajuste5">
+        </div>
+      </div><br>
+
+      <div class="form-group row">
+        <label for="exampleFormControlSelect1" id="ajuste6" class="col-2 col-form-label">Domingo de:</label>
+        <div class="col-10">
+          <input class="form-control" type="time" value="10:00:00" id="ajuste5">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="exampleFormControlSelect1" id="ajuste6" class="col-2 col-form-label">Até:</label>
+        <div class="col-10">
+          <input class="form-control" type="time" value="17:45:00" id="ajuste5">
+        </div>
+      </div><br>
   </div>
 
   <input class="btn btn-primary" type="submit" value="Salvar Alterações" id="saidae">

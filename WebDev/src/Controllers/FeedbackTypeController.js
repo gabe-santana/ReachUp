@@ -1,4 +1,4 @@
-class CommuniqueTypeController {
+class FeedbackTypeController {
     api;
     constructor(){
         this.api = new ApiConnection();
@@ -7,14 +7,15 @@ class CommuniqueTypeController {
     async getAll()
     {
         return await
-         this.api.httpAnonymousGet('CommuniqueType/GetAll');
+         this.api.httpAnonymousGet('FeedbackType/GetAll');
+         
     }
 
     async add(name)
     {
         return await
          this.api.httpAnonymousPost(
-             'CommuniqueType/',
+             'FeedbackType/',
              {
                 name: name
              }
@@ -25,7 +26,7 @@ class CommuniqueTypeController {
     {
         return await
          this.api.httpAnonymousPatch(
-             'CommuniqueType/',
+             'FeedbackType/',
              {
                 id: id,
                 name: name
@@ -36,6 +37,6 @@ class CommuniqueTypeController {
     async delete(id)
     {
         return await
-         this.api.httpAnonymousDelete(`CommuniqueType?id=${id}`);
+         this.api.httpAnonymousDelete(`FeedbackType?id=${id}`);
     }
 }

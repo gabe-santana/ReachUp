@@ -6,8 +6,10 @@ class FeedbackTypeController {
 
     async getAll()
     {
+        alert("Cheguei na controller");
         return await
          this.api.httpAnonymousGet('FeedbackType/GetAll');
+         
     }
 
     async add(name)

@@ -6,6 +6,7 @@ class ApiConnection {
 
    async httpAnonymousGet(str, options = [])
    {
+     console.log(str);
       const response = await fetch(this.config.url() + str, {
           mode: 'cors',
           method: 'GET',

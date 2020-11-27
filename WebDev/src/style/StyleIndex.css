@@ -45,13 +45,27 @@ html{
   transition: all 0.3 ease;
   cursor: pointer;
 }
+
+.btnLocal {
+  font-family: sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #f5f8f7;
+  border: 0;
+  padding: 15px;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
 .form button:hover,.form button:active,.form button:focus {
   background: #064153
 }
 .form .message {
   margin: 15px 0 0;
   color: #b3b3b3;
-  font-size: 12px;
+  font-size: 14px;
 }
 .form .message a {
   color: #1b8c9c;
@@ -63,7 +77,7 @@ html{
 .container {
   position: relative;
   z-index: 1;
-  max-width: 300px;
+  max-width: 400px;
   margin: auto;
 }
 .container:before, .container:after {
@@ -84,7 +98,7 @@ html{
 }
 .container .info span {
   color: #4d4d4d;
-  font-size: 12px;
+  font-size: 14px;
 }
 .container .info span a {
   color: #000000;
@@ -112,6 +126,154 @@ body {
 
 .card {
   margin-bottom: 20px;
+  padding: 5px;
+}
+
+#direita{
+  float: right;
+}
+
+#descola{
   margin-left: 10px;
   margin-right: 10px;
+}
+
+#arrumado{
+  margin-right: 500px;
+  margin-left: 20px;
+}
+
+#saidae{
+  float: right;
+}
+
+#saidae2{
+  float: right;
+  margin-right: 15px;
+}
+
+#saidae3{
+  margin-top: 25px;
+}
+
+#saidae4{
+  margin-top: 0px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+#saidae5{
+  margin-top: 25px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+#ajuste2{
+  margin-left: 10px;
+}
+
+#ajuste3{
+  width: 200px;
+}
+
+#ajuste4{
+
+  margin-left: 10px;
+}
+
+#ajuste5{
+  margin-left: -45px;
+  width: 100px;
+}
+
+#ajuste6{
+  margin-left: -25px;
+}
+
+#lbl1{
+  margin-left: 15px;
+}
+
+#lbl2{
+}
+
+#centro{
+  margin-left: 43%;
+  background-color: white;
+  color: black;
+  border-color: white;
+}
+
+#centro2{
+  margin-left: 55%;
+}
+
+#centro3{
+  margin-left: 55%;
+  background-color: white;
+  color: black;
+  border-color: white;
+}
+
+#branco{
+  background-color: white;
+  color: black;
+  border-color: white;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-right: 100px;
+  margin-left: 100px;
+  padding: 50px;
+  height: auto;
+}
+
+.icone{
+  float: right;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#branco label{
+  text-align: center;
+}
+
+#nav2{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-left: -40px;
+  }
+
+#listgroup3{
+  width: 40%;
+  float: right;
+}
+
+.baixo{
+  overflow:hidden;
+  overflow-y:scroll;
+}
+
+.checked {
+  color: orange;
+}
+
+
+@media screen and (max-width: 1000px) {
+   #branco{
+    margin-left: 5px;
+    margin-right: 5px;
+   }
+   
+
+#barra{
+  width: 60%;
+}
+
+#btnResponsa{
+  width: 40%;
+}
+
+.checked {
+  color: orange;
 }

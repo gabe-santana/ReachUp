@@ -1,4 +1,4 @@
-class clsApiConfig {
+class ApiConfig {
     _url;
     _version;
     _license;
