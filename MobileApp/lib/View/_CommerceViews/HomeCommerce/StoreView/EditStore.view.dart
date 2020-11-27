@@ -1,7 +1,11 @@
 import 'package:ReachUp/globals.dart';
+import 'package:ReachUp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+
+import 'AddAlternativeHours.view.dart';
 
 class EditSoreView extends StatefulWidget {
   @override
@@ -93,11 +97,19 @@ TimeOfDay fromString(String time) {
       });
   }
 
+ void showSnackBarMessage(ctx, String message,
+        [MaterialColor color = Colors.green]) {
+      Scaffold.of(ctx).showSnackBar(SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.green,
+      ));
+    }
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
         child: Form(
+          key: _formKey,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
             child: Column(
@@ -160,7 +172,10 @@ TimeOfDay fromString(String time) {
                                             Icons.add_circle,
                                             color: Colors.green,
                                           ),
-                                          onPressed: () {}),
+                                          onPressed: () {
+                                            navigateTo(AddAlternativeHoursView(), 
+                                            "Horários extras", "Aqui você poderá editar os horários extras na qual sua loja persiste em funcionamento", context, true);
+                                          }),
                                     )
                                   ],
                                 ),
@@ -214,7 +229,9 @@ TimeOfDay fromString(String time) {
                                 minWidth: 200,
                                 child: RaisedButton(
                                   color: Colors.green,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showSnackBarMessage(context, "Alterações Salvas");
+                                  },
                                   child: Text(
                                     "Salvar alterações",
                                     style: TextStyle(color: Colors.white),
@@ -225,7 +242,9 @@ TimeOfDay fromString(String time) {
                                 minWidth: 200,
                                 child: RaisedButton(
                                   color: Theme.of(context).colorScheme.error,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
                                   child: Text(
                                     "Desfazer alterações",
                                     style: TextStyle(color: Colors.white),

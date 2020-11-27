@@ -44,6 +44,7 @@ class _StoreViewState extends State<StoreView> {
         EasyLoading.dismiss();
         setState(() {
           this.subcategories = value;
+          Globals.subcategoriesLocal = value;
         });
       });
     });

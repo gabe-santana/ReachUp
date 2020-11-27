@@ -1,4 +1,5 @@
 import 'package:ReachUp/Model/Category.model.dart';
+import 'package:ReachUp/Model/SubCategoryLocal.mode.dart';
 
 import 'Model/Communique.model.dart';
 import 'Model/Subcategory.model.dart';
@@ -19,7 +20,11 @@ class Globals {
   static List<Communique> selectedCommuniques = new List<Communique>();
 
   static List<Communique> admLocalCommuniques =  new List<Communique>();
+
+  static List<SubCategory> subcategoriesLocal = new List<SubCategory>();
 }
+
+
 
 class VersionConfig {
  static bool isCommerceVersion = true;
