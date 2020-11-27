@@ -1,7 +1,7 @@
-class clsApiConnection {
+class ApiConnection {
       config;
       constructor() {
-          this.config = new clsApiConfig();
+          this.config = new ApiConfig();
        }
 
        async httpAnonymousGet(str, options = [])

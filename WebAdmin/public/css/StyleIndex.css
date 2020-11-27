@@ -182,7 +182,12 @@ body {
 }
 
 #ajuste5{
+  margin-left: -45px;
+  width: 100px;
+}
 
+#ajuste6{
+  margin-left: -25px;
 }
 
 #lbl1{
