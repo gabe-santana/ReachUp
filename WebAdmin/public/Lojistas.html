@@ -46,54 +46,21 @@
 
 
 <form class="form-inline my-2 my-lg-0" id="saidae5">
-      <input class="form-control mr-sm-2" id="barra" type="search" placeholder="Pesquise Por Cliente" aria-label="Search">
-      <button type="button" id="btnResponsa" class="btn btn-primary">Pesquisar</button>
+      <input id="txtSearch" class="form-control mr-sm-2" id="barra" type="search" placeholder="Pesquisar" aria-label="Search">
+      <input id="btnByLocal" type="checkbox"><strong><p style="color: white;">Por loja</p></strong></input>
+      <input id="btnByShopkeeper" type="checkbox"><strong><p style="color: white;">Por lojista</p></strong></input>
     </form>
 
-<div class="list-group" id="saidae5">
-  <div class="list-group-item list-group-item-action">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Pedro Ian</h5>
-    </div>
-    <p class="mb-1">Vinculado à: Netshoes</p>
-    <div class="icone"><a href="CriarLojistas.html"><i class="fas fa-cog fa-2x"></i></a></div>
-  </div>
-  <div class="list-group-item list-group-item-action">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Gabriel Santana</h5>
-    </div>
-    <p class="mb-1">Vinculado à: McDonalds</p>
-      <div class="icone"><a href="CriarLojistas.html"><i class="fas fa-cog fa-2x"></i></a></div>
-  </div>
-   <div class="list-group-item list-group-item-action">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Guilherme Djrdjrjan</h5>
-    </div>
-    <p class="mb-1">Vinculado à: Subway</p>
-      <div class="icone"><a href="CriarLojistas.html"><i class="fas fa-cog fa-2x"></i></a></div>
-  </div>
-   <div class="list-group-item list-group-item-action">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">David Zongoli</h5>
-    </div>
-    <p class="mb-1">Vinculado à: Saraiva</p>
-      <div class="icone"><a href="CriarLojistas.html"><i class="fas fa-cog fa-2x"></i></a></div>
-  </div>
-  <div class="list-group-item list-group-item-action">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Zario Travezz</h5>
-    </div>
-    <p class="mb-1">Vinculado à: Americanas</p>
-    <div class="icone"><a href="CriarLojistas.html"><i class="fas fa-cog fa-2x"></i></a></div>
-  </div>
-  </div>
+<div id="shopkeepers" class="list-group" id="saidae5">
 </div>
-
-
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script src="../src/Scripts/fetchShopkeepers.js"></script>
+<script src="../src/Controllers/AccountController.js"></script>
+<script src="../src/Controllers/LocalController.js"></script>
+<script src="../src/Services/ApiConfig.js"></script>
+<script src="../src/Services/ApiConnection.js"></script>
 
 </body>
 </html>
