@@ -337,9 +337,15 @@ namespace ReachUp
                         user.Role = role;
                         if (user.Role == "loj")
                         {
-                            user.AdmLocal = await new Local().Get(
+                            if (this.Data["cd_local"].ToString() != null)
+                            {
+                                 user.AdmLocal = await new Local().Get(
                                 int.Parse(this.Data["cd_local"].ToString())
                                 );
+                            }
+                            else {
+                                user.AdmLocal = null;
+                            }
                         }
                         users.Add(user);
                     }
