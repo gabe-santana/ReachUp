@@ -2,6 +2,9 @@ $( async () => {
 
     const clsLocal = new LocalController();
     const clsAccount = new AccountController();
+    const clsUser = new UserController();
+
+    getAll();
 
     function turnShopkeepersOff()
     {
@@ -69,6 +72,12 @@ $( async () => {
 
           shopkeepersSection.append(div);
         })
+    }
+
+    async function getAll()
+    {
+        const shopkeepers = await clsUser.getAll();
+        showShopkeepers(shopkeepers);
     }
 
     async function searchShopkeepers(name)

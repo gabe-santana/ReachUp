@@ -4,6 +4,14 @@ class UserController {
         this.api = new ApiConnection();
     }
 
+    async getAdmin(email)
+    {
+        return await
+         this.api.httpAnonymousGet(
+             `User?role=adm&email=${email}`
+         )
+    }
+
     async get(email)
     {
         return await
@@ -50,5 +58,19 @@ class UserController {
                 role: 'loj'
               }
           )
+    }
+
+    async updateAdmin(admin)
+    {
+        return await
+         this.api.httpAnonymousPatch(
+             'User/',
+             {
+                 name: admin.Name,
+                 email: admin.Email,
+                 password: admin.Password,
+                 role: 'adm'
+             }
+         )
     }
 }
