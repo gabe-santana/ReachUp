@@ -383,9 +383,6 @@ CALL clientePrefere("inocenciogoes@email.com");
 
 CALL criarFeedback(5, "jonathanjoestar@email.com", "Os corredores são bem espaçosos, mas em alguns pontos não há piso tátil.", 3);
 CALL criarFeedback(6, "jonathanjoestar@email.com", "Os corredores entre as mesas são muito apertados, eu sempre acabo esbarrando em algumas.", 2);
-CALL criarFeedback(8, "jonathanjoestar@email.com", "A praça de lazer no último andar é muito aconchegante e acessível, gostei", 5);
-CALL criarFeedback(7, "jessicafonseca@email.com", "O restaurante Pé de Fava é muito ruim para se locomover.", 1);
-CALL criarFeedback(7, "jessicafonseca@email.com", "A Cafeteria Plaza está de parabéns! O garçom me atendeu super bem, atencioso, e consegui caminhar pelo local sem nenhum problema", 5);
 CALL criarFeedback(4, "thiagoklein@email.com", "O piso tátil da Besni está muito esburacado, e algumas partes faltam no meio do caminho, acabo me perdendo.", 2);
 CALL criarFeedback(4, "reginaweber@email.com", "A Samsung está de parabéns! Amo seus celulares, e a loja é muito acessível!", 2);
 CALL criarFeedback(3, "leandrokarmal@email.com", "Os elevadores são bem acessíveis, parabéns!", 4);

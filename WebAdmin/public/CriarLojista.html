@@ -41,45 +41,37 @@
 <h4>Easter egg do ReachUp <3</h4>
 <h6>Easter egg do ReachUp <3</h6>
 <hr>
-
 <div id="branco">
- <div class="form-group">
-    <label for="exampleFormControlSelect1">Nome do Logista: </label>
-    <input type="text" class="form-control" id="exampleFormControlSelect1" disabled="true" placeholder="Adagoberto dos Santos">
-    </select>
-  </div>
-
- <div class="form-group">
-    <label for="exampleFormControlSelect1">Editar Senha: </label>
-    <input type="password" class="form-control" id="exampleFormControlSelect1">
-    </select>
-  </div>
-
- <div class="form-group">
-    <label for="exampleFormControlSelect1">Confirmar Senha: </label>
-    <input type="password" class="form-control" id="exampleFormControlSelect1">
-    </select>
-  </div>
 
 <div class="form-group">
-    <label for="exampleFormControlSelect1">Associe a uma loja:</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>Netshoes</option>
-      <option>McDonalds</option>
-      <option>Subway</option>
-      <option>Saraiva</option>
-      <option>Americanas</option>
-    </select>
+    <label for="exampleFormControlSelect1">Email</label>
+    <input id="txtShopkeeperEmail" type="email" class="form-control" id="exampleFormControlSelect1" required/>
+    <label for="exampleFormControlSelect1">Nome</label>
+    <input id="txtShopkeeperName" type="text" class="form-control" id="exampleFormControlSelect1" required/>
+    <label for="exampleFormControlSelect1">Senha</label>
+    <input id="txtShopkeeperPassword" type="password" class="form-control" id="exampleFormControlSelect1" required/>
   </div>
 
 <br>
 
-  <input class="btn btn-primary" type="submit" value="Criar Logista" id="saidae">
+<div class="form-group">
+  <label for="exampleFormControlSelect1">Associar a loja:</label>
+  <select id="cmbStores" class="form-control" id="exampleFormControlSelect1">
+  </select>
+</div>
 
+  <input id="btnAddShopkeeper" class="btn btn-primary" type="submit" value="Adicionar" id="saidae">
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script src="../src/Scripts/fetchStores.js"></script>
+<script src="../src/Scripts/addShopkeeper.js"></script>
+<script src="../src/Controllers/LocalController.js"></script>
+<script src="../src/Controllers/UserController.js"></script>
+<script src="../src/Models/User.js"></script>
+<script src="../src/Services/ApiConfig.js"></script>
+<script src="../src/Services/ApiConnection.js"></script>
 
 </body>
 </html>

@@ -44,11 +44,8 @@ $( async () => {
      {
          const local = await clsLocal.get(id);
 
-         console.log(local);
-
          $("#txtLocalName").val(local.name);
          $("#txtLocalFloor").val(local.floor);
-         console.log(local.floor);
          localType = local.type;
 
          const pLocalState = $("#txtLocalAvailability");
@@ -123,25 +120,18 @@ $( async () => {
      async function updateOpHoursLocal()
      {
         const startSeg = $("#startSeg").val();
-        console.log(startSeg);
         const endSeg = $("#endSeg").val();
         const startTer = $("#startTer").val();
-        console.log(startTer);
         const endTer = $("#endTer").val();
         const startQua = $("#startQua").val();
-        console.log(startQua);
         const endQua = $("#endQua").val();
         const startQui = $("#startQui").val();
-        console.log(startQui);
         const endQui = $("#endQui").val();
         const startSex = $("#startSex").val();
-        console.log(startSex);
         const endSex = $("#endSex").val();
         const startSab = $("#startSab").val();
-        console.log(startSab);
         const endSab = $("#endSab").val();
         const startDom = $("#startDom").val();
-        console.log(startDom);
         const endDom = $("#endDom").val();
 
          for (var i = 0; i < 7; i++)

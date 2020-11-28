@@ -55,4 +55,16 @@ class AccountController {
                 );
          }
 
+         async searchShopkeeperByName(name)
+         {
+             return await
+              this.api.httpAnonymousGet(`Account/SearchShopkeeperByName?name=${name}`);
+         }
+
+         async getShopkeeperLocal(email)
+         {
+            return await 
+              this.api.httpAnonymousGet(`Account/GetShopkeeperLocal?email=${email}`);
+         }
+
      }

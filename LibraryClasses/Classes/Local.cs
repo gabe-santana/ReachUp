@@ -91,7 +91,6 @@ namespace ReachUp
         /// <param name="floor"></param>
         /// <param name="openingHour"></param>
         /// <param name="closingHour"></param>
-        /// <param name="beaconUUID"></param>
         public Local(int id, int type, string typeName, string name, ushort floor,
         string openingHour, string closingHour, bool isAvailable) 
         :base()
@@ -614,18 +613,21 @@ namespace ReachUp
                 {
                     List<User> Admins = new List<User>();
 
-                    while (this.Data.Read())
-                    {
-                        Admins.Add(
-                            new User(
-                            this.Data["nm_administrador"].ToString(),
-                            this.Data["nm_email_administrador"].ToString()
-                          )
-                        );
-                    }
-                    this.Data.Close();
-                    base.Disconnect();
-                    return Task.FromResult(Admins);
+                       while (this.Data.Read())
+                       {
+                            if (this.Data["ok"].ToString() != "0")
+                            {
+                               Admins.Add(
+                                new User(
+                                this.Data["nm_administrador"].ToString(),
+                                this.Data["nm_email_administrador"].ToString()
+                                 )
+                               );
+                            }
+                        }
+                        this.Data.Close();
+                        base.Disconnect();
+                        return Task.FromResult(Admins);
                 }
                 base.Disconnect();
                 return null;

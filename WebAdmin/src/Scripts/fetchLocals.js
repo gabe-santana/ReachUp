@@ -107,7 +107,6 @@ $( async () => {
         if (banana.is(':checked'))
         {
             removeLocals(0);
-            alert("ok bye");
         }
         else if (apple.is(':checked'))
         {

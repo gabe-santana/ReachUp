@@ -115,7 +115,7 @@ namespace ReachUpWebAPI.Controllers
             if (CommuniqueSubCategory != null)
                return Ok(await new Communique().BindSubCategories(CommuniqueSubCategory));
            return BadRequest("Parameters are null");
-        }
+        }*/
 
         // OK 
         [Authorize]
