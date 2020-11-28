@@ -335,7 +335,7 @@ namespace ReachUp
                         user.Email = this.Data["nm_email_user"].ToString();
                         user.Name = this.Data["nm_user"].ToString();
                         user.Role = role;
-                        if (role == "loj")
+                        if (user.Role == "loj")
                         {
                             user.AdmLocal = await new Local().Get(
                                 int.Parse(this.Data["cd_local"].ToString())

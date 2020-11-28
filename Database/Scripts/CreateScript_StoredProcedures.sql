@@ -1069,9 +1069,20 @@ END$$
 DROP PROCEDURE IF EXISTS lojistasLoja$$
 CREATE PROCEDURE lojistasLoja(pLocal INT)
 BEGIN
-		SELECT adm.nm_administrador, adm.nm_email_administrador FROM `local` AS l
+	DECLARE count int;
+    SELECT count(*) into @count from `local` l 
+    inner join administrador adm on l.cd_local = adm.cd_local 
+    where adm.cd_local = pLocal;
+		
+    if (@count > 0) then
+		SELECT adm.nm_administrador, adm.nm_email_administrador,
+        1 as "ok"
+        FROM `local` AS l
 		INNER JOIN administrador AS adm ON l.cd_local = adm.cd_local
 		WHERE adm.cd_local = pLocal;
+    else 
+        SELECT 0 as "ok";
+    end if;
 END$$
 
 DROP PROCEDURE IF EXISTS pegarCategoria$$
