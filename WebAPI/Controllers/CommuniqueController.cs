@@ -9,6 +9,8 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using ReachUp;
+using BusinessLayer.Classes;
+
 
 namespace ReachUpWebAPI.Controllers
 {
@@ -108,10 +110,10 @@ namespace ReachUpWebAPI.Controllers
 
         // OK 
         [HttpPost("BindSubCategories")]
-        public async Task<IActionResult> BindSubCategories([FromBody] Communique communique) 
+        public async Task<IActionResult> BindSubCategories([FromBody] List<CommuniqueSubCategory> CommuniqueSubCategory)
         {
-            if (communique != null)
-               return Ok(await communique.BindSubCategories());
+            if (CommuniqueSubCategory != null)
+               return Ok(await new Communique().BindSubCategories(CommuniqueSubCategory));
            return BadRequest("Parameters are null");
         }
 

@@ -303,7 +303,7 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        //[Authorize(Roles = "adm")]
+        [Authorize(Roles = "adm,loj")]
         [HttpDelete("DeleteSubCategory")]
         public async Task<IActionResult> DeleteSubCategory(int local, int category, int subCategory)
         {

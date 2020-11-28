@@ -31,11 +31,10 @@ namespace ReachUpWebAPI
         .ConfigureWebHostDefaults(webBuilder =>
         {
             webBuilder
-             .UseUrls("http://192.168.42.10:8000")
+             .UseUrls("http://192.168.0.105:8000")
             .UseEnvironment("Development")
             .UseKestrel()
             .UseContentRoot(Directory.GetCurrentDirectory())
-            .UseIISIntegration()
             .UseStartup<Startup>();
       
         });

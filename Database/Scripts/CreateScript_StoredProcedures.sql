@@ -859,6 +859,7 @@ BEGIN
 
 
 	INSERT INTO comunicado VALUES (@_cd, pLocal, pTipo, pDs, pDataInicio, pDataFim);
+	
 
 END$$
 
