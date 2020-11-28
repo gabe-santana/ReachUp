@@ -20,9 +20,11 @@ namespace WebAPI.Controllers
 
         //[Authorize]
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(int id)
         {
-           return Ok(await new Shopping().Get());
+           if (!string.IsNullOrWhiteSpace(id.ToString()))
+              return Ok(await new Shopping().Get(id));
+           return BadRequest("Parameters are null");
         }
 
         //[Authorize(Roles ="adm")]

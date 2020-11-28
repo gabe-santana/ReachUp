@@ -33,7 +33,7 @@ namespace ReachUp
         public Shopping() : base () { }
 
         /// <summary>
-        /// Default constructor
+        /// Default constructor.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
@@ -71,18 +71,18 @@ namespace ReachUp
 
         #endregion
 
-        #region Public Methods
+        #region Public Methods.
 
 
         /// <summary>
         /// Get the shopping
         /// </summary>
         /// <returns>Shopping object</returns>
-        public Task<Shopping> Get()
+        public Task<Shopping> Get(int id)
         {
             if (base.DQLCommand(Procedure.pegarInfoShopping, ref this.Data,
                 new string[,]{
-                    {"pShopping", "0"}
+                    {"pShopping", id.ToString()}
                 }
             ))
             {
