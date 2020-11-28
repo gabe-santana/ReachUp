@@ -41,6 +41,7 @@ dependencies:
   flutter_circular_chart: ^0.1.0
   intl: ^0.16.1
   flutter_rating_bar: ^3.2.0+1
+  toggle_switch: ^0.1.8
   get:
   
 dev_dependencies:

@@ -4,6 +4,7 @@ import 'package:ReachUp/View/DeveloperView/Compass.view.dart';
 import 'package:ReachUp/View/FeedbackView/Feedback.view.dart';
 import 'package:ReachUp/View/HomeView/HomeMap.view.dart';
 import 'package:ReachUp/View/HomeView/WalkingInfo.view.dart';
+import 'package:ReachUp/View/InfoView/Info.view.dart';
 import 'package:ReachUp/View/MapView/Map.view.dart';
 import 'package:ReachUp/View/NarratorConfigView/NarratorConfig.view.dart';
 import 'package:ReachUp/View/NotificationsView/Notifications.view.dart';
@@ -256,7 +257,7 @@ class _HomeState extends State<Home> {
                                 icon: FontAwesomeIcons.infoCircle,
                                 selected: _selectedIndex == 6),
                             onTap: () {
-                              navigateTo(NotificationsView(), "Info",
+                              navigateTo(InfoView(), "Info",
                                   "Quem somos nós?", context, false);
                             },
                           ),
