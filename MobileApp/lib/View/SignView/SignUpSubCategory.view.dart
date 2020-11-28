@@ -1,6 +1,8 @@
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Account.controller.dart';
+import 'package:ReachUp/Controller/ClientPreference.controller.dart';
 import 'package:ReachUp/Controller/SubCategory.controller.dart';
+import 'package:ReachUp/Model/ClientPreference.model.dart';
 import 'package:ReachUp/Model/Subcategory.model.dart';
 import 'package:ReachUp/View/HomeView/Home.view.dart';
 import 'package:ReachUp/globals.dart';
@@ -17,7 +19,10 @@ class SignUpSubCategory extends StatefulWidget {
 }
 
 class _SignUpSubCategoryState extends State<SignUpSubCategory> {
-  SubCategoryController subCategoryController = new SubCategoryController();
+  final ClientPreferenceController clientPreferenceController =
+      new ClientPreferenceController();
+  final SubCategoryController subCategoryController =
+      new SubCategoryController();
   int categoryIndex = 0;
 
   @override
@@ -32,7 +37,6 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
   }
 
   Widget buildListView(List<SubCategory> subCategoriesByCat) {
-
     return ListView.builder(
       itemCount: subCategoriesByCat.length,
       itemBuilder: (context, index) =>
@@ -108,8 +112,6 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
                     ],
                   ),
                   onPressed: () {
-                    print("index cat");
-                    print(Globals.categoriesChecked.length - categoryIndex);
                     if (Globals.subCategoriesChecked.isNotEmpty) {
                       if (categoryIndex <
                           Globals.categoriesChecked.length - 1) {
@@ -117,15 +119,30 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
                           categoryIndex++;
                         });
                       } else {
+                        EasyLoading.show(status: "Carregando...");
                         accountController.signUp().then((value) {
                           Globals.user = value;
+
+                          ClientPreference newPreferences =
+                              new ClientPreference()
+                                ..clientEmail = Globals.user.email
+                                ..subCategories = new List<SubCategory>();
+
+                          Globals.subCategoriesChecked.forEach((element) {
+                            newPreferences.subCategories.add(element);
+                          });
+                          clientPreferenceController
+                              .add(newPreferences)
+                              .then((value) {
+                            EasyLoading.dismiss();
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Home(isNoob: true)),
+                              (Route<dynamic> route) => false,
+                            );
+                          });
                         });
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Home(isNoob: true)),
-                          (Route<dynamic> route) => false,
-                        );
                       }
                     } else
                       showSnackBarMessage(
@@ -149,10 +166,9 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
 
           return buildListView(snapshot.data);
         } else {
-
-          return Builder(builder: (context){
-              EasyLoading.show(status: "Buscando itens...");
-              return Container();
+          return Builder(builder: (context) {
+            EasyLoading.show(status: "Buscando itens...");
+            return Container();
           });
         }
       },

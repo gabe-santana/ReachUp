@@ -15,7 +15,9 @@ class CategoryStoreCard extends StatefulWidget {
   Category category;
   bool checked = false;
 
-  CategoryStoreCard(this.category);
+  CategoryStoreCard(this.category){
+   
+  }
 
   @override
   _CategoryStoreCardState createState() => _CategoryStoreCardState();
@@ -24,12 +26,14 @@ class CategoryStoreCard extends StatefulWidget {
 class _CategoryStoreCardState extends State<CategoryStoreCard> {
   SubCategoryController subCategoryController = new SubCategoryController();
 
+
   Widget buildListView(List<SubCategory> subCategoriesByCat) {
     // subCategoriesByCat.removeWhere((subcat) => Globals.subcategoriesLocal.contains(subcat));
     return ListView.builder(
       itemCount: subCategoriesByCat.length,
-      itemBuilder: (context, index) =>
-          SubCategoryStoreCardView(subCategoriesByCat[index]),
+      itemBuilder: (context, index) => SubCategoryStoreCardView(
+          subCategoriesByCat[index],
+          isClientPreference: Globals.user.role == "cli"),
     );
   }
 
@@ -40,6 +44,12 @@ class _CategoryStoreCardState extends State<CategoryStoreCard> {
   }
 
   @override
+  void initState() {
+   
+    super.initState();
+ 
+  }
+  @override
   Widget build(BuildContext context) {
     return Align(
         alignment: Alignment.center,
@@ -48,14 +58,14 @@ class _CategoryStoreCardState extends State<CategoryStoreCard> {
             children: [
               Card(
                   child: Container(
-                    color: widget.checked ? Colors.grey[100] : Colors.white,
-                    child: InkWell(
-                onTap: () {
+                color: widget.checked ? Colors.grey[100] : Colors.white,
+                child: InkWell(
+                  onTap: () {
                     setState(() {
                       widget.checked = !widget.checked;
                     });
-                },
-                child: (Row(
+                  },
+                  child: (Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
@@ -74,8 +84,9 @@ class _CategoryStoreCardState extends State<CategoryStoreCard> {
                                   .getImage(widget.category.categoryId),
                               placeholder: (context, url) => Center(
                                 child: CircularProgressIndicator(
-                                    valueColor: new AlwaysStoppedAnimation<Color>(
-                                        Colors.grey)),
+                                    valueColor:
+                                        new AlwaysStoppedAnimation<Color>(
+                                            Colors.grey)),
                               ),
                               errorWidget: (context, url, error) =>
                                   Icon(Icons.error),
@@ -93,17 +104,18 @@ class _CategoryStoreCardState extends State<CategoryStoreCard> {
                               widget.category.categoryName,
                               overflow: TextOverflow.clip,
                               style: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onBackground,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
                                   fontSize: 18),
                             ),
                           ),
                         ],
                       )
                     ],
-                )),
-              ),
                   )),
+                ),
+              )),
               widget.checked
                   ? AnimatedContainer(
                       duration: Duration(seconds: 1),

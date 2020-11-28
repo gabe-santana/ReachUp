@@ -26,6 +26,6 @@ class SubCategory {
   }
 
   bool operator ==(other) {
-    return this.subCategoryId  == other.subCategoryId;
+    return this.subCategoryName  == other.subCategoryName;
   }
 }

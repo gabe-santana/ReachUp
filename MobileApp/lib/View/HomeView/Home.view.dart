@@ -8,6 +8,7 @@ import 'package:ReachUp/View/InfoView/Info.view.dart';
 import 'package:ReachUp/View/MapView/Map.view.dart';
 import 'package:ReachUp/View/NarratorConfigView/NarratorConfig.view.dart';
 import 'package:ReachUp/View/NotificationsView/Notifications.view.dart';
+import 'package:ReachUp/View/ProfileView/Profile.view.dart';
 import 'package:ReachUp/View/SearchView/Search.view.dart';
 import 'package:ReachUp/View/SignView/Sign.view.dart';
 import 'package:ReachUp/View/_Layouts/HomeLayout.layout.dart';
@@ -84,49 +85,59 @@ class _HomeState extends State<Home> {
                 child: DrawerHeader(
                   margin: EdgeInsets.all(0.0),
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 15),
-                  child: Stack(
-                    children: <Widget>[
-                      Positioned(
-                        bottom: 0,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                              child: FaIcon(
-                                FontAwesomeIcons.userAlt,
-                                color: Colors.white,
-                                size: 45,
+                  child: GestureDetector(
+                    onTap: (){
+                          navigateTo(
+                                  ProfileView(),
+                                  "Perfil",
+                                  "Aqui você verificar as informações do seu perfil, bem como editá-las",
+                                  context,
+                                  false);
+                    },
+                                      child: Stack(
+                      children: <Widget>[
+                        Positioned(
+                          bottom: 0,
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                child: FaIcon(
+                                  FontAwesomeIcons.userAlt,
+                                  color: Colors.white,
+                                  size: 45,
+                                ),
                               ),
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Container(
-                                    child: Text(Globals.user.name,
-                                        style: TextStyle(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onSecondary,
-                                            fontSize: 25))),
-                                Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.7,
-                                    child: Opacity(
-                                      opacity: 0.5,
-                                      child: Text(Globals.user.email,
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Container(
+                                      child: Text(Globals.user.name,
                                           style: TextStyle(
                                               color: Theme.of(context)
                                                   .colorScheme
                                                   .onSecondary,
-                                              fontSize: 16)),
-                                    )),
-                              ],
-                            ),
-                          ],
+                                              fontSize: 25))),
+                                  Container(
+                                      width:
+                                          MediaQuery.of(context).size.width * 0.7,
+                                      child: Opacity(
+                                        opacity: 0.5,
+                                        child: Text(Globals.user.email,
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSecondary,
+                                                fontSize: 16)),
+                                      )),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -210,6 +221,7 @@ class _HomeState extends State<Home> {
                                   false);
                             },
                           ),
+                        
                         ],
                       ),
                     ),

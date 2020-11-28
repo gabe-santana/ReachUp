@@ -11,10 +11,19 @@ class SubCategoryStoreCardView extends StatefulWidget {
 
   bool checked;
   bool exists;
-   
-  SubCategoryStoreCardView(this.subCategory){
-      this.checked = Globals.subCategoriesStoreChecked.contains(this.subCategory);
+  bool isClientPreference;
+
+  SubCategoryStoreCardView(this.subCategory,
+      {this.isClientPreference = false}) {
+    if (isClientPreference) {
+      this.checked =
+          Globals.subCategoriesPreferenceChecked.contains(this.subCategory);
+      this.exists = Globals.userPreference.subCategories.contains(this.subCategory);
+    } else {
+      this.checked =
+          Globals.subCategoriesStoreChecked.contains(this.subCategory);
       this.exists = Globals.subcategoriesLocal.contains(this.subCategory);
+    }
   }
 
   @override
@@ -33,122 +42,133 @@ class _SubCategoryStoreCardViewState extends State<SubCategoryStoreCardView> {
           color: Colors.grey[100],
           child: InkWell(
             splashColor: Theme.of(context).primaryColor,
-            child: 
-            !widget.exists ? 
-             Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                      child: Container(
-              
-                        width: 40,
-                        height: 40,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: CachedNetworkImage(
-                            fit: BoxFit.fill,
-                          
-                            httpHeaders: {
-                              "Authorization": "Bearer ${Globals.user.token}"
-                            },
-                            imageUrl: SubCategoryRepository().getImage(
-                                widget.subCategory.category.categoryId,
-                                widget.subCategory.subCategoryId),
-                            placeholder: (context, url) => Center(
-                              child: CircularProgressIndicator(
-                                  valueColor: new AlwaysStoppedAnimation<Color>(
-                                      Colors.grey)),
+            child: widget.exists
+                ? Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: CachedNetworkImage(
+                              fit: BoxFit.fill,
+                              httpHeaders: {
+                                "Authorization": "Bearer ${Globals.user.token}"
+                              },
+                              imageUrl: SubCategoryRepository().getImage(
+                                  widget.subCategory.category.categoryId,
+                                  widget.subCategory.subCategoryId),
+                              placeholder: (context, url) => Center(
+                                child: CircularProgressIndicator(
+                                    valueColor:
+                                        new AlwaysStoppedAnimation<Color>(
+                                            Colors.grey)),
+                              ),
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
                             ),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
                           ),
                         ),
                       ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 120,
-                          child: Text(
-                            "${widget.subCategory.subCategoryName} (Já adicionado)",
-                            overflow: TextOverflow.clip,
-                            style: TextStyle(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground,
-                                fontSize: 18),
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                )
-            
-            : CheckboxListTile(
-                activeColor: Theme.of(context).primaryColor,
-                title: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: CachedNetworkImage(
-                            fit: BoxFit.fill,
-                            width: MediaQuery.of(context).size.width,
-                            httpHeaders: {
-                              "Authorization": "Bearer ${Globals.user.token}"
-                            },
-                            imageUrl: SubCategoryRepository().getImage(
-                                widget.subCategory.category.categoryId,
-                                widget.subCategory.subCategoryId),
-                            placeholder: (context, url) => Center(
-                              child: CircularProgressIndicator(
-                                  valueColor: new AlwaysStoppedAnimation<Color>(
-                                      Colors.grey)),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 120,
+                            child: Text(
+                              "${widget.subCategory.subCategoryName} (Já adicionado)",
+                              overflow: TextOverflow.clip,
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
+                                  fontSize: 18),
                             ),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
                           ),
-                        ),
-                      ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                        ],
+                      )
+                    ],
+                  )
+                : CheckboxListTile(
+                    activeColor: Theme.of(context).primaryColor,
+                    title: Row(
                       children: [
-                        Container(
-                          width: 120,
-                          child: Text(
-                            widget.subCategory.subCategoryName,
-                            overflow: TextOverflow.clip,
-                            style: TextStyle(
-                                color:
-                                    Theme.of(context).colorScheme.onBackground,
-                                fontSize: 18),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                          child: Container(
+                            width: 40,
+                            height: 40,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: CachedNetworkImage(
+                                fit: BoxFit.fill,
+                                width: MediaQuery.of(context).size.width,
+                                httpHeaders: {
+                                  "Authorization":
+                                      "Bearer ${Globals.user.token}"
+                                },
+                                imageUrl: SubCategoryRepository().getImage(
+                                    widget.subCategory.category.categoryId,
+                                    widget.subCategory.subCategoryId),
+                                placeholder: (context, url) => Center(
+                                  child: CircularProgressIndicator(
+                                      valueColor:
+                                          new AlwaysStoppedAnimation<Color>(
+                                              Colors.grey)),
+                                ),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
+                            ),
                           ),
                         ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 120,
+                              child: Text(
+                                widget.subCategory.subCategoryName,
+                                overflow: TextOverflow.clip,
+                                style: TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
+                                    fontSize: 18),
+                              ),
+                            ),
+                          ],
+                        )
                       ],
-                    )
-                  ],
-                ),
-                controlAffinity: ListTileControlAffinity.trailing,
-                value: widget.checked,
-                onChanged: (val) {
-                  setState(() {
-                    widget.checked = val;
-
-                    if (val) {
-                      Globals.subCategoriesStoreChecked.add(widget.subCategory);
-                    } else {
-                      Globals.subCategoriesStoreChecked
-                          .removeWhere((ctg) => ctg == widget.subCategory);
-                    }
-                  });
-                }),
+                    ),
+                    controlAffinity: ListTileControlAffinity.trailing,
+                    value: widget.checked,
+                    onChanged: (val) {
+                      setState(() {
+                        widget.checked = val;
+                        if (widget.isClientPreference) {
+                          if (val) {
+                            Globals.subCategoriesPreferenceChecked
+                                .add(widget.subCategory);
+                          } else {
+                            Globals.subCategoriesPreferenceChecked.removeWhere(
+                                (ctg) => ctg == widget.subCategory);
+                          }
+                        } else {
+                          if (val) {
+                            Globals.subCategoriesStoreChecked
+                                .add(widget.subCategory);
+                          } else {
+                            Globals.subCategoriesStoreChecked.removeWhere(
+                                (ctg) => ctg == widget.subCategory);
+                          }
+                        }
+                      });
+                    }),
           ),
         ),
       ),

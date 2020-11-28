@@ -1,6 +1,7 @@
 import 'package:ReachUp/Model/Communique.model.dart';
 import 'package:ReachUp/globals.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
@@ -19,6 +20,12 @@ class _CommuniqueCardState extends State<CommuniqueCard> {
 
   selectWidget() {
     widget.onSelected(widget.communique, widgetSelected);
+  }
+
+  @override
+  void deactivate() {
+    EasyLoading.dismiss();
+    super.deactivate();
   }
 
   @override

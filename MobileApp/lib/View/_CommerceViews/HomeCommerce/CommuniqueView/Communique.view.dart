@@ -28,6 +28,12 @@ class _CommuniqueViewState extends State<CommuniqueView> {
      Globals.subCategoriesPromotionChecked.clear();
     Globals.selectedCommuniques.clear();
   }
+    @override
+  void deactivate() {
+    EasyLoading.dismiss();
+    super.deactivate();
+  }
+
 
   Widget _buildListView(int type) {
     List<CommuniqueCard> cards;

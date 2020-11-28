@@ -1,6 +1,7 @@
 import 'package:ReachUp/Model/Category.model.dart';
 import 'package:ReachUp/Model/SubCategoryLocal.mode.dart';
 
+import 'Model/ClientPreference.model.dart';
 import 'Model/Communique.model.dart';
 import 'Model/CommuniqueSubCategory.model.dart';
 import 'Model/Subcategory.model.dart';
@@ -28,7 +29,13 @@ class Globals {
 
   static List<SubCategory> subcategoriesLocal = new List<SubCategory>();
 
-  static List<SubCategory> subCategoriesStoreChecked= new List<SubCategory>();
+  static List<SubCategory> subCategoriesStoreChecked = new List<SubCategory>();
+
+  static List<SubCategory> subCategoriesPreferenceChecked = new List<SubCategory>();
+
+
+  static ClientPreference userPreference = new ClientPreference();
+  
 }
 
 
