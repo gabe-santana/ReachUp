@@ -1199,6 +1199,24 @@ CALL cadastrarBox("Entrada/Saída Carrefour", 261, "adeb0cf1-n928-76ea-adc2-8942
 CALL cadastrarLocal(8, "Entrada/Saída Praiamar Corporate",  4,  '10:00:00', '22:00:00');
 CALL cadastrarBox("Entrada/Saída Praiamar Corporate", 262, "adeb2cf1-n928-19ea-adc2-8942ac120032");
 
+CALL darAdm("adampark@email.com", 1);
+CALL darAdm("adamsandler@email.com", 1);
+CALL darAdm("damasioPereira@email.com", 5);
+CALL darAdm("faustosilva@email.com", 6);
+CALL darAdm("fabiolimapedefava@email.com", 7);
+CALL darAdm("helderinacio@email.com", 7);
+CALL darAdm("anamoreno@email.com", 5);
+
+insert into feedback values (8,4, "reginaweber@email.com", "A Samsung está de parabéns! Amo seus celulares, e a loja é muito acessível", '2020-11-27', 5);
+insert into feedback values (7,4, "reginaweber@email.com", "A Samsung está de parabéns! Amo seus celulares, e a loja é muito acessível", '2020-11-29', 5);
+CALL criarFeedback(5, "jonathanjoestar@email.com", "Os corredores são bem espaçosos, mas em alguns pontos não há piso tátil.", 3);
+insert into feedback values (2,4, "reginaweber@email.com", "A Samsung está de parabéns! Amo seus celulares, e a loja é muito acessível", '2020-11-12', 3);
+insert into feedback values (3,4, "reginaweber@email.com", "A Samsung está de parabéns! Amo seus celulares, e a loja é muito acessível", '2020-11-12', 4);
+insert into feedback values (4,4, "reginaweber@email.com", "A Samsung está de parabéns! Amo seus celulares, e a loja é muito acessível", '2020-11-21', 2);
+insert into feedback values (5,4, "reginaweber@email.com", "A Samsung está de parabéns! Amo seus celulares, e a loja é muito acessível", '2020-11-09', 3);
+insert into feedback values (6,4, "reginaweber@email.com", "A Samsung está de parabéns! Amo seus celulares, e a loja é muito acessível", '2020-11-09', 5);
+
+
 /* Definir horário alternativo das entradas: no domingo
 o período de funcionamento do shopping é diferente */
 
