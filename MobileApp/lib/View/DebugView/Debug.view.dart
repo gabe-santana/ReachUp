@@ -1,11 +1,16 @@
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
+import 'package:ReachUp/View/HomeView/Home.view.dart';
 import 'package:ReachUp/View/SignView/Sign.view.dart';
 import 'package:ReachUp/View/SignView/SignIn.view.dart';
+import 'package:ReachUp/View/_CommerceViews/HomeCommerce/HomeView/HomeCommerce.view.dart';
+import 'package:ReachUp/View/splashscreen.view.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../globals.dart';
 
 class DebugView extends StatefulWidget {
+  DebugView() {}
   @override
   _DebugViewState createState() => _DebugViewState();
 }
@@ -16,17 +21,12 @@ class _DebugViewState extends State<DebugView> {
   GlobalKey<NavigatorState> navigateKey = GlobalKey<NavigatorState>();
 
   Future<bool> _backPressed(GlobalKey<NavigatorState> _navigateKey) async {
-
     if (_navigateKey.currentState.canPop()) {
-
       _navigateKey.currentState.maybePop();
       return Future<bool>.value(false);
     }
     return Future<bool>.value(true);
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -71,16 +71,13 @@ class _DebugViewState extends State<DebugView> {
                   width: 250,
                   child: CheckboxListTile(
                     title: Text("Entrar como lojista"),
-              
-                    activeColor:  Theme.of(context).colorScheme.primary,
+                    activeColor: Theme.of(context).colorScheme.primary,
                     value: VersionConfig.isCommerceVersion,
                     onChanged: (value) {
-                     setState(() {
-           
+                      setState(() {
                         VersionConfig.isCommerceVersion = value;
-                     });
+                      });
                     },
-
                   ),
                 ),
                 Padding(
@@ -114,10 +111,23 @@ class _DebugViewState extends State<DebugView> {
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();
                       debugPrint("URL API: ${Globals.urlAPI}\n");
-          
-                      Navigator.push(context, 
-                          MaterialPageRoute(builder: (BuildContext context) => 
-                          VersionConfig.isCommerceVersion ? SignInView() : SignView()));
+                      Globals.isLoggedIn
+                          ? Globals.user.role == "cli"
+                              ? Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          Home()))
+                              : MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      HomeCommerceView())
+                          : Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      VersionConfig.isCommerceVersion
+                                          ? Splash(SignInView())
+                                          : Splash(SignView())));
                     }
                   },
                   color: Theme.of(context).colorScheme.primary,

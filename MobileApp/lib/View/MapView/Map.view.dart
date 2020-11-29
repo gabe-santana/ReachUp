@@ -1,19 +1,21 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 import 'package:ReachUp/Component/Map/Course.component.dart';
 import 'package:ReachUp/Component/Map/Halls.component.dart';
 import 'package:ReachUp/Component/Map/MapObject.component.dart';
 import 'package:ReachUp/Component/TTS/TextToSpeech.component.dart';
 import 'package:ReachUp/View/MapView/RouteSign.view.dart';
+import 'package:ReachUp/globals.dart';
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_beacon/flutter_beacon.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:gesture_x_detector/gesture_x_detector.dart';
 import 'package:lottie/lottie.dart';
-import 'dart:async' show Future, Timer;
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:path/path.dart';
+import 'dart:async' show Future, StreamController, StreamSubscription, Timer;
+import 'package:flutter/services.dart' show PlatformException, rootBundle;
 
 class MapViewWidGet extends StatefulWidget {
   bool inRouting;
@@ -85,14 +87,6 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
 
   updateRoute() {}
 
-  @override
-  void dispose() {
-    timer?.cancel();
-    TextToSpeech.stop();
-    TextToSpeech.initializeTts();
-    super.dispose();
-  }
-
   Future _speakDirection(String direction) async {
     if (direction != null && direction.isNotEmpty) {
       var result;
@@ -157,7 +151,6 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
     try {
       return 2 * pi * (_heading / 360);
     } catch (e) {
-      // debugPrint(e);
       hasCompass = false;
       return 0;
     }
@@ -188,7 +181,6 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
     if (this.mounted)
       setState(() {
         _heading = x;
-        //  print(_heading);
       });
   }
 
@@ -397,13 +389,207 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
   }
 }
 
-class MapView extends StatelessWidget {
+class MapView extends StatefulWidget {
   bool inRouting;
   MapView({this.inRouting = false});
+
+  @override
+  _MapViewState createState() => _MapViewState();
+}
+
+class _MapViewState extends State<MapView> with WidgetsBindingObserver {
+  final StreamController<BluetoothState> streamController = StreamController();
+  StreamSubscription<BluetoothState> _streamBluetooth;
+  StreamSubscription<RangingResult> _streamRanging;
+  final _regionBeacons = <Region, List<Beacon>>{};
+
+  bool authorizationStatusOk = false;
+  bool locationServiceEnabled = false;
+  bool bluetoothEnabled = false;
+  AsyncMemoizer _memoizer;
+
+  listeningState() async {
+    print('Listening to bluetooth state');
+    _streamBluetooth = flutterBeacon
+        .bluetoothStateChanged()
+        .listen((BluetoothState state) async {
+      print('BluetoothState = $state');
+      streamController.add(state);
+
+      switch (state) {
+        case BluetoothState.stateOn:
+          initScanBeacon();
+          break;
+        case BluetoothState.stateOff:
+          await pauseScanBeacon();
+          await checkAllRequirements();
+          break;
+      }
+    });
+  }
+
+  checkAllRequirements() async {
+    final bluetoothState = await flutterBeacon.bluetoothState;
+    final bluetoothEnabled = bluetoothState == BluetoothState.stateOn;
+    final authorizationStatus = await flutterBeacon.authorizationStatus;
+    final authorizationStatusOk =
+        authorizationStatus == AuthorizationStatus.allowed ||
+            authorizationStatus == AuthorizationStatus.always;
+    final locationServiceEnabled =
+        await flutterBeacon.checkLocationServicesIfEnabled;
+
+    setState(() {
+      this.authorizationStatusOk = authorizationStatusOk;
+      this.locationServiceEnabled = locationServiceEnabled;
+      this.bluetoothEnabled = bluetoothEnabled;
+    });
+  }
+
+  initScanBeacon() async {
+    await flutterBeacon.initializeScanning;
+    await checkAllRequirements();
+    if (!authorizationStatusOk ||
+        !locationServiceEnabled ||
+        !bluetoothEnabled) {
+      print('RETURNED, authorizationStatusOk=$authorizationStatusOk, '
+          'locationServiceEnabled=$locationServiceEnabled, '
+          'bluetoothEnabled=$bluetoothEnabled');
+      return;
+    }
+    final regions = <Region>[];
+
+    regions.add(Region(identifier: 'com.beacon'));
+
+    if (_streamRanging != null) {
+      if (_streamRanging.isPaused) {
+        _streamRanging.resume();
+        return;
+      }
+    }
+
+    _streamRanging =
+        flutterBeacon.ranging(regions).listen((RangingResult result) {
+
+      if (result != null && mounted) {
+        setState(() {
+          _regionBeacons[result.region] = result.beacons;
+          Globals.beacons.clear();
+          _regionBeacons.values.forEach((list) {
+            Globals.beacons.addAll(list);
+          });
+          Globals.beacons.sort(_compareParameters);
+        });
+      }
+    });
+  }
+
+  pauseScanBeacon() async {
+    _streamRanging?.pause();
+    if (Globals.beacons.isNotEmpty) {
+      setState(() {
+        Globals.beacons.clear();
+      });
+    }
+  }
+
+  int _compareParameters(Beacon a, Beacon b) {
+    int compare = a.proximityUUID.compareTo(b.proximityUUID);
+
+    if (compare == 0) {
+      compare = a.major.compareTo(b.major);
+    }
+
+    if (compare == 0) {
+      compare = a.minor.compareTo(b.minor);
+    }
+
+    return compare;
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    print('AppLifecycleState = $state');
+    if (state == AppLifecycleState.resumed) {
+      if (_streamBluetooth != null && _streamBluetooth.isPaused) {
+        _streamBluetooth.resume();
+      }
+      await checkAllRequirements();
+      if (authorizationStatusOk && locationServiceEnabled && bluetoothEnabled) {
+        await initScanBeacon();
+      } else {
+        await pauseScanBeacon();
+        await checkAllRequirements();
+      }
+    } else if (state == AppLifecycleState.paused) {
+      _streamBluetooth?.pause();
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    streamController?.close();
+    _streamRanging?.cancel();
+    _streamBluetooth?.cancel();
+    flutterBeacon.close;
+
+    _memoizer = null;
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _memoizer = AsyncMemoizer();
+    WidgetsBinding.instance.addObserver(this);
+    listeningState();
+  }
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: MapViewWidGet(inRouting: inRouting),
+      child: StreamBuilder<BluetoothState>(
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final state = snapshot.data;
+
+              if (state == BluetoothState.stateOn) {
+                return MapViewWidGet(inRouting: widget.inRouting);
+              }
+
+              if (state == BluetoothState.stateOff) {
+                if (Platform.isAndroid) {
+                  try {
+                    _memoizer.runOnce(() {
+                      flutterBeacon.openBluetoothSettings;
+                    });
+                  } on PlatformException catch (e) {
+                    print(e);
+                  }
+                } else if (Platform.isIOS) {}
+              }
+
+              if (!authorizationStatusOk) {
+                _memoizer.runOnce(() {
+                  flutterBeacon.requestAuthorization;
+                });
+              }
+
+              if (!locationServiceEnabled) {
+                if (Platform.isAndroid) {
+                  _memoizer.runOnce(() {
+                    flutterBeacon.openLocationSettings;
+                  });
+                } else if (Platform.isIOS) {}
+              }
+            }
+            return Container();
+          },
+          stream: streamController.stream,
+          initialData: BluetoothState.stateUnknown),
     );
   }
 }

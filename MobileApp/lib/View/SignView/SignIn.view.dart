@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:ReachUp/Component/Database/Database.db.dart';
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Account.controller.dart';
 import 'package:ReachUp/View/HomeView/Home.view.dart';
@@ -166,7 +169,12 @@ class _SignInViewState extends State<SignInView> {
                                     EasyLoading.dismiss();
                                     if (value != null) {
                                       Globals.user = value;
-
+                                      Database.insert(
+                                          key: "user",
+                                          value: jsonEncode(
+                                              Globals.user.toJson()));
+                                      debugPrint(
+                                          "Local Database user:\n ${Database.select(key: 'user').response} ");
                                       Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
