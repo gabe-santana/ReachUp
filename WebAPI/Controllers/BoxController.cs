@@ -8,10 +8,12 @@ using System.Linq;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Cors;
 using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class BoxController : ControllerBase

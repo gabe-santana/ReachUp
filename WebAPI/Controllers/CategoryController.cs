@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
 using System.IO;
+using Microsoft.AspNetCore.Cors;
 using System.Collections;
 using System.Collections.Generic;
 using ReachUp;
 
 namespace ReachUpWebAPI.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase

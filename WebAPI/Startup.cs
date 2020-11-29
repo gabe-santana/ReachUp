@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,6 +30,8 @@ namespace ReachUpWebAPI
         {
             Configuration = configuration;
         }
+
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         public IConfiguration Configuration { get; }
 
@@ -68,6 +71,12 @@ namespace ReachUpWebAPI
               builder => builder.AllowAnyOrigin()
                   .AllowAnyMethod()
                   .AllowAnyHeader());
+
+                /*options.AddPolicy(name: MyAllowSpecificOrigins,
+              builder => 
+              {
+                 builder.WithOrigins("http://127.0.0.1:5000");
+              });*/
             });
 
             services.AddControllers()
@@ -83,6 +92,10 @@ namespace ReachUpWebAPI
 
             services.Configure<KestrelServerOptions>(
            Configuration.GetSection("Kestrel"));
+
+           /*services.Configure<MvcOptions>(options => {
+              options.Filters.Add(new CorsAuthorizationFilterFactory("AllowSpecificOrigin"));
+           });*/
 
         }
 

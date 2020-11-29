@@ -11,6 +11,8 @@ class ApiConnection {
           mode: 'cors',
           method: 'GET',
           headers: {
+            'Access-Control-Allow-Origin': 'http://127.0.0.1:5500',
+            'Access-Control-Allow-Headers': '*',
             'Accept':'application/json',
             'Accept-Ranges': 'bytes',
             'Content-Type':'application/json',
@@ -19,13 +21,10 @@ class ApiConnection {
             'WWW-Authenticate': 'Basic',
             'Connection': 'close',
           },
-          cache: 'no-cache',
-          credentials: 'same-origin',
-          redirect: 'follow',
-          referrerPolicy: 'no-referrer'
         })
 
         const json = await response.json();
+        console.log(json);
         return json;
    }
 
