@@ -5,6 +5,7 @@ $( async () => {
     const clsUser = new UserController();
 
     var iterator = -1;
+    var localsNumber = 0;
 
     getAll();
 
@@ -18,8 +19,99 @@ $( async () => {
     {
         turnShopkeepersOff();
         const shopkeepersSection = $("#shopkeepers");
+        var localId = -1;
 
+        i = -1;
         shopkeepers.forEach(shopkeeper => {
+          i++;
+
+          if (i == 0)
+          {
+             localId = shopkeeper.admLocal.idLocal;
+             const localDiv = document.createElement('div');
+            localDiv.classList.add('list-group-item');
+            localDiv.classList.add('list-group-item-action');
+            localDiv.style.backgroundColor = 'rgb(70, 130, 180, 0.6)';
+            localDiv.style.color = "#f5f5f5";
+
+            const div2 = document.createElement('div');
+          div2.classList.add('d-flex');
+          div2.classList.add('w-100');
+          div2.classList.add('justify-content-between');
+
+          const h4 = document.createElement('h4');
+
+          h4.innerText = shopkeeper.admLocal.name;
+          h4.classList.add('mb-1');
+          div2.append(h4);
+
+          const p = document.createElement('p');
+
+          p.innerText = shopkeeper.admLocal.typeName;
+          p.classList.add('mb-1');
+          div2.append(p);
+
+          const p2 = document.createElement('p2');
+
+          p2.innerText = shopkeeper.admLocal.isAvailable ? "Local ativo" : "Local desativo";
+          p2.classList.add('mb-1');
+          div2.append(p2);
+
+          const btnUpdateLocal = document.createElement('button');
+          btnUpdateLocal.innerText = "Editar local";
+          btnUpdateLocal.id = localId;
+          btnUpdateLocal.classList.add('btnUpdateLocal');
+          
+          div2.append(btnUpdateLocal);
+
+          localDiv.append(div2);
+          shopkeepersSection.append(localDiv);
+        }
+          
+          if (shopkeeper.admLocal.idLocal != localId)
+          {
+            localId = shopkeeper.admLocal.idLocal;
+            const localDiv = document.createElement('div');
+           localDiv.classList.add('list-group-item');
+           localDiv.classList.add('list-group-item-action');
+           localDiv.style.backgroundColor = 'rgb(70, 130, 180, 0.6)';
+           localDiv.style.color = "#f5f5f5";
+
+           const div2 = document.createElement('div');
+         div2.classList.add('d-flex');
+         div2.classList.add('w-100');
+         div2.classList.add('justify-content-between');
+
+         const h4 = document.createElement('h4');
+
+         h4.innerText = shopkeeper.admLocal.name;
+         h4.classList.add('mb-1');
+         div2.append(h4);
+
+         const p = document.createElement('p');
+
+         p.innerText = shopkeeper.admLocal.typeName;
+         p.classList.add('mb-1');
+         div2.append(p);
+
+         const p2 = document.createElement('p2');
+
+         p2.innerText = shopkeeper.admLocal.isAvailable ? "Local ativo" : "Local desativo";
+         p2.classList.add('mb-1');
+         div2.append(p2);
+
+         const btnUpdateLocal = document.createElement('button');
+         btnUpdateLocal.innerText = "Editar local";
+         btnUpdateLocal.id = localId;
+         btnUpdateLocal.classList.add('btnUpdateLocal');
+         
+         div2.append(btnUpdateLocal);
+
+         localDiv.append(div2);
+         shopkeepersSection.append(localDiv);
+          }
+
+
           const div = document.createElement('div');
           div.classList.add('list-group-item');
           div.classList.add('list-group-item-action');
@@ -46,7 +138,7 @@ $( async () => {
           btnUpdateLocal.classList.add('icone');
 
           const linkUpdateLocal = document.createElement('a');
-          linkUpdateLocal.href = `EditarLocais.html?id=${shopkeeper.admLocal.idLocal}`;          
+          linkUpdateLocal.href = `EditarLocais.html?id=${localId}`;          
 
           const updateLocalIcon = document.createElement('i');
           updateLocalIcon.classList.add('fas');
@@ -76,15 +168,53 @@ $( async () => {
         })
     }
 
-    function showShopkeepersByLocal(shopkeepers)
+    function showShopkeepersByLocal(shopkeepers, localId, localName, localType, localAvailability)
     {
-        console.log(iterator);
-        if (iterator == 0)
+        if (iterator == 1)
         {
            turnShopkeepersOff();
         }
 
         const shopkeepersSection = $("#shopkeepers");
+
+            const localDiv = document.createElement('div');
+            localDiv.classList.add('list-group-item');
+            localDiv.classList.add('list-group-item-action');
+            localDiv.style.backgroundColor = 'rgb(70, 130, 180, 0.6)';
+            localDiv.style.color = "#f5f5f5";
+
+            const div2 = document.createElement('div');
+          div2.classList.add('d-flex');
+          div2.classList.add('w-100');
+          div2.classList.add('justify-content-between');
+
+          const h4 = document.createElement('h4');
+
+          h4.innerText = localName;
+          h4.classList.add('mb-1');
+          div2.append(h4);
+
+          const p = document.createElement('p');
+
+          p.innerText = localType;
+          p.classList.add('mb-1');
+          div2.append(p);
+
+          const p2 = document.createElement('p2');
+
+          p2.innerText = localAvailability ? "Local ativo" : "Local desativo";
+          p2.classList.add('mb-1');
+          div2.append(p2);
+
+          const btnUpdateLocal = document.createElement('button');
+          btnUpdateLocal.innerText = "Editar local";
+          btnUpdateLocal.id = localId;
+          btnUpdateLocal.classList.add('btnUpdateLocal');
+          
+          div2.append(btnUpdateLocal);
+
+          localDiv.append(div2);
+          shopkeepersSection.append(localDiv);
 
         shopkeepers.forEach(shopkeeper => {
           const div = document.createElement('div');
@@ -108,21 +238,6 @@ $( async () => {
           pLocal.innerText = shopkeeper.admLocal.name;
           pLocal.classList.add('mb-1');
           div.append(pLocal);
-
-          const btnUpdateLocal = document.createElement('div');
-          btnUpdateLocal.classList.add('icone');
-
-          const linkUpdateLocal = document.createElement('a');
-          linkUpdateLocal.href = `EditarLocais.html?id=${shopkeeper.admLocal.idLocal}`;          
-
-          const updateLocalIcon = document.createElement('i');
-          updateLocalIcon.classList.add('fas');
-          updateLocalIcon.classList.add('fa-cog');
-          updateLocalIcon.classList.add('fa-2x');
-
-          linkUpdateLocal.append(updateLocalIcon);
-          btnUpdateLocal.append(linkUpdateLocal);
-          div.append(btnUpdateLocal);
 
           const btnUpdate = document.createElement('div');
           btnUpdate.classList.add('icone');
@@ -156,12 +271,14 @@ $( async () => {
         showShopkeepers(shopkeepers);
     }
 
-    async function getLocalAdmins(id, name)
+    async function getLocalAdmins(id, name, type, availability)
     {
         const shopkeepers = await clsLocal.getAdmins(id);
+        console.log(shopkeepers);
 
-        if (shopkeepers.ok)
+        if (shopkeepers.length != 0)
         {
+
             var _shopkeepers = [];
 
             shopkeepers.forEach(shopkeeper => {
@@ -176,7 +293,7 @@ $( async () => {
                 _shopkeepers.push(_user);
             })
             iterator++;
-            showShopkeepersByLocal(_shopkeepers);
+            showShopkeepersByLocal(_shopkeepers, id, name, type, availability);
         }
     }
 
@@ -184,13 +301,12 @@ $( async () => {
     {
         const locals = await clsLocal.seek(search);
 
-        console.log(locals);
-
         locals.forEach(local => {
             const id = local.idLocal;
-            console.log(local.idLocal);
             const name = local.name;
-            getLocalAdmins(id, name);
+            const type = local.typeName;
+            const availability = local.isAvailable;
+            getLocalAdmins(id, name, type, availability);
         })
         iterator = 0;
     }
@@ -202,9 +318,18 @@ $( async () => {
 
         if (byLocal.is(':checked'))
         {
-           return await searchByLocal(search);
+           if (search.length > 2)
+           {
+              return await searchByLocal(search);
+           }
         }
         await searchShopkeepers(search);
         
+    })
+
+    $(document).on('click', '.btnUpdateLocal', async () => {
+        const id = $(this).id;
+        alert("cliquei pra editar o local de id" + id);
+        window.location.href = `EditarLocais.html?id=${id}`;
     })
 })

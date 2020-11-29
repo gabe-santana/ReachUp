@@ -12,6 +12,7 @@ $( async () => {
 
         stores.forEach(store => {
            const option = document.createElement('option');
+           option.id = store.idLocal;
            option.value = store.idLocal;
            option.innerText = store.name;
            cmbStores.append(option);
