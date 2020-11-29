@@ -147,7 +147,8 @@ BEGIN
   SELECT nm_email_administrador, cd_local, nm_administrador, nm_senha_administrador
   FROM administrador
   WHERE formatString(nm_administrador) LIKE formatString(concat("%", pNome,"%"))
-  AND cd_local IS NOT NULL;
+  AND cd_local IS NOT NULL
+  GROUP BY cd_local;
  END IF;
 END$$
 
