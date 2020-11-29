@@ -15,6 +15,8 @@ $( async () => {
     {
         const feedbacksSection = $("#feedbacks");
 
+        var date = new Date();
+
         feedbacks.forEach(feedback => {
 
             const div = document.createElement('div');
@@ -40,7 +42,118 @@ $( async () => {
             div.append(pType);
 
             const pDate = document.createElement('p');
-            pDate.innerText = feedback.feedbackDate;
+
+            if (feedback.feedbackDate.substr(0, 2) == date.getDate()
+            && feedback.feedbackDate.substr(3, 2) == date.getMonth() + 1
+            && feedback.feedbackDate.substr(6, 4) == date.getFullYear())
+            {
+                pDate.innerText = "Hoje";
+            }
+            else if (feedback.feedbackDate.substr(0, 2) == date.getDate() - 1 
+            && feedback.feedbackDate.substr(3, 2) == date.getMonth() + 1
+            && feedback.feedbackDate.substr(6, 4) == date.getFullYear())
+            {
+                pDate.innerText = "Ontem"; 
+            }
+            else if (feedback.feedbackDate.substr(0, 2) == date.getDate() - 2
+            && feedback.feedbackDate.substr(3, 2) == date.getMonth() + 1
+            && feedback.feedbackDate.substr(6, 4) == date.getFullYear())
+            {
+                pDate.innerText = "Anteontem"; 
+            }
+            else if (feedback.feedbackDate.substr(6, 4) == date.getFullYear())
+            {
+                const month = feedback.feedbackDate.substr(3, 2);
+                var monthText;
+
+                switch (month)
+                {
+                    case 01:
+                        monthText = "janeiro";
+                    break;
+                    case 02:
+                        monthText = "fevereiro";
+                    break;
+                    case 03:
+                        monthText = "março";
+                    break;
+                    case 04:
+                        monthText = "abril";
+                    break;
+                    case 05:
+                        monthText = "maio";
+                    break;
+                    case 06:
+                        monthText = "junho";
+                    break;
+                    case 07:
+                        monthText = "julho";
+                    break;
+                    case 08:
+                        monthText = "agosto";
+                    break;
+                    case 09:
+                        monthText = "setembro";
+                    break;
+                    case 10:
+                        monthText = "outubro";
+                    break;
+                    case 11:
+                        monthText = "novembro";
+                    break;
+                    case 12:
+                        monthText = "dezembro";
+                    break;
+                }
+
+                pDate.innerText = `${feedback.feedbackDate.substr(0, 2)} de ${monthText}`;
+            }
+            else {
+                const month = feedback.feedbackDate.substr(3, 2);
+                var monthText;
+
+                switch (month)
+                {
+                    case 01:
+                        monthText = "janeiro";
+                    break;
+                    case 02:
+                        monthText = "fevereiro";
+                    break;
+                    case 03:
+                        monthText = "março";
+                    break;
+                    case 04:
+                        monthText = "abril";
+                    break;
+                    case 05:
+                        monthText = "maio";
+                    break;
+                    case 06:
+                        monthText = "junho";
+                    break;
+                    case 07:
+                        monthText = "julho";
+                    break;
+                    case 08:
+                        monthText = "agosto";
+                    break;
+                    case 09:
+                        monthText = "setembro";
+                    break;
+                    case 10:
+                        monthText = "outubro";
+                    break;
+                    case 11:
+                        monthText = "novembro";
+                    break;
+                    case 12:
+                        monthText = "dezembro";
+                    break;
+                }
+
+                pDate.innerText = `${feedback.feedbackDate.substr(0, 2)} de ${monthText} de ${feedback.feedbackDate.substr(6, 4)}`;
+            }
             pDate.classList.add('mb-1');
             div.append(pDate);
 
@@ -102,24 +215,6 @@ $( async () => {
             feedbacksSection.append(div);
 
         })
-    }
-
-    function reorderFeedbacks(feedbacksHTML)
-    {
-        const feedbacksSection = $("#feedbacks");
-        feedbacksSection.remove();
-
-        console.log(feedbacksHTML);
-
-        /*feedbacksSection.forEach(section => {
-
-            for (let i = 0; i < section.length; i++)
-        {
-           console.log(f[i]);
-           feedbacksSection.append(section[i]);
-        }
-
-        })*/
     }
 
     function showFeedbacks(feedbacks)
@@ -152,7 +247,118 @@ $( async () => {
             div.append(pType);
 
             const pDate = document.createElement('p');
-            pDate.innerText = feedback.feedbackDate;
+            
+            if (feedback.feedbackDate.substr(0, 2) == date.getDate()
+            && feedback.feedbackDate.substr(3, 2) == date.getMonth() + 1
+            && feedback.feedbackDate.substr(6, 4) == date.getFullYear())
+            {
+                pDate.innerText = "Hoje";
+            }
+            else if (feedback.feedbackDate.substr(0, 2) == date.getDate() - 1 
+            && feedback.feedbackDate.substr(3, 2) == date.getMonth() + 1
+            && feedback.feedbackDate.substr(6, 4) == date.getFullYear())
+            {
+                pDate.innerText = "Ontem"; 
+            }
+            else if (feedback.feedbackDate.substr(0, 2) == date.getDate() - 2
+            && feedback.feedbackDate.substr(3, 2) == date.getMonth() + 1
+            && feedback.feedbackDate.substr(6, 4) == date.getFullYear())
+            {
+                pDate.innerText = "Anteontem"; 
+            }
+            else if (feedback.feedbackDate.substr(6, 4) == date.getFullYear())
+            {
+                const month = feedback.feedbackDate.substr(3, 2);
+                var monthText;
+
+                switch (month)
+                {
+                    case 01:
+                        monthText = "janeiro";
+                    break;
+                    case 02:
+                        monthText = "fevereiro";
+                    break;
+                    case 03:
+                        monthText = "março";
+                    break;
+                    case 04:
+                        monthText = "abril";
+                    break;
+                    case 05:
+                        monthText = "maio";
+                    break;
+                    case 06:
+                        monthText = "junho";
+                    break;
+                    case 07:
+                        monthText = "julho";
+                    break;
+                    case 08:
+                        monthText = "agosto";
+                    break;
+                    case 09:
+                        monthText = "setembro";
+                    break;
+                    case 10:
+                        monthText = "outubro";
+                    break;
+                    case 11:
+                        monthText = "novembro";
+                    break;
+                    case 12:
+                        monthText = "dezembro";
+                    break;
+                }
+
+                pDate.innerText = `${feedback.feedbackDate.substr(0, 2)} de ${monthText}`;
+            }
+            else {
+                const month = feedback.feedbackDate.substr(3, 2);
+                var monthText;
+
+                switch (month)
+                {
+                    case 01:
+                        monthText = "janeiro";
+                    break;
+                    case 02:
+                        monthText = "fevereiro";
+                    break;
+                    case 03:
+                        monthText = "março";
+                    break;
+                    case 04:
+                        monthText = "abril";
+                    break;
+                    case 05:
+                        monthText = "maio";
+                    break;
+                    case 06:
+                        monthText = "junho";
+                    break;
+                    case 07:
+                        monthText = "julho";
+                    break;
+                    case 08:
+                        monthText = "agosto";
+                    break;
+                    case 09:
+                        monthText = "setembro";
+                    break;
+                    case 10:
+                        monthText = "outubro";
+                    break;
+                    case 11:
+                        monthText = "novembro";
+                    break;
+                    case 12:
+                        monthText = "dezembro";
+                    break;
+                }
+
+                pDate.innerText = `${feedback.feedbackDate.substr(0, 2)} de ${monthText} de ${feedback.feedbackDate.substr(6, 4)}`;
+            }
             pDate.classList.add('mb-1');
             div.append(pDate);
 
@@ -215,61 +421,6 @@ $( async () => {
 
         })
     }
-
-    function sortAscending()
-    {
-        const feedbacksSection = $("#feedbacks");
-        const feedbacks = Array.from(feedbacksSection);
-        var dates = [];
-
-        feedbacks.forEach(feedback => {
-            
-            for (let i = 0; i < feedback.children.length; i++)
-            {
-               dates.push(feedback.children[i]);
-            }
-        })
-
-        dates.sort(function(a, b) {
-            if (a.innerHTML.substr(a.innerHTML.split("<p class='mb-1'>", 2) + 6, 4) 
-             > b.innerHTML.substr(b.innerHTML.split("<p class='mb-1'>", 2) + 6, 4))
-            {
-                return -1;
-            }
-            else
-            {
-                return 1;
-            }
-        })
-
-        dates.sort(function(a, b) {
-            if (a.innerHTML.substr(a.innerHTML.split("<p class='mb-1'>", 2) + 3, 2) 
-            > b.innerHTML.substr(b.innerHTML.split("<p class='mb-1'>", 2) + 3, 2))
-            {
-                return -1;
-            }
-            else
-            {
-                return 1;
-            }
-        })
-
-        dates.sort(function(a, b) {
-            if (a.innerHTML.substr(a.innerHTML.split("<p class='mb-1'>", 2), 2)
-            >  b.innerHTML.substr(b.innerHTML.split("<p class='mb-1'>", 2), 2))
-            {
-                return -1;
-            }
-            else
-            {
-                return 1;
-            }
-        })
-
-        reorderFeedbacks(feedbacks);
-    }
-
-    function sortDescending(){}
 
     async function getAll()
     {
@@ -343,12 +494,4 @@ $( async () => {
          const email = $("#txtClientEmail").val();
          await getByUser(email);
      })
-
-     $("#btnNewestFirst").click(() => {
-        sortAscending();
-     })
-
-     $("#btnOldestFirst").click(() => {
-        sortDescending();
-    })
 })
