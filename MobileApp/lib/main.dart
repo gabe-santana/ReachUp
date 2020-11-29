@@ -1,12 +1,19 @@
+import 'dart:convert';
+
+import 'package:ReachUp/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:get_storage/get_storage.dart';
+import 'Component/Database/Database.db.dart';
+import 'Model/User.model.dart';
 import 'View/DebugView/Debug.view.dart';
+import 'View/HomeView/Home.view.dart';
 import 'View/_Layouts/HomeLayout.layout.dart';
-import 'package:get/get.dart';
+import 'View/splashscreen.view.dart';
 
-
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(ReachUp());
   configLoading();
 }
@@ -79,9 +86,15 @@ var lightTheme = ThemeData(
 );
 
 class ReachUp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    GetStorage storage = new GetStorage();
+    String response = Database.select(key: "user").response;
+
+    if (response != null) {
+      Globals.user = User.fromJson(json.decode(response));
+      Globals.isLoggedIn = true;
+    }
 
     return MaterialApp(
       title: 'ReachUp!',
@@ -98,7 +111,7 @@ class ReachUp extends StatelessWidget {
 
 navigateTo(Widget bodyContent, String titlePage, String info,
     BuildContext context, bool scale) {
- return Navigator.push(
+  return Navigator.push(
       context,
       !scale
           ? SlideRightRoute(

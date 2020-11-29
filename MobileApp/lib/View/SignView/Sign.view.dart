@@ -1,5 +1,10 @@
+import 'dart:convert';
 import 'dart:ui';
 
+import 'package:ReachUp/Component/Database/Database.db.dart';
+import 'package:ReachUp/Model/User.model.dart';
+import 'package:ReachUp/View/HomeView/Home.view.dart';
+import 'package:ReachUp/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_builder.dart';
 import 'package:flutter_signin_button/button_list.dart';
@@ -16,6 +21,12 @@ class SignView extends StatefulWidget {
 
 class _SignViewState extends State<SignView> {
   String signInStatus;
+
+  @override
+  void initState() {
+    super.initState();
+   
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +59,10 @@ class _SignViewState extends State<SignView> {
                     Buttons.Email,
                     text: "Entrar com E-mail",
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => SignInView()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SignInView()));
                     },
                   ),
                   SignInButtonBuilder(

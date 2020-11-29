@@ -6,6 +6,7 @@ class InfoView extends StatelessWidget {
     return Container(
       child: Center(
         child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 0, 30),
             child: Container(
@@ -14,7 +15,8 @@ class InfoView extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 40, 0, 40),
-                      child: Image.asset("assets/images/icons/launch/ReachUp.png",
+                      child: Image.asset(
+                          "assets/images/icons/launch/ReachUp.png",
                           width: 150),
                     ),
                     Text(

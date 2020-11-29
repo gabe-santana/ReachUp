@@ -1,3 +1,4 @@
+import 'package:ReachUp/Component/Database/Database.db.dart';
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/View/DeveloperView/BeaconBroadcast.view.dart';
 import 'package:ReachUp/View/DeveloperView/Compass.view.dart';
@@ -86,15 +87,15 @@ class _HomeState extends State<Home> {
                   margin: EdgeInsets.all(0.0),
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 15),
                   child: GestureDetector(
-                    onTap: (){
-                          navigateTo(
-                                  ProfileView(),
-                                  "Perfil",
-                                  "Aqui você verificar as informações do seu perfil, bem como editá-las",
-                                  context,
-                                  false);
+                    onTap: () {
+                      navigateTo(
+                          ProfileView(),
+                          "Perfil",
+                          "Aqui você verificar as informações do seu perfil, bem como editá-las",
+                          context,
+                          false);
                     },
-                                      child: Stack(
+                    child: Stack(
                       children: <Widget>[
                         Positioned(
                           bottom: 0,
@@ -120,8 +121,8 @@ class _HomeState extends State<Home> {
                                                   .onSecondary,
                                               fontSize: 25))),
                                   Container(
-                                      width:
-                                          MediaQuery.of(context).size.width * 0.7,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.7,
                                       child: Opacity(
                                         opacity: 0.5,
                                         child: Text(Globals.user.email,
@@ -151,6 +152,7 @@ class _HomeState extends State<Home> {
               ),
               Expanded(
                 child: ListView(
+                    physics: BouncingScrollPhysics(),
                   // Important: Remove any padding from the ListView.
                   padding: EdgeInsets.zero,
                   children: <Widget>[
@@ -221,7 +223,6 @@ class _HomeState extends State<Home> {
                                   false);
                             },
                           ),
-                        
                         ],
                       ),
                     ),
@@ -269,8 +270,8 @@ class _HomeState extends State<Home> {
                                 icon: FontAwesomeIcons.infoCircle,
                                 selected: _selectedIndex == 6),
                             onTap: () {
-                              navigateTo(InfoView(), "Info",
-                                  "Quem somos nós?", context, false);
+                              navigateTo(InfoView(), "Info", "Quem somos nós?",
+                                  context, false);
                             },
                           ),
                         ],
@@ -282,44 +283,6 @@ class _HomeState extends State<Home> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                                border: Border(
-                              top: BorderSide(
-                                  width: 1.0, color: Color(0xFFededed)),
-                            )),
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(15, 10, 0, 15),
-                              child: const Text(
-                                "Desenvolvedor",
-                                style:
-                                    TextStyle(fontSize: 18, color: Colors.grey),
-                              ),
-                            ),
-                          ),
-                          ListTile(
-                            contentPadding: EdgeInsets.fromLTRB(15, 0, 0, 10),
-                            title: ItemMenuTitle(
-                                title: "Beacons broadcast",
-                                icon: FontAwesomeIcons.broadcastTower,
-                                selected: _selectedIndex == 7),
-                            onTap: () {
-                              _onSelectItem(7);
-                            },
-                          ),
-                          ListTile(
-                            selected: true,
-                            focusColor: Colors.black,
-                            contentPadding: EdgeInsets.fromLTRB(15, 0, 0, 10),
-                            title: ItemMenuTitle(
-                                title: "Compass viewer",
-                                icon: FontAwesomeIcons.compass,
-                                selected: _selectedIndex == 8),
-                            onTap: () {
-                              _onSelectItem(8);
-                            },
-                          ),
                           Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
@@ -363,6 +326,7 @@ class _HomeState extends State<Home> {
                                           }),
                                       buttonNO: FlatButton(
                                           onPressed: () {
+                                            Database.delete(key: "user");
                                             Navigator.pushAndRemoveUntil(
                                               context,
                                               MaterialPageRoute(

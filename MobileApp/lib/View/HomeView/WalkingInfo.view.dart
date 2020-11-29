@@ -1,8 +1,11 @@
+import 'package:ReachUp/globals.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_beacon/flutter_beacon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class WalkingInfoView extends StatefulWidget {
   bool inRouting;
+
   WalkingInfoView({this.inRouting = false});
   @override
   _WalkingInfoViewState createState() => _WalkingInfoViewState();
@@ -40,7 +43,7 @@ class _WalkingInfoViewState extends State<WalkingInfoView> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -62,8 +65,14 @@ class _WalkingInfoViewState extends State<WalkingInfoView> {
                   fontSize: 20,
                 ),
                 tabs: [
-                  Tab(text: "Sugestões"),
-                  Tab(text: "Favoritos"),
+                  Tab(
+                    text: "Sugestões",
+                    icon: Icon(Icons.live_tv),
+                  ),
+                  Tab(text: "Favoritos", icon: Icon(FontAwesomeIcons.heart)),
+                  Tab(
+                      text: "Beacons próximos",
+                      icon: Icon(FontAwesomeIcons.bluetooth)),
                 ],
               ),
             ),
@@ -71,6 +80,7 @@ class _WalkingInfoViewState extends State<WalkingInfoView> {
                 ? Expanded(
                     child: Center(
                         child: ListView(
+                            physics: BouncingScrollPhysics(),
                       children: [
                         SuggestionItem(
                           title: "Caminhar até a saída",
@@ -95,18 +105,90 @@ class _WalkingInfoViewState extends State<WalkingInfoView> {
                       ],
                     )),
                   )
-                : Expanded(
-                    child: Center(
-                      child: Text(
-                        "Você não tem\n locais favoritos no momento!",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 18,
+                : tabIndex == 1
+                    ? Expanded(
+                        child: Center(
+                          child: Text(
+                            "Você não tem\n locais favoritos no momento!",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 18,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  )
+                      )
+                    : Expanded(
+                        child: Globals.beacons == null ||
+                                Globals.beacons.isEmpty
+                            ? Center(
+                                child: CircularProgressIndicator(
+                                    valueColor:
+                                        new AlwaysStoppedAnimation<Color>(
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .primary)))
+                            : Stack(
+                                children: [
+                                  ListView(
+                                    physics: BouncingScrollPhysics(),
+                                    children: ListTile.divideTiles(
+                                        context: context,
+                                        tiles: Globals.beacons.map((beacon) {
+                                          return ListTile(
+                                            title: Text(beacon.proximityUUID),
+                                            subtitle: new Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: <Widget>[
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.fromLTRB(
+                                                          0, 0, 10, 0),
+                                                  child: Container(
+                                                    child: FaIcon(
+                                                      FontAwesomeIcons
+                                                          .bluetooth,
+                                                      color: Colors.blue,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Flexible(
+                                                    child: Text(
+                                                        'Major: ${beacon.major}\nMinor: ${beacon.minor}',
+                                                        style: TextStyle(
+                                                            fontSize: 13.0)),
+                                                    flex: 1,
+                                                    fit: FlexFit.tight),
+                                                Flexible(
+                                                    child: Text(
+                                                        'Distância: ${beacon.accuracy}m\nRSSI: ${beacon.rssi}',
+                                                        style: TextStyle(
+                                                            fontSize: 13.0)),
+                                                    flex: 2,
+                                                    fit: FlexFit.tight)
+                                              ],
+                                            ),
+                                          );
+                                        })).toList(),
+                                  ),
+                                  Positioned(
+                                    bottom: 10,
+                                    right: 10,
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.orange,
+                                      radius: 25,
+                                      child: IconButton(
+                                        padding: EdgeInsets.zero,
+                                        icon: Icon(Icons.refresh),
+                                        color: Colors.white,
+                                        onPressed: () {
+                                          setState(() {});
+                                        },
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ))
           ],
         ),
       ),

@@ -13,6 +13,7 @@ class BroadcastBeacon extends StatefulWidget {
 }
 
 class _BroadcastBeacon extends State<BroadcastBeacon> with WidgetsBindingObserver {
+  
   final StreamController<BluetoothState> streamController = StreamController();
   StreamSubscription<BluetoothState> _streamBluetooth;
   StreamSubscription<RangingResult> _streamRanging;

@@ -1,8 +1,17 @@
+import 'package:ReachUp/Component/Database/Database.db.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class NarratorConfig extends StatefulWidget {
+  int toggleIndex = 0;
+  NarratorConfig() {
+    Database.select(key: "narrator").response == "true"
+        ? toggleIndex = 0
+        : toggleIndex = 1;
+
+        print(Database.select(key: "narrator").response);
+  }
   @override
   _NarratorConfigState createState() => _NarratorConfigState();
 }
@@ -19,7 +28,6 @@ class _NarratorConfigState extends State<NarratorConfig> {
   List<String> intervalOptions = ["Curto", "Médio", "Rápido", "Insistente"];
   int intervalOptionsIndex = 0;
 
-  int toggleIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,23 +45,26 @@ class _NarratorConfigState extends State<NarratorConfig> {
                   child: ToggleSwitch(
                     minWidth: MediaQuery.of(context).size.width * 0.4,
                     cornerRadius: 20.0,
-                    activeBgColor: toggleIndex == 0
+                    activeBgColor: widget.toggleIndex == 0
                         ? Colors.green
                         : Theme.of(context).colorScheme.error,
                     activeFgColor: Colors.white,
                     inactiveBgColor: Colors.grey,
                     inactiveFgColor: Colors.white,
                     labels: ['Ativado', 'Desativado'],
-                    initialLabelIndex: toggleIndex,
+                    initialLabelIndex: widget.toggleIndex,
                     icons: [FontAwesomeIcons.check, FontAwesomeIcons.times],
                     onToggle: (index) {
                       setState(() {
-                        toggleIndex = index;
+                        widget.toggleIndex = index;
+                        widget.toggleIndex == 0
+                            ? Database.update(key: "narrator", value: "true")
+                            : Database.update(key: "narrator", value: "false");
                       });
                     },
                   ),
                 ),
-                toggleIndex != 0
+                widget.toggleIndex != 0
                     ? Center(
                         child: Text(
                           "Narrador desativado!",
@@ -63,15 +74,16 @@ class _NarratorConfigState extends State<NarratorConfig> {
                         ),
                       )
                     : Padding(
-                      padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: Column(
+                        padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
                             children: [
                               Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 20, 0),
                                     child: Text(
                                       "Velocidade",
                                       style: TextStyle(
@@ -97,17 +109,17 @@ class _NarratorConfigState extends State<NarratorConfig> {
                                       }).toList(),
                                       onChanged: (selectedItem) {
                                         setState(() {
-                                          speedOptionsIndex =
-                                              speedOptions.indexOf(selectedItem);
+                                          speedOptionsIndex = speedOptions
+                                              .indexOf(selectedItem);
                                         });
                                       }),
                                 ],
                               ),
-                              
                               Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(0, 0, 50, 0),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 50, 0),
                                     child: Text(
                                       "Gênero",
                                       style: TextStyle(
@@ -117,7 +129,7 @@ class _NarratorConfigState extends State<NarratorConfig> {
                                           fontSize: 18),
                                     ),
                                   ),
-                                     Spacer(),
+                                  Spacer(),
                                   DropdownButton<String>(
                                       value: genderOptions[genderOptionsIndex],
                                       items: genderOptions.map((String value) {
@@ -133,8 +145,8 @@ class _NarratorConfigState extends State<NarratorConfig> {
                                       }).toList(),
                                       onChanged: (selectedItem) {
                                         setState(() {
-                                          genderOptionsIndex =
-                                              genderOptions.indexOf(selectedItem);
+                                          genderOptionsIndex = genderOptions
+                                              .indexOf(selectedItem);
                                         });
                                       }),
                                 ],
@@ -142,7 +154,8 @@ class _NarratorConfigState extends State<NarratorConfig> {
                               Row(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 20, 0),
                                     child: Text(
                                       "Intervalo",
                                       style: TextStyle(
@@ -152,10 +165,12 @@ class _NarratorConfigState extends State<NarratorConfig> {
                                           fontSize: 18),
                                     ),
                                   ),
-                                     Spacer(),
+                                  Spacer(),
                                   DropdownButton<String>(
-                                      value: intervalOptions[intervalOptionsIndex],
-                                      items: intervalOptions.map((String value) {
+                                      value:
+                                          intervalOptions[intervalOptionsIndex],
+                                      items:
+                                          intervalOptions.map((String value) {
                                         return new DropdownMenuItem<String>(
                                           value: value,
                                           child: new Text(value,
@@ -168,16 +183,16 @@ class _NarratorConfigState extends State<NarratorConfig> {
                                       }).toList(),
                                       onChanged: (selectedItem) {
                                         setState(() {
-                                          intervalOptionsIndex =
-                                              intervalOptions.indexOf(selectedItem);
+                                          intervalOptionsIndex = intervalOptions
+                                              .indexOf(selectedItem);
                                         });
                                       }),
                                 ],
                               ),
                             ],
                           ),
-                      ),
-                    )
+                        ),
+                      )
               ],
             ),
           ),

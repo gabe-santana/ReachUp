@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:ReachUp/Component/Database/Database.db.dart';
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Account.controller.dart';
 import 'package:ReachUp/Controller/ClientPreference.controller.dart';
@@ -135,6 +138,11 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
                               .add(newPreferences)
                               .then((value) {
                             EasyLoading.dismiss();
+                            Database.insert(
+                                key: "user",
+                                value: jsonEncode(Globals.user.toJson()));
+                            debugPrint(
+                                "Local Database user:\n ${Database.select(key: 'user').response} ");
                             Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(

@@ -1,5 +1,6 @@
 import 'package:ReachUp/Model/Category.model.dart';
 import 'package:ReachUp/Model/SubCategoryLocal.mode.dart';
+import 'package:flutter_beacon/flutter_beacon.dart';
 
 import 'Model/ClientPreference.model.dart';
 import 'Model/Communique.model.dart';
@@ -15,7 +16,7 @@ class Globals {
   static bool isLoggedIn = false;
   static String urlAPI;
  
-
+  static  List<Beacon> beacons = <Beacon>[];
   static  List<CommuniqueSubCategory> communiqueSubCategories = new List<CommuniqueSubCategory>();
 
   static List<Category> categoriesChecked = new List<Category>();
