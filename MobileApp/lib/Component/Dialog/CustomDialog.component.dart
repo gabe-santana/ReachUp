@@ -54,6 +54,7 @@ class CustomDialog extends StatelessWidget {
                 title,
                 style: TextStyle(
                   fontSize: 24.0,
+                  color: Theme.of(context).colorScheme.onBackground,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -63,6 +64,7 @@ class CustomDialog extends StatelessWidget {
                 child: Text(
                   description,
                   style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground,
                     fontSize: 17.0,
                   ),
                 ),
@@ -161,14 +163,15 @@ class CustomWidGetDialog extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.w700,
-                ),
+                    fontSize: 24.0,
+                    color: Theme.of(context).colorScheme.onBackground),
               ),
               SizedBox(height: 16.0),
-              Padding(padding: EdgeInsets.all(10), child: Container(
-                width: MediaQuery.of(context).size.width,
-                child: content)),
+              Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: content)),
               SizedBox(height: 24.0),
               // Align(
               //   alignment: Alignment.bottomRight,

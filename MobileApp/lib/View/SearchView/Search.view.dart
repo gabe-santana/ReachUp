@@ -1,9 +1,12 @@
+import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
+import 'package:ReachUp/Component/TTS/TextToSpeech.component.dart';
 import 'package:ReachUp/Controller/Local.controller.dart';
 import 'package:ReachUp/Model/Local.dart';
 import 'package:ReachUp/View/SearchView/SearchCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lottie/lottie.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -15,36 +18,75 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
   final _localController = new LocalController();
   String search;
   List<Local> locates;
+  List<Local> filterLocates;
+  FlutterTts _flutterTts;
+
   TabController _tabController;
   TextEditingController _controller = TextEditingController();
 
   buildListView() {
+    tabIndex == 2
+        ? filterLocates = locates.where((local) => local.type == 0).toList()
+        : tabIndex == 3
+            ? filterLocates = locates.where((local) => local.type == 1).toList()
+            : tabIndex == 4
+                ? filterLocates =
+                    locates.where((local) => local.type == 2).toList()
+                : tabIndex == 5
+                    ? filterLocates =
+                        locates.where((local) => local.type == 7).toList()
+                    : tabIndex == 6
+                        ? filterLocates =
+                            locates.where((local) => local.type == 3).toList()
+                        : tabIndex == 7
+                            ? locates
+                                .where((local) =>
+                                    local.type == 4 ||
+                                    local.type == 5 ||
+                                    local.type == 8)
+                                .toList()
+                            : filterLocates = locates;
+
     return ListView.builder(
-        itemCount: locates.length,
+        physics: BouncingScrollPhysics(),
+        itemCount: filterLocates.length,
         itemBuilder: (context, index) {
-          return SearchCard(local: locates[index]);
+          return SearchCard(local: filterLocates[index]);
         });
   }
 
   @override
   void initState() {
     super.initState();
+    TextToSpeech.initializeTts();
   }
 
   @override
   void dispose() {
     super.dispose();
+    TextToSpeech.stop();
   }
 
   bool loading = false;
   int tabIndex = 0;
+
+  List<String> tabBarOptions = [
+    "Recentes",
+    "Todos",
+    "Lojas",
+    "Restaurantes",
+    "Cinema",
+    "Serviços",
+    "Banheiro",
+    "Público"
+  ];
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 8,
       child: Scaffold(
           appBar: AppBar(
-            toolbarHeight: 150,
+            toolbarHeight: 160,
             actions: [
               Expanded(
                 child: Container(
@@ -80,6 +122,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                                 if (val.isNotEmpty) {
                                   setState(() {
                                     loading = true;
+                                    search = val;
                                   });
 
                                   if (val.length > 3)
@@ -87,13 +130,11 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                                         .search(val)
                                         .then((value) => {
                                               setState(() {
+                                                loading = false;
                                                 locates = value;
+                                                filterLocates = value;
                                               })
                                             });
-
-                                  setState(() {
-                                    loading = false;
-                                  });
                                 } else {
                                   setState(() {
                                     locates.clear();
@@ -130,7 +171,6 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                                     icon: Icon(Icons.clear,
                                         size: 30, color: Colors.white),
                                   ),
-                                  hintText: "lojas, locais, produtos ...",
                                   hintStyle: TextStyle(
                                     color: Color(0xFFd9d9d9),
                                     fontSize: 21,
@@ -148,18 +188,26 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                           padding: EdgeInsets.fromLTRB(0, 0, 15, 0),
                           icon: Icon(
                             Icons.mic,
-                            size: 35,
+                            size: 30,
                             color: Colors.white,
                           ),
                           onPressed: () {
-                            print("Mic");
+                            TextToSpeech.speak("Aperte para falar");
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    CustomWidGetDialog(
+                                      icon: Icons.mic,
+                                      title: "Aperte para falar",
+                                      content: Container(),
+                                    ));
                           },
                         ),
                         IconButton(
                           padding: EdgeInsets.fromLTRB(0, 0, 15, 0),
                           icon: Icon(
                             Icons.more_vert,
-                            size: 35,
+                            size: 30,
                             color: Colors.white,
                           ),
                           onPressed: () {},
@@ -175,6 +223,8 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                 setState(() {
                   //get tabbar index
                   tabIndex = index;
+
+                  //çç
                 });
               },
               indicatorColor: Theme.of(context).colorScheme.onPrimary,
@@ -184,12 +234,55 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
               ),
               tabs: [
                 Tab(
-                  text: "Todos",
+                  text: "Recentes",
+                  icon: Icon(
+                    
+                    FontAwesomeIcons.clock,
+                  
+                  ),
                 ),
-                Tab(text: "Lojas"),
-                Tab(text: "Restaurantes"),
-                Tab(text: "Livrarias"),
-                Tab(text: "Cinema")
+                Tab(
+                  text: "Todos",
+                  icon: Icon(
+                    Icons.apps,
+                  ),
+                ),
+                Tab(
+                  text: "Lojas",
+                  icon: Icon(
+                    FontAwesomeIcons.store,
+                  ),
+                ),
+                Tab(
+                  text: "Restaurantes",
+                  icon: Icon(
+                    FontAwesomeIcons.hamburger,
+                  ),
+                ),
+                Tab(
+                  text: "Cinema",
+                  icon: Icon(
+                    FontAwesomeIcons.ticketAlt,
+                  ),
+                ),
+                Tab(
+                  text: "Serviços",
+                  icon: Icon(
+                    FontAwesomeIcons.dollarSign,
+                  ),
+                ),
+                Tab(
+                  text: "Banheiro",
+                  icon: Icon(
+                    FontAwesomeIcons.bath,
+                  ),
+                ),
+                Tab(
+                  text: "Público",
+                  icon: Icon(
+                    FontAwesomeIcons.mapMarked,
+                  ),
+                )
               ],
             ),
           ),
@@ -203,14 +296,22 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                   child: loading == true
                       ? Center(
                           child: CircularProgressIndicator(
-                            strokeWidth: 7.0,
-                          ),
+                              strokeWidth: 6.0,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  Theme.of(context).colorScheme.primary)),
                         )
-                      : locates != null
-                          ? buildListView()
+                      : filterLocates != null ?
+                      
+                         buildListView()
                           : Center(
-                              child:
-                                  Lottie.asset("assets/animations/search.json"),
+                              child: Text(
+                                "Sem resultados",
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground),
+                              ),
                             ),
                 )),
               ],

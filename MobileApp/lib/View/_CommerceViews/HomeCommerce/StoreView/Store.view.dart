@@ -213,6 +213,7 @@ class _StoreViewState extends State<StoreView> {
               child: Builder(builder: (context) {
                 buildlistView();
                 return ListView.builder(
+                   physics: BouncingScrollPhysics(),
                     itemCount: Globals.subcategoriesLocal.length,
                     itemBuilder: (context, index) => ListTile(
                           trailing: IconButton(

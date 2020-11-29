@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:ReachUp/Component/Map/Course.component.dart';
 import 'package:ReachUp/Component/Map/Halls.component.dart';
 import 'package:ReachUp/Component/Map/MapObject.component.dart';
+import 'package:ReachUp/Component/TTS/TextToSpeech.component.dart';
 import 'package:ReachUp/View/MapView/RouteSign.view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_compass/flutter_compass.dart';
@@ -32,7 +33,6 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
   bool canUpdateRoute = true;
   bool firstLoad = true;
   bool isPlaying = false;
-  FlutterTts _flutterTts;
 
   Position userMarkPosition = new Position(x: 40 * 12, y: 17 * 11, floor: 0);
   double userMarkDimension = 35.0;
@@ -56,7 +56,7 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
   void initState() {
     super.initState();
 
-    initializeTts();
+    TextToSpeech.initializeTts();
 
     FlutterCompass.events.listen(_onData);
     loadMapJson().then((mapJson) {
@@ -88,41 +88,9 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
   @override
   void dispose() {
     timer?.cancel();
-    _flutterTts.stop();
+    TextToSpeech.stop();
+    TextToSpeech.initializeTts();
     super.dispose();
-  }
-
-  initializeTts() {
-    _flutterTts = FlutterTts();
-    setTtsLanguage();
-    _flutterTts.setStartHandler(() {
-      setState(() {
-        isPlaying = true;
-      });
-    });
-
-    _flutterTts.setCompletionHandler(() {
-      setState(() {
-        isPlaying = false;
-      });
-    });
-
-    _flutterTts.setErrorHandler((err) {
-      setState(() {
-        print("error occurred: " + err);
-        isPlaying = false;
-      });
-    });
-  }
-
-  Future _speak(String text) async {
-    if (text != null && text.isNotEmpty) {
-      var result = await _flutterTts.speak(text);
-      if (result == 1)
-        setState(() {
-          isPlaying = true;
-        });
-    }
   }
 
   Future _speakDirection(String direction) async {
@@ -131,16 +99,16 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
 
       switch (direction) {
         case "N":
-          result = await _flutterTts.speak("Andando para o Norte");
+          result = await TextToSpeech.speak("Andando para o Norte");
           break;
         case "E":
-          result = await _flutterTts.speak("Andando para o Leste");
+          result = await TextToSpeech.speak("Andando para o Leste");
           break;
         case "S":
-          result = await _flutterTts.speak("Andando para o Sul");
+          result = await TextToSpeech.speak("Andando para o Sul");
           break;
         case "W":
-          result = await _flutterTts.speak("Andando para o Oeste");
+          result = await TextToSpeech.speak("Andando para o Oeste");
           break;
         default:
       }
@@ -153,15 +121,11 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
   }
 
   Future _stop() async {
-    var result = await _flutterTts.stop();
+    var result = await TextToSpeech.stop();
     if (result == 1)
       setState(() {
         isPlaying = false;
       });
-  }
-
-  void setTtsLanguage() async {
-    await _flutterTts.setLanguage("pt-BR");
   }
 
   void _handlePanUpdate(
@@ -408,6 +372,7 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
                 right: 10,
                 child: RawMaterialButton(
                   onPressed: () {
+                    TextToSpeech.speak("Focando na sua posição");
                     focusOn(
                         userMarkPosition,
                         new Size(constraints.maxWidth / 2,

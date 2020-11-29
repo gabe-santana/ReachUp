@@ -63,41 +63,50 @@ class _WalkingInfoViewState extends State<WalkingInfoView> {
                 ),
                 tabs: [
                   Tab(text: "Sugestões"),
-                   Tab(text: "Favoritos"),
+                  Tab(text: "Favoritos"),
                 ],
               ),
             ),
-            tabIndex == 0 ?Expanded(
-              child: Center(
-                  child: ListView(
-                children: [
-                  SuggestionItem(
-                    title: "Caminhar até a saída",
-                    icon: FaIcon(FontAwesomeIcons.signOutAlt),
-                  ),
-                  SuggestionItem(
-                    title: "Voltar a última visita",
-                    icon: FaIcon(FontAwesomeIcons.mapMarkedAlt),
-                  ),
-                  SuggestionItem(
-                    title: "Banheiro mais próximo",
-                    icon: FaIcon(FontAwesomeIcons.bath),
-                  ),
-                  SuggestionItem(
-                    title: "Escada mais próxima",
-                    icon: FaIcon(FontAwesomeIcons.etsy),
-                  ),
-                  SuggestionItem(
-                    title: "Restaurante mais próximo",
-                    icon: FaIcon(FontAwesomeIcons.hamburger),
-                  ),
-                ],
-              )),
-            ) : Expanded(
-              child: Center(
-                child: Text("Você não tem locais favoritos no momento!"),
-              ),
-            )
+            tabIndex == 0
+                ? Expanded(
+                    child: Center(
+                        child: ListView(
+                      children: [
+                        SuggestionItem(
+                          title: "Caminhar até a saída",
+                          icon: FaIcon(FontAwesomeIcons.signOutAlt),
+                        ),
+                        SuggestionItem(
+                          title: "Voltar a última visita",
+                          icon: FaIcon(FontAwesomeIcons.mapMarkedAlt),
+                        ),
+                        SuggestionItem(
+                          title: "Banheiro mais próximo",
+                          icon: FaIcon(FontAwesomeIcons.bath),
+                        ),
+                        SuggestionItem(
+                          title: "Escada mais próxima",
+                          icon: FaIcon(FontAwesomeIcons.etsy),
+                        ),
+                        SuggestionItem(
+                          title: "Restaurante mais próximo",
+                          icon: FaIcon(FontAwesomeIcons.hamburger),
+                        ),
+                      ],
+                    )),
+                  )
+                : Expanded(
+                    child: Center(
+                      child: Text(
+                        "Você não tem\n locais favoritos no momento!",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  )
           ],
         ),
       ),

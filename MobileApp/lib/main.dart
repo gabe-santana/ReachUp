@@ -3,6 +3,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'View/DebugView/Debug.view.dart';
 import 'View/_Layouts/HomeLayout.layout.dart';
+import 'package:get/get.dart';
+
 
 void main() {
   runApp(ReachUp());
@@ -79,6 +81,8 @@ var lightTheme = ThemeData(
 class ReachUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    GetStorage storage = new GetStorage();
+
     return MaterialApp(
       title: 'ReachUp!',
       debugShowCheckedModeBanner: false,

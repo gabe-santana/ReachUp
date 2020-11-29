@@ -4,6 +4,7 @@ import 'package:ReachUp/Model/SubCategoryLocal.mode.dart';
 import 'Model/ClientPreference.model.dart';
 import 'Model/Communique.model.dart';
 import 'Model/CommuniqueSubCategory.model.dart';
+import 'Model/Local.dart';
 import 'Model/Subcategory.model.dart';
 import 'Model/User.model.dart';
 import 'dart:convert';
@@ -35,7 +36,7 @@ class Globals {
 
 
   static ClientPreference userPreference = new ClientPreference();
-  
+
 }
 
 

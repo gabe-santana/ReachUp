@@ -75,7 +75,7 @@ class _SignInViewState extends State<SignInView> {
         resizeToAvoidBottomInset: true,
         body: Builder(
           builder: (context) => Center(
-                      child: SingleChildScrollView(
+            child: SingleChildScrollView(
               child: Container(
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(50, 0, 50, 0),
@@ -105,7 +105,7 @@ class _SignInViewState extends State<SignInView> {
                           },
                           decoration: InputDecoration(
                               labelText: 'E-mail',
-                              hintText: 'examplo@email.com',
+
                               //filled: true,
                               icon: const Icon(Icons.email),
                               labelStyle: TextStyle(
@@ -129,7 +129,7 @@ class _SignInViewState extends State<SignInView> {
                           },
                           decoration: InputDecoration(
                               labelText: 'Senha',
-                              hintText: 'Sua senha',
+
                               //filled: true,
                               icon: const FaIcon(FontAwesomeIcons.key),
                               labelStyle: TextStyle(

@@ -2,7 +2,6 @@ import 'package:ReachUp/Model/Subcategory.model.dart';
 import 'package:ReachUp/Repositories/SubCategory.repository.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../globals.dart';
 
@@ -77,7 +76,7 @@ class _SubCategoryStoreCardViewState extends State<SubCategoryStoreCardView> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
-                            width: 120,
+                           width: MediaQuery.of(context).size.width * 0.7,
                             child: Text(
                               "${widget.subCategory.subCategoryName} (Já adicionado)",
                               overflow: TextOverflow.clip,
