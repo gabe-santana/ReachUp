@@ -936,7 +936,7 @@ BEGIN
     INNER JOIN tipo_feedback tf
     ON f.cd_tipo_feedback = tf.cd_tipo_feedback
     WHERE nm_email_cliente = pEmail
-    ORDER BY cd_tipo_feedback;
+    ORDER BY dt_feedback DESC, cd_tipo_feedback;
 END$$
 
 DROP PROCEDURE IF EXISTS acessoFeedbacks$$
@@ -948,13 +948,15 @@ BEGIN
                 INNER JOIN tipo_feedback tf
 				ON f.cd_tipo_feedback = tf.cd_tipo_feedback
 				WHERE dt_feedback BETWEEN  dataInicio AND dataFim
-				AND tf.cd_tipo_feedback = pTipo;
+				AND tf.cd_tipo_feedback = pTipo
+                ORDER BY dt_feedback DESC;
 	ELSE
 				SELECT tf.cd_tipo_feedback, tf.nm_tipo_feedback, nm_email_cliente, ds_feedback, qt_estrelas_feedback,dt_feedback 
                 FROM feedback f
                 INNER JOIN tipo_feedback tf
 				ON f.cd_tipo_feedback = tf.cd_tipo_feedback
-				WHERE tf.cd_tipo_feedback = pTipo;
+				WHERE tf.cd_tipo_feedback = pTipo
+                ORDER BY dt_feedback DESC;
 	END IF;
 END$$
 
