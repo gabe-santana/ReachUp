@@ -327,9 +327,8 @@ $( async () => {
         
     })
 
-    $(document).on('click', '.btnUpdateLocal', async () => {
-        const id = $(this).id;
-        alert("cliquei pra editar o local de id" + id);
+    $(document).on('click', '.btnUpdateLocal', function (){
+        const id = this.id;
         window.location.href = `EditarLocais.html?id=${id}`;
     })
 })

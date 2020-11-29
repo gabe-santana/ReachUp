@@ -43,10 +43,35 @@ $( async () => {
      async function getLocal(id)
      {
          const local = await clsLocal.get(id);
+         
+         const localHeader = $("#localEdition");
+
+         const div = document.createElement('div');
+         div.classList.add('list-group-item');
+         div.classList.add('list-group-item-action');
+         div.style.backgroundColor = 'rgba(70, 130, 180, 0.8)';
+         div.style.color = 'rgb(245, 245, 245)';
+
+         const div2 = document.createElement('div');
+         div2.classList.add('d-flex');
+         div2.classList.add('w-100');
+         div2.classList.add('justify-content-between');
+         
+         const h4 = document.createElement('h4');
+         h4.classList.add('mb-1');
+         h4.innerHTML = local.name;
+
+         const p = document.createElement('p');
+         p.classList.add('mb-1');
+         p.innerHTML = local.typeName;
+
+         div2.append(h4);
+         div2.append(p);
+         div.append(div2);
+         localHeader.append(div);
 
          $("#txtLocalName").val(local.name);
          $("#txtLocalFloor").val(local.floor);
-         localType = local.type;
 
          const pLocalState = $("#txtLocalAvailability");
          pLocalState.innerText =  local.isAvailable ? 'Local ativo' : 'Local desativo';
