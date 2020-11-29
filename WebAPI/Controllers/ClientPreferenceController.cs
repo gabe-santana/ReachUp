@@ -12,7 +12,7 @@ namespace ReachUpWebAPI.Controllers
         #region Actions
 
         // OK 
-        [Authorize(Roles = "cli")]
+        [Authorize(Roles = "cli,adm")]
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll(string email)
         {
@@ -22,9 +22,9 @@ namespace ReachUpWebAPI.Controllers
         }
 
         // OK 
-        [Authorize(Roles = "cli")]
-        [HttpPost("Add")]
-        public async Task<IActionResult> Add([FromBody] ClientPreference clientPreference)
+        [Authorize(Roles = "cli,adm")]
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] ClientPreference clientPreference)
         {
             if (clientPreference != null)
                 return Ok(await clientPreference.Add());
