@@ -56,12 +56,6 @@ $( async () => {
           div2.classList.add('w-100');
           div2.classList.add('justify-content-between');
 
-          /*const icon =  document.createElement('img');
-          icon.src = `../../public/assets/icons/localType/${local.type}.png`;
-          console.log(icon.src);
-
-          div2.append(icon);*/
-
           const h5 = document.createElement('h5');
 
           h5.innerText = local.name;
@@ -132,8 +126,14 @@ $( async () => {
     })
 
     $("#txtSearch").change( async () => {
-
+        alert('porra');
         const search = $("#txtSearch").val();
         await Seek(search);
     })
+
+    $("#btnAddLocal").click(() => {
+        alert('merda');
+        window.location.href = '../../public/CriarLocal.html';
+    })
+    
 })

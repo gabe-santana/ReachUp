@@ -4,8 +4,10 @@ class clsApiConfig {
       _license;
        _owner;
   
+       //http://192.168.42.10:8000/api
+       //http://localhost:5000/api/
       constructor(){
-        this._url = 'http://localhost:5000/api/';
+        this._url = 'http://192.168.42.10:8000/api/';
         this._version = '1.0';
         this._license = 'MIT';
         this._owner = 'cSoft';

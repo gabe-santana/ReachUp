@@ -1,7 +1,35 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url(https://fonts.googleapis.com/css2?family=Lato&display=swap);
+
 body{
 background: rgb(62,67,140);
 background: linear-gradient(90deg, rgba(62,67,140,1) 0%, rgba(34,193,195,1) 100%);
+height: 100%;
+}
 
+html {
+  height: 100%;
+}
+
+#tudo {
+  min-height: 100%;
+  position: relative;
+}
+
+* html #tudo {
+  height: 100%;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+#navTitle {
+  font-family: Roboto;
+  font-size: 22px;
+}
 .listgroup2{
   max-width: 50%;
 }
