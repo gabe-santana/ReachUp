@@ -943,12 +943,18 @@ DROP PROCEDURE IF EXISTS acessoFeedbacks$$
 CREATE PROCEDURE acessoFeedbacks(pTipo int, dataInicio date , dataFim date, pGeral bool)
 BEGIN
 	IF pGeral = false THEN
-				SELECT cd_tipo_feedback, nm_email_cliente, ds_feedback, qt_estrelas_feedback, dt_feedback FROM feedback 
+				SELECT tf.cd_tipo_feedback, tf.nm_tipo_feedback, nm_email_cliente, ds_feedback, qt_estrelas_feedback, dt_feedback 
+				FROM feedback f
+                INNER JOIN tipo_feedback tf
+				ON f.cd_tipo_feedback = tf.cd_tipo_feedback
 				WHERE dt_feedback BETWEEN  dataInicio AND dataFim
-				AND cd_tipo_feedback = pTipo;
+				AND tf.cd_tipo_feedback = pTipo;
 	ELSE
-				SELECT cd_tipo_feedback, nm_email_cliente, ds_feedback, qt_estrelas_feedback,dt_feedback FROM feedback 
-				WHERE cd_tipo_feedback = pTipo;
+				SELECT tf.cd_tipo_feedback, tf.nm_tipo_feedback, nm_email_cliente, ds_feedback, qt_estrelas_feedback,dt_feedback 
+                FROM feedback f
+                INNER JOIN tipo_feedback tf
+				ON f.cd_tipo_feedback = tf.cd_tipo_feedback
+				WHERE tf.cd_tipo_feedback = pTipo;
 	END IF;
 END$$
 
