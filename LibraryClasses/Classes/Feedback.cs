@@ -71,6 +71,27 @@ namespace ReachUp
             this.TypeName = typeName;
         }
 
+        /// <summary>
+        ///  Get by user constructor
+        /// </summary>
+        /// <param name="feedbackUser"></param>
+        /// <param name="description"></param>
+        /// <param name="date"></param>
+        /// <param name="stars"></param>
+        /// <param name="type"></param>
+        /// <param name="id"></param>
+        /// <param name="typeName"></param>
+         public Feedback(User FeedbackUser, string Description, string FeedbackDate,
+             ushort Stars, ushort type, string typeName) : base()
+         {
+            this.FeedbackUser = FeedbackUser;
+            this.Description = Description;
+            this.FeedbackDate = FeedbackDate.Substring(0, 10);
+            this.Stars = Stars;
+            this.Type = type;
+            this.TypeName = typeName;
+        }
+
          /// <summary>
         ///  Get by key (type + id) constructor
         /// </summary>
@@ -148,7 +169,8 @@ namespace ReachUp
                            this.Data["ds_feedback"].ToString(),
                            this.Data["dt_feedback"].ToString(),
                            ushort.Parse(this.Data["qt_estrelas_feedback"].ToString()),
-                           ushort.Parse(this.Data["cd_tipo_feedback"].ToString())
+                           ushort.Parse(this.Data["cd_tipo_feedback"].ToString()),
+                            this.Data["nm_tipo_feedback"].ToString()
                             )
                         );
                     }
@@ -190,7 +212,8 @@ namespace ReachUp
                                 this.Data["ds_feedback"].ToString(),
                                 this.Data["dt_feedback"].ToString(),
                                 ushort.Parse(this.Data["qt_estrelas_feedback"].ToString()),
-                                ushort.Parse(this.Data["cd_tipo_feedback"].ToString())
+                                ushort.Parse(this.Data["cd_tipo_feedback"].ToString()),
+                                this.Data["nm_tipo_feedback"].ToString()
                             )
                         );
                     }
