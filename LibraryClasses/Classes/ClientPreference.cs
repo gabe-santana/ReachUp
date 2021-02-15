@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ReachUp
 {
-    public class ClientPreference : clsDatabase
+    public class ClientPreference : clsMySqlConnection
     {
         #region Properties
         public List<SubCategory> SubCategories = new List<SubCategory>();

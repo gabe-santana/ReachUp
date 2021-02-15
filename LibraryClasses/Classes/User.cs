@@ -6,7 +6,7 @@ using System;
 
 namespace ReachUp
 {
-    public class User : clsDatabase
+    public class User : clsMySqlConnection
     {
         #region Properties
         public string Email { get; set; }
@@ -236,7 +236,7 @@ namespace ReachUp
         /// <returns>Bool</returns>
         public async Task<bool> RecoverPassword(string email)
         {
-           string cod = GenerateGuidCode();
+           string cod = clsBitFactory.GenerateGuidCode();
            if (base.DMLCommand(Procedure.recuperarSenha,
                new string[,]{
                    {"pEmail", email},
@@ -460,20 +460,6 @@ namespace ReachUp
             return Task.FromResult(false);
         }
 
-
-        #endregion
-
-        #region Private Methods
-
-        private static string GenerateGuidCode()
-        {
-           long i = 1;
-           foreach (byte b in Guid.NewGuid().ToByteArray())
-           {
-              i *= ((int)b + 1);
-           }
-           return string.Format("{0:x}", i - DateTime.Now.Ticks);
-        }
 
         #endregion
     }

@@ -7,7 +7,7 @@ using System.Data;
 
 namespace ReachUp
 {
-    public class clsDatabase
+    public class clsMySqlConnection : IDbConnection
     {
         #region Properties
         private MySqlCommand mSqlCommand = null;
@@ -100,7 +100,7 @@ namespace ReachUp
         #endregion
 
         #region Constructor
-        public clsDatabase()
+        public clsMySqlConnection()
         {
 
         }

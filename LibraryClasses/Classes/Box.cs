@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ReachUp
 {
-    public class Box : clsDatabase
+    public class Box : clsMySqlConnection
     {
         #region Properties
     
