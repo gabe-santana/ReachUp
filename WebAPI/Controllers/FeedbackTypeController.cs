@@ -32,13 +32,13 @@ namespace ReachUpWebAPI.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-           return Ok(await new FeedbackType().GetAll());
+           return Ok(await new LocalType().GetAll());
         }
 
         // OK 
         //[Authorize(Roles = "adm, dev")]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] FeedbackType feedbackType)
+        public async Task<IActionResult> Post([FromBody] LocalType feedbackType)
         {
             if (feedbackType != null)
                 return Ok(await feedbackType.Add());
@@ -48,7 +48,7 @@ namespace ReachUpWebAPI.Controllers
         // OK 
         //[Authorize(Roles = "adm")]
         [HttpPatch]
-        public async Task<IActionResult> Patch([FromBody] FeedbackType feedbackType)
+        public async Task<IActionResult> Patch([FromBody] LocalType feedbackType)
         {
             if (feedbackType != null)
                 return Ok(await feedbackType.Update());
@@ -61,7 +61,7 @@ namespace ReachUpWebAPI.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             if (!string.IsNullOrWhiteSpace(id.ToString()))
-                return Ok(await new FeedbackType().Delete(id));
+                return Ok(await new LocalType().Delete(id));
             return BadRequest("Parameters are null");
         }
 

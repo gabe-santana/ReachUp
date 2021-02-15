@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ReachUp
 {
-    public class Communique : clsDatabase
+    public class Communique : clsMySqlConnection
     {
         #region Properties
         public int CommuniqueId { get; set; }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ReachUp
 {
-    public class Feedback : clsDatabase
+    public class Feedback : clsMySqlConnection
     {
         #region Properties
         [JsonIgnore] public int FeedbackId { get; set; }

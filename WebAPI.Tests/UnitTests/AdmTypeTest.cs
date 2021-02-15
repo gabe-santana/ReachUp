@@ -3,7 +3,6 @@ using Xunit;
 using ReachUp;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 
 namespace ReachUp_Tests.UnitTests
 {
@@ -34,7 +33,7 @@ namespace ReachUp_Tests.UnitTests
             Assert.True(Convert.ToBoolean(result));
         }
 
-        [Theory(DisplayName = "O nome do novo tipo de adm foi recebido corretamente, porém houve erro no cadastro")]
+        [Theory(DisplayName = "ERRO - O nome do novo tipo de adm foi recebido corretamente, porém houve erro no cadastro")]
         [InlineData("Desenvolvedor de beacons")]
         public void NotAdded(string name)
         {

@@ -52,19 +52,19 @@ namespace ReachUp
         /// Gets all feedback types
         /// </summary>
         /// <returns>FeedbackType object list</returns>
-        public Task<List<FeedbackType>> GetAll()
+        public Task<List<LocalType>> GetAll()
         {
             if (base.DQLCommand(
                 "SELECT * from tipo_feedback", ref this.Data
             ))
             {
-                List<FeedbackType> feedbackTypes = new List<FeedbackType>();
+                List<LocalType> feedbackTypes = new List<LocalType>();
                 if (this.Data.HasRows)
                 {
                     while (this.Data.Read())
                     {
                         feedbackTypes.Add(
-                          new FeedbackType(
+                          new LocalType(
                             int.Parse(this.Data["cd_tipo_feedback"].ToString()),
                             this.Data["nm_tipo_feedback"].ToString()
                           )
