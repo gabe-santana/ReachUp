@@ -6,7 +6,7 @@ using System;
 
 namespace ReachUp
 {
-    public class User : clsMySqlConnection
+    public class User : ClsMySqlConnection
     {
         #region Properties
         public string Email { get; set; }
@@ -236,7 +236,7 @@ namespace ReachUp
         /// <returns>Bool</returns>
         public async Task<bool> RecoverPassword(string email)
         {
-           string cod = clsBitFactory.GenerateGuidCode();
+           string cod = ClsBitFactory.GenerateGuidCode();
            if (base.DMLCommand(Procedure.recuperarSenha,
                new string[,]{
                    {"pEmail", email},

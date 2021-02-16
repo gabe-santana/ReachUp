@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ReachUp
 {
-    public static class clsBitFactory
+    public static class ClsBitFactory
     {
         public static string GenerateGuidCode()
         {

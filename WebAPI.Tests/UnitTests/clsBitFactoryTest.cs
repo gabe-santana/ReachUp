@@ -6,19 +6,19 @@ using ReachUp;
 
 namespace BusinessLayer.Tests.UnitTests
 {
-    public class clsBitFactoryTest
+    public class ClsBitFactoryTest
     {
         [Fact]
         public void GuidCodeGenerated()
         {
-            string code = clsBitFactory.GenerateGuidCode();
+            string code = ClsBitFactory.GenerateGuidCode();
             Assert.NotNull(code);
         }
 
         [Fact]
         public void GuidCodeError()
         {
-            Assert.Throws<Exception>(() => clsBitFactory.GenerateGuidCode());
+            Assert.Throws<Exception>(() => ClsBitFactory.GenerateGuidCode());
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ReachUp
 {
-    public class BeaconType : clsMySqlConnection
+    public class BeaconType : ClsMySqlConnection
     {
         #region Properties
         public int Id {get; set;}

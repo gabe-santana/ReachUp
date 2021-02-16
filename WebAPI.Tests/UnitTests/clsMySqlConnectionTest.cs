@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Tests.UnitTests
 {
-    public class clsMySqlConnectionTest : clsMySqlConnection
+    public class clsMySqlConnectionTest : ClsMySqlConnection
     {
         public clsMySqlConnectionTest() : base() { }
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ReachUp
 {
-    interface IDbConnection
+    public interface IDbConnection
     {
         public bool Connect();
         public void Disconnect();

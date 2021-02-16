@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ReachUp
 {
-    public class FeedbackType : clsMySqlConnection
+    public class FeedbackType : ClsMySqlConnection
     {
         #region Properties
         public int Id {get; set;}
