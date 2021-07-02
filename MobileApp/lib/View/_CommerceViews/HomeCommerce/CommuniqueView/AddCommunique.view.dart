@@ -138,7 +138,7 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomPadding: true,
+        resizeToAvoidBottomInset: true,
         appBar: this.finished
             ? AppBar(
                 centerTitle: false,
@@ -288,7 +288,6 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                   preferredSize: Size.fromHeight(50),
                 ),
               ),
-        resizeToAvoidBottomInset: true,
         body: this.finished
             ? AddedCommuniqueView(newCommunique: (bool _new) {
                 setState(() {
