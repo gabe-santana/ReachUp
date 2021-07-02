@@ -1,0 +1,28 @@
+.areaFiltro {
+    position: relative;
+    margin-top: -25px;
+    margin-left: 100px;
+}
+
+.areaFiltro select {
+    position: absolute;
+    margin-top: -40px;
+    margin-left: 125px;
+}
+
+form .txtLocalName, form .txtLocalBeacon {
+    width: 250px;
+    height: 30px;
+}
+
+form .txtLocalFloor {
+    width: 100px;
+    height: 25px;
+    position: relative;
+    top: 0px;
+    left: 10px;
+}
+
+form .txtLocalName, form .txtLocalFloor, form .txtLocalBeacon {
+    border-radius: 5px 5px;
+}

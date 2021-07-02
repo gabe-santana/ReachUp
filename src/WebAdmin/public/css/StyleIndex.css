@@ -1,0 +1,280 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url(https://fonts.googleapis.com/css2?family=Lato&display=swap);
+
+html{
+  height: 100%;
+}
+
+.login-page {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+  font-family: sans-serif;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 360px;
+  margin: auto;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #1b8c9c;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.btnLocal {
+  font-family: sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #f5f8f7;
+  border: 0;
+  padding: 15px;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.form button:hover,.form button:active,.form button:focus {
+  background: #064153
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 14px;
+}
+.form .message a {
+  color: #1b8c9c;
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 400px;
+  margin: auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 50px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 14px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}
+
+body {
+  background: rgb(27,30,70);
+  background: linear-gradient(0deg, rgba(27,30,70,1) 0%, rgba(34,193,195,1) 100%);
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;  
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;    
+}
+
+.logo{
+  margin-bottom: 30px;
+}
+
+.card {
+  margin-bottom: 20px;
+  padding: 5px;
+}
+
+#direita{
+  float: right;
+}
+
+#descola{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#arrumado{
+  margin-right: 500px;
+  margin-left: 20px;
+}
+
+#saidae{
+  float: right;
+}
+
+#saidae2{
+  float: right;
+  margin-right: 15px;
+}
+
+#saidae3{
+  margin-top: 25px;
+}
+
+#saidae4{
+  margin-top: 0px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+#saidae5{
+  margin-top: 25px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+#ajuste2{
+  margin-left: 10px;
+}
+
+#ajuste3{
+  width: 200px;
+}
+
+#ajuste4{
+
+  margin-left: 10px;
+}
+
+#ajuste5{
+  margin-left: -45px;
+  width: 100px;
+}
+
+#ajuste6{
+  margin-left: -25px;
+}
+
+#lbl1{
+  margin-left: 15px;
+}
+
+#lbl2{
+}
+
+#centro{
+  margin-left: 43%;
+  background-color: white;
+  color: black;
+  border-color: white;
+}
+
+#centro2{
+  margin-left: 55%;
+}
+
+#centro3{
+  margin-left: 55%;
+  background-color: white;
+  color: black;
+  border-color: white;
+}
+
+#branco{
+  background-color: white;
+  color: black;
+  border-color: white;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  margin-right: 100px;
+  margin-left: 100px;
+  padding: 50px;
+  height: auto;
+}
+
+.icone{
+  float: right;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#branco label{
+  text-align: center;
+}
+
+#nav2{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin-left: -40px;
+  }
+
+#listgroup3{
+  width: 40%;
+  float: right;
+}
+
+.baixo{
+  overflow:hidden;
+  overflow-y:scroll;
+}
+
+.checked {
+  color: orange;
+}
+
+
+@media screen and (max-width: 1000px) {
+   #branco{
+    margin-left: 5px;
+    margin-right: 5px;
+   }
+   
+
+#barra{
+  width: 60%;
+}
+
+#btnResponsa{
+  width: 40%;
+}
+
+.checked {
+  color: orange;
+}

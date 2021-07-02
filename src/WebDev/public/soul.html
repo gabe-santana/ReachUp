@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../src/style/MapMaker.style.css">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link href="../src/style/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Open+Sans&family=PT+Sans&family=PT+Sans+Narrow&display=swap" rel="stylesheet">
+    <title>ReachUp! Dev - MapMaker</title>
+
+    <style>
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
+  
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+      </style>
+      <!-- Custom styles for this template -->
+    <link href="../src/style/dashboard.css" rel="stylesheet">
+</head>
+<body>
+   <script src="../src/Scripts/jquery-3.5.1.min.js"></script>
+   <script src="../src/Scripts/bootstrap.min.js"></script>
+
+   <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a href="boss.html"><section class="logo"></section></a>
+<a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" style="background-color:#343a40;font-family: 'PT Sans', sans-serif;font-size: 18px;"   href="boss.html">ReachUp! Dev</a>
+<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+  <span class="navbar-toggler-icon"></span>
+</button>
+<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+<ul class="navbar-nav px-3">
+  <!--<li class="nav-item text-nowrap">
+        <a class="nav-link" href="index.html">Voltar</a>
+  </li>-->
+  <li class="nav-item text-nowrap">
+    <a class="nav-link" href="index.html">Sair</a>
+  </li>
+</ul>
+</nav>
+
+   <input id="copyToClipBoard" type="text" hidden>
+   <section id="top-painel">
+     
+     <div id="top-controls">
+       Set Corner:
+       <label>
+           <input id="cbCornerUp" type="checkbox" name="cbGetter" checked="true">
+              Up
+           </label>
+
+           <label>
+               <input id="cbCornerDown" type="checkbox" name="cbGetter" checked="true">
+                   Down
+          </label>
+
+           <label>
+               <input id="cbCornerRight" type="checkbox" name="cbGetter" checked="true">
+                   Right
+           </label>
+
+           <label>
+               <input id="cbCornerLeft" type="checkbox" name="cbGetter" checked="true">
+                   Left
+           </label>
+
+           <button class="mapBtn" id="addRoute">Add Corner</button>
+ 
+     </div>
+
+   </section>
+
+
+
+   <section id="bottom-painel" >
+       <label>
+           <span>UUID</span>
+           <input  id="uuid" type="text" >
+       </label>
+
+       <label>
+       <span>Current Floor</span>
+           <input  id="floor" type="number" value="0"  width="20px">
+       </label>
+
+       <label>
+       <span>Local ID</span>
+           <input  id="localid" type="number" value="0"  width="20px">
+       </label>
+
+       <label>
+
+   
+
+
+
+       <span>Plan</span>
+            <input  id="plan" type="file" value="0"  width="20px">
+        </label>
+           <br/>
+           <br/>
+           <div>
+               <label>
+               <input id="cbHall" type="radio" name="cbSetter">
+                   Hall
+               </label>
+   
+               <label>
+
+               <label>
+               <input id="cbCorner" type="radio" name="cbSetter">
+                   Corner
+               </label>
+   
+               <label>
+
+
+               <input id="cbBeacon" type="radio" name="cbSetter">
+                   Beacon
+               </label>
+   
+               <label>
+                   <input  id="cbILocal"  type="radio" name="cbSetter">
+                   Local (Initial Position)
+               </label>
+   
+               <label>
+                   <input  id="cbELocal" type="radio" name="cbSetter">
+                   Local (End Position)
+               </label>
+   
+           </div>
+           <br/>
+       <button class="mapBtn" id="addRoute">Add hall</button>
+ 
+       <button class="mapBtn" id="addLocal">Add local</button>
+       <button class="mapBtn" id="addAll">Add all</button>
+       <button class="mapBtn" id="clear">Clear</button>
+       <button class="mapBtn" id="clearSquare">Clear square</button>
+       <button class="mapBtn" id="showMap" disabled>Show map</button>
+  
+       <br/>
+
+   
+   </section>
+
+ 
+
+   <section id="mapContainer"></section>
+   <br/>
+
+    <script src="../build/main.bundle.js"></script>
+    <script type="module" src="../src/services/ApiConnection.ts"></script>
+    <script type="module" src="../src/Models/MallPlan.ts"></script>
+    <script type="module" src="../src/Controllers/AccountController.ts"></script>
+    <script type="module" src="../src/Scripts/routines.script.js"></script>
+    <script type="module" src="../src/Scripts/events.script.js"></script>
+</body>
+</html>
