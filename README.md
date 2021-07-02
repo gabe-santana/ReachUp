@@ -116,18 +116,6 @@ We're using:
 - **Flutter: Dart + Java + Objective-C** for cross-platfor mobile app (Android/iOS);
 - **Flame: Flutter Lib** for render a real-time map of local;
 
-## Project Progress
-
-- [x] Database **(completed, but always on edit and rising)**
-- [x] WebAPI **(completed, but always on edit and rising)**
-- [ ] Web Application - coding **(idling)**
-- [ ] Web Application - design **(on development)**
-- [ ] Cross-Platform Mobile App **(main functionality ready)**
-- [X] MapMaker - map module **(completed)**
-
-## About Officers Contributors
-
-We're TI students in [Centro Paula Souza](https://www.cps.sp.gov.br) technical schools organization and this projects are our Term Paper that we decided make it open-source!
 
 ## Contributing
 
@@ -145,10 +133,6 @@ later *Pull requests* will be welcome.
 
 - Approach us on our wiki:
 [See our development histories](https://github.com/0G4briel/ReachUp/wiki)
-
-## Our Partnership
-
-We are anxiously waiting for a craft from [Praiamar Shopping](http://www.praiamarshopping.com.br) to record the project working on there, and a lending of the local plants so that everything works correctly. Meanwhile, our database is densely populated with all mall locations, for testing and academic or commercial presentation purposes.
 
 ## Contact us
 
