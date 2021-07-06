@@ -33,12 +33,14 @@
 <img src="https://user-images.githubusercontent.com/59267719/124625294-0fe1af80-de54-11eb-8aae-c1de31c24f78.png" width="200">
 <img src="https://user-images.githubusercontent.com/59267719/124625307-1112dc80-de54-11eb-8cbe-88bb940a4b11.png" width="200">
 <img src="https://user-images.githubusercontent.com/59267719/124625346-1839ea80-de54-11eb-97db-5ac6c3983cda.png" width="200">
+<img src="https://user-images.githubusercontent.com/59267719/124625310-11ab7200-de54-11eb-9783-277d681e85b6.png" width="200">
 <img src="https://user-images.githubusercontent.com/59267719/124625319-12dca000-de54-11eb-93a3-979598859e8f.png" width="200">
 <img src="https://user-images.githubusercontent.com/59267719/124625333-15d79080-de54-11eb-98e9-11c5e661806a.png" width="200">
 <img src="https://user-images.githubusercontent.com/59267719/124625337-15d79080-de54-11eb-9dbb-9d1bf4286eee.png" width="200">
 <img src="https://user-images.githubusercontent.com/59267719/124625339-16702700-de54-11eb-94ca-feb8d312b72d.png" width="200">
 <img src="https://user-images.githubusercontent.com/59267719/124625340-16702700-de54-11eb-9962-18863a5edfd9.png" width="200">
 </div>
+    
     
 ## How it works?
 
@@ -161,5 +163,8 @@ later *Pull requests* will be welcome.
 
 - [MIT](https://choosealicense.com/licenses/mit/)
 
-![ReachUp](https://user-images.githubusercontent.com/59267719/93685984-a55cb000-fa89-11ea-9dfe-4a4906088e3a.png)
+<p align="center">
+<img src="https://user-images.githubusercontent.com/59267719/93685984-a55cb000-fa89-11ea-9dfe-4a4906088e3a.png" width="200">
+</p>
+
 
