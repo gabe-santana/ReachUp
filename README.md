@@ -22,7 +22,38 @@
 >ReachUp is a SaaS for indoor location applications, provides blind and visually impaired an interaction experience in the mall, using voice tools the users can search by stores, bathrooms, restaurants and so on. Besides that, the application offers tools for shopkeepers publish their promotions or communicated and mall managers 
 >receive a user visit reports by the mall.
 
+## App screenshots 
+<div style="float: left">
+<img src="https://user-images.githubusercontent.com/59267719/124625343-17a15400-de54-11eb-8dac-12d017b486c3.png" width="300">
 
+<img src="https://user-images.githubusercontent.com/59267719/124625331-153efa00-de54-11eb-80ac-0e2b859ff03d.png" width="300">
+
+<img src="https://user-images.githubusercontent.com/59267719/124625312-11ab7300-de54-11eb-9512-3fb7957ac2e8.png" width="300">
+
+<img src="https://user-images.githubusercontent.com/59267719/124625304-1112dc80-de54-11eb-9758-113f876309a8.png" width="300">
+
+<img src="https://user-images.githubusercontent.com/59267719/124625326-140dcd00-de54-11eb-9bb0-6021d413ede6.png" width="300">
+
+<img src="https://user-images.githubusercontent.com/59267719/124625294-0fe1af80-de54-11eb-8aae-c1de31c24f78.png" width="300">
+
+<img src="https://user-images.githubusercontent.com/59267719/124625307-1112dc80-de54-11eb-8cbe-88bb940a4b11.png" width="300">
+
+<img src="https://user-images.githubusercontent.com/59267719/124625346-1839ea80-de54-11eb-97db-5ac6c3983cda.png" width="300">
+
+<img src="https://user-images.githubusercontent.com/59267719/124625310-11ab7300-de54-11eb-9783-277d681e85b6.png" width="300">
+
+<img src="https://user-images.githubusercontent.com/59267719/124625319-12dca000-de54-11eb-93a3-979598859e8f.png" width="300">
+
+<img src="https://user-images.githubusercontent.com/59267719/124625333-15d79080-de54-11eb-98e9-11c5e661806a.png" width="300">
+
+<img src="https://user-images.githubusercontent.com/59267719/124625337-15d79080-de54-11eb-9dbb-9d1bf4286eee.png" width="300">
+
+<img src="https://user-images.githubusercontent.com/59267719/124625339-16702700-de54-11eb-94ca-feb8d312b72d.png" width="300">
+
+<img src="https://user-images.githubusercontent.com/59267719/124625340-16702700-de54-11eb-9962-18863a5edfd9.png" width="300">
+    
+</div> 
+    
 ## How it works?
 
 This application uses BLE Beacons for detect aproximities locates , if you don't understand what beacons are, [checkout](https://kontakt.io/beacon-basics/what-is-a-beacon/). 
