@@ -1,5 +1,5 @@
 # ReachUp!
-## Beta Version : November 30
+## Beta Version : 2020.11.30
 
 <p>
 <img alt="Csharp" src="https://img.shields.io/badge/-C%23-7022DC?style=flat-square&logo=c-sharp&logoColor=white" />
