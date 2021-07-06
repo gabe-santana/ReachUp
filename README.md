@@ -19,7 +19,7 @@
 <img src="https://img.shields.io/github/last-commit/0G4briel/ReachUp">
 </p>
 
->ReachUp (the end can sounds like "shop") is a mobile application for indoor location, provides blind and visually impaired an interaction experience in the mall, using voice tools the users can search by stores, bathrooms, restaurants and so on. Besides that, the application offers tools for shopkeepers publish their promotions or communicated and mall managers 
+>ReachUp is a SaaS for indoor location applications, provides blind and visually impaired an interaction experience in the mall, using voice tools the users can search by stores, bathrooms, restaurants and so on. Besides that, the application offers tools for shopkeepers publish their promotions or communicated and mall managers 
 >receive a user visit reports by the mall.
 
 
