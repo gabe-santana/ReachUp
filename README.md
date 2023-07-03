@@ -21,7 +21,7 @@
 >ReachUp is a SaaS for indoor location applications, provides blind and visually impaired an interaction experience in the mall, using voice tools the users can search by stores, bathrooms, restaurants and so on. Besides that, the application offers tools for shopkeepers publish their promotions or communicated and mall managers 
 >receive a user visit reports by the mall.
 
-## MVP App screenshots 
+## MVP App screenshots
 
 <div style="float: left">
 <img src="https://user-images.githubusercontent.com/59267719/124625343-17a15400-de54-11eb-8dac-12d017b486c3.png" width="200">
@@ -37,6 +37,8 @@
 <img src="https://user-images.githubusercontent.com/59267719/124625339-16702700-de54-11eb-94ca-feb8d312b72d.png" width="200">
 <img src="https://user-images.githubusercontent.com/59267719/124625340-16702700-de54-11eb-9962-18863a5edfd9.png" width="200">
 </div>
+
+
     
     
 ## How it works?
