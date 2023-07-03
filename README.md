@@ -38,8 +38,9 @@
 <img src="https://user-images.githubusercontent.com/59267719/124625340-16702700-de54-11eb-9962-18863a5edfd9.png" width="200">
 </div>
 
+## Beacon-location mapping
 
-    
+<img src=".github/mapping.png">
     
 ## How it works?
 
