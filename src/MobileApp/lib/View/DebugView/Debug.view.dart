@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/View/HomeView/Home.view.dart';
 import 'package:ReachUp/View/SignView/Sign.view.dart';

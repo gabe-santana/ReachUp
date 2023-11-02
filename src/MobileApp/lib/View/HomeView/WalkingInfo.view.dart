@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
@@ -80,7 +81,7 @@ class _WalkingInfoViewState extends State<WalkingInfoView> {
                 ? Expanded(
                     child: Center(
                         child: ListView(
-                            physics: BouncingScrollPhysics(),
+                      physics: BouncingScrollPhysics(),
                       children: [
                         SuggestionItem(
                           title: "Caminhar até a saída",

@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Model/Local.dart';
 import 'package:ReachUp/Model/User.model.dart';
 import 'package:ReachUp/globals.dart';
@@ -26,9 +27,9 @@ class AccountRepository extends ReachUpAPI {
     return null;
   }
 
-
-  Future<bool> checkEmail() async{
-    await super.httpGet("Account/CheckEmail?email=${Globals.user.email}&role=${Globals.user.role}");
+  Future<bool> checkEmail() async {
+    await super.httpGet(
+        "Account/CheckEmail?email=${Globals.user.email}&role=${Globals.user.role}");
     print(super.response.data);
     if (super.response.statusCode == 200) {
       return super.response.data;
@@ -37,8 +38,9 @@ class AccountRepository extends ReachUpAPI {
     return null;
   }
 
-  Future<Local> getShopkeeperLocal() async{
-    await super.httpGet("Account/GetShopkeeperLocal?Email=${Globals.user.email}");
+  Future<Local> getShopkeeperLocal() async {
+    await super
+        .httpGet("Account/GetShopkeeperLocal?Email=${Globals.user.email}");
     print(super.response.data);
     if (super.response.statusCode == 200) {
       return Local.fromJson(super.response.data);
@@ -46,5 +48,4 @@ class AccountRepository extends ReachUpAPI {
 
     return null;
   }
-
 }

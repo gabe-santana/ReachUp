@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:get_storage/get_storage.dart';
 
 class Database {
@@ -13,15 +14,12 @@ class Database {
   }
 
   Database.update({String key, String value}) {
-    
     box.remove(key).then((v) {
       box.write(key, value);
     });
   }
 
-  Database.delete({String key}){
+  Database.delete({String key}) {
     box.remove(key);
   }
-
-
 }

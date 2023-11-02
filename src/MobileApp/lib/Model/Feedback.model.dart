@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Model/User.model.dart';
 
 class Feedback {

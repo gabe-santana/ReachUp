@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Category.controller.dart';
 import 'package:ReachUp/Controller/SubCategory.controller.dart';
@@ -50,7 +51,7 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
     return ListView(children: cards);
   }
 
-  void selectItem(){
+  void selectItem() {
     print("selecionou");
   }
 

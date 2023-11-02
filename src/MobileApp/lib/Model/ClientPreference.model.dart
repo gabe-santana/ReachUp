@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'Subcategory.model.dart';
 
 class ClientPreference {
@@ -26,5 +27,3 @@ class ClientPreference {
     return data;
   }
 }
-
-

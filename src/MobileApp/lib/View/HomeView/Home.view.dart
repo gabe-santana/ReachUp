@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Component/Database/Database.db.dart';
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/View/DeveloperView/BeaconBroadcast.view.dart';
@@ -152,7 +153,7 @@ class _HomeState extends State<Home> {
               ),
               Expanded(
                 child: ListView(
-                    physics: BouncingScrollPhysics(),
+                  physics: BouncingScrollPhysics(),
                   // Important: Remove any padding from the ListView.
                   padding: EdgeInsets.zero,
                   children: <Widget>[

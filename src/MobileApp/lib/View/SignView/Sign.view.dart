@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:convert';
 import 'dart:ui';
 
@@ -25,7 +26,6 @@ class _SignViewState extends State<SignView> {
   @override
   void initState() {
     super.initState();
-   
   }
 
   @override

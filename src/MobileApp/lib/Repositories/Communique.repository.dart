@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:convert';
 
 import 'package:ReachUp/Model/Communique.model.dart';
@@ -9,19 +10,15 @@ import '../globals.dart';
 class CommuniqueRepository extends ReachUpAPI {
   CommuniqueRepository() : super() {}
 
-
   String getImage(Communique communique) {
     return "${Globals.urlAPI}/Communique/GetImage?id=${communique.communiqueId}";
   }
-
-
 
   Future<List<Communique>> byLocal(int local, bool general) async {
     await super.httpGet("Communique/GetAll?local=$local&general=$general");
     if (super.response.statusCode == 200) {
       return List<Communique>.from(
           super.response.data.map((i) => Communique.fromJson(i)));
-
     } else
       return null;
   }
@@ -35,10 +32,10 @@ class CommuniqueRepository extends ReachUpAPI {
       return false;
   }
 
-  Future<bool> bindSubCategories(List<CommuniqueSubCategory> communiqueSubCategory) async {
- 
-
-    await super.httpPost("Communique/BindSubCategories", json.encode(communiqueSubCategory));
+  Future<bool> bindSubCategories(
+      List<CommuniqueSubCategory> communiqueSubCategory) async {
+    await super.httpPost(
+        "Communique/BindSubCategories", json.encode(communiqueSubCategory));
     print("response: ${super.response.data}");
     if (super.response.statusCode == 200) {
       return super.response.data;

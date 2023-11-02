@@ -18,15 +18,12 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   flutter_beacon: ^0.3.0
 
-  path_provider:
   photo_view: 0.4.2
-  flutter_image_compress: 0.6.3
-  path:
-
+  path_provider_windows: 0.0.4 
   flutter_tts: ^0.8.6
   sensors: ^0.4.2+5
   flutter_compass: ^0.4.3
-  gesture_x_detector: ^0.0.4
+  gesture_x_detector: 0.0.4
 
   lottie: ^0.6.0
 
@@ -38,7 +35,11 @@ dependencies:
   async: ^2.4.2
   flutter_easyloading: ^2.1.3
   cached_network_image: ^2.3.3
-  flutter_circular_chart: ^0.1.0
+  flutter_circular_chart:
+    git:
+      url: https://github.com/afandiyusuf/flutter_circular_chart.git
+      ref: develop
+
   intl: ^0.16.1
   flutter_rating_bar: ^3.2.0+1
   toggle_switch: ^0.1.8

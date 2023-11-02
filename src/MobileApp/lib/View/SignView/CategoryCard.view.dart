@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Model/Category.model.dart';
 import 'package:ReachUp/Repositories/Category.repository.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -47,7 +48,8 @@ class _CategoryCardViewState extends State<CategoryCardView> {
                                 valueColor: new AlwaysStoppedAnimation<Color>(
                                     Colors.grey)),
                           ),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                       ),
                     ),

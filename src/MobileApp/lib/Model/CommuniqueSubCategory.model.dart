@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'Category.model.dart';
 import 'Communique.model.dart';
 import 'Subcategory.model.dart';
@@ -6,12 +7,13 @@ class CommuniqueSubCategory {
   Communique communique;
   Category category;
   SubCategory subcategory;
-  
 
   CommuniqueSubCategory({this.communique, this.subcategory, this.category});
 
   CommuniqueSubCategory.fromJson(Map<String, dynamic> json) {
-    communique = json['communique'] != null ? new Communique.fromJson(json['communique']) : null;
+    communique = json['communique'] != null
+        ? new Communique.fromJson(json['communique'])
+        : null;
     subcategory = json['subcategory'] != null
         ? new SubCategory.fromJson(json['subcategory'])
         : null;

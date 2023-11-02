@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Communique.controller.dart';
 import 'package:ReachUp/Model/Communique.model.dart';

@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -6,14 +7,13 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
 
-
 class BroadcastBeacon extends StatefulWidget {
   @override
   _BroadcastBeacon createState() => _BroadcastBeacon();
 }
 
-class _BroadcastBeacon extends State<BroadcastBeacon> with WidgetsBindingObserver {
-  
+class _BroadcastBeacon extends State<BroadcastBeacon>
+    with WidgetsBindingObserver {
   final StreamController<BluetoothState> streamController = StreamController();
   StreamSubscription<BluetoothState> _streamBluetooth;
   StreamSubscription<RangingResult> _streamRanging;
@@ -82,7 +82,7 @@ class _BroadcastBeacon extends State<BroadcastBeacon> with WidgetsBindingObserve
     }
     final regions = <Region>[];
 
-     regions.add(Region(identifier: 'com.beacon'));
+    regions.add(Region(identifier: 'com.beacon'));
 
     if (_streamRanging != null) {
       if (_streamRanging.isPaused) {
@@ -189,9 +189,7 @@ class _BroadcastBeacon extends State<BroadcastBeacon> with WidgetsBindingObserve
                   onPressed: () async {
                     if (Platform.isAndroid) {
                       await flutterBeacon.openLocationSettings;
-                    } else if (Platform.isIOS) {
-
-                    }
+                    } else if (Platform.isIOS) {}
                   }),
             StreamBuilder<BluetoothState>(
               builder: (context, snapshot) {
@@ -216,9 +214,7 @@ class _BroadcastBeacon extends State<BroadcastBeacon> with WidgetsBindingObserve
                           } on PlatformException catch (e) {
                             print(e);
                           }
-                        } else if (Platform.isIOS) {
-
-                        }
+                        } else if (Platform.isIOS) {}
                       },
                       color: Colors.red,
                     );

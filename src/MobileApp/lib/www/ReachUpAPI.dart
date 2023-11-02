@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
@@ -16,14 +17,16 @@ class ReachUpAPI {
     _config();
   }
 
-  httpPost(String uri, dynamic data) async{
+  httpPost(String uri, dynamic data) async {
     try {
       this.response = await dio.post(
         "${dio.options.baseUrl}/$uri",
         data: data,
         options: Options(
-            
-            headers: {"Authorization": "Bearer ${Globals.user.token != null ?  Globals.user.token : 'xpto'}"},
+            headers: {
+              "Authorization":
+                  "Bearer ${Globals.user.token != null ? Globals.user.token : 'xpto'}"
+            },
             followRedirects: false,
             validateStatus: (status) {
               return status < 500;
@@ -39,7 +42,10 @@ class ReachUpAPI {
       this.response = await dio.get(
         "${dio.options.baseUrl}/$uri",
         options: Options(
-            headers: {"Authorization":  "Bearer ${Globals.user.token != null ?  Globals.user.token : 'xpto'}"},
+            headers: {
+              "Authorization":
+                  "Bearer ${Globals.user.token != null ? Globals.user.token : 'xpto'}"
+            },
             followRedirects: false,
             validateStatus: (status) {
               return status < 500;
@@ -50,14 +56,16 @@ class ReachUpAPI {
     }
   }
 
- httpPatch(String uri, dynamic data) async{
+  httpPatch(String uri, dynamic data) async {
     try {
       this.response = await dio.patch(
         "${dio.options.baseUrl}/$uri",
         data: data,
         options: Options(
-            
-            headers: {"Authorization": "Bearer ${Globals.user.token != null ?  Globals.user.token : 'xpto'}"},
+            headers: {
+              "Authorization":
+                  "Bearer ${Globals.user.token != null ? Globals.user.token : 'xpto'}"
+            },
             followRedirects: false,
             validateStatus: (status) {
               return status < 500;
@@ -68,14 +76,16 @@ class ReachUpAPI {
     }
   }
 
- httpPut(String uri, dynamic data) async{
+  httpPut(String uri, dynamic data) async {
     try {
       this.response = await dio.put(
         "${dio.options.baseUrl}/$uri",
         data: data,
         options: Options(
-            
-            headers: {"Authorization": "Bearer ${Globals.user.token != null ?  Globals.user.token : 'xpto'}"},
+            headers: {
+              "Authorization":
+                  "Bearer ${Globals.user.token != null ? Globals.user.token : 'xpto'}"
+            },
             followRedirects: false,
             validateStatus: (status) {
               return status < 500;
@@ -86,12 +96,15 @@ class ReachUpAPI {
     }
   }
 
-    httpDelete(String uri) async {
+  httpDelete(String uri) async {
     try {
       this.response = await dio.delete(
         "${dio.options.baseUrl}/$uri",
         options: Options(
-            headers: {"Authorization":  "Bearer ${Globals.user.token != null ?  Globals.user.token : 'xpto'}"},
+            headers: {
+              "Authorization":
+                  "Bearer ${Globals.user.token != null ? Globals.user.token : 'xpto'}"
+            },
             followRedirects: false,
             validateStatus: (status) {
               return status < 500;
@@ -111,7 +124,8 @@ class ReachUpAPI {
     };
 
     dio.options.headers['content-Type'] = 'application/json';
-    dio.options.headers["Authorization"] =  "Bearer ${Globals.user.token != null ?  Globals.user.token : 'xpto'}";
+    dio.options.headers["Authorization"] =
+        "Bearer ${Globals.user.token != null ? Globals.user.token : 'xpto'}";
   }
 
   noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);

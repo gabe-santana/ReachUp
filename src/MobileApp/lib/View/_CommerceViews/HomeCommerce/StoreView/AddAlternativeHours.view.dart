@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';

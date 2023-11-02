@@ -1,3 +1,4 @@
+// @dart=2.9
 class Category {
   int categoryId;
   String categoryName;

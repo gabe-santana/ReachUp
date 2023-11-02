@@ -87,7 +87,6 @@ var lightTheme = ThemeData(
 );
 
 class ReachUp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     String response = Database.select(key: "user").response;

@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/globals.dart';
 import 'package:ReachUp/main.dart';
 import 'package:flutter/material.dart';
@@ -17,15 +18,18 @@ class _EditSoreViewState extends State<EditSoreView> {
   TimeOfDay openingTime;
   TimeOfDay closingTime;
 
-TimeOfDay fromString(String time) {
-  int hh = 0;
-  if (time.endsWith('PM')) hh = 12;
-  time = time.split(' ')[0];
-  return TimeOfDay(
-    hour: hh + int.parse(time.split(":")[0]) % 24, // in case of a bad time format entered manually by the user
-    minute: int.parse(time.split(":")[1]) % 60,
-  );
-}
+  TimeOfDay fromString(String time) {
+    int hh = 0;
+    if (time.endsWith('PM')) hh = 12;
+    time = time.split(' ')[0];
+    return TimeOfDay(
+      hour: hh +
+          int.parse(time.split(":")[0]) %
+              24, // in case of a bad time format entered manually by the user
+      minute: int.parse(time.split(":")[1]) % 60,
+    );
+  }
+
   @override
   void deactivate() {
     EasyLoading.dismiss();
@@ -97,13 +101,14 @@ TimeOfDay fromString(String time) {
       });
   }
 
- void showSnackBarMessage(ctx, String message,
-        [MaterialColor color = Colors.green]) {
-      Scaffold.of(ctx).showSnackBar(SnackBar(
-        content: Text(message),
-        backgroundColor: Colors.green,
-      ));
-    }
+  void showSnackBarMessage(ctx, String message,
+      [MaterialColor color = Colors.green]) {
+    Scaffold.of(ctx).showSnackBar(SnackBar(
+      content: Text(message),
+      backgroundColor: Colors.green,
+    ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -173,8 +178,12 @@ TimeOfDay fromString(String time) {
                                             color: Colors.green,
                                           ),
                                           onPressed: () {
-                                            navigateTo(AddAlternativeHoursView(), 
-                                            "Horários extras", "Aqui você poderá editar os horários extras na qual sua loja persiste em funcionamento", context, true);
+                                            navigateTo(
+                                                AddAlternativeHoursView(),
+                                                "Horários extras",
+                                                "Aqui você poderá editar os horários extras na qual sua loja persiste em funcionamento",
+                                                context,
+                                                true);
                                           }),
                                     )
                                   ],
@@ -230,7 +239,8 @@ TimeOfDay fromString(String time) {
                                 child: RaisedButton(
                                   color: Colors.green,
                                   onPressed: () {
-                                    showSnackBarMessage(context, "Alterações Salvas");
+                                    showSnackBarMessage(
+                                        context, "Alterações Salvas");
                                   },
                                   child: Text(
                                     "Salvar alterações",

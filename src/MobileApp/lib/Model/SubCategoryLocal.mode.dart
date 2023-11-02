@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Model/Local.dart';
 import 'Category.model.dart';
 import 'Subcategory.model.dart';

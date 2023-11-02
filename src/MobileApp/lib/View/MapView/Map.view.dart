@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
@@ -469,7 +470,6 @@ class _MapViewState extends State<MapView> with WidgetsBindingObserver {
 
     _streamRanging =
         flutterBeacon.ranging(regions).listen((RangingResult result) {
-
       if (result != null && mounted) {
         setState(() {
           _regionBeacons[result.region] = result.beacons;
@@ -545,8 +545,6 @@ class _MapViewState extends State<MapView> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
     listeningState();
   }
-
-  
 
   @override
   Widget build(BuildContext context) {

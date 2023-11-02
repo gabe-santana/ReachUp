@@ -1,22 +1,23 @@
+// @dart=2.9
 import 'package:ReachUp/Repositories/Account.repository.dart';
 import 'package:ReachUp/View/SignView/SignUp.view.dart';
 
 class AccountController {
   AccountRepository accountRepository;
-  
-  AccountController(){
-      this.accountRepository = new AccountRepository();
+
+  AccountController() {
+    this.accountRepository = new AccountRepository();
   }
 
-  Future signUp() async{
+  Future signUp() async {
     return await this.accountRepository.signUp();
   }
 
-  Future signIn() async{
+  Future signIn() async {
     return await this.accountRepository.signIn();
   }
 
-  Future checkEmail() async{
+  Future checkEmail() async {
     return await this.accountRepository.checkEmail();
   }
 

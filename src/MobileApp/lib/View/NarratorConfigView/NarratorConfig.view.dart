@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Component/Database/Database.db.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,7 +11,7 @@ class NarratorConfig extends StatefulWidget {
         ? toggleIndex = 0
         : toggleIndex = 1;
 
-        print(Database.select(key: "narrator").response);
+    print(Database.select(key: "narrator").response);
   }
   @override
   _NarratorConfigState createState() => _NarratorConfigState();

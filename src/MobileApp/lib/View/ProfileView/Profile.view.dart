@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/ClientPreference.controller.dart';
 import 'package:ReachUp/Repositories/SubCategory.repository.dart';
@@ -79,7 +80,8 @@ class _ProfileViewState extends State<ProfileView> {
                             Globals.user.name,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
-                                color: Theme.of(context).colorScheme.onBackground,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
                                 fontSize: 18),
                           ),
                           Container(
@@ -87,7 +89,8 @@ class _ProfileViewState extends State<ProfileView> {
                             child: Text(
                               Globals.user.email,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(color: Colors.grey, fontSize: 18),
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 18),
                             ),
                           ),
                         ],
@@ -107,7 +110,8 @@ class _ProfileViewState extends State<ProfileView> {
                           "Minhas preferências",
                           style: TextStyle(
                               fontSize: 18,
-                              color: Theme.of(context).colorScheme.onBackground),
+                              color:
+                                  Theme.of(context).colorScheme.onBackground),
                         ),
                       ),
                       Container(
@@ -118,8 +122,8 @@ class _ProfileViewState extends State<ProfileView> {
                             children: [
                               ListView.builder(
                                   physics: BouncingScrollPhysics(),
-                                  itemCount:
-                                      Globals.userPreference.subCategories.length,
+                                  itemCount: Globals
+                                      .userPreference.subCategories.length,
                                   itemBuilder: (context, index) => ListTile(
                                         trailing: IconButton(
                                           tooltip:
@@ -127,7 +131,8 @@ class _ProfileViewState extends State<ProfileView> {
                                           onPressed: () {
                                             showDialog(
                                                 context: context,
-                                                builder: (BuildContext context) =>
+                                                builder: (BuildContext
+                                                        context) =>
                                                     CustomDialog(
                                                       icon: Icons.delete,
                                                       title: "Deletar",
@@ -143,8 +148,8 @@ class _ProfileViewState extends State<ProfileView> {
                                                                   "Deletando...");
                                                           clientPreferenceController
                                                               .delete(
-                                                                  Globals
-                                                                      .user.email,
+                                                                  Globals.user
+                                                                      .email,
                                                                   Globals
                                                                       .userPreference
                                                                       .subCategories[
@@ -157,7 +162,8 @@ class _ProfileViewState extends State<ProfileView> {
                                                                           index]
                                                                       .subCategoryId)
                                                               .then((value) {
-                                                            EasyLoading.dismiss();
+                                                            EasyLoading
+                                                                .dismiss();
                                                             setState(() {
                                                               Globals
                                                                   .userPreference
@@ -177,9 +183,11 @@ class _ProfileViewState extends State<ProfileView> {
                                                         ),
                                                       ),
                                                       buttonNO: FlatButton(
-                                                        color: Colors.transparent,
+                                                        color:
+                                                            Colors.transparent,
                                                         onPressed: () {
-                                                          Navigator.pop(context);
+                                                          Navigator.pop(
+                                                              context);
                                                         },
                                                         child: Text(
                                                           "Cancelar",
@@ -200,8 +208,9 @@ class _ProfileViewState extends State<ProfileView> {
                                         title: Row(
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.fromLTRB(
-                                                  0, 0, 20, 0),
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      0, 0, 20, 0),
                                               child: Container(
                                                 height: 50,
                                                 width: 50,
@@ -214,20 +223,19 @@ class _ProfileViewState extends State<ProfileView> {
                                                     "Authorization":
                                                         "Bearer ${Globals.user.token}"
                                                   },
-                                                  imageUrl:
-                                                      SubCategoryRepository()
-                                                          .getImage(
-                                                              Globals
-                                                                  .userPreference
-                                                                  .subCategories[
-                                                                      index]
-                                                                  .category
-                                                                  .categoryId,
-                                                              Globals
-                                                                  .userPreference
-                                                                  .subCategories[
-                                                                      index]
-                                                                  .subCategoryId),
+                                                  imageUrl: SubCategoryRepository()
+                                                      .getImage(
+                                                          Globals
+                                                              .userPreference
+                                                              .subCategories[
+                                                                  index]
+                                                              .category
+                                                              .categoryId,
+                                                          Globals
+                                                              .userPreference
+                                                              .subCategories[
+                                                                  index]
+                                                              .subCategoryId),
                                                   placeholder: (context, url) =>
                                                       Center(
                                                     child: CircularProgressIndicator(
@@ -251,7 +259,8 @@ class _ProfileViewState extends State<ProfileView> {
                                                 Text(
                                                   "${Globals.userPreference.subCategories[index].category.categoryName}",
                                                   style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                       color: Theme.of(context)
                                                           .colorScheme
                                                           .onBackground,
@@ -307,7 +316,8 @@ class _ProfileViewState extends State<ProfileView> {
                                       .then((value) {
                                     EasyLoading.dismiss();
 
-                                    Globals.userPreference.subCategories = value;
+                                    Globals.userPreference.subCategories =
+                                        value;
                                   });
                                 });
                               });

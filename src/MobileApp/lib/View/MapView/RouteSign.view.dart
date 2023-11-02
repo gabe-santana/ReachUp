@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Component/Map/MapObject.component.dart';
 import 'package:flutter/material.dart';
 
@@ -46,9 +47,9 @@ class _RouteSignState extends State<RouteSign> {
               widget.routeParameters._scale +
           50,
       left: (widget.routeParameters.position.x * 12).toDouble() *
-          widget.routeParameters._scale + 10,
+              widget.routeParameters._scale +
+          10,
       child: Align(
-        
         alignment: Alignment.topLeft,
         child: AnimatedContainer(
             height: 10 * widget.routeParameters._scale,

@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Model/Local.dart';
 import 'package:ReachUp/Repositories/Local.repository.dart';
@@ -41,14 +42,12 @@ class SearchCard extends StatefulWidget {
 
 class _SearchCardState extends State<SearchCard> {
   void showSnackBarMessage(ctx, String message,
-        [MaterialColor color = Colors.green]) {
-      Scaffold.of(ctx).showSnackBar(SnackBar(
-        content: Text(message),
-        backgroundColor: Colors.green,
-      ));
-    }
-
-
+      [MaterialColor color = Colors.green]) {
+    Scaffold.of(ctx).showSnackBar(SnackBar(
+      content: Text(message),
+      backgroundColor: Colors.green,
+    ));
+  }
 
   createAlertDialog(BuildContext context, Local local) {
     return showDialog(
@@ -104,18 +103,16 @@ class _SearchCardState extends State<SearchCard> {
   @override
   Widget build(BuildContext context) {
     return Slidable(
-    
-  secondaryActions: <Widget>[
-
-    IconSlideAction(
-      caption: 'Favoritar',
-      color: Colors.red,
-      icon: FontAwesomeIcons.heart,
-      onTap: () {
-        showSnackBarMessage(context, "${widget.local.name} Favoritado!");
-      },
-    ),
-  ],
+      secondaryActions: <Widget>[
+        IconSlideAction(
+          caption: 'Favoritar',
+          color: Colors.red,
+          icon: FontAwesomeIcons.heart,
+          onTap: () {
+            showSnackBarMessage(context, "${widget.local.name} Favoritado!");
+          },
+        ),
+      ],
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
       child: Card(
