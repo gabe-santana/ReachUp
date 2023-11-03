@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Repositories/SubCategory.repository.dart';
 import 'package:ReachUp/globals.dart';
 import 'package:cached_network_image/cached_network_image.dart';

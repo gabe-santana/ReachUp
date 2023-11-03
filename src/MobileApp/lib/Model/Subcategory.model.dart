@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'Category.model.dart';
 
 class SubCategory {
@@ -26,6 +27,6 @@ class SubCategory {
   }
 
   bool operator ==(other) {
-    return this.subCategoryName  == other.subCategoryName;
+    return this.subCategoryName == other.subCategoryName;
   }
 }

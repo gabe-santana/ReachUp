@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Controller/SubCategory.controller.dart';
 import 'package:ReachUp/Model/Category.model.dart';
 import 'package:ReachUp/Model/Subcategory.model.dart';
@@ -15,9 +16,7 @@ class CategoryStoreCard extends StatefulWidget {
   Category category;
   bool checked = false;
 
-  CategoryStoreCard(this.category){
-   
-  }
+  CategoryStoreCard(this.category) {}
 
   @override
   _CategoryStoreCardState createState() => _CategoryStoreCardState();
@@ -25,7 +24,6 @@ class CategoryStoreCard extends StatefulWidget {
 
 class _CategoryStoreCardState extends State<CategoryStoreCard> {
   SubCategoryController subCategoryController = new SubCategoryController();
-
 
   Widget buildListView(List<SubCategory> subCategoriesByCat) {
     // subCategoriesByCat.removeWhere((subcat) => Globals.subcategoriesLocal.contains(subcat));
@@ -45,10 +43,9 @@ class _CategoryStoreCardState extends State<CategoryStoreCard> {
 
   @override
   void initState() {
-   
     super.initState();
- 
   }
+
   @override
   Widget build(BuildContext context) {
     return Align(

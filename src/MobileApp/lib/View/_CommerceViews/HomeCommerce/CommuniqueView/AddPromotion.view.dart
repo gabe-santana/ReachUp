@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Communique.controller.dart';
 import 'package:ReachUp/Controller/SubCategory.controller.dart';
@@ -13,7 +14,7 @@ import 'AddPromotionCard.view.dart';
 class AddPromotionView extends StatefulWidget {
   Communique communique;
 
-  AddPromotionView({this.communique}){
+  AddPromotionView({this.communique}) {
     Globals.communiqueSubCategories.clear();
   }
   @override
@@ -67,15 +68,11 @@ class _AddPromotionViewState extends State<AddPromotionView> {
           bottom: 0,
           child: GestureDetector(
             onTap: () {
-             
-              Globals.subCategoriesPromotionChecked.forEach((element) { 
-                Globals.communiqueSubCategories.add(
-                  CommuniqueSubCategory(
+              Globals.subCategoriesPromotionChecked.forEach((element) {
+                Globals.communiqueSubCategories.add(CommuniqueSubCategory(
                     communique: widget.communique,
                     category: element.category,
-                    subcategory: element
-                  )
-                );
+                    subcategory: element));
               });
               Navigator.pop(context);
               // communiqueController.bindSubCategories(Globals.communiqueSubCategories);

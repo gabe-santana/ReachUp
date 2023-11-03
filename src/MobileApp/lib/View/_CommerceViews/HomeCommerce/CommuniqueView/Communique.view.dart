@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Communique.controller.dart';
 import 'package:ReachUp/Model/Communique.model.dart';
@@ -25,15 +26,15 @@ class _CommuniqueViewState extends State<CommuniqueView> {
     //       categories = value;
     //     });
     super.initState();
-     Globals.subCategoriesPromotionChecked.clear();
+    Globals.subCategoriesPromotionChecked.clear();
     Globals.selectedCommuniques.clear();
   }
-    @override
+
+  @override
   void deactivate() {
     EasyLoading.dismiss();
     super.deactivate();
   }
-
 
   Widget _buildListView(int type) {
     List<CommuniqueCard> cards;
@@ -61,7 +62,6 @@ class _CommuniqueViewState extends State<CommuniqueView> {
   }
 
   onCommuniqueSelected(Communique communique, bool remove) {
-
     setState(() {
       if (remove) {
         Globals.selectedCommuniques
@@ -104,17 +104,18 @@ class _CommuniqueViewState extends State<CommuniqueView> {
                       buttonOK: RaisedButton(
                         color: Theme.of(context).colorScheme.error,
                         onPressed: () {
-                             Navigator.pop(context);
+                          Navigator.pop(context);
                           setState(() {
-                         
                             EasyLoading.show();
 
                             CommuniqueController communiqueController =
                                 new CommuniqueController();
                             Globals.selectedCommuniques.forEach((comm) {
-                              communiqueController.delete(comm.communiqueId, comm.type);
+                              communiqueController.delete(
+                                  comm.communiqueId, comm.type);
                             });
-                            Globals.admLocalCommuniques.removeWhere((admComm) =>   Globals.selectedCommuniques.contains(admComm));
+                            Globals.admLocalCommuniques.removeWhere((admComm) =>
+                                Globals.selectedCommuniques.contains(admComm));
 
                             Globals.selectedCommuniques.clear();
                             EasyLoading.dismiss();

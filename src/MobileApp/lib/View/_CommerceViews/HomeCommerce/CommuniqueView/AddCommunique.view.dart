@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:convert';
 
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
@@ -323,7 +324,8 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                       child: ListTile(
                                         onTap: () {
                                           navigateTo(
-                                              AddPromotionView(communique: this.communique),
+                                              AddPromotionView(
+                                                  communique: this.communique),
                                               "Subcategorias",
                                               "Informe as subcategorias da sua promoção",
                                               context,
@@ -612,17 +614,18 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                                                 .last
                                                                 .communiqueId);
                                                 });
-                                                print(json.encode(communiqueSubCategories));
+                                                print(json.encode(
+                                                    communiqueSubCategories));
                                                 communiqueController
                                                     .bindSubCategories(
-                                                        communiqueSubCategories).then((value) {
-                                                          if(value){
-                                                            debugPrint("Bindado");
-                                                          }
-                                                          else{
-                                                            debugPrint("Não Bindado");
-                                                          }
-                                                        });
+                                                        communiqueSubCategories)
+                                                    .then((value) {
+                                                  if (value) {
+                                                    debugPrint("Bindado");
+                                                  } else {
+                                                    debugPrint("Não Bindado");
+                                                  }
+                                                });
                                               });
                                             });
 

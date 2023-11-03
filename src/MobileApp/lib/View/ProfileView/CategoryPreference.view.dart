@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Controller/Category.controller.dart';
 import 'package:ReachUp/Controller/ClientPreference.controller.dart';
 import 'package:ReachUp/Model/Category.model.dart';

@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:convert';
 
 import 'package:ReachUp/Model/Local.dart';
@@ -7,7 +8,6 @@ import 'package:ReachUp/www/ReachUpAPI.dart';
 import '../globals.dart';
 
 class LocalRepository extends ReachUpAPI {
-  
   LocalRepository() : super() {}
   String getImage(Local local) {
     return "${Globals.urlAPI}/Local/GetImage?id=${local.idLocal}";
@@ -25,22 +25,24 @@ class LocalRepository extends ReachUpAPI {
       return null;
   }
 
-   Future<bool> addSubcategory(List<SubcategoriesLocal>  subcategoriesLocal) async {
-    await super.httpPost("Local/AddSubCategories", json.encode(subcategoriesLocal));
+  Future<bool> addSubcategory(
+      List<SubcategoriesLocal> subcategoriesLocal) async {
+    await super
+        .httpPost("Local/AddSubCategories", json.encode(subcategoriesLocal));
     print("response: ${super.response.data}");
     if (super.response.statusCode == 200) {
-      
-      return  true;
+      return true;
     } else
       return false;
   }
 
-    Future<bool> deleteSubCategory(int local, int category, int subcategory) async {
-    await super.httpDelete("Local/DeleteSubCategory?local=$local&category=$category&subcategory=$subcategory");
+  Future<bool> deleteSubCategory(
+      int local, int category, int subcategory) async {
+    await super.httpDelete(
+        "Local/DeleteSubCategory?local=$local&category=$category&subcategory=$subcategory");
     print("response: ${super.response.data}");
     if (super.response.statusCode == 200) {
-      
-      return  true;
+      return true;
     } else
       return false;
   }

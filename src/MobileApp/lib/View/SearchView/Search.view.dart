@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Component/TTS/TextToSpeech.component.dart';
 import 'package:ReachUp/Controller/Local.controller.dart';
@@ -236,9 +237,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                 Tab(
                   text: "Recentes",
                   icon: Icon(
-                    
                     FontAwesomeIcons.clock,
-                  
                   ),
                 ),
                 Tab(
@@ -300,9 +299,8 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
                               valueColor: AlwaysStoppedAnimation<Color>(
                                   Theme.of(context).colorScheme.primary)),
                         )
-                      : filterLocates != null ?
-                      
-                         buildListView()
+                      : filterLocates != null
+                          ? buildListView()
                           : Center(
                               child: Text(
                                 "Sem resultados",

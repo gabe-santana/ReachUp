@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'MapObject.component.dart';
 
 class HallController {
@@ -130,7 +131,6 @@ class HallController {
                       .equals(_h.position) ||
                   new Position(x: p.x, y: p.y - index, floor: p.floor)
                       .equals(_h.position);
-   
             })
             .toList()
             .first;

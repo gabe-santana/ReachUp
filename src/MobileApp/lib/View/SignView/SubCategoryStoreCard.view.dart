@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Model/Subcategory.model.dart';
 import 'package:ReachUp/Repositories/SubCategory.repository.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -17,7 +18,8 @@ class SubCategoryStoreCardView extends StatefulWidget {
     if (isClientPreference) {
       this.checked =
           Globals.subCategoriesPreferenceChecked.contains(this.subCategory);
-      this.exists = Globals.userPreference.subCategories.contains(this.subCategory);
+      this.exists =
+          Globals.userPreference.subCategories.contains(this.subCategory);
     } else {
       this.checked =
           Globals.subCategoriesStoreChecked.contains(this.subCategory);
@@ -76,7 +78,7 @@ class _SubCategoryStoreCardViewState extends State<SubCategoryStoreCardView> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
-                           width: MediaQuery.of(context).size.width * 0.7,
+                            width: MediaQuery.of(context).size.width * 0.7,
                             child: Text(
                               "${widget.subCategory.subCategoryName} (Já adicionado)",
                               overflow: TextOverflow.clip,

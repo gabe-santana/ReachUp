@@ -1,9 +1,9 @@
+// @dart=2.9
 import 'package:flutter_tts/flutter_tts.dart';
 
 class TextToSpeech {
   static FlutterTts _flutterTts;
   static bool isPlaying = false;
-
 
   static Future speak(String text) async {
     if (text != null && text.isNotEmpty) {

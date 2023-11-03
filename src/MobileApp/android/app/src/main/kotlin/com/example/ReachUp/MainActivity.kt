@@ -16,11 +16,11 @@ class MainActivity: FlutterActivity() {
         val primaryClipDescription = clipboard.primaryClipDescription
         val clip: ClipData = ClipData.newPlainText("Label", "Value")
         if (clipboard.hasPrimaryClip() && (primaryClipDescription == null || !primaryClipDescription.hasMimeType(MIMETYPE_TEXT_PLAIN))) {
-            clipboard.primaryClip = clip
+             clipboard?.setPrimaryClip(clip)
             Log.i("MainActivityTag", "Clipboard Updated")
         } else if (!clipboard.hasPrimaryClip()) {
             // Only for Stable Channel. PrimaryClip NPE Handled in Master channel already
-            clipboard.primaryClip = clip
+            clipboard?.setPrimaryClip(clip)
             Log.i("MainActivityTag", "Clipboard is Empty...Updated")
         } else {
             Log.i("MainActivityTag", "Clipboard Safe")

@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Category.controller.dart';
 import 'package:ReachUp/Model/Category.model.dart';
@@ -128,7 +129,6 @@ class _StepperBodyState extends State<StepperBody> {
           child: Column(
             children: <Widget>[
               TextFormField(
-          
                 focusNode: _focusNode,
                 keyboardType: TextInputType.text,
                 autocorrect: false,
@@ -166,7 +166,7 @@ class _StepperBodyState extends State<StepperBody> {
                 },
                 decoration: InputDecoration(
                     labelText: 'Sobrenome',
-        
+
                     //filled: true,
                     icon: const Icon(Icons.person),
                     labelStyle:
@@ -202,7 +202,6 @@ class _StepperBodyState extends State<StepperBody> {
                 maxLines: 1,
                 decoration: InputDecoration(
                     labelText: 'E-mail',
-    
                     icon: const Icon(Icons.email),
                     labelStyle:
                         TextStyle(decorationStyle: TextDecorationStyle.solid)),
@@ -237,7 +236,6 @@ class _StepperBodyState extends State<StepperBody> {
                 },
                 decoration: InputDecoration(
                     labelText: 'Senha',
-      
                     icon: const FaIcon(FontAwesomeIcons.key),
                     labelStyle:
                         TextStyle(decorationStyle: TextDecorationStyle.solid)),
@@ -255,7 +253,6 @@ class _StepperBodyState extends State<StepperBody> {
                 onSaved: (value) {},
                 decoration: InputDecoration(
                     labelText: 'Confirmar Senha',
-                
                     icon: const FaIcon(FontAwesomeIcons.key),
                     labelStyle:
                         TextStyle(decorationStyle: TextDecorationStyle.solid)),

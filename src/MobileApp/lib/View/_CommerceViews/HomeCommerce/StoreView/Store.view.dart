@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Local.controller.dart';
 import 'package:ReachUp/Controller/SubCategory.controller.dart';
@@ -213,7 +214,7 @@ class _StoreViewState extends State<StoreView> {
               child: Builder(builder: (context) {
                 buildlistView();
                 return ListView.builder(
-                   physics: BouncingScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     itemCount: Globals.subcategoriesLocal.length,
                     itemBuilder: (context, index) => ListTile(
                           trailing: IconButton(

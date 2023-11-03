@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Model/Subcategory.model.dart';
 import 'package:ReachUp/Repositories/SubCategory.repository.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -49,7 +50,8 @@ class _SubCategoryCardState extends State<SubCategoryCard> {
                                 valueColor: new AlwaysStoppedAnimation<Color>(
                                     Colors.grey)),
                           ),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
                       ),
                     ),

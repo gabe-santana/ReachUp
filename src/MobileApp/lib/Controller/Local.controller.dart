@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Model/Local.dart';
 import 'package:ReachUp/Model/SubCategoryLocal.mode.dart';
 import 'package:ReachUp/Repositories/Local.repository.dart';

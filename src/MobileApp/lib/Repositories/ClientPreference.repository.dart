@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:ReachUp/Model/ClientPreference.model.dart';
 import 'package:ReachUp/Model/Subcategory.model.dart';
 import 'package:ReachUp/www/ReachUpAPI.dart';
@@ -17,7 +18,7 @@ class ClientePreferenceRepository extends ReachUpAPI {
     await super.httpGet("ClientPreference/GetAll?email=$email");
     print(super.response.data);
     if (super.response.statusCode == 200) {
-       return List<SubCategory>.from(
+      return List<SubCategory>.from(
           super.response.data.map((i) => SubCategory.fromJson(i)));
     }
 
