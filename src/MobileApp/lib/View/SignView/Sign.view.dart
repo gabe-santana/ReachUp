@@ -31,7 +31,7 @@ class _SignViewState extends State<SignView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: SignUp(),
+      endDrawer: SignUpView(),
       body: Container(
         decoration: BoxDecoration(
             image: DecorationImage(

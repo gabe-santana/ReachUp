@@ -9,6 +9,7 @@ import 'package:get_storage/get_storage.dart';
 import 'Component/Database/Database.db.dart';
 import 'Model/User.model.dart';
 import 'View/DebugView/Debug.view.dart';
+import 'package:ReachUp/View/SignView/Sign.view.dart';
 import 'View/HomeView/Home.view.dart';
 import 'View/_Layouts/HomeLayout.layout.dart';
 import 'View/splashscreen.view.dart';
@@ -100,7 +101,7 @@ class ReachUp extends StatelessWidget {
       title: 'ReachUp!',
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
-      home: DebugView(),
+      home: SignView(),
       builder: (BuildContext context, Widget child) {
         /// make sure that loading can be displayed in front of all other widgets
         return FlutterEasyLoading(child: child);
