@@ -1,4 +1,7 @@
 // @dart=2.9
+import 'dart:convert';
+
+import 'package:ReachUp/Component/Database/Database.db.dart';
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Controller/Account.controller.dart';
 import 'package:ReachUp/Controller/Category.controller.dart';
@@ -314,11 +317,9 @@ class _StepperBodyState extends State<StepperBody> {
           EasyLoading.show(status: "Carregando");
           accountController.signUp().then((value) {
             EasyLoading.dismiss();
-              Globals.user = value;
-              Database.insert(
-                  key: "user",
-                  value: jsonEncode(
-                      Globals.user.toJson()));
+            Globals.user = value;
+            Database.insert(
+                key: "user", value: jsonEncode(Globals.user.toJson()));
           });
 
           List<Category> categories = new List<Category>();
