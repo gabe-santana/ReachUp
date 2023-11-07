@@ -15,7 +15,7 @@ import 'package:flutter/services.dart' show rootBundle;
 class Globals {
   static User user = new User();
   static bool isLoggedIn = false;
-  static String urlAPI;
+  static String urlAPI = 'https://reachup-poc.azurewebsites.net/api';
 
   static List<Beacon> beacons = <Beacon>[];
   static List<CommuniqueSubCategory> communiqueSubCategories =

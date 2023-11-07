@@ -1,10 +1,12 @@
 // @dart=2.9
 import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
+import 'package:ReachUp/Controller/Account.controller.dart';
 import 'package:ReachUp/Controller/Category.controller.dart';
 import 'package:ReachUp/Model/Category.model.dart';
 import 'package:ReachUp/Model/User.model.dart';
 import 'package:ReachUp/View/SignView/SignUpPreferences.view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -16,12 +18,12 @@ List<GlobalKey<FormState>> formKeys = [
   GlobalKey<FormState>(), //Userpassword formState
 ];
 
-class SignUp extends StatefulWidget {
+class SignUpView extends StatefulWidget {
   @override
-  _SignUpState createState() => _SignUpState();
+  _SignUpViewState createState() => _SignUpViewState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignUpViewState extends State<SignUpView> {
   final _formKey = GlobalKey<FormState>();
   int currentStep;
 
@@ -97,6 +99,7 @@ class StepperBody extends StatefulWidget {
 
 class _StepperBodyState extends State<StepperBody> {
   final CategoryController _categoryController = new CategoryController();
+  final AccountController accountController = new AccountController();
 
   static final _focusNode = FocusNode();
   static UserData user = UserData();
@@ -112,6 +115,12 @@ class _StepperBodyState extends State<StepperBody> {
       setState(() {});
       print('Has focus: $_focusNode.hasFocus');
     });
+  }
+
+  @override
+  void deactivate() {
+    EasyLoading.dismiss();
+    super.deactivate();
   }
 
   List<Step> steps = [
@@ -302,7 +311,15 @@ class _StepperBodyState extends State<StepperBody> {
               email: user.email,
               password: user.password,
               role: "cli");
-          //send _user to [POST] api/Account/SignUp
+          EasyLoading.show(status: "Carregando");
+          accountController.signUp().then((value) {
+            EasyLoading.dismiss();
+              Globals.user = value;
+              Database.insert(
+                  key: "user",
+                  value: jsonEncode(
+                      Globals.user.toJson()));
+          });
 
           List<Category> categories = new List<Category>();
 
