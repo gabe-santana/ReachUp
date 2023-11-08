@@ -102,7 +102,7 @@ class StepperBody extends StatefulWidget {
 
 class _StepperBodyState extends State<StepperBody> {
   final CategoryController _categoryController = new CategoryController();
-  final AccountController accountController = new AccountController();
+  //final AccountController accountController = new AccountController();
 
   static final _focusNode = FocusNode();
   static UserData user = UserData();
@@ -120,11 +120,11 @@ class _StepperBodyState extends State<StepperBody> {
     });
   }
 
-  @override
+  /*@override
   void deactivate() {
     EasyLoading.dismiss();
     super.deactivate();
-  }
+  }*/
 
   List<Step> steps = [
     Step(
@@ -314,13 +314,13 @@ class _StepperBodyState extends State<StepperBody> {
               email: user.email,
               password: user.password,
               role: "cli");
-          EasyLoading.show(status: "Carregando");
+          /*EasyLoading.show(status: "Carregando");
           accountController.signUp().then((value) {
             EasyLoading.dismiss();
             Globals.user = value;
             Database.insert(
                 key: "user", value: jsonEncode(Globals.user.toJson()));
-          });
+          });*/
 
           List<Category> categories = new List<Category>();
 

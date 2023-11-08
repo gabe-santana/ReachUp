@@ -25,9 +25,6 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
 
   @override
   initState() {
-    // _categoryController.getAll().then((value) => () {
-    //       categories = value;
-    //     });
     super.initState();
     _memoizer = AsyncMemoizer();
   }

@@ -16,6 +16,7 @@ class Globals {
   static User user = new User();
   static bool isLoggedIn = false;
   static String urlAPI = 'https://reachup-poc.azurewebsites.net/api';
+  //static String urlAPI = 'https://localhost:5001/api';
 
   static List<Beacon> beacons = <Beacon>[];
   static List<CommuniqueSubCategory> communiqueSubCategories =
@@ -43,7 +44,7 @@ class Globals {
 }
 
 class VersionConfig {
-  static bool isCommerceVersion = true;
+  static bool isCommerceVersion = false;
 
   // static bool isCommerceVersion()  {
   //   parseJsonFromAssets('assets/config/global/config-global.json')
