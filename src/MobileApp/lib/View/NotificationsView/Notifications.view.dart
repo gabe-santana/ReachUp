@@ -122,9 +122,7 @@ class _NotificationsViewState extends State<NotificationsView> {
                       ),
                       buttonNO: TextButton(
                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
-                              .colorScheme
-                              .primary),
+                            backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
                           ),
                         onPressed: () {
                           Navigator.pop(context);
