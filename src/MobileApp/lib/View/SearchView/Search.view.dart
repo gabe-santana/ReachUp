@@ -5,7 +5,6 @@ import 'package:ReachUp/Controller/Local.controller.dart';
 import 'package:ReachUp/Model/Local.dart';
 import 'package:ReachUp/View/SearchView/SearchCard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
@@ -62,11 +61,12 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
     TextToSpeech.initializeTts();
   }
 
-  @override
+// erro está aqui
+  /*@override
   void dispose() {
     super.dispose();
     TextToSpeech.stop();
-  }
+  }*/
 
   bool loading = false;
   int tabIndex = 0;

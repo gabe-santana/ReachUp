@@ -8,7 +8,7 @@ import 'package:ReachUp/www/ReachUpAPI.dart';
 import '../globals.dart';
 
 class CommuniqueRepository extends ReachUpAPI {
-  CommuniqueRepository() : super() {}
+  CommuniqueRepository() : super();
 
   String getImage(Communique communique) {
     return "${Globals.urlAPI}/Communique/GetImage?id=${communique.communiqueId}";

@@ -19,26 +19,23 @@ class Globals {
   //static String urlAPI = 'https://localhost:5001/api';
 
   static List<Beacon> beacons = <Beacon>[];
-  static List<CommuniqueSubCategory> communiqueSubCategories =
-      new List<CommuniqueSubCategory>();
+  static List<CommuniqueSubCategory> communiqueSubCategories = [];
 
-  static List<Category> categoriesChecked = new List<Category>();
+  static List<Category> categoriesChecked = [];
 
-  static List<SubCategory> subCategoriesChecked = new List<SubCategory>();
+  static List<SubCategory> subCategoriesChecked = [];
 
-  static List<SubCategory> subCategoriesPromotionChecked =
-      new List<SubCategory>();
+  static List<SubCategory> subCategoriesPromotionChecked = [];
 
-  static List<Communique> selectedCommuniques = new List<Communique>();
+  static List<Communique> selectedCommuniques = [];
 
-  static List<Communique> admLocalCommuniques = new List<Communique>();
+  static List<Communique> admLocalCommuniques = [];
 
-  static List<SubCategory> subcategoriesLocal = new List<SubCategory>();
+  static List<SubCategory> subcategoriesLocal = [];
 
-  static List<SubCategory> subCategoriesStoreChecked = new List<SubCategory>();
+  static List<SubCategory> subCategoriesStoreChecked = [];
 
-  static List<SubCategory> subCategoriesPreferenceChecked =
-      new List<SubCategory>();
+  static List<SubCategory> subCategoriesPreferenceChecked = [];
 
   static ClientPreference userPreference = new ClientPreference();
 }

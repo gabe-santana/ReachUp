@@ -69,14 +69,14 @@ class HallController {
   }
 
   List<Parser> getInitialParsers(Halls hOrigin) {
-    List<Parser> _r = new List<Parser>();
+    List<Parser> _r = [];
 
     for (var direction in directions) {
       Halls newHall = walkTo(direction, hOrigin.position);
       if (newHall != null) {
         _r.add(new Parser(
             id: 0,
-            halls: new List<Halls>()..add(newHall),
+            halls: []..add(newHall),
             direction: direction));
       }
     }

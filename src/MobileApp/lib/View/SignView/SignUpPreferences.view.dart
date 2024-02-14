@@ -56,7 +56,7 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
   Widget build(BuildContext context) {
     void showSnackBarMessage(ctx, String message,
         [MaterialColor color = Colors.red]) {
-      Scaffold.of(ctx).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
         content: Text(message),
         backgroundColor: Theme.of(context).colorScheme.error,
       ));
@@ -78,8 +78,12 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
                                 ? "Sabendo de suas preferências podemos\n" +
                                     "te ajudar a encontrar o que você procura mais rápidamente!"
                                 : "Selecione as categorias que mais se identifique!",
-                            buttonOK: RaisedButton(
-                              color: Theme.of(context).colorScheme.primary,
+                            buttonOK: ElevatedButton(
+                               style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                    .colorScheme
+                                    .primary),
+                                ),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
@@ -105,7 +109,7 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
                     ),
                     Padding(
                       padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                      child: RaisedButton(
+                      child: ElevatedButton(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -128,7 +132,11 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
                             showSnackBarMessage(
                                 context, "Escolha pelo menos uma categoria!");
                         },
-                        color: Theme.of(context).colorScheme.primary,
+                         style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                              .colorScheme
+                              .primary),
+                          ),
                       ),
                     ),
                   ],
@@ -213,7 +221,7 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
                         ),
                         Padding(
                           padding: EdgeInsets.fromLTRB(20, 50, 20, 0),
-                          child: RaisedButton(
+                          child: ElevatedButton(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -231,19 +239,25 @@ class _SignUpPreferencesViewState extends State<SignUpPreferencesView> {
                                 this.accepted = true;
                               });
                             },
-                            color: Theme.of(context).colorScheme.primary,
+                             style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                  .colorScheme
+                                  .primary),
+                              ),
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
-                          child: FlatButton(
+                          child: TextButton(
                               child: Text(
                                 "Fazer isso depois",
                                 style:
                                     TextStyle(color: Colors.grey, fontSize: 16),
                               ),
                               onPressed: () {},
-                              color: Colors.transparent),
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                              ),),
                         ),
                       ],
                     ),

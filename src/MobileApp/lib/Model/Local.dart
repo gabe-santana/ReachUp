@@ -21,7 +21,7 @@ class Local {
 
   Local.fromJson(Map<String, dynamic> json) {
     if (json['beacons'] != null) {
-      beacons = new List<Beacons>();
+      beacons = [];
       json['beacons'].forEach((v) {
         beacons.add(new Beacons.fromJson(v));
       });

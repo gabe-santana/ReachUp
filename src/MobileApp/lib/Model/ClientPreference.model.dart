@@ -9,7 +9,7 @@ class ClientPreference {
 
   ClientPreference.fromJson(Map<String, dynamic> json) {
     if (json['SubCategories'] != null) {
-      subCategories = new List<SubCategory>();
+      subCategories = [];
       json['SubCategories'].forEach((v) {
         subCategories.add(new SubCategory.fromJson(v));
       });

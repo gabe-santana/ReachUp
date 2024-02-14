@@ -45,8 +45,12 @@ class _DebugViewState extends State<DebugView> {
                               icon: Icons.info_outline,
                               title: "Info",
                               description: "View for debug",
-                              buttonOK: RaisedButton(
-                                color: Theme.of(context).colorScheme.primary,
+                              buttonOK: ElevatedButton(
+                                 style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                      .colorScheme
+                                      .primary),
+                                  ),
                                 onPressed: () {
                                   Navigator.pop(context);
                                 },
@@ -107,7 +111,7 @@ class _DebugViewState extends State<DebugView> {
                     ),
                   ),
                 ),
-                FlatButton(
+                TextButton(
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
                       _formKey.currentState.save();
@@ -131,7 +135,11 @@ class _DebugViewState extends State<DebugView> {
                                           : Splash(SignView())));
                     }
                   },
-                  color: Theme.of(context).colorScheme.primary,
+                   style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                        .colorScheme
+                        .primary),
+                    ),
                   child: Text("Submit", style: TextStyle(color: Colors.white)),
                 )
               ],

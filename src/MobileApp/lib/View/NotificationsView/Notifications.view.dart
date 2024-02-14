@@ -91,8 +91,12 @@ class _NotificationsViewState extends State<NotificationsView> {
                       title: "Deletar",
                       description:
                           "Deseja deletar o(s) item(s) selecionado(s)?",
-                      buttonOK: RaisedButton(
-                        color: Theme.of(context).colorScheme.error,
+                      buttonOK: ElevatedButton(
+                         style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                              .colorScheme
+                              .error),
+                          ),
                         onPressed: () {
                           Navigator.pop(context);
                           setState(() {
@@ -116,8 +120,12 @@ class _NotificationsViewState extends State<NotificationsView> {
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
-                      buttonNO: FlatButton(
-                        color: Colors.transparent,
+                      buttonNO: TextButton(
+                         style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                              .colorScheme
+                              .primary),
+                          ),
                         onPressed: () {
                           Navigator.pop(context);
                         },

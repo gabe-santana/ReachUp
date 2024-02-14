@@ -53,8 +53,10 @@ class _FeedbackViewState extends State<FeedbackView> {
                       ),
                       ButtonTheme(
                         minWidth: MediaQuery.of(context).size.width * 0.6,
-                        child: RaisedButton(
-                          color: Colors.green,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                            ),
                           onPressed: () {
                             setState(() {
                               finished = false;
@@ -68,8 +70,12 @@ class _FeedbackViewState extends State<FeedbackView> {
                       ),
                       ButtonTheme(
                         minWidth: MediaQuery.of(context).size.width * 0.6,
-                        child: RaisedButton(
-                          color: Theme.of(context).colorScheme.primary,
+                        child: ElevatedButton(
+                           style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                .colorScheme
+                                .primary),
+                            ),
                           onPressed: () {
                             Navigator.pop(context);
                           },
@@ -162,8 +168,10 @@ class _FeedbackViewState extends State<FeedbackView> {
                         ),
                         ButtonTheme(
                           minWidth: MediaQuery.of(context).size.width,
-                          child: RaisedButton(
-                            color: Colors.green,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                            ),
                             onPressed: () {
                               if (_formKey.currentState.validate()) {
                                 _formKey.currentState.save();

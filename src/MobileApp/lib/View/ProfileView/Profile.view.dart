@@ -138,10 +138,12 @@ class _ProfileViewState extends State<ProfileView> {
                                                       title: "Deletar",
                                                       description:
                                                           "Deletar ${Globals.userPreference.subCategories[index].subCategoryName} em ${Globals.userPreference.subCategories[index].category.categoryName} ?",
-                                                      buttonOK: RaisedButton(
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .error,
+                                                      buttonOK: ElevatedButton(
+                                                        style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                          .colorScheme
+                                          .error),
+                                      ),
                                                         onPressed: () {
                                                           EasyLoading.show(
                                                               status:
@@ -182,9 +184,10 @@ class _ProfileViewState extends State<ProfileView> {
                                                                   Colors.white),
                                                         ),
                                                       ),
-                                                      buttonNO: FlatButton(
-                                                        color:
-                                                            Colors.transparent,
+                                                      buttonNO: TextButton(
+                                                        style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                                      ),
                                                         onPressed: () {
                                                           Navigator.pop(
                                                               context);

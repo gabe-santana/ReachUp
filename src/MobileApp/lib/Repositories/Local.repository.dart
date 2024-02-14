@@ -8,7 +8,7 @@ import 'package:ReachUp/www/ReachUpAPI.dart';
 import '../globals.dart';
 
 class LocalRepository extends ReachUpAPI {
-  LocalRepository() : super() {}
+  LocalRepository() : super();
   String getImage(Local local) {
     return "${Globals.urlAPI}/Local/GetImage?id=${local.idLocal}";
   }

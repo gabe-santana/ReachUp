@@ -10,8 +10,6 @@ import 'package:ReachUp/globals.dart';
 import 'package:ReachUp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
-
 import 'AddPromotion.view.dart';
 
 class AddCommuniqueView extends StatefulWidget {
@@ -157,9 +155,12 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                   icon: Icons.info_outline,
                                   title: "Info",
                                   description: "Tela de adicionar comunicados",
-                                  buttonOK: RaisedButton(
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
+                                  buttonOK: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                      ),
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
@@ -202,9 +203,12 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                   icon: Icons.info_outline,
                                   title: "Info",
                                   description: "Tela de adicionar comunicados",
-                                  buttonOK: RaisedButton(
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
+                                  buttonOK: ElevatedButton(
+                                     style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                      ),
                                     onPressed: () {
                                       Navigator.pop(context);
                                     },
@@ -561,8 +565,10 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                     const EdgeInsets.fromLTRB(20, 0, 20, 0),
                                 child: ButtonTheme(
                                   minWidth: MediaQuery.of(context).size.width,
-                                  child: RaisedButton(
-                                    color: Colors.green,
+                                  child: ElevatedButton(
+                                     style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                                      ),
                                     onPressed: () {
                                       //mandar
                                       if (_formKey.currentState.validate()) {
@@ -589,8 +595,7 @@ class _AddCommuniqueViewState extends State<AddCommuniqueView> {
                                           if (value) {
                                             List<CommuniqueSubCategory>
                                                 communiqueSubCategories =
-                                                new List<
-                                                    CommuniqueSubCategory>();
+                                              [];
 
                                             CommuniqueController()
                                                 .getByLocal(

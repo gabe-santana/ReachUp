@@ -12,7 +12,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_circular_chart/flutter_circular_chart.dart';
+import 'package:awesome_circular_chart/awesome_circular_chart.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../globals.dart';
@@ -605,17 +605,19 @@ class _HomeCommerceViewState extends State<HomeCommerceView> {
                                 builder: (context) => CustomDialog(
                                     title: "Sair",
                                     description: "Deseja sair?",
-                                    buttonOK: RaisedButton(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
+                                    buttonOK: ElevatedButton(
+                                      style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                      ),
                                         child: Text("Continuar",
                                             style:
                                                 TextStyle(color: Colors.white)),
                                         onPressed: () {
                                           Navigator.pop(context);
                                         }),
-                                    buttonNO: FlatButton(
+                                    buttonNO: TextButton(
                                         onPressed: () {
                                           Navigator.pushAndRemoveUntil(
                                             context,

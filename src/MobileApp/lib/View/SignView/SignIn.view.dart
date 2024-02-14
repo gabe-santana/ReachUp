@@ -41,7 +41,7 @@ class _SignInViewState extends State<SignInView> {
   Widget build(BuildContext context) {
     void showSnackBarMessage(ctx, String message,
         [MaterialColor color = Colors.red]) {
-      Scaffold.of(ctx).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
         content: Text(message),
         backgroundColor: Theme.of(context).colorScheme.error,
       ));
@@ -61,8 +61,12 @@ class _SignInViewState extends State<SignInView> {
                             description: VersionConfig.isCommerceVersion
                                 ? "Acesse sua conta com  os dados que lhe foram passados pela administração do shopping"
                                 : "Informe seu Email e senha para entrar",
-                            buttonOK: RaisedButton(
-                              color: Theme.of(context).colorScheme.primary,
+                            buttonOK: ElevatedButton(
+                               style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                    .colorScheme
+                                    .primary),
+                                ),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
@@ -141,8 +145,12 @@ class _SignInViewState extends State<SignInView> {
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-                          child: RaisedButton(
-                              color: Theme.of(context).primaryColor,
+                          child: ElevatedButton(
+                               style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                    .colorScheme
+                                    .primary),
+                                ),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -198,7 +206,7 @@ class _SignInViewState extends State<SignInView> {
                         ),
                         Padding(
                           padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                          child: FlatButton(
+                          child: TextButton(
                               child: Text(
                                 "Esqueci minha senha",
                                 style:
@@ -211,7 +219,9 @@ class _SignInViewState extends State<SignInView> {
                                         builder: (context) =>
                                             ForgotPasswordView()));
                               },
-                              color: Colors.transparent),
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                              )),
                         ),
                       ],
                     ),

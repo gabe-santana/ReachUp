@@ -31,8 +31,12 @@ class _HomeLayoutState extends State<HomeLayout> {
                             icon: Icons.info_outline,
                             title: "Info",
                             description: widget.info,
-                            buttonOK: RaisedButton(
-                              color: Theme.of(context).colorScheme.primary,
+                            buttonOK: ElevatedButton(
+                              style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                      ),
                               onPressed: () {
                                 Navigator.pop(context);
                               },

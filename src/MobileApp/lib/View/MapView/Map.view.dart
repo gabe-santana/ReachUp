@@ -123,13 +123,13 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
       });
   }
 
-  void _handlePanUpdate(
-      Offset localPos, Offset position, Offset localDelta, Offset delta) {
+  void _handleMoveUpdate(
+      MoveEvent moveEvent) {
     print("pan");
-    print(position);
+    print(moveEvent.position);
     setState(() {
-      top += delta.dy;
-      left += delta.dx;
+      top += moveEvent.delta.dy;
+      left += moveEvent.delta.dx;
     });
   }
 
@@ -157,14 +157,13 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
     }
   }
 
-  void _handleScaleUpdate(
-      Offset changedFocusPoint, double scale, double rotation) {
+  void _handleScaleUpdate(ScaleEvent scaleEvent) {
     setState(() {
       if (this._scale <= _maxScale && this._scale >= _minScale) {
-        this._scale = _baseScaleFactor * scale;
+        this._scale = _baseScaleFactor * scaleEvent.scale;
 
         print("scale");
-        print(changedFocusPoint);
+        print(scaleEvent.focalPoint);
 
         this._scale >= _maxScale ? this._scale = _maxScale : null;
 
@@ -178,10 +177,10 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
 
   String get _readout => _heading.toStringAsFixed(0) + '°';
 
-  void _onData(double x) {
+  void _onData(CompassEvent x) {
     if (this.mounted)
       setState(() {
-        _heading = x;
+        _heading = x.heading;
       });
   }
 
@@ -204,7 +203,7 @@ class _MapViewWidGetState extends State<MapViewWidGet> {
     return LayoutBuilder(
       builder: (context, constraints) {
         return XGestureDetector(
-          onMoveUpdate: _handlePanUpdate,
+          onMoveUpdate: _handleMoveUpdate,
           onScaleStart: (details) {
             _baseScaleFactor = _scale;
           },

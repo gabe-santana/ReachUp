@@ -229,10 +229,12 @@ class _StoreViewState extends State<StoreView> {
                                         title: "Deletar",
                                         description:
                                             "Deletar ${Globals.subcategoriesLocal[index].subCategoryName} em ${Globals.subcategoriesLocal[index].category.categoryName} ?",
-                                        buttonOK: RaisedButton(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .error,
+                                        buttonOK: ElevatedButton(
+                                          style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                          .colorScheme
+                                          .error),
+                                      ),
                                           onPressed: () {
                                             EasyLoading.show(
                                                 status: "Deletando...");
@@ -264,8 +266,10 @@ class _StoreViewState extends State<StoreView> {
                                                 TextStyle(color: Colors.white),
                                           ),
                                         ),
-                                        buttonNO: FlatButton(
-                                          color: Colors.transparent,
+                                        buttonNO: TextButton(
+                                          style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                                      ),
                                           onPressed: () {
                                             Navigator.pop(context);
                                           },

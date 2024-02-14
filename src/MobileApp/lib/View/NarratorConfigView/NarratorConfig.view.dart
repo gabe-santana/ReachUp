@@ -46,9 +46,9 @@ class _NarratorConfigState extends State<NarratorConfig> {
                   child: ToggleSwitch(
                     minWidth: MediaQuery.of(context).size.width * 0.4,
                     cornerRadius: 20.0,
-                    activeBgColor: widget.toggleIndex == 0
+                    activeBgColor: [ widget.toggleIndex == 0
                         ? Colors.green
-                        : Theme.of(context).colorScheme.error,
+                        : Theme.of(context).colorScheme.error ],
                     activeFgColor: Colors.white,
                     inactiveBgColor: Colors.grey,
                     inactiveFgColor: Colors.white,

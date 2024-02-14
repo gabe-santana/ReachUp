@@ -22,8 +22,10 @@ class AddedCommuniqueView extends StatelessWidget {
         ),
         ButtonTheme(
           minWidth: MediaQuery.of(context).size.width * 0.6,
-          child: RaisedButton(
-            color: Colors.green,
+          child: ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+            ),
             onPressed: () {
               newCommunique(true);
             },
@@ -35,8 +37,12 @@ class AddedCommuniqueView extends StatelessWidget {
         ),
         ButtonTheme(
           minWidth: MediaQuery.of(context).size.width * 0.6,
-          child: RaisedButton(
-            color: Theme.of(context).colorScheme.primary,
+          child: ElevatedButton(
+             style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                  .colorScheme
+                  .primary),
+              ),
             onPressed: () {
               Navigator.pop(context);
             },

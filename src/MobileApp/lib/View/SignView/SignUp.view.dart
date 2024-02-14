@@ -48,8 +48,12 @@ class _SignUpViewState extends State<SignUpView> {
                                 "O cadastro é necessário para usar o ReachUp.\n\n" +
                                     "Através dele podemos identificá-lo, autenticá-lo\n" +
                                     "e lhe proporcionar uma melhor experiência!",
-                            buttonOK: RaisedButton(
-                              color: Theme.of(context).colorScheme.primary,
+                            buttonOK: ElevatedButton(
+                               style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                    .colorScheme
+                                    .primary),
+                                ),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
@@ -278,7 +282,7 @@ class _StepperBodyState extends State<StepperBody> {
   Widget build(BuildContext context) {
     void showSnackBarMessage(String message,
         [MaterialColor color = Colors.red]) {
-      Scaffold.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(message),
         backgroundColor: Theme.of(context).colorScheme.error,
       ));
@@ -339,23 +343,26 @@ class _StepperBodyState extends State<StepperBody> {
           key: _formKey,
           child: ListView(children: <Widget>[
             Stepper(
-              controlsBuilder: (BuildContext context,
-                  {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
+              controlsBuilder: (BuildContext context, ControlsDetails details) {
                 return Padding(
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   child: Row(
                     children: <Widget>[
                       currStep != 2
-                          ? FlatButton(
-                              onPressed: onStepContinue,
-                              color: Theme.of(context).colorScheme.primary,
+                          ? TextButton(
+                              onPressed: details.onStepContinue,
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                  .colorScheme
+                                  .primary),
+                              ),
                               child: Text("Próximo",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 16)))
                           : Container(),
                       currStep != 0 && currStep != 2
-                          ? FlatButton(
-                              onPressed: onStepCancel,
+                          ? TextButton(
+                              onPressed: details.onStepCancel,
                               child: const Text(
                                 'Voltar',
                                 style:
@@ -400,7 +407,7 @@ class _StepperBodyState extends State<StepperBody> {
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: RaisedButton(
+              child: ElevatedButton(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -413,7 +420,11 @@ class _StepperBodyState extends State<StepperBody> {
                   ],
                 ),
                 onPressed: _submitForm,
-                color: Theme.of(context).colorScheme.primary,
+                 style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                      .colorScheme
+                      .primary),
+                  ),
               ),
             ),
           ]),

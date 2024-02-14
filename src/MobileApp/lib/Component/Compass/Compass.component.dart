@@ -22,10 +22,10 @@ class _CompassState extends State<Compass> {
     FlutterCompass.events.listen(_onData);
   }
 
-  void _onData(double x) {
+  void _onData(CompassEvent x) {
     if (this.mounted)
       setState(() {
-        _heading = x;
+        _heading = x.heading;
       });
   }
 

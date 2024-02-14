@@ -53,7 +53,7 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
   Widget build(BuildContext context) {
     void showSnackBarMessage(ctx, String message,
         [MaterialColor color = Colors.red]) {
-      Scaffold.of(ctx).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
         content: Text(message),
         backgroundColor: Theme.of(context).colorScheme.error,
       ));
@@ -73,8 +73,12 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
                             title: "Info",
                             description:
                                 "Selecione as especificações de suas preferências",
-                            buttonOK: RaisedButton(
-                              color: Theme.of(context).colorScheme.primary,
+                            buttonOK: ElevatedButton(
+                               style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                    .colorScheme
+                                    .primary),
+                                ),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
@@ -99,7 +103,7 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: RaisedButton(
+                child: ElevatedButton(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -157,7 +161,11 @@ class _SignUpSubCategoryState extends State<SignUpSubCategory> {
                       showSnackBarMessage(
                           context, "Escolha pelo menos um item!");
                   },
-                  color: Theme.of(context).colorScheme.primary,
+                   style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                        .colorScheme
+                        .primary),
+                    ),
                 ),
               ),
             ],

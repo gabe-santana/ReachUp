@@ -3,7 +3,6 @@ import 'package:ReachUp/Component/Dialog/CustomDialog.component.dart';
 import 'package:ReachUp/Model/Local.dart';
 import 'package:ReachUp/Repositories/Local.repository.dart';
 import 'package:ReachUp/View/HomeView/Home.view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -12,7 +11,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 class SearchCard extends StatefulWidget {
   final Local local;
-  bool open = false;
+bool open = false;
 
   _toTime(String _hour) {
     String hour = _hour.substring(0, 2);
@@ -43,7 +42,7 @@ class SearchCard extends StatefulWidget {
 class _SearchCardState extends State<SearchCard> {
   void showSnackBarMessage(ctx, String message,
       [MaterialColor color = Colors.green]) {
-    Scaffold.of(ctx).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
       content: Text(message),
       backgroundColor: Colors.green,
     ));
@@ -103,18 +102,24 @@ class _SearchCardState extends State<SearchCard> {
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      secondaryActions: <Widget>[
-        IconSlideAction(
-          caption: 'Favoritar',
-          color: Colors.red,
-          icon: FontAwesomeIcons.heart,
-          onTap: () {
+      startActionPane: ActionPane(
+        motion: const DrawerMotion(),
+        extentRatio: 0.25,
+      ),
+      endActionPane: ActionPane(
+        motion: const DrawerMotion(),
+        extentRatio: 0.25,
+        children: [
+          SlidableAction(
+            label: 'Favoritar',
+            backgroundColor: Colors.red,
+            icon: FontAwesomeIcons.heart,
+            onPressed: (context) {
             showSnackBarMessage(context, "${widget.local.name} Favoritado!");
           },
-        ),
-      ],
-      actionPane: SlidableDrawerActionPane(),
-      actionExtentRatio: 0.25,
+          )
+        ],
+      ),
       child: Card(
         elevation: 2,
         child: InkWell(

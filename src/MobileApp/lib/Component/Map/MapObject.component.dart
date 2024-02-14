@@ -71,7 +71,7 @@ class MapObject {
     widthUnits = json['widthUnits'];
     heightUnits = json['heightUnits'];
     if (json['floors'] != null) {
-      floors = new List<Floors>();
+      floors = [];
       json['floors'].forEach((v) {
         floors.add(new Floors.fromJson(v));
       });
@@ -101,13 +101,13 @@ class Floors {
 
   Floors.fromJson(Map<String, dynamic> json) {
     if (json['locates'] != null) {
-      locates = new List<Locates>();
+      locates = [];
       json['locates'].forEach((v) {
         locates.add(new Locates.fromJson(v));
       });
     }
     if (json['halls'] != null) {
-      halls = new List<Halls>();
+      halls = [];
       json['halls'].forEach((v) {
         halls.add(new Halls.fromJson(v));
       });

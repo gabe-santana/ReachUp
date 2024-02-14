@@ -103,7 +103,7 @@ class _EditSoreViewState extends State<EditSoreView> {
 
   void showSnackBarMessage(ctx, String message,
       [MaterialColor color = Colors.green]) {
-    Scaffold.of(ctx).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
       content: Text(message),
       backgroundColor: Colors.green,
     ));
@@ -236,8 +236,10 @@ class _EditSoreViewState extends State<EditSoreView> {
                             children: [
                               ButtonTheme(
                                 minWidth: 200,
-                                child: RaisedButton(
-                                  color: Colors.green,
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                                  ),
                                   onPressed: () {
                                     showSnackBarMessage(
                                         context, "Alterações Salvas");
@@ -250,8 +252,12 @@ class _EditSoreViewState extends State<EditSoreView> {
                               ),
                               ButtonTheme(
                                 minWidth: 200,
-                                child: RaisedButton(
-                                  color: Theme.of(context).colorScheme.error,
+                                child: ElevatedButton(
+                                  style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                      .colorScheme
+                                      .error),
+                                  ),
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },

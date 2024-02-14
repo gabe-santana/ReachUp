@@ -64,8 +64,12 @@ class _HomeState extends State<Home> {
             icon: icon,
             title: title,
             description: msg,
-            buttonOK: RaisedButton(
-              color: Theme.of(context).colorScheme.primary,
+            buttonOK: ElevatedButton(
+               style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                    .colorScheme
+                    .primary),
+                ),
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -315,17 +319,19 @@ class _HomeState extends State<Home> {
                                   builder: (context) => CustomDialog(
                                       title: "Sair",
                                       description: "Deseja sair?",
-                                      buttonOK: RaisedButton(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
+                                      buttonOK: ElevatedButton(
+                                          style: ButtonStyle(
+                                          backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                          .colorScheme
+                                          .primary),
+                                      ),
                                           child: Text("Continuar",
                                               style: TextStyle(
                                                   color: Colors.white)),
                                           onPressed: () {
                                             Navigator.pop(context);
                                           }),
-                                      buttonNO: FlatButton(
+                                      buttonNO: TextButton(
                                           onPressed: () {
                                             Database.delete(key: "user");
                                             Navigator.pushAndRemoveUntil(

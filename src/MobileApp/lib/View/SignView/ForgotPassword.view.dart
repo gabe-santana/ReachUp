@@ -27,7 +27,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
   Widget build(BuildContext context) {
     void showSnackBarMessage(ctx, String message,
         [MaterialColor color = Colors.red]) {
-      Scaffold.of(ctx).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(ctx).showSnackBar(SnackBar(
         content: Text(message),
         backgroundColor: Theme.of(context).colorScheme.error,
       ));
@@ -46,8 +46,12 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                             title: "Info",
                             description:
                                 "Enviaremos um código de validação para seu E-mail",
-                            buttonOK: RaisedButton(
-                              color: Theme.of(context).colorScheme.primary,
+                            buttonOK: ElevatedButton(
+                               style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                    .colorScheme
+                                    .primary),
+                                ),
                               onPressed: () {
                                 Navigator.pop(context);
                               },
@@ -99,8 +103,12 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                     ),
                     Padding(
                         padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-                        child: RaisedButton(
-                            color: Theme.of(context).primaryColor,
+                        child: ElevatedButton(
+                             style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context)
+                                  .colorScheme
+                                  .primary),
+                              ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -134,7 +142,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                                     context, "Preencha todos os campos!");
                               }
                             })),
-                    FlatButton(
+                    TextButton(
                         child: Text(
                           "Cancelar",
                           style: TextStyle(color: Colors.grey, fontSize: 16),
@@ -142,7 +150,9 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        color: Colors.transparent),
+                         style: ButtonStyle(
+                                        backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                                      ),),
                   ],
                 ),
               ),
